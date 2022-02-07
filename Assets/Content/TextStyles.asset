@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9287381442bc0439776b19bf737de5, type: 3}
+  m_Name: TextStyles
+  m_EditorClassIdentifier: 
+  m_DefaultStyle:
+    Id:
+      m_Source: 
+      m_HashValue: 0
+    Background:
+      serializedVersion: 2
+      rgba: 4293129727
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+  m_Styles:
+  - Id:
+      m_Source: call
+      m_HashValue: 3018949801
+    Background:
+      serializedVersion: 2
+      rgba: 4292732821
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 1
+  - Id:
+      m_Source: me
+      m_HashValue: 1747856039
+    Background:
+      serializedVersion: 2
+      rgba: 4289456282
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 2
+  - Id:
+      m_Source: action
+      m_HashValue: 3294899967
+    Background:
+      serializedVersion: 2
+      rgba: 4289456282
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
