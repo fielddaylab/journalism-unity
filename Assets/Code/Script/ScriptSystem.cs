@@ -38,13 +38,14 @@ namespace Journalism {
 
             CustomTagParserConfig parserConfig = new CustomTagParserConfig();
             TagStringEventHandler eventHandler = new TagStringEventHandler();
-            GameText.InitializeEvents(parserConfig, eventHandler, m_Integration, m_Visuals);
+            GameText.InitializeEvents(parserConfig, eventHandler, m_Integration, m_Visuals, m_TextDisplay);
             m_Integration.ConfigureTagStringHandling(parserConfig, eventHandler);
 
             m_Integration.HandleNodeEnter = HandleNodeEnter;
 
             m_TextDisplay.LookupNextChoice = m_Integration.PredictChoice;
             m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
+            m_TextDisplay.LookupLine = m_Integration.LookupLine;
 
             m_Integration.LoadScript(m_TestScript).OnComplete((s) => m_Integration.StartFromBeginning());
         }

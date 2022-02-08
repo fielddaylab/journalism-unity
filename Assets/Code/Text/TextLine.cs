@@ -38,5 +38,6 @@ namespace Journalism {
         #endregion // Inspector
 
         [NonSerialized] public TextStyles.StyleData CurrentStyle;
+        [NonSerialized] public TextAlignment CurrentAlignment;
     }
 }

@@ -8,6 +8,14 @@ using BeauPools;
 namespace Journalism {
     public sealed class TextChoiceGroup : MonoBehaviour {
         
+        public struct ChoiceState {
+            public TempAlloc<TextChoice> Choice;
+            public float LocationX;
+            public float LocationY;
+            public Routine LocationAnimation;
+            public Routine RevealAnimation;
+        }
+
         #region Inspector
 
         [Header("Default Choice")]
@@ -16,6 +24,22 @@ namespace Journalism {
         public Sprite DefaultNextIcon = null;
         public Color DefaultNextIconColor = Color.black;
 
+        [Header("Grid")]
+        public RectTransform GridRoot;
+        public float RowSpacing = 128;
+        public float ColumnSpacing = 250;
+        public int MaxPerRow = 2;
+        public float RotationRange = 1;
+
+        [Header("Animation")]
+        public TweenSettings NewChoiceAnimParams = new TweenSettings(0.3f, Curve.BackOut);
+        public TweenSettings VanishAnimParams = new TweenSettings(0.4f, Curve.QuadIn);
+        [Range(0, 1)] public float NewScrollDelay = 0.05f;
+        [Range(0, 1)] public float TextVanishDelay = 0.08f;
+        public float VanishAnimDistance = 80;
+
         #endregion // Inspector
+
+        public RingBuffer<ChoiceState> Choices = new RingBuffer<ChoiceState>();
     }
 }

@@ -66,8 +66,40 @@ namespace Journalism {
             SetTailMode(line, style.Tail);
         }
 
-        static public void AlignTextLine(TextLine line, TextAnchor anchor) {
-            CanvasUtility.SetAnchor(line.Root, anchor);
+        static public TextAlignment ComputeDesiredAlignment(TextLine line, TextLineScroll scroll) {
+            TextLine.TailMode tail = line.CurrentStyle?.Tail ?? TextLine.TailMode.Hidden;
+            switch(tail) {
+                case TextLine.TailMode.Left: {
+                    return TextAlignment.Left;
+                }
+                case TextLine.TailMode.Right: {
+                    return TextAlignment.Right;
+                }
+                default: {
+                    return scroll.Alignment;
+                }
+            }
+        }
+
+        static public void AlignTextLine(TextLine line, TextAlignment alignment) {
+            switch(alignment) {
+                case TextAlignment.Left: {
+                    CanvasUtility.SetAnchor(line.Root, TextAnchor.LowerLeft);
+                    break;
+                }
+
+                case TextAlignment.Center: {
+                    CanvasUtility.SetAnchor(line.Root, TextAnchor.LowerCenter);
+                    break;
+                }
+
+                case TextAlignment.Right: {
+                    CanvasUtility.SetAnchor(line.Root, TextAnchor.LowerRight);
+                    break;
+                }
+            }
+            
+            line.CurrentAlignment = alignment;
         }
 
         static private void SetTailMode(TextLine line, TextLine.TailMode tailMode) {
@@ -123,7 +155,6 @@ namespace Journalism {
             lineRect.SetParent(scroll.ListRoot, false);
             lineRect.anchoredPosition = default;
             lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
-            AlignTextLine(line, scroll.Anchor);
             line.Group.alpha = 0;
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
                 Line = lineAlloc
@@ -143,25 +174,46 @@ namespace Journalism {
 
             TextLine line;
             float baseline = 0;
+            Vector2 size;
+            float width;
             float height;
             float extraOffset;
+            float inset;
+            float x;
             for(int i = 0; i < newLineCount; i++) {
                 ref var state = ref states[i];
                 line = state.Line.Object;
-                height = line.Root.sizeDelta.y;
+                size = line.Root.sizeDelta;
+                width = size.x;
+                height = size.y;
                 if (line.Tail.gameObject.activeSelf) {
                     extraOffset = line.TailHeight;
+                    inset = scroll.DialogInset;
                 } else {
                     extraOffset = 0;
+                    inset = 0;
                 }
 
-                state.Location = baseline + extraOffset + height / 2;
+                x = 0;
+                switch(line.CurrentAlignment) {
+                    case TextAlignment.Left: {
+                        x = width / 2 + inset;
+                        break;
+                    }
+                    case TextAlignment.Right: {
+                        x = -width / 2 - inset;
+                        break;
+                    }
+                }
+
+                state.LocationX = x;
+                state.LocationY = baseline + extraOffset + height / 2;
                 baseline = baseline + height + extraOffset + spacing;
             }
 
             for(int i = newLineCount; i < count; i++) {
                 ref var state = ref states[i];
-                state.Location += baseline;
+                state.LocationY += baseline;
             }
         }
 
@@ -175,19 +227,40 @@ namespace Journalism {
 
             TextLine line;
             float baseline = 0;
+            Vector2 size;
+            float width;
             float height;
             float extraOffset;
+            float inset;
+            float x;
             for(int i = 0; i < count; i++) {
                 ref var state = ref states[i];
                 line = state.Line.Object;
-                height = line.Root.sizeDelta.y;
+                size = line.Root.sizeDelta;
+                width = size.x;
+                height = size.y;
                 if (line.Tail.gameObject.activeSelf) {
                     extraOffset = line.TailHeight;
+                    inset = scroll.DialogInset;
                 } else {
                     extraOffset = 0;
+                    inset = 0;
                 }
 
-                state.Location = baseline + extraOffset + height / 2;
+                x = 0;
+                switch(line.CurrentAlignment) {
+                    case TextAlignment.Left: {
+                        x = width / 2 + inset;
+                        break;
+                    }
+                    case TextAlignment.Right: {
+                        x = -width / 2 - inset;
+                        break;
+                    }
+                }
+
+                state.LocationX = x;
+                state.LocationY = baseline + extraOffset + height / 2;
                 baseline = baseline + height + extraOffset + spacing;
             }
         }
@@ -210,7 +283,9 @@ namespace Journalism {
 
                 delay = (newLineCount - i) * scroll.TextScrollDelay;
 
-                anim = line.Root.AnchorPosTo(state.Location, scroll.NewTextAnimParams, Axis.Y).DelayBy(delay).Play(line);
+                line.Root.SetAnchorPos(state.LocationX, Axis.X);
+
+                anim = line.Root.AnchorPosTo(state.LocationY, scroll.NewTextAnimParams, Axis.Y).DelayBy(delay).Play(line);
                 state.LocationAnimation = anim;
                 
                 anim = line.Group.FadeTo(1, scroll.NewTextAnimParams.Time).DelayBy(delay).Play(line);
@@ -223,7 +298,7 @@ namespace Journalism {
 
                 delay = i * scroll.TextScrollDelay;
 
-                anim = line.Root.AnchorPosTo(state.Location, scroll.TextScrollAnimParams, Axis.Y).DelayBy(delay).Play(line);
+                anim = line.Root.AnchorPosTo(state.LocationY, scroll.TextScrollAnimParams, Axis.Y).DelayBy(delay).Play(line);
                 state.LocationAnimation = anim;
             }
 
@@ -245,16 +320,16 @@ namespace Journalism {
                 ref var state = ref states[i];
                 line = state.Line.Object;
 
-                delay = (count - 1 - i) * scroll.TextScrollDelay;
+                delay = (count - 1 - i) * scroll.TextVanishDelay;
 
-                anim = line.Root.AnchorPosTo(state.Location + scroll.VanishAnimDistance, scroll.VanishAnimParams, Axis.Y).DelayBy(delay).Play(line);
+                anim = line.Root.AnchorPosTo(state.LocationY + scroll.VanishAnimDistance, scroll.VanishAnimParams, Axis.Y).DelayBy(delay).Play(line);
                 state.LocationAnimation = anim;
 
                 anim = line.Group.FadeTo(0, scroll.VanishAnimParams.Time).DelayBy(delay).Play(line);
                 state.RevealAnimation = anim;
             }
 
-            return Routine.WaitSeconds(count * scroll.TextScrollDelay + scroll.VanishAnimParams.Time);
+            return Routine.WaitSeconds(count * scroll.TextVanishDelay + scroll.VanishAnimParams.Time);
         }
 
         /// <summary>
@@ -321,21 +396,34 @@ namespace Journalism {
         static public class Events {
             static public readonly StringHash32 Character = "character";
             static public readonly StringHash32 Background = "background";
+            static public readonly StringHash32 Image = "image";
+            static public readonly StringHash32 ClearImage = "clear-image";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
+        }
+
+        static public class Characters {
+            static public readonly StringHash32 Me = "me";
+            static public readonly StringHash32 Action = "action";
+        }
+
+        static public bool IsPlayer(StringHash32 characterId) {
+            return characterId == Characters.Me || characterId == Characters.Action;
         }
 
         /// <summary>
         /// Initializes event parsing.
         /// </summary>
-        static public void InitializeEvents(CustomTagParserConfig config, TagStringEventHandler handler, LeafIntegration integration, ScriptVisualsSystem visuals) {
+        static public void InitializeEvents(CustomTagParserConfig config, TagStringEventHandler handler, LeafIntegration integration, ScriptVisualsSystem visuals, TextDisplaySystem textDisplay) {
             LeafUtils.ConfigureDefaultParsers(config, integration, null); // TODO: Replace with appropriate localization callback
 
             config.AddEvent("@*", Events.Character).ProcessWith(ProcessCharacter);
             config.AddEvent("bg", Events.Background).WithStringData();
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
+            config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
 
+            textDisplay.ConfigureHandlers(config, handler);
             visuals.ConfigureHandlers(config, handler);
         }
 

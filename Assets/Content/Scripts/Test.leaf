@@ -12,17 +12,25 @@ $goto Its5AM
 It's 5AM.
 {bg-fadeout}
 Dark, rainy, and way too early.
-$goto MissedCalls
+
+$choice MissedCalls; Check your phone
 
 :: MissedCalls
 @clearText
+{img Anim/BossPhone5.png}
 5 missed calls from your editor.
 Probably checking up on your puff piece about the cherry festival.
+
+$choice CallBack; Call her back
+
+:: CallBack
+@clearText
 {bg-fadein}{@call} Finally! Where have you been??!
 Before you can tell here where you've been (sleeping, because it's FIVE in the MORNING), she gives you the lowdown:
 {@call} Downtown is flooding!
 {@call} You need to get to the newsroom and put out a breaking news update, ASAP.
 {@me}   I'm on my way.
+{/img}
 $goto Prep
 
 :: Prep

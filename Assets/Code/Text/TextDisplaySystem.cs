@@ -6,10 +6,15 @@ using System.Collections;
 using BeauUtil.Tags;
 using BeauUtil;
 using BeauUtil.Debugger;
+using BeauRoutine;
+using StreamingAssets;
+using BeauPools;
+using System;
 
 namespace Journalism {
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
 
+        public delegate TagString LookupLineDelegate(StringHash32 id);
         public delegate TagString NextLineDelegate();
         public delegate bool NextChoicesDelegate();
 
@@ -20,19 +25,22 @@ namespace Journalism {
         [SerializeField] private TextChoiceGroup m_ChoiceDisplay = null;
         [SerializeField] private TextStyles m_Styles = null;
 
+        [Header("Image Contents")]
+        [SerializeField] private ImageColumn m_Image = null;
+        [SerializeField] private float m_ColumnShift = 250;
+
         #endregion // Inspector
 
-        private readonly TagStringEventHandler m_EventHandler = new TagStringEventHandler();
         private TextLine m_QueuedLine;
+        [NonSerialized] private TextAlignment m_ImagePosition = TextAlignment.Center;
 
+        public LookupLineDelegate LookupLine;
         public NextLineDelegate LookupNextLine;
         public NextChoicesDelegate LookupNextChoice;
 
         #region Unity
 
         private void Awake() {
-            m_EventHandler.Register(GameText.Events.Character, HandleCharacter);
-
             GameText.InitializeScroll(m_TextDisplay);
             GameText.InitializeChoices(m_ChoiceDisplay);
         }
@@ -41,10 +49,113 @@ namespace Journalism {
 
         #region Events
 
+        public void ConfigureHandlers(CustomTagParserConfig config, TagStringEventHandler handlers) {
+            handlers.Register(GameText.Events.Character, HandleCharacter)
+                .Register(GameText.Events.Image, HandleImage)
+                .Register(GameText.Events.ClearImage, HandleImageClear);
+        }
+
         private void HandleCharacter(TagEventData evtData, object context) {
             StringHash32 characterId = evtData.GetStringHash();
             // TODO: Some indirection? Character -> Style as opposed to Character == Style?
             SetStyle(characterId);
+        }
+
+        private IEnumerator HandleImage(TagEventData evtData, object context) {
+            var args = evtData.ExtractStringArgs();
+            StringSlice path = args[0];
+
+            if (path.IsEmpty) {
+                yield return HandleImageClear(evtData, context);
+                yield break;
+            }
+
+            TextAlignment align = m_ImagePosition;
+            if (args.Count > 1) {
+                align = StringParser.ConvertTo<TextAlignment>(args[1], m_ImagePosition);
+            }
+            if (align == TextAlignment.Center) {
+                align = TextAlignment.Left;
+            }
+
+            // if everything is aligned, no need to do anything more.
+            bool needsRealign = align != m_ImagePosition;
+            bool needsFadeOut = m_Image.Root.gameObject.activeSelf;
+            bool needsChangeTexture = path != m_Image.Texture.Path;
+
+            if (!needsRealign && !needsFadeOut && !needsChangeTexture) {
+                yield break;
+            }
+
+            m_ImagePosition = align;
+
+            using(PooledList<IEnumerator> anims = PooledList<IEnumerator>.Create()) {
+                if (needsRealign) {
+                    anims.Add(ClearLines());
+                }
+                if (needsFadeOut) {
+                    anims.Add(m_Image.TextureGroup.FadeTo(0, 0.3f));
+                }
+
+                yield return Routine.Combine(anims);
+                anims.Clear();
+
+                if (needsChangeTexture) {
+                    m_Image.Texture.Path = path.ToString();
+                    m_Image.Texture.Prefetch();
+                    while(m_Image.Texture.IsLoading()) {
+                        yield return null;
+                    }
+                }
+
+                if (needsRealign) {
+                    float imgX = 0, textX = 0;
+                    switch(m_ImagePosition) {
+                        case TextAlignment.Left: {
+                            imgX = -m_ColumnShift;
+                            textX = m_ColumnShift;
+                            break;
+                        }
+                        case TextAlignment.Right: {
+                            imgX = m_ColumnShift;
+                            textX = -m_ColumnShift;
+                            break;
+                        }
+                    }
+
+                    m_TextDisplay.Root.SetAnchorPos(textX, Axis.X);
+                    m_Image.Root.SetAnchorPos(imgX, Axis.X);
+                    m_TextDisplay.Alignment = TextAlignment.Left;
+                }
+
+                m_Image.TextureGroup.alpha = 0;
+                m_Image.Root.gameObject.SetActive(true);
+                anims.Add(m_Image.TextureGroup.FadeTo(1, 0.3f));
+
+                yield return Routine.Combine(anims);
+            }
+        }
+        
+        private IEnumerator HandleImageClear(TagEventData evtData, object context) {
+            if (m_ImagePosition == TextAlignment.Center) {
+                yield break;
+            }
+
+            if (m_Image.Root.gameObject.activeSelf) {
+                yield return Routine.Combine(
+                    m_Image.TextureGroup.FadeTo(0, 0.3f),
+                    ClearLines()
+                );
+
+                m_Image.Texture.Unload();
+                m_Image.Root.gameObject.SetActive(false);
+                m_TextDisplay.Root.SetAnchorPos(0, Axis.X);
+            }
+
+            m_TextDisplay.Alignment = TextAlignment.Center;
+            m_ImagePosition = TextAlignment.Center;
+
+            Streaming.UnloadUnusedAsync();
         }
 
         private void SetStyle(StringHash32 styleId) {
@@ -57,29 +168,31 @@ namespace Journalism {
             bool needsClear = node.HasFlags(ScriptNodeFlags.ClearText);
             if (needsClear) {
                 yield return ClearLines();
-                yield return 0.1f;
+                yield return 0.2f;
             }
         }
 
         #endregion // Events
 
         public IEnumerator ClearLines() {
-            yield return GameText.AnimateVanish(m_TextDisplay);
-            GameText.ClearLines(m_TextDisplay);
+            if (m_TextDisplay.Lines.Count > 0) {
+                yield return GameText.AnimateVanish(m_TextDisplay);
+                GameText.ClearLines(m_TextDisplay);
+            }
         }
 
         #region ITextDisplayer
 
         public TagStringEventHandler PrepareLine(TagString inString, TagStringEventHandler inBaseHandler) {
-            m_EventHandler.Base = inBaseHandler;
             if (inString.RichText.Length > 0) {
                 m_QueuedLine = GameText.AllocLine(m_TextDisplay, m_Pools);
                 StringHash32 characterId = GameText.FindCharacter(inString);
                 GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, m_Styles.Style(characterId));
+                GameText.AlignTextLine(m_QueuedLine, GameText.ComputeDesiredAlignment(m_QueuedLine, m_TextDisplay));
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
             }
 
-            return m_EventHandler;
+            return null;
         }
 
         public IEnumerator TypeLine(TagString inSourceString, TagTextData inType) {
@@ -96,9 +209,12 @@ namespace Journalism {
             }
 
             var nextLineText = LookupNextLine();
-            if (nextLineText != null && GameText.FindCharacter(nextLineText) == "me") {
-                yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, nextLineText.RichText, m_Styles.Style("me"));
-                yield break;
+            if (nextLineText != null) {
+                StringHash32 characterId = GameText.FindCharacter(nextLineText);
+                if (GameText.IsPlayer(characterId)) {
+                    yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, nextLineText.RichText, m_Styles.Style(characterId));
+                    yield break;
+                }
             }
 
             yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, m_Styles.Style("action"));
@@ -109,9 +225,27 @@ namespace Journalism {
         #region IChoiceDisplayer
 
         public IEnumerator ShowChoice(LeafChoice inChoice, LeafThreadState inThread, ILeafPlugin inPlugin) {
-            throw new System.NotImplementedException();
+            if (inChoice.AvailableCount == 1) {
+                var choices = inChoice.AvailableOptions().GetEnumerator();
+                choices.MoveNext();
+                var choice = choices.Current;
+
+                TagString choiceText = LookupLine(choice.LineCode);
+                StringHash32 characterId = GameText.FindCharacter(choiceText);
+                if (characterId.IsEmpty) {
+                    characterId = GameText.Characters.Action;
+                }
+                yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, choiceText.RichText, m_Styles.Style(characterId));
+                inChoice.Choose(choice.TargetId);
+            }
         }
 
         #endregion // IChoiceDisplayer
+    }
+
+    public enum TextLayoutId {
+        Left,
+        Center,
+        Right
     }
 }

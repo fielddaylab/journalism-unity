@@ -106,6 +106,17 @@ namespace Journalism {
             return null;
         }
 
+        public TagString LookupLine(StringHash32 id) {
+            var thread = m_CurrentThread.GetThread<LeafThreadState<ScriptNode>>();
+            
+            if (LeafUtils.TryLookupLine(this, id, thread.PeekNode(), out string line)) {
+                m_TagParser.Parse(ref m_TempTagString, line, LeafEvalContext.FromThreadHandle(m_CurrentThread));
+                return m_TempTagString;
+            }
+
+            return null;
+        }
+
         #endregion // Prediction
     }
 }
