@@ -374,7 +374,10 @@ namespace Journalism {
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
             yield return choices.DefaultChoiceGroup.FadeTo(1, 0.1f);
             choices.DefaultChoiceGroup.blocksRaycasts = true;
-            yield return choices.DefaultNextButton.Button.onClick.WaitForInvoke();
+            choices.DefaultNextButton.Selected = false;
+            while(!choices.DefaultNextButton.Selected) {
+                yield return null;
+            }
             choices.DefaultChoiceGroup.blocksRaycasts = false;
             yield return choices.DefaultChoiceGroup.FadeTo(0, 0.1f);
         }
@@ -384,7 +387,10 @@ namespace Journalism {
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
             yield return choices.DefaultChoiceGroup.FadeTo(1, 0.1f);
             choices.DefaultChoiceGroup.blocksRaycasts = true;
-            yield return choices.DefaultNextButton.Button.onClick.WaitForInvoke();
+            choices.DefaultNextButton.Selected = false;
+            while(!choices.DefaultNextButton.Selected) {
+                yield return null;
+            }
             choices.DefaultChoiceGroup.blocksRaycasts = false;
             yield return choices.DefaultChoiceGroup.FadeTo(0, 0.1f);
         }

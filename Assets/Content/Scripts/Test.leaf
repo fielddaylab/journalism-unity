@@ -25,10 +25,10 @@ $choice CallBack; Call her back
 
 :: CallBack
 @clearText
-{bg-fadein}{@call} Finally! Where have you been??!
+{bg-fadein}{@phone} Finally! Where have you been??!
 Before you can tell here where you've been (sleeping, because it's FIVE in the MORNING), she gives you the lowdown:
-{@call} Downtown is flooding!
-{@call} You need to get to the newsroom and put out a breaking news update, ASAP.
+{@phone} Downtown is flooding!
+{@phone} You need to get to the newsroom and put out a breaking news update, ASAP.
 {@me}   I'm on my way.
 {/img}
 $goto Prep
@@ -36,5 +36,6 @@ $goto Prep
 :: Prep
 @clearText
 {bg BG/Apartments.png}
+$call SetHeaderEnabled(true)
 This is it, rookie. Your first big scoop.
 If you hurry, you should have time to do one thing before work.

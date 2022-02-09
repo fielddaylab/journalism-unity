@@ -23,13 +23,10 @@ namespace Journalism {
         #endregion // Inspector
 
         private LeafIntegration m_Integration;
-        private VariantTable m_Variables;
         private CustomVariantResolver m_Resolver;
 
         private void Awake() {
-            m_Variables = new VariantTable();
             m_Resolver = new CustomVariantResolver();
-            m_Resolver.SetDefaultTable(m_Variables);
 
             BeauRoutine.Routine.Settings.ForceSingleThreaded = true;
 
@@ -47,11 +44,23 @@ namespace Journalism {
             m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
             m_TextDisplay.LookupLine = m_Integration.LookupLine;
 
+            // TODO: TESTING LOGIC - MOVE TO ITS OWN SCRIPT
+
+            DeclareData(new PlayerData());
+
             m_Integration.LoadScript(m_TestScript).OnComplete((s) => m_Integration.StartFromBeginning());
         }
 
         private IEnumerator HandleNodeEnter(ScriptNode node, LeafThreadState thread) {
             yield return m_TextDisplay.HandleNodeStart(node, thread);
+        }
+
+        public void DeclareData(PlayerData data) {
+            m_Resolver.Clear();
+            m_Resolver.SetDefaultTable(data.GlobalTable);
+            m_Resolver.SetTable(data.UITable);
+            Player.DeclareData(data, m_Resolver);
+            Game.Events.DispatchAsync(Events.SaveDeclared, data);
         }
     }
 }

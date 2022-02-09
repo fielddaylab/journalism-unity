@@ -4,6 +4,7 @@ using BeauUtil;
 using TMPro;
 using System;
 using BeauPools;
+using BeauUtil.Variants;
 
 namespace Journalism {
     public sealed class TextChoice : MonoBehaviour {
@@ -16,5 +17,14 @@ namespace Journalism {
         public Button Button;
 
         #endregion // Inspector
+
+        [NonSerialized] public Variant TargetId;
+        [NonSerialized] public uint TimeCost;
+        
+        [NonSerialized] public bool Selected;
+
+        private void Awake() {
+            Button.onClick.AddListener(() => Selected = true);
+        }
     }
 }

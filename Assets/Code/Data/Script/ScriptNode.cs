@@ -1,6 +1,7 @@
 using BeauUtil;
 using BeauUtil.Blocks;
 using Leaf;
+using UnityEngine.Scripting;
 
 namespace Journalism {
     public sealed class ScriptNode : LeafNode {
@@ -22,7 +23,7 @@ namespace Journalism {
 
         #region Meta Tags
         
-        [BlockMeta("clearText")]
+        [BlockMeta("clearText"), Preserve]
         private void SetClearTextFlag() {
             m_Flags |= ScriptNodeFlags.ClearText;
         }

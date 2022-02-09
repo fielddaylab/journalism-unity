@@ -23,6 +23,7 @@ namespace Journalism {
         public LeafIntegration(MonoBehaviour inHost, CustomVariantResolver inResolver, IMethodCache inCache = null)
             : base(inHost, inResolver)
         {
+            m_MethodCache.LoadStatic();
         }
 
         public HandleNodeStartDelegate HandleNodeEnter;
