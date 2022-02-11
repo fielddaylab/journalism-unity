@@ -196,6 +196,10 @@ namespace BeauUtil.Extensions {
             /// Returns if any deletes are queued on this handler block.
             /// </summary>
             private bool HasDeletesQueued() {
+                if (m_ForceCleanup) {
+                    return true;
+                }
+                
                 for (int i = 0; i < m_QueuedDeleteMasks.Length; i++) {
                     if (m_QueuedDeleteMasks[i] != 0) {
                         return true;
