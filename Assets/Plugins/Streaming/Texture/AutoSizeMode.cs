@@ -2,6 +2,8 @@ namespace StreamingAssets {
     public enum AutoSizeMode {
         Disabled,
         StretchX,
-        StretchY
+        StretchY,
+        Fit,
+        Fill
     }
 }

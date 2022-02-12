@@ -14,12 +14,11 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Profiling;
 
 [assembly: InternalsVisibleTo("StreamingAssets.Editor")]
 
 namespace StreamingAssets {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     public class Streaming : UnityEditor.AssetPostprocessor {
     #else
     static public class Streaming {
@@ -99,6 +98,11 @@ namespace StreamingAssets {
             public RingBuffer<AssetCallback> OnUpdate;
         }
 
+        public struct MemoryStat {
+            public long Current;
+            public long Max;
+        }
+
         #endregion // Types
 
         static private readonly Dictionary<StringHash32, Texture2D> s_Textures = new Dictionary<StringHash32, Texture2D>();
@@ -109,7 +113,7 @@ namespace StreamingAssets {
         static private uint s_LoadCount = 0;
         static private AsyncHandle s_LoadHandle;
         static private AsyncHandle s_UnloadHandle;
-        static private long s_TextureMemoryUsage = 0;
+        static private MemoryStat s_TextureMemoryUsage = default;
 
         #if UNITY_EDITOR
         static private readonly HotReloadBatcher s_Batcher = new HotReloadBatcher();
@@ -188,6 +192,13 @@ namespace StreamingAssets {
             return false;
         }
 
+        /// <summary>
+        /// Returns the total number of streamed texture bytes.
+        /// </summary>
+        static public MemoryStat TextureMemoryUsage() {
+            return s_TextureMemoryUsage;
+        }
+
         #if UNITY_EDITOR
 
         static private Texture2D LoadTexture_Editor(StringHash32 id, string pathOrUrl, AssetMeta meta) {
@@ -197,7 +208,7 @@ namespace StreamingAssets {
                 Texture2D texture = CreatePlaceholderTexture(pathOrUrl, true);
                 meta.Proxy = null;
                 meta.Status = AssetStatus.Error;
-                RecomputeSize(ref s_TextureMemoryUsage, meta, texture);
+                RecomputeMemorySize(ref s_TextureMemoryUsage, meta, texture);
                 return texture;
             }
 
@@ -210,11 +221,12 @@ namespace StreamingAssets {
                 texture.filterMode = GetTextureFilterMode(pathOrUrl);
                 texture.wrapMode = GetTextureWrapMode(pathOrUrl);
                 texture.LoadImage(bytes, false);
+                RecomputeMemorySize(ref s_TextureMemoryUsage, meta, texture);
                 Log.Msg("[Streaming] ...finished loading (sync) '{0}'", id);
                 meta.Proxy = new HotReloadableFileProxy(correctedPath, (p, s) => {
                     if (s == HotReloadOperation.Modified) {
                         texture.LoadImage(File.ReadAllBytes(p), false);
-                        RecomputeSize(ref s_TextureMemoryUsage, meta, texture);
+                        RecomputeMemorySize(ref s_TextureMemoryUsage, meta, texture);
                         Log.Msg("[Streaming] Texture '{0}' reloaded", id);
                         InvokeCallbacks(meta, id, texture);
                     } else {
@@ -222,7 +234,7 @@ namespace StreamingAssets {
                         texture.Resize(2, 2);
                         texture.SetPixels32(TextureLoadingBytes);
                         texture.Apply(false, true);
-                        RecomputeSize(ref s_TextureMemoryUsage, meta, texture);
+                        RecomputeMemorySize(ref s_TextureMemoryUsage, meta, texture);
 
                         meta.Status = AssetStatus.Error;
                         Log.Msg("[Streaming] Texture '{0}' was deleted", id);
@@ -236,7 +248,7 @@ namespace StreamingAssets {
                 Texture2D texture = CreatePlaceholderTexture(pathOrUrl, true);
                 meta.Proxy = null;
                 meta.Status = AssetStatus.Error;
-                RecomputeSize(ref s_TextureMemoryUsage, meta, texture);
+                RecomputeMemorySize(ref s_TextureMemoryUsage, meta, texture);
                 return texture;
             }
         }
@@ -252,7 +264,7 @@ namespace StreamingAssets {
                 var sent = request.SendWebRequest();
                 sent.completed += (r) => HandleTextureUWRFinished(id, pathOrUrl, meta, request);
             });
-            RecomputeSize(ref s_TextureMemoryUsage, meta, texture);
+            RecomputeMemorySize(ref s_TextureMemoryUsage, meta, texture);
             s_LoadCount++;
             return texture;
         }
@@ -293,7 +305,7 @@ namespace StreamingAssets {
             }
 
             meta.Status = AssetStatus.Loaded;
-            RecomputeSize(ref s_TextureMemoryUsage, meta, dest);
+            RecomputeMemorySize(ref s_TextureMemoryUsage, meta, dest);
             Log.Msg("[Streaming] ...finished loading (async) '{0}'", id);
             InvokeCallbacks(meta, id, dest);
         }
@@ -323,7 +335,7 @@ namespace StreamingAssets {
 
         static private Texture2D CreatePlaceholderTexture(string name, bool final) {
             Texture2D texture;
-            texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            texture = new Texture2D(2, 2, TextureFormat.RGBA32, false, false);
             texture.name = name;
             texture.SetPixels32(TextureLoadingBytes);
             texture.filterMode = FilterMode.Point;
@@ -401,6 +413,13 @@ namespace StreamingAssets {
         /// </summary>
         static public bool IsLoading() {
             return s_LoadCount > 0;
+        }
+
+        /// <summary>
+        /// Returns if the asset with the given streaming id is loading.
+        /// </summary>
+        static public bool IsLoading(StringHash32 id) {
+            return !id.IsEmpty && (Status(id) & AssetStatus.PendingLoad) != 0;
         }
 
         /// <summary>
@@ -553,10 +572,10 @@ namespace StreamingAssets {
 
         static internal void UnloadAll() {
             foreach(var texture in s_Textures.Values) {
-                DestroyResource(texture);
+                StreamingHelper.DestroyResource(texture);
             }
             foreach(var audio in s_AudioClips.Values) {
-                DestroyResource(audio);
+                StreamingHelper.DestroyResource(audio);
             }
 
             foreach(var meta in s_Metas.Values) {
@@ -577,7 +596,7 @@ namespace StreamingAssets {
             s_Batcher.Dispose();
             #endif // UNITY_EDITOR
 
-            s_TextureMemoryUsage = 0;
+            s_TextureMemoryUsage.Current = 0;
 
             Log.Msg("[Streaming] Unloaded all streamed assets");
         }
@@ -615,8 +634,9 @@ namespace StreamingAssets {
                 switch(meta.Type) {
                     case AssetType.Texture: {
                             resource = s_Textures[id];
+
                             s_Textures.Remove(id);
-                            s_TextureMemoryUsage -= meta.Size;
+                            s_TextureMemoryUsage.Current -= meta.Size;
                             break;
                         }
 
@@ -628,7 +648,7 @@ namespace StreamingAssets {
                         }
                 }
                 s_ReverseLookup.Remove(resource.GetInstanceID());
-                DestroyResource(resource);
+                StreamingHelper.DestroyResource(resource);
                 resource = null;
             }
 
@@ -671,56 +691,14 @@ namespace StreamingAssets {
                 meta.OnUpdate.FastRemove(callback);
             }
         }
-
-        static internal void DestroyResource<T>(ref T resource) where T : UnityEngine.Object {
-            if (resource != null) {
-                #if UNITY_EDITOR
-                if (!Application.isPlaying) {
-                    UnityEngine.Object.DestroyImmediate(resource);
-                } else {
-                    UnityEngine.Object.Destroy(resource);
-                }
-                #else
-                UnityEngine.Object.Destroy(resource);
-                #endif // UNITY_EDITOR
-
-                resource = null;
+    
+        static private void RecomputeMemorySize(ref MemoryStat memUsage, AssetMeta meta, UnityEngine.Object asset) {
+            memUsage.Current -= meta.Size;
+            meta.Size = StreamingHelper.CalculateMemoryUsage(asset);
+            memUsage.Current += meta.Size;
+            if (memUsage.Max < memUsage.Current) {
+                memUsage.Max = memUsage.Current;
             }
-        }
-
-        static internal void DestroyResource(UnityEngine.Object resource) {
-            if (resource != null) {
-                #if UNITY_EDITOR
-                if (!Application.isPlaying) {
-                    UnityEngine.Object.DestroyImmediate(resource);
-                } else {
-                    UnityEngine.Object.Destroy(resource);
-                }
-                #else
-                UnityEngine.Object.Destroy(resource);
-                #endif // UNITY_EDITOR
-            }
-        }
-
-        static private void RecomputeSize(ref long memUsage, AssetMeta meta, UnityEngine.Object asset) {
-            memUsage -= meta.Size;
-            meta.Size = CalculateSize(asset);
-            memUsage += meta.Size;
-
-            Log.Msg("[Streaming] Size of texture '{0}' is {1}kB", asset.name, meta.Size / 1024);
-        }
-
-        static internal long CalculateSize(UnityEngine.Object resource) {
-            if (Profiler.enabled) {
-                return Profiler.GetRuntimeMemorySizeLong(resource);
-            }
-
-            Texture2D tex = resource as Texture2D;
-            if (tex != null) {
-                return UnityHelper.CalculateMemoryUsage(tex);
-            }
-
-            return 0;
         }
 
         #endregion // Utilities

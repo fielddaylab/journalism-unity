@@ -4,8 +4,11 @@ using BeauUtil;
 using TMPro;
 using System;
 using BeauPools;
+using StreamingAssets;
 
 namespace Journalism {
+    
+    [DisallowMultipleComponent]
     public sealed class TextLine : MonoBehaviour {
         
         [Serializable] public sealed class Pool : SerializablePool<TextLine> { }
@@ -19,17 +22,19 @@ namespace Journalism {
         #region Inspector
 
         [Header("Animation")]
-        public RectTransform Root;
-        public CanvasGroup Group;
+        [Required] public RectTransform Root;
+        [Required] public CanvasGroup Group;
 
         [Header("Configuration")]
-        public ColorGroup[] BackgroundColor;
-        public ColorGroup[] OutlineColor;
+        [Required] public ColorGroup[] BackgroundColor;
+        [Required] public ColorGroup[] OutlineColor;
+        [Required] public Image[] Rounding;
         public RectTransform Tail;
+        [ShowIfField("Tail")] public RectTransform InnerTail;
 
         [Header("Layout")]
         public LayoutGroup Layout;
-        public float TailHeight;
+        [ShowIfField("Tail")] public float TailHeight;
 
         [Header("Contents")]
         public TMP_Text Text;

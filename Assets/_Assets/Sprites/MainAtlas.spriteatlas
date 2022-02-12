@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ProgrammerAtlas_Bilinear
+  m_Name: MainAtlas
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -20,19 +20,7 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings:
-    - serializedVersion: 3
-      m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
-      m_ResizeAlgorithm: 0
-      m_TextureFormat: -1
-      m_TextureCompression: 2
-      m_CompressionQuality: 50
-      m_CrunchedCompression: 0
-      m_AllowsAlphaSplitting: 0
-      m_Overridden: 0
-      m_AndroidETC2FallbackOverride: 0
-      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    platformSettings: []
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -42,48 +30,76 @@ SpriteAtlas:
       enableTightPacking: 0
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: 4c4dc423db1d42a4d826e8aa2bc6609f, type: 3}
+    - {fileID: 102900000, guid: 42a4936d2dbf7d947b542b228b854b80, type: 3}
+    - {fileID: 102900000, guid: 8b708df7dbf8cfb4585819d18077e70f, type: 3}
+    - {fileID: 102900000, guid: 9c41734d29ead134c817cdb59ae683e6, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 297741307d85e394da92dfaf7b713cc1, type: 3}
+  - {fileID: 21300000, guid: af2bc8b02aad38541a9b4c776ad85556, type: 3}
   - {fileID: 21300000, guid: c5c4f961a44dac042a5be25d1a7e6d54, type: 3}
   - {fileID: 21300000, guid: 17ffe5e1e7459cb4ba6e54c766b6baaa, type: 3}
   - {fileID: -6068790857114741763, guid: 2749eb22772ed334ebf026eb938312a5, type: 3}
   - {fileID: 21300000, guid: 15aa4a52245f4a14f97a18721c557943, type: 3}
   - {fileID: 21300000, guid: f392e7829398b1f4db653e6ebd198f5c, type: 3}
+  - {fileID: -772575820629016456, guid: af889cc2049db984db69d947f2922315, type: 3}
+  - {fileID: 21300000, guid: f746f2031973bdb4587a279ebc548704, type: 3}
+  - {fileID: 21300000, guid: 49665413db1e1d84cb59245271b435cf, type: 3}
+  - {fileID: -1629541493807577969, guid: 5d96cab3616f95b4e83591dba64fe8ec, type: 3}
+  - {fileID: 21300000, guid: a4bb5ff349a448c44a99e13478f70e43, type: 3}
   - {fileID: 21300000, guid: 863d051417f2ff7429b1a919f8062be7, type: 3}
   - {fileID: 21300000, guid: 21ceae85738130d4daf8c0fceb15a51c, type: 3}
+  - {fileID: 21300000, guid: ed9dde853b85e4348973e8fbe28cf9b1, type: 3}
   - {fileID: 21300000, guid: 20175ef504f33ec4fba4519d705339e4, type: 3}
+  - {fileID: 21300000, guid: 48b2f1b7346efcf42942b5766b9a2106, type: 3}
   - {fileID: 21300000, guid: ac7df418fb00b094baf405cecda134b0, type: 3}
-  - {fileID: 21300000, guid: c5ceeae8653f6ca41a7823f037963a73, type: 3}
   - {fileID: 21300000, guid: e9b7af09a3ec2f54bb23ccce5480167d, type: 3}
-  - {fileID: 21300000, guid: fced33a9985993949a74d8916e87a704, type: 3}
+  - {fileID: -768233074013804200, guid: 5c947c1935ec7a344b084bb9d1c47bc7, type: 3}
   - {fileID: 21300000, guid: a10e8fe9fd6fbd347b87d1f493b29f39, type: 3}
   - {fileID: 21300000, guid: 237eff2a97bddf94e8109891d11b2470, type: 3}
+  - {fileID: 8174540821471540263, guid: 96f1fa3a443df6441af9bd99a317564d, type: 3}
   - {fileID: 154641881785775158, guid: 2501c9baf1022384eb313d1b65f0d057, type: 3}
+  - {fileID: -7967339431453721430, guid: 7ddf2c2b817dd814c9f75b0ed9ec9057, type: 3}
   - {fileID: 21300000, guid: 5703785b27a186b4bb61ecae44095ee1, type: 3}
+  - {fileID: 2296426576234114103, guid: 9387babccaae3f04a8e75a8c763481a7, type: 3}
   - {fileID: 21300000, guid: 2514285dbbe219d45939af2ca6f15a5d, type: 3}
   - {fileID: 21300000, guid: e4b66e9d2addd2d428e10a3bac8ee3ae, type: 3}
+  - {fileID: 4664704447381176927, guid: f44ab3ae28887014493f786680c101bc, type: 3}
+  - {fileID: 21300000, guid: 8f6c05be887eb434ca760269d2f4610a, type: 3}
+  - {fileID: 21300000, guid: 510a9ede8615ea84b99bd898b716ef68, type: 3}
   m_PackedSpriteNamesToIndex:
   - ThinX
+  - NextIcon
   - CircleGradient50
   - CircleGradient25
   - HalfQuad0
   - Circle
   - RoundedRect100Outline
+  - SquareAlt20
+  - Close
+  - Stats
+  - SquareAlt10
+  - Notes
   - CircleGradient0
   - RoundedRect100-gradientEdge
+  - Map
   - CircleGradient75-Invert
+  - Time
   - Gradient100_Down
-  - CircleBox
   - ThickX
-  - CircleBoxOutline
+  - CircleOutline-Thin0
   - star
   - CircleGradient75
+  - CircleOutline-Thick-Half0
   - SemiCircle0
+  - SquareAlt1-Vert0
   - LeftTriangle
+  - CircleOutline0
   - RoundedRect100
   - Gradient100_Left
-  m_Tag: ProgrammerAtlas_Bilinear
+  - CircleOutline-Thick0
+  - SquareOutline
+  - Square
+  m_Tag: MainAtlas
   m_IsVariant: 0

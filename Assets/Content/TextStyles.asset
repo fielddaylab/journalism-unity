@@ -23,6 +23,7 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4278388513
     Tail: 0
+    RoundingScale: 1.5
   m_Styles:
   - Id:
       m_Source: phone
@@ -34,6 +35,7 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4278388513
     Tail: 1
+    RoundingScale: 1.2
   - Id:
       m_Source: me
       m_HashValue: 1747856039
@@ -44,6 +46,7 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4278388513
     Tail: 2
+    RoundingScale: 1.2
   - Id:
       m_Source: action
       m_HashValue: 3294899967
@@ -54,3 +57,4 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4278388513
     Tail: 0
+    RoundingScale: 1.5

@@ -28,12 +28,13 @@ namespace StreamingAssets {
         [SerializeField] private MeshFilter m_MeshFilter;
         [SerializeField] private MeshRenderer m_MeshRenderer;
 
-        [SerializeField, StreamingImagePath] private string m_Path;
+        [SerializeField, StreamingImagePath] private string m_Path = null;
         [SerializeField, Required] private Material m_Material;
         [SerializeField] private Color32 m_Color = Color.white;
         
         [SerializeField] private Vector2 m_Size = new Vector2(1, 1);
         [SerializeField] private Vector2 m_Pivot = new Vector2(0.5f, 0.5f);
+        [SerializeField] private Rect m_UVRect = new Rect(0f, 0f, 1f, 1f);
         [SerializeField] private AutoSizeMode m_AutoSize = AutoSizeMode.Disabled;
         
         [SerializeField, SortingLayer] private int m_SortingLayer = 0;
@@ -173,6 +174,12 @@ namespace StreamingAssets {
                 return;
             }
 
+            Vector2 size = m_Size;
+
+            if (!StreamingHelper.AutoSize(sizeMode, m_LoadedTexture, m_UVRect, ref size, StreamingHelper.GetParentSize(transform))) {
+                return;
+            }
+
             #if UNITY_EDITOR
             if (!Application.IsPlaying(this)) {
                 UnityEditor.Undo.RecordObject(this, "Changing size");
@@ -180,23 +187,7 @@ namespace StreamingAssets {
             }
             #endif // UNITY_EDITOR
 
-            switch(sizeMode) {
-                case AutoSizeMode.StretchX: {
-                    float height = m_LoadedTexture.height;
-                    if (height > 0) {
-                        m_Size.x = m_Size.y * (m_LoadedTexture.width / height);
-                    }
-                    break;
-                }
-
-                case AutoSizeMode.StretchY: {
-                    float width = m_LoadedTexture.width;
-                    if (width > 0) {
-                        m_Size.y = m_Size.x * (m_LoadedTexture.height / width);
-                    }
-                    break;
-                }
-            }
+            m_Size = size;
 
             if (isActiveAndEnabled) {
                 LoadMesh();
@@ -211,6 +202,7 @@ namespace StreamingAssets {
                 if (EditorApplication.isPlayingOrWillChangePlaymode) {
                     return;
                 }
+
                 m_MeshFilter = GetComponent<MeshFilter>();
                 m_MeshRenderer = GetComponent<MeshRenderer>();
                 Refresh();
@@ -339,7 +331,7 @@ namespace StreamingAssets {
                 vertColor = Color.white;
             }
 
-            m_MeshInstance = MeshGeneration.CreateQuad(m_Size, m_Pivot, vertColor, m_MeshInstance);
+            m_MeshInstance = MeshGeneration.CreateQuad(m_Size, m_Pivot, vertColor, m_UVRect, m_MeshInstance);
             m_MeshInstance.hideFlags = HideFlags.DontSave;
             m_MeshFilter.sharedMesh = m_MeshInstance;
         }
@@ -353,7 +345,7 @@ namespace StreamingAssets {
             }
 
             Streaming.Unload(ref m_LoadedTexture);
-            Streaming.DestroyResource(ref m_MeshInstance);
+            StreamingHelper.DestroyResource(ref m_MeshInstance);
         }
 
         #endregion // Resources

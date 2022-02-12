@@ -11,6 +11,7 @@ namespace StreamingAssets.Editor {
 
         private SerializedProperty m_SizeProperty;
         private SerializedProperty m_PivotProperty;
+        private SerializedProperty m_UVRectProperty;
         private SerializedProperty m_AutoSizeProperty;
         
         private SerializedProperty m_SortingLayerProperty;
@@ -23,6 +24,7 @@ namespace StreamingAssets.Editor {
 
             m_SizeProperty = serializedObject.FindProperty("m_Size");
             m_PivotProperty = serializedObject.FindProperty("m_Pivot");
+            m_UVRectProperty = serializedObject.FindProperty("m_UVRect");
             m_AutoSizeProperty = serializedObject.FindProperty("m_AutoSize");
 
             m_SortingLayerProperty = serializedObject.FindProperty("m_SortingLayer");
@@ -40,6 +42,7 @@ namespace StreamingAssets.Editor {
 
             EditorGUILayout.PropertyField(m_SizeProperty);
             EditorGUILayout.PropertyField(m_PivotProperty);
+            EditorGUILayout.PropertyField(m_UVRectProperty);
             EditorGUILayout.PropertyField(m_AutoSizeProperty);
 
             EditorGUILayout.Space();

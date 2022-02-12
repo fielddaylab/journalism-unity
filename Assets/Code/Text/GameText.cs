@@ -29,13 +29,15 @@ namespace Journalism {
                 line.Text.SetText(string.Empty);
             }
 
-            if (icon) {
-                line.Icon.sprite = icon;
-                line.Icon.color = iconColor;
-                line.Icon.gameObject.SetActive(true);
-            } else {
-                line.Icon.gameObject.SetActive(false);
-                line.Icon.sprite = null;
+            if (line.Icon != null) {
+                if (icon) {
+                    line.Icon.sprite = icon;
+                    line.Icon.color = iconColor;
+                    line.Icon.gameObject.SetActive(true);
+                } else {
+                    line.Icon.gameObject.SetActive(false);
+                    line.Icon.sprite = null;
+                }
             }
 
             if (style != null) {
@@ -61,6 +63,10 @@ namespace Journalism {
 
             for(int i = 0; i < line.OutlineColor.Length; i++) {
                 line.OutlineColor[i].SetColor(style.Outline);
+            }
+
+            for(int i = 0; i < line.Rounding.Length; i++) {
+                line.Rounding[i].pixelsPerUnitMultiplier = style.RoundingScale;
             }
 
             SetTailMode(line, style.Tail);
@@ -104,34 +110,43 @@ namespace Journalism {
 
         static private void SetTailMode(TextLine line, TextLine.TailMode tailMode) {
             RectTransform tail = line.Tail;
+            RectTransform innerTail = line.InnerTail;
+
+            if (!tail || !innerTail) {
+                return;
+            }
 
             if (tailMode == TextLine.TailMode.Hidden) {
                 tail.gameObject.SetActive(false);
+                innerTail.gameObject.SetActive(false);
                 return;
             }
 
             tail.gameObject.SetActive(true);
-            Vector2 anchorMin = tail.anchorMin,
-                anchorMax = tail.anchorMax,
-                offset = tail.anchoredPosition;
+            innerTail.gameObject.SetActive(true);
+            Vector2 offset = tail.anchoredPosition,
+                innerOffset = innerTail.anchoredPosition;
 
             switch(tailMode) {
                 case TextLine.TailMode.Left: {
-                    anchorMin.x = anchorMax.x = 0;
+                    CanvasUtility.SetAnchor(tail, TextAnchor.LowerLeft);
+                    CanvasUtility.SetAnchor(innerTail, TextAnchor.LowerLeft);
                     offset.x = Math.Abs(offset.x);
+                    innerOffset.x = Math.Abs(innerOffset.x);
                     break;
                 }
 
                 case TextLine.TailMode.Right: {
-                    anchorMin.x = anchorMax.x = 1;
+                    CanvasUtility.SetAnchor(tail, TextAnchor.LowerRight);
+                    CanvasUtility.SetAnchor(innerTail, TextAnchor.LowerRight);
                     offset.x = -Math.Abs(offset.x);
+                    innerOffset.x = -Math.Abs(innerOffset.x);
                     break;
                 }
             }
 
-            tail.anchorMin = anchorMin;
-            tail.anchorMax = anchorMax;
             tail.anchoredPosition = offset;
+            innerTail.anchoredPosition = innerOffset;
         }
 
         #endregion // Lines
@@ -446,5 +461,23 @@ namespace Journalism {
         }
 
         #endregion // Parsing
+
+        #region Text Generation
+
+        static public string FormatTime(uint timeRemaining) {
+            uint hours = timeRemaining / Stats.TimeUnitsPerHour;
+            uint minutes = Stats.MinutesPerTimeUnit * (timeRemaining % Stats.TimeUnitsPerHour);
+
+            // TODO: Localization
+            if (hours > 0 && minutes > 0) {
+                return string.Format("<color=#EB8686>{0}</color> hours and <color=#EB8686>{1}</color> minutes", hours, minutes);
+            } else if (hours > 0) {
+                return string.Format("<color=#EB8686>{0}</color> hours", hours);
+            } else {
+                return string.Format("<color=#EB8686>{0}</color> minutes", minutes);
+            }
+        }
+
+        #endregion // Text Generation
     }
 }

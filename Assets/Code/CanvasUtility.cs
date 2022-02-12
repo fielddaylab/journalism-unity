@@ -19,5 +19,9 @@ namespace Journalism {
             Vector2 anchorVec = s_Anchors[(int) anchor];
             rect.anchorMin = rect.anchorMax = anchorVec;
         }
+
+        static public void SetPivot(RectTransform rect, TextAnchor anchor) {
+            rect.pivot = s_Anchors[(int) anchor];
+        }
     }
 }

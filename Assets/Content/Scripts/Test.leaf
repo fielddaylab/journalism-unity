@@ -1,10 +1,12 @@
 // Story
 
 :: START
+$call SetHeaderEnabled(true)
 Sometimes when the train passes nearby, I can convince myself I'm still in New York.
 {bg BG/Room.png}
 But this is <i>not</i> New York.
 Not by a country mile.
+
 $goto Its5AM
 
 :: Its5AM

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEngine.EventSystems;
 #endif // UNITY_EDITOR
 
 namespace StreamingAssets {
@@ -19,7 +20,7 @@ namespace StreamingAssets {
     #endif // USE_ALWAYS
     [AddComponentMenu("Streaming Assets/Streaming UGUI Texture")]
     [RequireComponent(typeof(RawImage), typeof(RectTransform))]
-    public sealed class StreamingUGUITexture : MonoBehaviour, IStreamingComponent {
+    public sealed class StreamingUGUITexture : UIBehaviour, IStreamingComponent, ILayoutSelfController {
         #region Inspector
 
         [SerializeField] private RawImage m_RawImage;
@@ -30,6 +31,7 @@ namespace StreamingAssets {
         #endregion // Inspector
 
         [NonSerialized] private Texture2D m_LoadedTexture;
+        private DrivenRectTransformTracker m_Tracker;
  
         private readonly Streaming.AssetCallback OnAssetUpdated;
 
@@ -101,10 +103,34 @@ namespace StreamingAssets {
         /// </summary>
         public void Resize(AutoSizeMode sizeMode) {
             if (sizeMode == AutoSizeMode.Disabled || !m_LoadedTexture) {
+                m_Tracker.Clear();
                 return;
             }
 
             RectTransform rect = (RectTransform) transform;
+            Vector2 size = rect.rect.size;
+
+            m_Tracker.Clear();
+
+            switch(sizeMode) {
+                case AutoSizeMode.StretchX: {
+                    m_Tracker.Add(this, rect, DrivenTransformProperties.SizeDeltaX);
+                    break;
+                }
+                case AutoSizeMode.StretchY: {
+                    m_Tracker.Add(this, rect, DrivenTransformProperties.SizeDeltaY);
+                    break;
+                }
+                case AutoSizeMode.Fit:
+                case AutoSizeMode.Fill: {
+                    m_Tracker.Add(this, rect, DrivenTransformProperties.SizeDelta);
+                    break;
+                }
+            }
+
+            if (!StreamingHelper.AutoSize(sizeMode, m_LoadedTexture, m_RawImage.uvRect, ref size, StreamingHelper.GetParentSize(rect))) {
+                return;
+            }
 
             #if UNITY_EDITOR
             if (!Application.IsPlaying(this)) {
@@ -113,34 +139,34 @@ namespace StreamingAssets {
             }
             #endif // UNITY_EDITOR
 
-            Vector2 sizeDelta = rect.sizeDelta;
-
             switch(sizeMode) {
                 case AutoSizeMode.StretchX: {
-                    float height = m_LoadedTexture.height;
-                    if (height > 0) {
-                        sizeDelta.x = sizeDelta.y * (m_LoadedTexture.width / height);
-                    }
+                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
                     break;
                 }
-
                 case AutoSizeMode.StretchY: {
-                    float width = m_LoadedTexture.width;
-                    if (width > 0) {
-                        sizeDelta.y = sizeDelta.x * (m_LoadedTexture.height / width);
-                    }
+                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                    break;
+                }
+                case AutoSizeMode.Fit:
+                case AutoSizeMode.Fill: {
+                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
                     break;
                 }
             }
 
-            rect.sizeDelta = sizeDelta;
         }
 
         #region Unity Events
 
-        private void OnEnable() {
+        protected override void OnEnable() {
             #if UNITY_EDITOR
             if (!Application.IsPlaying(this)) {
+                if (EditorApplication.isPlayingOrWillChangePlaymode) {
+                    return;
+                }
+                
                 m_RawImage = GetComponent<RawImage>();
                 LoadTexture();
                 return;
@@ -150,13 +176,37 @@ namespace StreamingAssets {
             LoadTexture();
         }
 
-        private void OnDisable() {
+        protected override void OnDisable() {
+            m_Tracker.Clear();
             Unload();
         }
 
-        private void OnDestroy() {
+        protected override void OnDestroy() {
             Unload();
         }
+
+        protected override void OnRectTransformDimensionsChange() {
+            Resize(m_AutoSize);
+        }
+
+        #if UNITY_EDITOR
+
+        [NonSerialized] private Vector2 m_CachedParentSize;
+
+        private void Update() {
+            if (!Application.IsPlaying(this)) {
+                if (EditorApplication.isPlayingOrWillChangePlaymode) {
+                    return;
+                }
+
+                Vector2? parentSize = StreamingHelper.GetParentSize(transform);
+                if (parentSize.HasValue && Ref.Replace(ref m_CachedParentSize, parentSize.Value)) {
+                    Resize(m_AutoSize);
+                }
+            }
+        }
+
+        #endif // UNITY_EDITOR
 
         #endregion // Unity Events
 
@@ -197,15 +247,31 @@ namespace StreamingAssets {
 
         #endregion // Resources
 
+        #region ILayoutSelfController
+
+        void ILayoutController.SetLayoutHorizontal() {
+            if (StreamingHelper.IsAutoSizeHorizontal(m_AutoSize)) {
+                Resize(m_AutoSize);
+            }
+        }
+
+        void ILayoutController.SetLayoutVertical() {
+            if (StreamingHelper.IsAutoSizeVertical(m_AutoSize)) {
+                Resize(m_AutoSize);
+            }
+        }
+
+        #endregion // ILayoutSelfController
+
         #region Editor
 
         #if UNITY_EDITOR
 
-        private void Reset() {
+        protected override void Reset() {
             m_RawImage = GetComponent<RawImage>();
         }
 
-        private void OnValidate() {
+        protected override void OnValidate() {
             if (EditorApplication.isPlaying || PrefabUtility.IsPartOfPrefabAsset(this)) {
                 return;
             }

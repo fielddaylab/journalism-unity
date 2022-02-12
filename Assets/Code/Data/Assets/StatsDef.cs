@@ -64,7 +64,20 @@ namespace Journalism {
     /// Stat access.
     /// </summary>
     static public class Stats {
+        /// <summary>
+        /// Total number of stats.
+        /// </summary>
         public const int Count = 6;
+
+        /// <summary>
+        /// Number of time units per hour.
+        /// </summary>
+        public const int TimeUnitsPerHour = 4;
+
+        /// <summary>
+        /// Number of minutes per time unit.
+        /// </summary>
+        public const int MinutesPerTimeUnit = 60 / TimeUnitsPerHour;
 
         static private ushort s_MaxValue;
         static private StatsDef.Stat[] s_Stats;
