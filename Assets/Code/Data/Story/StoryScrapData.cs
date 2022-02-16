@@ -19,11 +19,11 @@ namespace Journalism {
     /// Type of story scrap.
     /// </summary>
     public enum StoryScrapType {
-        Picture,
-        Graph,
-        Quote,
-        Fact,
-        Observation
+        Picture = 0x01,
+        Graph = 0x02,
+        Quote = 0x04,
+        Fact = 0x08,
+        Observation = 0x10
     }
 
     /// <summary>

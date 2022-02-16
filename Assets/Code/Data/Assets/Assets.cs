@@ -80,6 +80,13 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Layout of the story for the current 
+        /// </summary>
+        static public StoryScraps StoryLayout {
+            get { return s_CurrentLevel.StoryScraps; }
+        }
+
+        /// <summary>
         /// Scrap data for the currently loaded level.
         /// </summary>
         static public StoryScrapData Scrap(StringHash32 id) {

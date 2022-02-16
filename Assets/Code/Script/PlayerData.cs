@@ -12,7 +12,8 @@ namespace Journalism {
         public HashSet<StringHash32> VisitedNodeIds = new HashSet<StringHash32>();
         
         public uint LevelIndex = 0;
-        public List<StringHash32> StoryScraps = new List<StringHash32>();
+        public List<StringHash32> StoryScrapInventory = new List<StringHash32>();
+        public StringHash32[] AllocatedScraps = new StringHash32[StoryScraps.MaxSlots];
         public StringHash32 CheckpointId = null;
         public StringHash32 LocationId = null;
         public uint TimeRemaining;
@@ -31,8 +32,10 @@ namespace Journalism {
             serializer.Object("uiVars", ref UITable);
             serializer.UInt32ProxySet("visited", ref VisitedNodeIds);
             
+            serializer.UInt32ProxyArray("scrapInventory", ref StoryScrapInventory);
+            serializer.UInt32ProxyArray("allocatedScraps", ref AllocatedScraps);
+
             serializer.Serialize("levelIndex", ref LevelIndex);
-            serializer.UInt32ProxyArray("storyScraps", ref StoryScraps);
             serializer.UInt32Proxy("checkpointId", ref CheckpointId);
             serializer.UInt32Proxy("locationId", ref LocationId);
             serializer.Serialize("timeRemaining", ref TimeRemaining);

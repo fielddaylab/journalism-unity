@@ -8,13 +8,21 @@ using UnityEngine.Scripting;
 
 namespace Journalism {
     public sealed class StoryScraps : ScriptableDataBlockPackage<StoryScrapData> {
+        public const int MaxSlots = 6;
+        
         private readonly Dictionary<StringHash32, StoryScrapData> m_Scraps = new Dictionary<StringHash32, StoryScrapData>();
+        private readonly List<StorySlot> m_Slots = new List<StorySlot>();
+
+        private string m_HeadlineType = string.Empty;
 
         public override int Count { get { return m_Scraps.Count; } }
 
         public override IEnumerator<StoryScrapData> GetEnumerator() {
             return m_Scraps.Values.GetEnumerator();
         }
+
+        public string HeadlineType { get { return m_HeadlineType; } }
+        public ListSlice<StorySlot> Slots { get { return m_Slots; } }
 
         public StoryScrapData Scrap(StringHash32 id) {
             StoryScrapData scrap = null;
@@ -28,7 +36,14 @@ namespace Journalism {
             base.Clear();
 
             m_Scraps.Clear();
+            m_Slots.Clear();
         }
+
+        #region Meta
+
+
+
+        #endregion // Meta
 
         #region Generator
 

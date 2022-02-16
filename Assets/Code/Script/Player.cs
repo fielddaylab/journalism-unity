@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Leaf.Runtime;
 using BeauUtil.Debugger;
 using Leaf;
+using System;
 
 namespace Journalism {
     static public class Player {
@@ -272,7 +273,7 @@ namespace Journalism {
         /// </summary>
         /// <value></value>
         static public ListSlice<StringHash32> StoryScraps {
-            get { return s_Current.StoryScraps; }
+            get { return s_Current.StoryScrapInventory; }
         }
 
         /// <summary>
@@ -280,7 +281,7 @@ namespace Journalism {
         /// </summary>
         [LeafMember("HasSnippet")]
         static public bool HasStoryScrap(StringHash32 scrapId) {
-            return s_Current.StoryScraps.Contains(scrapId);
+            return s_Current.StoryScrapInventory.Contains(scrapId);
         }
 
         /// <summary>
@@ -288,8 +289,8 @@ namespace Journalism {
         /// </summary>
         [LeafMember("GiveSnippet")]
         static public bool AddStoryScrap(StringHash32 scrapId) {
-            if (!s_Current.StoryScraps.Contains(scrapId)) {
-                s_Current.StoryScraps.Add(scrapId);
+            if (!s_Current.StoryScrapInventory.Contains(scrapId)) {
+                s_Current.StoryScrapInventory.Add(scrapId);
                 Game.Events.Dispatch(Events.InventoryUpdated, scrapId);
                 return true;
             }
@@ -314,7 +315,8 @@ namespace Journalism {
         /// </summary>
         [LeafMember("ResetForNewLevel")]
         static public void ResetForNewLevel() {
-            s_Current.StoryScraps.Clear();
+            s_Current.StoryScrapInventory.Clear();
+            Array.Clear(s_Current.AllocatedScraps, 0, s_Current.AllocatedScraps.Length);
             s_Current.CheckpointId = default;
             s_Current.LocationId = default;
         }
