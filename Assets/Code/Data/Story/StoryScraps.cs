@@ -7,17 +7,17 @@ using Leaf;
 using UnityEngine.Scripting;
 
 namespace Journalism {
-    public sealed class StoryScraps : ScriptableDataBlockPackage<StoryScrap> {
-        private readonly Dictionary<StringHash32, StoryScrap> m_Scraps = new Dictionary<StringHash32, StoryScrap>();
+    public sealed class StoryScraps : ScriptableDataBlockPackage<StoryScrapData> {
+        private readonly Dictionary<StringHash32, StoryScrapData> m_Scraps = new Dictionary<StringHash32, StoryScrapData>();
 
         public override int Count { get { return m_Scraps.Count; } }
 
-        public override IEnumerator<StoryScrap> GetEnumerator() {
+        public override IEnumerator<StoryScrapData> GetEnumerator() {
             return m_Scraps.Values.GetEnumerator();
         }
 
-        public StoryScrap Scrap(StringHash32 id) {
-            StoryScrap scrap = null;
+        public StoryScrapData Scrap(StringHash32 id) {
+            StoryScrapData scrap = null;
             if (!id.IsEmpty && !m_Scraps.TryGetValue(id, out scrap)) {
                 Assert.Fail("[StoryScraps] No scrap with id '{0}' found in file '{1}'", id, name);
             }
@@ -32,11 +32,11 @@ namespace Journalism {
 
         #region Generator
 
-        static public readonly IBlockGenerator<StoryScrap, StoryScraps> Parser = new Generator();
+        static public readonly IBlockGenerator<StoryScrapData, StoryScraps> Parser = new Generator();
 
         private class Generator : GeneratorBase<StoryScraps> {
-            public override bool TryCreateBlock(IBlockParserUtil inUtil, StoryScraps inPackage, TagData inId, out StoryScrap outBlock) {
-                outBlock = new StoryScrap() {
+            public override bool TryCreateBlock(IBlockParserUtil inUtil, StoryScraps inPackage, TagData inId, out StoryScrapData outBlock) {
+                outBlock = new StoryScrapData() {
                     Id = inId.Id
                 };
                 inPackage.m_Scraps.Add(outBlock.Id, outBlock);

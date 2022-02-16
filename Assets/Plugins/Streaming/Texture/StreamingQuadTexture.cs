@@ -27,6 +27,7 @@ namespace StreamingAssets {
 
         [SerializeField] private MeshFilter m_MeshFilter;
         [SerializeField] private MeshRenderer m_MeshRenderer;
+        [SerializeField] private ColorGroup m_ColorGroup;
 
         [SerializeField, StreamingImagePath] private string m_Path = null;
         [SerializeField, Required] private Material m_Material;
@@ -47,6 +48,7 @@ namespace StreamingAssets {
         [NonSerialized] private Shader m_LastKnownShader = null;
         [NonSerialized] private int m_MainTexturePropertyId = 0;
         [NonSerialized] private int m_MainColorPropertyId = 0;
+        [NonSerialized] private Rect m_ClippedUVs;
  
         private readonly Streaming.AssetCallback OnAssetUpdated;
 
@@ -176,7 +178,7 @@ namespace StreamingAssets {
 
             Vector2 size = m_Size;
 
-            if (!StreamingHelper.AutoSize(sizeMode, m_LoadedTexture, m_UVRect, ref size, StreamingHelper.GetParentSize(transform))) {
+            if (StreamingHelper.AutoSize(sizeMode, m_LoadedTexture, m_UVRect, transform.localPosition, m_Pivot, ref size, ref m_ClippedUVs, StreamingHelper.GetParentSize(transform)) == 0) {
                 return;
             }
 
@@ -205,6 +207,7 @@ namespace StreamingAssets {
 
                 m_MeshFilter = GetComponent<MeshFilter>();
                 m_MeshRenderer = GetComponent<MeshRenderer>();
+                m_ColorGroup = GetComponent<ColorGroup>();
                 Refresh();
                 return;
             }
@@ -273,7 +276,9 @@ namespace StreamingAssets {
         }
 
         private void ApplyColor() {
-            if (m_MainColorPropertyId != 0) {
+            if (m_ColorGroup != null) {
+                m_ColorGroup.Color = m_Color;
+            } else if (m_MainColorPropertyId != 0) {
                 var spb = SharedPropertyBlock(m_MeshRenderer);
                 spb.SetColor(m_MainColorPropertyId, m_Color);
                 m_MeshRenderer.SetPropertyBlock(spb);
@@ -287,11 +292,17 @@ namespace StreamingAssets {
             if (!Streaming.Texture(m_Path, ref m_LoadedTexture, OnAssetUpdated)) {
                 if (!m_LoadedTexture) {
                     m_MeshRenderer.enabled = false;
+                    if (m_ColorGroup) {
+                        m_ColorGroup.Visible = false;
+                    }
                 }
                 return;
             }
 
             m_MeshRenderer.enabled = m_LoadedTexture;
+            if (m_ColorGroup) {
+                m_ColorGroup.Visible = m_LoadedTexture;
+            }
             
             if (m_MainTexturePropertyId != 0) {
                 ApplyTextureAndColor();
@@ -331,7 +342,7 @@ namespace StreamingAssets {
                 vertColor = Color.white;
             }
 
-            m_MeshInstance = MeshGeneration.CreateQuad(m_Size, m_Pivot, vertColor, m_UVRect, m_MeshInstance);
+            m_MeshInstance = MeshGeneration.CreateQuad(m_Size, m_Pivot, vertColor, m_ClippedUVs, m_MeshInstance);
             m_MeshInstance.hideFlags = HideFlags.DontSave;
             m_MeshFilter.sharedMesh = m_MeshInstance;
         }
@@ -342,6 +353,9 @@ namespace StreamingAssets {
         public void Unload() {
             if (m_MeshRenderer) {
                 m_MeshRenderer.enabled = false;
+            }
+            if (m_ColorGroup) {
+                m_ColorGroup.Visible = false;
             }
 
             Streaming.Unload(ref m_LoadedTexture);
@@ -354,9 +368,25 @@ namespace StreamingAssets {
 
         #if UNITY_EDITOR
 
+        [NonSerialized] private Vector2 m_CachedParentSize;
+
+        private void Update() {
+            if (!Application.IsPlaying(this)) {
+                if (EditorApplication.isPlayingOrWillChangePlaymode) {
+                    return;
+                }
+
+                Vector2? parentSize = StreamingHelper.GetParentSize(transform);
+                if (parentSize.HasValue && Ref.Replace(ref m_CachedParentSize, parentSize.Value)) {
+                    Resize(m_AutoSize);
+                }
+            }
+        }
+
         private void Reset() {
             m_MeshFilter = GetComponent<MeshFilter>();
             m_MeshRenderer = GetComponent<MeshRenderer>();
+            m_ColorGroup = GetComponent<ColorGroup>();
             m_Material = AssetDatabase.GetBuiltinExtraResource<Material>("Sprites-Default.mat");
         }
 
@@ -367,6 +397,7 @@ namespace StreamingAssets {
 
             m_MeshFilter = GetComponent<MeshFilter>();
             m_MeshRenderer = GetComponent<MeshRenderer>();
+            m_ColorGroup = GetComponent<ColorGroup>();
 
             EditorApplication.delayCall += () => {
                 if (!this) {

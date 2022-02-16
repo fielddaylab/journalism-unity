@@ -26,9 +26,9 @@ namespace Journalism {
 
         [Header("Grid")]
         public RectTransform GridRoot;
+        public CanvasGroup GridGroup;
         public float RowSpacing = 128;
-        public float ColumnSpacing = 250;
-        public int MaxPerRow = 2;
+        public float ColumnSpacing = 320;
         public float RotationRange = 1;
 
         [Header("Animation")]
@@ -36,6 +36,7 @@ namespace Journalism {
         public TweenSettings VanishAnimParams = new TweenSettings(0.4f, Curve.QuadIn);
         [Range(0, 1)] public float NewScrollDelay = 0.05f;
         [Range(0, 1)] public float TextVanishDelay = 0.08f;
+        public float NewAnimDistance = 80;
         public float VanishAnimDistance = 80;
 
         #endregion // Inspector

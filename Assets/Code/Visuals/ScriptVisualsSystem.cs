@@ -79,6 +79,17 @@ namespace Journalism {
 
         #endregion // Handlers
 
+        public void ClearBackgrounds() {
+            m_CurrentBackgroundTransition.Stop();
+            m_CurrentBackgroundTexture = null;
+            m_QueuedBackgroundTexture = null;
+            m_CameraBackground.backgroundColor = Color.black;
+            m_BackgroundTextureA.Unload();
+            m_BackgroundTextureB.Unload();
+            m_BackgroundTextureA.Alpha = 0;
+            m_BackgroundTextureB.Alpha = 0;
+        }
+
         #region Loading
 
         private IEnumerator PrepareNextBackground(string path) {

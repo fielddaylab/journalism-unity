@@ -21,6 +21,7 @@ namespace Journalism.UI {
         #endregion // Inspector
 
         public Action LoadData;
+        public Action UnloadData;
 
         #region Unity Events
 
@@ -40,6 +41,14 @@ namespace Journalism.UI {
             }
 
             transform.SetRotation(RNG.Instance.SignNonZero() * RNG.Instance.NextFloat(m_RandomRotationRange * 0.5f, m_RandomRotationRange), Axis.Z, Space.Self);
+        }
+
+        protected override void OnDisable() {
+            if (WasShowing()) {
+                UnloadData?.Invoke();
+            }
+
+            base.OnDisable();
         }
 
         #endregion // Unity Events

@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using BeauUtil.Debugger;
 using UnityEngine;
 
@@ -90,9 +91,28 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Converts hours to time units.
+        /// </summary>
+        [MethodImpl(256)]
+        static public uint HoursToTimeUnits(float hours) {
+            return (uint) Math.Round(hours * TimeUnitsPerHour);
+        }
+
+        /// <summary>
+        /// Converts time units to hours.
+        /// </summary>
+        [MethodImpl(256)]
+        static public float TimeUnitsToHours(uint timeUnits) {
+            return (float) timeUnits / TimeUnitsPerHour;
+        }
+
+        /// <summary>
         /// Clamps the value of the given stat value.
         /// </summary>
-        static public uint Clamp(ushort statValue) {
+        static public int Clamp(int statValue) {
+            if (statValue < 0) {
+                return 0;
+            }
             return statValue > s_MaxValue ? s_MaxValue : statValue;
         }
 

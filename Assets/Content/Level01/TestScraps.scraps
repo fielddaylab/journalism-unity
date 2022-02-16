@@ -1,0 +1,7 @@
+:: TestScrap
+@type   Picture
+@image  Photo/TestPhoto-Sandbags.png
+
+:: TestScrap2
+@type   Quote
+<b>"This is a quote!"</b>, according to the local grammarian.

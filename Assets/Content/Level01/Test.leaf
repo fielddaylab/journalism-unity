@@ -1,8 +1,24 @@
 // Story
 
+// whoa shit macros are a thing in leaf now
+
+#macro HubChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time \
+        $data once
+#macro OnceChoice(nodeId, text) \
+    $choice $nodeId; $text \
+        $data once
+        
+// oh and consts too!
+#const FirstScrap TestScrap
+
 :: START
 $call SetHeaderEnabled(true)
+$call AdjustStats(Research = 15, Resourceful + 1, Tech + 20, Social - 2)
 Sometimes when the train passes nearby, I can convince myself I'm still in New York.
+$call GiveSnippet($FirstScrap)
+$call GiveSnippet(TestScrap2)
 {bg BG/Room.png}
 But this is <i>not</i> New York.
 Not by a country mile.
@@ -15,7 +31,8 @@ It's 5AM.
 {bg-fadeout}
 Dark, rainy, and way too early.
 
-$choice MissedCalls; Check your phone
+$OnceChoice(MissedCalls, Check your phone)
+$HubChoice(MissedCalls, "Check your phone!", 0.5)
 
 :: MissedCalls
 @clearText

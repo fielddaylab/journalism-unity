@@ -30,6 +30,10 @@ namespace Journalism {
 
         private Dictionary<StringHash32, StyleData> m_StyleMap;
 
+        public StyleData Default() {
+            return m_DefaultStyle;
+        }
+
         public StyleData Style(StringHash32 styleId) {
             if (styleId.IsEmpty) {
                 return m_DefaultStyle;

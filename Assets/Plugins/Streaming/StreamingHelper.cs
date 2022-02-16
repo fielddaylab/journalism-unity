@@ -57,6 +57,12 @@ namespace StreamingAssets {
 
         #region Streamed Textures
 
+        [Flags]
+        internal enum UpdatedResizeProperty {
+            Size = 0x01,
+            Clip = 0x02,
+        }
+
         /// <summary>
         /// Calculates the size of a window into a given texture region.
         /// </summary>
@@ -89,6 +95,7 @@ namespace StreamingAssets {
                 case AutoSizeMode.StretchX:
                 case AutoSizeMode.Fit:
                 case AutoSizeMode.Fill:
+                case AutoSizeMode.FillWithClipping:
                     return true;
 
                 default:
@@ -106,19 +113,27 @@ namespace StreamingAssets {
             }
         }
 
-        static internal bool AutoSize(AutoSizeMode sizeMode, Texture2D texture, Rect uvRect, ref Vector2 size, Vector2? parentSize) {
+        static internal UpdatedResizeProperty AutoSize(AutoSizeMode sizeMode, Texture2D texture, Rect sourceUV, Vector2 localPosition, Vector2 pivot, ref Vector2 size, ref Rect clippedUV, Vector2? parentSize) {
             if (sizeMode == AutoSizeMode.Disabled || !texture) {
-                return false;
+                if (Ref.Replace(ref clippedUV, sourceUV)) {
+                    return UpdatedResizeProperty.Clip;
+                }
+                return 0;
             }
 
-            Vector2 textureSize = GetTextureRegionSize(texture, uvRect);
+            Vector2 textureSize = GetTextureRegionSize(texture, sourceUV);
 
             if (textureSize.x == 0 || textureSize.y == 0) {
-                return false;
+                if (Ref.Replace(ref clippedUV, sourceUV)) {
+                    return UpdatedResizeProperty.Clip;
+                }
+                return 0;
             }
 
             Vector2 originalSize = size;
             Vector2 parentSizeVector = parentSize.GetValueOrDefault();
+            Rect originalUV = clippedUV;
+            clippedUV = sourceUV;
 
             switch(sizeMode) {
                 case AutoSizeMode.StretchX: {
@@ -165,9 +180,49 @@ namespace StreamingAssets {
                     }
                     break;
                 }
+
+                case AutoSizeMode.FillWithClipping: {
+                    if (!parentSize.HasValue) {
+                        break;
+                    }
+
+                    float aspect = textureSize.x / textureSize.y;
+                    size.x = parentSizeVector.y * aspect;
+                    size.y = parentSizeVector.y;
+
+                    if (size.x < parentSizeVector.x) {
+                        size.x = parentSizeVector.x;
+                        size.y = size.x / aspect;
+                    } else if (size.y < parentSizeVector.y) {
+                        size.y = parentSizeVector.y;
+                        size.x = size.y * aspect;
+                    }
+
+                    float xRatio = parentSizeVector.x / size.x;
+                    float yRatio = parentSizeVector.y / size.y;
+
+                    float xOffset = (1 - xRatio) * pivot.x * clippedUV.width;
+                    float yOffset = (1 - yRatio) * pivot.y * clippedUV.height;
+
+                    clippedUV.x += xOffset;
+                    clippedUV.y += yOffset;
+                    clippedUV.width *= xRatio;
+                    clippedUV.height *= yRatio;
+
+                    size = parentSizeVector;
+
+                    break;
+                }
             }
 
-            return size != originalSize;
+            UpdatedResizeProperty prop = 0;
+            if (size != originalSize) {
+                prop |= UpdatedResizeProperty.Size;
+            }
+            if (clippedUV != originalUV) {
+                prop |= UpdatedResizeProperty.Clip;
+            }
+            return prop;
         }
 
         #endregion // Streamed Textures

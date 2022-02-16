@@ -58,3 +58,14 @@ MonoBehaviour:
       rgba: 4278388513
     Tail: 0
     RoundingScale: 1.5
+  - Id:
+      m_Source: msg
+      m_HashValue: 3766509314
+    Background:
+      serializedVersion: 2
+      rgba: 4292732821
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+    RoundingScale: 1.5

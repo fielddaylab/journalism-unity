@@ -361,8 +361,8 @@ GameObject:
   - component: {fileID: 4507121683936925807}
   - component: {fileID: 5585745856470450226}
   - component: {fileID: 6216168405043128509}
-  - component: {fileID: 4544937916518797877}
   - component: {fileID: 7670063363027768434}
+  - component: {fileID: 7543802541078286732}
   m_Layer: 5
   m_Name: StorySnippet_Image
   m_TagString: Untagged
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_ColorGroup: {fileID: 4507121683936925807}
---- !u!114 &4544937916518797877
+--- !u!114 &7670063363027768434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -497,7 +497,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3319456804573798800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: db8d8ff22b8287c4a8cd5ef32c7c2ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Line: {fileID: 1825051806797482806}
+  Toggle: {fileID: 7543802541078286732}
+  Texture: {fileID: 8603257503685354082}
+--- !u!114 &7543802541078286732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319456804573798800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -512,7 +527,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -528,24 +543,13 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 6216168405043128509}
-  m_OnClick:
+  toggleTransition: 1
+  graphic: {fileID: 0}
+  m_Group: {fileID: 0}
+  onValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7670063363027768434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3319456804573798800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db8d8ff22b8287c4a8cd5ef32c7c2ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Line: {fileID: 1825051806797482806}
-  ContentSizeFitter: {fileID: 0}
-  Texture: {fileID: 8603257503685354082}
+  m_IsOn: 0
 --- !u!1 &8816904842130449343
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +587,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 283.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5868544595163432253
 CanvasRenderer:
@@ -600,7 +604,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8816904842130449343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -632,8 +636,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RawImage: {fileID: 3217153195207784024}
-  m_Path: Photo/TestPhoto-Sandbags.png
-  m_AutoSize: 4
+  m_ColorGroup: {fileID: 8305356508664556774}
+  m_Path: 
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  m_AutoSize: 5
 --- !u!114 &8305356508664556774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,7 +659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Renderer: {fileID: 0}
   m_Graphic: {fileID: 3217153195207784024}
-  m_Visible: 1
+  m_Visible: 0
   m_Colors:
     Main: {r: 1, g: 1, b: 1, a: 1}
     Emissive: {r: 1, g: 1, b: 1, a: 1}

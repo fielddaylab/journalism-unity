@@ -4,12 +4,15 @@ using BeauUtil;
 using TMPro;
 using BeauRoutine;
 using BeauPools;
+using System;
 
 namespace Journalism {
     public sealed class TextLineScroll : MonoBehaviour {
         
         public struct LineState {
-            public TempAlloc<TextLine> Line;
+            public TempAlloc<TextLine> LineAlloc;
+            public TempAlloc<StoryScrapDisplay> ScrapAlloc;
+            public TextLine Line;
             public float LocationX;
             public float LocationY;
             public Routine LocationAnimation;
@@ -38,6 +41,7 @@ namespace Journalism {
 
         #endregion // Inspector
 
+        [NonSerialized] public float RootBaseline;
         public RingBuffer<LineState> Lines = new RingBuffer<LineState>();
     }
 }

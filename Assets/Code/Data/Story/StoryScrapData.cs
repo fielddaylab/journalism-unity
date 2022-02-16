@@ -7,7 +7,7 @@ namespace Journalism {
     /// <summary>
     /// Scrap of story in player's inventory.
     /// </summary>
-    public sealed class StoryScrap : IDataBlock {
+    public sealed class StoryScrapData : IDataBlock {
         public StringHash32 Id;
         [BlockMeta("type")] public StoryScrapType Type;
         [BlockMeta("quality")] public StoryScrapQuality Quality;

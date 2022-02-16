@@ -10,9 +10,9 @@ namespace Journalism.UI {
 
         #region Inspector
 
-        [SerializeField] private CanvasGroup m_Fader = null;
-        [SerializeField] private HeaderButton[] m_Buttons = null;
-        [SerializeField] private ToggleGroup m_ToggleGroup = null;
+        public CanvasGroup Fader = null;
+        public HeaderButton[] Buttons = null;
+        public ToggleGroup ToggleGroup = null;
 
         #endregion // Inspector
 
@@ -21,11 +21,11 @@ namespace Journalism.UI {
         [NonSerialized] private bool m_FaderState;
 
         private void Awake() {
-            m_Fader.alpha = 0;
-            m_Fader.gameObject.SetActive(false);
+            Fader.alpha = 0;
+            Fader.gameObject.SetActive(false);
 
-            for(int i = 0; i < m_Buttons.Length; i++) {
-                HeaderButton button = m_Buttons[i];
+            for(int i = 0; i < Buttons.Length; i++) {
+                HeaderButton button = Buttons[i];
                 if (!button.Window) {
                     continue;
                 }
@@ -58,18 +58,18 @@ namespace Journalism.UI {
         private void ReevaluateFaderState() {
             m_FaderEvaluateQueued = false;
 
-            bool hasSelection = m_ToggleGroup.ActiveToggle() != null;
+            bool hasSelection = ToggleGroup.ActiveToggle() != null;
             if (hasSelection == m_FaderState) {
                 return;
             }
 
             m_FaderState = hasSelection;
             if (m_FaderState) {
-                m_Fader.gameObject.SetActive(true);
-                m_FaderRoutine.Replace(this, m_Fader.FadeTo(1, 0.2f));
+                Fader.gameObject.SetActive(true);
+                m_FaderRoutine.Replace(this, Fader.FadeTo(1, 0.2f));
             } else {
-                m_FaderRoutine.Replace(this, m_Fader.FadeTo(0, 0.2f).OnComplete(() => {
-                    m_Fader.gameObject.SetActive(false);
+                m_FaderRoutine.Replace(this, Fader.FadeTo(0, 0.2f).OnComplete(() => {
+                    Fader.gameObject.SetActive(false);
                 }));
             }
         }

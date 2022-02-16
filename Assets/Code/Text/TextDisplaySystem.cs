@@ -23,7 +23,10 @@ namespace Journalism {
         [SerializeField] private TextPools m_Pools = null;
         [SerializeField] private TextLineScroll m_TextDisplay = null;
         [SerializeField] private TextChoiceGroup m_ChoiceDisplay = null;
-        [SerializeField] private TextStyles m_Styles = null;
+
+        [Header("Animation")]
+        [SerializeField] private float m_ChoiceRowsOffset = 48;
+        [SerializeField] private TweenSettings m_ChoiceRowsAnim = new TweenSettings(0.2f, Curve.Smooth);
 
         [Header("Image Contents")]
         [SerializeField] private ImageColumn m_Image = null;
@@ -43,6 +46,8 @@ namespace Journalism {
         private void Awake() {
             GameText.InitializeScroll(m_TextDisplay);
             GameText.InitializeChoices(m_ChoiceDisplay);
+
+            Game.Events.Register<StringHash32>(Events.InventoryUpdated, OnInventoryUpdated, this);
         }
 
         #endregion // Unity
@@ -159,7 +164,7 @@ namespace Journalism {
         }
 
         private void SetStyle(StringHash32 styleId) {
-            var style = m_Styles.Style(styleId);
+            var style = Assets.Style(styleId);
             Assert.NotNull(m_QueuedLine);
             GameText.SetTextLineStyle(m_QueuedLine, style);
         }
@@ -170,6 +175,33 @@ namespace Journalism {
                 yield return ClearLines();
                 yield return 0.2f;
             }
+        }
+
+        private void OnInventoryUpdated(StringHash32 scrapId) {
+            if (scrapId.IsEmpty) {
+                return;
+            }
+
+            Game.Scripting.Interrupt(DisplayNewStoryScrap(scrapId));
+        }
+
+        private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {
+            // TODO: Localization
+            TextLine line = GameText.AllocLine(m_TextDisplay, m_Pools);
+            GameText.PopulateTextLine(line, "New Story Snippet!", null, default, Assets.Style("msg"));
+            GameText.AlignTextLine(line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(m_TextDisplay, 1);
+            yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            yield return 0.1f;
+
+            StoryScrapData data = Assets.Scrap(scrapId);
+            StoryScrapDisplay scrap = GameText.AllocScrap(data, m_TextDisplay, m_Pools);
+            GameText.PopulateStoryScrap(scrap, data, Assets.DefaultStyle);
+            GameText.AlignTextLine(scrap.Line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(m_TextDisplay, 1);
+            yield return GameText.AnimateLocations(m_TextDisplay, 1);
+
+            yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
         }
 
         #endregion // Events
@@ -187,7 +219,7 @@ namespace Journalism {
             if (inString.RichText.Length > 0) {
                 m_QueuedLine = GameText.AllocLine(m_TextDisplay, m_Pools);
                 StringHash32 characterId = GameText.FindCharacter(inString);
-                GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, m_Styles.Style(characterId));
+                GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, Assets.Style(characterId));
                 GameText.AlignTextLine(m_QueuedLine, GameText.ComputeDesiredAlignment(m_QueuedLine, m_TextDisplay));
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
             }
@@ -212,12 +244,12 @@ namespace Journalism {
             if (nextLineText != null) {
                 StringHash32 characterId = GameText.FindCharacter(nextLineText);
                 if (GameText.IsPlayer(characterId)) {
-                    yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, nextLineText.RichText, m_Styles.Style(characterId));
+                    yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, nextLineText.RichText, Assets.Style(characterId));
                     yield break;
                 }
             }
 
-            yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, m_Styles.Style("action"));
+            yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
         }
 
         #endregion // ITextDisplayer
@@ -225,22 +257,86 @@ namespace Journalism {
         #region IChoiceDisplayer
 
         public IEnumerator ShowChoice(LeafChoice inChoice, LeafThreadState inThread, ILeafPlugin inPlugin) {
-            if (inChoice.AvailableCount == 1) {
-                var choices = inChoice.AvailableOptions().GetEnumerator();
-                choices.MoveNext();
-                var choice = choices.Current;
-
-                TagString choiceText = LookupLine(choice.LineCode);
-                StringHash32 characterId = GameText.FindCharacter(choiceText);
-                if (characterId.IsEmpty) {
-                    characterId = GameText.Characters.Action;
+            using(PooledList<LeafChoice.Option> fullOptions = PooledList<LeafChoice.Option>.Create()) {
+                fullOptions.AddRange(inChoice.AvailableOptions(ChoicePredicate));
+                bool hasTime = false;
+                foreach(var option in fullOptions) {
+                    if (inChoice.HasCustomData(option.TargetId, GameText.ChoiceData.Time)) {
+                        hasTime = true;
+                        break;
+                    }
                 }
-                yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, choiceText.RichText, m_Styles.Style(characterId));
-                inChoice.Choose(choice.TargetId);
+
+                if (fullOptions.Count == 1 && !hasTime) {
+                    var choices = inChoice.AvailableOptions().GetEnumerator();
+                    choices.MoveNext();
+                    var choice = choices.Current;
+
+                    TagString choiceText = LookupLine(choice.LineCode);
+                    StringHash32 characterId = GameText.FindCharacter(choiceText);
+                    if (characterId.IsEmpty) {
+                        characterId = GameText.Characters.Action;
+                    }
+                    yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, choiceText.RichText, Assets.Style(characterId));
+                    inChoice.Choose(choice.TargetId);
+                } else {
+                    foreach(var option in fullOptions) {
+                        TextChoice choice = GameText.AllocChoice(m_ChoiceDisplay, m_Pools);
+                        uint timeCost = Stats.HoursToTimeUnits(inChoice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat());
+                        TagString choiceText = LookupLine(option.LineCode);
+                        StringHash32 characterId = GameText.FindCharacter(choiceText);
+                        if (characterId.IsEmpty) {
+                            characterId = GameText.Characters.Action;
+                        }
+                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, Assets.Style(characterId));
+                    }
+
+                    GameText.RecomputeAllLocations(m_ChoiceDisplay);
+
+                    yield return m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y);
+                    
+                    yield return GameText.AnimateLocations(m_ChoiceDisplay);
+                    yield return GameText.WaitForChoice(m_ChoiceDisplay, inChoice);
+                    yield return GameText.AnimateVanish(m_ChoiceDisplay);
+                    GameText.ClearChoices(m_ChoiceDisplay);
+
+                    yield return m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline, m_ChoiceRowsAnim, Axis.Y);
+                    yield return 0.2f;
+                }
             }
         }
 
+        static private readonly LeafChoice.OptionPredicate ChoicePredicate = (choice, option) => {
+            float timeCost = choice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat();
+            if (!Player.HasTime(timeCost)) {
+                return false;
+            }
+
+            bool once = choice.HasCustomData(option.Index, GameText.ChoiceData.Once);
+            if (once && Player.Visited(option.TargetId.AsStringHash())) {
+                return false;
+            }
+
+            return true;
+        };
+
         #endregion // IChoiceDisplayer
+
+        public void ClearAll() {
+            GameText.ClearChoices(m_ChoiceDisplay);
+            GameText.ClearLines(m_TextDisplay);
+            m_QueuedLine = null;
+
+            m_Image.Texture.Unload();
+            m_Image.Root.gameObject.SetActive(false);
+            m_TextDisplay.Root.SetAnchorPos(0, Axis.X);
+            m_TextDisplay.ListRoot.SetAnchorPos(m_TextDisplay.RootBaseline, Axis.Y);
+
+            m_TextDisplay.Alignment = TextAlignment.Center;
+            m_ImagePosition = TextAlignment.Center;
+
+            Streaming.UnloadUnusedAsync();
+        }
     }
 
     public enum TextLayoutId {

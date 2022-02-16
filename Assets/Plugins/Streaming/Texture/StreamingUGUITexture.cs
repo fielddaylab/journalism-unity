@@ -24,13 +24,16 @@ namespace StreamingAssets {
         #region Inspector
 
         [SerializeField] private RawImage m_RawImage;
+        [SerializeField] private ColorGroup m_ColorGroup;
 
         [SerializeField, StreamingImagePath] private string m_Path;
+        [SerializeField] private Rect m_UVRect = new Rect(0f, 0f, 1f, 1f);
         [SerializeField] private AutoSizeMode m_AutoSize = AutoSizeMode.Disabled;
 
         #endregion // Inspector
 
         [NonSerialized] private Texture2D m_LoadedTexture;
+        [NonSerialized] private Rect m_ClippedUVs;
         private DrivenRectTransformTracker m_Tracker;
  
         private readonly Streaming.AssetCallback OnAssetUpdated;
@@ -78,20 +81,40 @@ namespace StreamingAssets {
         /// Color of the renderer.
         /// </summary>
         public Color Color {
-            get { return m_RawImage.color; }
-            set { m_RawImage.color = Color; }
+            get { 
+                if (m_ColorGroup) {
+                    return m_ColorGroup.Color;
+                }
+                return m_RawImage.color;
+            }
+            set {
+                if (m_ColorGroup) {
+                    m_ColorGroup.Color = value;
+                } else {
+                    m_RawImage.color = value;
+                }
+            }
         }
 
         /// <summary>
         /// Transparency of the renderer.
         /// </summary>
         public float Alpha {
-            get { return m_RawImage.color.a; }
+            get {
+                if (m_ColorGroup) {
+                    return m_ColorGroup.GetAlpha();
+                }
+                return m_RawImage.color.a;
+            }
             set {
-                var rawColor = m_RawImage.color;
-                if (rawColor.a != value) {
-                    rawColor.a = value;
-                    m_RawImage.color = rawColor;
+                if (m_ColorGroup) {
+                    m_ColorGroup.SetAlpha(value);
+                } else {
+                    var rawColor = m_RawImage.color;
+                    if (rawColor.a != value) {
+                        rawColor.a = value;
+                        m_RawImage.color = rawColor;
+                    }
                 }
             }
         }
@@ -104,6 +127,10 @@ namespace StreamingAssets {
         public void Resize(AutoSizeMode sizeMode) {
             if (sizeMode == AutoSizeMode.Disabled || !m_LoadedTexture) {
                 m_Tracker.Clear();
+                if (m_ClippedUVs != m_UVRect) {
+                    m_ClippedUVs = m_UVRect;
+                    LoadClipping();
+                }
                 return;
             }
 
@@ -122,40 +149,54 @@ namespace StreamingAssets {
                     break;
                 }
                 case AutoSizeMode.Fit:
-                case AutoSizeMode.Fill: {
+                case AutoSizeMode.Fill:
+                case AutoSizeMode.FillWithClipping: {
                     m_Tracker.Add(this, rect, DrivenTransformProperties.SizeDelta);
                     break;
                 }
             }
 
-            if (!StreamingHelper.AutoSize(sizeMode, m_LoadedTexture, m_RawImage.uvRect, ref size, StreamingHelper.GetParentSize(rect))) {
+            StreamingHelper.UpdatedResizeProperty updated = StreamingHelper.AutoSize(sizeMode, m_LoadedTexture, m_UVRect, rect.localPosition, rect.pivot, ref size, ref m_ClippedUVs, StreamingHelper.GetParentSize(rect));
+            if (updated == 0) {
                 return;
             }
 
             #if UNITY_EDITOR
             if (!Application.IsPlaying(this)) {
-                UnityEditor.Undo.RecordObject(rect, "Changing size");
-                UnityEditor.EditorUtility.SetDirty(rect);
+                if ((updated & StreamingHelper.UpdatedResizeProperty.Size) != 0) {
+                    UnityEditor.Undo.RecordObject(rect, "Changing size");
+                    UnityEditor.EditorUtility.SetDirty(rect);
+                }
+                if ((updated & StreamingHelper.UpdatedResizeProperty.Clip) != 0) {
+                    UnityEditor.Undo.RecordObject(m_RawImage, "Changing clipping");
+                    UnityEditor.EditorUtility.SetDirty(m_RawImage);
+                }
             }
             #endif // UNITY_EDITOR
 
-            switch(sizeMode) {
-                case AutoSizeMode.StretchX: {
-                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
-                    break;
-                }
-                case AutoSizeMode.StretchY: {
-                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
-                    break;
-                }
-                case AutoSizeMode.Fit:
-                case AutoSizeMode.Fill: {
-                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
-                    rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
-                    break;
+            if ((updated & StreamingHelper.UpdatedResizeProperty.Size) != 0) {
+                switch(sizeMode) {
+                    case AutoSizeMode.StretchX: {
+                        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                        break;
+                    }
+                    case AutoSizeMode.StretchY: {
+                        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                        break;
+                    }
+                    case AutoSizeMode.Fit:
+                    case AutoSizeMode.Fill:
+                    case AutoSizeMode.FillWithClipping: {
+                        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
+                        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
+                        break;
+                    }
                 }
             }
 
+            if ((updated & StreamingHelper.UpdatedResizeProperty.Clip) != 0) {
+                LoadClipping();
+            }
         }
 
         #region Unity Events
@@ -168,12 +209,16 @@ namespace StreamingAssets {
                 }
                 
                 m_RawImage = GetComponent<RawImage>();
+                m_ColorGroup = GetComponent<ColorGroup>();
+
                 LoadTexture();
+                LoadClipping();
                 return;
             }
             #endif // UNITY_EDITOR
 
             LoadTexture();
+            LoadClipping();
         }
 
         protected override void OnDisable() {
@@ -217,21 +262,34 @@ namespace StreamingAssets {
         /// </summary>
         public void Prefetch() {
             LoadTexture();
+            LoadClipping();
         }
 
         private void LoadTexture() {
             if (!Streaming.Texture(m_Path, ref m_LoadedTexture, OnAssetUpdated)) {
                 if (!m_LoadedTexture) {
                     m_RawImage.enabled = false;
+                    if (m_ColorGroup) {
+                        m_ColorGroup.Visible = false;
+                    }
                 }
                 return;
             }
 
             m_RawImage.enabled = m_LoadedTexture;
             m_RawImage.texture = m_LoadedTexture;
+            m_ClippedUVs = m_UVRect;
+
+            if (m_ColorGroup) {
+                m_ColorGroup.Visible = m_LoadedTexture;
+            }
 
             if (Streaming.IsLoaded(m_LoadedTexture))
                 Resize(m_AutoSize);
+        }
+
+        private void LoadClipping() {
+            m_RawImage.uvRect = m_ClippedUVs;
         }
 
         /// <summary>
@@ -240,6 +298,9 @@ namespace StreamingAssets {
         public void Unload() {
             if (m_RawImage) {
                 m_RawImage.enabled = false;
+            }
+            if (m_ColorGroup) {
+                m_ColorGroup.Visible = false;
             }
 
             Streaming.Unload(ref m_LoadedTexture);
@@ -269,6 +330,7 @@ namespace StreamingAssets {
 
         protected override void Reset() {
             m_RawImage = GetComponent<RawImage>();
+            m_ColorGroup = GetComponent<ColorGroup>();
         }
 
         protected override void OnValidate() {
@@ -277,6 +339,7 @@ namespace StreamingAssets {
             }
 
             m_RawImage = GetComponent<RawImage>();
+            m_ColorGroup = GetComponent<ColorGroup>();
 
             EditorApplication.delayCall += () => {
                 if (!this) {
@@ -285,6 +348,7 @@ namespace StreamingAssets {
 
                 LoadTexture();
                 Resize(m_AutoSize);
+                LoadClipping();
             };
         }
 

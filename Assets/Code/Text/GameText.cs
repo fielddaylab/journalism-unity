@@ -9,6 +9,7 @@ using System.Collections;
 using BeauPools;
 using BeauUtil.Tags;
 using Leaf;
+using BeauUtil.Variants;
 
 namespace Journalism {
     static public class GameText {
@@ -158,13 +159,22 @@ namespace Journalism {
         /// </summary>
         static public void InitializeScroll(TextLineScroll scroll) {
             scroll.Lines = new RingBuffer<TextLineScroll.LineState>(scroll.MaxLines + 3, RingBufferMode.Fixed);
+            scroll.RootBaseline = scroll.Root.anchoredPosition.y;
+        }
+
+        /// <summary>
+        /// Allocates a new line.
+        /// </summary>
+        static public TempAlloc<TextLine> AllocLine(TextPools pools) {
+            TempAlloc<TextLine> lineAlloc = pools.LinePool.TempAlloc();
+            return lineAlloc;
         }
 
         /// <summary>
         /// Allocates a new line.
         /// </summary>
         static public TextLine AllocLine(TextLineScroll scroll, TextPools pools) {
-            TempAlloc<TextLine> lineAlloc = pools.LinePool.TempAlloc<TextLine>();
+            TempAlloc<TextLine> lineAlloc = pools.LinePool.TempAlloc();
             TextLine line = lineAlloc.Object;
             RectTransform lineRect = line.Root;
             lineRect.SetParent(scroll.ListRoot, false);
@@ -172,9 +182,47 @@ namespace Journalism {
             lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
-                Line = lineAlloc
+                LineAlloc = lineAlloc,
+                Line = line
             });
             return line;
+        }
+
+        /// <summary>
+        /// Allocates a new story scrap.
+        /// </summary>
+        static public TempAlloc<StoryScrapDisplay> AllocScrap(StoryScrapData scrap, TextPools pools) {
+            TempAlloc<StoryScrapDisplay> scrapAlloc;
+            if (scrap.Type == StoryScrapType.Picture || scrap.Type == StoryScrapType.Graph) {
+                scrapAlloc = pools.ImageStoryPool.TempAlloc();
+            } else {
+                scrapAlloc = pools.TextStoryPool.TempAlloc();
+            }
+            return scrapAlloc;
+        }
+
+        /// <summary>
+        /// Allocates a new story scrap.
+        /// </summary>
+        static public StoryScrapDisplay AllocScrap(StoryScrapData scrap, TextLineScroll scroll, TextPools pools) {
+            TempAlloc<StoryScrapDisplay> scrapAlloc;
+            if (scrap.Type == StoryScrapType.Picture || scrap.Type == StoryScrapType.Graph) {
+                scrapAlloc = pools.ImageStoryPool.TempAlloc();
+            } else {
+                scrapAlloc = pools.TextStoryPool.TempAlloc();
+            }
+
+            TextLine line = scrapAlloc.Object.Line;
+            RectTransform lineRect = line.Root;
+            lineRect.SetParent(scroll.ListRoot, false);
+            lineRect.anchoredPosition = default;
+            lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
+            line.Group.alpha = 0;
+            scroll.Lines.PushFront(new TextLineScroll.LineState() {
+                ScrapAlloc = scrapAlloc,
+                Line = line
+            });
+            return scrapAlloc.Object;
         }
 
         /// <summary>
@@ -197,11 +245,11 @@ namespace Journalism {
             float x;
             for(int i = 0; i < newLineCount; i++) {
                 ref var state = ref states[i];
-                line = state.Line.Object;
+                line = state.Line;
                 size = line.Root.sizeDelta;
                 width = size.x;
                 height = size.y;
-                if (line.Tail.gameObject.activeSelf) {
+                if (line.Tail && line.Tail.gameObject.activeSelf) {
                     extraOffset = line.TailHeight;
                     inset = scroll.DialogInset;
                 } else {
@@ -233,6 +281,19 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Adjusts computed line positions based on a fixed amount.
+        /// </summary>
+        static public void AdjustComputedLocationsFixed(TextLineScroll scroll, float adjust) {
+            var states = scroll.Lines;
+            int count = states.Count;
+
+            for(int i = 0; i < count; i++) {
+                ref var state = ref states[i];
+                state.LocationY += adjust;
+            }
+        }
+
+        /// <summary>
         /// Recomputes all line positions in the given scroll.
         /// </summary>
         static public void RecomputeAllLocations(TextLineScroll scroll) {
@@ -250,11 +311,11 @@ namespace Journalism {
             float x;
             for(int i = 0; i < count; i++) {
                 ref var state = ref states[i];
-                line = state.Line.Object;
+                line = state.Line;
                 size = line.Root.sizeDelta;
                 width = size.x;
                 height = size.y;
-                if (line.Tail.gameObject.activeSelf) {
+                if (line.Tail && line.Tail.gameObject.activeSelf) {
                     extraOffset = line.TailHeight;
                     inset = scroll.DialogInset;
                 } else {
@@ -281,7 +342,7 @@ namespace Journalism {
         }
 
         /// <summary>
-        /// Animates all 
+        /// Animates all lines to their appropriate locations.
         /// </summary>
         static public IEnumerator AnimateLocations(TextLineScroll scroll, int newLineCount) {
             var states = scroll.Lines;
@@ -294,7 +355,7 @@ namespace Journalism {
             float delay = 0;
             for(int i = 0; i < newLineCount; i++) {
                 ref var state = ref states[i];
-                line = state.Line.Object;
+                line = state.Line;
 
                 delay = (newLineCount - i) * scroll.TextScrollDelay;
 
@@ -309,7 +370,7 @@ namespace Journalism {
 
             for(int i = newLineCount; i < count; i++) {
                 ref var state = ref states[i];
-                line = state.Line.Object;
+                line = state.Line;
 
                 delay = i * scroll.TextScrollDelay;
 
@@ -333,7 +394,7 @@ namespace Journalism {
 
             for(int i = 0; i < count; i++) {
                 ref var state = ref states[i];
-                line = state.Line.Object;
+                line = state.Line;
 
                 delay = (count - 1 - i) * scroll.TextVanishDelay;
 
@@ -355,21 +416,23 @@ namespace Journalism {
 
             while(states.Count > scroll.MaxLines) {
                 var state = states.PopBack();
-                state.Line.Dispose();
+                state.LineAlloc?.Dispose();
+                state.ScrapAlloc?.Dispose();
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
             }
         }
 
         /// <summary>
-        /// Clears lines overflowing from the given scroll.
+        /// Clears all lines from the given scroll.
         /// </summary>
         static public void ClearLines(TextLineScroll scroll) {
             var states = scroll.Lines;
 
             while(states.Count > 0) {
                 var state = states.PopBack();
-                state.Line.Dispose();
+                state.LineAlloc?.Dispose();
+                state.ScrapAlloc?.Dispose();
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
             }
@@ -382,35 +445,227 @@ namespace Journalism {
         static public void InitializeChoices(TextChoiceGroup choices) {
             choices.DefaultChoiceGroup.alpha = 0;
             choices.DefaultChoiceGroup.blocksRaycasts = false;
+            choices.GridGroup.blocksRaycasts = false;
         }
+
+        /// <summary>
+        /// Allocates a new line.
+        /// </summary>
+        static public TextChoice AllocChoice(TextChoiceGroup choices, TextPools pools) {
+            TempAlloc<TextChoice> choiceAlloc = pools.ChoicePool.TempAlloc();
+            TextChoice choice = choiceAlloc.Object;
+            TextLine line = choice.Line;
+            RectTransform lineRect = line.Root;
+            lineRect.SetParent(choices.GridRoot, false);
+            lineRect.anchoredPosition = default;
+            lineRect.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
+            line.Group.alpha = 0;
+            choices.Choices.PushBack(new TextChoiceGroup.ChoiceState() {
+                Choice = choiceAlloc
+            });
+            return choice;
+        }
+
+        /// <summary>
+        /// Populates the contents of a given choice.
+        /// </summary>
+        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, TextStyles.StyleData style) {
+            Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
+
+            TextLine line = choice.Line;
+            line.Text.SetText(textString.ToString());
+            line.Text.gameObject.SetActive(true);
+
+            choice.TargetId = targetId;
+            choice.TimeCost = timeCost;
+            choice.Selected = false;
+
+            if (line.Icon != null) {
+                if (timeCost > 0) {
+                    line.Icon.gameObject.SetActive(true);
+                    line.Icon.fillAmount = (float) timeCost / Stats.TimeUnitsPerHour;
+                } else {
+                    line.Icon.gameObject.SetActive(false);
+                }
+            }
+
+            if (style != null) {
+                SetTextLineStyle(choice.Line, style);
+            }
+        }
+
+        /// <summary>
+        /// Recomputes all line positions in the given scroll.
+        /// </summary>
+        static public void RecomputeAllLocations(TextChoiceGroup choices) {
+            var states = choices.Choices;
+            int count = states.Count;
+            float spacingX = choices.ColumnSpacing;
+            float spacingY = choices.RowSpacing;
+
+            int rowCount, columnCount;
+            if (count <= 2) {
+                columnCount = count;
+                rowCount = 1;
+            } else {
+                columnCount = (int) Math.Ceiling(count / 2f);
+                rowCount = 2;
+            }
+
+            float xOffset = -(columnCount - 1) * choices.ColumnSpacing * 0.5f;
+            float yOffset = (rowCount - 1) * choices.RowSpacing * 0.5f;
+
+            for(int i = 0; i < count; i++) {
+                ref var state = ref states[i];
+                int x = i % columnCount;
+                int y = i / columnCount;
+
+                state.LocationX = xOffset + spacingX * x;;
+                state.LocationY = yOffset - spacingY * y;
+            }
+        }
+
+        /// <summary>
+        /// Animates all choices to their appropriate locations.
+        /// </summary>
+        static public IEnumerator AnimateLocations(TextChoiceGroup choices) {
+            var states = choices.Choices;
+            int count = states.Count;
+
+            TextChoice choice;
+            Routine anim;
+            float delay = 0;
+
+            for(int i = 0; i < count; i++) {
+                ref var state = ref states[i];
+                choice = state.Choice.Object;
+
+                delay = i * choices.NewScrollDelay;
+
+                choice.Line.Root.SetAnchorPos(new Vector2(state.LocationX, state.LocationY - choices.NewAnimDistance), Axis.XY);
+
+                anim = choice.Line.Root.AnchorPosTo(state.LocationY, choices.NewChoiceAnimParams, Axis.Y).DelayBy(delay).Play(choice);
+                state.LocationAnimation = anim;
+                
+                anim = choice.Line.Group.FadeTo(1, choices.NewChoiceAnimParams.Time).DelayBy(delay).Play(choice);
+                state.RevealAnimation = anim;
+            }
+
+            return Routine.WaitSeconds(delay + choices.NewChoiceAnimParams.Time);
+        }
+
+        static public IEnumerator WaitForChoice(TextChoiceGroup choices, LeafChoice choice) {
+            choices.GridGroup.blocksRaycasts = true;
+            while(!choice.HasChosen()) {
+                foreach(var btnState in choices.Choices) {
+                    TextChoice choiceButton = btnState.Choice.Object;
+                    if (choiceButton.Selected) {
+                        choice.Choose(choiceButton.TargetId);
+                        break;
+                    }
+                }
+                yield return null;
+            }
+            choices.GridGroup.blocksRaycasts = false;
+        }
+
+        /// <summary>
+        /// Animates all lines to a vanished state.
+        /// </summary>
+        static public IEnumerator AnimateVanish(TextChoiceGroup choices) {
+            var states = choices.Choices;
+            int count = states.Count;
+
+            TextLine line;
+            Routine anim;
+            float delay = 0;
+
+            for(int i = 0; i < count; i++) {
+                ref var state = ref states[i];
+                line = state.Choice.Object.Line;
+
+                delay = (count - 1 - i) * choices.TextVanishDelay;
+
+                anim = line.Root.AnchorPosTo(state.LocationY + choices.VanishAnimDistance, choices.VanishAnimParams, Axis.Y).DelayBy(delay).Play(line);
+                state.LocationAnimation = anim;
+
+                anim = line.Group.FadeTo(0, choices.VanishAnimParams.Time).DelayBy(delay).Play(line);
+                state.RevealAnimation = anim;
+            }
+
+            return Routine.WaitSeconds(count * choices.TextVanishDelay + choices.VanishAnimParams.Time);
+        }
+
+        /// <summary>
+        /// Clears choices overflowing from the choice group.
+        /// </summary>
+        static public void ClearChoices(TextChoiceGroup choices) {
+            var states = choices.Choices;
+
+            while(states.Count > 0) {
+                var state = states.PopBack();
+                state.Choice.Dispose();
+                state.LocationAnimation.Stop();
+                state.RevealAnimation.Stop();
+            }
+        }
+
+        #region Defaults
 
         static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style) {
             PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style);
-            choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
-            yield return choices.DefaultChoiceGroup.FadeTo(1, 0.1f);
+            choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
+            yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
             choices.DefaultChoiceGroup.blocksRaycasts = true;
             choices.DefaultNextButton.Selected = false;
             while(!choices.DefaultNextButton.Selected) {
                 yield return null;
             }
             choices.DefaultChoiceGroup.blocksRaycasts = false;
-            yield return choices.DefaultChoiceGroup.FadeTo(0, 0.1f);
+            yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style) {
             PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style);
-            choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
-            yield return choices.DefaultChoiceGroup.FadeTo(1, 0.1f);
+
+            choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
+            yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
             choices.DefaultChoiceGroup.blocksRaycasts = true;
             choices.DefaultNextButton.Selected = false;
             while(!choices.DefaultNextButton.Selected) {
                 yield return null;
             }
             choices.DefaultChoiceGroup.blocksRaycasts = false;
-            yield return choices.DefaultChoiceGroup.FadeTo(0, 0.1f);
+            yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
         }
 
+        #endregion // Defaults
+
         #endregion // Choice
+
+        #region Story Scraps
+
+        /// <summary>
+        /// Populates a story scrap.
+        /// </summary>
+        static public void PopulateStoryScrap(StoryScrapDisplay display, StoryScrapData data, TextStyles.StyleData style) {
+            if (display.Texture) {
+                display.Texture.Path = data.ImagePath;
+            }
+
+            // TODO: Localization
+            if (display.Line.Text) {
+                display.Line.Text.SetText(data.Content);
+            }
+
+            SetTextLineStyle(display.Line, style);
+
+            if (display.Line.Layout) {
+                display.Line.Layout.ForceRebuild();
+            }
+        }
+
+        #endregion // Story Scraps
 
         #region Parsing
 
@@ -421,6 +676,11 @@ namespace Journalism {
             static public readonly StringHash32 ClearImage = "clear-image";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
+        }
+
+        static public class ChoiceData {
+            static public readonly StringHash32 Time = "time";
+            static public readonly StringHash32 Once = "once";
         }
 
         static public class Characters {
@@ -468,16 +728,30 @@ namespace Journalism {
             uint hours = timeRemaining / Stats.TimeUnitsPerHour;
             uint minutes = Stats.MinutesPerTimeUnit * (timeRemaining % Stats.TimeUnitsPerHour);
 
+            string hourStr = null, minuteStr = null;
+            
             // TODO: Localization
-            if (hours > 0 && minutes > 0) {
-                return string.Format("<color=#EB8686>{0}</color> hours and <color=#EB8686>{1}</color> minutes", hours, minutes);
-            } else if (hours > 0) {
-                return string.Format("<color=#EB8686>{0}</color> hours", hours);
+            if (hours > 1) {
+                hourStr = string.Format("<color=#EB8686>{0}</color> hours", hours);
+            } else if (hours == 1) {
+                hourStr = "<color=#EB8686>1</color> hour";
+            }
+
+            if (minutes > 0) {
+                minuteStr = string.Format("<color=#EB8686>{0}</color> minutes", minutes);
+            } else if (hours == 0) {
+                minuteStr = "<color=#EB8686>0</color> minutes";
+            }
+
+            if (hourStr != null && minuteStr != null) {
+                return string.Join(" and ", hourStr, minuteStr);
             } else {
-                return string.Format("<color=#EB8686>{0}</color> minutes", minutes);
+                return hourStr ?? minuteStr;
             }
         }
 
         #endregion // Text Generation
+    
+        // TODO: Stat changes
     }
 }

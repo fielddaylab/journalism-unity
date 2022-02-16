@@ -4,11 +4,14 @@ using BeauUtil.Variants;
 using System.Collections.Generic;
 using Leaf.Runtime;
 using BeauUtil.Debugger;
+using Leaf;
 
 namespace Journalism {
     static public class Player {
         static private PlayerData s_Current;
         static private CustomVariantResolver s_Resolver;
+
+        static private readonly StringUtils.ArgsList.Splitter s_ArgsSplitter = new StringUtils.ArgsList.Splitter();
 
         /// <summary>
         /// Registers data.
@@ -25,6 +28,34 @@ namespace Journalism {
             get { return s_Current; }
         }
 
+        #region Location
+
+        /// <summary>
+        /// Returns the id of the current location.
+        /// </summary>
+        [LeafMember("Location")]
+        static public StringHash32 Location() {
+            return s_Current.LocationId;
+        }
+
+        /// <summary>
+        /// Sets the current location id.
+        /// </summary>
+        [LeafMember("SetLocation")]
+        static public bool SetLocation(StringHash32 locationId) {
+            if (s_Current.LocationId != locationId) {
+                s_Current.LocationId = locationId;
+                Game.Events.Dispatch(Events.Locationupdated, locationId);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion // Location
+
+        #region Stats
+
         /// <summary>
         /// Returns the value for the current save's given stat.
         /// </summary>
@@ -38,16 +69,157 @@ namespace Journalism {
         /// </summary>
         [LeafMember("StatCheck")]
         static public bool StatCheck(StatId statId, int value) {
-            return s_Current.StatValues[(int) statId] >= value;
+            if (s_Current.StatValues[(int) statId] >= value) {
+                Log.Msg("[Player] Stat check: Player Stat {0} ({1}) vs {2} - success!", statId, s_Current.StatValues[(int) statId], value);
+                return true;
+            } else {
+                Log.Msg("[Player] Stat check: Player Stat {0} ({1}) vs {2} - failure :(", statId, s_Current.StatValues[(int) statId], value);
+                return false;
+            }
         }
 
         /// <summary>
-        /// Returns if the given node has been visited.
+        /// Sets a stat value directly.
         /// </summary>
-        [LeafMember("Visited")]
-        static public bool Visited(StringHash32 nodeId) {
-            return s_Current.VisitedNodeIds.Contains(nodeId);
+        [LeafMember("SetStat")]
+        static public bool SetStat(StatId statId, int value) {
+            int clamped = Stats.Clamp(value);
+            ref int current = ref s_Current.StatValues[(int) statId];
+            if (current != clamped) {
+                Log.Msg("[Player] Stat {0} changed from {1} to {2}", statId, current, clamped);
+                current = (ushort) clamped;
+                return true;
+            }
+
+            return false;
         }
+
+        /// <summary>
+        /// Adjust stats.
+        /// </summary>
+        [LeafMember("AdjustStats")]
+        static public void AdjustStats(StringSlice statData) {
+            if (statData.IsEmpty) {
+                return;
+            }
+
+            TempList8<StringSlice> allAdjustments = default;
+            statData.Split(s_ArgsSplitter, System.StringSplitOptions.RemoveEmptyEntries, ref allAdjustments);
+            int[] adjustments = new int[Stats.Count];
+            bool bChanged = false;
+            
+            foreach(var adjustStr in allAdjustments)
+            {
+                int operatorIdx = adjustStr.IndexOfAny(AdjustOperators);
+                Assert.True(operatorIdx >= 0, "Stat modification '{0}' is not valid", adjustStr);
+                StringSlice left = adjustStr.Substring(0, operatorIdx);
+                StringSlice right = adjustStr.Substring(operatorIdx + 1);
+                char op = adjustStr[operatorIdx];
+
+                StatId statId = StringParser.ConvertTo<StatId>(left);
+                int value = StringParser.ParseInt(right);
+
+                ref int currentValue = ref s_Current.StatValues[(int) statId];
+
+                int desiredValue = currentValue;
+                switch(op) {
+                    case '=': {
+                        desiredValue = value;
+                        break;
+                    }
+                    case '+': {
+                        desiredValue += value;
+                        break;
+                    }
+                    case '-': {
+                        desiredValue -= value;
+                        break;
+                    }
+                }
+
+                int finalValue = Stats.Clamp(desiredValue);
+                int delta = finalValue - currentValue;
+                if (delta != 0) {
+                    adjustments[(int) statId] = delta;
+                    bChanged = true;
+
+                    Log.Msg("[Player] Stat {0} changed from {1} to {2}", statId, currentValue, finalValue);
+
+                    currentValue = finalValue;
+                }
+            }
+
+            if (bChanged) {
+                Game.Events.Dispatch(Events.StatsUpdated, adjustments);
+            }
+        }
+
+        static private readonly char[] AdjustOperators = new char[] {
+            '=', '-', '+'
+        };
+
+        #endregion // Stats
+
+        #region Time
+
+        /// <summary>
+        /// Returns the amount of time remaining, in hours.
+        /// </summary>
+        [LeafMember("TimeRemaining")]
+        static public float TimeRemaining() {
+            return Stats.TimeUnitsToHours(s_Current.TimeRemaining);
+        }
+
+        /// <summary>
+        /// Returns the amount of time remaining, in hours.
+        /// </summary>
+        [LeafMember("HasTime")]
+        static public bool HasTime(float hours) {
+            return s_Current.TimeRemaining >= Stats.HoursToTimeUnits(hours);
+        }
+
+        /// <summary>
+        /// Sets the amount of time remaining, in hours.
+        /// </summary>
+        [LeafMember("SetTimeRemaining")]
+        static public void SetTimeRemaining(float hours) {
+            uint units = Stats.HoursToTimeUnits(hours);
+            if (units != s_Current.TimeRemaining) {
+                s_Current.TimeRemaining = units;
+                Game.Events.DispatchAsync(Events.TimeUpdated, s_Current.TimeRemaining);
+            }
+        }
+
+        /// <summary>
+        /// Decreases the amount of time remaining, in hours.
+        /// </summary>
+        [LeafMember("DecreaseTime")]
+        static public void DecreaseTime(float hours) {
+            uint units = Stats.HoursToTimeUnits(hours);
+            if (units > s_Current.TimeRemaining) {
+                units = s_Current.TimeRemaining;
+            }
+            if (units > 0) {
+                s_Current.TimeRemaining -= units;
+                Game.Events.DispatchAsync(Events.TimeUpdated, s_Current.TimeRemaining);
+            }
+        }
+
+        /// <summary>
+        /// Increases the amount of time remaining, in hours.
+        /// </summary>
+        [LeafMember("IncreaseTime")]
+        static public void IncreaseTime(float hours) {
+            uint units = Stats.HoursToTimeUnits(hours);
+            if (units > 0) {
+                s_Current.TimeRemaining += units;
+                Game.Events.DispatchAsync(Events.TimeUpdated, s_Current.TimeRemaining);
+            }
+        }
+
+        #endregion // Time
+
+        #region Variables
 
         /// <summary>
         /// Reads the value of the variable with the given id.
@@ -90,5 +262,63 @@ namespace Journalism {
                 Game.Events.DispatchAsync(Events.VariableUpdated, varId);
             }
         }
+
+        #endregion // Variables
+
+        #region Inventory
+
+        /// <summary>
+        /// List of all story scraps accumulated for the current level.
+        /// </summary>
+        /// <value></value>
+        static public ListSlice<StringHash32> StoryScraps {
+            get { return s_Current.StoryScraps; }
+        }
+
+        /// <summary>
+        /// Returns if a story scrap is in the player's inventory.
+        /// </summary>
+        [LeafMember("HasSnippet")]
+        static public bool HasStoryScrap(StringHash32 scrapId) {
+            return s_Current.StoryScraps.Contains(scrapId);
+        }
+
+        /// <summary>
+        /// Adds a story scrap to the player's inventory.
+        /// </summary>
+        [LeafMember("GiveSnippet")]
+        static public bool AddStoryScrap(StringHash32 scrapId) {
+            if (!s_Current.StoryScraps.Contains(scrapId)) {
+                s_Current.StoryScraps.Add(scrapId);
+                Game.Events.Dispatch(Events.InventoryUpdated, scrapId);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion // Inventory
+
+        #region Script
+
+        /// <summary>
+        /// Returns if the given node has been visited.
+        /// </summary>
+        [LeafMember("Visited")]
+        static public bool Visited(StringHash32 nodeId) {
+            return s_Current.VisitedNodeIds.Contains(nodeId);
+        }
+
+        /// <summary>
+        /// Resets level-specific data.
+        /// </summary>
+        [LeafMember("ResetForNewLevel")]
+        static public void ResetForNewLevel() {
+            s_Current.StoryScraps.Clear();
+            s_Current.CheckpointId = default;
+            s_Current.LocationId = default;
+        }
+
+        #endregion // Script
     }
 }

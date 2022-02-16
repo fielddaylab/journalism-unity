@@ -202,13 +202,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b597960dba7a50498f5313c88f4d2f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Fader: {fileID: 0}
-  m_Buttons:
+  Fader: {fileID: 0}
+  Buttons:
   - {fileID: 2088421219238667665}
   - {fileID: 1388600460432933792}
   - {fileID: 4762153584392413135}
   - {fileID: 1625500821230178127}
-  m_ToggleGroup: {fileID: 5624074424798986261}
+  ToggleGroup: {fileID: 5624074424798986261}
 --- !u!114 &5624074424798986261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +548,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5624074424798986256}
     m_Modifications:
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_Source
+      value: Stats
+      objectReference: {fileID: 0}
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_HashValue
+      value: 267161228
+      objectReference: {fileID: 0}
     - target: {fileID: 6777147068596989909, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
       propertyPath: m_Name
@@ -700,6 +710,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5624074424798986256}
     m_Modifications:
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_Source
+      value: Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_HashValue
+      value: 3756319748
+      objectReference: {fileID: 0}
     - target: {fileID: 6777147068596989909, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
       propertyPath: m_Name
@@ -815,6 +835,11 @@ PrefabInstance:
       propertyPath: m_Group
       value: 
       objectReference: {fileID: 5624074424798986261}
+    - target: {fileID: 6777147068596989931, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6777147068771420633, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
       propertyPath: m_Sprite
@@ -853,6 +878,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5624074424798986256}
     m_Modifications:
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_Source
+      value: Notes
+      objectReference: {fileID: 0}
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_HashValue
+      value: 267393898
+      objectReference: {fileID: 0}
     - target: {fileID: 6777147068596989909, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
       propertyPath: m_Name
@@ -1011,6 +1046,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5624074424798986256}
     m_Modifications:
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_Source
+      value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 935177205279993000, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: Id.m_HashValue
+      value: 1151856721
+      objectReference: {fileID: 0}
     - target: {fileID: 6777147068596989909, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
       propertyPath: m_Name

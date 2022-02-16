@@ -56,11 +56,44 @@ namespace Journalism {
     
         #endregion // Loading
 
+        #region Interrupts
+
+        /// <summary>
+        /// Interrupts the given thread.
+        /// </summary>
+        public void Interrupt(IEnumerator routine) {
+            m_CurrentThread.GetThread()?.Interrupt(routine);
+        }
+
+        /// <summary>
+        /// Interrupts the given thread.
+        /// </summary>
+        public void Interrupt() {
+            m_CurrentThread.GetThread()?.Interrupt();
+        }
+
+        #endregion // Interrupts
+
         #region Starting
 
         public void StartFromBeginning() {
             Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
             m_CurrentScript.TryGetNode(m_CurrentScript.StartNodeId(), out ScriptNode start);
+            Game.Events.Dispatch(Events.LevelStarted);
+            Run(start);
+        }
+
+        public void StartFromCheckpoint(PlayerData data) {
+            Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
+            m_CurrentScript.TryGetNode(data.CheckpointId, out ScriptNode start);
+            Game.Events.Dispatch(Events.LevelStarted);
+            Run(start);
+        }
+
+        public void StartFromNode(StringHash32 nodeId) {
+            Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
+            m_CurrentScript.TryGetNode(nodeId, out ScriptNode start);
+            Game.Events.Dispatch(Events.LevelStarted);
             Run(start);
         }
 
@@ -71,6 +104,8 @@ namespace Journalism {
         public override void OnNodeEnter(ScriptNode inNode, LeafThreadState<ScriptNode> inThreadState) {
             base.OnNodeEnter(inNode, inThreadState);
 
+            Player.Data.VisitedNodeIds.Add(inNode.Id());
+
             IEnumerator process = HandleNodeEnter?.Invoke(inNode, inThreadState);
             if (process != null) {
                 inThreadState.Interrupt(process);
@@ -80,6 +115,14 @@ namespace Journalism {
         public override LeafThreadHandle Run(ScriptNode node, ILeafActor actor = null, VariantTable locals = null, string name = null) {
             m_CurrentThread.Kill();
             return m_CurrentThread = base.Run(node, actor, locals, name);
+        }
+
+        public override IEnumerator ShowOptions(LeafThreadState<ScriptNode> inThreadState, LeafChoice inChoice) {
+            yield return base.ShowOptions(inThreadState, inChoice);
+            float chosenTime = inChoice.GetCustomData(inChoice.ChosenIndex(), GameText.ChoiceData.Time).AsFloat();
+            if (chosenTime > 0) {
+                Player.DecreaseTime(chosenTime);
+            }
         }
 
         #endregion // Run
