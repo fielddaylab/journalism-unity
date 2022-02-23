@@ -10,6 +10,5 @@ namespace Journalism {
     public struct StorySlot {
         public StoryScrapType AllowedTypes;
         public int Width;
-        public int Height;
     }
 }

@@ -15,7 +15,7 @@ namespace EasyAssetStreaming {
 #if UNITY_EDITOR
     public partial class Streaming : UnityEditor.AssetPostprocessor {
     #else
-    static partial public class Streaming {
+    static public partial class Streaming {
     #endif // UNITY_EDITOR
 
         #region Consts
