@@ -4,7 +4,7 @@ using BeauUtil;
 using TMPro;
 using BeauRoutine;
 using BeauPools;
-using StreamingAssets;
+using EasyAssetStreaming;
 
 namespace Journalism {
     public sealed class ImageColumn : MonoBehaviour {

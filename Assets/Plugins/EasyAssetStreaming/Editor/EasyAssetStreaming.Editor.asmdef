@@ -1,10 +1,11 @@
 {
-    "name": "StreamingAssets",
+    "name": "EasyAssetStreaming.Editor",
     "references": [
-        "BeauRoutine",
-        "BeauUtil"
+        "EasyAssetStreaming"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
     "overrideReferences": false,

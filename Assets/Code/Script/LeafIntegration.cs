@@ -104,7 +104,10 @@ namespace Journalism {
         public override void OnNodeEnter(ScriptNode inNode, LeafThreadState<ScriptNode> inThreadState) {
             base.OnNodeEnter(inNode, inThreadState);
 
-            Player.Data.VisitedNodeIds.Add(inNode.Id());
+            if (m_CurrentThread != inThreadState.GetHandle()) {
+                m_CurrentThread = inThreadState.GetHandle();
+                inThreadState.Interrupt();
+            }
 
             IEnumerator process = HandleNodeEnter?.Invoke(inNode, inThreadState);
             if (process != null) {

@@ -100,6 +100,18 @@ namespace Journalism {
         /// </summary>
         [LeafMember("AdjustStats")]
         static public void AdjustStats(StringSlice statData) {
+            AdjustStatsImpl(statData, true);
+        }
+
+        /// <summary>
+        /// Initializes stats.
+        /// </summary>
+        [LeafMember("InitStats")]
+        static public void InitStats(StringSlice statData) {
+            AdjustStatsImpl(statData, false);
+        }
+
+        static private void AdjustStatsImpl(StringSlice statData, bool dispatchEvent) {
             if (statData.IsEmpty) {
                 return;
             }
@@ -150,7 +162,7 @@ namespace Journalism {
                 }
             }
 
-            if (bChanged) {
+            if (dispatchEvent && bChanged) {
                 Game.Events.Dispatch(Events.StatsUpdated, adjustments);
             }
         }

@@ -1,0 +1,42 @@
+{
+    "Assets": {
+        "Anim/BossPhone5.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "BG/Apartments.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "BG/Room.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Photo/TestPhoto-Sandbags.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "UI/MapPlaceholder.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "UI/ticket-stub 1.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        }
+    },
+    "TextureDefaults": {
+    }
+}

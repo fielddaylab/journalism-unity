@@ -1,18 +1,31 @@
+/*
+ * Copyright (C) 2022. Autumn Beauchesne, Field Day Lab
+ * Author:  Autumn Beauchesne
+ * Date:    4 Feb 2022
+ * 
+ * File:    StreamingUGUITexture.cs
+ * Purpose: Streaming texture, rendered in UGUI with a RawTexture.
+ */
+
 #if UNITY_2018_3_OR_NEWER
 #define USE_ALWAYS
 #endif // UNITY_2018_3_OR_NEWER
 
-using System;
+#if USING_BEAUUTIL
 using BeauUtil;
+#endif // USING_BEAUUTIL
+
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEngine.EventSystems;
 #endif // UNITY_EDITOR
 
-namespace StreamingAssets {
+namespace EasyAssetStreaming {
     #if USE_ALWAYS
     [ExecuteAlways]
     #else
@@ -20,31 +33,39 @@ namespace StreamingAssets {
     #endif // USE_ALWAYS
     [AddComponentMenu("Streaming Assets/Streaming UGUI Texture")]
     [RequireComponent(typeof(RawImage), typeof(RectTransform))]
-    public sealed class StreamingUGUITexture : UIBehaviour, IStreamingComponent, ILayoutSelfController {
+    public sealed class StreamingUGUITexture : UIBehaviour, IStreamingTextureComponent, ILayoutSelfController {
         #region Inspector
 
         [SerializeField] private RawImage m_RawImage;
+        #if USING_BEAUUTIL
         [SerializeField] private ColorGroup m_ColorGroup;
+        #endif // USING_BEAUUTIL
 
-        [SerializeField, StreamingImagePath] private string m_Path;
+        [SerializeField, StreamingImagePath, FormerlySerializedAs("m_Url")] private string m_Path;
         [SerializeField] private Rect m_UVRect = new Rect(0f, 0f, 1f, 1f);
         [SerializeField] private AutoSizeMode m_AutoSize = AutoSizeMode.Disabled;
+        [SerializeField] private bool m_Visible = true;
 
         #endregion // Inspector
 
         [NonSerialized] private Texture2D m_LoadedTexture;
         [NonSerialized] private Rect m_ClippedUVs;
+        private readonly Streaming.AssetCallback m_OnUpdatedEvent;
         private DrivenRectTransformTracker m_Tracker;
- 
-        private readonly Streaming.AssetCallback OnAssetUpdated;
 
         private StreamingUGUITexture() {
-            OnAssetUpdated = (StringHash32 id, Streaming.AssetStatus status, object asset) => {
+            m_OnUpdatedEvent = (StreamingAssetId id, Streaming.AssetStatus status, object asset) => {
                 if (status == Streaming.AssetStatus.Loaded) {
                     Resize(m_AutoSize);
                 }
+                OnUpdated?.Invoke(this, status);
             };
         }
+
+        /// <summary>
+        /// Event invoked when asset status is updated.
+        /// </summary>
+        public event StreamingComponentEvent OnUpdated;
 
         #region Properties
 
@@ -78,21 +99,32 @@ namespace StreamingAssets {
         }
 
         /// <summary>
+        /// Loaded texture.
+        /// </summary>
+        public Texture2D Texture {
+            get { return m_LoadedTexture; }
+        }
+
+        /// <summary>
         /// Color of the renderer.
         /// </summary>
         public Color Color {
-            get { 
+            get {
+                #if USING_BEAUUTIL
                 if (m_ColorGroup) {
                     return m_ColorGroup.Color;
                 }
+                #endif // USING_BEAUUTIL
                 return m_RawImage.color;
             }
             set {
+                #if USING_BEAUUTIL
                 if (m_ColorGroup) {
                     m_ColorGroup.Color = value;
-                } else {
-                    m_RawImage.color = value;
+                    return;
                 }
+                #endif // USING_BEAUUTIL
+                m_RawImage.color = value;
             }
         }
 
@@ -101,20 +133,66 @@ namespace StreamingAssets {
         /// </summary>
         public float Alpha {
             get {
+                #if USING_BEAUUTIL
                 if (m_ColorGroup) {
                     return m_ColorGroup.GetAlpha();
                 }
+                #endif // USING_BEAUUTIL
                 return m_RawImage.color.a;
             }
             set {
+                #if USING_BEAUUTIL
                 if (m_ColorGroup) {
                     m_ColorGroup.SetAlpha(value);
-                } else {
-                    var rawColor = m_RawImage.color;
-                    if (rawColor.a != value) {
-                        rawColor.a = value;
-                        m_RawImage.color = rawColor;
+                    return;
+                }
+                #endif // USING_BEAUUTIL
+                
+                var rawColor = m_RawImage.color;
+                if (rawColor.a != value) {
+                    rawColor.a = value;
+                    m_RawImage.color = rawColor;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Whether or not the renderer is visible.
+        /// </summary>
+        public bool Visible {
+            get { return m_Visible; }
+            set {
+                if (m_Visible != value) {
+                    m_Visible = value;
+                    if (isActiveAndEnabled) {
+                        ApplyVisible();
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// UV window.
+        /// </summary>
+        public Rect UVRect {
+            get { return m_UVRect; }
+            set {
+                if (m_UVRect != value) {
+                    m_UVRect = value;
+                    Resize(m_AutoSize);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Auto sizing mode.
+        /// </summary>
+        public AutoSizeMode SizeMode {
+            get { return m_AutoSize; }
+            set {
+                if (m_AutoSize != value) {
+                    m_AutoSize = value;
+                    Resize(m_AutoSize);
                 }
             }
         }
@@ -148,9 +226,9 @@ namespace StreamingAssets {
                     m_Tracker.Add(this, rect, DrivenTransformProperties.SizeDeltaY);
                     break;
                 }
-                case AutoSizeMode.Fit:
-                case AutoSizeMode.Fill:
-                case AutoSizeMode.FillWithClipping: {
+                case AutoSizeMode.FitToParent:
+                case AutoSizeMode.FillParent:
+                case AutoSizeMode.FillParentWithClipping: {
                     m_Tracker.Add(this, rect, DrivenTransformProperties.SizeDelta);
                     break;
                 }
@@ -184,9 +262,9 @@ namespace StreamingAssets {
                         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
                         break;
                     }
-                    case AutoSizeMode.Fit:
-                    case AutoSizeMode.Fill:
-                    case AutoSizeMode.FillWithClipping: {
+                    case AutoSizeMode.FitToParent:
+                    case AutoSizeMode.FillParent:
+                    case AutoSizeMode.FillParentWithClipping: {
                         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size.x);
                         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size.y);
                         break;
@@ -209,16 +287,28 @@ namespace StreamingAssets {
                 }
                 
                 m_RawImage = GetComponent<RawImage>();
+                #if USING_BEAUUTIL
                 m_ColorGroup = GetComponent<ColorGroup>();
+                #endif // USING_BEAUUTIL
+
+                if (m_ClippedUVs == default) {
+                    m_ClippedUVs = m_UVRect;
+                }
 
                 LoadTexture();
                 LoadClipping();
+                ApplyVisible();
                 return;
             }
             #endif // UNITY_EDITOR
 
+            if (m_ClippedUVs == default) {
+                m_ClippedUVs = m_UVRect;
+            }
+
             LoadTexture();
             LoadClipping();
+            ApplyVisible();
         }
 
         protected override void OnDisable() {
@@ -245,7 +335,8 @@ namespace StreamingAssets {
                 }
 
                 Vector2? parentSize = StreamingHelper.GetParentSize(transform);
-                if (parentSize.HasValue && Ref.Replace(ref m_CachedParentSize, parentSize.Value)) {
+                if (parentSize.HasValue && m_CachedParentSize != parentSize.Value) {
+                    m_CachedParentSize = parentSize.Value;
                     Resize(m_AutoSize);
                 }
             }
@@ -260,29 +351,34 @@ namespace StreamingAssets {
         /// <summary>
         /// Prefetches
         /// </summary>
-        public void Prefetch() {
+        public void Preload() {
             LoadTexture();
             LoadClipping();
+            ApplyVisible();
         }
 
         private void LoadTexture() {
-            if (!Streaming.Texture(m_Path, ref m_LoadedTexture, OnAssetUpdated)) {
+            if (!Streaming.Texture(m_Path, ref m_LoadedTexture, m_OnUpdatedEvent)) {
                 if (!m_LoadedTexture) {
                     m_RawImage.enabled = false;
+                    #if USING_BEAUUTIL
                     if (m_ColorGroup) {
                         m_ColorGroup.Visible = false;
                     }
+                    #endif // USING_BEAUUTIL
                 }
                 return;
             }
 
-            m_RawImage.enabled = m_LoadedTexture;
+            m_RawImage.enabled = m_LoadedTexture && m_Visible;
             m_RawImage.texture = m_LoadedTexture;
             m_ClippedUVs = m_UVRect;
 
+            #if USING_BEAUUTIL
             if (m_ColorGroup) {
-                m_ColorGroup.Visible = m_LoadedTexture;
+                m_ColorGroup.Visible = m_RawImage.enabled;
             }
+            #endif // USING_BEAUUTIL
 
             if (Streaming.IsLoaded(m_LoadedTexture))
                 Resize(m_AutoSize);
@@ -292,6 +388,15 @@ namespace StreamingAssets {
             m_RawImage.uvRect = m_ClippedUVs;
         }
 
+        private void ApplyVisible() {
+            m_RawImage.enabled = m_LoadedTexture && m_Visible;
+            #if USING_BEAUUTIL
+            if (m_ColorGroup) {
+                m_ColorGroup.Visible = m_RawImage.enabled;
+            }
+            #endif // USING_BEAUUTIL
+        }
+
         /// <summary>
         /// Unloads all resources owned by the StreamingWorldTexture.
         /// </summary>
@@ -299,11 +404,16 @@ namespace StreamingAssets {
             if (m_RawImage) {
                 m_RawImage.enabled = false;
             }
+
+            #if USING_BEAUUTIL
             if (m_ColorGroup) {
                 m_ColorGroup.Visible = false;
             }
+            #endif // USING_BEAUUTIL
 
-            Streaming.Unload(ref m_LoadedTexture);
+            if (Streaming.Unload(ref m_LoadedTexture)) {
+                OnUpdated?.Invoke(this, Streaming.AssetStatus.Unloaded);
+            }
         }
 
         #endregion // Resources
@@ -330,7 +440,9 @@ namespace StreamingAssets {
 
         protected override void Reset() {
             m_RawImage = GetComponent<RawImage>();
+            #if USING_BEAUUTIL
             m_ColorGroup = GetComponent<ColorGroup>();
+            #endif // USING_BEAUUTIL
         }
 
         protected override void OnValidate() {
@@ -339,7 +451,9 @@ namespace StreamingAssets {
             }
 
             m_RawImage = GetComponent<RawImage>();
+            #if USING_BEAUUTIL
             m_ColorGroup = GetComponent<ColorGroup>();
+            #endif // USING_BEAUUTIL
 
             EditorApplication.delayCall += () => {
                 if (!this) {
@@ -349,6 +463,7 @@ namespace StreamingAssets {
                 LoadTexture();
                 Resize(m_AutoSize);
                 LoadClipping();
+                ApplyVisible();
             };
         }
 

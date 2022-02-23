@@ -7,7 +7,7 @@ using BeauUtil.Tags;
 using BeauUtil;
 using BeauUtil.Debugger;
 using BeauRoutine;
-using StreamingAssets;
+using EasyAssetStreaming;
 using BeauPools;
 using System;
 
@@ -27,6 +27,7 @@ namespace Journalism {
         [Header("Animation")]
         [SerializeField] private float m_ChoiceRowsOffset = 48;
         [SerializeField] private TweenSettings m_ChoiceRowsAnim = new TweenSettings(0.2f, Curve.Smooth);
+        [SerializeField] private float m_StatsOffset = 32;
 
         [Header("Image Contents")]
         [SerializeField] private ImageColumn m_Image = null;
@@ -47,7 +48,8 @@ namespace Journalism {
             GameText.InitializeScroll(m_TextDisplay);
             GameText.InitializeChoices(m_ChoiceDisplay);
 
-            Game.Events.Register<StringHash32>(Events.InventoryUpdated, OnInventoryUpdated, this);
+            Game.Events.Register<StringHash32>(Events.InventoryUpdated, OnInventoryUpdated, this)
+                .Register<int[]>(Events.StatsUpdated, OnStatsUpdated, this);
         }
 
         #endregion // Unity
@@ -107,7 +109,7 @@ namespace Journalism {
 
                 if (needsChangeTexture) {
                     m_Image.Texture.Path = path.ToString();
-                    m_Image.Texture.Prefetch();
+                    m_Image.Texture.Preload();
                     while(m_Image.Texture.IsLoading()) {
                         yield return null;
                     }
@@ -202,6 +204,39 @@ namespace Journalism {
             yield return GameText.AnimateLocations(m_TextDisplay, 1);
 
             yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
+        }
+
+        private void OnStatsUpdated(int[] adjustments) {
+            Game.Scripting.Interrupt(DisplayStatsAdjusted(adjustments));
+        }
+
+        private IEnumerator DisplayStatsAdjusted(int[] adjustments) {
+            // TODO: Implement for real
+            using(PooledStringBuilder psb = PooledStringBuilder.Create()) {
+                for(int i = 0; i < Stats.Count; i++) {
+                    int adjust = adjustments[i];
+                    if (adjust != 0) {
+                        if (psb.Builder.Length > 0) {
+                            psb.Builder.Append(" ");
+                        }
+                        string name = Stats.Name((StatId) i);
+                        if (adjust > 0) {
+                            psb.Builder.Append("<b>").Append(name).Append("</b>").Append('+', Mathf.CeilToInt(adjust / 4f));
+                        } else {
+                            psb.Builder.Append("<b>").Append(name).Append("</b>").Append('-', Mathf.CeilToInt(-adjust / 4f));
+                        }
+                    }
+                }
+
+                TextLine line = GameText.AllocLine(m_TextDisplay, m_Pools);
+                GameText.PopulateTextLine(line, psb.ToString(), null, default, Assets.Style("msg"));
+                GameText.AlignTextLine(line, TextAlignment.Center);
+                GameText.AdjustComputedLocations(m_TextDisplay, 1);
+                yield return GameText.AnimateLocations(m_TextDisplay, 1);
+                yield return 0.1f;
+
+                yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
+            }
         }
 
         #endregion // Events

@@ -1,7 +1,7 @@
 using System;
 using BeauPools;
 using BeauUtil;
-using StreamingAssets;
+using EasyAssetStreaming;
 using UnityEngine;
 using UnityEngine.UI;
 

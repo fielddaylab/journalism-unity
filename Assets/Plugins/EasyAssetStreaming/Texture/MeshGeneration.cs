@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StreamingAssets {
+namespace EasyAssetStreaming {
     static internal class MeshGeneration {
         #region Quad
 

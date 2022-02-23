@@ -56,6 +56,8 @@ namespace Journalism {
             }
             
             yield return m_TextDisplay.HandleNodeStart(node, thread);
+
+            Player.Data.VisitedNodeIds.Add(node.Id());
         }
 
         private void OnLevelStarted() {

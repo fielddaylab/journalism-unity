@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StreamingAssets {
+namespace EasyAssetStreaming {
     public sealed class StreamingAudioSource : MonoBehaviour {
         
     }

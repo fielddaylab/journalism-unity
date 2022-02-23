@@ -15,7 +15,7 @@
 
 :: START
 $call SetHeaderEnabled(true)
-$call AdjustStats(Research = 15, Resourceful + 1, Tech + 20, Social - 2)
+$call InitStats(Research = 15, Resourceful + 1, Tech + 20, Social - 2)
 Sometimes when the train passes nearby, I can convince myself I'm still in New York.
 $call GiveSnippet($FirstScrap)
 $call GiveSnippet(TestScrap2)

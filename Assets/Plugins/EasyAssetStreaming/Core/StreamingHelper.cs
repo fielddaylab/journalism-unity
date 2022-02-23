@@ -2,11 +2,11 @@
 #define DEVELOPMENT
 #endif // UNITY_EDITOR || DEVELOPMENT_BUILD
 
-using BeauUtil;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace StreamingAssets {
+namespace EasyAssetStreaming {
 
     /// <summary>
     /// Helper and utility methods for streaming.
@@ -47,10 +47,118 @@ namespace StreamingAssets {
         static internal long CalculateMemoryUsage(UnityEngine.Object resource) {
             Texture2D tex = resource as Texture2D;
             if (tex != null) {
-                return UnityHelper.CalculateMemoryUsage(tex);
+                return CalculateTextureMemoryUsage(tex);
+            }
+
+            AudioClip clip = resource as AudioClip;
+            if (clip != null) {
+                return CalculateAudioMemoryUsage(clip);
             }
 
             return 0;
+        }
+
+        /// copied over from BeauUtil to reduce dependencies
+        static private long CalculateTextureMemoryUsage(Texture2D texture) {
+            int numPixels = texture.width * texture.height;
+
+            switch(texture.format) {
+                case TextureFormat.Alpha8: return numPixels;
+
+                case TextureFormat.ARGB4444: return numPixels * 2;
+                case TextureFormat.RGB24: return numPixels * 3;
+                case TextureFormat.RGBA32: return numPixels * 4;
+                case TextureFormat.ARGB32: return numPixels * 4;
+
+                case TextureFormat.RGB565: return numPixels * 2;
+                case TextureFormat.R16: return numPixels * 2;
+
+                case TextureFormat.DXT1: return numPixels / 2;
+                case TextureFormat.DXT5: return numPixels;
+
+                case TextureFormat.RGBA4444: return numPixels * 2;
+                case TextureFormat.BGRA32: return numPixels * 4;
+
+                case TextureFormat.RHalf: return numPixels * 2;
+                case TextureFormat.RGHalf: return numPixels * 4;
+                case TextureFormat.RGBAHalf: return numPixels * 8;
+
+                case TextureFormat.RFloat: return numPixels * 4;
+                case TextureFormat.RGFloat: return numPixels * 8;
+                case TextureFormat.RGBAFloat: return numPixels * 16;
+
+                case TextureFormat.YUY2: return numPixels;
+
+                case TextureFormat.DXT1Crunched: return numPixels / 2;
+                case TextureFormat.DXT5Crunched: return numPixels;
+
+                case TextureFormat.PVRTC_RGB2: return numPixels / 4;
+                case TextureFormat.PVRTC_RGBA2: return numPixels / 4;
+                case TextureFormat.PVRTC_RGB4: return numPixels / 2;
+                case TextureFormat.PVRTC_RGBA4: return numPixels / 4;
+
+                case TextureFormat.ETC_RGB4: return numPixels / 2;
+                case TextureFormat.EAC_R: return numPixels / 2;
+                case TextureFormat.EAC_R_SIGNED: return numPixels / 2;
+                case TextureFormat.EAC_RG: return numPixels;
+                case TextureFormat.EAC_RG_SIGNED: return numPixels;
+
+                case TextureFormat.ETC2_RGB: return numPixels / 2;
+                case TextureFormat.ETC2_RGBA1: return numPixels * 5 / 8;
+                case TextureFormat.ETC2_RGBA8: return numPixels;
+
+                #if UNITY_5_5_OR_NEWER
+                case TextureFormat.BC4: return numPixels / 2;
+                case TextureFormat.BC5: return numPixels;
+                case TextureFormat.BC6H: return numPixels;
+                case TextureFormat.BC7: return numPixels;
+                #endif // UNITY_5_5_OR_NEWER
+
+                #if UNITY_5_6_OR_NEWER
+                case TextureFormat.RGB9e5Float: return numPixels * 4;
+                case TextureFormat.RG16: return numPixels / 2;
+                case TextureFormat.R8: return numPixels;
+                #endif // UNITY_5_6_OR_NEWER
+
+                #if UNITY_2017_3_OR_NEWER
+                case TextureFormat.ETC_RGB4Crunched: return numPixels / 2;
+                case TextureFormat.ETC2_RGBA8Crunched: return numPixels;
+                #endif // UNITY_2017_3_OR_NEWER
+
+                #if UNITY_2019_1_OR_NEWER
+                case TextureFormat.ASTC_RGB_4x4: return numPixels;
+                case TextureFormat.ASTC_RGBA_4x4: return numPixels;
+                case TextureFormat.ASTC_RGB_5x5: return numPixels * 16 / 25;
+                case TextureFormat.ASTC_RGBA_5x5: return numPixels * 16 / 25;
+                case TextureFormat.ASTC_RGB_6x6: return numPixels * 16 / 36;
+                case TextureFormat.ASTC_RGBA_6x6: return numPixels * 16 / 36;
+                case TextureFormat.ASTC_RGB_8x8: return numPixels * 16 / 64;
+                case TextureFormat.ASTC_RGBA_8x8: return numPixels * 16 / 64;
+                case TextureFormat.ASTC_RGB_10x10: return numPixels * 16 / 100;
+                case TextureFormat.ASTC_RGBA_10x10: return numPixels * 16 / 100;
+                case TextureFormat.ASTC_RGB_12x12: return numPixels * 16 / 144;
+                case TextureFormat.ASTC_RGBA_12x12: return numPixels * 16 / 144;
+                case TextureFormat.ASTC_HDR_4x4: return numPixels;
+                case TextureFormat.ASTC_HDR_5x5: return numPixels * 16 / 25;
+                case TextureFormat.ASTC_HDR_6x6: return numPixels * 16 / 36;
+                case TextureFormat.ASTC_HDR_8x8: return numPixels * 16 / 64;
+                case TextureFormat.ASTC_HDR_10x10: return numPixels * 16 / 100;
+                case TextureFormat.ASTC_HDR_12x12: return numPixels * 16 / 144;
+                #endif // UNITY_2019_1_OR_NEWER
+
+                #if UNITY_2019_4_OR_NEWER
+                case TextureFormat.RG32: return numPixels * 4;
+                case TextureFormat.RGB48: return numPixels * 6;
+                case TextureFormat.RGBA64: return numPixels * 8;
+                #endif // UNITY_2019_4_OR_NEWER 
+
+                default: return numPixels;
+            }
+        }
+
+        static private long CalculateAudioMemoryUsage(AudioClip clip) {
+            // TODO: Figure out how this should be calculated
+            return clip.samples * sizeof(float);
         }
     
         #endregion // Resources
@@ -93,9 +201,9 @@ namespace StreamingAssets {
         static internal bool IsAutoSizeHorizontal(AutoSizeMode sizeMode) {
             switch(sizeMode) {
                 case AutoSizeMode.StretchX:
-                case AutoSizeMode.Fit:
-                case AutoSizeMode.Fill:
-                case AutoSizeMode.FillWithClipping:
+                case AutoSizeMode.FitToParent:
+                case AutoSizeMode.FillParent:
+                case AutoSizeMode.FillParentWithClipping:
                     return true;
 
                 default:
@@ -115,7 +223,8 @@ namespace StreamingAssets {
 
         static internal UpdatedResizeProperty AutoSize(AutoSizeMode sizeMode, Texture2D texture, Rect sourceUV, Vector2 localPosition, Vector2 pivot, ref Vector2 size, ref Rect clippedUV, Vector2? parentSize) {
             if (sizeMode == AutoSizeMode.Disabled || !texture) {
-                if (Ref.Replace(ref clippedUV, sourceUV)) {
+                if (clippedUV != sourceUV) {
+                    clippedUV = sourceUV;
                     return UpdatedResizeProperty.Clip;
                 }
                 return 0;
@@ -124,7 +233,8 @@ namespace StreamingAssets {
             Vector2 textureSize = GetTextureRegionSize(texture, sourceUV);
 
             if (textureSize.x == 0 || textureSize.y == 0) {
-                if (Ref.Replace(ref clippedUV, sourceUV)) {
+                if (clippedUV != sourceUV) {
+                    clippedUV = sourceUV;
                     return UpdatedResizeProperty.Clip;
                 }
                 return 0;
@@ -144,7 +254,7 @@ namespace StreamingAssets {
                     size.y = size.x * (textureSize.y / textureSize.x);
                     break;
                 }
-                case AutoSizeMode.Fit: {
+                case AutoSizeMode.FitToParent: {
                     if (!parentSize.HasValue) {
                         break;
                     }
@@ -162,7 +272,7 @@ namespace StreamingAssets {
                     }
                     break;
                 }
-                case AutoSizeMode.Fill: {
+                case AutoSizeMode.FillParent: {
                     if (!parentSize.HasValue) {
                         break;
                     }
@@ -181,7 +291,7 @@ namespace StreamingAssets {
                     break;
                 }
 
-                case AutoSizeMode.FillWithClipping: {
+                case AutoSizeMode.FillParentWithClipping: {
                     if (!parentSize.HasValue) {
                         break;
                     }
@@ -226,5 +336,23 @@ namespace StreamingAssets {
         }
 
         #endregion // Streamed Textures
+
+        #region Misc
+
+        static internal bool FastRemove<T>(this List<T> list, T item) {
+            int end = list.Count - 1;
+            int index = list.IndexOf(item);
+            if (index >= 0)
+            {
+                if (index != end)
+                    list[index] = list[end];
+                list.RemoveAt(end);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion // Misc
     }
 }

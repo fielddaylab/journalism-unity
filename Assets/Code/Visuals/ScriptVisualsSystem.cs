@@ -4,7 +4,7 @@ using BeauRoutine;
 using BeauUtil;
 using BeauUtil.Tags;
 using Leaf.Runtime;
-using StreamingAssets;
+using EasyAssetStreaming;
 using UnityEngine;
 
 namespace Journalism {
@@ -95,7 +95,7 @@ namespace Journalism {
         private IEnumerator PrepareNextBackground(string path) {
             m_QueuedBackgroundTexture = GetNextBackground();
             m_QueuedBackgroundTexture.Path = path;
-            m_QueuedBackgroundTexture.Prefetch();
+            m_QueuedBackgroundTexture.Preload();
             while(m_QueuedBackgroundTexture.IsLoading())
                 yield return null;
         }

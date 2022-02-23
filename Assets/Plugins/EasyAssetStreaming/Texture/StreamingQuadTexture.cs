@@ -1,18 +1,30 @@
+/*
+ * Copyright (C) 2022. Autumn Beauchesne, Field Day Lab
+ * Author:  Autumn Beauchesne
+ * Date:    4 Feb 2022
+ * 
+ * File:    StreamingQuadTexture.cs
+ * Purpose: Streaming texture, rendered with a MeshRenderer.
+ */
+
 #if UNITY_2018_3_OR_NEWER
 #define USE_ALWAYS
 #endif // UNITY_2018_3_OR_NEWER
 
-using System;
+#if USING_BEAUUTIL
 using BeauUtil;
+#endif // USING_BEAUUTIL
+
+using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
-using BeauUtil.Debugger;
-using UnityEngine.Rendering;
 #endif // UNITY_EDITOR
 
-namespace StreamingAssets {
+namespace EasyAssetStreaming {
 
     #if USE_ALWAYS
     [ExecuteAlways]
@@ -21,17 +33,20 @@ namespace StreamingAssets {
     #endif // USE_ALWAYS
     [AddComponentMenu("Streaming Assets/Streaming Quad Texture")]
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-    public sealed class StreamingQuadTexture : MonoBehaviour, IStreamingComponent {
+    public sealed class StreamingQuadTexture : MonoBehaviour, IStreamingTextureComponent {
         
         #region Inspector
 
         [SerializeField] private MeshFilter m_MeshFilter;
         [SerializeField] private MeshRenderer m_MeshRenderer;
+        #if USING_BEAUUTIL
         [SerializeField] private ColorGroup m_ColorGroup;
+        #endif // USING_BEAUUTIL
 
-        [SerializeField, StreamingImagePath] private string m_Path = null;
-        [SerializeField, Required] private Material m_Material;
+        [SerializeField, StreamingImagePath, FormerlySerializedAs("m_Url")] private string m_Path = null;
+        [SerializeField] private Material m_Material;
         [SerializeField] private Color32 m_Color = Color.white;
+        [SerializeField] private bool m_Visible = true;
         
         [SerializeField] private Vector2 m_Size = new Vector2(1, 1);
         [SerializeField] private Vector2 m_Pivot = new Vector2(0.5f, 0.5f);
@@ -53,12 +68,18 @@ namespace StreamingAssets {
         private readonly Streaming.AssetCallback OnAssetUpdated;
 
         private StreamingQuadTexture() {
-            OnAssetUpdated = (StringHash32 id, Streaming.AssetStatus status, object asset) => {
+            OnAssetUpdated = (StreamingAssetId id, Streaming.AssetStatus status, object asset) => {
                 if (status == Streaming.AssetStatus.Loaded) {
                     Resize(m_AutoSize);
                 }
+                OnUpdated?.Invoke(this, status);
             };
         }
+
+        /// <summary>
+        /// Event invoked when asset status is updated.
+        /// </summary>
+        public event StreamingComponentEvent OnUpdated;
 
         #region Properties
 
@@ -92,6 +113,13 @@ namespace StreamingAssets {
         }
 
         /// <summary>
+        /// Loaded texture.
+        /// </summary>
+        public Texture2D Texture {
+            get { return m_LoadedTexture; }
+        }
+
+        /// <summary>
         /// Color of the renderer.
         /// </summary>
         public Color Color {
@@ -116,6 +144,21 @@ namespace StreamingAssets {
                     m_Color.a = (byte) (value * 255);
                     if (isActiveAndEnabled) {
                         ApplyColor();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Whether or not the renderer is visible.
+        /// </summary>
+        public bool Visible {
+            get { return m_Visible; }
+            set {
+                if (m_Visible != value) {
+                    m_Visible = value;
+                    if (isActiveAndEnabled) {
+                        ApplyVisible();
                     }
                 }
             }
@@ -166,6 +209,32 @@ namespace StreamingAssets {
             }
         }
 
+        /// <summary>
+        /// UV window.
+        /// </summary>
+        public Rect UVRect {
+            get { return m_UVRect; }
+            set {
+                if (m_UVRect != value) {
+                    m_UVRect = value;
+                    Resize(m_AutoSize);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Auto sizing mode.
+        /// </summary>
+        public AutoSizeMode SizeMode {
+            get { return m_AutoSize; }
+            set {
+                if (m_AutoSize != value) {
+                    m_AutoSize = value;
+                    Resize(m_AutoSize);
+                }
+            }
+        }
+
         #endregion // Properties
 
         /// <summary>
@@ -173,6 +242,12 @@ namespace StreamingAssets {
         /// </summary>
         public void Resize(AutoSizeMode sizeMode) {
             if (sizeMode == AutoSizeMode.Disabled || !m_LoadedTexture) {
+                if (m_ClippedUVs != m_UVRect) {
+                    m_ClippedUVs = m_UVRect;
+                    if (isActiveAndEnabled) {
+                        LoadMesh();
+                    }
+                }
                 return;
             }
 
@@ -207,12 +282,20 @@ namespace StreamingAssets {
 
                 m_MeshFilter = GetComponent<MeshFilter>();
                 m_MeshRenderer = GetComponent<MeshRenderer>();
+                #if USING_BEAUUTIL
                 m_ColorGroup = GetComponent<ColorGroup>();
+                #endif // USING_BEAUUTIL
+                if (m_ClippedUVs == default) {
+                    m_ClippedUVs = m_UVRect;
+                }
                 Refresh();
                 return;
             }
             #endif // UNITY_EDITOR
 
+            if (m_ClippedUVs == default) {
+                m_ClippedUVs = m_UVRect;
+            }
             Refresh();
         }
 
@@ -231,7 +314,7 @@ namespace StreamingAssets {
         /// <summary>
         /// Prefetches
         /// </summary>
-        public void Prefetch() {
+        public void Preload() {
             LoadTexture();
             if (m_MainTexturePropertyId == 0) {
                 LoadMaterial();
@@ -246,6 +329,7 @@ namespace StreamingAssets {
             LoadTexture();
             ApplySorting();
             LoadMesh();
+            ApplyVisible();
         }
 
         private void LoadMaterial() {
@@ -262,23 +346,31 @@ namespace StreamingAssets {
             if (m_Material.shader != m_LastKnownShader) {
                 m_LastKnownShader = m_Material.shader;
                 m_MainTexturePropertyId = FindMainTexturePropertyName(m_LastKnownShader);
-                // Assert.True(m_MainColorPropertyId != 0 && m_Material.HasProperty(m_MainTexturePropertyId), "No main texture property found for shader {0}", m_LastKnownShader.name);
 
                 // if we have a ColorGroup we shouldn't interfere with the color settings there
+                #if USING_BEAUUTIL
                 if (GetComponent<ColorGroup>()) {
                     m_MainColorPropertyId = 0;
                 } else {
                     m_MainColorPropertyId = FindMainColorPropertyName(m_Material);
                 }
+                #else
+                m_MainColorPropertyId = FindMainColorPropertyName(m_Material);
+                #endif // USING_BEAUUTIL
             }
 
             ApplyTextureAndColor();
         }
 
         private void ApplyColor() {
+            #if USING_BEAUUTIL
             if (m_ColorGroup != null) {
                 m_ColorGroup.Color = m_Color;
-            } else if (m_MainColorPropertyId != 0) {
+                return;
+            }
+            #endif // USING_BEAUUTIL
+            
+            if (m_MainColorPropertyId != 0) {
                 var spb = SharedPropertyBlock(m_MeshRenderer);
                 spb.SetColor(m_MainColorPropertyId, m_Color);
                 m_MeshRenderer.SetPropertyBlock(spb);
@@ -292,17 +384,21 @@ namespace StreamingAssets {
             if (!Streaming.Texture(m_Path, ref m_LoadedTexture, OnAssetUpdated)) {
                 if (!m_LoadedTexture) {
                     m_MeshRenderer.enabled = false;
+                    #if USING_BEAUUTIL
                     if (m_ColorGroup) {
                         m_ColorGroup.Visible = false;
                     }
+                    #endif // USING_BEAUUTIL
                 }
                 return;
             }
 
-            m_MeshRenderer.enabled = m_LoadedTexture;
+            m_MeshRenderer.enabled = m_LoadedTexture && m_Visible;
+            #if USING_BEAUUTIL
             if (m_ColorGroup) {
-                m_ColorGroup.Visible = m_LoadedTexture;
+                m_ColorGroup.Visible = m_MeshRenderer.enabled;
             }
+            #endif // USING_BEAUUTIL
             
             if (m_MainTexturePropertyId != 0) {
                 ApplyTextureAndColor();
@@ -347,6 +443,15 @@ namespace StreamingAssets {
             m_MeshFilter.sharedMesh = m_MeshInstance;
         }
 
+        private void ApplyVisible() {
+            m_MeshRenderer.enabled = m_LoadedTexture && m_Visible;
+            #if USING_BEAUUTIL
+            if (m_ColorGroup) {
+                m_ColorGroup.Visible = m_MeshRenderer.enabled;
+            }
+            #endif // USING_BEAUUTIL
+        }
+
         /// <summary>
         /// Unloads all resources owned by the StreamingWorldTexture.
         /// </summary>
@@ -354,11 +459,15 @@ namespace StreamingAssets {
             if (m_MeshRenderer) {
                 m_MeshRenderer.enabled = false;
             }
+            #if USING_BEAUUTIL
             if (m_ColorGroup) {
                 m_ColorGroup.Visible = false;
             }
+            #endif // USING_BEAUUTIL
 
-            Streaming.Unload(ref m_LoadedTexture);
+            if (Streaming.Unload(ref m_LoadedTexture)) {
+                OnUpdated?.Invoke(this, Streaming.AssetStatus.Unloaded);
+            }
             StreamingHelper.DestroyResource(ref m_MeshInstance);
         }
 
@@ -377,7 +486,8 @@ namespace StreamingAssets {
                 }
 
                 Vector2? parentSize = StreamingHelper.GetParentSize(transform);
-                if (parentSize.HasValue && Ref.Replace(ref m_CachedParentSize, parentSize.Value)) {
+                if (parentSize.HasValue && m_CachedParentSize != parentSize.Value) {
+                    m_CachedParentSize = parentSize.Value;
                     Resize(m_AutoSize);
                 }
             }
@@ -386,7 +496,11 @@ namespace StreamingAssets {
         private void Reset() {
             m_MeshFilter = GetComponent<MeshFilter>();
             m_MeshRenderer = GetComponent<MeshRenderer>();
+
+            #if USING_BEAUUTIL
             m_ColorGroup = GetComponent<ColorGroup>();
+            #endif // USING_BEAUUTIL
+
             m_Material = AssetDatabase.GetBuiltinExtraResource<Material>("Sprites-Default.mat");
         }
 
@@ -397,7 +511,10 @@ namespace StreamingAssets {
 
             m_MeshFilter = GetComponent<MeshFilter>();
             m_MeshRenderer = GetComponent<MeshRenderer>();
+
+            #if USING_BEAUUTIL
             m_ColorGroup = GetComponent<ColorGroup>();
+            #endif // USING_BEAUUTIL
 
             EditorApplication.delayCall += () => {
                 if (!this) {
@@ -413,6 +530,7 @@ namespace StreamingAssets {
                 ApplySorting();
                 Resize(m_AutoSize);
                 LoadMesh();
+                ApplyVisible();
             };
         }
 

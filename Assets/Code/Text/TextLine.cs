@@ -4,7 +4,7 @@ using BeauUtil;
 using TMPro;
 using System;
 using BeauPools;
-using StreamingAssets;
+using EasyAssetStreaming;
 
 namespace Journalism {
     

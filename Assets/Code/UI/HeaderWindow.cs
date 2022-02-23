@@ -5,7 +5,7 @@ using System;
 using UnityEngine.UI;
 using System.Collections;
 using BeauRoutine;
-using StreamingAssets;
+using EasyAssetStreaming;
 using BeauUtil;
 
 namespace Journalism.UI {
