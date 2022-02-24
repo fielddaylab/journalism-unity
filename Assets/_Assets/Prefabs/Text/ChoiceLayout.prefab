@@ -105,7 +105,7 @@ MonoBehaviour:
   GridRoot: {fileID: 8144963194590921723}
   GridGroup: {fileID: 6427025348680251910}
   RowSpacing: 100
-  ColumnSpacing: 320
+  ColumnSpacing: 326
   RotationRange: 1
   NewChoiceAnimParams:
     Time: 0.3

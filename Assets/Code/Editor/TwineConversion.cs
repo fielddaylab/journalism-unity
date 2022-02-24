@@ -95,7 +95,7 @@ namespace Journalism {
             JSON tags = element["tags"];
             string text = element["text"].AsString;
 
-            if (IsAllUppercase(name)) {
+            if (IsAllUppercase(name) && name != "START") {
                 Debug.LogFormat("Skipping node '{0}': All uppercase title", name);
                 return true;
             }
@@ -138,6 +138,8 @@ namespace Journalism {
 
             Debug.LogFormat("Node {0}:\n{1}", leafId, text);
 
+            text = text.Trim('{', '}');
+
             text = ItalicsFormat.Replace(text, ItalicsReplace);
             Debug.LogFormat("Node {0} (Italics):\n{1}", leafId, text);
             text = BoldFormat.Replace(text, BoldReplace);
@@ -155,6 +157,8 @@ namespace Journalism {
 
             text = ReplaceIfs(text);
             Debug.LogFormat("Node {0} (If):\n{1}", leafId, text);
+            text = ReplaceUnlesss(text);
+            Debug.LogFormat("Node {0} (Unless):\n{1}", leafId, text);
             text = ReplaceElseIf(text);
             Debug.LogFormat("Node {0} (ElseIf):\n{1}", leafId, text);
             text = ReplaceElse(text);
@@ -169,6 +173,21 @@ namespace Journalism {
             Debug.LogFormat("Node {0} (Less Time):\n{1}", leafId, text);
             text = MoreTimeRemainingFormat.Replace(text, MoreTimeRemainingReplace);
             Debug.LogFormat("Node {0} (More Time):\n{1}", leafId, text);
+
+            text = AndCheckFormat.Replace(text, AndCheckReplace);
+            Debug.LogFormat("Node {0} (And):\n{1}", leafId, text);
+            text = OrCheckFormat.Replace(text, OrCheckReplace);
+            Debug.LogFormat("Node {0} (Or):\n{1}", leafId, text);
+
+            text = TechieFormat.Replace(text, TechieReplace);
+            text = TrustFormat.Replace(text, TrustReplace);
+            text = SocialFormat.Replace(text, SocialReplace);
+            text = ResourcefulFormat.Replace(text, ResourcefulReplace);
+            text = BookwormFormat.Replace(text, BookwormReplace);
+            text = EnduranceFormat.Replace(text, EnduranceReplace);
+
+            text = VariableComparisonFormat.Replace(text, VariableComparisonReplace);
+            Debug.LogFormat("Node {0} (Variable Comparison):\n{1}", leafId, text);
 
             text = IncrementFormat.Replace(text, IncrementReplace);
             Debug.LogFormat("Node {0} (Increment):\n{1}", leafId, text);
@@ -192,13 +211,6 @@ namespace Journalism {
             Debug.LogFormat("Node {0} (Adjust Variable):\n{1}", leafId, text);
             text = SimpleSetVarFormat.Replace(text, SimpleSetVarReplace);
             Debug.LogFormat("Node {0} (Set Variable):\n{1}", leafId, text);
-
-            text = TechieFormat.Replace(text, TechieReplace);
-            text = TrustFormat.Replace(text, TrustReplace);
-            text = SocialFormat.Replace(text, SocialReplace);
-            text = ResourcefulFormat.Replace(text, ResourcefulReplace);
-            text = BookwormFormat.Replace(text, BookwormReplace);
-            text = EnduranceFormat.Replace(text, EnduranceReplace);
 
             text = ComplexLinkRightFormat.Replace(text, ComplexLinkRightReplace);
             Debug.LogFormat("Node {0} (Complex Link Left):\n{1}", leafId, text);
@@ -246,7 +258,7 @@ namespace Journalism {
             return builder.Flush();
         }
 
-        static private readonly char[] IdTrimChars = new char[] { '.', '-', '_', '\'' };
+        static private readonly char[] IdTrimChars = new char[] { '.', '-', '_', '\'', '"' };
 
         static private readonly string[] SkipNodeIds = new string[] {
             "SubmitStory", "JudgeSnippet", "StoryTypeMultiplier"
@@ -254,12 +266,12 @@ namespace Journalism {
 
         #region Set
 
-        static private Regex AdjustVarFormat = new Regex(@"^\(set: \$(\w+) to it (.+)\)", RegexOptions.Multiline);
+        static private Regex AdjustVarFormat = new Regex(@"^\(set:\\s*\$(\w+)to it (.+)\)", RegexOptions.Multiline);
         static private MatchEvaluator AdjustVarReplace = (m) => {
             return string.Format("$set {0} {1}", m.Groups[1].Value, m.Groups[2].Value);
         };
 
-        static private Regex SimpleSetVarFormat = new Regex(@"^\(set: \$(\w+) to (.+)\)", RegexOptions.Multiline);
+        static private Regex SimpleSetVarFormat = new Regex(@"^\(set: \$([\$\w]+) to (.+)\)", RegexOptions.Multiline);
         static private MatchEvaluator SimpleSetVarReplace = (m) => {
             return string.Format("$set {0} = {1}", m.Groups[1].Value, m.Groups[2].Value);
         };
@@ -268,9 +280,13 @@ namespace Journalism {
 
         #region Expressions
 
-        static private Regex NumberComparisonFormat = new Regex("is\\s+([><=]{1,2})(\\d+)");
+        static private Regex NumberComparisonFormat = new Regex("is\\s+([><=]{1,2})?\\s*(\\d+)");
         static private MatchEvaluator NumberComparisonReplace = (m) => {
-            return string.Format("{0} {1}", m.Groups[1].Value, m.Groups[2].Value);
+            if (string.IsNullOrEmpty(m.Groups[1].Value)) {
+                return string.Format("== {0}", m.Groups[2].Value);
+            } else {
+                return string.Format("{0} {1}", m.Groups[1].Value, m.Groups[2].Value);
+            }
         };
 
         #endregion // Expressions
@@ -307,7 +323,7 @@ namespace Journalism {
         static private Regex ImageFormat = new Regex("<\\s*img\\s+src=\"https://journalism-game-master\\.netlify\\.app/assets/(.*?)\".*?\\/>");
         static private MatchEvaluator ImageReplace = (m) => {
             string target = m.Groups[1].Value;
-            return string.Format("{{image Photo/{0}}}", target);
+            return string.Format("{{img Photo/{0}}}", target);
         };
 
         #endregion // Images
@@ -330,36 +346,51 @@ namespace Journalism {
 
         #region Is
 
-        static private Regex IsCheckFormat = new Regex("\\bis\\b\\s*(\\d+)\\)");
+        static private Regex IsCheckFormat = new Regex("\\bis\\b\\s*(\\d|true|false)+\\)", RegexOptions.IgnoreCase);
         static private MatchEvaluator IsCheckReplace = (m) => {
-            return string.Format("== {0}", m.Groups[1].Value);
+            return string.Format("== {0})", m.Groups[1].Value);
+        };
+
+        static private Regex VariableComparisonFormat = new Regex("\\$(\\w+)\\s*(==|>=|>|<=|<)", RegexOptions.IgnoreCase);
+        static private MatchEvaluator VariableComparisonReplace = (m) => {
+            return string.Format("{0} {1}", m.Groups[1].Value, m.Groups[2].Value);
+        };
+
+        static private Regex AndCheckFormat = new Regex("((?:else)?if\\s+(?:.+)\\b)(?:and)(\\b\\s+(?:.+)\n)");
+        static private MatchEvaluator AndCheckReplace = (m) => {
+            return string.Format("{0},{1}", m.Groups[1].Value, m.Groups[2].Value);
+        };
+
+        static private Regex OrCheckFormat = new Regex("\\$(?:if\\s+)((?:.+)\\b)(?:or)(\\b\\s+(?:.+)\\n)");
+        static private MatchEvaluator OrCheckReplace = (m) => {
+            return string.Format("$set local:_localOr = false\n$if {0}\n$set local:_localOr = true\n$elseif {1}\n$set local:_localOr = true\n$endif\n$if local:_localOr\n", m.Groups[1].Value, m.Groups[2].Value);
         };
 
         #endregion // Is
 
         #region Macros and Functions
 
-        static private Regex HistoryVisitedFormat_Pre = new Regex("\\(history:\\)\\s*contains \"([^\"]+?)\"");
+        static private Regex HistoryVisitedFormat_Pre = new Regex("(?:(?:\\(history:\\))|(?:it))\\s*contains \"([^\"]+?)\"");
         static private MatchEvaluator HistoryVisitedReplace_Pre = (m) => {
             string target = ProcessId(m.Groups[1].Value);
             return string.Format("Visited\"{0}\"", target);
         };
 
-        static private Regex HistoryVisitedFormat_Post = new Regex("Visited\"(.*)\"");
+        static private Regex HistoryVisitedFormat_Post = new Regex("Visited\"([\\w\\.]*)\"");
         static private MatchEvaluator HistoryVisitedReplace_Post = (m) => {
             string target = m.Groups[1].Value;
             return string.Format("Visited({0})", target);
         };
 
-        static private Regex CurrentTimeRemainingFormat = new Regex("\\$currentTime\\s+is\\s+<=?(\\d+)");
+        static private Regex CurrentTimeRemainingFormat = new Regex("\\$currentTime\\s+[<=]+\\s*(\\d+)");
         static private MatchEvaluator CurrentTimeRemainingReplace = (m) => {
-            float time = StringParser.ParseFloat(m.Groups[1].Value);
+            float time = StringParser.ParseFloat(m.Groups[1].Value) / 60;
             return string.Format("!HasTime({0})", time);
         };
 
-        static private Regex MoreTimeRemainingFormat = new Regex("\\$currentTime\\s+is\\s+>=?(\\d+)");
+        static private Regex MoreTimeRemainingFormat = new Regex("\\$currentTime\\s+[>=]+\\s*(\\d+)");
         static private MatchEvaluator MoreTimeRemainingReplace = (m) => {
-            float time = StringParser.ParseFloat(m.Groups[1].Value);
+            float time = StringParser.ParseFloat(m.Groups[1].Value) / 60;
             return string.Format("HasTime({0})", time);
         };
 
@@ -411,7 +442,7 @@ namespace Journalism {
             }
         };
 
-        static private Regex SetTimeFormat = new Regex("\\(set: \\$currentTime to (\\d+)\\)");
+        static private Regex SetTimeFormat = new Regex("\\(set:\\s*\\$currentTime\\s+to\\s+(\\d+)\\)");
         static private MatchEvaluator SetTimeReplace = (m) => {
             return string.Format("$call SetTimeRemaining({0})", StringParser.ParseFloat(m.Groups[1].Value) / 60f);
         };
@@ -421,7 +452,7 @@ namespace Journalism {
             return string.Format("$call DecreaseTime({0})", StringParser.ParseFloat(m.Groups[1].Value) / 60f);
         };
 
-        static private Regex GiveSnippetFormat = new Regex("\\(\\$gainSnippet:\\s*\"\\w+\",\\s*\"([\\w\\s]+)\"\\)");
+        static private Regex GiveSnippetFormat = new Regex("\\(\\$gainSnippet:\\s*\"(?:[\\w\\s/]+)\",\\s*\"([\\w\\s]+)\"\\)");
         static private MatchEvaluator GiveSnippetReplace = (m) => {
             string target = ProcessId(m.Groups[1].Value);
             return string.Format("$call GiveSnippet({0})", target);
@@ -476,9 +507,10 @@ namespace Journalism {
 
         #region If
 
-        static private Regex FindIfStart = new Regex("\\(if\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        static private Regex FindElseIfContinue = new Regex("\\$endif\\s*\\(elseif\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        static private Regex FindElseIfErrant = new Regex("\\(elseif\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindIfStart = new Regex("\\(if\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindUnlessStart = new Regex("\\(unless\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindElseIfContinue = new Regex("\\$endif\\s*\\((?:elseif|else-if)\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindElseIfErrant = new Regex("\\(elseif\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
         static private Regex FindElseStart = new Regex("\\$endif\\s*\\(else\\s*:\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
         static private string ReplaceIfs(string source) {
@@ -500,6 +532,34 @@ namespace Journalism {
                     source = source.Substring(0, m.Index) + string.Format("\n$if {0}\n{1}\n$endif\n", comparison, contents) + source.Substring(groupEnd + endLength);
                 }
                 m = FindIfStart.Match(source);
+            }
+            return source;
+        }
+
+        static private string ReplaceUnlesss(string source) {
+            Match m = FindUnlessStart.Match(source);
+            while(m != null && m.Success) {
+                int groupStart = m.Index + m.Length - 1;
+                int groupEnd;
+                int endLength = 0;
+                if (source[groupStart] == '[') {
+                    groupEnd = FindBlockEnd(source, groupStart, out endLength);
+                } else {
+                    groupEnd = FindLineBreak(source, groupStart, out endLength);
+                }
+                string comparison = m.Groups[1].Value;
+                if (comparison.StartsWith("!")) {
+                    comparison = comparison.Substring(1);
+                } else {
+                    comparison = "!" + comparison;
+                }
+                StringSlice contents = new StringSlice(source, groupStart + 1, (groupEnd - 1 - groupStart)).Trim();
+                if (groupEnd + endLength >= source.Length) {
+                    source = source.Substring(0, m.Index) + string.Format("\n$if {0}\n{1}\n$endif\n", comparison, contents);
+                } else {
+                    source = source.Substring(0, m.Index) + string.Format("\n$if {0}\n{1}\n$endif\n", comparison, contents) + source.Substring(groupEnd + endLength);
+                }
+                m = FindUnlessStart.Match(source);
             }
             return source;
         }
@@ -573,7 +633,7 @@ namespace Journalism {
 
         #region Link
 
-        static private Regex LinkStartFormat = new Regex("\\(link(?:-reveal)?\\s*:\\s*([\\w\"\\s'-]*)\\)\\[?", RegexOptions.IgnoreCase);
+        static private Regex LinkStartFormat = new Regex("\\(link(?:\\-reveal)?\\s*:\\s*([\\w\"\\s\'\\-!\\?\\.\\\\ \\,]+)\\)\\s?\\[?", RegexOptions.IgnoreCase);
 
         static private string ReplaceLinks(string source) {
             Match m = LinkStartFormat.Match(source);
@@ -590,8 +650,8 @@ namespace Journalism {
                 if (groupEnd + endLength < source.Length) {
                     source = source.Remove(groupEnd, 1);
                 }
-                source = source.Substring(0, m.Index) + string.Format("\n{{@action}} {0}\n{1}", text, source.Substring(groupStart + 1));
-                m = FindIfStart.Match(source);
+                source = source.Substring(0, m.Index) + string.Format("\n{{@action}} {0}\n{1}", text, source.Substring(groupStart + 1).TrimStart('='));
+                m = LinkStartFormat.Match(source);
             }
             return source;
         }

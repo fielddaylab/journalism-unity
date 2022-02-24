@@ -8,6 +8,7 @@ namespace Journalism {
 
         private ScriptNodeFlags m_Flags;
         private StringHash32 m_CheckpointId;
+        private StringHash32[] m_Tags;
 
         public ScriptNode(StringHash32 inId, Script inScript)
             : base(inId, inScript)
@@ -26,6 +27,10 @@ namespace Journalism {
             return m_CheckpointId;
         }
 
+        public bool HasTag(StringHash32 tag) {
+            return m_Tags != null && ArrayUtils.Contains(m_Tags, tag);
+        }
+
         #region Meta Tags
         
         [BlockMeta("clearText"), Preserve]
@@ -42,6 +47,11 @@ namespace Journalism {
         private void SetCheckpoint(StringHash32 id = default) {
             m_Flags |= ScriptNodeFlags.Checkpoint;
             m_CheckpointId = id.IsEmpty ? this.Id() : id;
+        }
+
+        [BlockMeta("tags"), Preserve]
+        private void SetCheckpoint(StringSlice data) {
+            m_Tags = ArrayUtils.MapFrom(data.Split(StringUtils.ArgsList.Splitter.Instance, System.StringSplitOptions.RemoveEmptyEntries), (s) => new StringHash32(s));
         }
 
         #endregion // Meta Tags
