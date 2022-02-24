@@ -16,41 +16,11 @@ $choice RoundUpYourTechAndRainGear; Round up your tech and rain gear
 $choice DigThroughTheFridgeForSomethingNourishing; Dig through the fridge for something nourishing
 $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for posts and photos about the storm
 
-// Original Name: RESOURCEFUL CHARACTER
-:: RESOURCEFULCHARACTER
-@tags Resourceful
-Double-click this passage to edit it.
-
-// Original Name: BOOKWORM CHARACTER
-:: BOOKWORMCHARACTER
-@tags Egghead, Bookworm
-Double-click this passage to edit it.
-
-// Original Name: ENDURANCE
-:: ENDURANCE
-@tags Endurance
-Double-click this passage to edit it.
-
-// Original Name: SOCIAL BUTTERFLY CHARACTER
-:: SOCIALBUTTERFLYCHARACTER
-@tags Social
-Double-click this passage to edit it.
-
-// Original Name: TECHIE CHARACTER
-:: TECHIECHARACTER
-@tags Techie
-Double-click this passage to edit it.
-
-// Original Name: TRUST CHARACTER
-:: TRUSTCHARACTER
-@tags Trust
-Double-click this passage to edit it.
-
 // Original Name: Round up your tech and rain gear
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 You run around the apartment, gathering your tech and rain gear.
-<img src="https://journalism-game-master.netlify.app/assets/enml-phoneaccessories.jpg" title="Buzzing phone" width="400"/>
+{image Photo/enml-phoneaccessories.jpg}
 You can't find your raincoat, but you do manage to dig up a large trash bag and your old swim goggles!
 
 $call AdjustStats(Tech + 1)
@@ -84,7 +54,7 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 
 // Original Name: Off to work
 :: OffToWork
-<img src="https://journalism-game-master.netlify.app/assets/enml-waterrushing.gif" title="Flapping chicken" width="400"/>
+{image Photo/enml-waterrushing.gif}
 Your apartment is located over a local bookstore.
 
 You come downstairs and walk through the enormous, decorative metal bird sculptures out front. They look even more terrifying in the dark.  
@@ -99,7 +69,7 @@ $choice RushToWork; There's no time, I've got to get into work!
 // Original Name: Help her
 :: HelpHer
 The whole coop is running around like chickens with... well, you know.
-<img src="https://journalism-game-master.netlify.app/assets/enml-escapedchicken.jpg" title="Flapping chicken" width="400"/>
+{image Photo/enml-escapedchicken.jpg}
 You need to save them before they get swept away! 
 
 $choice ChaseChickens; Chase after the chickens
@@ -147,28 +117,43 @@ $choice JenkinssComputer; Track down his computer.
 :: Office1-DNR
 You ask the DNR worker what's going on.
 ($statGate: $socialName, 2)
-(if: Stat(Social) >1)[The worker sounds relieved to have someone to talk to.
+
+$if Stat(Social) >1
+The worker sounds relieved to have someone to talk to.
 
 He vents about the flooding, and you end up with a great quote!
 
 $call GiveSnippet(GoodDNR)
-](else:)[He sounds overworked and gives you a clearly rehearsed quote: stay off the roads, avoid downtown. 
+$else
+He sounds overworked and gives you a clearly rehearsed quote: stay off the roads, avoid downtown. 
 
-$call GiveSnippet(RehearsedDNR)]
-(if:Visited(JenkinssComputer))[
-(link:"Call Jenkins's DNR Contact")[Jenkins's contact, Wynne D. Storme, is excited to talk to you. 
+$call GiveSnippet(RehearsedDNR)
+$endif
+
+
+$if Visited(JenkinssComputer)
+
+{@action} "Call Jenkins's DNR Contact"
+Jenkins's contact, Wynne D. Storme, is excited to talk to you. 
 
 "We've never seen anything like this," she tells you. "They're calling it a 100-year flood!" 
 
 ($statGate: $bookwormName, 2)
-(if: Stat(Research) > 1)[You remember that term from your research: a flood that only happens once every 100 years.
+
+$if Stat(Research) > 1
+You remember that term from your research: a flood that only happens once every 100 years.
 
 Wynne is impressed by your book smarts! She gives you tons of great data for your story.
 
-$call GiveSnippet(DNRData)]
-(else:)[You're horrified. A flood that lasts 100 years??? 
+$call GiveSnippet(DNRData)
+$else
+You're horrified. A flood that lasts 100 years??? 
 
-By the time Wynne gets you caught up on what "100-year flood" actually means, she's out of time. No more questions.]]]
+By the time Wynne gets you caught up on what "100-year flood" actually means, she's out of time. No more questions.
+$endif
+
+$endif
+
 
 $branch Office1-Clock
 
@@ -183,11 +168,13 @@ $choice PoliceResponse; "The Twin Lakes Herald."
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
 ($statGate: $socialName, 2)
-(if: Stat(Social) is >1)[Your city council contact is thrilled to hear from you. 
+
+$if Stat(Social) > 1
+Your city council contact is thrilled to hear from you. 
 
 "Everyone is still talking about those cherry glazed donuts you brought last time!" she says.
 
-<img src="https://journalism-game-master.netlify.app/assets/enml-coffeedonuts.jpg" title="Buzzing phone" width="400"/>
+{image Photo/enml-coffeedonuts.jpg}
 She tells you that the flood started at the dam, and most of downtown is at risk.
 
 Volunteers are working to lay sandbags, while the city struggles to keep up with rescues and emergency calls.
@@ -198,7 +185,8 @@ You thank her for her time. These quotes will be amazing for your article!
 
 $call GiveSnippet(FloodBackground)
 $call GiveSnippet(CityHallShock)
-](else:)[You interviewed your city hall contact last week. She doesn't seem thrilled to hear from you again.
+$else
+You interviewed your city hall contact last week. She doesn't seem thrilled to hear from you again.
 
 Come to think of it, calling the cherry festival a "nice distraction from the soul-crushing boredom of small town life" might've been a mistake.   
 
@@ -207,14 +195,18 @@ She tells you that the flood started at the dam.
 "We're pretty busy here," she says, sounding annoyed. "Check our website later."
 
 $call GiveSnippet(FloodBackground)
-$call GiveSnippet(CityHallAnnoyance)]
+$call GiveSnippet(CityHallAnnoyance)
+$endif
+
 
 $branch Office1-Clock
 
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
 ($statGate: $bookwormName, 2)
-(if:Stat(Research) > 1)[You get online and see what your friends are posting.
+
+$if Stat(Research) > 1
+You get online and see what your friends are posting.
 
 Thanks to your bookish tendencies, you find a lead: a book club friend livestreaming from outside the library!
 
@@ -223,11 +215,14 @@ The parking lot is under a few inches of water, and the street has become a rush
 You message her, and she sends you some amazing photos. 
 
 $call GiveSnippet(LibraryLot)
-](else:)[You get on Squawker and check the #TwinLakesFlood hashtag.
+$else
+You get on Squawker and check the #TwinLakesFlood hashtag.
 
 There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
 
-$choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo (text-colour:purple)[(10 minutes)]]
+$choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo (text-colour:purple)[(10 minutes)]
+$endif
+
 
 (display:"Office 1 - Clock")
 
@@ -262,16 +257,18 @@ $branch STORYEVALUATION
 
 // Original Name: Office 1 - Clock
 :: Office1-Clock
-{(if: $currentTime is <=30)[
-	$choice YouHaveJustEnoughTimeToCompileTheStoryNow; You have just enough time to compile the story now.
-](else:)[
-	$choice BreakingNewsStory; Return to your desk 
-]}
+
+$if $currentTime <= 30
+$choice YouHaveJustEnoughTimeToCompileTheStoryNow; You have just enough time to compile the story now.
+$else
+$choice BreakingNewsStory; Return to your desk
+$endif
+
 
 // Original Name: Abandoned Cherrymobile
 :: AbandonedCherrymobile
 @tags Photo, Great
-<img src="https://journalism-game-master.netlify.app/assets/enml-stuckcar.jpg" title="Car stuck in the water" width="400"/>
+{image Photo/enml-stuckcar.jpg}
 
 // Original Name: Hospital ducks
 :: HospitalDucks
@@ -282,42 +279,6 @@ Insert a photo of ducks swimming in the hospital parking lot.
 :: RudeShopkeeper
 @tags Quote, Bad
 Snippet body not implemented.
-
-// Original Name: Story type multiplier
-:: StoryTypeMultiplier
-(if: $storyType is "Breaking News")[
-	(set: $photoMod to 0, 
-	$graphMod to 0, 
-	$quoteMod to 5, 
-	$factMod to 0, 
-	$observationMod to 0)
-](elseif: $storyType is "Science")[
-	(set: $photoMod to 0, 
-	$graphMod to 5, 
-	$quoteMod to 0, 
-	$factMod to 0, 
-	$observationMod to 0)
-](elseif: $storyType is "Investigation")[
-	(set: $photoMod to 5, 
-	$graphMod to 0, 
-	$quoteMod to 0, 
-	$factMod to 0, 
-	$observationMod to 5)
-](elseif: $storyType is "Human Interest")[
-	(set: $photoMod to 0, 
-	$graphMod to 0, 
-	$quoteMod to 5, 
-	$factMod to 0, 
-	$observationMod to 0)
-](elseif: $storyType is "PSA")[
-	(set: $photoMod to 0, 
-	$graphMod to 0, 
-	$quoteMod to 0, 
-	$factMod to 5, 
-	$observationMod to 0)
-](else:)[
-(text-colour:red)[ERROR: Could not perform type evaluation, story type unknown! Check the "Story type multiplier" passage to see valid types.]
-]
 
 // Original Name: Friendly shopkeeper
 :: FriendlyShopkeeper
@@ -404,22 +365,14 @@ Snippet body not implemented.
 @tags Photo, Great
 Snippet body not implemented.
 
-// Original Name: START
-:: START
-(t8n-time:3s)+(link:"Wake up")+(t8n:"fade")[
-
-It's 5AM.
-
-Dark, rainy, and way too early. 
-<img src="https://journalism-game-master.netlify.app/assets/enml-rain.gif" title="Buzzing phone" width="400"/>
-$choice CheckYourPhone; Check your phone.]
-
 // Original Name: Message Nurse
 :: MessageNurse
 (Insert photo of hospital parking lot)
 This photo would be perfect for your story!
 
-(link:"Send message")[=The nurse is happy to let you use his photo. He even has some headline ideas:
+
+{@action} "Send message"
+=The nurse is happy to let you use his photo. He even has some headline ideas:
 
 (text-style:"sway")[<i>Fowl weather at the quack of dawn!</i>
 
@@ -467,7 +420,7 @@ $choice OffToWork; Off to work
 
 Probably checking up on your puff piece about the cherry festival.
 
-<img src="https://journalism-game-master.netlify.app/assets/enml-buzzingphone.gif" title="Buzzing phone" width="400"/>
+{image Photo/enml-buzzingphone.gif}
 $choice CallYourEditor; Call back.
 
 // Original Name: Call your editor.
@@ -526,7 +479,7 @@ The town's famous Cherrymobile is abandoned in high water.
 Birds are pecking at pastries that have drifted out of a local bakery. 
 
 You wish you could snag some photos, but your editor is texting you. No time to stop.
-<img src="https://journalism-game-master.netlify.app/assets/enml-textmessage.jpg" title="Your boss's angry text" width="400"/>
+{image Photo/enml-textmessage.jpg}
 $choice ArriveAtWork; Rush to work 
 
 // Original Name: I'm in a hurry, there's no need to bring the bike!
@@ -538,7 +491,7 @@ Your usual route is covered with water. Mayyybe this flood is a little worse tha
 (link:"Stop to look around.")[=A baker is piling up burlap sacks in front of her shop.
 
 Cars are abandoned--including the famous Twin Lakes Cherrymobile!
-<img src="https://journalism-game-master.netlify.app/assets/enml-stuckcar.jpg" title="Car stuck in the water" width="400"/>
+{image Photo/enml-stuckcar.jpg}
 
 $choice HelpTheBaker; Help the baker
 $choice TakeSomePhotos; Take some photos
@@ -551,8 +504,11 @@ The lights are flickering and rainwater drips from the ceiling.
 
 Your editor looks relieved to see you.
 
-(if:Visited(HelpHer))["I'm not even gonna ask why you're covered in feathers," she says.
-](else-if:Visited(RoundUpYourGear))["I like your gear," she says. "The swim goggles are a nice touch."
+
+$if Visited(HelpHer)
+"I'm not even gonna ask why you're covered in feathers," she says.
+$endif
+(else-if:Visited(RoundUpYourGear")["I like your gear," she says. "The swim goggles are a nice touch.)
 ](else:)["You made it," she says. "I'm impressed."]
 
 (link:"\"Where is everybody??\"")[She explains that the other field reporters are stranded in the flood, or bailing out their flooded basements.
@@ -565,12 +521,14 @@ $call GiveSnippet(DifficultCommute)
 
 "You've got 2 hours."
 
-$choice BreakingNewsStory; "On it."]]
+$choice BreakingNewsStory; "On it."]
 
 // Original Name: Help the baker
 :: HelpTheBaker
 {($statGate: $enduranceName, 2)
-(if: Stat(Endurance) is >1)[You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
+
+$if Stat(Endurance) > 1
+You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
 
 The baker is stacking up bags of flour. 
 
@@ -578,8 +536,12 @@ You're not sure if this will actually protect her shop or just turn into play do
 
 "I don't know where to get sandbags," she explains. "It all happened so fast!"
 
-$call GiveSnippet(FriendlyShopkeeper)]}
-(elseif: Stat(Social) is >1)[($statGate: $socialName, 2)
+$call GiveSnippet(FriendlyShopkeeper)
+$endif
+}
+
+$if Stat(Social) > 1
+($statGate: $socialName, 2)
 You rush over, your heart going out to the struggling baker.
 
 She's stacking up bags of flour.
@@ -590,7 +552,9 @@ You're not strong enough to help much--maybe you should've had breakfast--but ta
 
 She agrees to let you quote her for your story, and she gives you a chocolate croissant for the road. 
 
-$call GiveSnippet(FriendlyShopkeeper)](else:)[($statGate: $socialName, 2)
+$call GiveSnippet(FriendlyShopkeeper)
+$else
+($statGate: $socialName, 2)
 The baker is stacking up bags of flour to stop the floodwater.
 
 "I think you're supposed to use sandbags," you tell her.
@@ -599,25 +563,32 @@ The baker seems exasperated and tells you to get out of the way.
 
 Maybe you could quote this, if you remove the profanity...
 
-$call GiveSnippet(RudeShopkeeper)]
+$call GiveSnippet(RudeShopkeeper)
+$endif
+
 
 $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Take some photos
 :: TakeSomePhotos
 ($statGate: $techieName, 2)
-(if:Stat(Tech) is >1)[You climb up on your car for a better view.
+
+$if Stat(Tech) > 1
+You climb up on your car for a better view.
 
 With your zoom lens, you get an awesome photo: the abandoned Cherrymobile, juxtaposed with the stacking shopkeep!
 
 $call GiveSnippet(AbandonedCherrymobile)
-](else:)[You pull over and snap some photos. 
+$else
+You pull over and snap some photos. 
 
 You can’t get close enough to get a good shot. A zoom lens would've been useful, but that's buried in your closet somewhere. 
 
 Hopefully blurry cars in blurry water will be good enough for your editor. 
 
-$call GiveSnippet(BlurryCars)]
+$call GiveSnippet(BlurryCars)
+$endif
+
 
 $choice ArriveAtWork; Arrive at work.
 
@@ -641,22 +612,27 @@ $HubChoice(Office1-SocialMedia, Check Squawker for photos to use in your story, 
 // Original Name: Blurry cars
 :: BlurryCars
 @tags Photo, Bad
-<img src="https://journalism-game-master.netlify.app/assets/enml-stuckcar.jpg" title="Car stuck in the water" width="400"/>
+{image Photo/enml-stuckcar.jpg}
 
 // Original Name: Jenkins's Computer
 :: JenkinssComputer
 <img src="https:<i>journalism-game-master.netlify.app/assets/enml-oldcomputer.jpg" title="Old computer" width="400"/>
 ($statGate: $techieName, 2)
-(if: Stat(Tech) > 1)[You take a few guesses at his password. 
+
+$if Stat(Tech) > 1
+You take a few guesses at his password. 
 
 PASSWORD doesn't work, but PASSWORD123 is a match!
 
 You find a treasure trove of quotes, plus a phone number for his DNR contact, Wynne D. Storme. 
 
-($gainSnippet:"Quote/Data","Scientist quotes")]
-(else:)[Jenkins's computer looks like it's from the stone age. Or at least the 90's. You don't know how to turn it on.
+($gainSnippet:"Quote/Data","Scientist quotes")
+$else
+Jenkins's computer looks like it's from the stone age. Or at least the 90's. You don't know how to turn it on.
 
-You do find a sticky note on his file cabinet: </i>Contact Wynne D. Storme, expert @ DNR// ]
+You do find a sticky note on his file cabinet: </i>Contact Wynne D. Storme, expert @ DNR//
+$endif
+
 $branch Office1-Clock
 
 // Original Name: Online picture
@@ -679,42 +655,6 @@ Snippet body not implemented.
 @tags Fact, Good
 Snippet body not implemented.
 
-// Original Name: STATS SIDEBAR
-:: STATSSIDEBAR
-@tags header
-(float-box: "X========", "Y")+(css: "background-color:dimgrey")+(text-color:white)[<b>Stats: </b>(text-size:0.8)[=(live: 10)[
----
-<b>$bookwormName: (text-colour:cyan)[Stat(Research)]</b>
-|desc)[Your knowledge and nerdiness.]
-
-<b>$resourcefulName: (text-colour:cyan)[Stat(Resourceful)]</b>
-|desc)[Your supplies and readiness.]
-
-<b>$enduranceName: (text-colour:cyan)[Stat(Endurance)]</b>
-|desc)[Your energy and physical prowess.]
-
-<b>$techieName: (text-colour:cyan)[Stat(Tech)]</b>
-|desc)[Your skill with gizmos and gadgets.]
-
-<b>$socialName: (text-colour:cyan)[Stat(Social)]</b>
-|desc)[Your charm and emotional intelligence.]
-
-<b>$trustName: (text-colour:cyan)[Stat(Trust)]</b>
-|desc)[Your presence in the community.]
-(change: ?desc, (text-size:0.5)+(text-style:"italic")+(text-colour: grey))
-(if: $showStatDescriptions is "hide descriptions")[(show: ?desc)]]]
-
-(float-box: "X========", "=========Y")+(css: "background-color:dimgrey")+(text-color:grey)+(text-size:0.8)[(cycling-link: 2bind $showStatDescriptions, "show descriptions", "hide descriptions")]
-(display:"REFRESH STATS")
-
-// Original Name: SNIPPET SIDEBAR
-:: SNIPPETSIDEBAR
-@tags header
-(float-box: "=====X", "Y")+(css: "background-color:dimgrey")+(text-color:white)[<b>Story Snippets: </b>(text-size:0.8)[=
----
-(for: each _snippet, ...(datanames:$StoryInventory))[
-(background:(gradient: 90, 0,grey,1,transparent))[(text-colour:lime)+(text-style:"bold")[(print: (passage:_snippet)'s tags's 1st): ](print: _snippet)]]]
-
 // Original Name: Story 2 Intro
 :: Story2Intro
 Your next assignment: get to the flood site and report on what's happening. 
@@ -731,32 +671,38 @@ You have about (display: "PRINT TIME") before you should get going.
 
 ($statGate: $techieName, 2)
 ($statGate: $resourcefulName, 2)
-(if:Stat(Tech) is < 2 and Stat(Resourceful) is <2)[First things first. You need more tech and rain gear, or you'll be dead in the water.
+
+$if Stat(Tech) is < 2 and Stat(Resourceful) < 2
+First things first. You need more tech and rain gear, or you'll be dead in the water.
 
 $HubChoice(BorrowGear, Ask to borrow rain gear, 0.1666667)
 $HubChoice(BorrowTech, Ask to borrow tech, 0.1666667)
 $HubChoice(LostAndFound, Check the Lost and Found, 0.25)
-($hubChoice: '"Borrow" charger', '"Borrow" someone\'s charger', 15)]
-
-(elseif:Stat(Resourceful) is < 2)[It's a mess out there. You'll need some rain gear before you leave. 
+($hubChoice: '"Borrow" charger', '"Borrow" someone\'s charger', 15)
+$elseif Stat(Resourceful) is < 2
+It's a mess out there. You'll need some rain gear before you leave. 
 
 $HubChoice(BorrowGear, Ask to borrow rain gear, 0.1666667)
-$HubChoice(LostAndFound, Check the Lost and Found, 0.25)]
-
-(elseif:Stat(Tech) is < 2)[You still need some tech before you head out.
+$HubChoice(LostAndFound, Check the Lost and Found, 0.25)
+$elseif Stat(Tech) is < 2
+You still need some tech before you head out.
 
 $HubChoice(BorrowTech, Ask to borrow tech, 0.1666667)
 $HubChoice(LostAndFound, Check the Lost and Found, 0.25)
-($hubChoice: '"Borrow" charger', '"Borrow" someone\'s charger', 15)]
+($hubChoice: '"Borrow" charger', '"Borrow" someone\'s charger', 15)
+$elseif Stat(Tech) >= 2 and Stat(Resourceful) >= 2
+You've got all the tech and gear you need! 
 
-(elseif: Stat(Tech) is >=2 and Stat(Resourceful) is >=2)[You've got all the tech and gear you need! 
+$choice GetReadyPart2; Prepare to brave the storm
+$endif
 
-$choice GetReadyPart2; Prepare to brave the storm]
 
 // Original Name: Borrow gear
 :: BorrowGear
 @tags Resourceful
-(if:Visited(BorrowTech))[Your coworkers aren't thrilled to have to lend you stuff. Again. 
+
+$if Visited(BorrowTech)
+Your coworkers aren't thrilled to have to lend you stuff. Again. 
 
 You end up with everything you need, including a light-up jellyfish umbrella! 
 
@@ -764,16 +710,24 @@ You'll just need to swing by the Lost and Found later for your dignity.
 
 $call AdjustStats(Resourceful + 2)
 $call AdjustStats(Social - 1)
-$call AdjustStats(Trust - 1)]
-(else:)[One of the copyeditors lends you his rain boots and a light-up jellyfish umbrella.
+$call AdjustStats(Trust - 1)
+$else
+One of the copyeditors lends you his rain boots and a light-up jellyfish umbrella.
 
 "I worked hard on that thing," he tells you. "You better not harm a single tentacle." 
 
 $call AdjustStats(Tech + 2)
-$call AdjustStats(Social - 1)]
+$call AdjustStats(Social - 1)
+$endif
 
-(if:Stat(Resourceful) is >= 2 and Stat(Tech) is >=2)$choice GetReadyPart2; [Back to your desk]
-(else:)$choice GetReady; [Back to your desk]
+
+
+$if Stat(Resourceful) is >= 2 and Stat(Tech) >= 2
+$choice GetReadyPart2; Back to your desk
+$else
+$choice GetReady; Back to your desk
+$endif
+
 
 
 // Original Name: Lost and Found
@@ -791,27 +745,45 @@ $choice GetReadyPart2; Back to your desk
 // Original Name: Borrow tech
 :: BorrowTech
 @tags Techie
-(if:Visited(BorrowGear))[Your coworkers are tired of lending you stuff.
+
+$if Visited(BorrowGear)
+Your coworkers are tired of lending you stuff.
 
 They give you the tech you need, but you notice that people have started hiding under their desks when you walk toward them. 
 
 $call AdjustStats(Tech + 2)
 $call AdjustStats(Social - 1)
-$call AdjustStats(Trust - 1)]
-(else:)[You wander around, asking for a phone charger.
+$call AdjustStats(Trust - 1)
+$else
+You wander around, asking for a phone charger.
 
 Your editor overhears your plight and lets you borrow her tech.
 
 "Journalism 101," she says. "Don't let your phone die in the middle of a  natural disaster."
 
 $call AdjustStats(Tech + 2)
-$call AdjustStats(Trust - 1)]
-(if:Stat(Resourceful) is >= 2)+(if:Stat(Tech) is >=2)$choice GetReadyPart2; [Back to your desk]
-(if:Stat(Resourceful) is < 2)$choice GetReady; [Back to your desk]
+$call AdjustStats(Trust - 1)
+$endif
+
+
+$if Stat(Resourceful) is >= 2
++
+$if Stat(Tech) >= 2
+$choice GetReadyPart2; Back to your desk
+$endif
+
+$endif
+
+$if Stat(Resourceful) is < 2
+$choice GetReady; Back to your desk
+$endif
+
 
 // Original Name: Get Ready part 2
 :: GetReadyPart2
-(if:$currentTime > 0)[You've got all the gear you need!
+
+$if $currentTime > 0
+You've got all the gear you need!
 
 Your coworkers are rushing around, making phone calls. You should be out of here in (display: "PRINT TIME").
 
@@ -825,19 +797,26 @@ $HubChoice(Breakroom, Search the break room for snacks, 0.1666667)
 
 $HubChoice(ResearchOption-FillIn, Read up on flooding at the library across the street, 0.5)
 
-$choice HeadOut; Enough stalling. Time to go.]
-(else:)[You return to the office one last time and check the clock.
+$choice HeadOut; Enough stalling. Time to go.
+$else
+You return to the office one last time and check the clock.
 
-$choice EjectWastedTooMuchTime; Oh no, you should be out there already...]
+$choice EjectWastedTooMuchTime; Oh no, you should be out there already...
+$endif
+
 
 // Original Name: Drive
 :: Drive
 ($statGate: $bookwormName, 2)
-(if: Stat(Research) is >= 2)[Thanks to your meticulous planning, you manage to avoid the most dangerous flood zones!
+
+$if Stat(Research) is >= 2
+Thanks to your meticulous planning, you manage to avoid the most dangerous flood zones!
 
 Unfortunately, it also takes three times longer than usual to get downtown.
 
-$choice ArriveAtFloodSite; Arrive at flood site](else:)[You head out into the storm, wipers on full blast.
+$choice ArriveAtFloodSite; Arrive at flood site
+$else
+You head out into the storm, wipers on full blast.
 
 If you'd done more research, maybe you'd know which streets to avoid, but it's too late now. 
 
@@ -846,7 +825,9 @@ You're half a mile from downtown when water starts rising.
 The road ahead is totally covered! 
 
 $choice FindHigherGround; Find higher ground and pull over ASAP
-$choice FloorIt; Try to drive through]
+$choice FloorIt; Try to drive through
+$endif
+
 
 // Original Name: Listen to the police scanner
 :: ListenToThePoliceScanner
@@ -868,7 +849,11 @@ Forget cats and dogs. It's raining an entire pet store.
 
 How are you going to get downtown in this mess? 
 
-(if: $hasBike is true)$choice Bike; Bike
+
+$if $hasBike is true
+[Bike]
+$endif
+
 $choice Drive; Drive
 (unless:Visited(TrackDownAnExpertToHelpYou))$choice TrackDownAnExpertToHelpYou; Track down an expert to help you
 
@@ -887,9 +872,21 @@ $choice SearchForSnacksToBoostYourStrength; Search for snacks to boost your stre
 Khalisa's car is stuck in a small puddle the size of a large puddle.
 
 ($statGate: $enduranceName, 2)
-(if: Stat(Endurance) >= 2)[You muster up all your strength and manage to push her car to dry ground!](else:)[You push with all your strength and move her car about an inch.]
 
-(if: Stat(Endurance) >=3)["Thanks, rookie," Khalisa says. "I owe you one."](else:)["It's ok," Khalisa says. "I appreciate the effort."]
+$if Stat(Endurance) >= 2
+You muster up all your strength and manage to push her car to dry ground!
+$else
+You push with all your strength and move her car about an inch.
+$endif
+
+
+
+$if Stat(Endurance) >=3
+"Thanks, rookie," Khalisa says. "I owe you one."
+$else
+"It's ok," Khalisa says. "I appreciate the effort."
+$endif
+
 
 $call AdjustStats(Endurance + 1)
 $call AdjustStats(Trust + 1)
@@ -967,8 +964,19 @@ When you hear him coming, you turn tail and run for it. 40% battery should be go
 $call AdjustStats(Tech + 2)
 $call AdjustStats(Trust - 1)
 
-(if:Stat(Resourceful) is >= 2)+(if:Stat(Tech) is >=2)$choice GetReadyPart2; [Back to your desk]
-(if:Stat(Resourceful) is < 2)$choice GetReady; [Back to your desk]
+
+$if Stat(Resourceful) is >= 2
++
+$if Stat(Tech) >= 2
+$choice GetReadyPart2; Back to your desk
+$endif
+
+$endif
+
+$if Stat(Resourceful) is < 2
+$choice GetReady; Back to your desk
+$endif
+
 
 
 // Original Name: Track down an expert to help you
@@ -977,15 +985,23 @@ You ask around for an expert informant to help you get downtown, but no one has 
 
 (unless:Visited(HelpKhalisa))[Khalisa might know someone. Too bad she's still bailing out her flooded car.
 
-$choice HeadOut; Back to your desk](elseif:Visited(Yogurt))[Khalisa might know someone, but she's digging through the breakroom fridge, looking annoyed. Muttering something about yogurt...
+$choice HeadOut; Back to your desk
+$if Visited(Yogurt)
+Khalisa might know someone, but she's digging through the breakroom fridge, looking annoyed. Muttering something about yogurt...
 
 Now might not be the best time to bother her. 
 
-$choice HeadOut; Back to your desk](elseif:Visited(HelpKhalisa))[Khalisa swings by your desk.
+$choice HeadOut; Back to your desk
+$endif
+
+$if Visited(HelpKhalisa)
+Khalisa swings by your desk.
 
 "You need help getting downtown, rookie?" she says. "I know a great informant. Retired fire chief. Also happens to be my dad."
 
-$choice CallInformant; Call informant]
+$choice CallInformant; Call informant
+$endif
+
 
 // Original Name: Bike
 :: Bike
@@ -1045,36 +1061,47 @@ $choice WaitForRescue; Wait for rescue
 // Original Name: Ask to borrow a kayak
 :: AskToBorrowAKayak
 ($statGate: $trustName, 4)
-(if: Stat(Trust) is >=4)[The driver is happy to lend you their kayak.
+
+$if Stat(Trust) >= 4
+The driver is happy to lend you their kayak.
 
 "I read your piece about the possoms living behind the high school. Really nice work!"
 
 "Oh!" You're amazed that anyone actually read it. "Um, thank you!"
 
 $choice StartPaddling; Start paddling
-](else:)[The driver looks reluctant.
+$else
+The driver looks reluctant.
 
 "You expect me to just <i>give</i> you my kayak? How do I know you're even a real reporter?"
 
 $choice MakeATradeToEarnTheirTrust; Make a trade to earn their trust
-$choice UseDeliWifi; Head into the deli and find another way]
+$choice UseDeliWifi; Head into the deli and find another way
+$endif
+
 
 // Original Name: Use deli wifi
 :: UseDeliWifi
 @tags Bookworm, Resourceful
 ($statGate: $socialName, 3)
-(if: Stat(Social) is >=3)[You check the flood map and find a safer route!
+
+$if Stat(Social) >= 3
+You check the flood map and find a safer route!
 
 The deli owner is worried about you.
 
 He gives you a free sandwich to take with you and tells you to be careful out there.
 $call AdjustStats(Research + 1)
-$call AdjustStats(Resourceful + 1)](else:)[You check the flood map and find a safer route!
+$call AdjustStats(Resourceful + 1)
+$else
+You check the flood map and find a safer route!
 
 The deli owner gives you the side-eye.
 
 He tells you to buy something if you want to stick around. This place is for paying customers only. 
-$call AdjustStats(Research + 1)]
+$call AdjustStats(Research + 1)
+$endif
+
 
 $choice ArriveAtFloodSite; Arrive at flood site
 
@@ -1098,7 +1125,9 @@ Volunteers are stacking sandbags by the road, with a DNR worker leading the effo
 
 You have (display:"PRINT TIME") remaining to submit this story.
 
-(if: $currentTime > 20)[A houseboat floats on the overflowing river, with a lady lounging on deck and "Nora's Ark" painted on the hull. 
+
+$if $currentTime > 20
+A houseboat floats on the overflowing river, with a lady lounging on deck and "Nora's Ark" painted on the hull. 
 
 $HubChoice(TalkToVolunteer1, Speak with a volunteer taking a break from heaving sandbags, 0.3333333)
 $HubChoice(TalkToVolunteer2, Speak with a volunteer gearing up to leave, 0.3333333)
@@ -1110,6 +1139,8 @@ $HubChoice(CherryFestivalMap, Walk down the street to the Cherry Festival, 0.166
 
 
 $choice Level2Story3TheScienceStory; Skip to Level 2, Story 3: The Science Story
+$endif
+
 
 // Original Name: Yogurt
 :: Yogurt
@@ -1150,21 +1181,29 @@ You sit on your car roof, contemplating the meaning of life.
 Finally, a retired firefighter swings by in a flood rescue vehicle! 
 
 ($statGate: $socialName, 3)
-(if: Stat(Social) is <= 2)[He's happy to drive you downtown, but less inclined to give an interview. 
+
+$if Stat(Social) is <= 2
+He's happy to drive you downtown, but less inclined to give an interview. 
 
 "Sorry," he says, "no time for idle chit chat. I've got a pint of black cherry ice cream melting in the back."
 
 You wish you could change his mind, but social niceties aren't exactly your thing. 
 
-$choice ArriveAtFloodSite; Arrive at flood site]
+$choice ArriveAtFloodSite; Arrive at flood site
+$endif
 
-(if: Stat(Social) is >2)[You have a great conversation as he drives you downtown. He even grabs some black cherry ice cream from the back and shares it with you.
+
+
+$if Stat(Social) > 2
+You have a great conversation as he drives you downtown. He even grabs some black cherry ice cream from the back and shares it with you.
 
 "I was the Twin Lakes fire chief for twenty years," he says. "I've never seen anything like this."
 
 $call GiveSnippet(FireChiefQuote)
 
-$choice ArriveAtFloodSite; Arrive at flood site]
+$choice ArriveAtFloodSite; Arrive at flood site
+$endif
+
 
 // Original Name: Eject: Just keep swimming...
 :: EjectJustKeepSwimming
@@ -1179,17 +1218,23 @@ The bad news: you lose your shoes, ruin all your tech, and sit on the bleachers 
 // Original Name: Take photos on the way
 :: TakePhotosOnTheWay
 ($statGate: $techieName, 3)
-(if: Stat(Tech) >=3)[On the way downtown, you get some great shots with your zoom lens:
+
+$if Stat(Tech) >=3
+On the way downtown, you get some great shots with your zoom lens:
 
 People kayaking down Shortbread Street, and a crate of fresh cherries floating down the road!
 
-$call GiveSnippet(GreatFloodPhotos)](else:)[You snap photos of the street around you. 
+$call GiveSnippet(GreatFloodPhotos)
+$else
+You snap photos of the street around you. 
 
 Too bad you don't have the right lens. 
 
 There's a crate of cherries floating through the water, but it ends up looking like a red blur.
 
-$call GiveSnippet(BlurryFloodPhotos)]
+$call GiveSnippet(BlurryFloodPhotos)
+$endif
+
 
 $choice ArriveAtFloodSite; Arrive at flood site
 
@@ -1210,7 +1255,9 @@ $choice AskWhatCausedTheFlood; Ask what caused the flood.
 A volunteer is standing off to the side, wiping rain off his glasses.
 
 ($statGate: $socialName, 3)
-(if: Stat(Social) >2)[He's thrilled when you ask to interview him! You seem to be getting a reputation for being easy to talk to. 
+
+$if Stat(Social) >2
+He's thrilled when you ask to interview him! You seem to be getting a reputation for being easy to talk to. 
 
 He tells you how he became a volunteer and where people can find sandbags.
 
@@ -1218,26 +1265,36 @@ He tells you how he became a volunteer and where people can find sandbags.
 
 $call GiveSnippet(SandbagQuote)
 $call GiveSnippet(VolunteerInfo)
-
-](else:)[You ask for an interview, but he seems reluctant to talk to you.
+$else
+You ask for an interview, but he seems reluctant to talk to you.
 
 $choice OfferToShareSomeFoodWithHim; Offer to share some food with him
-$choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record]
+$choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record
+$endif
+
 $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Interview the DNR worker
 :: InterviewTheDNRWorker
 ($statGate: $socialName, 3)
-(if: Stat(Social) >2)[The DNR worker seems to recognize you.
+
+$if Stat(Social) >2
+The DNR worker seems to recognize you.
 
 "You work for the Herald, right?" she says. "Sounds like you've been making a lot of friends around here! Do you need an interview?"
 
-$choice DamInterviewDNRWorker; "Oh... yeah, that would be great!"](if: Stat(Social) <=2)[The DNR worker looks relieved to see you. Then she notices you're a reporter, not a volunteer.
+$choice DamInterviewDNRWorker; "Oh... yeah, that would be great!"
+$endif
+
+$if Stat(Social) <=2
+The DNR worker looks relieved to see you. Then she notices you're a reporter, not a volunteer.
 
 "Sorry, kid, but we're literally swamped here. Help or get out of the way."
 
 $choice HelpMoveSomeSandbags; Help move some sandbags.
-$choice ArriveAtFloodSite; Talk to someone else.]
+$choice ArriveAtFloodSite; Talk to someone else.
+$endif
+
 
 // Original Name: Talk to the houseboat lady
 :: TalkToTheHouseboatLady
@@ -1251,27 +1308,43 @@ $choice WhatsTheDealWithTheHouseboat; "What's the deal with the houseboat?"
 // Original Name: Take photos of the flood site
 :: TakePhotosOfTheFloodSite
 ($statGate:$techieName, 3)
-(if: Stat(Tech) >= 3)[The conditions are terrible out here.
+
+$if Stat(Tech) >= 3
+The conditions are terrible out here.
 
 Luckily you've got a fully charged phone and a fancy zoom lens!
 
 You snag some great photos--the volunteers working, the overflowing dam, and two cats peeking out the window of the houseboat. 
 
-$call GiveSnippet(HouseboatPhotos)](if:Stat(Tech) is 2 and Stat(Endurance) >=3)[($statGate:$enduranceName, 3)
+$call GiveSnippet(HouseboatPhotos)
+$endif
+
+$if Stat(Tech) is 2 and Stat(Endurance) >=3
+($statGate:$enduranceName, 3)
 You don't have a zoom lens, but you notice a sturdy-looking tree near the dam! 
 
 You muster up all your strength and climb to the top branches for a perfect shot.
 
-(if:Visited(ChaseChickens))[Turns out running around after chickens is a pretty great workout!](else:)[Looks like your cherry-themed breakfast is paying off.]
 
-$call GiveSnippet(HouseboatPhotos)](elseif:Stat(Tech) is 2 and Stat(Resourceful) >=3)[($statGate:$resourcefulName, 3)
+$if Visited(ChaseChickens)
+Turns out running around after chickens is a pretty great workout!
+$else
+Looks like your cherry-themed breakfast is paying off.
+$endif
+
+
+$call GiveSnippet(HouseboatPhotos)
+$elseif Stat(Tech) is 2 and Stat(Resourceful) >=3
+($statGate:$resourcefulName, 3)
 Your gear isn't fancy, but that's never stopped you before. 
 
 You rig up a tripod with a broken branch, a shoelace, and a hair scrunchie. 
 
 You didn't binge-watch all those episodes of MacGyver for nothing. 
 
-$call GiveSnippet(HouseboatPhotos)](else-if:Stat(Tech) is 2 and Stat(Social) >=3)[($statGate:$socialName, 3)
+$call GiveSnippet(HouseboatPhotos)
+$endif
+(else-if:Stat(Tech) is 2 and Stat(Social) >=3)[($statGate:$socialName, 3)
 You can't get a clear shot without a zoom lens.
 
 You're about to give up when when you hear a voice from behind you.
@@ -1291,7 +1364,9 @@ $choice ArriveAtFloodSite; Back to the dam
 // Original Name: Offer to share some food with him
 :: OfferToShareSomeFoodWithHim
 ($statGate: $resourcefulName, 4)
-(if: Stat(Resourceful) is >=4)[You unwrap your sandwich and give the volunteer half.
+
+$if Stat(Resourceful) >= 4
+You unwrap your sandwich and give the volunteer half.
 
 It's a little soggy, but he still seems grateful.
 
@@ -1300,32 +1375,46 @@ He tells you about how he started volunteering.
 "People can sign up at the Twin Lakes Community Center," he says. "They've got plenty of sandbags, but a lot of people don't know where to find them!"
 
 $call GiveSnippet(GreatVolunteeringQuote)
-$call GiveSnippet(VolunteerInfo)](if: Stat(Resourceful) is <4)[You dig through your backpack and find half a protein bar.
+$call GiveSnippet(VolunteerInfo)
+$endif
+
+$if Stat(Resourceful) < 4
+You dig through your backpack and find half a protein bar.
 
 "Um...do you want this?" you say awkwardly. 
 
 He shakes his head. "Nah. Thanks, but I better get back to work."
 
-$choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record]
+$choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record
+$endif
+
 
 $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Ask if he'll talk off the record
 :: AskIfHellTalkOffTheRecord
 ($statGate:$trustName, 3)
-(if: Stat(Trust) is < 3)[He still doesn't seem convinced. "Please don't put my name in your article, okay?" 
+
+$if Stat(Trust) is < 3
+He still doesn't seem convinced. "Please don't put my name in your article, okay?" 
 
 He tells you that he did flood training at the community center. 
 
 You reeeeally wish you could quote him, but it's better than nothing.
 
-$call GiveSnippet(VolunteerInfo)]
-(if: Stat(Trust) is >=3)[Something about talking with you seems to put his mind at ease.
+$call GiveSnippet(VolunteerInfo)
+$endif
+
+
+$if Stat(Trust) >= 3
+Something about talking with you seems to put his mind at ease.
 
 He gives you an amazing quote, and tons of great info about volunteering!
 
 $call GiveSnippet(GreatVolunteeringQuote)
-$call GiveSnippet(VolunteerInfo)]
+$call GiveSnippet(VolunteerInfo)
+$endif
+
 
 
 $choice ArriveAtFloodSite; Back to the dam
@@ -1333,17 +1422,21 @@ $choice ArriveAtFloodSite; Back to the dam
 // Original Name: Record your observations
 :: RecordYourObservations
 ($statGate:$techieName, 3)
-(if: Stat(Tech) >=3)[You use your voice app to rattle off some notes: 
+
+$if Stat(Tech) >=3
+You use your voice app to rattle off some notes: 
 
 The overflowing dam, the 10 volunteers and the brand of rain jackets they're wearing, the make and models of the cars stranded in the street, even the name of the houseboat--Nora's Ark.
 
-$call GiveSnippet(SuperDetailedObservation)](elseif: Stat(Resourceful) >2)[
+$call GiveSnippet(SuperDetailedObservation)
+$elseif Stat(Resourceful) >2
 ($statGate:$resourcefulName, 3)
 Normally you'd take notes on your phone, but your battery power is alarmingly low. 
 
 Luckily, you came prepared! You whip out your trusty notebook and record your observations, writing to the glow of your light-up umbrella. 
 
-$call GiveSnippet(DetailedObservation)](elseif: Stat(Social) >3)[
+$call GiveSnippet(DetailedObservation)
+$elseif Stat(Social) >3
 ($statGate:$resourcefulName, 3)
 ($statGate:$socialName, 4)
 Your phone battery is low, and your notebook is lost somewhere in the war zone of your apartment.
@@ -1353,7 +1446,9 @@ Thankfully, one of the volunteers is willing to lend you their charger!
 You charm them with witty conversation while your phone charges, and even end up with a quote for your story.
 
 $call GiveSnippet(DetailedObservation)
-$call GiveSnippet(VolunteerConversation)](else:)[($statGate:$resourcefulName, 3)
+$call GiveSnippet(VolunteerConversation)
+$else
+($statGate:$resourcefulName, 3)
 ($statGate:$socialName, 4)
 Your phone battery is alarmingly low.
 
@@ -1361,19 +1456,27 @@ You switch to airplane mode to save power and take a few frantic notes.
 
 It's not exactly prize-winning prose, but it's better than nothing.
 
-$call GiveSnippet(BasicObservation)]
+$call GiveSnippet(BasicObservation)
+$endif
+
 
 $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Help move some sandbags.
 :: HelpMoveSomeSandbags
 ($statGate:$enduranceName,3)
-(if: Stat(Endurance) is >=3)[You grab some sandbags and start stacking. Easy, peasy. 
+
+$if Stat(Endurance) >= 3
+You grab some sandbags and start stacking. Easy, peasy. 
 
 The DNR worker looks impressed. "You're tougher than you look. I guess I can answer a few questions."
 
 
-$choice DamInterviewDNRWorker; Interview DNR Worker](if: Stat(Endurance) is <3)[You try to lift a sandbag, which goes about as well as you'd expect for someone who woke up at 4 a.m. and had saltine crackers for breakfast. 
+$choice DamInterviewDNRWorker; Interview DNR Worker
+$endif
+
+$if Stat(Endurance) < 3
+You try to lift a sandbag, which goes about as well as you'd expect for someone who woke up at 4 a.m. and had saltine crackers for breakfast. 
 
 To the DNR worker's credit, she only laughs a little.
 
@@ -1383,7 +1486,9 @@ She agrees to answer one question.
 
 $choice WhenWillTheSituationBeUnderControl; "When will the situation be under control?"
 $choice HowCanPeopleProtectTheirHousesAndBusinesses; "How can people protect their houses and businesses?"
-$choice HowDidTheCityLetThisHappen; "How did the city let this happen?"]
+$choice HowDidTheCityLetThisHappen; "How did the city let this happen?"
+$endif
+
 
 // Original Name: Look around for something useful
 :: LookAroundForSomethingUseful
@@ -1430,8 +1535,13 @@ You approach a volunteer as she's just packing up.
 "Sorry, can't talk, gotta go sample the bacterial contamination in the epilimnion of Upper Lake," she says.
 
 ($statGate:$bookwormName, 3)
-(if: Stat(Research) >=3)$choice BookwormAnswer; ["Interesting. Are you worried the flooding will contribute to toxic algae growth?"]
-(else:)$choice Non-BookwormAnswer; ["Um....epi-whatium?"]
+
+$if Stat(Research) >=3
+$choice BookwormAnswer; "Interesting. Are you worried the flooding will contribute to toxic algae growth?"
+$else
+$choice Non-BookwormAnswer; "Um....epi-whatium?"
+$endif
+
 
 // Original Name: "What's the deal with the houseboat?"
 :: WhatsTheDealWithTheHouseboat
@@ -1440,18 +1550,24 @@ You approach a volunteer as she's just packing up.
 Uh oh. This could go on for a while. 
 
 ($statGate:$socialName, 3)
-(if: Stat(Social) >=3)[Fortunately, you have the social know-how to gracefully exit the conversation.
+
+$if Stat(Social) >=3
+Fortunately, you have the social know-how to gracefully exit the conversation.
 
 "Float on by any time," she calls. "You know where to find me!"
 
 $call GiveSnippet(HouseboatStory)
-$choice ArriveAtFloodSite; Back to the dam](else:)[You try to escape, but you can't get a single word in.
+$choice ArriveAtFloodSite; Back to the dam
+$else
+You try to escape, but you can't get a single word in.
 
 The plus side: now you know more about houseboats than literally anyone else you've ever met. 
 
 $call GiveSnippet(HouseboatStory)
 
-$choice ArriveAtFloodSite; Back to the dam (finally!!!)]
+$choice ArriveAtFloodSite; Back to the dam (finally!!!)
+$endif
+
 
 // Original Name: Interview her
 :: InterviewHer
@@ -1469,7 +1585,9 @@ $choice ArriveAtFloodSite; Back to the dam
 // Original Name: Ask to go with her
 :: AskToGoWithHer
 ($statGate: $trustName, 3)
-(if: Stat(Trust) >=3)[She's happy to take a fellow limnologist along for the ride! 
+
+$if Stat(Trust) >=3
+She's happy to take a fellow limnologist along for the ride! 
 
 She gives you some spare waders to put on, and you go out into the shallows, where she takes samples with some fancy tech.
 
@@ -1480,11 +1598,14 @@ $call DecreaseTime(1)
 $call GiveSnippet(FloodScience)
 $call GiveSnippet(LakewaterStudy)
 
-$choice ArriveAtFloodSite; Back to flood site]
-(else:)[She gives you a sideways glance. "Uh... Sorry, I don't gather data together until at <i>least</i> the second date."
+$choice ArriveAtFloodSite; Back to flood site
+$else
+She gives you a sideways glance. "Uh... Sorry, I don't gather data together until at <i>least</i> the second date."
 
 She leaves in short order - and good thing, too, because that was getting awkward.
-$choice ArriveAtFloodSite; Back to flood site]
+$choice ArriveAtFloodSite; Back to flood site
+$endif
+
 
 // Original Name: Bookworm answer
 :: BookwormAnswer
@@ -1503,26 +1624,32 @@ She shakes her head.
 
 "Sorry, it's a lake science thing. You wouldn't understand."
 
-$choice ArriveAtFloodSite; Back to the dam]
+$choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: "Can you tell me how the flood has affected you?"
 :: CanYouTellMeHowTheFloodHasAffectedYou
 "The flood has been lovely," she says. "Though all those volunteers would probably be happier on a houseboat."
 
 ($statGate:$trustName, 3)
-(if: Stat(Trust) >=3)[You agree with her, they probably would.
+
+$if Stat(Trust) >=3
+You agree with her, they probably would.
 
 The houseboat lady, whose name really is Nora, seems to trust you.
 
 She tells you all about what she saw when the flood started, and even lets you pet one of her matching pairs of cats. 
 
-$call GiveSnippet(GreatHouseboatStory)](elseif: Stat(Research) >=3)[You try to explain that a world full of people on boats probably isn't the answer to climate change.
+$call GiveSnippet(GreatHouseboatStory)
+$elseif Stat(Research) >=3
+You try to explain that a world full of people on boats probably isn't the answer to climate change.
 
 Nora the houseboat lady isn't convinced. "Save your debate team arguments, dear. My cats and I are purrrrfectly happy here. Pun very much intended."
 
 $call GiveSnippet(HouseboatStory)
 
-$choice ArriveAtFloodSite; Back to the dam](else:)[You ask her about the flooding.
+$choice ArriveAtFloodSite; Back to the dam
+$else
+You ask her about the flooding.
 
 "It's not just about floods," she says. "Hosueboats are great in winter, too. Just travel south! If geese can do it, why not us?" 
 
@@ -1530,35 +1657,51 @@ $choice ArriveAtFloodSite; Back to the dam](else:)[You ask her about the floodin
 
 $call GiveSnippet(HouseboatStory)
 
-$choice ArriveAtFloodSite; Back to the dam ]]
+$choice ArriveAtFloodSite; Back to the dam ]
+$endif
+
 
 // Original Name: Message CherryCharlie07
 :: MessageCherryCharlie07
 ($statGate: $trustName, 2)
 $call DecreaseTime(0.1666667)
-(if:Stat(Trust) > 1)[<i>oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊</i>
 
-$call GiveSnippet(LibraryLot)](else:)[<i>the twin lakes herald?? that sounds fake. how do i know you're a real reporter?</i>
+$if Stat(Trust) > 1
+<i>oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊</i>
+
+$call GiveSnippet(LibraryLot)
+$else
+<i>the twin lakes herald?? that sounds fake. how do i know you're a real reporter?</i>
 
 ($statGate: $techieName, 3)
-(if: Stat(Tech) > 2)[You've been waiting your whole life for this moment.
+
+$if Stat(Tech) > 2
+You've been waiting your whole life for this moment.
 
 You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (whch you singlehandedly created).  
 
 You've earned their permission--and their respect.
 
-$call GiveSnippet(LibraryLot)](else:)[You don't have time for this. You log off and grab a stock photo. 
+$call GiveSnippet(LibraryLot)
+$else
+You don't have time for this. You log off and grab a stock photo. 
 
 At least it's better than nothing. Probably.
 
-$call GiveSnippet(GrainyPicture)]]
+$call GiveSnippet(GrainyPicture)
+$endif
+
+$endif
+
 
 
 $branch Office1-Clock
 
 // Original Name: Police Response
 :: PoliceResponse
-(if:Visited(HelpHer))[The officer is suddenly more cheerful. "Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?"
+
+$if Visited(HelpHer)
+The officer is suddenly more cheerful. "Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?"
 
 You're shocked that he knows about this. "Yeah, uh, that was me."
 
@@ -1568,7 +1711,8 @@ He gives you a great interview, including an anectdote about a man whose car got
 
 $call GiveSnippet(FloodBackground)
 $call GiveSnippet(PoliceStory)
-](else:)[The officer coughs awkwardly. "Um. You're Maureen's neighbor, aren't you? She said you nearly ran over her chickens this morning."
+$else
+The officer coughs awkwardly. "Um. You're Maureen's neighbor, aren't you? She said you nearly ran over her chickens this morning."
 
 It seems so unfair that he knows about this. "I wouldn't say 'ran over,' exactly..."
 
@@ -1576,7 +1720,9 @@ He gives you a few basic quotes about safety: don't drive through high water, an
 
 "Just check the city map next time," he says gruffly, "it's all in there."
 
-$call GiveSnippet(PoliceSafetyQuote)]
+$call GiveSnippet(PoliceSafetyQuote)
+$endif
+
 
 $branch Office1-Clock
 
@@ -1585,7 +1731,9 @@ $branch Office1-Clock
 @tags Resourceful, Techie
 You dig through your bag and find an expensive set of camera lenses. 
 
-(if:Visited(GrabSomeBreakfast))[The driver isn't interested--but they do notice the granola you brought from home. 
+
+$if Visited(GrabSomeBreakfast)
+The driver isn't interested--but they do notice the granola you brought from home. 
 
 "Wow! Is that Jim's famous cherry crisp granola??" 
 
@@ -1595,7 +1743,9 @@ Time to get on the water!
 
 $call AdjustStats(Resourceful - 1)
 
-$choice StartPaddling; Start paddling]](if:Visited(CheckOnYourUpstairsNeighbor))[You neighbor isn't interested--but they do notice the cherry-embroidered hat from your neighbor.
+$choice StartPaddling; Start paddling]
+$if Visited(CheckOnYourUpstairsNeighbor)
+You neighbor isn't interested--but they do notice the cherry-embroidered hat from your neighbor.
 
 "Wow! What lovely craftsmanship!" 
 
@@ -1603,7 +1753,9 @@ You offer them the hat as collateral, and they lend you the kayak!
 
 $call AdjustStats(Resourceful - 1)
 
-$choice StartPaddling; Start paddling](else:)[The driver still seems reluctant, but they accept the trade and give you the kayak. 
+$choice StartPaddling; Start paddling
+$else
+The driver still seems reluctant, but they accept the trade and give you the kayak. 
 
 The good news: you've got a way to get downtown!
 
@@ -1611,32 +1763,44 @@ The bad news: it'll be tricky to get decent photos once you get there.
 
 $call AdjustStats(Tech - 2)
 
-$choice StartPaddling; Start paddling]
+$choice StartPaddling; Start paddling
+$endif
+
+$endif
+
 
 // Original Name: Stop to take photos
 :: StopToTakePhotos
 ($statGate: $techieName, 2)
-(if: Stat(Tech) <=1)[You float in the street and snap some photos.
+
+$if Stat(Tech) <=1
+You float in the street and snap some photos.
 
 As expected, they turn out awful. You're already wishing you had those lenses back.
 
 $call GiveSnippet(BlurryFloodPhotos)
 
 
-$choice ArriveAtFloodSite; Arrive at flood site]
+$choice ArriveAtFloodSite; Arrive at flood site
+$endif
+
 (if: Stat(Tech) == 2[You float in the street and snap some photos.
 
 You don't have your zoom lens, but you're right in the middle of the action, so the photos turn out okay!
 
 $call GiveSnippet(GoodFloodPhotos)
 
-$choice ArriveAtFloodSite; Arrive at flood site](if: Stat(Tech) >2)[You use your tech gear to snap some amazing photos!
+$choice ArriveAtFloodSite; Arrive at flood site
+$if Stat(Tech) >2
+You use your tech gear to snap some amazing photos!
 
 Jars of cherry jam, carp flopping out of the water, and even a water snake slithering by.
 
 $call GiveSnippet(GreatFloodPhotos)
 
-$choice ArriveAtFloodSite; Arrive at flood site]
+$choice ArriveAtFloodSite; Arrive at flood site
+$endif
+
 
 
 // Original Name: Level 2, Story 3: The Science Story
@@ -1649,7 +1813,7 @@ $choice GatherFloodGear; Gather flood gear
 $choice GoOutsideAndHelpYourNeighbors; Go outside and help your neighbors
 $choice MakeBreakfast; Make breakfast
 $choice CheckSocialMedia; Check social media
-$choice ReadABookBeforeWork; Read a book before work]
+$choice ReadABookBeforeWork; Read a book before work
 
 // Original Name: Cherry Festival Map
 :: CherryFestivalMap
@@ -1664,12 +1828,17 @@ Cars are stranded, and people are clustered in dry areas and on rooftops. From a
 
 You have (display:"PRINT TIME") remaining to submit this story.
 
-(if: $currentTime > 20)[$HubChoice(GoInsideSpecialtyCheeseShop, Go inside specialty cheese shop, 0.1666667)
+
+$if $currentTime > 20
+$HubChoice(GoInsideSpecialtyCheeseShop, Go inside specialty cheese shop, 0.1666667)
 $HubChoice(TakePhotosOfTheStreet, Snap some pictures of the dismal scene, 0.3333333)
 $HubChoice(FollowTheSirens, Head towards the source of the sirens and splashing, 0.3333333)
 
-$HubChoice(ArriveAtFloodSite, Head back to the flood site, 0.3333333)]
-(else:)[That leaves just enough time to $choice CompileYourStory; compile your story... ]
+$HubChoice(ArriveAtFloodSite, Head back to the flood site, 0.3333333)
+$else
+That leaves just enough time to $choice CompileYourStory; compile your story...
+$endif
+
 
 // Original Name: Take photos of the street
 :: TakePhotosOfTheStreet
@@ -1717,38 +1886,44 @@ $choice Ok.Uh...AnyTips; "Ok. Uh... any tips?"
 @tags Endurance, Trust, Social
 Yesterday would have been grocery day if it weren't for all of the... yeah.
 
-(if:Visited(HelpHer))[Your cupboards are still pretty empty.
+
+$if Visited(HelpHer)
+Your cupboards are still pretty empty.
 
 Luckily, Maureen stops by with a carton of fresh eggs!
 
 You chat with her while you whip up an omelet. 
 
 $call AdjustStats(Endurance + 1)
-$call AdjustStats(Social + 1)]
-(elseif:Visited(HelpTheBaker))[You're starting to get sick of cherry pie for breakfast. 
+$call AdjustStats(Social + 1)
+$elseif Visited(HelpTheBaker)
+You're starting to get sick of cherry pie for breakfast. 
 
 Then you remember the leftover granola from the bakery! You text the baker a quick thank you, and she texts back:
 
 <i>No prob, thanks for the help yesterday. Loved ur story! xoxo</i>
 
 $call AdjustStats(Endurance + 1)
-$call AdjustStats(Social + 1)]
-(elseif:Visited(HelpHimPackUpHisWares))[The sparse cupboards make your stomach grumble when you suddenly remember!
+$call AdjustStats(Social + 1)
+$elseif Visited(HelpHimPackUpHisWares)
+The sparse cupboards make your stomach grumble when you suddenly remember!
 
 In the corner of the fridge is some slightly soggy Emmentaler cheese that shop-owner offered you when you helped bail out the cheese emporium. Score!
-$call AdjustStats(Endurance + 2)]
-
-(else:)[You're struggling to find some not-expired food when a neighbor shouts through the front window.
+$call AdjustStats(Endurance + 2)
+$else
+You're struggling to find some not-expired food when a neighbor shouts through the front window.
 
 "Hiya! You wrote that news story yesterday, right? Thanks to you, I got all my stuff out of the basement before it flooded!"
 
 He offers you a homemade lemon loaf--a little off-brand for the Cherry Capital of the Midwest, but still delicious.  
 
 $call AdjustStats(Endurance + 1)
-$call AdjustStats(Trust + 1)]
+$call AdjustStats(Trust + 1)
+$endif
+
 
 [(text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 // Original Name: Check social media
 :: CheckSocialMedia
@@ -1760,25 +1935,33 @@ Most people in the comments are thanking you for helping them stay safe.
 A few are convinced that the flood is just a scam to get people to buy flood insurance, because <i>their</i> streets are fine. 
 $call AdjustStats(Social + 1)
 
-(link-reveal: "Ignore the haters")[(replace:"Dunk on the haters")[]
+
+{@action} "Ignore the haters"
+(replace:"Dunk on the haters")[]
 You keep a stiff upper lip and disregard the trolls commenting on your article.
 
 $call AdjustStats(Trust + 1)
 
 (text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 (link-reveal: "Dunk on the haters")[(replace:"Ignore the haters")[]
 ($statGate:$techieName,3)
-(if:Stat(Tech) >=3)[You quote-resquawk some of the haters' replies with a sick own and ratio them <i>real</i> good. The clicks on your article keep going up, plus a few extra followers too!
 
-$call AdjustStats(Social + 1)](else:)[In a bit of a tizzy, you Squawk out some ill-advised hot takes.
+$if Stat(Tech) >=3
+You quote-resquawk some of the haters' replies with a sick own and ratio them <i>real</i> good. The clicks on your article keep going up, plus a few extra followers too!
+
+$call AdjustStats(Social + 1)
+$else
+In a bit of a tizzy, you Squawk out some ill-advised hot takes.
 
 You take a break to cool off and come back to you find that you've been cancelled by a not-insignificant portion of the website. Whoops.
 
-$call AdjustStats(Trust - 2)]
+$call AdjustStats(Trust - 2)
+$endif
+
 
 (text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 
 
@@ -1798,9 +1981,13 @@ $HubChoice(BikeDowntownToSurveyTheDamage, Bike downtown to survey the damage, 0.
 $HubChoice(DNRMap, Stop by the Department of Natural Resources, 0.3333333)
 $HubChoice(GatherFloodingInfoFromAcademicPapers, Get online and read academic papers about flooding, 0.5)
 
-(if:Visited(ThanksPlusUniversityContact) or "Read the bulletin board in the hallway")[$HubChoice(DepartmentOfLimnology, Visit the Department of Limnology, 0.3333333)]
 
-$choice PhoneContacts; Phone Contacts]
+$if Visited(ThanksPlusUniversityContact" or "Read the bulletin board in the hallway)
+$HubChoice(DepartmentOfLimnology, Visit the Department of Limnology, 0.3333333)
+$endif
+
+
+$choice PhoneContacts; Phone Contacts
 (else:)[ $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 ]
 
@@ -1811,7 +1998,13 @@ $call AdjustStats(Endurance + 1)
 
 All up and down the streets, people are dragging soaked furniture outside and shoring up sandbags.
 
-(if:Visited(HelpHer))[From down a side street, you hear a soft clucking. Did another of Maureen's chickens escape its coop??](else:)[From down a side street, you hear a soft clucking. Amelia Egghart???]
+
+$if Visited(HelpHer)
+From down a side street, you hear a soft clucking. Did another of Maureen's chickens escape its coop??
+$else
+From down a side street, you hear a soft clucking. Amelia Egghart???
+$endif
+
 
 $choice FollowTheChicken; Follow the chicken (text-colour:purple)[(10 minutes)]
 $choice MainStreetFloodRecovery; Head straight to Main Street
@@ -1829,26 +2022,36 @@ $HubChoice(KnockOnTheNearestOfficeDoor, Knock on the nearest office door, 0.3333
 $HubChoice(ReadTheBulletinBoardInTheHallway, Read the bulletin board in the hallway, 0.3333333)
 $HubChoice(RunIntoTheMayorInHallway, Head out, 0.3333333)
 
-(if:Visited(JenkinssComputer))[ $HubChoice(LookForYourDNRContactWynneD.Storme, Look for your DNR Contact, Wynne D. Storme, 0.3333333) ]
+
+$if Visited(JenkinssComputer)
+$HubChoice(LookForYourDNRContactWynneD.Storme, Look for your DNR Contact, Wynne D. Storme, 0.3333333)
+$endif
+
 
 $choice ScienceStoryMap; Time to head back
 
 // Original Name: Gather flooding info from academic papers
 :: GatherFloodingInfoFromAcademicPapers
 ($statGate:$bookwormName, 3)
-(if: Stat(Research) >=3)[You get online and find several academic papers about flooding! 
+
+$if Stat(Research) >=3
+You get online and find several academic papers about flooding! 
 
 As a proud bookworm, you have no problem deciphering the info. 
 
 You end up with tons of great background on the Twin Lakes watershed, plus some graphics for your article!
 
 $call GiveSnippet(ScienceOfFlooding)
-$call GiveSnippet(FloodProbability)](else:)[You end up with a ton of handwritten notes about the science of flooding!
+$call GiveSnippet(FloodProbability)
+$else
+You end up with a ton of handwritten notes about the science of flooding!
 
 Now if only you had a clue what any of it meant, or what all these confusing-looking diagrams were for...
 
 $call GiveSnippet(FloodMumboJumbo)
-$call GiveSnippet(ConfusingGraphic)]
+$call GiveSnippet(ConfusingGraphic)
+$endif
+
 
 $choice ScienceStoryMap; Science Story Map
 
@@ -1877,10 +2080,12 @@ $choice NoThanks; "No thanks."
 
 // Original Name: Look for your DNR Contact, Wynne D. Storme
 :: LookForYourDNRContactWynneD.Storme
-(unless:Visited(PhoneCallWynneD.StormeDNR))["Oh, hi!" she says. "You're that new reporter, right?"
+(unless:Visited(PhoneCallWynneD.StormeDNR")["Oh, hi!" she says. "You're that new reporter, right?)
 
 ($statGate: $socialName, 5) 
-(if: Stat(Social) >4)[She's busy and stressed, but your conversational skills seem to put her at ease.
+
+$if Stat(Social) >4
+She's busy and stressed, but your conversational skills seem to put her at ease.
 
 She gives you a ton of great info and statistics: 
 
@@ -1894,7 +2099,9 @@ Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
-$call GiveSnippet(CauseOfFlood)](elseif: Stat(Research) >4)[($statGate: $bookwormName, 5)
+$call GiveSnippet(CauseOfFlood)
+$elseif Stat(Research) >4
+($statGate: $bookwormName, 5)
 She's excited to talk to someone who's so well-informed on floods and climate change.
 
 She gives you a ton of great info and statistics: 
@@ -1909,12 +2116,16 @@ Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
-$call GiveSnippet(CauseOfFlood)](else:)[($statGate: $bookwormName, 5)
+$call GiveSnippet(CauseOfFlood)
+$else
+($statGate: $bookwormName, 5)
 She doesn't seem interested in socializing much, but she does give you some quick background on severe weather in Twin Lakes. 
 
 "Over time, storms in Twin Lakes are becoming more severe AND more frequent," she says. "We've had a lot of floods around here, but this one was by far the worst."
 
-$call GiveSnippet(BasicFloodBackground)]](else:)["Oh, hey there!" she says. "I enjoyed our talk on the phone, I'm looking forward to seeing what you publish!"
+$call GiveSnippet(BasicFloodBackground)
+$endif
+](else:)["Oh, hey there!" she says. "I enjoyed our talk on the phone, I'm looking forward to seeing what you publish!"
 
 $call AdjustStats(Trust + 1)]
 
@@ -1927,10 +2138,17 @@ This story is due in (display: "PRINT TIME").
 Phone Contacts:
 
 $HubChoice(PhoneCallDNRHeadquarters, Main DNR Number, 0.5)
-(if:Visited(JenkinssComputer))[$HubChoice(PhoneCallWynneD.StormeDNR, DNR Contact: Wynne D. Storme, 0.5)]
+
+$if Visited(JenkinssComputer)
+$HubChoice(PhoneCallWynneD.StormeDNR, DNR Contact: Wynne D. Storme, 0.5)
+$endif
+
 $HubChoice(PhoneCallCityHall, City Hall Contact, 0.5)
-(if:Visited(AskAroundForItsOwner))[ 
-$HubChoice(PhoneCallMayorsPersonalNumber, Mayor's Personal Number, 0.5)]
+
+$if Visited(AskAroundForItsOwner)
+$HubChoice(PhoneCallMayorsPersonalNumber, Mayor's Personal Number, 0.5)
+$endif
+
 
 $choice ScienceStoryMap; Back to map
 
@@ -1938,13 +2156,19 @@ $choice ScienceStoryMap; Back to map
 :: TakePhotosOfTheDebris
 ($statGate: $techieName, 3)
 ($statGate: $trustName, 4)
-(if: Stat(Tech) >=3 and Stat(Trust) >=4)[You get some amazing photos of Main Street!
+
+$if Stat(Tech) >=3 and Stat(Trust) >=4
+You get some amazing photos of Main Street!
 
 The business owners all agree to let you use pictures of them alongside your article.
 
 "I read your article yesterday," one of the shop owners says. "You're one of the good ones. Happy to help."
 
-$call GiveSnippet(InspiringDowntownRecovery)](If: Stat(Tech) >=3 and Stat(Trust) <4)[You get some amazing photos of Main Street!
+$call GiveSnippet(InspiringDowntownRecovery)
+$endif
+
+$if Stat(Tech) >=3 and Stat(Trust) <4
+You get some amazing photos of Main Street!
 
 You ask the business owners in the shot if they're okay with you using their picture.
 
@@ -1954,13 +2178,19 @@ Some of them agree, but others aren't so sure.
 
 Well, you can still use these photos, if you crop some of the people out...
 
-$call GiveSnippet(DowntownRecovery)](if: Stat(Tech) <3)[Uh oh. Your phone screen is on the fritz and you have no idea how to fix it! 
+$call GiveSnippet(DowntownRecovery)
+$endif
+
+$if Stat(Tech) <3
+Uh oh. Your phone screen is on the fritz and you have no idea how to fix it! 
 
 Maybe it's water damage? Low battery? Some kind of 100-year-flood curse? 
 
 You snap a few random photos and hope for the best.
 
-$call GiveSnippet(BlurryDowntownRecovery)]
+$call GiveSnippet(BlurryDowntownRecovery)
+$endif
+
 
 $choice MainStreetFloodRecovery; Keep looking around
 
@@ -1987,7 +2217,11 @@ As you turn to leave, you bump into someone--a researcher in knee-high boots and
 "Hey!" she says. "Careful out here, that's toxic blue-green algae. I'm here to take some samples."
 
 $choice QuickInterviewLimnologyExpert; Ask if she has time to talk
-(elseif:Visited(ThanksPlusUniversityContact))[ $choice TellHerYouMetHerSister; Tell her you met her sister! ]
+
+$if Visited(ThanksPlusUniversityContact)
+$choice TellHerYouMetHerSister; Tell her you met her sister!
+$endif
+
 
 // Original Name: Help bail out water from boathouse
 :: HelpBailOutWaterFromBoathouse
@@ -2012,7 +2246,7 @@ $choice ScienceStoryMap; Twin Lakes Map
 // Original Name: Interview mayor
 :: InterviewMayor
 "Sure thing," the mayor says. "I'd be happy to answer a couple questions." 
-(set:$currentTime to it - 20)
+$call DecreaseTime(0.3333333)
 This will be an amazing boost for your article, but you try to play it cool. 
 
 $choice WhatKindOfImpactWillThisFloodHaveOnTwinLakes; "What kind of impact will this flood have on Twin Lakes?"
@@ -2052,7 +2286,9 @@ $choice ScienceStoryMap; Map
 "Oh, hi!" she says. "You're that new reporter, right?"
 
 ($statGate:$socialName, 5)
-(if: Stat(Social) >4)[She sounds busy, but your conversational skills seem to put her at ease.
+
+$if Stat(Social) >4
+She sounds busy, but your conversational skills seem to put her at ease.
 
 She gives you a ton of great info and statistics: 
 
@@ -2066,7 +2302,9 @@ Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
-$call GiveSnippet(CauseOfFlood)](elseif: Stat(Research) >4)[($statGate:$bookwormName, 5)
+$call GiveSnippet(CauseOfFlood)
+$elseif Stat(Research) >4
+($statGate:$bookwormName, 5)
 She's excited to talk to someone who's so well-informed on floods and climate change.
 
 She gives you a ton of great info and statistics: 
@@ -2081,12 +2319,16 @@ Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
-$call GiveSnippet(CauseOfFlood)](else:)[($statGate:$bookwormName, 5)
+$call GiveSnippet(CauseOfFlood)
+$else
+($statGate:$bookwormName, 5)
 She doesn't seem interested in socializing much, but she does give you some quick background on severe weather in Twin Lakes. 
 
 "Over time, storms in Twin Lakes are becoming more severe AND more frequent," she says. "We've had a lot of floods around here, but this one was by far the worst."
 
-$call GiveSnippet(BasicFloodBackground)]
+$call GiveSnippet(BasicFloodBackground)
+$endif
+
 
 $choice PhoneContacts; Phone Contacts
 $choice ScienceStoryMap; Map
@@ -2115,14 +2357,14 @@ $choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
 $choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
 $HubChoice(TakePhotosOfTheDebris, Snap some pictures of the debris, 0.3333333)
 
-$choice ScienceStoryMap; Twin Lakes Map ]
+$choice ScienceStoryMap; Twin Lakes Map 
 (else:)[ $choice TimeToAssembleTheScienceStory; Time to assemble the science story... ]
 
 // Original Name: Follow the chicken
 :: FollowTheChicken
 You race around the corner like an Olympic biker out for gold.
 $call AdjustStats(Endurance + 1)
-(set:$currentTime to it - 10)
+$call DecreaseTime(0.1666667)
 There's a chicken wandering in circles in the middle of a puddle!
 
 $choice CallYourNeighborAndSeeIfItsHers; Call your neighbor and see if it's hers (text-colour:purple)[(10 minutes)]
@@ -2130,8 +2372,10 @@ $choice AskAroundForItsOwner; Ask around for its owner (text-colour:purple)[(20 
 
 // Original Name: Call your neighbor and see if it's hers
 :: CallYourNeighborAndSeeIfItsHers
-(set:$currentTime to it - 10)
-(if:Visited(HelpHer))[You call Maureen. "Hey! Um, weird question... did any more of your chickens fly the coop?"
+$call DecreaseTime(0.1666667)
+
+$if Visited(HelpHer)
+You call Maureen. "Hey! Um, weird question... did any more of your chickens fly the coop?"
 
 "Hmm? Nope, we're all fine here. No signs of fowl play. Thank you, though, Dear!" 
 $call AdjustStats(Trust + 1)
@@ -2139,7 +2383,9 @@ $call AdjustStats(Trust + 1)
 She hangs up, leaving you with a strange chicken staring up at you hopefully. 
 
 $choice AskAroundForItsOwner; Ask around for its owner (text-colour:purple)[(20 minutes)]
-$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself](else:)[You call Maureen. "Hey!! I think I found your chicken!"
+$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+$else
+You call Maureen. "Hey!! I think I found your chicken!"
 
 "Amelia Egghart? Oh, she actually just showed up back home! Thank you for calling, though!"
 $call AdjustStats(Trust + 1)
@@ -2151,12 +2397,14 @@ $call AdjustStats(Trust + 1)
 She hangs up, leaving you with a strange chicken staring up at you hopefully. 
 
 $choice AskAroundForItsOwner; Ask around for its owner (text-colour:purple)[(20 minutes)]
-$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself]
+$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+$endif
+
 
 // Original Name: Ask around for its owner
 :: AskAroundForItsOwner
 You wander the area, the rumpled chicken in your arms.
-(set:$currentTime to it - 20)
+$call DecreaseTime(0.3333333)
 You're about to give up when a woman in a messy ponytail runs over to you. 
 
 "Oh, you found Omelette! Thank you so much! My daughter was heartbroken."
@@ -2170,7 +2418,9 @@ $choice NoProblem.IBetterGoIveGotAStoryToWrite; "No problem. I better go, I've g
 // Original Name: Tell him you're a big fan of his work
 :: TellHimYoureABigFanOfHisWork
 ($statGate: $socialName, 4)
-(if: Stat(Social) >3)["Really?" he says, sounding doubtful. 
+
+$if Stat(Social) >3
+"Really?" he says, sounding doubtful. 
 
 "Yeah, I saw your new art installation at the ice cream social! Sorry you got caught in the flood."
 
@@ -2179,15 +2429,19 @@ $choice NoProblem.IBetterGoIveGotAStoryToWrite; "No problem. I better go, I've g
 He's so excited you've heard of his work that he agrees to an interview!
 
 ($hubChoice: "Interview Gallery Owner", '"Well, let\'s get started then..."', 20)
-$choice MainStreetFloodRecovery; ...nevermind, I gotta get going! 
+$choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
+$endif
 
-](if: Stat(Social) <3)["Sure you are," he says. "Tell me one thing you like about my paintings."
+$if Stat(Social) <3
+"Sure you are," he says. "Tell me one thing you like about my paintings."
 
 "They're very.... um.... green?"
 
 He rolls his eyes. "You can't butter me up that easy. If you'll excuse me, I've got some cleaning up to do."
 
-$choice MainStreetFloodRecovery; Well, you tried. Better leave this guy alone.]
+$choice MainStreetFloodRecovery; Well, you tried. Better leave this guy alone.
+$endif
+
 
 // Original Name: Ask if he needs help
 :: AskIfHeNeedsHelp
@@ -2200,20 +2454,26 @@ $choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
 // Original Name: Offer him some food
 :: OfferHimSomeFood
 ($statGate: $resourcefulName, 4)
-(if: Stat(Resourceful) >3)[You look through your bag. Luckily, you came prepared! 
+
+$if Stat(Resourceful) >3
+You look through your bag. Luckily, you came prepared! 
 
 You give him a locally-made protein bar and a bottle of water. 
 
 "Thanks," he says, looking grateful. "I guess I could do a quick interview, while you're here."
 
 ($hubChoice: "Interview Gallery Owner", '"Well, let\'s get started then..."', 20)
-$choice MainStreetFloodRecovery; ...actually, I gotta get going! ](else:)[You dig through your bag for something to offer him, but come up empty.
+$choice MainStreetFloodRecovery; ...actually, I gotta get going!
+$else
+You dig through your bag for something to offer him, but come up empty.
 
 He looks frustrated. "Can I get back to work now?"
 
 You better leave this guy alone.
 
-$choice MainStreetFloodRecovery; Find someone else to talk to.]
+$choice MainStreetFloodRecovery; Find someone else to talk to.
+$endif
+
 
 // Original Name: "No problem. I better go, I've got a story to write.
 :: NoProblem.IBetterGoIveGotAStoryToWrite
@@ -2231,7 +2491,7 @@ $choice PhoneContacts; Open Phone Contacts
 $choice MainStreetFloodRecovery; Keep biking toward Main Street
 
 
-$choice ScienceStoryMap; Science Story Map]
+$choice ScienceStoryMap; Science Story Map
 
 // Original Name: Leave the chicken to fend for itself
 :: LeaveTheChickenToFendForItself
@@ -2284,7 +2544,7 @@ $call AdjustStats(Endurance + 1)
 $call AdjustStats(Social + 1)
 
 [(text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 // Original Name: Help Jim get his phone working
 :: HelpJimGetHisPhoneWorking
@@ -2297,7 +2557,7 @@ $call AdjustStats(Trust + 1)
 $call AdjustStats(Tech + 1)
 
 [(text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 // Original Name: Hang Lost Chicken posters
 :: HangLostChickenPosters
@@ -2310,7 +2570,7 @@ $call AdjustStats(Trust + 1)
 $call AdjustStats(Tech + 1)
 
 [(text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 // Original Name: Make an excuse and rush back inside
 :: MakeAnExcuseAndRushBackInside
@@ -2352,50 +2612,73 @@ Something about the fictional town of Dual Ponds feels strangely familiar...
 $call AdjustStats(Research + 2)
 
 [(text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 // Original Name: Go outside and help your neighbors
 :: GoOutsideAndHelpYourNeighbors
 Your street is covered in junk--trash, broken branches, toppled lawn ornaments. 
 
-(if:Visited(LureChickens))[You step outside and Maureen's chickens come running, pecking around your feet for more granola.
+
+$if Visited(LureChickens)
+You step outside and Maureen's chickens come running, pecking around your feet for more granola.
 
 Your other neighbor, Jim, is struggling to make a phone call. "The storm must've knocked out the service!" he says, scratching his head.
 
 $choice HelpWithTheCleanUp; Help with the clean up
-$choice HelpJimGetHisPhoneWorking; Help Jim get his phone working](if:Visited(ChaseChickens))[Maureen sees you and waves. "Great article yesterday! We're lucky to have a top-notch reporter in the neighborhood."
+$choice HelpJimGetHisPhoneWorking; Help Jim get his phone working
+$endif
+
+$if Visited(ChaseChickens)
+Maureen sees you and waves. "Great article yesterday! We're lucky to have a top-notch reporter in the neighborhood."
 
 Your other neighbor, Jim, is struggling to make a phone call. "The storm must've knocked out the service!" he says, scratching his head.
 
 $choice HelpWithTheCleanUp; Help with the clean up
-$choice HelpJimGetHisPhoneWorking; Help Jim get his phone working](else:)[Maureen shoves a stack of Lost Chicken posters into your hands.
+$choice HelpJimGetHisPhoneWorking; Help Jim get his phone working
+$else
+Maureen shoves a stack of Lost Chicken posters into your hands.
 
 "After all, it's your fault Amelia Egghart is still missing," she says. "Not that I'm blaming you, of course."
 
 $choice HangLostChickenPosters; Hang Lost Chicken posters
 $choice HelpWithTheCleanUp; Take some posters for later and join the clean-up effort
-$choice MakeAnExcuseAndRushBackInside; Make an excuse and rush back inside]
+$choice MakeAnExcuseAndRushBackInside; Make an excuse and rush back inside
+$endif
+
 
 // Original Name: Help him carry furniture outside
 :: HelpHimCarryFurnitureOutside
 ($statGate: $enduranceName, 4)
-(if: Stat(Endurance) >3)[The gallery owner looks impressed as you help him carry out a sofa, table, and several easels.
+
+$if Stat(Endurance) >3
+The gallery owner looks impressed as you help him carry out a sofa, table, and several easels.
 
 "Are you a weightlifter?" he asks. 
 
-(if:Visited(HelpHer) or it contains "Follow the chicken")["Nah, I just eat lots of antioxidants and spend a lot of time chasing after chickens."
-](elseif:Visited(Yogurt))["Nah, I just steal people's yogurt and spend a lot of time biking around town."](else:)["Nah, I just eat lots of antioxidants and carry about a hundred pounds of gear around town."]
+
+$if Visited(HelpHer" or it contains "Follow the chicken)
+"Nah, I just eat lots of antioxidants and spend a lot of time chasing after chickens."
+$elseif Visited(Yogurt)
+"Nah, I just steal people's yogurt and spend a lot of time biking around town."
+$else
+"Nah, I just eat lots of antioxidants and carry about a hundred pounds of gear around town."
+$endif
+
 
 He's so thankful for your help that he agrees to a quick interview!
 
 ($hubChoice: "Interview Gallery Owner", '"Well, let\'s get started then..."', 20)
-$choice MainStreetFloodRecovery; ...nevermind, I gotta get going! ](else:)[You try to help him lift a sofa--no luck.
+$choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
+$else
+You try to help him lift a sofa--no luck.
 
 You forgot, manual labor isn't exactly your thing. 
 
 "No offense," he says, "but I've got a lot of work to do here."
 
-$choice MainStreetFloodRecovery; Find someone else to talk to.]
+$choice MainStreetFloodRecovery; Find someone else to talk to.
+$endif
+
 
 // Original Name: Interview Gallery Owner
 :: InterviewGalleryOwner
@@ -2409,7 +2692,15 @@ $choice MainStreetFloodRecovery; Thank him and let him get back to work
 
 // Original Name: Interview Cafe Owner
 :: InterviewCafeOwner
-(if:Visited(OrderTheDailySpecial))["Of course!" she says. "It's the least I can do for a fellow PB&J lover."](elseif:Visited(HelpWithHerComputer))["You dealt with that migraine-inducing nightmare of a website," she says. "It's the least I can do."](else:)[Her face falls. "Sure, I guess. It's not like I've got any customers, anyhow."]
+
+$if Visited(OrderTheDailySpecial)
+"Of course!" she says. "It's the least I can do for a fellow PB&J lover."
+$elseif Visited(HelpWithHerComputer)
+"You dealt with that migraine-inducing nightmare of a website," she says. "It's the least I can do."
+$else
+Her face falls. "Sure, I guess. It's not like I've got any customers, anyhow."
+$endif
+
 
 $HubChoice(InterviewQuestionsCafeOwner, Well, let's get started then..., 0.25)
 $choice MainStreetFloodRecovery; ...nevermind, I gotta go!
@@ -2418,22 +2709,32 @@ $choice MainStreetFloodRecovery; ...nevermind, I gotta go!
 :: HowHasTheFloodAffectedYourBusiness
 "Oy." She shakes her head. "It's a disaster. The Cherry Festival is usually my busiest week of the year. Now you're the first customer I've seen all morning."
 
-(unless:Visited(AreYouWorriedAboutMoreRainComing))[ $choice AreYouWorriedAboutMoreRainComing; "Are you worried about more rain coming?" ]
-(unless:Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp))[ $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; "How do you think it'll impact Twin Lakes if the flooding keeps up?" ]
+(unless:Visited(AreYouWorriedAboutMoreRainComing")[ $choice AreYouWorriedAboutMoreRainComing; "Are you worried about more rain coming?) ]
+(unless:Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp")[ $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; "How do you think it'll impact Twin Lakes if the flooding keeps up?) ]
 
-(if:Visited(OrderTheDailySpecial) or it contains "Help with her computer") $choice ThanksPlusUniversityContact; [Thank her for her time
-](else:)$choice Thanks; [Thank her for her time]
+
+$if Visited(OrderTheDailySpecial" or it contains "Help with her computer)
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
 
 
 // Original Name: "Are you worried about more rain coming?"
 :: AreYouWorriedAboutMoreRainComing
 "Well, yah. Of course I am."
 
-(unless:Visited(HowHasTheFloodAffectedYourBusiness))[ $choice HowHasTheFloodAffectedYourBusiness; "How has the flood affected your business?" ]
-(unless:Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp))[ $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; "How do you think it'll impact Twin Lakes if the flooding keeps up?" ]
+(unless:Visited(HowHasTheFloodAffectedYourBusiness")[ $choice HowHasTheFloodAffectedYourBusiness; "How has the flood affected your business?) ]
+(unless:Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp")[ $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; "How do you think it'll impact Twin Lakes if the flooding keeps up?) ]
 
-(if:Visited(OrderTheDailySpecial) or it contains "Help with her computer") $choice ThanksPlusUniversityContact; [Thank her for her time
-](else:)$choice Thanks; [Thank her for her time]
+
+$if Visited(OrderTheDailySpecial" or it contains "Help with her computer)
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
 
 
 // Original Name: Order the daily special
@@ -2454,9 +2755,15 @@ $choice InterviewCafeOwner; Ask for a quick interview while you eat
 "I don't know why they make this so impossible," she says, struggling with a very glitchy flood insurance website.
 
 ($statGate: $techieName, 4)
-(if: Stat(Tech) >3)[Luckily, you're able to use your tech savvy and save the day!
 
-$choice InterviewCafeOwner; Ask if she has time for an interview](else:)[You try to help, but you're as clueless about tech stuff as she is.]
+$if Stat(Tech) >3
+Luckily, you're able to use your tech savvy and save the day!
+
+$choice InterviewCafeOwner; Ask if she has time for an interview
+$else
+You try to help, but you're as clueless about tech stuff as she is.
+$endif
+
 
 $choice OrderTheDailySpecial; Ask to order food
 $choice MainStreetFloodRecovery; Head back out to Main Street. She seems too busy to talk.
@@ -2485,20 +2792,30 @@ $choice ScienceStoryMap; Twin Lakes Map
 :: HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp
 "The city needs to do somethin' to stop flooding before it's too late," she says. "It's only gonna keep getting worse, ya know. Climate change and all that." 
 
-(unless:Visited(HowHasTheFloodAffectedYourBusiness))[ $choice HowHasTheFloodAffectedYourBusiness; "How has the flood affected your business?" ]
-(unless:Visited(AreYouWorriedAboutMoreRainComing))[ $choice AreYouWorriedAboutMoreRainComing; "Are you worried about more rain coming?" ]
+(unless:Visited(HowHasTheFloodAffectedYourBusiness")[ $choice HowHasTheFloodAffectedYourBusiness; "How has the flood affected your business?) ]
+(unless:Visited(AreYouWorriedAboutMoreRainComing")[ $choice AreYouWorriedAboutMoreRainComing; "Are you worried about more rain coming?) ]
 
-(if:Visited(OrderTheDailySpecial) or it contains "Help with her computer") $choice ThanksPlusUniversityContact; [Thank her for her time
-](else:)$choice Thanks; [Thank her for her time]
+
+$if Visited(OrderTheDailySpecial" or it contains "Help with her computer)
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
 
 // Original Name: Interview Questions: Cafe Owner
 :: InterviewQuestionsCafeOwner
-(unless:Visited(HowHasTheFloodAffectedYourBusiness))[ $choice HowHasTheFloodAffectedYourBusiness; "How has the flood affected your business?" ]
-(unless:Visited(AreYouWorriedAboutMoreRainComing))[ $choice AreYouWorriedAboutMoreRainComing; "Are you worried about more rain coming?" ]
-(unless:Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp))[ $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; "How do you think it'll impact Twin Lakes if the flooding keeps up?" ]
+(unless:Visited(HowHasTheFloodAffectedYourBusiness")[ $choice HowHasTheFloodAffectedYourBusiness; "How has the flood affected your business?) ]
+(unless:Visited(AreYouWorriedAboutMoreRainComing")[ $choice AreYouWorriedAboutMoreRainComing; "Are you worried about more rain coming?) ]
+(unless:Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp")[ $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; "How do you think it'll impact Twin Lakes if the flooding keeps up?) ]
 
-(if:Visited(OrderTheDailySpecial) or it contains "Help with her computer") $choice ThanksPlusUniversityContact; [Thank her for her time
-](else:)$choice Thanks; [Thank her for her time]
+
+$if Visited(OrderTheDailySpecial" or it contains "Help with her computer)
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
 
 // Original Name: Look for someone to interview
 :: LookForSomeoneToInterview
@@ -2550,7 +2867,7 @@ He tells you it'll take more than just some sandbags.
 $call GiveSnippet(BasicFloodBackground)
 $call GiveSnippet(BasicFloodPrevention)
 
-(unless:Visited(WhatCausedTheFlood))[ $choice WhatCausedTheFlood; "What caused the flood?" ]
+(unless:Visited(WhatCausedTheFlood")[ $choice WhatCausedTheFlood; "What caused the flood?) ]
 
 $choice WhatDoYouMeanEngineeredSolutions; What do you mean, engineered solutions?
 
@@ -2561,7 +2878,9 @@ $choice ScienceStoryMap; Twin Lakes Map
 // Original Name: Quick Interview: Limnology Expert
 :: QuickInterviewLimnologyExpert
 ($statGate: $socialName, 4)
-(if: Stat(Social) <4)["Well..... I guess I could chat for a minute," she says.
+
+$if Stat(Social) <4
+"Well..... I guess I could chat for a minute," she says.
 
 She tells you about one of the main causes of the flooding: more extreme weather from climate change. 
 
@@ -2569,13 +2888,19 @@ She tells you about one of the main causes of the flooding: more extreme weather
 
 $call GiveSnippet(BasicFloodBackground)
 
-(unless:Visited(LookForSomeoneToInterview))[ $choice LookForSomeoneToInterview; Look for someone else to talk to]
-$choice ScienceStoryMap; Back to Twin Lakes Map](if: Stat(Social)>=4)[She seems busy, but your social graces win her over. 
+(unless:Visited(LookForSomeoneToInterview))[ $choice LookForSomeoneToInterview; Look for someone else to talk to
+$choice ScienceStoryMap; Back to Twin Lakes Map
+$endif
+
+$if Stat(Social)>=4
+She seems busy, but your social graces win her over. 
 
 "Sure," she says, "I'd be happy to talk!" 
 
 $HubChoice(InterviewScientist, Well, let's get started then..., 0.25)
-$choice DepartmentOfLimnology; ...actually, I gotta go!]
+$choice DepartmentOfLimnology; ...actually, I gotta go!
+$endif
+
 
 // Original Name: In-Depth Interview: Limnology Expert
 :: In-DepthInterviewLimnologyExpert
@@ -2682,32 +3007,42 @@ Your waders are technically snowpants, and your flashlight is a sloth-shaped key
 $call AdjustStats(Resourceful + 1)
 
 [(text-style:"shudder")[RRRRING.]
-$choice AnswerPhone; Answer phone]
+$choice AnswerPhone; Answer phone
 
 // Original Name: Math joke!
 :: MathJoke
 "Ok, ok, let's see... Did you hear the one about the law of averages? I'd tell it to you, but it's too <i>mean.</i>" He grins. 
 
 ($statGate: $bookwormName, 4)
-(if: Stat(Research) >=4)[Ha! You've been reading up on statistics lately--you can top that one. 
+
+$if Stat(Research) >=4
+Ha! You've been reading up on statistics lately--you can top that one. 
 
 "Did you hear about the haunted graph?" you say. "It had paranormal distribution." 
 
 He grins. "Not bad, kid. Not bad."
 
-$choice GoodDNRInterview; Interview DNR Worker.](if: Stat(Tech) >=4)[($statGate: $techieName, 4)
+$choice GoodDNRInterview; Interview DNR Worker.
+$endif
+
+$if Stat(Tech) >=4
+($statGate: $techieName, 4)
 Ha! Being a techie with a back pocket full of computer jokes, you can definitely top that one.
 
 "Did you hear about the computer that was full of bugs?" you say. "It had a broken screen." 
 
 He grins. "Ha! Not bad, kid."
 
-$choice GoodDNRInterview; Interview DNR Worker.](else:)[($statGate: $techieName, 4)
+$choice GoodDNRInterview; Interview DNR Worker.
+$else
+($statGate: $techieName, 4)
 "Um.... good one!" you say, the joke flying right over your non-techie, non-bookworm head. "Can I ask you some questions about the flood?"
 
 He looks slightly disappointed. "Well, I don't have time for an interview. I could give you a statement, though."
 
-$choice DNRStatement; Get DNR Statement]
+$choice DNRStatement; Get DNR Statement
+$endif
+
 
 // Original Name: DNR Statement
 :: DNRStatement
@@ -2980,25 +3315,35 @@ $choice HeadToCherryCreekMarsh; Head to the marsh
 // Original Name: Meet some other reporters for coffee
 :: MeetSomeOtherReportersForCoffee
 @tags Social, Trust
-(if:Visited(HelpTheBaker))[You meet up with Khalisa and Ben at your new favorite cafe: the bakery where you helped stack sandbags! (Well, technically, they were sacks of flour.)
+
+$if Visited(HelpTheBaker)
+You meet up with Khalisa and Ben at your new favorite cafe: the bakery where you helped stack sandbags! (Well, technically, they were sacks of flour.)
 
 The baker is happy to see you. "Thanks to your article, I was able to get some sandbags," she says, pointing outside. "Hopefully it'll be enough!"
 
-You have some coffee and chat with Khalisa and Ben, feeling unusually social for an "out-of-towner." ](elseif:Visited(WaitOutside))[You meet up with Khalisa and Ben at a cafe a few blocks away.
+You have some coffee and chat with Khalisa and Ben, feeling unusually social for an "out-of-towner."
+$elseif Visited(WaitOutside)
+You meet up with Khalisa and Ben at a cafe a few blocks away.
 
 Khalisa orders a yogurt parfait and asks what you said to her dad. "He seemed super impressed by you," she says. 
 
 Ben is very concerned with the safety of his jellyfish umbrella. 
 
-"Don't worry," you tell him, "it's at home drying out."](elseif:Visited(AskAroundForItsOwner))["I heard you raced after the mayor's pet chicken and saved it from drowning," Khalisa says, and Ben looks amazed. 
+"Don't worry," you tell him, "it's at home drying out."
+$elseif Visited(AskAroundForItsOwner)
+"I heard you raced after the mayor's pet chicken and saved it from drowning," Khalisa says, and Ben looks amazed. 
 
 "Actually, it was his niece's chicken, and it was just wandering around in a puddle," you say.
 
-They don't seem to hear you. You wonder if this is how small-town myths get started.](else:)[You meet up with Khalisa and Ben at a cafe.
+They don't seem to hear you. You wonder if this is how small-town myths get started.
+$else
+You meet up with Khalisa and Ben at a cafe.
 
 You have some coffee and chat, feeling unusually social for an "out-of-towner." 
 
-You hate to admit it, but this little town is starting to grow on you. You're even starting to get used to the cherry-infused coffee. ]
+You hate to admit it, but this little town is starting to grow on you. You're even starting to get used to the cherry-infused coffee.
+$endif
+
 
 $call AdjustStats(Social + 1)
 $call AdjustStats(Trust + 1)
@@ -3084,7 +3429,8 @@ $choice DoYouHaveSourcesForAllThisInformation; "Do you have sources for all this
 :: MarshMap
 <b>Location: Snakebite Marsh</b>
 (if:visits == 1[(set:$currentTime to 150)]
-(if:$currentTime > 30)[
+
+$if $currentTime > 30
 Mosquitoes and dragonflies are buzzing around you, making it hard to think.
 
 You've got some great stuff, but you'll need to do more digging if you want this to be a science story.
@@ -3094,31 +3440,42 @@ You have (display:"PRINT TIME") remaining to submit this story.
 $HubChoice(TakePhotosOfTheMarsh, Take photos of the marsh, 0.25) 
 $HubChoice(TalkToVolunteerHeadingOutOntoTheTrail, Talk to volunteer heading out onto the trail, 0.1666667) 
 $HubChoice(TalkToVolunteerWithBagFullOfSeedPackets, Talk to volunteer with bag full of seed packets, 0.25) 
-$HubChoice(GoToTheDepartmentOfLimnology, Go to the Department of Limnology, 0.5)]
-(else:)[(display:"Wetlands Story Construction")]
+$HubChoice(GoToTheDepartmentOfLimnology, Go to the Department of Limnology, 0.5)
+$else
+(display:"Wetlands Story Construction")
+$endif
+
 
 // Original Name: Take photos of the marsh
 :: TakePhotosOfTheMarsh
 ($statGate:$techieName, 5)
-(if: Stat(Tech) >4)[You notice a pair of sandhill cranes in the distance, surrounded by marshy water--and litter that got swept here by the storm.
+
+$if Stat(Tech) >4
+You notice a pair of sandhill cranes in the distance, surrounded by marshy water--and litter that got swept here by the storm.
 
 With your zoom lens, you get an amazing close-up photo!
 
-<i>Get amazing wetland photos</i>](elseif: Stat(Trust) >4)[($statGate:$trustName, 5)
+<i>Get amazing wetland photos</i>
+$elseif Stat(Trust) >4
+($statGate:$trustName, 5)
 You ask the volunteers if it would be okay to take a few photos.
 
 They all happily agree. Turns out they've heard of you and your work. 
 
 You get some great photos of the volunteers heading out to do some clean-up!
 
-<i>Get good wetland photos</i>](else:)[($statGate:$trustName, 5)
+<i>Get good wetland photos</i>
+$else
+($statGate:$trustName, 5)
 The volunteers seem suspicious of your motives and ask not to be photographed. 
 
 At least the plants and birds don't seem to mind.
 
 Now if only you had a better camera lens...
 
-<i>Get okay marsh photos</i>]
+<i>Get okay marsh photos</i>
+$endif
+
 
 $choice MarshMap; Marsh Map
 
@@ -3138,7 +3495,8 @@ $choice MarshMap; Thanks, but no thanks.
 // Original Name: Return to the Department of Limnology
 :: ReturnToTheDepartmentOfLimnology
 <b>Location: Department of Limnology</b>
-(if: $currentTime >=30)[
+
+$if $currentTime >=30
 You have (display:"PRINT TIME") remaining to submit this story.
 
 The Department of Limnology is right on the shoreline.
@@ -3149,7 +3507,9 @@ As you get closer, you realize that the dock is completely submerged!
 
 $HubChoice(TakePhotos, Take photos, 0.25)
 $choice AskIfTheyHaveTimeForAnInterview; Ask if they have time for an interview. 
-$HubChoice(CallTheBigBusinessBureau, Call the Big Business Bureau, 0.25)]
+$HubChoice(CallTheBigBusinessBureau, Call the Big Business Bureau, 0.25)
+$endif
+
 $HubChoice(MarshMap, Go back to the marsh, 0.5)
 (display:"Wetlands Story Construction")
 
@@ -3158,17 +3518,25 @@ $HubChoice(MarshMap, Go back to the marsh, 0.5)
 You follow him on a narrow, soggy trail. 
 
 ($statGate: $enduranceName, 5)
-(if: Stat(Endurance) >4)[He's a brisk walker, but thanks to your endurance, you keep up easily.
 
-$choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering](elseif: Stat(Resourceful) >4)[($statGate: $resourcefulName, 5)
+$if Stat(Endurance) >4
+He's a brisk walker, but thanks to your endurance, you keep up easily.
+
+$choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
+$elseif Stat(Resourceful) >4
+($statGate: $resourcefulName, 5)
 Thankfully, your updated flood gear keeps you dry and able to keep up!
 
-$choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering](elseif: Stat(Social) >4)[($statGate: $socialName, 5)
+$choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
+$elseif Stat(Social) >4
+($statGate: $socialName, 5)
 You can barely keep up, but your charming personality comes to the rescue.
 
 He slows down, enjoying your conversation, and shows you how to navigate the muck.
 
-$choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering](else:)[($statGate: $resourcefulName, 5)
+$choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
+$else
+($statGate: $resourcefulName, 5)
 ($statGate: $socialName, 5)
 You can barely keep up with his lightning-fast pace, and water soaks through your apparently-not-waterproof hiking boots.
 
@@ -3180,7 +3548,9 @@ A very large sandhill crane. With beady red eyes and a knife-like beak.
 
 It really is very beautiful, and probably incredibly gentle. (Which you tell yourself as you run for dear life, hoping the crane won't fly after you.)
 
-$choice MarshMap; Marsh Map]
+$choice MarshMap; Marsh Map
+$endif
+
 
 // Original Name: Ask why he's out here volunteering
 :: AskWhyHesOutHereVolunteering
@@ -3214,13 +3584,17 @@ $choice AskIfTheyHaveTimeForAnInterview; Ask if they have time for an interview.
 
 // Original Name: Ask if they have time for an interview.
 :: AskIfTheyHaveTimeForAnInterview
-(if:Visited(BookwormAnswer))[As the dark silouette walks closer, you recognize her: the lake studies researcher you met at the dam!
+
+$if Visited(BookwormAnswer)
+As the dark silouette walks closer, you recognize her: the lake studies researcher you met at the dam!
 
 "Hey!" she says. "You're the limnology-nerd reporter, right? I read your story yesterday!"
 
 She's happy to give you another interview. Looks like all that light reading on inland aquatic ecosystems and the local drainage basin is coming in handy!
 
-$HubChoice(AskHerAboutTheWetlands, Ask her about the wetlands, 0.25)](elseif: Stat(Social) >4)[($statGate:$socialName, 5)
+$HubChoice(AskHerAboutTheWetlands, Ask her about the wetlands, 0.25)
+$elseif Stat(Social) >4
+($statGate:$socialName, 5)
 At first they don't seem thrilled about the idea. 
 
 Then they notice the coffee and donuts you brought with you--your favorite social currency. 
@@ -3229,7 +3603,8 @@ Then they notice the coffee and donuts you brought with you--your favorite socia
 
 One of the researchers grins. "You had me at donuts."
 
-$HubChoice(AskHerAboutTheWetlands, Ask her about the wetlands, 0.25)](elseif: Stat(Resourceful) >4)[
+$HubChoice(AskHerAboutTheWetlands, Ask her about the wetlands, 0.25)
+$elseif Stat(Resourceful) >4
 ($statGate:$socialName, 5)
 At first they don't seem thrilled about the idea. 
 ($statGate:$resourcefulName, 5)
@@ -3239,7 +3614,9 @@ Then they notice the coffee and donuts you brought with you. You're nothing if n
 
 One of the researchers grins. "You had me at donuts."
 
-$HubChoice(AskHerAboutTheWetlands, Ask her about the wetlands, 0.25)](else:)[($statGate:$socialName, 5)
+$HubChoice(AskHerAboutTheWetlands, Ask her about the wetlands, 0.25)
+$else
+($statGate:$socialName, 5)
 ($statGate:$resourcefulName, 5)
 The researchers have been out here all morning--they're a little too hangry for a long chat.
 
@@ -3251,7 +3628,8 @@ $call GiveSnippet(AnnoyedLimnologists)
 
 $HubChoice(CheckLimnologyDepartmentWebsite, Check Limnology Department Website., 0.25)
 $HubChoice(LookAroundForSomeoneElseToTalkTo, Look around for someone else to talk to., 0.25)
-]
+$endif
+
 
 // Original Name: Ask her about the wetlands
 :: AskHerAboutTheWetlands
@@ -3263,12 +3641,14 @@ $HubChoice(LookAroundForSomeoneElseToTalkTo, Look around for someone else to tal
 
 $choice AskHerToConfirmCRANEsInformation; Ask her to confirm CRANE's information
 $choice AskHerIfTheWetlandsAreProtected; Ask her if the wetlands are protected.
-$choice WetlandStatistics; Ask what percentage of local wetlands have been lost.]
+$choice WetlandStatistics; Ask what percentage of local wetlands have been lost.
 
 // Original Name: Check Limnology Department Website.
 :: CheckLimnologyDepartmentWebsite
 ($statGate: $bookwormName,4)  
-(if: Stat(Research) >3 or Stat(Tech) > 3)[You go online and search their website, moving quickly thanks to your speed-reading skills. 
+
+$if Stat(Research) >3 or Stat(Tech) > 3
+You go online and search their website, moving quickly thanks to your speed-reading skills. 
 
 It's full of great research and statistics!
 
@@ -3277,8 +3657,11 @@ You gather tons of stats for your article--the percentage of lost wetlands, the 
 It's not quite as exciting quoting a website, instead of a person, but youll take what you can get. 
 
 $call GiveSnippet(WetlandsAndRainfall)
-$call GiveSnippet(WetlandsAndFlooding)]
-(else:)[This website is absolutely impenetrable. Bright blue text on a grey background. They're using at least seven different fonts. This is like, Web 0.1. You don't think you can get anything useful here.]
+$call GiveSnippet(WetlandsAndFlooding)
+$else
+This website is absolutely impenetrable. Bright blue text on a grey background. They're using at least seven different fonts. This is like, Web 0.1. You don't think you can get anything useful here.
+$endif
+
 
 $choice LookAroundForSomeoneElseToTalkTo; Look around for someone else to talk to.
 $choice -ReturnToTheDepartmentOfLimnology; ->Return to the Department of Limnology
@@ -3299,12 +3682,18 @@ She looks over your notes. "Yep," she says, "that all looks right! And here's so
 She sends you a link to a long, complicated academic paper about wetlands and flooding.
 
 ($statGate: $bookwormName, 6)
-(if: Stat(Research) >5)[Thanks to your bookish tendencies, you should be able to knock this out by lunchtime.
+
+$if Stat(Research) >5
+Thanks to your bookish tendencies, you should be able to knock this out by lunchtime.
 
 $call GiveSnippet(WetlandsAndFloodingBackground)
-$call GiveSnippet(WetlandLossConfirmation)](else:)[Just the thought of reading this makes you want to crawl into a hole somewhere.
+$call GiveSnippet(WetlandLossConfirmation)
+$else
+Just the thought of reading this makes you want to crawl into a hole somewhere.
 
-$call GiveSnippet(WetlandLossConfirmation)]
+$call GiveSnippet(WetlandLossConfirmation)
+$endif
+
 
 $choice AskHerIfTheWetlandsAreProtected; Ask her if the wetlands are protected.
 $choice WetlandStatistics; Ask what percentage of local wetlands have been lost.
@@ -3320,12 +3709,14 @@ $choice ThankHerAndEndInterview; Thank her and end interview
 
 $choice AskHerToConfirmCRANEsInformation; Ask her to confirm CRANE's information
 $choice WetlandStatistics; Ask what percentage of local wetlands have been lost.
-$choice ThankHerAndEndInterview; Thank her and end interview]
+$choice ThankHerAndEndInterview; Thank her and end interview
 
 // Original Name: Talk to volunteer with bag full of seed packets
 :: TalkToVolunteerWithBagFullOfSeedPackets
 ($statGate: $trustName, 5)
-(if: Stat(Trust) >4)[The volunteer seems to trust you instantly. 
+
+$if Stat(Trust) >4
+The volunteer seems to trust you instantly. 
 
 She tells you all about her volunteer work: planting native seeds to help restore the marsh.
 
@@ -3335,7 +3726,11 @@ You're not sure about the magical part. You've already gotten about a dozen mosq
 
 $call GiveSnippet(VitalImportanceOfWetlands)
 
-$choice MarshMap; Marsh Map](if: Stat(Resourceful) >4)[($statGate: $resourcefulName, 5)
+$choice MarshMap; Marsh Map
+$endif
+
+$if Stat(Resourceful) >4
+($statGate: $resourcefulName, 5)
 The volunteer looks frustrated. "Can't believe I forgot my waders," she mutters.
 
 Luckily, you have an extra pair in your backpack! You pull them out, and she stares in amazement. "You just carry those around with you??"
@@ -3346,14 +3741,18 @@ While she puts them on, she tells you all about her volunteer work: planting nat
 
 $call GiveSnippet(VitalImportanceOfWetlands)
 
-$choice MarshMap; Marsh Map](else:)[($statGate: $resourcefulName, 5)
+$choice MarshMap; Marsh Map
+$else
+($statGate: $resourcefulName, 5)
 Unfortunately, the volunteer doesn't trust you enough to talk to you.
 
 "Sorry," she says, swatting a mosquito. "No offense, Dear, but I think reporters are sort of pests."
 
 Well, at least she said it nicely. 
 
-$choice MarshMap; Marsh Map ]
+$choice MarshMap; Marsh Map
+$endif
+
 
 // Original Name: Go inside specialty cheese shop
 :: GoInsideSpecialtyCheeseShop
@@ -3376,7 +3775,11 @@ For goodness sake. People will pun about anything in this town.
 Outside, the sirens are getting louder. 
 
 $choice HelpHimPackUpHisWares; Help him pack up his wares. (text-colour:purple)[(30 minutes)]
-(if: Visited(TakePhotosOfTheStreet))[ $choice ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation; Show him the photos you took outside, to help him understand this dire situation. (text-colour:purple)[(20 minutes)]]
+
+$if Visited(TakePhotosOfTheStreet)
+$choice ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation; Show him the photos you took outside, to help him understand this dire situation. (text-colour:purple)[(20 minutes)]
+$endif
+
 $choice Evacuate--YouArentWillingToDieOverCheese; Evacuate--you aren't willing to die over cheese! (text-colour:purple)[(10 minutes)]
 
 // Original Name: Help him pack up his wares.
@@ -3428,19 +3831,23 @@ $choice ArriveAtFloodSite; Return to the dam
 
 // Original Name: Wetlands Story Construction
 :: WetlandsStoryConstruction
-(if: $currentTime <=30)[Time to compile that big story on the wetlands!
+
+$if $currentTime <=30
+Time to compile that big story on the wetlands!
 $set storyType = "Investigation"
 $set snippetLimit = 6
 $set destination = "TO BE CONTINUED"
-$branch STORYEVALUATION]
-(else:)[There's still time to collect information for this story!
+$branch STORYEVALUATION
+$else
+There's still time to collect information for this story!
 
 $choice ReturnToTheDepartmentOfLimnology; Return to the Department of Limnology
 $choice CallTheBigBusinessBureau; Call the Big Business Bureau
 $choice MarshMap; Marsh Map
 
 $choice StartCompilingAnyway; Start compiling anyway.
-]
+$endif
+
 
 // Original Name: Thank her and end interview
 :: ThankHerAndEndInterview
@@ -3460,23 +3867,33 @@ $choice ReturnToTheDepartmentOfLimnology; Return to the Department of Limnology
 // Original Name: Ask to join him
 :: AskToJoinHim
 ($statGate:$bookwormName, 5)
-(if: Stat(Research)>4)[He almost says no, but then you tell him your credentials and his eyes light up.
+
+$if Stat(Research)>4
+He almost says no, but then you tell him your credentials and his eyes light up.
 
 "You're the new reporter who wrote that great science story yesterday!" he says. "It's rare to find somebody around here who actually knows how to write about lake studies. Respect."
 
 He agrees to let you tag along on the lake!
 
-$choice ClimbAboard; Climb aboard](if: Stat(Trust)>4)[($statGate: $trustName, 5)
+$choice ClimbAboard; Climb aboard
+$endif
+
+$if Stat(Trust)>4
+($statGate: $trustName, 5)
 He almost says no, but then he recognizes you. 
 
 "You're that new reporter who's always helping out around here!" he says. "I've heard you're super trustworthy."
 
 He agrees to let you tag along on the lake!
 
-$choice ClimbAboard; Climb aboard](else:)[($statGate: $trustName, 5)
+$choice ClimbAboard; Climb aboard
+$else
+($statGate: $trustName, 5)
 "Sorry," he says. "You're not a scientist. You'd probably just be bored out there." 
 
-$choice AskForAQuickInterview; Ask for a quick interview]
+$choice AskForAQuickInterview; Ask for a quick interview
+$endif
+
 
 
 // Original Name: Climb aboard
@@ -3496,23 +3913,31 @@ $choice WetlandsStoryConstruction; Wetlands Story Construction
 
 // Original Name: Call the Big Business Bureau
 :: CallTheBigBusinessBureau
-(if: Visited(TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands))[ 
+
+$if Visited(TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands)
 ($statGate:$techieName, 3)
-(if:Stat(Tech) >=3)[You remember a method to set yourself as a <i>private caller</i> and even install a subtle voice changer. Hopefully now they won't recognize you as that mudraking journalist from earlier.
+
+$if Stat(Tech) >=3
+You remember a method to set yourself as a <i>private caller</i> and even install a subtle voice changer. Hopefully now they won't recognize you as that mudraking journalist from earlier.
 
 "How can I help you?"
 
-$choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; Tell them their name came up in a story and you want to get their perspective. ](else:)[You give the Big Business Bureau another call. This time it goes straight to voicemail. Figures.
+$choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; Tell them their name came up in a story and you want to get their perspective.
+$else
+You give the Big Business Bureau another call. This time it goes straight to voicemail. Figures.
 
 $choice WetlandsStoryConstruction; Wetlands Story Construction
-]
+$endif
 
-](else:)[You dig up the number of the Big Business Bureau. The first time you call, a cheerful-sounding receptionist picks up.
+$else
+You dig up the number of the Big Business Bureau. The first time you call, a cheerful-sounding receptionist picks up.
 
 "How can I help you?"
 
 $choice TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands; Tell them you're writing about how business is destroying the wetlands.
-$choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; Tell them their name came up in a story and you want to get their perspective. ]
+$choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; Tell them their name came up in a story and you want to get their perspective.
+$endif
+
 
 // Original Name: Tell them their name came up in a story and you want to get their perspective.
 :: TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective
@@ -3611,45 +4036,6 @@ $choice WetlandsStoryConstruction; Wetlands Story Construction
 // Original Name: blankstart
 :: Blankstart
 $goto START
-
-// Original Name: REFRESH STATS
-:: REFRESHSTATS
-{(set: Stat(Research) to $bookwormName of $stats)
-$set resourceful = $resourcefulName of $stats
-$set endurance = $enduranceName of $stats
-$set techie = $techieName of $stats
-$set social = $socialName of $stats
-$set trust = $trustName of $stats}
-
-// Original Name: PRINT TIME
-:: PRINTTIME
-{(set: _hours to 0)
-(set: _minutes to $currentTime)
-(if: _minutes  >= 60)[
-	(set: _minutes to it - 60)
-	(set: _hours to it + 1)
-](if: _minutes  >= 60)[
-	(set: _minutes  to it - 60)
-	(set: _hours to it + 1)
-](if: _minutes  >= 60)[
-	(set: _minutes  to it - 60)
-	(set: _hours to it + 1)
-](if: _minutes  >= 60)[
-	(set: _minutes  to it - 60)
-	(set: _hours to it + 1)
-]
-
-(text-style:"buoy")+(text-style:"bold")+(text-color:purple)[(if: _hours > 1)[
-	_hours hours` `
-](elseif: _hours == 1[
-	1 hour` `
-]
-(if: _minutes  > 0)[
-(if: _hours > 0)[
-and` `
-]
-_minutes  minutes` `
-]]}
 
 // Original Name: Great flood photos
 :: GreatFloodPhotos
@@ -4389,22 +4775,38 @@ $choice WhatWouldItTakeToGetSomeBroadbandTowersBuilt; "What would it take to get
 
 // Original Name: "It's the 21st century. Why hasn't Twin Lakes done anything to fix this?"
 :: ItsThe21stCentury.WhyHasntTwinLakesDoneAnythingToFixThis
-(if: Stat(Trust) <5)[The mayor looks a little miffed. You must not have sounded as friendly as the typical Twin Lakes-ian.
+
+$if Stat(Trust) <5
+The mayor looks a little miffed. You must not have sounded as friendly as the typical Twin Lakes-ian.
 
 "Rural areas are outside our jurisdiction," he says "You'll need to take it up with the county. Now if you'll excuse me, I've got a lot of work to do."
 
 <i>-1 Trust</i>
 
-$choice TalkToSomeOfTheTownspeople; Talk to some of the townspeople.]
-(if: Stat(Trust) >=5)[It might not have been the friendliest question, but the mayor seems to trust you enough answer it.
+$choice TalkToSomeOfTheTownspeople; Talk to some of the townspeople.
+$endif
+
+
+$if Stat(Trust) >=5
+It might not have been the friendliest question, but the mayor seems to trust you enough answer it.
 
 "I agree with you, " he says. "It's maddening. But rural areas are outside of Twin Lakes's jurisdiction. The county would need to change their regulations."
 
-(if: Stat(Research) >5)[Thanks to all the reading you've been doing lately, you know all about the regulations: fees, permits, and paperwork.
 
-$choice WhatDoYouThinkItWouldTakeToGetNewTowersBuilt; "What do you think it would take to get new towers built?"](if: Stat(Research) <5)[You wish you'd read up more on the local ordinances, but you were too busy NOT dying of boredom. 
+$if Stat(Research) >5
+Thanks to all the reading you've been doing lately, you know all about the regulations: fees, permits, and paperwork.
 
-$choice CanYouTellMeMoreAboutTheTowerRegulations; "Can you tell me more about the tower regulations?"]]
+$choice WhatDoYouThinkItWouldTakeToGetNewTowersBuilt; "What do you think it would take to get new towers built?"
+$endif
+
+$if Stat(Research) <5
+You wish you'd read up more on the local ordinances, but you were too busy NOT dying of boredom. 
+
+$choice CanYouTellMeMoreAboutTheTowerRegulations; "Can you tell me more about the tower regulations?"
+$endif
+
+$endif
+
 
 
 
@@ -4437,19 +4839,27 @@ You ask Maureen about the broadband issues, but she doesn't seem to be in the mo
 
 "Sorry, Dear, I've gotta run," she says. "Need to find a new book for my Feel-Good Book Club! Speaking of which... have you heard of Animal Farm? Sounds like a fun read. Talking chickens and everything!" 
 
-(if: Stat(Research) >4)[As an avid reader, you can tell her that Animal Farm isn't exactly a "Feel Good" book. 
+
+$if Stat(Research) >4
+As an avid reader, you can tell her that Animal Farm isn't exactly a "Feel Good" book. 
 
 You recommend a few talking animals stories that don't include slaiughterhouses or anti-utopian allegories. Maureen seems grateful.
 
 "Thank you, Dear. I suppose I could do a quick interview, while I'm here."
 
-$choice AskHerWhatSheThinksAboutBuildingNewBroadbandTowers; Ask her what she thinks about building new broadband towers.](if: Stat(Research) <4)["That sounds great," you say, not really paying attention. Children's books aren't really your thing. "If I could just ask you a few questions--"
+$choice AskHerWhatSheThinksAboutBuildingNewBroadbandTowers; Ask her what she thinks about building new broadband towers.
+$endif
+
+$if Stat(Research) <4
+"That sounds great," you say, not really paying attention. Children's books aren't really your thing. "If I could just ask you a few questions--"
 
 "I really am sorry, Dear, but I don't know much about the issue, anyway," she says. "See you around the neighborhood!"
 
 $choice TalkToFredAndHopeYouCanSteerTheConversationAwayFromGardening; Talk to Fred and hope you can steer the conversation away from gardening.
 $choice TalkToAManInATwinLakesHighSchoolT-Shirt; Talk to a man in a Twin Lakes High School T-shirt.
-$choice AskToInterviewTheMayor; Try to catch the mayor before he leaves.]
+$choice AskToInterviewTheMayor; Try to catch the mayor before he leaves.
+$endif
+
  
 
 
@@ -4466,7 +4876,9 @@ $choice A...BloodbathOfFlowersHowDoesThatWork; "A...bloodbath? Of flowers? How d
 
 // Original Name: Talk to a man in a Twin Lakes High School T-shirt.
 :: TalkToAManInATwinLakesHighSchoolT-Shirt
-(if: Stat(Social) <5)[The man seems grumpy when he finds out who you are.
+
+$if Stat(Social) <5
+The man seems grumpy when he finds out who you are.
 
 "I teach journalism at the high school," he says. "The paper shoulda hired somebody who grew up here. Somebody who cares about Twin Lakes."
 
@@ -4478,8 +4890,12 @@ Welllll, that could've gone better.
 
 $choice TalkToMaureenYourChicken-LovingNeighbor; Talk to Maureen, your chicken-loving neighbor.
 $choice TalkToFredAndHopeYouCanSteerTheConversationAwayFromGardening; Talk to Fred and hope you can steer the conversation away from gardening.
-$choice AskToInterviewTheMayor; Try to catch the mayor before he leaves.]
-(if: Stat(Social) >=5)[The man seems happy to see you.
+$choice AskToInterviewTheMayor; Try to catch the mayor before he leaves.
+$endif
+
+
+$if Stat(Social) >=5
+The man seems happy to see you.
 
 "You're that new reporter!" he says. "I've heard you've been helping out your neighbors. Gettin' to know everybody. I'm glad they found somebody like you."
 
@@ -4492,7 +4908,9 @@ $choice AskToInterviewTheMayor; Try to catch the mayor before he leaves.]
 "Oh, I can tell you all about that! My brother runs McCloud Broadband. I'm heading to his place for lunch, if you want to meet me there."
 
 $choice LunchWithBroadbandCompanyOwner; "Sure! Sounds great."
-$choice NoThanks.IThinkIllStickAroundTheMeeting; "No thanks. I think I'll stick around the meeting."]
+$choice NoThanks.IThinkIllStickAroundTheMeeting; "No thanks. I think I'll stick around the meeting."
+$endif
+
 
 
 // Original Name: Lunch with Broadband Company Owner
@@ -4739,12 +5157,16 @@ $choice So...WhatAreYouDoingExactly; "So... what are you doing, exactly?"
 
 // Original Name: Ask if you can interview him about the broadband restrictions.
 :: AskIfYouCanInterviewHimAboutTheBroadbandRestrictions
-(if: Stat(Trust)<5)[Immediately, he looks disappointed.
+
+$if Stat(Trust)<5
+Immediately, he looks disappointed.
 
 "I'm sorry, but I don't know if I can trust you. I don't want to end up looking like the bad guy, just because I care about this town."
 
 $choice ICareAboutThisTownToo.IdLikeToGetYourSideOfTheStory; "I care about this town, too. I'd like to get your side of the story."
-$choice OfferToHelpWith...WhateverItIsTheyreDoing; "What if I help out while we talk?"]
+$choice OfferToHelpWith...WhateverItIsTheyreDoing; "What if I help out while we talk?"
+$endif
+
 
 // Original Name: "So... what are you doing, exactly?"
 :: So...WhatAreYouDoingExactly
@@ -4872,11 +5294,17 @@ $choice CheckOutTheOrchard; Check out the orchard
 
 // Original Name: Walk to the nearest farmhouse to wait out the storm.
 :: WalkToTheNearestFarmhouseToWaitOutTheStorm
-(if: Stat(Endurance) >5)[You wade up the muddy dirt driveway. 
 
-It feels like walking through quicksand. Good thing you've been getting more exercise lately, because this is definitely a workout.](else:)[You wade up the muddy dirt driveway. 
+$if Stat(Endurance) >5
+You wade up the muddy dirt driveway. 
 
-You wish you'd had a heartier breakfast today. The mud is thick as cement and your endurance is almost running out.]
+It feels like walking through quicksand. Good thing you've been getting more exercise lately, because this is definitely a workout.
+$else
+You wade up the muddy dirt driveway. 
+
+You wish you'd had a heartier breakfast today. The mud is thick as cement and your endurance is almost running out.
+$endif
+
 
 As you reach dry ground, an elderly farmer comes running out of the farm house. 
 
@@ -4948,7 +5376,9 @@ $choice AskHimToRestateWhatHappenedSoThatYouCanQuoteHim; Ask him to restate what
 
 // Original Name: Ask him to restate what happened, so that you can quote him.
 :: AskHimToRestateWhatHappenedSoThatYouCanQuoteHim
-(if: Stat(Social) <6)[He frowns.  "Well, I just toldja, didn't I? Did ya forget to write it down?"
+
+$if Stat(Social) <6
+He frowns.  "Well, I just toldja, didn't I? Did ya forget to write it down?"
 
 "I just..." You stammer a little. "I could use a better quote. For the article."
 
@@ -4956,7 +5386,9 @@ $choice AskHimToRestateWhatHappenedSoThatYouCanQuoteHim; Ask him to restate what
 
 Looks like you could use some brushing up on your social skills. Offending the source isn't usually the best idea. Nice try, though.
 
-$choice AskToTakePhotosOfTheFloodedBasement; Ask to take photos of the flooded basement.](else)[He blinks. "You want me to say it all again?"
+$choice AskToTakePhotosOfTheFloodedBasement; Ask to take photos of the flooded basement.
+$endif
+(else)[He blinks. "You want me to say it all again?"
 
 "Well, I can write about what I saw here," you say, "but I'd love to hear how you'd tell the story."
 
@@ -4964,25 +5396,31 @@ Nice recovery. He looks cheered. "Well," he says, "we don't get internet out the
 
 You didn't even realize that the Gazette still printed paper copies. "That was great," you tell him. "Thank you!"
 
-$choice AskToTakePhotosOfTheFloodedBasement; Ask to take photos of the flooded basement.]
+$choice AskToTakePhotosOfTheFloodedBasement; Ask to take photos of the flooded basement.
 
 // Original Name: Ask to take photos of the flooded basement.
 :: AskToTakePhotosOfTheFloodedBasement
 "Sure!" he says. "My kids will be tickled if I get my picture in the paper!"
 
-(if: Stat(Tech) >5)[Considering that you're in a basement, with the only light coming from the tiny square windows, the photos don't turn out the best.
+
+$if Stat(Tech) >5
+Considering that you're in a basement, with the only light coming from the tiny square windows, the photos don't turn out the best.
 
 You really should brush up on your technique in dim lighting.
 
 Still, badly-lit photos are better than nothing.
 
-<i>Get decent photos of flooded basement</i>](else:)[The lighting in the basement is awful.
+<i>Get decent photos of flooded basement</i>
+$else
+The lighting in the basement is awful.
 
 Luckily, you've been practicing your technique in dim lighting.
 
 You get some amazing photos of the farmer, standing in water up above his knees.
 
-<i>Get amazing photos of flooded basement</i>]
+<i>Get amazing photos of flooded basement</i>
+$endif
+
 
 $choice InternetIssuesStepThree; Thank the farmer for his time
 
@@ -5112,20 +5550,26 @@ The storm has definitely left its mark here.
 
 The aisles between the long rows of trees are soaked, your feet sinking deep into the muck.
 
-(if: Stat(Resourceful) >5)[Luckily, you came prepared. Your knee-high boots keep you dry as you wade through the muck.
+
+$if Stat(Resourceful) >5
+Luckily, you came prepared. Your knee-high boots keep you dry as you wade through the muck.
 
 You snap some amazing photos along the way.
 <i>Get great photos of flooded orchard</i>
 
 Up ahead, you see a man in a baseballc ap and a kid, maybe eight or nine, gathering fallen cherries into large baskets. 
 
-$choice InterviewOrchardVisitors; Ask to interview them](else:)[You make it halfway down one row and snap some photos...
+$choice InterviewOrchardVisitors; Ask to interview them
+$else
+You make it halfway down one row and snap some photos...
 
 Until your woefully-inadequate tennis shoe sticks in the mud and comes right off your foot. 
 
 You've had enough of this mess. You fish your shoe out of the muck and head back down toward the barn. 
 
 $choice HeadInsideTheBarn; Head inside the barn
+$endif
+
 
 // Original Name: Interview orchard visitors
 :: InterviewOrchardVisitors
@@ -5215,11 +5659,15 @@ $choice HasItBeenFrustratingToTryToConvincePeopleToChangeTheirMinds; "Has it bee
 
 // Original Name: "Has it been frustrating to try to convince people to change their minds?"
 :: HasItBeenFrustratingToTryToConvincePeopleToChangeTheirMinds
-(if: Stat(Trust) >5)[The mayor sighs. "I shouldn't be saying this, but you seem trustworthy," he says. "It's been an absolute nightmare."
+
+$if Stat(Trust) >5
+The mayor sighs. "I shouldn't be saying this, but you seem trustworthy," he says. "It's been an absolute nightmare."
 
 "What do you mean?" you ask.
 
-"All this stuff with the county," he says. "It's nonsense. We need to act now. Things are only going to get worse."](elseif: Stat(Research) >5)[The mayor hesitates. "Well... I do my best to take everyone's concerns to heart."
+"All this stuff with the county," he says. "It's nonsense. We need to act now. Things are only going to get worse."
+$elseif Stat(Research) >5
+The mayor hesitates. "Well... I do my best to take everyone's concerns to heart."
 
 It sounds noble, but you were just reading this morning about a bitter feud from a few years ago. "You got into an argument with the county board a few years ago, didn't you?"
 
@@ -5227,11 +5675,15 @@ He chuckles. "You certainly did your research. I won't go into detail, but they 
 
 You try not to laugh. Obstruction of coffee is a serious crime. "What did you fight about?"
 
-"I called the whole thing a charade," he says. "The county never even considered changing the lake levels. It's time to take this seriously."](else:)[The mayor hesitates. It seems he doesn't trust you enough to really speak his mind. 
+"I called the whole thing a charade," he says. "The county never even considered changing the lake levels. It's time to take this seriously."
+$else
+The mayor hesitates. It seems he doesn't trust you enough to really speak his mind. 
 
 "Um, well," he says. "Part of my job is to listen to my constituents and their needs, even if I don't agree. But I sure hope we can find some common ground before the next storm comes through."
 
-A typical paint-by-numbers reply. You wish you could pry a little deeper, but he's giving you nothing.]
+A typical paint-by-numbers reply. You wish you could pry a little deeper, but he's giving you nothing.
+$endif
+
 
 $choice DoYouKnowWhoElseICanTalkToAboutThis; "Do you know who else I can talk to about this?"
 
@@ -5295,21 +5747,29 @@ $choice TalkToTheMayorAboutTheLakeLevelIssue; Talk to the mayor about the lake l
 
 // Original Name: Head to the lakeshore.
 :: HeadToTheLakeshore
-(if: Stat(Research) >6)[You're starting to get used to the blocked-off roads. Probably thanks to all your perusing of the flood maps. 
 
-You weave around the barricaded areas and make it to the lakeshore in record time.](elseif: Stat(Resourceful) >6)[You weave through the maze of downtown streets, half of them closed off.
+$if Stat(Research) >6
+You're starting to get used to the blocked-off roads. Probably thanks to all your perusing of the flood maps. 
+
+You weave around the barricaded areas and make it to the lakeshore in record time.
+$elseif Stat(Resourceful) >6
+You weave through the maze of downtown streets, half of them closed off.
 
 You almost make it, but you get stuck at the intersection of Ruby and Maraschino. The water is deep here, too deep to wade through.
 
 Luckily, you notice an abandoned swan inner tube floating along the road. 
 
-You dig into your pocket for a bungee cord and just manage to snag the float, which fits you perfectly. You are nothing if not resourceful.](else:)[You drive through the maze of flooded, debris-strewn streets. Several areas are still flooded. 
+You dig into your pocket for a bungee cord and just manage to snag the float, which fits you perfectly. You are nothing if not resourceful.
+$else
+You drive through the maze of flooded, debris-strewn streets. Several areas are still flooded. 
 
 At Maraschino Street, you wade through knee-deep water to reach your destination. Not a big deal, you tell yoursef firmly, trying to ignore everything the experts have told you about bacteria and contaminated water. 
 
 Maybe you should've brushed up on how to use the flood map, or packed some knee-high waders, but it's about as useful as remembering to pre-bake your crust after the whole pie is done.
 
-(Look what this town has done to your inner monologue--next thing you know, you'll be speaking in cherry-themed puns.)]
+(Look what this town has done to your inner monologue--next thing you know, you'll be speaking in cherry-themed puns.)
+$endif
+
 
 $choice ArriveAtLakeshoreNeighborhood; Arrive at lakeshore neighborhood.
 
@@ -5339,14 +5799,18 @@ You ask if he'd be willing to do an interview about his concerns.
 
 "That depends," he says. "Have you been doing your research, or just listening to the mayor? How do I know I can trust you?"
 
-(if: Stat(Research) > 5)[Luckily, you've gotten into the habit of reading old news archives and city ordinances with your morning coffee! 
+
+$if Stat(Research) > 5
+Luckily, you've gotten into the habit of reading old news archives and city ordinances with your morning coffee! 
 
 "I did talk to the mayor," you say, "but I also read the county advisory board's report from five years ago. They suggested keeping the lake levels high and looking for other ways to prevent flooding."
 
 He looks begrudgingly impressed. "Yes, that's true."
 
 $choice DoYouStillThinkTheLakeLevelsShouldStayHowTheyAre; "Do you still think the lake levels should stay how they are?"
-$choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affect your life?"](elseif: Stat(Trust) > 5)[You can tell he thinks you've already pegged him as the bad guy.
+$choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affect your life?"
+$elseif Stat(Trust) > 5
+You can tell he thinks you've already pegged him as the bad guy.
 
 "Yes, I talked to the mayor," you say. "But I want to hear your story, too. You're the one who lives here. You're the expert on how this will affect you."
 
@@ -5355,7 +5819,9 @@ Something in your voice must convince him you're being sincere.
 "Okay," he says. "What do you want to know?"
 
 $choice DoYouStillThinkTheLakeLevelsShouldStayHowTheyAre; "Do you still think the lake levels should stay how they are?"
-$choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affect your life?"](elseif: Stat(Social) >5)[You're about to answer when he notices the cherry-embroidered hat poking out of your bag. 
+$choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affect your life?"
+$elseif Stat(Social) >5
+You're about to answer when he notices the cherry-embroidered hat poking out of your bag. 
 
 "Wait a sec!" he says. "Where did you get one of Imojean's limited-edition cherry berets? My wife wants one, but all the shops in town are sold out!"
 
@@ -5364,7 +5830,9 @@ $choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affe
 From the look on his face, you've just made his entire week. "Thank you!" he says. "I guess an interview couldn't hurt, since you came all this way. What do you want to know?"
 
 $choice DoYouStillThinkTheLakeLevelsShouldStayHowTheyAre; "Do you still think the lake levels should stay how they are?"
-$choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affect your life?"](else:)[You try to think of some way to convince him to trust you, but you don't have any statistics to impress him with or local connections to ease his mind.
+$choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affect your life?"
+$else
+You try to think of some way to convince him to trust you, but you don't have any statistics to impress him with or local connections to ease his mind.
 
 "I... helped rescue some chickens once?" you say. 
 
@@ -5372,7 +5840,9 @@ $choice HowWouldLowerLakeLevelsAffectYourLife; "How would lower lake levels affe
 
 He tosses a "Homeowners for Higher Lakes" poster at you and shuts the door.
 
-$choice LakeshoreNeighborhoodHub; Look for someone else to talk to.]
+$choice LakeshoreNeighborhoodHub; Look for someone else to talk to.
+$endif
+
 
 
 // Original Name: Talk to a mom and toddler playing in their front yard.
@@ -5397,25 +5867,37 @@ You're surprised to see that the damage isn't bad here--the docks are covered in
 
 Down the lakeshore, you can see a scenic view of downtown--complete with barricades and debris.
 
-(if: Stat(Tech) >5)[You're elated to have brought your zoom lens.
 
-You snap a picture of the peaceful-looking pontoon boat in the foreground, with the wreckage of downtown in the background.](else:)[You wish you could an evocative shot of the wreckage of downtown, with the idyllic lakeside docks in the foreground. 
+$if Stat(Tech) >5
+You're elated to have brought your zoom lens.
+
+You snap a picture of the peaceful-looking pontoon boat in the foreground, with the wreckage of downtown in the background.
+$else
+You wish you could an evocative shot of the wreckage of downtown, with the idyllic lakeside docks in the foreground. 
 
 Unfortunately, you must've left your zoom lens at home with all the boxes you still haven't unpacked. You settle for a mediocore image of the lakeshore.
 
-<i>Get decent photo of lakeshore properties</i>]
+<i>Get decent photo of lakeshore properties</i>
+$endif
+
 
 $choice LakeshoreNeighborhoodHub; Plan your next move
 
 // Original Name: Look in your bag for something to entertain the toddler.
 :: LookInYourBagForSomethingToEntertainTheToddler
-(if: Stat(Resourceful) >5)[You dig thorugh your bag and find a protein bar, a package of mixed nuts, and a stick of cinnamon gum. Then--voila!--an applesauce pouch! That seems kid-friendly. Probably. You hand it over, and the toddler eats happily while you talk.
 
-$choice WhatAreYourThoughtsAboutLoweringTheLakes; "What are your thoughts about lowering the lakes?"](else:)[You dig through your bag for something to entertain the toddler. but all you find is some chapstick, your phone, and a bunch of soy sauce packets. 
+$if Stat(Resourceful) >5
+You dig thorugh your bag and find a protein bar, a package of mixed nuts, and a stick of cinnamon gum. Then--voila!--an applesauce pouch! That seems kid-friendly. Probably. You hand it over, and the toddler eats happily while you talk.
+
+$choice WhatAreYourThoughtsAboutLoweringTheLakes; "What are your thoughts about lowering the lakes?"
+$else
+You dig through your bag for something to entertain the toddler. but all you find is some chapstick, your phone, and a bunch of soy sauce packets. 
 
 You're not a baby expert, but it doesn't seem toddler friendly.
 
 $choice TellHerItsNoProblemYoureSureItllBeFine; "I'd still love to chat, if you're up for it," you say. "Whatever you have time for."
+$endif
+
 
 // Original Name: Tell her it's no problem, you're sure it'll be fine.
 :: TellHerItsNoProblemYoureSureItllBeFine
@@ -5898,13 +6380,17 @@ $choice AskAboutWhatTheShelterIsAbleToProvide; Ask about what the shelter is abl
 
 // Original Name: Look in your bag for something helpful to offer him.
 :: LookInYourBagForSomethingHelpfulToOfferHim
-(if: Stat(Resourceful) >6)[Score! You knew you packed those dog treats for a reason.
+
+$if Stat(Resourceful) >6
+Score! You knew you packed those dog treats for a reason.
 
 You offer one to the man's dog, and both of them immediately warm up to you.
 
 "Thanks," the man says. "At least somebody appreciates my boy here."
 
-$choice InterviewOldMan; "Can you tell me what happened?"](else:)[You dig through your bag, but only find your usual gear, cherry granola bars, and some crumbs.
+$choice InterviewOldMan; "Can you tell me what happened?"
+$else
+You dig through your bag, but only find your usual gear, cherry granola bars, and some crumbs.
 
 You offer the man a granola bar, but he shakes his head. "Already ate. Don't you have somebody else to hassle?"
 
@@ -5912,19 +6398,22 @@ $choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you.
 $choice OfferToCarryHisSuitcase--ItLooksPrettyHeavy; Offer to carry his suitcase--it looks pretty heavy.
 $choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
 $choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
-
-
+$endif
 
 
 // Original Name: Reassure him that he can trust you.
 :: ReassureHimThatHeCanTrustYou
 "I'm on your side," you tell him. "Whatever's going on, I want to get the story out there. Maybe we can work together to help other people who are in the same boat."
 
-(if: Stat(Trust) >6)[He looks more closely at you and suddenly his eyes light up.
+
+$if Stat(Trust) >6
+He looks more closely at you and suddenly his eyes light up.
 
 "You're that new reporter!" he says. "I read your article a couple weeks ago. You're really lookin' out for people around here."
 
-$choice InterviewOldMan; "Can you tell me more about what's going on here?"](else:)[He looks more closely at you, then shakes his head.
+$choice InterviewOldMan; "Can you tell me more about what's going on here?"
+$else
+He looks more closely at you, then shakes his head.
 
 "I don't know nothin' about you," he says. "Sorry, but I don't trust easy."
 
@@ -5932,6 +6421,8 @@ $choice LookInYourBagForSomethingHelpfulToOfferHim; Look in your bag for somethi
 $choice OfferToCarryHisSuitcase--ItLooksPrettyHeavy; Offer to carry his suitcase--it looks pretty heavy.
 $choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
 $choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
+$endif
+
 
 // Original Name: Offer to carry his suitcase--it looks pretty heavy.
 :: OfferToCarryHisSuitcase--ItLooksPrettyHeavy
@@ -5939,28 +6430,40 @@ You ask if he'd like help with his suitcase.
 
 "Aw, don't worry 'bout that," he says. "It's probably too heavy for ya."
 
-(if: Stat(Endurance) >6)[You surprise him by lifting the suitcase easily.
+
+$if Stat(Endurance) >6
+You surprise him by lifting the suitcase easily.
 
 It's not exactly a picnic--the thing feels like it's full of bricks--but you tell him you'd be happy to carry it out to his car for him, and maybe interview him along the way.
 
 "Well, color me impressed," he says. "Okay, kid. What do you want to ask me about?"
 
-$choice InterviewOldMan; "Can you tell me about what's going on here?"](else:)[You try to lift the suitcase, but you can hardly budge it an inch.
+$choice InterviewOldMan; "Can you tell me about what's going on here?"
+$else
+You try to lift the suitcase, but you can hardly budge it an inch.
 
 You set it back down, defeated. "Wow. What've you got in there, bricks?"
 
 "Books," he says. "So... pretty much."
 
-(if: Stat(Research) >6)[To his surprise, you launch into a discussion of your latest reads, ranging from a mystery novel and Fred Finkler's guide to native to plants to a detailed, annotated history of Twin Lakes. 
+
+$if Stat(Research) >6
+To his surprise, you launch into a discussion of your latest reads, ranging from a mystery novel and Fred Finkler's guide to native to plants to a detailed, annotated history of Twin Lakes. 
 
 "Didn't realize you were a bookish type, too," he says. "Guess I could help you out. We bookworms gotta stick together. What do you want to know?"
 
-$choice InterviewOldMan; "Can you tell me more about what's happening here?"](else:)[You don't have much to say about that. You haven't had much time to read lately.
+$choice InterviewOldMan; "Can you tell me more about what's happening here?"
+$else
+You don't have much to say about that. You haven't had much time to read lately.
 
 $choice LookInYourBagForSomethingHelpfulToOfferHim; Look in your bag for something helpful to offer him.
 $choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you.
 $choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
-$choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.]]
+$choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
+$endif
+
+$endif
+
 
 
 // Original Name: Use your social connections to try to find common ground.
@@ -6341,7 +6844,9 @@ $choice SeniorCitizenAptHub; Decide on your next move.
 
 // Original Name: Ask if they'd like an extra set of hands.
 :: AskIfTheydLikeAnExtraSetOfHands
-(if: Stat(Social) >6)[Her husband looks doubtful about inviting a stranger inside his home, but the woman pats his arm. 
+
+$if Stat(Social) >6
+Her husband looks doubtful about inviting a stranger inside his home, but the woman pats his arm. 
 
 "Don't you know who this is, Ray? You're talking to the new reporter from--" Her voice hushes. "--New York City! I've heard all about her from Maureen, Sophia, Imojean..."
 
@@ -6350,6 +6855,8 @@ $choice SeniorCitizenAptHub; Decide on your next move.
 "We're in a book club together," she says. "You should join us next time, Dear!"
 
 $choice FollowThemInside; Follow them inside.
+$endif
+
 
 // Original Name: Follow them inside.
 :: FollowThemInside
@@ -6448,11 +6955,17 @@ $choice IsItTrueThatTheFloodRiskMapsAreOutdated; "Is it true that the flood risk
 :: OfferTheNurseARideBackToHerNeighborhoodAndCheckOutTheSituationThere
 The nurse gratefully accepts. She's had enough of lugging sandbags on and off the bus.
 
-(if: Stat(Endurance) >6)[You help her load as many sandbag as you can fit into your trunk. 
 
-She thanks you, but it's still clearly not enough to protect an entire household. One person isn't going to be able to solve this. It'll take government action to help.](else:)[You try to help her load up sandbags, but somehow they feel even heavier than last time.
+$if Stat(Endurance) >6
+You help her load as many sandbag as you can fit into your trunk. 
 
-She smiles at your sheepish expression. "It's okay, Honey. I'm turning patients and doing hoyer lifts five days a week. I'm sure you've got plenty of other skills."]
+She thanks you, but it's still clearly not enough to protect an entire household. One person isn't going to be able to solve this. It'll take government action to help.
+$else
+You try to help her load up sandbags, but somehow they feel even heavier than last time.
+
+She smiles at your sheepish expression. "It's okay, Honey. I'm turning patients and doing hoyer lifts five days a week. I'm sure you've got plenty of other skills."
+$endif
+
 
 $choice ArriveAtRoyalHazelNeighborhood; Arrive at Royal Hazel neighborhood.
 
@@ -6487,16 +7000,22 @@ But you hear a loud beep, and notice your phone battery hovering at 3%.
 
 "Uh oh." 
 
-(if: Stat(Tech) >7)[Thankfully, you came prepared! You dig into your bag for your wireless charger. Just in time.
+
+$if Stat(Tech) >7
+Thankfully, you came prepared! You dig into your bag for your wireless charger. Just in time.
 
 $choice AreYouAwareThatTheNeighborhoodDoesntHaveASandbagStation; "Are you aware that the neighborhood doesn't have a sandbag station?"
-$choice HowWouldYouAdvisePeopleWhoCantStayOffTheRoadsBecauseTheyNeedToWork; "How would you advise people who can't stay off the roads, because they need to work?"](else:)[You dig into your backback for tech gear, but looks like you forgot your wireless charger.
+$choice HowWouldYouAdvisePeopleWhoCantStayOffTheRoadsBecauseTheyNeedToWork; "How would you advise people who can't stay off the roads, because they need to work?"
+$else
+You dig into your backback for tech gear, but looks like you forgot your wireless charger.
 
 Before you can say another word, your phone goes black.
 
 Ugh. Rookie mistake. 
 
-$choice FindSomewhereToChargeYourPhone; Find somewhere to charge your phone.]
+$choice FindSomewhereToChargeYourPhone; Find somewhere to charge your phone.
+$endif
+
 
 // Original Name: "Are you aware that the neighborhood doesn't have a sandbag station?"
 :: AreYouAwareThatTheNeighborhoodDoesntHaveASandbagStation
