@@ -417,6 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Root: {fileID: 3319456804573798803}
+  Local: {fileID: 3319456804573798803}
   Group: {fileID: 7832661044376501248}
   BackgroundColor: []
   OutlineColor:
@@ -425,6 +426,8 @@ MonoBehaviour:
   - {fileID: 3319456803860234002}
   - {fileID: 3319456803245221237}
   - {fileID: 5735968534757853970}
+  Pattern: []
+  PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
   Layout: {fileID: 0}
@@ -645,6 +648,7 @@ MonoBehaviour:
     width: 1
     height: 1
   m_AutoSize: 5
+  m_Visible: 1
 --- !u!114 &8305356508664556774
 MonoBehaviour:
   m_ObjectHideFlags: 0

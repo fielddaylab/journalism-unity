@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Root: {fileID: 3319456804573798803}
+  Local: {fileID: 3319456803949372075}
   Group: {fileID: 7832661044376501248}
   BackgroundColor:
   - {fileID: 3037343872289806085}
@@ -585,6 +586,8 @@ MonoBehaviour:
   - {fileID: 3319456803860234002}
   - {fileID: 3319456804975166437}
   - {fileID: 3319456803245221237}
+  Pattern: []
+  PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
   Layout: {fileID: 3319456804573798805}

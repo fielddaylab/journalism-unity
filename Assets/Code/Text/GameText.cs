@@ -174,7 +174,7 @@ namespace Journalism {
         /// Initializes the scroll line.
         /// </summary>
         static public void InitializeScroll(TextLineScroll scroll) {
-            scroll.Lines = new RingBuffer<TextLineScroll.LineState>(scroll.MaxLines + 3, RingBufferMode.Fixed);
+            scroll.Lines = new RingBuffer<TextLineScroll.LineState>(scroll.MaxLines + 8, RingBufferMode.Fixed);
             scroll.RootBaseline = scroll.Root.anchoredPosition.y;
         }
 

@@ -5,6 +5,7 @@ using BeauUtil.Debugger;
 using System.Collections.Generic;
 using EasyAssetStreaming;
 using System.Collections;
+using BeauRoutine;
 
 namespace Journalism {
     public sealed class AudioSystem : MonoBehaviour {
@@ -13,11 +14,15 @@ namespace Journalism {
         [SerializeField] private AudioBundle m_DefaultBundle = null;
         [SerializeField, Required] private DownloadStreamingAudioSource m_AmbienceAudio = null;
         [SerializeField, Required] private DownloadStreamingAudioSource m_MusicAudio = null;
+        [SerializeField] private float m_CrossFadeDuration = 0.5f;
 
         #endregion // Inspector
 
         private readonly Dictionary<StringHash32, AudioEvent> m_Events = new Dictionary<StringHash32, AudioEvent>(64);
         private readonly HashSet<AudioBundle> m_LoadedBundles = new HashSet<AudioBundle>();
+
+        private Routine m_AmbienceFade;
+        private Routine m_MusicFade;
 
         private void Awake() {
             if (m_DefaultBundle != null) {
@@ -84,21 +89,39 @@ namespace Journalism {
         }
 
         public void SetAmbience(string url, float volume) {
-            m_AmbienceAudio.Path = url;
-            if (!string.IsNullOrEmpty(url)) {
-                m_AmbienceAudio.Play();
-            } else {
-                m_AmbienceAudio.Stop();
-            }
+            m_AmbienceFade.Replace(this, Transition(m_AmbienceAudio, url, volume, m_CrossFadeDuration));
         }
 
         public void SetMusic(string url, float volume) {
-            m_MusicAudio.Path = url;
-            m_MusicAudio.Volume = volume;
-            if (!string.IsNullOrEmpty(url)) {
-                m_MusicAudio.Play();
+            m_MusicFade.Replace(this, Transition(m_MusicAudio, url, volume, m_CrossFadeDuration));
+        }
+
+        static private IEnumerator Transition(DownloadStreamingAudioSource source, string url, float volume, float duration) {
+            if (source.Path == url) {
+                if (source.Volume != volume) {
+                    yield return Tween.Float(source.Volume, volume, (f) => source.Volume = f, duration);
+                }
             } else {
-                m_MusicAudio.Stop();
+                bool bFadeOut = source.IsPlaying;
+                bool bFadeIn = !string.IsNullOrEmpty(url);
+                float animSlice = duration;
+                if (bFadeOut && bFadeIn) {
+                    animSlice /= 2;
+                }
+                if (bFadeOut) {
+                    yield return Tween.Float(source.Volume, 0, (f) => source.Volume = f, animSlice);
+                    source.Unload();
+                }
+                if (bFadeIn) {
+                    source.Path = url;
+                    source.Stop();
+                    source.Volume = 0;
+                    while(source.IsLoading()) {
+                        yield return null;
+                    }
+                    source.Play();
+                    yield return Tween.Float(source.Volume, volume, (f) => source.Volume = f, animSlice);
+                }
             }
         }
 

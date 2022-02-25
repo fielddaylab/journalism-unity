@@ -24,9 +24,11 @@ namespace Journalism.UI {
 
                 foreach(var scrapId in Player.StoryScraps) {
                     var scrapData = Assets.Scrap(scrapId);
-                    var display = GameText.AllocScrap(scrapData, m_Pools);
-                    GameText.PopulateStoryScrap(display, scrapData, Assets.DefaultStyle);
-                    display.Object.Toggle.group = m_ToggleGroup;
+                    if (scrapData != null) {
+                        var display = GameText.AllocScrap(scrapData, m_Pools);
+                        GameText.PopulateStoryScrap(display, scrapData, Assets.DefaultStyle);
+                        display.Object.Toggle.group = m_ToggleGroup;
+                    }
                 }
 
                 Async.InvokeAsync(() => {

@@ -210,6 +210,7 @@ namespace Journalism {
             GameText.AlignTextLine(line, TextAlignment.Center);
             GameText.AdjustComputedLocations(m_TextDisplay, 1);
             yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            GameText.ClearOverflowLines(m_TextDisplay);
             yield return 0.1f;
 
             StoryScrapData data = Assets.Scrap(scrapId);
@@ -226,6 +227,8 @@ namespace Journalism {
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
                 yield return GameText.AnimateLocations(m_TextDisplay, 1);
             }
+
+            GameText.ClearOverflowLines(m_TextDisplay);
 
             yield return CompleteLine();
         }
@@ -257,6 +260,7 @@ namespace Journalism {
                 GameText.AlignTextLine(line, TextAlignment.Center);
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
                 yield return GameText.AnimateLocations(m_TextDisplay, 1);
+                GameText.ClearOverflowLines(m_TextDisplay);
                 yield return 0.1f;
 
                 yield return CompleteLine();

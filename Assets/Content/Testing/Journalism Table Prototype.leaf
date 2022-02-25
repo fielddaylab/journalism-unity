@@ -108,7 +108,7 @@ This will be perfect to include in your story!
 $call GiveSnippet(FloodMap)
 $call GiveSnippet(WeatherStats)
 
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Office 1 - Coworker
 :: Office1-Coworker
@@ -152,7 +152,7 @@ $if Visited(JenkinssComputer)
 
 $endif
 
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Office 1 - Police
 :: Office1-Police
@@ -191,7 +191,7 @@ $else
 $endif
 
 
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
@@ -211,7 +211,7 @@ $else
     $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(10 minutes)</color>
 $endif
 
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Answer the phone
 :: AnswerThePhone
@@ -631,7 +631,7 @@ Jenkins's computer looks like it's from the stone age. Or at least the 90's. You
 You do find a sticky note on his file cabinet: </i>Contact Wynne D. Storme, expert @ DNR//
 $endif
 
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Online picture
 :: OnlinePicture
@@ -1682,36 +1682,39 @@ $endif
 
 
 
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Police Response
 :: PoliceResponse
 
 $if Visited(HelpHer)
-The officer is suddenly more cheerful. "Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?"
+    The officer is suddenly more cheerful.
+    {@phone} Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?
 
-You're shocked that he knows about this. "Yeah, uh, that was me."
+    You're shocked that he knows about this.
+    {@me} Yeah, uh, that was me.
 
-He gives you a great interview, including an anectdote about a man whose car got swept into a ditch! 
+    He gives you a great interview, including an anectdote about a man whose car got swept into a ditch! 
 
-"Rescuers pulled him out just in time," he says. "People need to remember: turn around, don't drown!"
+    {@phone} Rescuers pulled him out just in time.
+    {@phone} People need to remember: turn around, don't drown!
 
-$call GiveSnippet(FloodBackground)
-$call GiveSnippet(PoliceStory)
+    $call GiveSnippet(FloodBackground)
+    $call GiveSnippet(PoliceStory)
 $else
-The officer coughs awkwardly. "Um. You're Maureen's neighbor, aren't you? She said you nearly ran over her chickens this morning."
-
-It seems so unfair that he knows about this. "I wouldn't say 'ran over,' exactly..."
-
-He gives you a few basic quotes about safety: don't drive through high water, and avoid flood risk areas.
-
-"Just check the city map next time," he says gruffly, "it's all in there."
-
-$call GiveSnippet(PoliceSafetyQuote)
+    The officer coughs awkwardly.
+    {@phone} Um. You're Maureen's neighbor, aren't you?{auto}
+    {@phone} She said you nearly ran over her chickens this morning.
+    It seems so unfair that he knows about this.
+    {@me} I wouldn't say 'ran over,' exactly...
+    He gives you a few basic quotes about safety: don't drive through high water, and avoid flood risk areas.
+    {@phone} Just check the city map next time{auto}
+    he says gruffly.
+    {@phone} It's all in there.
+    $call GiveSnippet(PoliceSafetyQuote)
 $endif
 
-
-$branch Office1-Clock
+$goto Office1-Clock
 
 // Original Name: Make a trade to earn their trust
 :: MakeATradeToEarnTheirTrust
