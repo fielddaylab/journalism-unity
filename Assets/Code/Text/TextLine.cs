@@ -23,12 +23,15 @@ namespace Journalism {
 
         [Header("Animation")]
         [Required] public RectTransform Root;
+        [Required] public RectTransform Local;
         [Required] public CanvasGroup Group;
 
         [Header("Configuration")]
         [Required] public ColorGroup[] BackgroundColor;
         [Required] public ColorGroup[] OutlineColor;
         [Required] public Image[] Rounding;
+        public RawImage[] Pattern;
+        public Mask PatternMask;
         public RectTransform Tail;
         [ShowIfField("Tail")] public RectTransform InnerTail;
 

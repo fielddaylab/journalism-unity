@@ -9,6 +9,7 @@ using BeauUtil.Debugger;
 using BeauUtil.Variants;
 using BeauRoutine;
 using System;
+using UnityEngine.Scripting;
 
 namespace Journalism {
     public sealed class ScriptSystem : MonoBehaviour {
@@ -24,6 +25,7 @@ namespace Journalism {
         private CustomVariantResolver m_Resolver;
 
         [NonSerialized] private LevelDef m_CurrentLevel;
+        [NonSerialized] private bool m_FirstVisit;
 
         private void Awake() {
             m_Resolver = new CustomVariantResolver();
@@ -57,7 +59,7 @@ namespace Journalism {
             
             yield return m_TextDisplay.HandleNodeStart(node, thread);
 
-            Player.Data.VisitedNodeIds.Add(node.Id());
+            m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
         }
 
         private void OnLevelStarted() {
@@ -145,5 +147,14 @@ namespace Journalism {
         public void Interrupt(IEnumerator routine) {
             m_Integration.Interrupt(routine);
         }
+
+        #region Leaf
+
+        [LeafMember("FirstVisit"), Preserve]
+        static private bool LeafFirstVisit() {
+            return Game.Scripting.m_FirstVisit;
+        }
+
+        #endregion // Leaf
     }
 }

@@ -14,6 +14,7 @@ namespace Journalism {
             public Color32 Outline;
             public TextLine.TailMode Tail;
             public float RoundingScale = 1.5f;
+            public Texture2D Texture = null;
 
             public StringHash32 Key { get { return Id; } }
             public StyleData Value { get { return this; } }

@@ -23,6 +23,7 @@ namespace Journalism {
         [SerializeField] private LevelDef[] m_LevelDefs = null;
         
         [Header("Controllers")]
+        [SerializeField] private AudioSystem m_AudioSystem = null;
         [SerializeField] private ScriptSystem m_ScriptSystem = null;
         [SerializeField] private UISystem m_UISystem = null;
         [SerializeField] private SaveSystem m_SaveSystem = null;
@@ -54,6 +55,13 @@ namespace Journalism {
         /// </summary>
         static public EventDispatcher<object> Events {
             get { return Game.I?.m_EventDispatcher; }
+        }
+
+        /// <summary>
+        /// Audio system.
+        /// </summary>
+        static public AudioSystem Audio {
+            get { return Game.I?.m_AudioSystem; }
         }
 
         /// <summary>

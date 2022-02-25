@@ -14,7 +14,7 @@ namespace EasyAssetStreaming.Editor {
             m_PathProperty = serializedObject.FindProperty("m_Path");
             m_UVRectProperty = serializedObject.FindProperty("m_UVRect");
             m_AutoSizeProperty = serializedObject.FindProperty("m_AutoSize");
-            m_AutoSizeProperty = serializedObject.FindProperty("m_Visible");
+            m_VisibleProperty = serializedObject.FindProperty("m_Visible");
         }
 
         public override void OnInspectorGUI() {

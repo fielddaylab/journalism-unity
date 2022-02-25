@@ -6,6 +6,81 @@
                 "Alpha": false
             }
         },
+        "Anim/enml-buzzingphone.gif": {
+            "Type": "Unknown"
+        },
+        "Anim/enml-buzzingphone.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-coffeedonuts.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-dnrlady.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-escapedchicken.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-fridgeofcherries.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-oldcomputer.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-phoneaccessories.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-rain.gif": {
+            "Type": "Unknown"
+        },
+        "Anim/enml-rain.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-stuckcar.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-textmessage.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
+        "Anim/enml-waterrushing.gif": {
+            "Type": "Unknown"
+        },
+        "Anim/enml-waterrushing.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Alpha": false
+            }
+        },
         "BG/Apartments.png": {
             "Type": "Texture",
             "Texture": {
@@ -17,6 +92,12 @@
             "Texture": {
                 "Alpha": false
             }
+        },
+        "Music/Jahzzar 02 Wet Socks.mp3": {
+            "Type": "Audio"
+        },
+        "Music/Jahzzar 04 Flood.mp3": {
+            "Type": "Audio"
         },
         "Photo/TestPhoto-Sandbags.png": {
             "Type": "Texture",

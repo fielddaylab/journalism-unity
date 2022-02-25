@@ -17,6 +17,8 @@ namespace Journalism.UI {
         [SerializeField] private TweenSettings m_ShowAnim = new TweenSettings(0.3f, Curve.CubeOut);
         [SerializeField] private TweenSettings m_HideAnim = new TweenSettings(0.3f, Curve.CubeIn);
         [SerializeField] private float m_RandomRotationRange = 0;
+        [SerializeField] private SerializedHash32 m_OpenAudio = null;
+        [SerializeField] private SerializedHash32 m_CloseAudio = null;
 
         #endregion // Inspector
 
@@ -60,10 +62,12 @@ namespace Journalism.UI {
             while(Streaming.IsLoading()) {
                 yield return null;
             }
+            Game.Audio.PlayOneShot(m_OpenAudio);
             yield return m_RootTransform.AnchorPosTo(0, m_ShowAnim, Axis.Y);
         }
 
         protected override IEnumerator TransitionToHide() {
+            Game.Audio.PlayOneShot(m_CloseAudio);
             yield return m_RootTransform.AnchorPosTo(m_OffscreenPos, m_HideAnim, Axis.Y);
             m_RootTransform.gameObject.SetActive(false);
         }

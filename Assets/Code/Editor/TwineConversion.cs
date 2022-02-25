@@ -13,6 +13,7 @@ namespace Journalism {
     static public class TwineConversion {
         private const string TwineFilePath = "Assets/Content/Testing/Journalism Table Prototype.json";
         private const string LeafFilePath = "Assets/Content/Testing/Journalism Table Prototype.leaf";
+        private const string PrependFilePath = "Assets/Content/Testing/Macros.leaf";
 
         [MenuItem("Journalism/Convert Twine File %T")]
         static private void Menu_ConvertTwine() {
@@ -37,6 +38,7 @@ namespace Journalism {
                 }
                 using (FileStream writeStream = File.Create(leafFilePath))
                 using (TextWriter write = new StreamWriter(writeStream)) {
+                    write.Write(File.ReadAllText(PrependFilePath));
                     if (!ConvertStoryToLeaf(document, write)) {
                         Log.Msg("[TwineConversion] Unable to convert from Twine file '{0}' to leaf", twineFilePath);
                         return false;
@@ -298,6 +300,11 @@ namespace Journalism {
             string text = m.Groups[1].Value;
             string target = m.Groups[2].Value;
             target = ProcessId(target);
+            if (text.Contains("\\\"")) {
+                text = "{@me} " + text.Trim('"', '\\');
+            } else {
+                text = text.Trim('"');
+            }
             return string.Format("$choice {0}; {1}", target, text);
         };
 
@@ -306,6 +313,11 @@ namespace Journalism {
             string text = m.Groups[2].Value;
             string target = m.Groups[1].Value;
             target = ProcessId(target);
+            if (text.Contains("\\\"")) {
+                text = "{@me} " + text.Trim('"', '\\');
+            } else {
+                text = text.Trim('"');
+            }
             return string.Format("$choice {0}; {1}", target, text);
         };
 
@@ -313,6 +325,11 @@ namespace Journalism {
         static private MatchEvaluator SimpleLinkReplace = (m) => {
             string text = m.Groups[1].Value;
             string target = ProcessId(text);
+            if (text.Contains("\\\"")) {
+                text = "{@me} " + text.Trim('"', '\\');
+            } else {
+                text = text.Trim('"');
+            }
             return string.Format("$choice {0}; {1}", target, text);
         };
 
@@ -330,13 +347,13 @@ namespace Journalism {
 
         #region Display/Goto
 
-        static private Regex DisplayPassageFormat = new Regex("^\\(display: \"?(.+?)\"?\\)", RegexOptions.Multiline);
+        static private Regex DisplayPassageFormat = new Regex("^\\(display:\\s*\"?(.+?)\"?\\)", RegexOptions.Multiline);
         static private MatchEvaluator DisplayPassageReplace = (m) => {
             string target = ProcessId(m.Groups[1].Value);
             return string.Format("$branch {0}", target);
         };
 
-        static private Regex GotoPassageFormat = new Regex("^\\(goto: \"?(.+?)\"?\\)");
+        static private Regex GotoPassageFormat = new Regex("^\\(goto:\\s*\"?(.+?)\"?\\)");
         static private MatchEvaluator GotoPassageReplace = (m) => {
             string target = ProcessId(m.Groups[1].Value);
             return string.Format("$goto {0}", target);
@@ -399,7 +416,7 @@ namespace Journalism {
             string target = ProcessId(m.Groups[1].Value);
             string text = m.Groups[2].Value;
             float time = StringParser.ParseFloat(m.Groups[3].Value) / 60f;
-            return string.Format("$HubChoice({0}, {1}, {2})", target, text, time);
+            return string.Format("$HubChoice({0}, \"{1}\", {2})", target, text, time);
         };
 
         static private Regex AdjustStatFormat = new Regex("\\(\\$changeStat:\\s*\\$(\\w+),\\s*(-*)(\\d+)\\)");
@@ -507,11 +524,11 @@ namespace Journalism {
 
         #region If
 
-        static private Regex FindIfStart = new Regex("\\(if\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        static private Regex FindUnlessStart = new Regex("\\(unless\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        static private Regex FindElseIfContinue = new Regex("\\$endif\\s*\\((?:elseif|else-if)\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        static private Regex FindElseIfErrant = new Regex("\\(elseif\\s*:\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-        static private Regex FindElseStart = new Regex("\\$endif\\s*\\(else\\s*:\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindIfStart = new Regex("\\(if\\s*:?\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindUnlessStart = new Regex("\\(unless\\s*:?\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindElseIfContinue = new Regex("\\$endif\\s*\\((?:elseif|else-if)\\s*:?\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindElseIfErrant = new Regex("\\(elseif\\s*:?\\s*([\\w\\d\\(\\)\" ,/!\\$><=\\.]*)[\\b]?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        static private Regex FindElseStart = new Regex("\\$endif\\s*\\(else\\s*:?\\s*\\)\\s*\\[?", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
         static private string ReplaceIfs(string source) {
             Match m = FindIfStart.Match(source);
@@ -650,7 +667,13 @@ namespace Journalism {
                 if (groupEnd + endLength < source.Length) {
                     source = source.Remove(groupEnd, 1);
                 }
-                source = source.Substring(0, m.Index) + string.Format("\n{{@action}} {0}\n{1}", text, source.Substring(groupStart + 1).TrimStart('='));
+
+                if (text.Contains("\\\"")) {
+                    text = "{@me} " + text.Trim('"', '\\');
+                } else {
+                    text = text.Trim('"');
+                }
+                source = source.Substring(0, m.Index) + string.Format("\n$ContinueChoice({0})\n{1}", text, source.Substring(groupStart + 1).TrimStart('='));
                 m = LinkStartFormat.Match(source);
             }
             return source;
@@ -698,15 +721,13 @@ namespace Journalism {
                     }
 
                     case '"':
-                        if (quoteMode) {
-                            if (i > 0 && source[i - 1] == '\\') {
-                                i++;
-                                break;
-                            } else {
-                                quoteMode = !quoteMode;
-                            }
-                        } else {
-                            quoteMode = true;
+                        if (i > 0 && source[i - 1] == '\\')
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            quoteMode = !quoteMode;
                         }
                         break;
                 }

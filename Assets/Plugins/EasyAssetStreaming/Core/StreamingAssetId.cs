@@ -67,6 +67,10 @@ namespace EasyAssetStreaming {
             return a.m_Hash != b.m_Hash;
         }
 
+        static public implicit operator bool(StreamingAssetId id) {
+            return id.m_Hash != 0;
+        }
+
         #endregion // Overrides
     }
 }

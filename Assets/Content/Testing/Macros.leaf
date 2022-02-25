@@ -1,0 +1,16 @@
+// MACROS
+
+#macro HubChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time \
+        $data once
+#macro TimeChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time
+#macro OnceChoice(nodeId, text) \
+    $choice $nodeId; $text \
+        $data once
+#macro ContinueChoice(text) \
+    $choice _null; $text \
+    $choose continue
+    

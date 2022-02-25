@@ -37,6 +37,17 @@ MonoBehaviour:
     Tail: 1
     RoundingScale: 1.2
   - Id:
+      m_Source: person
+      m_HashValue: 3549934208
+    Background:
+      serializedVersion: 2
+      rgba: 4283093503
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 1
+    RoundingScale: 1.2
+  - Id:
       m_Source: me
       m_HashValue: 1747856039
     Background:
@@ -64,6 +75,28 @@ MonoBehaviour:
     Background:
       serializedVersion: 2
       rgba: 4292732821
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+    RoundingScale: 1.5
+  - Id:
+      m_Source: article
+      m_HashValue: 392652633
+    Background:
+      serializedVersion: 2
+      rgba: 4285897903
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+    RoundingScale: 1.5
+  - Id:
+      m_Source: error
+      m_HashValue: 563185489
+    Background:
+      serializedVersion: 2
+      rgba: 4285164188
     Outline:
       serializedVersion: 2
       rgba: 4278388513

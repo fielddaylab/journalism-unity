@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RawImage: {fileID: 7965663023515391498}
+  m_ColorGroup: {fileID: 0}
   m_Path: UI/ticket-stub 1.png
   m_UVRect:
     serializedVersion: 2
@@ -167,6 +168,7 @@ MonoBehaviour:
     width: 1
     height: 1
   m_AutoSize: 5
+  m_Visible: 1
 --- !u!1 &4348798330317781094
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +251,12 @@ MonoBehaviour:
     Time: 0.3
     Curve: 5
   m_RandomRotationRange: 0.5
+  m_OpenAudio:
+    m_Source: StatsOpen
+    m_HashValue: 1187219372
+  m_CloseAudio:
+    m_Source: 
+    m_HashValue: 0
 --- !u!114 &7091283740535102435
 MonoBehaviour:
   m_ObjectHideFlags: 0

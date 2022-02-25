@@ -14,6 +14,7 @@ namespace Journalism {
             public float LocationY;
             public Routine LocationAnimation;
             public Routine RevealAnimation;
+            public Routine StyleAnimation;
         }
 
         #region Inspector

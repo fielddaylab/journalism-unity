@@ -347,7 +347,7 @@ namespace EasyAssetStreaming {
                 }
 
                 if (request.isNetworkError || request.isHttpError) {
-                    OnTextureDownloadFail(id, pathOrUrl, meta);
+                    OnTextureDownloadFail(id, pathOrUrl, meta, request.error);
                 } else {
                     OnTextureDownloadCompleted(id, request.downloadHandler.data, pathOrUrl, meta);
                 }
@@ -364,7 +364,7 @@ namespace EasyAssetStreaming {
                     PostApplySettings(texture, settings);
                 } catch(Exception e) {
                     UnityEngine.Debug.LogException(e);
-                    OnTextureDownloadFail(id, pathOrUrl, meta);
+                    OnTextureDownloadFail(id, pathOrUrl, meta, e.ToString());
                     return;
                 }
 
@@ -374,8 +374,8 @@ namespace EasyAssetStreaming {
                 InvokeCallbacks(meta, id, texture);
             }
 
-            static private void OnTextureDownloadFail(StreamingAssetId id, string pathOrUrl, AssetMeta meta) {
-                UnityEngine.Debug.LogErrorFormat("[Streaming] Failed to load texture '{0}' from '{1}", id, pathOrUrl);
+            static private void OnTextureDownloadFail(StreamingAssetId id, string pathOrUrl, AssetMeta meta, string error) {
+                UnityEngine.Debug.LogErrorFormat("[Streaming] Failed to load texture '{0}' from '{1}': {2}", id, pathOrUrl, error);
                 meta.Loader = null;
                 meta.Status = AssetStatus.Error;
                 InvokeCallbacks(meta, id, TextureMap[id]);

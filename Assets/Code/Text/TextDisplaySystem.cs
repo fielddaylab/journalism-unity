@@ -37,6 +37,8 @@ namespace Journalism {
 
         private TextLine m_QueuedLine;
         [NonSerialized] private TextAlignment m_ImagePosition = TextAlignment.Center;
+        [NonSerialized] private float m_ImageColumnBaseline;
+        [NonSerialized] private float m_AutoContinue = -1;
 
         public LookupLineDelegate LookupLine;
         public NextLineDelegate LookupNextLine;
@@ -48,6 +50,8 @@ namespace Journalism {
             GameText.InitializeScroll(m_TextDisplay);
             GameText.InitializeChoices(m_ChoiceDisplay);
 
+            m_ImageColumnBaseline = m_Image.Root.anchoredPosition.y;
+
             Game.Events.Register<StringHash32>(Events.InventoryUpdated, OnInventoryUpdated, this)
                 .Register<int[]>(Events.StatsUpdated, OnStatsUpdated, this);
         }
@@ -57,15 +61,27 @@ namespace Journalism {
         #region Events
 
         public void ConfigureHandlers(CustomTagParserConfig config, TagStringEventHandler handlers) {
-            handlers.Register(GameText.Events.Character, HandleCharacter)
+            handlers.Register(LeafUtils.Events.Character, HandleCharacter)
                 .Register(GameText.Events.Image, HandleImage)
-                .Register(GameText.Events.ClearImage, HandleImageClear);
+                .Register(GameText.Events.ClearImage, HandleImageClear)
+                .Register(GameText.Events.Anim, HandleAnim)
+                .Register(GameText.Events.Auto, HandleAuto);
         }
 
         private void HandleCharacter(TagEventData evtData, object context) {
             StringHash32 characterId = evtData.GetStringHash();
             // TODO: Some indirection? Character -> Style as opposed to Character == Style?
             SetStyle(characterId);
+        }
+
+        private void HandleAnim(TagEventData evtData, object context) {
+            if (m_QueuedLine != null) {
+                GameText.SetAnim(m_QueuedLine, evtData.StringArgument, ref m_TextDisplay.Lines[0].StyleAnimation);
+            }
+        }
+
+        private void HandleAuto(TagEventData evtData, object context) {
+            m_AutoContinue = evtData.GetFloat();
         }
 
         private IEnumerator HandleImage(TagEventData evtData, object context) {
@@ -197,13 +213,21 @@ namespace Journalism {
             yield return 0.1f;
 
             StoryScrapData data = Assets.Scrap(scrapId);
-            StoryScrapDisplay scrap = GameText.AllocScrap(data, m_TextDisplay, m_Pools);
-            GameText.PopulateStoryScrap(scrap, data, Assets.DefaultStyle);
-            GameText.AlignTextLine(scrap.Line, TextAlignment.Center);
-            GameText.AdjustComputedLocations(m_TextDisplay, 1);
-            yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            if (data != null) {
+                StoryScrapDisplay scrap = GameText.AllocScrap(data, m_TextDisplay, m_Pools);
+                GameText.PopulateStoryScrap(scrap, data, Assets.DefaultStyle);
+                GameText.AlignTextLine(scrap.Line, TextAlignment.Center);
+                GameText.AdjustComputedLocations(m_TextDisplay, 1);
+                yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            } else {
+                TextLine scrap = GameText.AllocLine(m_TextDisplay, m_Pools);
+                GameText.PopulateTextLine(scrap, "ERROR: No scrap with id " + scrapId.ToDebugString(), null, default, Assets.Style("error"));
+                GameText.AlignTextLine(scrap, TextAlignment.Center);
+                GameText.AdjustComputedLocations(m_TextDisplay, 1);
+                yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            }
 
-            yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
+            yield return CompleteLine();
         }
 
         private void OnStatsUpdated(int[] adjustments) {
@@ -235,7 +259,7 @@ namespace Journalism {
                 yield return GameText.AnimateLocations(m_TextDisplay, 1);
                 yield return 0.1f;
 
-                yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
+                yield return CompleteLine();
             }
         }
 
@@ -258,6 +282,8 @@ namespace Journalism {
                 GameText.AlignTextLine(m_QueuedLine, GameText.ComputeDesiredAlignment(m_QueuedLine, m_TextDisplay));
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
             }
+
+            m_AutoContinue = -1;
 
             return null;
         }
@@ -284,7 +310,11 @@ namespace Journalism {
                 }
             }
 
-            yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
+            if (m_AutoContinue >= 0) {
+                yield return m_AutoContinue;
+            } else {
+                yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style("action"));
+            }
         }
 
         #endregion // ITextDisplayer
@@ -328,14 +358,20 @@ namespace Journalism {
 
                     GameText.RecomputeAllLocations(m_ChoiceDisplay);
 
-                    yield return m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y);
+                    yield return Routine.Combine(
+                        m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y),
+                        m_Image.Root.AnchorPosTo(m_ImageColumnBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y)
+                    );
                     
                     yield return GameText.AnimateLocations(m_ChoiceDisplay);
                     yield return GameText.WaitForChoice(m_ChoiceDisplay, inChoice);
                     yield return GameText.AnimateVanish(m_ChoiceDisplay);
                     GameText.ClearChoices(m_ChoiceDisplay);
 
-                    yield return m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline, m_ChoiceRowsAnim, Axis.Y);
+                    yield return Routine.Combine(
+                        m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline, m_ChoiceRowsAnim, Axis.Y),
+                        m_Image.Root.AnchorPosTo(m_ImageColumnBaseline, m_ChoiceRowsAnim, Axis.Y)
+                    );
                     yield return 0.2f;
                 }
             }

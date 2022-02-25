@@ -1,7 +1,5 @@
 using BeauUtil;
-using BeauUtil.Blocks;
 using Leaf;
-using UnityEngine.Scripting;
 using UnityEngine;
 using System;
 
@@ -11,6 +9,7 @@ namespace Journalism {
         
         [Required] public LeafAsset Script;
         [Required] public StoryScraps StoryScraps;
+        public AudioBundle Audio;
 
         [NonSerialized] public Script LoadedScript;
     }

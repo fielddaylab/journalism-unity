@@ -14,6 +14,8 @@ using BeauUtil.Variants;
 namespace Journalism {
     static public class GameText {
 
+        static private readonly char[] QuoteTrim = new char[] { '"' };
+
         #region Lines
 
         /// <summary>
@@ -21,6 +23,8 @@ namespace Journalism {
         /// </summary>
         static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style) {
             Assert.True(line.gameObject.activeInHierarchy, "TextLine must be active before calling PopulateTextLine");
+
+            textString = textString.Trim(QuoteTrim);
 
             if (!textString.IsEmpty) {
                 line.Text.SetText(textString.ToString());
@@ -46,6 +50,7 @@ namespace Journalism {
             }
 
             line.Layout.ForceRebuild();
+            line.Root.SetSizeDelta(line.Local.sizeDelta);
         }
 
         /// <summary>
@@ -68,6 +73,17 @@ namespace Journalism {
 
             for(int i = 0; i < line.Rounding.Length; i++) {
                 line.Rounding[i].pixelsPerUnitMultiplier = style.RoundingScale;
+            }
+
+            if (line.Pattern != null) {
+                for(int i = 0; i < line.Pattern.Length; i++) {
+                    line.Pattern[i].texture = style.Texture;
+                    line.Pattern[i].gameObject.SetActive(style.Texture);
+                }
+            }
+
+            if (line.PatternMask != null) {
+                line.PatternMask.enabled = style.Texture;
             }
 
             SetTailMode(line, style.Tail);
@@ -179,6 +195,7 @@ namespace Journalism {
             RectTransform lineRect = line.Root;
             lineRect.SetParent(scroll.ListRoot, false);
             lineRect.anchoredPosition = default;
+            line.Local.anchoredPosition = default;
             lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
@@ -216,6 +233,7 @@ namespace Journalism {
             RectTransform lineRect = line.Root;
             lineRect.SetParent(scroll.ListRoot, false);
             lineRect.anchoredPosition = default;
+            line.Local.anchoredPosition = default;
             lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
@@ -420,6 +438,7 @@ namespace Journalism {
                 state.ScrapAlloc?.Dispose();
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
+                state.StyleAnimation.Stop();
             }
         }
 
@@ -435,6 +454,7 @@ namespace Journalism {
                 state.ScrapAlloc?.Dispose();
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
+                state.StyleAnimation.Stop();
             }
         }
 
@@ -458,6 +478,7 @@ namespace Journalism {
             RectTransform lineRect = line.Root;
             lineRect.SetParent(choices.GridRoot, false);
             lineRect.anchoredPosition = default;
+            line.Local.anchoredPosition = default;
             lineRect.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
             choices.Choices.PushBack(new TextChoiceGroup.ChoiceState() {
@@ -471,6 +492,8 @@ namespace Journalism {
         /// </summary>
         static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, TextStyles.StyleData style) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
+
+            textString = textString.Trim(QuoteTrim);
 
             TextLine line = choice.Line;
             line.Text.SetText(textString.ToString());
@@ -662,6 +685,7 @@ namespace Journalism {
 
             if (display.Line.Layout) {
                 display.Line.Layout.ForceRebuild();
+                display.Line.Root.SetSizeDelta(display.Line.Local.sizeDelta);
             }
         }
 
@@ -670,12 +694,18 @@ namespace Journalism {
         #region Parsing
 
         static public class Events {
-            static public readonly StringHash32 Character = "character";
             static public readonly StringHash32 Background = "background";
             static public readonly StringHash32 Image = "image";
+            static public readonly StringHash32 Anim = "animation";
+            static public readonly StringHash32 Auto = "auto";
             static public readonly StringHash32 ClearImage = "clear-image";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
+        }
+
+        static public class TextAnims {
+            static public readonly StringHash32 Sway = "sway";
+            static public readonly StringHash32 Rumble = "rumble";
         }
 
         static public class ChoiceData {
@@ -698,8 +728,11 @@ namespace Journalism {
         static public void InitializeEvents(CustomTagParserConfig config, TagStringEventHandler handler, LeafIntegration integration, ScriptVisualsSystem visuals, TextDisplaySystem textDisplay) {
             LeafUtils.ConfigureDefaultParsers(config, integration, null); // TODO: Replace with appropriate localization callback
 
-            config.AddEvent("@*", Events.Character).ProcessWith(ProcessCharacter);
+            config.AddReplace("timeLeft", () => FormatTime(Player.Data.TimeRemaining));
+
             config.AddEvent("bg", Events.Background).WithStringData();
+            config.AddEvent("anim", Events.Anim).WithStringData();
+            config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
@@ -708,16 +741,20 @@ namespace Journalism {
             visuals.ConfigureHandlers(config, handler);
         }
 
-        static private void ProcessCharacter(TagData tag, object context, ref TagEventData evt) {
-            evt.SetStringHash(tag.Id.Substring(1));
-        }
-
         /// <summary>
         /// Finds the character associated with the given TagString line.
         /// </summary>
         static public StringHash32 FindCharacter(TagString line) {
-            line.TryFindEvent(GameText.Events.Character, out TagEventData characterEvt);
+            line.TryFindEvent(LeafUtils.Events.Character, out TagEventData characterEvt);
             return characterEvt.GetStringHash();
+        }
+
+        /// <summary>
+        /// Finds the animations associated with the given TagString line.
+        /// </summary>
+        static public StringSlice FindAnims(TagString line) {
+            line.TryFindEvent(Events.Anim, out TagEventData characterEvt);
+            return characterEvt.StringArgument;
         }
 
         #endregion // Parsing
@@ -752,6 +789,34 @@ namespace Journalism {
 
         #endregion // Text Generation
     
+        #region Text Styles
+
+        static public void SetAnim(TextLine line, StringSlice anims, ref Routine anim) {
+            // TODO: Parse styles to allow multiple anims
+            StringHash32 styleId = anims.Hash32();
+            if (styleId == TextAnims.Rumble) {
+                anim.Replace(line, TextAnim_Rumble(line));
+            } else if (styleId == TextAnims.Sway) {
+                anim.Replace(line, TextAnim_Sway(line));
+            }
+        }
+
+        static private IEnumerator TextAnim_Rumble(TextLine line) {
+            return Routine.Combine(
+                line.Local.AnchorPosTo(1, 0.097f, Axis.X).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1),
+                line.Local.AnchorPosTo(1, 0.1117f, Axis.Y).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1)
+            );
+        }
+
+        static private IEnumerator TextAnim_Sway(TextLine line) {
+            return Routine.Combine(
+                line.Local.AnchorPosTo(4, 1, Axis.X).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1),
+                line.Local.AnchorPosTo(1, 2, Axis.Y).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1)
+            );
+        }
+
+        #endregion // Text Styles
+
         // TODO: Stat changes
     }
 }

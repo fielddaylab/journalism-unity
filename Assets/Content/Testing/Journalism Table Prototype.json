@@ -1196,7 +1196,7 @@
       ]
     },
     {
-      "text": "Forget cats and dogs. It's raining an entire pet store. \n\nHow are you going to get downtown in this mess? \n\n(if: $hasBike is true)[[Bike]]\n[[Drive]]\n(unless:(history:) contains \"Track down an expert to help you\")[[Track down an expert to help you]]",
+      "text": "Forget cats and dogs. It's raining an entire pet store. \n\nHow are you going to get downtown in this mess? \n\n(if: $hasBike is true)[[[Bike]]]\n[[[Drive]]]\n(unless:(history:) contains \"Track down an expert to help you\")[[[Track down an expert to help you]]]",
       "links": [
         {
           "name": "Bike",

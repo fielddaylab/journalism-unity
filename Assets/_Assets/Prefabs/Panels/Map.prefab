@@ -86,8 +86,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RawImage: {fileID: 3127918276694045089}
+  m_ColorGroup: {fileID: 0}
   m_Path: UI/MapPlaceholder.png
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   m_AutoSize: 1
+  m_Visible: 1
 --- !u!114 &5442273702165640753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +253,12 @@ MonoBehaviour:
     Time: 0.3
     Curve: 5
   m_RandomRotationRange: 0.5
+  m_OpenAudio:
+    m_Source: MapOpen
+    m_HashValue: 836558653
+  m_CloseAudio:
+    m_Source: 
+    m_HashValue: 0
 --- !u!1001 &4876313558936475361
 PrefabInstance:
   m_ObjectHideFlags: 0

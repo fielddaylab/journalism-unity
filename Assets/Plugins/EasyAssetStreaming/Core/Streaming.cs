@@ -178,7 +178,6 @@ namespace EasyAssetStreaming {
 
         // Lookups
 
-        static private readonly Dictionary<StreamingAssetId, AudioClip> s_AudioClips = new Dictionary<StreamingAssetId, AudioClip>();
         static private readonly Dictionary<StreamingAssetId, AssetMeta> s_Metas = new Dictionary<StreamingAssetId, AssetMeta>();
         static private readonly Dictionary<int, StreamingAssetId> s_ReverseLookup = new Dictionary<int, StreamingAssetId>();
 
@@ -300,6 +299,9 @@ namespace EasyAssetStreaming {
                 case AssetType.Texture: {
                     return Textures.TextureMap[id];
                 }
+                case AssetType.Audio: {
+                    return Audios.ClipMap[id];
+                }
                 default: {
                     return null;
                 }
@@ -334,11 +336,24 @@ namespace EasyAssetStreaming {
         #endif // UNITY_EDITOR
 
         /// <summary>
-        /// Dereferences the given texture.
+        /// Dereferences the given asset.
         /// </summary>
         static public bool Unload(StreamingAssetId id, AssetCallback callback = null) {
             if (!id.IsEmpty) {
                 Dereference(id, callback);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Dereferences the given asset.
+        /// </summary>
+        static public bool Unload(ref StreamingAssetId id, AssetCallback callback = null) {
+            if (!id.IsEmpty) {
+                Dereference(id, callback);
+                id = default;
                 return true;
             }
 
@@ -428,10 +443,7 @@ namespace EasyAssetStreaming {
         /// </summary>
         static public void UnloadAll() {
             Textures.DestroyAllTextures();
-
-            foreach(var audio in s_AudioClips.Values) {
-                StreamingHelper.DestroyResource(audio);
-            }
+            Audios.DestroyAllClips();
 
             foreach(var meta in s_Metas.Values) {
                 meta.Status = AssetStatus.Unloaded;
@@ -442,7 +454,6 @@ namespace EasyAssetStreaming {
             }
 
             s_ReverseLookup.Clear();
-            s_AudioClips.Clear();
             s_Metas.Clear();
             s_LoadState.Queue.Clear();
 
@@ -505,9 +516,7 @@ namespace EasyAssetStreaming {
                     }
 
                     case AssetType.Audio: {
-                        resource = s_AudioClips[id];
-                        
-                        s_AudioClips.Remove(id);
+                        resource = Audios.DestroyClip(id, meta);
                         break;
                     }
                 }
@@ -642,6 +651,10 @@ namespace EasyAssetStreaming {
                 switch(meta.Type) {
                     case AssetType.Texture: {
                         Textures.StartLoading(id, meta);
+                        break;
+                    }
+                    case AssetType.Audio: {
+                        Audios.StartLoading(id, meta);
                         break;
                     }
                 }

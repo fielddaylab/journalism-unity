@@ -27,7 +27,7 @@ namespace Journalism {
         public StoryScrapData Scrap(StringHash32 id) {
             StoryScrapData scrap = null;
             if (!id.IsEmpty && !m_Scraps.TryGetValue(id, out scrap)) {
-                Assert.Fail("[StoryScraps] No scrap with id '{0}' found in file '{1}'", id, name);
+                Log.Error("[StoryScraps] No scrap with id '{0}' found in file '{1}'", id, name);
             }
             return scrap;
         }
