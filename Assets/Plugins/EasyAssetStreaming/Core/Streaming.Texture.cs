@@ -129,7 +129,7 @@ namespace EasyAssetStreaming {
                 public bool Alpha;
 
                 public LoadedFilterMode Filter;
-                public TextureCompression CompressionLevel;
+                public LoadedTextureCompression CompressionLevel;
 
                 public LoadedTextureWrapMode Wrap;
                 public LoadedTextureWrapMode WrapU;
@@ -155,6 +155,15 @@ namespace EasyAssetStreaming {
             }
 
             public enum TextureCompression {
+                None,
+
+                Low,
+                Normal,
+                High,
+            }
+
+            public enum LoadedTextureCompression {
+                Inherit = 0,
                 None,
 
                 Low,
@@ -272,8 +281,9 @@ namespace EasyAssetStreaming {
                     texture.name = pathOrUrl;
                     texture.hideFlags = HideFlags.DontSave;
                     var settings = ApplySettings(id, texture);
+                    TextureCompression compression = ResolveCompression(settings.CompressionLevel);
                     texture.LoadImage(bytes, false);
-                    PostApplySettings(texture, settings);
+                    PostApplySettings(texture, settings, compression, false);
                     RecomputeMemorySize(ref MemoryUsage, meta, texture);
                     UnityEngine.Debug.LogFormat("[Streaming] ...finished loading (sync) '{0}'", id);
                     meta.EditorPath = correctedPath;
@@ -307,8 +317,9 @@ namespace EasyAssetStreaming {
             static public void HandleTextureModified(StreamingAssetId id, AssetMeta meta) {
                 Texture2D texture = TextureMap[id];
                 var settings = ApplySettings(id, texture);
+                TextureCompression compression = ResolveCompression(settings.CompressionLevel);
                 texture.LoadImage(File.ReadAllBytes(meta.EditorPath), false);
-                PostApplySettings(texture, settings);
+                PostApplySettings(texture, settings, compression, false);
                 RecomputeMemorySize(ref MemoryUsage, meta, texture);
                 meta.EditorEditTime = File.GetLastWriteTimeUtc(meta.EditorPath).ToFileTimeUtc();
 
@@ -360,8 +371,9 @@ namespace EasyAssetStreaming {
                 Texture2D texture = TextureMap[id]; 
                 try {
                     var settings = ApplySettings(id, texture);
-                    texture.LoadImage(source, settings.CompressionLevel == 0);
-                    PostApplySettings(texture, settings);
+                    TextureCompression compression = ResolveCompression(settings.CompressionLevel);
+                    texture.LoadImage(source, compression == 0);
+                    PostApplySettings(texture, settings, compression, true);
                 } catch(Exception e) {
                     UnityEngine.Debug.LogException(e);
                     OnTextureDownloadFail(id, pathOrUrl, meta, e.ToString());
@@ -397,9 +409,12 @@ namespace EasyAssetStreaming {
                 return settings;
             }
 
-            static private void PostApplySettings(Texture2D texture, TextureSettings settings) {
-                if (settings.CompressionLevel > 0 && texture.isReadable) {
-                    texture.Compress(settings.CompressionLevel == TextureCompression.High);
+            static private void PostApplySettings(Texture2D texture, TextureSettings settings, TextureCompression compression, bool final) {
+                if (compression > 0 && texture.isReadable) {
+                    texture.Compress(compression == TextureCompression.High);
+                    if (final) {
+                        texture.Apply(false, true);
+                    }
                 }
             }
 
@@ -408,6 +423,14 @@ namespace EasyAssetStreaming {
                     return Manifest.Current.TextureDefaults.Filter;
                 } else {
                     return (FilterMode) (mode - 1);
+                }
+            }
+
+            static private TextureCompression ResolveCompression(LoadedTextureCompression mode) {
+                if (mode == LoadedTextureCompression.Inherit) {
+                    return Manifest.Current.TextureDefaults.Compression;
+                } else {
+                    return (TextureCompression) (mode - 1);
                 }
             }
 
@@ -497,7 +520,7 @@ namespace EasyAssetStreaming {
                 settings.Width = data["Width"].AsInt;
                 settings.Height = data["Height"].AsInt;
                 settings.Alpha = data["Alpha"] == null ? true : data["Alpha"].AsBool;
-                settings.CompressionLevel = ParseEnum<TextureCompression>(data["Compression"], TextureCompression.None);
+                settings.CompressionLevel = ParseEnum<LoadedTextureCompression>(data["Compression"], LoadedTextureCompression.Inherit);
                 settings.Filter = ParseEnum<LoadedFilterMode>(data["Filter"], LoadedFilterMode.Inherit);
                 settings.Wrap = ParseEnum<LoadedTextureWrapMode>(data["Wrap"], LoadedTextureWrapMode.Inherit);
                 settings.WrapU = ParseEnum<LoadedTextureWrapMode>(data["WrapU"], LoadedTextureWrapMode.Inherit);
@@ -519,7 +542,7 @@ namespace EasyAssetStreaming {
                 if (!settings.Alpha) {
                     json["Alpha"].AsBool = false;
                 }
-                WriteEnum(json, "Compression", settings.CompressionLevel, TextureCompression.None);
+                WriteEnum(json, "Compression", settings.CompressionLevel, LoadedTextureCompression.Inherit);
                 WriteEnum(json, "Filter", settings.Filter, LoadedFilterMode.Inherit);
                 WriteEnum(json, "Wrap", settings.Wrap, LoadedTextureWrapMode.Inherit);
                 WriteEnum(json, "WrapU", settings.WrapU, LoadedTextureWrapMode.Inherit);
