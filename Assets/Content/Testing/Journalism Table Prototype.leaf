@@ -11,9 +11,11 @@
     $choice $nodeId; $text \
         $data once
 #macro ContinueChoice(text) \
-    $choice _null; $text \
+    {force-input} $text
+#macro ActionChoice(text) \
+    $choice _null; {@action} $text \
     $choose continue
-    
+
 // Name: Journalism Table Prototype
 // Creator: Twine
 
@@ -134,7 +136,7 @@ $endif
 
 
 $if Visited(JenkinssComputer)
-    $ContinueChoice(Call Jenkins's DNR Contact)
+    $ActionChoice(Call Jenkins's DNR Contact)
     
     Jenkins's contact, Wynne D. Storme, is excited to talk to you. 
     {@phone} We've never seen anything like this{auto}
@@ -229,6 +231,7 @@ $call DecreaseTime(0.25)
 $choice BreakingNewsStory; {@me} Sorry, Fred, I'm pretty swamped here. Can't talk now.
 $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 
+// Original Name: N/a
 :: AnswerThePhoneContinue
 $call DecreaseTime(0.5)
 He tells you all his storm woes--his zinnias are flooded and his cat is getting cranky and the ceiling is leaking. 
@@ -357,7 +360,7 @@ Snippet body not implemented.
 
 // Original Name: START
 :: START
-$ContinueChoice(Wake up)
+$ActionChoice(Wake up)
 {bg BG/Room.png}
 $call Music(Music/Jahzzar 02 Wet Socks.mp3)
 It's 5AM.
@@ -371,7 +374,7 @@ $choice CheckYourPhone; Check your phone.
 This photo would be perfect for your story!
 
 
-$ContinueChoice(Send message)
+$ActionChoice(Send message)
 The nurse is happy to let you use his photo. He even has some headline ideas:
 
 // sway text
@@ -490,7 +493,7 @@ You drive toward the newsroom, windshield wipers working frantically.
 Your usual route is covered with water. Mayyybe this flood is a little worse than you thought. 
 
 
-$ContinueChoice(Stop to look around.)
+$ActionChoice(Stop to look around.)
 A baker is piling up burlap sacks in front of her shop.
 
 Cars are abandoned--including the famous Twin Lakes Cherrymobile!
@@ -1656,31 +1659,25 @@ $endif
 $call DecreaseTime(0.1666667)
 
 $if StatCheck(Trust, 2)
-<i>oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊</i>
+    <i>oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊</i>
 
-$call GiveSnippet(LibraryLot)
-else <i>the twin lakes herald?? that sounds fake. how do i know you're a real reporter?</i>
-
-
-$if StatCheck(Tech, 3)
-You've been waiting your whole life for this moment.
-
-You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (whch you singlehandedly created).  
-
-You've earned their permission--and their respect.
-
-$call GiveSnippet(LibraryLot)
+    $call GiveSnippet(LibraryLot)
 $else
-You don't have time for this. You log off and grab a stock photo. 
+    <i>the twin lakes herald?? that sounds fake. how do i know you're a real reporter?</i>
 
-At least it's better than nothing. Probably.
+    $if StatCheck(Tech, 3)
+        You've been waiting your whole life for this moment.
+        You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (whch you singlehandedly created).  
+        You've earned their permission--and their respect.
 
-$call GiveSnippet(GrainyPicture)
+        $call GiveSnippet(LibraryLot)
+    $else
+        You don't have time for this. You log off and grab a stock photo. 
+        At least it's better than nothing. Probably.
+
+        $call GiveSnippet(GrainyPicture)
+    $endif
 $endif
-
-$endif
-
-
 
 $goto Office1-Clock
 
@@ -1801,7 +1798,7 @@ $endif
 // Original Name: Level 2, Story 3: The Science Story
 :: Level2Story3TheScienceStory
 
-$ContinueChoice(The next morning...)
+$ActionChoice(The next morning...)
 You wake up to an eerily quiet morning.
 
 The chance of rain is hovering at 30%. If more rain comes, Twin Lakes could be in big trouble. 
@@ -1932,7 +1929,7 @@ A few are convinced that the flood is just a scam to get people to buy flood ins
 $call AdjustStats(Social + 1)
 
 
-$ContinueChoice(Ignore the haters)
+$ActionChoice(Ignore the haters)
 // (replace:"Dunk on the haters")[]
 You keep a stiff upper lip and disregard the trolls commenting on your article.
 
@@ -1942,7 +1939,7 @@ $call AdjustStats(Trust + 1)
 {anim rumble} RRRRING.
 $choice AnswerPhone; Answer phone
 
-$ContinueChoice(Dunk on the haters)
+$ActionChoice(Dunk on the haters)
 //(replace:"Ignore the haters")[]
 
 $if StatCheck(Tech, 3)
@@ -3547,7 +3544,7 @@ You have {timeLeft} remaining to submit this story.
 $HubChoice(TakePhotosOfTheMarsh, "Take photos of the marsh", 0.25) 
 $HubChoice(TalkToVolunteerHeadingOutOntoTheTrail, "Talk to volunteer heading out onto the trail", 0.1666667) 
 $HubChoice(TalkToVolunteerWithBagFullOfSeedPackets, "Talk to volunteer with bag full of seed packets", 0.25) 
-$HubChoice(GoToTheDepartmentOfLimnology, "Go to the Department of Limnology", 0.5)
+$HubChoice(DepartmentOfLimnology, "Go to the Department of Limnology", 0.5)
 $else
 $goto WetlandsStoryConstruction
 $endif
@@ -3764,7 +3761,7 @@ $endif
 
 
 $choice LookAroundForSomeoneElseToTalkTo; Look around for someone else to talk to.
-$choice -ReturnToTheDepartmentOfLimnology; ->Return to the Department of Limnology
+$choice ReturnToTheDepartmentOfLimnology; Return to the Department of Limnology
 
 // Original Name: Look around for someone else to talk to.
 :: LookAroundForSomeoneElseToTalkTo

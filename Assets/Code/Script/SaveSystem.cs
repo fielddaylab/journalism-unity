@@ -24,6 +24,8 @@ namespace Journalism {
 
         public void NewSaveData() {
             PlayerData data = new PlayerData();
+            data.SetDefaults();
+            
             m_CheckpointData = null;
             DeclareSave(data);
         }

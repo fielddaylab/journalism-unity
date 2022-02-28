@@ -1,0 +1,156 @@
+// Original Name: Sandbag quote
+:: SandbagQuote
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Volunteer info
+:: VolunteerInfo
+@type Fact
+@quality Good
+Snippet text unimplemented
+
+// Original Name: Houseboat photos
+:: HouseboatPhotos
+@type Photo
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Okay houseboat photos
+:: OkayHouseboatPhotos
+@type Photo
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Blurry houseboat photos
+:: BlurryHouseboatPhotos
+@type Photo
+@quality Bad
+Snippet text unimplemented.
+
+// Original Name: Great volunteering quote
+:: GreatVolunteeringQuote
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Great houseboat story
+:: GreatHouseboatStory
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Houseboat story
+:: HouseboatStory
+@type Quote
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Dog rescue
+:: DogRescue
+@type Observation
+@quality Good
+Snippet text unimplemented
+
+// Original Name: Dog rescue picture
+:: DogRescuePicture
+@type Photo
+@quality Good
+Insert picture of a rescue worker saving a dog from the flood.
+
+// Original Name: Great flood photos
+:: GreatFloodPhotos
+@type Photo
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Blurry flood photos
+:: BlurryFloodPhotos
+@type Photo
+@quality Bad
+Snippet text unimplemented.
+
+// Original Name: Lake levels
+:: LakeLevels
+@type Quote
+@quality Good
+Double-click this passage to edit it.
+
+// Original Name: Flood cause
+:: FloodCause
+@type Fact
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Flood science
+:: FloodScience
+@type Fact
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Lakewater study
+:: LakewaterStudy
+@type Photo
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: DNR expectations
+:: DNRExpectations
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Flood info
+:: FloodInfo
+@type Fact
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Sandbag troubles
+:: SandbagTroubles
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Sandbag location
+:: SandbagLocation
+@type Fact
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Great flood quote
+:: GreatFloodQuote
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Flood safety tips
+:: FloodSafetyTips
+@type Fact
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Cheese rescue
+:: CheeseRescue
+@type Observation
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Flooded street from above
+:: FloodedStreetFromAbove
+@type Photo
+@quality Great
+Insert birds-eye view of flooded Cherry Festival main street.
+
+// Original Name: Firefighter rescue
+:: FirefighterRescue
+@type Observation
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Good flood photos
+:: GoodFloodPhotos
+@type Photo
+@quality Good
+Snippet text unimplemented.
+

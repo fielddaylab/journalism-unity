@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13e8218b5935cd446b2c3e4bf8407568, type: 3}
-  m_Name: Level1
+  m_Name: Level01
   m_EditorClassIdentifier: 
-  Script: {fileID: -1942890987711236906, guid: a0bbdc7eab33ce449beb1fbbb560c74c, type: 3}
-  StoryScraps: {fileID: -4270002856181823206, guid: c180da8174ee8af40983bfde89118828,
+  Script: {fileID: -1942890987711236906, guid: 623072a7901267849b2862cfcb12bd60, type: 3}
+  StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
+  Audio: {fileID: 0}

@@ -123,6 +123,8 @@ namespace Journalism {
                     yield return Tween.Float(source.Volume, volume, (f) => source.Volume = f, animSlice);
                 }
             }
+
+            Streaming.UnloadUnusedAsync();
         }
 
         #endregion // Playing

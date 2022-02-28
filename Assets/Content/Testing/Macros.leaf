@@ -11,6 +11,7 @@
     $choice $nodeId; $text \
         $data once
 #macro ContinueChoice(text) \
+    {force-input} $text
+#macro ActionChoice(text) \
     $choice _null; $text \
     $choose continue
-    

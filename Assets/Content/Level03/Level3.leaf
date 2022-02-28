@@ -1,0 +1,1410 @@
+// MACROS
+
+#macro HubChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time \
+        $data once
+#macro TimeChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time
+#macro OnceChoice(nodeId, text) \
+    $choice $nodeId; $text \
+        $data once
+#macro ContinueChoice(text) \
+    {force-input} $text
+#macro ActionChoice(text) \
+    $choice _null; {@action} $text \
+    $choose continue
+
+// Name: Journalism Table Prototype
+// Creator: Twine
+
+# start Level2Story3TheScienceStory
+
+// Original Name: Level 2, Story 3: The Science Story
+:: Level2Story3TheScienceStory
+
+$ActionChoice(The next morning...)
+You wake up to an eerily quiet morning.
+
+The chance of rain is hovering at 30%. If more rain comes, Twin Lakes could be in big trouble. 
+
+$choice GatherFloodGear; Gather flood gear
+$choice GoOutsideAndHelpYourNeighbors; Go outside and help your neighbors
+$choice MakeBreakfast; Make breakfast
+$choice CheckSocialMedia; Check social media
+$choice ReadABookBeforeWork; Read a book before work
+
+// Original Name: Gather flood gear
+:: GatherFloodGear
+@tags Resourceful
+You get online and find a flood gear checklist. Score!!
+
+You gather up supplies--boots, waders, a flashlight, snacks and water.
+
+Your waders are technically snowpants, and your flashlight is a sloth-shaped keychain whose eyes light up. But it's better than nothing.
+
+$call AdjustStats(Resourceful + 1)
+
+// shudder style
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Go outside and help your neighbors
+:: GoOutsideAndHelpYourNeighbors
+Your street is covered in junk--trash, broken branches, toppled lawn ornaments. 
+
+
+$if Visited(LureChickens)
+You step outside and Maureen's chickens come running, pecking around your feet for more granola.
+
+Your other neighbor, Jim, is struggling to make a phone call. "The storm must've knocked out the service!" he says, scratching his head.
+
+$choice HelpWithTheCleanUp; Help with the clean up
+$choice HelpJimGetHisPhoneWorking; Help Jim get his phone working
+$endif
+
+$if Visited(ChaseChickens)
+Maureen sees you and waves. "Great article yesterday! We're lucky to have a top-notch reporter in the neighborhood."
+
+Your other neighbor, Jim, is struggling to make a phone call. "The storm must've knocked out the service!" he says, scratching his head.
+
+$choice HelpWithTheCleanUp; Help with the clean up
+$choice HelpJimGetHisPhoneWorking; Help Jim get his phone working
+$else
+Maureen shoves a stack of Lost Chicken posters into your hands.
+
+"After all, it's your fault Amelia Egghart is still missing," she says. "Not that I'm blaming you, of course."
+
+$choice HangLostChickenPosters; Hang Lost Chicken posters
+$choice HelpWithTheCleanUp; Take some posters for later and join the clean-up effort
+$choice MakeAnExcuseAndRushBackInside; Make an excuse and rush back inside
+$endif
+
+// Original Name: Make breakfast
+:: MakeBreakfast
+@tags Endurance, Trust, Social
+Yesterday would have been grocery day if it weren't for all of the... yeah.
+
+
+$if Visited(HelpHer)
+Your cupboards are still pretty empty.
+
+Luckily, Maureen stops by with a carton of fresh eggs!
+
+You chat with her while you whip up an omelet. 
+
+$call AdjustStats(Endurance + 1, Social + 1)
+$elseif Visited(HelpTheBaker)
+You're starting to get sick of cherry pie for breakfast. 
+
+Then you remember the leftover granola from the bakery! You text the baker a quick thank you, and she texts back:
+
+<i>No prob, thanks for the help yesterday. Loved ur story! xoxo</i>
+
+$call AdjustStats(Endurance + 1, Social + 1)
+$elseif Visited(HelpHimPackUpHisWares)
+The sparse cupboards make your stomach grumble when you suddenly remember!
+
+In the corner of the fridge is some slightly soggy Emmentaler cheese that shop-owner offered you when you helped bail out the cheese emporium. Score!
+$call AdjustStats(Endurance + 2)
+$else
+You're struggling to find some not-expired food when a neighbor shouts through the front window.
+
+"Hiya! You wrote that news story yesterday, right? Thanks to you, I got all my stuff out of the basement before it flooded!"
+
+He offers you a homemade lemon loaf--a little off-brand for the Cherry Capital of the Midwest, but still delicious.  
+
+$call AdjustStats(Endurance + 1, Trust + 1)
+$endif
+
+
+// shudder
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Check social media
+:: CheckSocialMedia
+@tags Social, Trust
+Your story has been liked and re-squawked hundreds of times!
+
+Most people in the comments are thanking you for helping them stay safe. 
+
+A few are convinced that the flood is just a scam to get people to buy flood insurance, because <i>their</i> streets are fine. 
+$call AdjustStats(Social + 1)
+
+
+$ActionChoice(Ignore the haters)
+// (replace:"Dunk on the haters")[]
+You keep a stiff upper lip and disregard the trolls commenting on your article.
+
+$call AdjustStats(Trust + 1)
+
+// shudder
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+$ActionChoice(Dunk on the haters)
+//(replace:"Ignore the haters")[]
+
+$if StatCheck(Tech, 3)
+You quote-resquawk some of the haters' replies with a sick own and ratio them <i>real</i> good. The clicks on your article keep going up, plus a few extra followers too!
+
+$call AdjustStats(Social + 1)
+$else
+In a bit of a tizzy, you Squawk out some ill-advised hot takes.
+
+You take a break to cool off and come back to you find that you've been cancelled by a not-insignificant portion of the website. Whoops.
+
+$call AdjustStats(Trust - 2)
+$endif
+
+
+// shudder style
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Read a book before work
+:: ReadABookBeforeWork
+@tags Bookworm
+You track down the book you grabbed from the library: a novel from local horror author, Stephanie Queen. 
+
+The book is about a tiny lakeside town being overtaken by literal cats and dogs falling from the sky, and the chaos that ensues. 
+
+Something about the fictional town of Dual Ponds feels strangely familiar...
+
+$call AdjustStats(Research + 2)
+
+// shudder style
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Answer phone
+:: AnswerPhone
+It's your editor, calling from the newsroom. 
+
+Which, according to her, is now completely flooded.
+
+"The computers are ruined," she says. "The plants are thriving, though. I always forget to water them."
+
+She gives you your next assignment: a feature on the science of flooding.
+
+$choice AssignmentScienceStory; Um... I'm not really a science writer.
+
+// Original Name: Help with the clean up
+:: HelpWithTheCleanUp
+@tags Endurance, Social
+You pitch in with the neighborhood cleanup, trading stories and gathering up debris. 
+
+The storm must've gotten pretty fierce last night. You've never seen so many headless plastic flamingos in your life. 
+
+$call AdjustStats(Endurance + 1, Social + 1)
+
+// shudder style
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Help Jim get his phone working
+:: HelpJimGetHisPhoneWorking
+@tags Trust, Techie
+Jim is a genius when it comes to granola-making, but technology isn't his thing.
+
+You turn off airplane mode so he can use his phone, and you also get him caught up with the latest 16 software updates.
+
+$call AdjustStats(Trust + 1, Tech + 1)
+
+// shudder style
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Hang Lost Chicken posters
+:: HangLostChickenPosters
+@tags Trust, Techie
+You post a bunch of signs on doors and trees and telephone poles.
+
+You even help Maureen set up a "Lost Chicken" bulletin on NeighborSquawk.com. Anything to help poor Amelia Egghart. 
+
+$call AdjustStats(Trust + 1, Tech + 1)
+
+// shudder style
+{anim rumble} RRRRING.
+$choice AnswerPhone; Answer phone
+
+// Original Name: Make an excuse and rush back inside
+:: MakeAnExcuseAndRushBackInside
+Ahh. Back in the blissful cave of your home. 
+$call AdjustStats(Social - 1)
+
+$choice MakeBreakfast; Make breakfast
+$choice CheckSocialMedia; Check social media
+$choice ReadABookBeforeWork; Read a book before work
+$choice GatherFloodGear; Gather flood gear
+
+// Original Name: Assignment: Science Story
+:: AssignmentScienceStory
+"Then it's the perfect time to learn," she says. "I need you to report on the science of how this happened, and how we can prevent it from happening again."
+
+$choice Ok.Uh...AnyTips; Ok. Uh... any tips?
+
+// Original Name: "Ok. Uh... any tips?"
+:: Ok.Uh...AnyTips
+She must hear some of the expertly hidden panic in your voice. 
+
+She sends a checklist of what you'll need for your story:
+{@article}* Expert quote: cause of flood \
+* Quote: why this story matters \
+* Flooding graphics and statistics \
+* Facts about flooding \
+* Quotes and vignettes for color \
+* One or more photos
+
+"If I were you, I'd start at the DNR," she says. "Or you could head downtown to get some color. It'd be great if you could score an interview with the mayor, but he's probably swamped." 
+
+Looks like you're gonna have to follow your own instincts on where to start. 
+
+$choice ScienceStoryMap; Got it. Thanks.
+
+// Original Name: Science Story Map
+:: ScienceStoryMap
+<b>Twin Lakes Map</b>
+
+$if FirstVisit()
+$call SetTimeRemaining(3)
+$endif
+
+
+
+$if !!HasTime(0.3333333)
+This story is due in {timeLeft}.
+What do you want to do? 
+
+$HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.3333333)
+$HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.3333333)
+$HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5)
+
+
+$set local:_localOr = false
+$if Visited(ThanksPlusUniversityContact) 
+$set local:_localOr = true
+$elseif  "Read the bulletin board in the hallway"
+
+$set local:_localOr = true
+$endif
+$if local:_localOr
+$HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.3333333)
+$endif
+
+
+$choice PhoneContacts; Phone Contacts
+$else
+$choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
+// Original Name: Phone Contacts
+:: PhoneContacts
+This story is due in {timeLeft}.
+Phone Contacts:
+
+$HubChoice(PhoneCallDNRHeadquarters, "Main DNR Number", 0.5)
+
+$if Visited(JenkinssComputer)
+$HubChoice(PhoneCallWynneD.StormeDNR, "DNR Contact: Wynne D. Storme", 0.5)
+$endif
+
+$HubChoice(PhoneCallCityHall, "City Hall Contact", 0.5)
+
+$if Visited(AskAroundForItsOwner)
+$HubChoice(PhoneCallMayorsPersonalNumber, "Mayor's Personal Number", 0.5)
+$endif
+
+
+$choice ScienceStoryMap; Back to map
+
+// Original Name: Time to assemble the science story...
+:: TimeToAssembleTheScienceStory
+Well, here goes nothing. Your first science story!
+$set storyType = "Science"
+$set snippetLimit = 6
+$set destination = "Science Story 2: Wetlands"
+$goto STORYEVALUATION
+
+// Original Name: Bike downtown to survey the damage
+:: BikeDowntownToSurveyTheDamage
+You pedal through town, weaving around abandoned cars and piles of trash.
+$call AdjustStats(Endurance + 1)
+
+All up and down the streets, people are dragging soaked furniture outside and shoring up sandbags.
+
+
+$if Visited(HelpHer)
+From down a side street, you hear a soft clucking. Did another of Maureen's chickens escape its coop??
+$else
+From down a side street, you hear a soft clucking. Amelia Egghart???
+$endif
+
+
+$choice FollowTheChicken; Follow the chicken <color="purple">(10 minutes)</color>
+$choice MainStreetFloodRecovery; Head straight to Main Street
+
+// Original Name: DNR Map
+:: DNRMap
+<b>Location: DNR Headquarters</b>
+This story is due in {timeLeft}.
+
+Turns out even the DNR headquarters isn't safe from flooding!
+
+Workers are airing out the hallways with giant fans. The carpets squelch like swampland under your feet.
+
+$HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.3333333)
+$HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.3333333)
+$HubChoice(RunIntoTheMayorInHallway, "Head out", 0.3333333)
+
+
+$if Visited(JenkinssComputer)
+$HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.3333333)
+$endif
+
+
+$choice ScienceStoryMap; Time to head back
+
+// Original Name: Gather flooding info from academic papers
+:: GatherFloodingInfoFromAcademicPapers
+
+$if StatCheck(Research, 3)
+You get online and find several academic papers about flooding! 
+
+As a proud bookworm, you have no problem deciphering the info. 
+
+You end up with tons of great background on the Twin Lakes watershed, plus some graphics for your article!
+
+$call GiveSnippet(ScienceOfFlooding)
+$call GiveSnippet(FloodProbability)
+$else
+You end up with a ton of handwritten notes about the science of flooding!
+
+Now if only you had a clue what any of it meant, or what all these confusing-looking diagrams were for...
+
+$call GiveSnippet(FloodMumboJumbo)
+$call GiveSnippet(ConfusingGraphic)
+$endif
+
+
+$choice ScienceStoryMap; Science Story Map
+
+// Original Name: Department of Limnology
+:: DepartmentOfLimnology
+You arrive at the Department of Limnology, located right on the lake.
+
+The dock is covered in murky, greenish water.
+
+People are rushing in and out of the boathouse, bailing out water. 
+
+
+$if !!HasTime(0.3333333)
+$HubChoice(PhotographFloodedDock, "Take some pictures of the flooded dock", 0.25)
+$choice LookForSomeoneToInterview; Look for someone to interview 
+$choice ScienceStoryMap; Science Story Map
+$else
+$choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
+// Original Name: Phone Call: DNR Headquarters
+:: PhoneCallDNRHeadquarters
+You call the DNR Headquarters. 
+
+The person you reach sounds a little distracted, but he's willing to talk!
+
+He tells you the cause of the flooding: extreme rainfall, and less places (like rain gardens and wetlands) for water to go.  
+
+"This flood has already forced people out of their homes and caused millions of dollars in damages," he says. "We need better policies to prevent this kind of disaster in the future."
+
+$call GiveSnippet(BasicFloodBackground)
+$call GiveSnippet(BasicFloodPrevention)
+
+$choice PhoneContacts; Phone Contacts
+$choice ScienceStoryMap; Map
+
+// Original Name: Phone Call: Wynne D. Storme @ DNR
+:: PhoneCallWynneD.StormeDNR
+"Oh, hi!" she says. "You're that new reporter, right?"
+
+
+$if StatCheck(Social, 5)
+She sounds busy, but your conversational skills seem to put her at ease.
+
+She gives you a ton of great info and statistics: 
+
+Since 1900, rainfall in Twin Lakes has increased by roughly 10%.
+
+The volume of the river that connects the two lakes is up by 40%.
+
+Oh, and Upper Lake is being kept 5 feet higher than its normal level.
+
+"It's basically a perfect storm," she says. 
+
+$call GiveSnippet(DetailedFloodBackground)
+$call GiveSnippet(FloodsAndClimateChange)
+$call GiveSnippet(CauseOfFlood)
+$elseif StatCheck(Research, 5)
+She's excited to talk to someone who's so well-informed on floods and climate change.
+
+She gives you a ton of great info and statistics: 
+
+Since 1900, rainfall in Twin Lakes has increased by roughly 10%. 
+
+The volume of the river that connects the two lakes is up 40%.
+
+Oh, and Upper Lake is being kept 5 feet higher than its normal level.
+
+"It's basically a perfect storm," she says. 
+
+$call GiveSnippet(DetailedFloodBackground)
+$call GiveSnippet(FloodsAndClimateChange)
+$call GiveSnippet(CauseOfFlood)
+$else
+She doesn't seem interested in socializing much, but she does give you some quick background on severe weather in Twin Lakes. 
+
+"Over time, storms in Twin Lakes are becoming more severe AND more frequent," she says. "We've had a lot of floods around here, but this one was by far the worst."
+
+$call GiveSnippet(BasicFloodBackground)
+$endif
+
+
+$choice PhoneContacts; Phone Contacts
+$choice ScienceStoryMap; Map
+
+// Original Name: Phone Call: City Hall
+:: PhoneCallCityHall
+You call City Hall, but it's impossible to really get through to anyone.
+
+You ask about the science behind the flooding, but they give you a clearly prewritten statement:
+
+"We're still working to mitigate damage from the flood. We're working to get sandbags to the right locations and evacuate people from at-risk areas. Feel free to check our website for more info!"
+
+<i>Get unscientific statement about flood damage</i>
+
+$choice PhoneContacts; Phone Contacts
+$choice ScienceStoryMap; Map
+
+// Original Name: Phone Call: Mayor's Personal Number
+:: PhoneCallMayorsPersonalNumber
+The mayor has already heard about how you rescued poor Omelette!
+
+He's happy to talk with you and give you some type of quote.
+
+$choice PhoneContacts; Phone Contacts
+
+// Original Name: Follow the chicken
+:: FollowTheChicken
+You race around the corner like an Olympic biker out for gold.
+$call AdjustStats(Endurance + 1)
+$call DecreaseTime(0.1666667)
+There's a chicken wandering in circles in the middle of a puddle!
+
+$choice CallYourNeighborAndSeeIfItsHers; Call your neighbor and see if it's hers <color="purple">(10 minutes)</color>
+$choice AskAroundForItsOwner; Ask around for its owner <color="purple">(20 minutes)</color>
+
+// Original Name: Main Street Flood Recovery
+:: MainStreetFloodRecovery
+<b>LOCATION MAP: MAIN STREET</b>
+This story is due in {timeLeft}.
+
+Main Street is cordoned off. 
+
+The floodwater has gone down, but there's mud and debris everywhere. 
+
+You duck under the barricade and take a look around.
+
+
+$if !!HasTime(0.3333333)
+$choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
+$choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
+$HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.3333333)
+
+$choice ScienceStoryMap; Twin Lakes Map 
+$else
+$choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
+// Original Name: Knock on the nearest office door
+:: KnockOnTheNearestOfficeDoor
+You find an office with a handwritten sign on the door: <i>Knock for math puns.</i>
+
+"Oh, hi there!" the DNR worker says, looking up from his computer. "Wanna hear a joke?"
+
+$choice MathJoke; Sure, why not?
+$choice NoThanks; No thanks.
+
+// Original Name: Read the bulletin board in the hallway
+:: ReadTheBulletinBoardInTheHallway
+There are articles and flyers taped up. A few of them catch your eye:  
+
+TWIN LAKES COLLEGE GAZETTE:
+<b>Twin Lakes in danger of catastrophic flood!
+by Sarah McCloud, climate researcher at the Dept. of Limnology</b>
+
+FLYER:
+<b>Why lower lake levels?
+* Prevent shoreline erosion
+* Stop flooding
+* Prepare for extreme weather
+Mayor Johnson is pushing to have the lake levels lowered! Hear more at this week's Town Hall meeting. 
+</b>
+<color="magenta"><i>Gained new location: Department of Limnology</i></color>
+
+$call GiveSnippet(LakeLevelBackground)
+
+$choice KnockOnTheNearestOfficeDoor; Knock on the nearest office door
+$choice LookForYourDNRContactWynneD.Storme; Look for your DNR Contact, Wynne D. Storme
+
+// Original Name: Run into the mayor in hallway
+:: RunIntoTheMayorInHallway
+As you're leaving, you literally run into someone.
+
+"Ope, sorry," he says, straightening his glasses.
+
+You recognize him from all the local press conferences: Barry Johnson, the mayor of Twin Lakes!
+
+$choice InterviewMayor; Ask for an interview <color="purple">(20 minutes)</color>
+$choice ScienceStoryMap; Gotta go!
+
+// Original Name: Look for your DNR Contact, Wynne D. Storme
+:: LookForYourDNRContactWynneD.Storme
+
+$if !Visited(PhoneCallWynneD.StormeDNR)
+"Oh, hi!" she says. "You're that new reporter, right?"
+
+$if StatCheck(Social, 5)
+She's busy and stressed, but your conversational skills seem to put her at ease.
+
+She gives you a ton of great info and statistics: 
+
+Since 1900, rainfall in Twin Lakes has increased by roughly 10%.
+
+The volume of the river that connects the two lakes is up by 40%.
+
+Oh, and Upper Lake is being kept 5 feet higher than its normal level.
+
+"It's basically a perfect storm," she says. 
+
+$call GiveSnippet(DetailedFloodBackground)
+$call GiveSnippet(FloodsAndClimateChange)
+$call GiveSnippet(CauseOfFlood)
+$elseif StatCheck(Research, 5)
+She's excited to talk to someone who's so well-informed on floods and climate change.
+
+She gives you a ton of great info and statistics: 
+
+Since 1900, rainfall in Twin Lakes has increased by roughly 10%. 
+
+The volume of the river that connects the two lakes is up 40%.
+
+Oh, and Upper Lake is being kept 5 feet higher than its normal level.
+
+"It's basically a perfect storm," she says. 
+
+$call GiveSnippet(DetailedFloodBackground)
+$call GiveSnippet(FloodsAndClimateChange)
+$call GiveSnippet(CauseOfFlood)
+$else
+She doesn't seem interested in socializing much, but she does give you some quick background on severe weather in Twin Lakes. 
+
+"Over time, storms in Twin Lakes are becoming more severe AND more frequent," she says. "We've had a lot of floods around here, but this one was by far the worst."
+
+$call GiveSnippet(BasicFloodBackground)
+$endif
+
+$else
+"Oh, hey there!" she says. "I enjoyed our talk on the phone, I'm looking forward to seeing what you publish!"
+
+$call AdjustStats(Trust + 1)
+$endif
+
+
+$choice RunIntoTheMayorInHallway; Look for someone else to talk to
+$choice ReadTheBulletinBoardInTheHallway; Read the bulletin board in the hallway
+
+// Original Name: Look for someone to interview
+:: LookForSomeoneToInterview
+You try to catch someone as they run by, but he's too busy to talk. 
+
+"Sorry," he says. "We've got a lot of damage control to do here."
+
+$HubChoice(HelpBailOutWaterFromBoathouse, "Help bail out water from boathouse", 0.25)
+$HubChoice(GrabCoffeeForTheLimnologyDepartment, "Grab coffee for the Limnology Department", 0.5)
+$choice DepartmentOfLimnology; Head back to the docks
+
+// Original Name: Photograph flooded dock
+:: PhotographFloodedDock
+The dock is covered with murky-looking water. The lighting is great--you get some photos of an eerie blue-green shine on the water. More artful than journalistic, but hey - they'll make a great addition to your collection.
+
+As you turn to leave, you bump into someone--a researcher in knee-high boots and waders. Her nametag says "S. McCloud." 
+
+"Hey!" she says. "Careful out here, that's toxic blue-green algae. I'm here to take some samples."
+
+$choice QuickInterviewLimnologyExpert; Ask if she has time to talk
+
+$if Visited(ThanksPlusUniversityContact)
+$choice TellHerYouMetHerSister; Tell her you met her sister!
+$endif
+
+// Original Name: Call your neighbor and see if it's hers
+:: CallYourNeighborAndSeeIfItsHers
+$call DecreaseTime(0.1666667)
+
+$if Visited(HelpHer)
+You call Maureen. "Hey! Um, weird question... did any more of your chickens fly the coop?"
+
+"Hmm? Nope, we're all fine here. No signs of fowl play. Thank you, though, Dear!" 
+$call AdjustStats(Trust + 1)
+
+She hangs up, leaving you with a strange chicken staring up at you hopefully. 
+
+$choice AskAroundForItsOwner; Ask around for its owner <color="purple">(20 minutes)</color>
+$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+$else
+You call Maureen. "Hey!! I think I found your chicken!"
+
+"Amelia Egghart? Oh, she actually just showed up back home! Thank you for calling, though!"
+$call AdjustStats(Trust + 1)
+
+"But..."
+
+"Sorry, Dear, gotta go. Amelia's a bit peckish."
+
+She hangs up, leaving you with a strange chicken staring up at you hopefully. 
+
+$choice AskAroundForItsOwner; Ask around for its owner <color="purple">(20 minutes)</color>
+$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+$endif
+
+// Original Name: Ask around for its owner
+:: AskAroundForItsOwner
+You wander the area, the rumpled chicken in your arms.
+$call DecreaseTime(0.3333333)
+You're about to give up when a woman in a messy ponytail runs over to you. 
+
+"Oh, you found Omelette! Thank you so much! My daughter was heartbroken."
+
+$call AdjustStats(Trust + 1)
+
+You hand over the pet chicken with relief, wondering whatever happened to cats and dogs and hamsters. 
+
+$choice NoProblem.IBetterGoIveGotAStoryToWrite; No problem. I better go, I've got a story to write.
+
+// Original Name: Main Street Gallery Owner
+:: MainStreetGalleryOwner
+The gallery owner is hanging soggy art prints on a clothesline and grumbling under his breath.
+
+His art is mostly abstract--blue-green swirls and squiggles, close-ups of greenish beads, eerie chartreuse umbrellas.
+
+$choice AskToInterviewHim; Ask to interview him
+$choice AskIfHeNeedsHelp; Ask if he needs help
+$choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work <color="purple">(10 minutes)</color>
+
+// Original Name: Main Street Cafe
+:: MainStreetCafe
+You walk into the cafe on a bridge of wet cardboard. 
+
+The owner is sitting on a table to keep her feet dry, muttering insults at her malfunctioning laptop.   
+
+Her eyes light up when she notices you.
+
+"Oh, I didn't see ya there! What can I getcha?"
+
+$choice InterviewCafeOwner; Ask to interview her
+$HubChoice(OrderTheDailySpecial, "Order the daily special", 0.25)
+$HubChoice(HelpWithHerComputer, "{@me} Actually, do you need help with that laptop?", 15)
+
+// Original Name: Take photos of the debris
+:: TakePhotosOfTheDebris
+
+$if StatCheck(Tech, 3) , StatCheck(Trust, 4)
+You get some amazing photos of Main Street!
+
+The business owners all agree to let you use pictures of them alongside your article.
+
+"I read your article yesterday," one of the shop owners says. "You're one of the good ones. Happy to help."
+
+$call GiveSnippet(InspiringDowntownRecovery)
+$endif
+
+$if StatCheck(Tech, 3) , !StatCheck(Trust, 4)
+You get some amazing photos of Main Street!
+
+You ask the business owners in the shot if they're okay with you using their picture.
+
+Some of them agree, but others aren't so sure.
+
+"Sorry," they say. "How can I trust that you won't make me look stupid?"
+
+Well, you can still use these photos, if you crop some of the people out...
+
+$call GiveSnippet(DowntownRecovery)
+$endif
+
+$if !StatCheck(Tech, 3)
+Uh oh. Your phone screen is on the fritz and you have no idea how to fix it! 
+
+Maybe it's water damage? Low battery? Some kind of 100-year-flood curse? 
+
+You snap a few random photos and hope for the best.
+
+$call GiveSnippet(BlurryDowntownRecovery)
+$endif
+
+
+$choice MainStreetFloodRecovery; Keep looking around
+
+// Original Name: Math joke!
+:: MathJoke
+"Ok, ok, let's see... Did you hear the one about the law of averages? I'd tell it to you, but it's too <i>mean.</i>" He grins. 
+
+
+$if StatCheck(Research, 4)
+Ha! You've been reading up on statistics lately--you can top that one. 
+
+"Did you hear about the haunted graph?" you say. "It had paranormal distribution." 
+
+He grins. "Not bad, kid. Not bad."
+
+$choice GoodDNRInterview; Interview DNR Worker.
+$endif
+
+$if StatCheck(Tech, 4)
+Ha! Being a techie with a back pocket full of computer jokes, you can definitely top that one.
+
+"Did you hear about the computer that was full of bugs?" you say. "It had a broken screen." 
+
+He grins. "Ha! Not bad, kid."
+
+$choice GoodDNRInterview; Interview DNR Worker.
+$else
+"Um.... good one!" you say, the joke flying right over your non-techie, non-bookworm head. "Can I ask you some questions about the flood?"
+
+He looks slightly disappointed. "Well, I don't have time for an interview. I could give you a statement, though."
+
+$choice DNRStatement; Get DNR Statement
+$endif
+
+// Original Name: "No thanks."
+:: NoThanks
+He doesn't seem to hear you. 
+
+$goto MathJoke
+
+// Original Name: Interview mayor
+:: InterviewMayor
+"Sure thing," the mayor says. "I'd be happy to answer a couple questions." 
+$call DecreaseTime(0.3333333)
+This will be an amazing boost for your article, but you try to play it cool. 
+
+$choice WhatKindOfImpactWillThisFloodHaveOnTwinLakes; What kind of impact will this flood have on Twin Lakes?
+$choice WhatIsTheCityDoingToStopThisFromHappeningAgain; What is the city doing to stop this from happening again?
+
+// Original Name: Help bail out water from boathouse
+:: HelpBailOutWaterFromBoathouse
+You follow the scientist into the boathouse. 
+
+Several people are inflating a portable dam to stop the water, while others bail out the water that's already there.
+
+You grab your extra-large water bottle and join in, scooping out floodwater. 
+
+"Thanks!" the scientist says. "I guess I could do a quick interview while we work. Just make sure not to accidentally drink from that bottle later. This floodwater is nasty stuff."
+
+$HubChoice(InterviewScientist, "Well, let's get started then...", 0.25)
+$choice DepartmentOfLimnology; ...actually, I gotta go!
+
+// Original Name: Grab coffee for the Limnology Department
+:: GrabCoffeeForTheLimnologyDepartment
+@tags Social
+You bike to a campus coffee shop and order as many coffees as you can carry! 
+
+When you get back, the scientists pause in their work, drawn to the tantalizing aroma of medium roast. 
+$call AdjustStats(Social + 1)
+
+"Thanks!" says the scientist from earlier. "I guess I could do a quick interview over coffee."
+
+$HubChoice(InterviewScientist, "Well, let's get started then...", 0.25)
+$choice DepartmentOfLimnology; ...actually, I gotta go!
+
+// Original Name: Quick Interview: Limnology Expert
+:: QuickInterviewLimnologyExpert
+
+$if !StatCheck(Social, 4)
+"Well..... I guess I could chat for a minute," she says.
+
+She tells you about one of the main causes of the flooding: more extreme weather from climate change. 
+
+"We're going to keep seeing more and more heavy rain," she says. "The town is going to need to make some changes if it wants to survive. Sorry, wish I could talk more, but I gotta run."
+
+$call GiveSnippet(BasicFloodBackground)
+
+
+$if !Visited(LookForSomeoneToInterview)
+$choice LookForSomeoneToInterview; Look for someone else to talk to
+$endif
+
+$choice ScienceStoryMap; Back to Twin Lakes Map
+$endif
+
+$if StatCheck(Social, 4)
+She seems busy, but your social graces win her over. 
+
+"Sure," she says, "I'd be happy to talk!" 
+
+$HubChoice(InterviewScientist, "Well, let's get started then...", 0.25)
+$choice DepartmentOfLimnology; ...actually, I gotta go!
+$endif
+
+// Original Name: Tell her you met her sister!
+:: TellHerYouMetHerSister
+"I met your sister this morning," you say. "Her cafe is amazing!"
+
+"Aww! How's she doing? Did she make you her world-famous PB&J? Sourdough and cherry preserves....it's the best in town."
+
+When she hears that you helped out her sister, she's happy to do an in-depth interview!
+
+$HubChoice(In-DepthInterviewLimnologyExpert, "Well, let's get started then!", 0.5)
+$choice DepartmentOfLimnology; ...actually, I gotta get going!
+
+// Original Name: Leave the chicken to fend for itself
+:: LeaveTheChickenToFendForItself
+The chicken will be fine. It looks fully capable.
+
+You jump back on your bike and continue downtown.
+
+$choice MainStreetFloodRecovery; Arrive at Main Street
+
+// Original Name: "No problem. I better go, I've got a story to write.
+:: NoProblem.IBetterGoIveGotAStoryToWrite
+The woman looks surprised. "Oh, you're a reporter? You should talk to my brother! He'll know all the details."
+
+She scribbles down her brother's contact info: <i>Barry Zingerman, 555-1678</i>
+
+
+$ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
+
+
+"Oh, you've heard of him? Give him a call. Tell him you rescued his niece's pet. I'm sure he'd love to chat."
+
+<i>Get Mayor's Contact Info</i>
+
+$choice PhoneContacts; Open Phone Contacts
+$choice MainStreetFloodRecovery; Keep biking toward Main Street
+
+
+$choice ScienceStoryMap; Science Story Map
+
+// Original Name: Ask to interview him
+:: AskToInterviewHim
+He doesn't even glance at you. "Do I look like I'm in a chatty mood?"
+
+$choice AskIfHeNeedsHelp; Ask if he needs help
+$choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
+$choice MainStreetFloodRecovery; Leave him alone. There must be someone else you can talk to.
+
+// Original Name: Ask if he needs help
+:: AskIfHeNeedsHelp
+"Hmm. Let's see. My gallery is totally destroyed. The storm kept me up all night. And all I had for breakfast was tic tacs and oyster crackers. Would <i>you</i> say I need help?"
+
+$choice OfferHimSomeFood; Offer him some food
+$HubChoice(HelpHimCarryFurnitureOutside, "Help him carry furniture outside", 0.25)
+$choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
+
+// Original Name: Tell him you're a big fan of his work
+:: TellHimYoureABigFanOfHisWork
+
+$if StatCheck(Social, 4)
+"Really?" he says, sounding doubtful. 
+
+"Yeah, I saw your new art installation at the ice cream social! Sorry you got caught in the flood."
+
+"Well," he says, more cheerful now, "this is my series on toxic lakewater bacteria, so it's actually pretty meta. I'm guessing these prints are soaked with it by now."
+
+He's so excited you've heard of his work that he agrees to an interview!
+
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 0.33333)
+$choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
+$endif
+
+$if !StatCheck(Social, 3)
+"Sure you are," he says. "Tell me one thing you like about my paintings."
+
+"They're very.... um.... green?"
+
+He rolls his eyes. "You can't butter me up that easy. If you'll excuse me, I've got some cleaning up to do."
+
+$choice MainStreetFloodRecovery; Well, you tried. Better leave this guy alone.
+$endif
+
+// Original Name: Interview Cafe Owner
+:: InterviewCafeOwner
+
+$if Visited(OrderTheDailySpecial)
+"Of course!" she says. "It's the least I can do for a fellow PB&J lover."
+$elseif Visited(HelpWithHerComputer)
+"You dealt with that migraine-inducing nightmare of a website," she says. "It's the least I can do."
+$else
+Her face falls. "Sure, I guess. It's not like I've got any customers, anyhow."
+$endif
+
+
+$HubChoice(InterviewQuestionsCafeOwner, "Well, let's get started then...", 0.25)
+$choice MainStreetFloodRecovery; ...nevermind, I gotta go!
+
+// Original Name: Order the daily special
+:: OrderTheDailySpecial
+@tags Endurance
+"Great!" She rummages around behind the counter and comes back with peanut butter and jelly on white bread.
+
+"Um, sorry," she says sheepishly. "The storm knocked out the power. No oven, no fridge." 
+
+"No problem," you tell her honestly. It's the best peanut butter and jelly you've ever tasted. 
+
+$call AdjustStats(Endurance + 1)
+
+$choice InterviewCafeOwner; Ask for a quick interview while you eat
+
+// Original Name: Help with her computer
+:: HelpWithHerComputer
+"I don't know why they make this so impossible," she says, struggling with a very glitchy flood insurance website.
+
+
+$if StatCheck(Tech, 4)
+Luckily, you're able to use your tech savvy and save the day!
+
+$choice InterviewCafeOwner; Ask if she has time for an interview
+$else
+You try to help, but you're as clueless about tech stuff as she is.
+$endif
+
+
+$choice OrderTheDailySpecial; Ask to order food
+$choice MainStreetFloodRecovery; Head back out to Main Street. She seems too busy to talk.
+
+// Original Name: Good DNR Interview
+:: GoodDNRInterview
+You sit down with the DNR worker and polish off your interviewing skills.
+
+$choice WhatWasTheCauseOfTheFlood; What was the cause of the flood?
+$choice HasTwinLakesEverHadAFloodLikeThisBefore; Has Twin Lakes ever had a flood like this before?
+
+// Original Name: DNR Statement
+:: DNRStatement
+He tells you the cause of the flooding: extreme rainfall, and less places (like rain gardens and wetlands) for water to go.  
+
+"This flood has already forced people out of their homes and caused millions of dollars in damages," he says. "We need better policies to prevent this kind of disaster in the future."
+
+$call GiveSnippet(BasicFloodBackground)
+$call GiveSnippet(BasicFloodPrevention)
+
+$choice DNRMap; DNR Map
+
+// Original Name: "What kind of impact will this flood have on Twin Lakes?"
+:: WhatKindOfImpactWillThisFloodHaveOnTwinLakes
+"It will be a long recovery, with millions of dollars in damages," he says. "Right now I'm just hoping we don't get another storm this week--I don't think the watershed could take it." 
+
+$call GainSnippet(Mayor-Impact)
+
+$choice WhatIsTheCityDoingToStopThisFromHappeningAgain; What is the city doing to stop this from happening again?
+
+// Original Name: "What is the city doing to stop this from happening again?"
+:: WhatIsTheCityDoingToStopThisFromHappeningAgain
+"Of course we're working on getting sandbags to the right people," he says. "But in the long-term, that won't be enough. We need new policies. I'm hoping this disaster will push people to make some changes around here."
+
+$call GainSnippet(Mayor-Response)
+
+$choice WhatKindOfNewPolicies; What kind of new policies?
+$choice WhatKindOfImpactWillThisFloodHaveOnTwinLakes; What kind of impact will this flood have on Twin Lakes?
+
+// Original Name: Interview scientist
+:: InterviewScientist
+$choice WhatCausedTheFlood; What caused the flood?
+$choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening next time?
+
+$choice ScienceStoryMap; Twin Lakes Map
+
+// Original Name: In-Depth Interview: Limnology Expert
+:: In-DepthInterviewLimnologyExpert
+She tells you how she predicted the flood would happen. 
+
+"Twin Lakes is super vulnerable to flooding," she says. "We're got water on two sides! That, plus the higher lake levels... it was a disaster waiting to happen."
+
+$choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
+$choice AskIfSheHasGraphicsYouCanUse; Ask if she has graphics you can use
+
+// Original Name: Offer him some food
+:: OfferHimSomeFood
+
+$if StatCheck(Resourceful, 4)
+You look through your bag. Luckily, you came prepared! 
+
+You give him a locally-made protein bar and a bottle of water. 
+
+"Thanks," he says, looking grateful. "I guess I could do a quick interview, while you're here."
+
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 20)
+$choice MainStreetFloodRecovery; ...actually, I gotta get going!
+$else
+You dig through your bag for something to offer him, but come up empty.
+
+He looks frustrated. "Can I get back to work now?"
+
+You better leave this guy alone.
+
+$choice MainStreetFloodRecovery; Find someone else to talk to.
+$endif
+
+// Original Name: Help him carry furniture outside
+:: HelpHimCarryFurnitureOutside
+
+$if StatCheck(Endurance, 4)
+The gallery owner looks impressed as you help him carry out a sofa, table, and several easels.
+
+"Are you a weightlifter?" he asks. 
+
+
+$set local:_localOr = false
+$if Visited(HelpHer) 
+$set local:_localOr = true
+$elseif  Visited(FollowTheChicken)
+
+$set local:_localOr = true
+$endif
+$if local:_localOr
+"Nah, I just eat lots of antioxidants and spend a lot of time chasing after chickens."
+$elseif Visited(Yogurt)
+"Nah, I just steal people's yogurt and spend a lot of time biking around town."
+$else
+"Nah, I just eat lots of antioxidants and carry about a hundred pounds of gear around town."
+$endif
+
+
+He's so thankful for your help that he agrees to a quick interview!
+
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 20)
+$choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
+$else
+You try to help him lift a sofa--no luck.
+
+You forgot, manual labor isn't exactly your thing. 
+
+"No offense," he says, "but I've got a lot of work to do here."
+
+$choice MainStreetFloodRecovery; Find someone else to talk to.
+$endif
+
+// Original Name: Interview Gallery Owner
+:: InterviewGalleryOwner
+He tells you this is his third year running the gallery. The damage from this flood could cost him thousands of dollars. 
+
+"We've had a little flooding every year, but nothing like this," he says. "It was like a disaster movie out there. I gotta tell ya, a lot of downtown businesses are hurting." 
+
+$call GiveSnippet(ArtBusinessImpact)
+
+$choice MainStreetFloodRecovery; Thank him and let him get back to work
+
+// Original Name: Interview Questions: Cafe Owner
+:: InterviewQuestionsCafeOwner
+
+$if !Visited(HowHasTheFloodAffectedYourBusiness)
+$choice HowHasTheFloodAffectedYourBusiness; How has the flood affected your business?
+$endif
+
+
+$if !Visited(AreYouWorriedAboutMoreRainComing)
+$choice AreYouWorriedAboutMoreRainComing; Are you worried about more rain coming?
+$endif
+
+
+$if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
+$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How do you think it'll impact Twin Lakes if the flooding keeps up?
+$endif
+
+
+
+$set local:_localOr = false
+$if Visited(OrderTheDailySpecial) 
+$set local:_localOr = true
+$elseif  Visited(HelpWithHerComputer)
+
+$set local:_localOr = true
+$endif
+$if local:_localOr
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
+// Original Name: "What was the cause of the flood?"
+:: WhatWasTheCauseOfTheFlood
+"I'd say the flood was caused by a couple factors," he says. "Extreme rainfall, and less places for that water to go."
+
+$call GiveSnippet(CauseOfFlood)
+
+$choice CanYouGiveMeTheRainfallStatistics; Can you give me the rainfall statistics?
+$choice WhatDoYouMeanLessPlacesForTheWaterToGo; What do you mean, less places for the water to go?
+
+// Original Name: "Has Twin Lakes ever had a flood like this before?"
+:: HasTwinLakesEverHadAFloodLikeThisBefore
+"We deal with flash flooding all the time," he says, "but it's never been this serious before. With climate change, it'll only keep getting worse unless we do something."
+
+$call GiveSnippet(ImpactOfFlood)
+
+$choice CanYouGiveMeTheRainfallStatistics; Can you give me the rainfall statistics?
+$choice HowMuchFinancialDamageHasTheFloodCaused; How much financial damage has the flood caused?
+$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+
+// Original Name: "What kind of new policies?"
+:: WhatKindOfNewPolicies
+"I've been fighting for years to get those lake levels down," he tells you. "A lot of people don't like the idea. They think it'll ruin tourist season, or ruin their docks. But we won't have ANY tourists if floods keep destroying the town every year!"
+
+$call GainSnippet(Mayor-Policies)
+
+$choice ScienceStoryMap; Science Story Map
+
+// Original Name: "What caused the flood?"
+:: WhatCausedTheFlood
+He tells you a big part of the problem is climate change and higher lake levels. 
+
+"Extreme weather events are happening more often," he says. "The city is going to need to make some big changes to keep people safe."
+
+$call GiveSnippet(CauseOfFlood)
+$call GiveSnippet(BasicFloodBackground)
+
+$choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening next time?
+$choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake levels.
+
+
+$if !Visited(PhotographFloodedDock)
+$choice PhotographFloodedDock; Thank him and go take photos of the dock
+$endif
+
+
+$choice ScienceStoryMap; Twin Lakes Map
+
+// Original Name: "How can the city prevent this from happening next time?"
+:: HowCanTheCityPreventThisFromHappeningNextTime
+He tells you it'll take more than just some sandbags.
+
+"This is a long-term, city-wide problem," he says. "We need to work on some engineered solutions. The problem is, it'll be VERY expensive."
+
+$call GiveSnippet(BasicFloodBackground)
+$call GiveSnippet(BasicFloodPrevention)
+
+
+$if !Visited(WhatCausedTheFlood)
+$choice WhatCausedTheFlood; What caused the flood?
+$endif
+
+
+$choice WhatDoYouMeanEngineeredSolutions; What do you mean, engineered solutions?
+
+
+$if !Visited(PhotographFloodedDock)
+$choice PhotographFloodedDock; Thank him and go take photos of the dock
+$endif
+
+
+$choice ScienceStoryMap; Twin Lakes Map
+
+// Original Name: Ask what people can do to help
+:: AskWhatPeopleCanDoToHelp
+"Welllll... it's complicated," she says. "For now, filling sandbags and helping people find shelter is probably the best thing you could do. But we also need long-term solutions."
+
+$choice CanYouGiveMeSomeExamples; Can you give me some examples?
+
+// Original Name: Ask if she has graphics you can use
+:: AskIfSheHasGraphicsYouCanUse
+"Oh, totally!" she says, pulling some files up on her phone. "I've got tons of great visuals in my research."
+
+$call GiveSnippet(RainfallStats)
+
+$choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
+$choice DepartmentOfLimnology; Thank her for her help
+
+// Original Name: "How has the flood affected your business?"
+:: HowHasTheFloodAffectedYourBusiness
+"Oy." She shakes her head. "It's a disaster. The Cherry Festival is usually my busiest week of the year. Now you're the first customer I've seen all morning."
+
+
+$if !Visited(AreYouWorriedAboutMoreRainComing)
+$choice AreYouWorriedAboutMoreRainComing; Are you worried about more rain coming?
+$endif
+
+
+$if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
+$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How do you think it'll impact Twin Lakes if the flooding keeps up?
+$endif
+
+
+
+$set local:_localOr = false
+$if Visited(OrderTheDailySpecial) 
+$set local:_localOr = true
+$elseif  Visited(HelpWithHerComputer)
+
+$set local:_localOr = true
+$endif
+$if local:_localOr
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
+// Original Name: "Are you worried about more rain coming?"
+:: AreYouWorriedAboutMoreRainComing
+"Well, yah. Of course I am."
+
+
+$if !Visited(HowHasTheFloodAffectedYourBusiness)
+$choice HowHasTheFloodAffectedYourBusiness; How has the flood affected your business?
+$endif
+
+
+$if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
+$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How do you think it'll impact Twin Lakes if the flooding keeps up?
+$endif
+
+
+
+$set local:_localOr = false
+$if Visited(OrderTheDailySpecial) 
+$set local:_localOr = true
+$elseif  Visited(HelpWithHerComputer)
+
+$set local:_localOr = true
+$endif
+$if local:_localOr
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
+// Original Name: "How do you think it'll impact Twin Lakes if the flooding keeps up?"
+:: HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp
+"The city needs to do somethin' to stop flooding before it's too late," she says. "It's only gonna keep getting worse, ya know. Climate change and all that." 
+
+
+$if !Visited(HowHasTheFloodAffectedYourBusiness)
+$choice HowHasTheFloodAffectedYourBusiness; How has the flood affected your business?
+$endif
+
+
+$if !Visited(AreYouWorriedAboutMoreRainComing)
+$choice AreYouWorriedAboutMoreRainComing; Are you worried about more rain coming?
+$endif
+
+
+
+$set local:_localOr = false
+$if Visited(OrderTheDailySpecial) 
+$set local:_localOr = true
+$elseif  Visited(HelpWithHerComputer)
+
+$set local:_localOr = true
+$endif
+$if local:_localOr
+$choice ThanksPlusUniversityContact; Thank her for her time
+$else
+$choice Thanks; Thank her for her time
+$endif
+
+// Original Name: Thanks, plus university contact
+:: ThanksPlusUniversityContact
+"No problem," she says. "And since you helped me out, I've got a tip for ya! You oughta talk to my sister, Sarah McCloud--she's a researcher at the college. They basically predicted this flood, but nobody listened."
+
+She gives you the address for the Department of Limnology.
+
+"Thanks again!" she says. "Stop by any time."
+
+<color="magenta"><i>Gained new location: Department of Limnology</i></color>
+
+$choice MainStreetFloodRecovery; Back to Main Street
+$choice ScienceStoryMap; Twin Lakes Map
+
+// Original Name: Thanks
+:: Thanks
+"No problem," she says. "Stop by any time!"
+
+$choice MainStreetFloodRecovery; Back to Main Street
+$choice ScienceStoryMap; Twin Lakes Map
+
+// Original Name: "Can you give me the rainfall statistics?"
+:: CanYouGiveMeTheRainfallStatistics
+"We got an average of 14 inches of rain within 24 hours," he says. "That's the worst rain to hit Twin Lakes since 1957! Of course, back then the flooding wasn't so bad."
+
+$call GiveSnippet(RainfallStats)
+
+$choice HowMuchFinancialDamageHasTheFloodCaused; How much financial damage has the flood caused?
+$choice WhatDoYouMeanLessPlacesForTheWaterToGo; Why was this flood so much worse than in 1957?
+
+// Original Name: "What do you mean, less places for the water to go?"
+:: WhatDoYouMeanLessPlacesForTheWaterToGo
+"The lakes are being kept extra high," he says. "Plus, a lot of our wetlands have been covered up by new developments. Yesterday's rain was more than the area could handle."
+
+$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+$choice WhyAreTheLakesBeingKeptSoHigh; Why are the lakes being kept so high?
+
+// Original Name: "How much financial damage has the flood caused?"
+:: HowMuchFinancialDamageHasTheFloodCaused
+"We're estimating $50 million in damages, just to Twin Lakes," he says. "I'm sure it'll be much more once we look at the damage to cherry farms outside of town." 
+
+<i>Get great quote: flood impact</i>
+<i>Get stats: flood damage</i>
+
+$choice HasTwinLakesEverHadAFloodLikeThisBefore; Has Twin Lakes ever had a flood like this before?
+$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+
+// Original Name: "How can we stop this from happening again?"
+:: HowCanWeStopThisFromHappeningAgain
+"Hate to say it, but sandbags aren't going to be enough," he said. "We need better policies if we want the town to survive."
+
+<i>Get great quote: flood prevention</i>
+<i>Get expert info: flood prevention</i>
+
+$choice WhatKindOfPolicies; What kind of policies?
+
+// Original Name: "Tell me more about the high lake levels."
+:: TellMeMoreAboutTheHighLakeLevels
+"Well, I'm not an expert on this part, but I know the lakes are being kept  high on purpose," he says. "The city uses the dam to keep Upper Lake a whole five feet higher than it would normally be!"
+
+$choice DepartmentOfLimnology; Department of Limnology 
+
+// Original Name: What do you mean, engineered solutions?
+:: WhatDoYouMeanEngineeredSolutions
+He gives you some examples:
+-A better storm drain system to carry water away
+-Flood walls along the river
+-Rain gardens designed to soak up water
+
+$choice DepartmentOfLimnology; Department of Limnology 
+
+// Original Name: "Can you give me some examples?"
+:: CanYouGiveMeSomeExamples
+"New policies to protect wetlands," she says. "Taxing people to build flood walls and drains. Convincing the city that lower lake levels actually aren't the end of the world."
+
+$call GiveSnippet(PoliciesToPreventFlooding)
+
+$choice AskIfSheHasGraphicsYouCanUse; Ask if she has graphics you can use
+$choice DepartmentOfLimnology; Thank her for her help
+
+// Original Name: "Why are the lakes being kept so high?"
+:: WhyAreTheLakesBeingKeptSoHigh
+"People want to be able to use their docks," he says. "Plus, our tourist season depends on beaches and water sports. It's hard to convince people to vote for lower lake levels when they feel like they'd be losing money."
+
+<i>Get expert quote: higher lake levels</i>
+<i>Get detailed info: cause of flood</i>
+
+$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+$choice HowMuchFinancialDamageHasTheFloodCaused; How much financial damage has the flood caused?
+
+// Original Name: "What kind of policies?"
+:: WhatKindOfPolicies
+"Lower lake levels," he says. "Rules for developers to include rain gardens and other precautions. We probably need more wetland protections, too." 
+
+$call GiveSnippet(PoliciesToPreventFlooding)
+
+$choice DNRMap; Thank him for his time.
+

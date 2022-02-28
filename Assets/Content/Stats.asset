@@ -73,7 +73,7 @@ MonoBehaviour:
     - Esteemed
     - Community Pillar
     Icon: {fileID: 0}
-  m_MaxValue: 30
+  m_MaxValue: 12
   m_StatColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}

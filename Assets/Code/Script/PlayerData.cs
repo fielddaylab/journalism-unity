@@ -18,6 +18,12 @@ namespace Journalism {
         public StringHash32 LocationId = null;
         public uint TimeRemaining;
 
+        public void SetDefaults() {
+            for(int i = 0; i < StatValues.Length; i++) {
+                StatValues[i] = 1;
+            }
+        }
+
         #region ISerializedObject
         
         // v1: initial

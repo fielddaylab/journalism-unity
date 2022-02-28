@@ -1,0 +1,1152 @@
+// MACROS
+
+#macro HubChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time \
+        $data once
+#macro TimeChoice(nodeId, text, time) \
+    $choice $nodeId; $text \
+        $data time = $time
+#macro OnceChoice(nodeId, text) \
+    $choice $nodeId; $text \
+        $data once
+#macro ContinueChoice(text) \
+    {force-input} $text
+#macro ActionChoice(text) \
+    $choice _null; {@action} $text \
+    $choose continue
+
+// Name: Journalism Table Prototype
+// Creator: Twine
+
+# start Level3Story2
+
+// Original Name: Level 3, Story 2
+:: Level3Story2
+<i>Two weeks later...</i>
+
+You wake up on Monday morning at 7:15 A.M.--only 45 minutes later than planned. 
+
+The lake levels are coming down and some people have started removing the sandbags from their properties, though the mayor warns that one storm could undo all of this progress. 
+
+You're not too worried. Outside, the sun is shining and Maureen's chickens are clucking happily. 
+
+You have plans to grab breakfast with Khalisa before work. You have time to do one thing first.
+
+$choice WanderThroughTheBookstoreUnderYourFlat; Wander through the bookstore under your flat.
+$choice StopByYourUpstairsNeighborsPlaceForTea; Stop by your upstairs neighbor's place for tea.
+$choice GoForARunAtCherryCreekMarsh; Go for a run at Cherry Creek Marsh.
+$choice ReplenishYourBagWithFoodAndSupplies; Replenish your bag with food and supplies.
+$choice GetOnlineAndFixTheLatestGlitchOnTheGazettesWebsite; Get online and fix the latest glitch on the Gazette's website.
+
+// Original Name: Wander through the bookstore under your flat.
+:: WanderThroughTheBookstoreUnderYourFlat
+You walk through the "local authors" section and choose a thick volume about the uses and classifications of native plants, by F. J. Finkler, PhD.
+
+"Go ahead," the bookseller says cheerfully, "just bring it back in when you're done."
+
+You curl up on the bench outside, surrounded by the enormous, gleaming metal bird sculptures, and read Fred Finkler's thoughts on delphinium and foxglove, feeling vaguely amused by how strange your life has become. 
+
+$call AdjustStats(Research + 1)
+
+$choice HeadToSophiasCafeForBreakfast; Head to Sophia's Cafe for breakfast.
+
+// Original Name: Stop by your upstairs neighbor's place for tea.
+:: StopByYourUpstairsNeighborsPlaceForTea
+As usual, Jeanie is happy to see you. "Good morning to the best reporter in Twin Lakes!" she says. "Kettle's on. While you're here, why don't you take a look at my new designs?"
+
+She shows you a stack of knitted hats.She's started to add new patterns--tiny cats, tiny cherry pies, and one that you suggested, tiny sandhill cranes.
+
+"Wow, Jeanie," you say. "You really outdid yourself!"
+
+"It's all thanks to your <i>purls</i> of wisdom, Dear," she says, and you actually get the joke. Maybe you need to hang out with more people your own age.
+
+On the other hand, this hat is impossibly soft.
+
+$call AdjustStats(Social + 2)
+
+$choice HeadToSophiasCafeForBreakfast; Head to Sophia's Cafe for breakfast.
+
+// Original Name: Go for a run at Cherry Creek Marsh.
+:: GoForARunAtCherryCreekMarsh
+You could use a nice burst of endorphins. You grab your running shoes and drive to your favorite trailhead.
+
+Some of the trails are still muddy, but you know which areas to avoid. As you round a curve, you see Birdie gazing up into the treetops through binoculars.
+
+"Hey again!" she says, smiling. "You might see some unusual birds today. They're all stirred up, for some reason. Maybe a change in the air pressure."
+
+She's right--you see a kingfisher, a heron, the usual pair of sandhill cranes, and several chickadees before you've even finished the loop.
+
+$call AdjustStats(Endurance + 2)
+
+$choice HeadToSophiasCafeForBreakfast; Head to Sophia's Cafe for breakfast.
+
+// Original Name: Replenish your bag with food and supplies.
+:: ReplenishYourBagWithFoodAndSupplies
+You've been a reporter in Twin Lakes for more than a month now. You're an old pro at this.
+
+You stuff your bag with things you feel like you might end up needing:
+
+* Your notebook and pens/pencils
+* Camera gear
+* A folded-up poncho
+* A flashlight and batteries
+* Gauze
+* Protein bars
+* Dried cherries
+* Bungee cords
+* Anti-venom
+* Dog treats
+* Snow shoes 
+
+It's not an exhaustive list, but at least you won't be caught totally empty-handed. 
+
+$call AdjustStats(Resourceful + 1)
+
+$choice HeadToSophiasCafeForBreakfast; Head to Sophia's Cafe for breakfast.
+
+// Original Name: Get online and fix the latest glitch on the Gazette's website.
+:: GetOnlineAndFixTheLatestGlitchOnTheGazettesWebsite
+Larry from accounting was poking around on the website, trying to add an advertisement for a local pizza place, The Cherry Tomato.
+
+Which means now the entire screen is swallowed up by an enormous cherry and arugula goat cheese pizza. 
+
+You resize the ad and put it at the bottom of the page, wondering if you might be able to convince The Cherry Tomato to put some new, innovative pizzas on their menu. Like--just for example--pepperoni.
+
+$call AdjustStats(Tech + 2)
+
+$choice HeadToSophiasCafeForBreakfast; Head to Sophia's Cafe for breakfast.
+
+// Original Name: Head to Sophia's Cafe for breakfast.
+:: HeadToSophiasCafeForBreakfast
+Khalisa is already there, sipping coffee. "Hey, rookie! Only five minutes late. Impressive."
+
+Sophia brings over a slice of cherry almond coffee cake for Khalisa and your usual: spinach fritatta and coffee with milk, no sugar. Turns out you've accidentally become a "regular."  
+
+You and Khalisa are just starting to eat when both of your phones buzz in unison.
+
+$choice CheckTextMessage; Check text message
+
+// Original Name: Check text message
+:: CheckTextMessage
+It's your editor, texting in all caps:
+
+CHECK CITY WEBSITE ASAP
+
+You exchange a glance with Khalisa. This whole thing feels strangely familiar. 
+
+$choice PullUpCityWebsiteOnYourPhone; Pull up city website on your phone.
+
+// Original Name: Pull up city website on your phone.
+:: PullUpCityWebsiteOnYourPhone
+Uh oh. All that red and caps-lock is definitely not a good sign.
+
+ALERT: UNEXPECTED SUMMER STORM APPROACHING TWIN LAKES.
+12 INCHES RAIN EXPECTED TO START WITHIN 48 HOURS
+SEVERE FLOODING EXPECTED
+EVACUATIONS EXPECTED
+
+Underneath, there is a list of sandbagging stations, at-risk areas, and neighborhoods in need of evacuation. 
+
+You look outside. Already, the sun is still shining. The whole thing feels so hard to believe. 
+
+$choice CallYourEditor2; Call your editor 2
+
+// Original Name: Call your editor 2
+:: CallYourEditor2
+She picks up on the first ring. You put it on speaker, so Khalisa can hear.
+
+"We need to get ahead of this story," she says. "It's not like last time. We know what we're dealing with here. Khalisa, you cover the breaking news update."
+
+"On it," says Khalisa, looking determined.
+
+"Rookie," your editor says, "you get down to the high school. They've got a shelter and sandbagging station set up there."
+
+$choice OkayGotIt.WhatShouldIWriteAbout; Okay, got it. What should I write about?" 
+
+// Original Name: "Okay, got it. What should I write about?" 
+:: OkayGotIt.WhatShouldIWriteAbout
+"I'll leave it up to you this time," she says. "Follow your instincts. Where do you see equity issues? Who needs the most help before the storm hits?"
+
+You'll need:
+* A description of whose needs aren't being met and why.
+* Expert advice about possible solutions.
+* Anecdotes, photos, and quotes for color.
+
+Khalisa is looking a little sadly at her coffee cake. "We better get out there."
+
+"Rain check?" you say, and she laughs.
+
+"Count on it." 
+
+$choice HeadToTheEvacuationShelter; Head to the evacuation shelter.
+
+// Original Name: Head to the evacuation shelter.
+:: HeadToTheEvacuationShelter
+At the high school, there's a sign posted at the school doors: Shelter Entrance. Service Animals OK. No Pets. 
+
+In the parking lot, you see a dump truck dropping off a load of sand and city workers stacking sandbags that need to be filled.
+
+$choice GoInsideTheShelter; Go inside the shelter.
+$choice CheckOutTheSandbaggingStation; Check out the sandbagging station.
+
+// Original Name: Go inside the shelter.
+:: GoInsideTheShelter
+The high school gym is full of cots, folding chairs, and blankets, with a handful of Twin Lakesians scattered around. 
+
+You notice an elderly man holding tight to his dog's leash, arguing with the intake volunteer.
+
+The shelter coordinator is walking around the gym with a clipboard, counting cots one by one. 
+
+$choice CheckOnTheOldManAndDog; Check on the old man and dog.
+$choice AskToInterviewTheShelterCoordinator; Ask to interview the shelter coordinator.
+
+// Original Name: Check out the sandbagging station.
+:: CheckOutTheSandbaggingStation
+At the sandbagging station, people from the neighborhood are just beginning to show up and scoop sand into sandbags.
+
+The DNR official recognizes you from the city dam, three weeks ago.
+
+"Nice to see you again!" she says. A drastic change in tone from last time you talked, but you're not complaining. "Great work with that breaking news update. How can I help you this time?"
+
+$choice AskHerHowTheCityIsPreparingForTheApproachingStorm; Ask her how the city is preparing for the approaching storm.
+
+// Original Name: Check on the old man and dog.
+:: CheckOnTheOldManAndDog
+The old man is slumping toward the exit when you catch up with him. He's holding a cup of coffee from a downtown bagel shop and dragging an old-fashioned suitcase. Plus his dog's leash. Guy's got his hands full. 
+
+"Hi," you say. "I'm a reporter with the Twin Lakes Gazette. Are you... okay?"
+
+He looks forlorn. "Don't wanna talk about it."
+
+$choice LookInYourBagForSomethingHelpfulToOfferHim; Look in your bag for something helpful to offer him.
+$choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you.
+$choice OfferToCarryHisSuitcase--ItLooksPrettyHeavy; Offer to carry his suitcase--it looks pretty heavy.
+$choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
+
+// Original Name: Ask to interview the shelter coordinator.
+:: AskToInterviewTheShelterCoordinator
+The woman in charge looks frazzled as she counts the cots throughout the room.
+
+"I know who you are," she says. "I've enjoyed your coverage in the Gazette, but I'm afraid I don't have much time. I suppose I could answer two or three questions."
+
+$choice AskAboutTheSituationWithTheManAndDogWhoWereJustTurnedAway; Ask about the situation with the man and dog who were just turned away.
+$choice AskAboutWhatProblemsTheShelterIsExperiencing; Ask about what problems the shelter is experiencing.
+$choice AskAboutWhatTheShelterIsAbleToProvide; Ask about what the shelter is able to provide.
+
+// Original Name: Ask her how the city is preparing for the approaching storm.
+:: AskHerHowTheCityIsPreparingForTheApproachingStorm
+"We've got sandbagging stations set up in the most at-risk neighborhoods, according to the government flood risk map," she says. "People can feel free to show up and take whatever they need."
+
+You're about to ask another question when a thirty-something Black woman next to you chimes in.
+
+"Couldn't help overhearing," she says. "There's no sandbag station in my neighborhood. And we got hit hard last time."
+
+$choice AskHerWhereSheLivesAndWhatTheSituationIsThere; Ask her where she lives and what the situation is there.
+
+// Original Name: Look in your bag for something helpful to offer him.
+:: LookInYourBagForSomethingHelpfulToOfferHim
+
+$if StatCheck(Resourceful, 7)
+Score! You knew you packed those dog treats for a reason.
+
+You offer one to the man's dog, and both of them immediately warm up to you.
+
+"Thanks," the man says. "At least somebody appreciates my boy here."
+
+$choice InterviewOldMan; Can you tell me what happened?
+$else
+You dig through your bag, but only find your usual gear, cherry granola bars, and some crumbs.
+
+You offer the man a granola bar, but he shakes his head. "Already ate. Don't you have somebody else to hassle?"
+
+$choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you.
+$choice OfferToCarryHisSuitcase--ItLooksPrettyHeavy; Offer to carry his suitcase--it looks pretty heavy.
+$choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
+$choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
+$endif
+
+// Original Name: Reassure him that he can trust you.
+:: ReassureHimThatHeCanTrustYou
+"I'm on your side," you tell him. "Whatever's going on, I want to get the story out there. Maybe we can work together to help other people who are in the same boat."
+
+
+$if StatCheck(Trust, 7)
+He looks more closely at you and suddenly his eyes light up.
+
+"You're that new reporter!" he says. "I read your article a couple weeks ago. You're really lookin' out for people around here."
+
+$choice InterviewOldMan; Can you tell me more about what's going on here?
+$else
+He looks more closely at you, then shakes his head.
+
+"I don't know nothin' about you," he says. "Sorry, but I don't trust easy."
+
+$choice LookInYourBagForSomethingHelpfulToOfferHim; Look in your bag for something helpful to offer him.
+$choice OfferToCarryHisSuitcase--ItLooksPrettyHeavy; Offer to carry his suitcase--it looks pretty heavy.
+$choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
+$choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
+$endif
+
+// Original Name: Offer to carry his suitcase--it looks pretty heavy.
+:: OfferToCarryHisSuitcase--ItLooksPrettyHeavy
+You ask if he'd like help with his suitcase.
+
+"Aw, don't worry 'bout that," he says. "It's probably too heavy for ya."
+
+
+$if StatCheck(Endurance, 7)
+You surprise him by lifting the suitcase easily.
+
+It's not exactly a picnic--the thing feels like it's full of bricks--but you tell him you'd be happy to carry it out to his car for him, and maybe interview him along the way.
+
+"Well, color me impressed," he says. "Okay, kid. What do you want to ask me about?"
+
+$choice InterviewOldMan; Can you tell me about what's going on here?
+$else
+You try to lift the suitcase, but you can hardly budge it an inch.
+
+You set it back down, defeated. "Wow. What've you got in there, bricks?"
+
+"Books," he says. "So... pretty much."
+
+
+$if StatCheck(Research, 7)
+To his surprise, you launch into a discussion of your latest reads, ranging from a mystery novel and Fred Finkler's guide to native to plants to a detailed, annotated history of Twin Lakes. 
+
+"Didn't realize you were a bookish type, too," he says. "Guess I could help you out. We bookworms gotta stick together. What do you want to know?"
+
+$choice InterviewOldMan; Can you tell me more about what's happening here?
+$else
+You don't have much to say about that. You haven't had much time to read lately.
+
+$choice LookInYourBagForSomethingHelpfulToOfferHim; Look in your bag for something helpful to offer him.
+$choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you.
+$choice UseYourSocialConnectionsToTryToFindCommonGround; Use your social connections to try to find common ground.
+$choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
+$endif
+
+$endif
+
+// Original Name: Use your social connections to try to find common ground.
+:: UseYourSocialConnectionsToTryToFindCommonGround
+$choice LookInYourBagForSomethingHelpfulToOfferHim; Look in your bag for something helpful to offer him.
+$choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you.
+$choice OfferToCarryHisSuitcase--ItLooksPrettyHeavy; Offer to carry his suitcase--it looks pretty heavy.
+$choice AskToInterviewTheShelterCoordinator; Leave him alone and go interview the shelter coordinator.
+
+// Original Name: Ask about the situation with the man and dog who were just turned away.
+:: AskAboutTheSituationWithTheManAndDogWhoWereJustTurnedAway
+"He wanted to bring in his dog," she says. "We're not allowed to take in pets. Only service animals. There are reasons for it. Safety, pests, potential allergies. But still. I feel terrible."
+
+She tells you that the man was coming from Picnic Place, a senior citizen apartment building.
+
+"The situation has been awful over there," she says. "You might want to check it out."
+
+$choice HeadToPicnicPlaceApartments; Head to Picnic Place Apartments.
+
+// Original Name: Ask about what problems the shelter is experiencing.
+:: AskAboutWhatProblemsTheShelterIsExperiencing
+"We need more supplies and volunteers to make this shelter more accessible," she says. "We need different sleeping options, not just these little cots. And we need some way to accomodate pets, so I don't have to keep turning people away."
+
+$choice WhyWasntThisAllPlannedOutAheadOfTime; Why wasn't this all planned out ahead of time?
+$choice AskAboutTheSituationWithTheManAndDogWhoWereJustTurnedAway; What happened with that older gentleman I saw you talking to?
+
+// Original Name: Ask about what the shelter is able to provide.
+:: AskAboutWhatTheShelterIsAbleToProvide
+"Well, we've got people volunteering to prepare meals in the cafeteria," she says. "And there are lots of cots and blankets. But it might not be enough."
+
+$choice AskAboutWhatProblemsTheShelterIsExperiencing; Ask about what problems the shelter is experiencing.
+
+// Original Name: Ask her where she lives and what the situation is there.
+:: AskHerWhereSheLivesAndWhatTheSituationIsThere
+"I own a house in the Royal Hazel neighborhood," she says. "Last time, the streets flooded and our basement filled up with two feet of water. I'm a nursing assistant at the Royal Hazel Medical Center, and I can't get enough time off to deal with the damage." 
+
+$choice AskTheCityWorkerIfThereArePlansToPutASandbagStationInTheRoyalHazelNeighborhood; Ask the city worker if there are plans to put a sandbag station in the Royal Hazel neighborhood.
+$choice AskTheNurseIfHerNeighborhoodIsListedAsAnEvacuationZone; Ask the nurse if her neighborhood is listed as an evacuation zone.
+
+// Original Name: Interview old man
+:: InterviewOldMan
+"I've been lookin' for a place to live since the first flood happened," he says. "I thought they might take me in here, but they don't allow pets. There's no way I could leave Bruno somewhere, just to get myself a bed. He's my best friend."
+
+$choice WhereDidYouLiveBeforeWhatHappenedToIt; Where did you live before? What happened to it?
+
+// Original Name: Head to Picnic Place Apartments.
+:: HeadToPicnicPlaceApartments
+When you arrive, you find a sprawling two-story apartment building blocked off by caution tape. 
+
+A few people who appear to be in their seventies and eighties are waiting outside, while an official-looking woman in a suit--probably the apartment's manager--is talking to an electrical worker near the entrance.
+
+$choice TalkToAnElderlyWomanSittingOnAParkBenchHoldingAPetBirdOnHerLap; Talk to an elderly woman sitting on a park bench, holding a pet bird on her lap.
+$choice TalkToAnOlderCoupleNearTheEntranceWhoLookAnxiousToGetInside; Talk to an older couple near the entrance, who look anxious to get inside. 
+$choice TalkToTheBuildingManager; Talk to the building manager.
+$choice TalkToTheElectricalWorker; Talk to the electrical worker.
+
+// Original Name: "Why wasn't this all planned out ahead of time?"
+:: WhyWasntThisAllPlannedOutAheadOfTime
+"I'm not sure," she says. "I think the city has had its hands full with flood recovery. They created rushed plans for a shelter without considering accessiblity. And now here we are."
+
+$choice AskAboutTheSituationWithTheManAndDogWhoWereJustTurnedAway; Ask about the situation with the man and dog who were just turned away.
+
+// Original Name: Ask the city worker if there are plans to put a sandbag station in the Royal Hazel neighborhood.
+:: AskTheCityWorkerIfThereArePlansToPutASandbagStationInTheRoyalHazelNeighborhood
+"No, but sounds like there should be," she says. "I'll call headquarters and see if we can get one set up. According to the flood-risk maps, that neighborhood shouldn't have been affected."
+
+The nurse sighs. "Well, looks like the neighborhood didn't get the memo."
+
+$choice AskTheCityWorkerIfTheFloodRiskMapsHaveBeenUpdatedRecently; Ask the city worker if the flood risk maps have been updated recently.
+$choice AskTheNurseWhatSheNeedsToPrepareForTheFlood; Ask the nurse what she needs to prepare for the flood.
+
+// Original Name: Ask the nurse if her neighborhood is listed as an evacuation zone.
+:: AskTheNurseIfHerNeighborhoodIsListedAsAnEvacuationZone
+"No," she says, "but I'm not sure I trust those maps anymore. Here, take a look."
+
+She holds up her phone and shows you a screenshot comparison of two flood maps from three weeks ago.
+
+The city's flood risk map--which shows the most likely area at risk--shows Royal Hazel in a safe zone.
+
+The live flood map--showing ACTUAL flooding--shows Royal Hazel covered in water.
+
+$choice AskTheCityWorkerIfTheFloodRiskMapsHaveBeenUpdatedRecently; Ask the city worker if the flood risk maps have been updated recently.
+
+// Original Name: "Where did you live before? What happened to it?"
+:: WhereDidYouLiveBeforeWhatHappenedToIt
+"I was happy as a clam at Picnic Place Apartments, over in the Marmalade neighborhood," he says. "It's a nice place for seniors. But we've all been kicked out of there for weeks now."
+
+$choice TheBuildingKickedEveryoneOutWhy; The building kicked everyone out?? Why?
+
+// Original Name: Talk to an elderly woman sitting on a park bench, holding a pet bird on her lap.
+:: TalkToAnElderlyWomanSittingOnAParkBenchHoldingAPetBirdOnHerLap
+The woman is happy to chat with you. "I've been waiting so long," she says. "I'm bored out of my mind!"
+
+$choice AskWhatShesWaitingFor; Ask what she's waiting for.
+
+// Original Name: Talk to an older couple near the entrance, who look anxious to get inside.
+:: TalkToAnOlderCoupleNearTheEntranceWhoLookAnxiousToGetInside
+Just as you approach, the old couple is about to be led inside by a building employee.
+
+"Sorry," the elderly lady says. "I recognize you and I would love to chat, but we finally get to go inside to fetch some of our things!"
+
+$choice AskIfTheydLikeAnExtraSetOfHands; Ask if they'd like an extra set of hands.
+
+// Original Name: Talk to the building manager.
+:: TalkToTheBuildingManager
+The building's manager--at least, you assume that's who she is--looks annoyed when she sees you.
+
+"I've got enough going on here," she says. "No press."
+
+$choice TellHerYoureWritingThisStoryAnyway--SheMightAsWellGetHerTwoCentsIn; Tell her you're writing this story anyway--she might as well get her two cents in.
+$choice TellHerYouUnderstandShesInADifficultSpotAndYouWantToKnowHowTheCityCanHelp; Tell her you understand she's in a difficult spot and you want to know how the city can help.
+
+// Original Name: Talk to the electrical worker.
+:: TalkToTheElectricalWorker
+You try to catch the electrical worker, but he's already on his way inside.
+
+"Sorry," he says. "I'm literally swamped here."
+
+$choice CanYouTellMeWhatYoureWorkingOn; Can you tell me what you're working on?
+
+// Original Name: Ask the city worker if the flood risk maps have been updated recently.
+:: AskTheCityWorkerIfTheFloodRiskMapsHaveBeenUpdatedRecently
+"I'm not sure," she says. "You'd have to talk to our DNR person in charge of water monitoring. And I know somebody who lives by the lakeshore who's an expert in future flood projections. I can give you their information."
+
+$choice SandbagStationHub; Thanks. That would be great.
+
+// Original Name: Ask the nurse what she needs to prepare for the flood.
+:: AskTheNurseWhatSheNeedsToPrepareForTheFlood
+"We need help right in our neighborhood," she says. "My car was destroyed during the flood, so I've been hustling back and forth on the bus, carrying sandbags one at a time. And we need updated flood risk maps, because obviously the ones we've got aren't accurate."
+
+$choice AskTheCityWorkerIfTheFloodRiskMapsHaveBeenUpdatedRecently; Ask the city worker if the flood risk maps have been updated recently.
+
+// Original Name: "The building kicked everyone out?? Why?"
+:: TheBuildingKickedEveryoneOutWhy
+"We got hit hard by the flood," he says. "Apparently the building's not safe, so we were evacuated without notice. Though I'd rather be in a soggy apartment with no power than out on the street."
+
+$choice WhereHaveYouBeenLiving; Where have you been living?
+$choice HaveTheBuildingOwnersDoneAnythingToHelpYou; Have the building owners done anything to help you?
+
+// Original Name: Ask what she's waiting for.
+:: AskWhatShesWaitingFor
+"The building owners said they would decide today if we're allowed to move back in," she says. "I live on the first floor, so I feel like I've got a good chance."
+
+$choice CanYouTellMeAboutWhyYouHadToLeaveYourApartment; Can you tell me about why you had to leave your apartment?
+$choice HowLongHasItBeenSinceYouHadToLeave; How long has it been since you had to leave?
+
+// Original Name: Ask if they'd like an extra set of hands.
+:: AskIfTheydLikeAnExtraSetOfHands
+
+$if StatCheck(Social, 7)
+Her husband looks doubtful about inviting a stranger inside his home, but the woman pats his arm. 
+
+"Don't you know who this is, Ray? You're talking to the new reporter from--" Her voice hushes. "--New York City! I've heard all about her from Maureen, Sophia, Imojean..."
+
+"You know all of them?" you ask, startled.
+
+"We're in a book club together," she says. "You should join us next time, Dear!"
+
+$choice FollowThemInside; Follow them inside.
+$endif
+
+// Original Name: Tell her you're writing this story anyway--she might as well get her two cents in.
+:: TellHerYoureWritingThisStoryAnyway--SheMightAsWellGetHerTwoCentsIn
+If she was mad before, she's furious now.
+
+"Fine," she says. "Here's my official statement: I've been trying to get the building repaired for weeks. I'm losing money with each day the residents don't pay their rent. All these sweet old grandmas and grandpas keep acting like I'm Cruella DeVille. And I just read at the Gazette that there's ANOTHER flood on its way and the same thing's gonna happen all over again. So forgive me if I seem tense."
+
+Whoa. That was... something. 
+
+$choice TellHerYouUnderstandShesInADifficultSpotAndYouWantToKnowHowTheCityCanHelp; Empathize with how incredibly frustrating all of that sounds.
+$choice TellHerIfSheDoesntWantToBeTreatedLikeAMonsterSheProbablyShouldntActLikeOne; Tell her if she doesn't want to be treated like a monster, she probably shouldn't act like one.
+
+// Original Name: Tell her you understand she's in a difficult spot and you want to know how the city can help.
+:: TellHerYouUnderstandShesInADifficultSpotAndYouWantToKnowHowTheCityCanHelp
+The woman's face softens. "You have no idea," she says. "I've been waiting weeks to get this place repaired. I have no idea when the residents will be allowed back inside."
+
+$choice HaveYouDoneAnythingToHelpTheResidents; Have you done anything to help the residents?
+$choice CanYouTellMeWhyItsTakingSoLong; Can you tell me why it's taking so long?
+
+// Original Name: "Can you tell me what you're working on?"
+:: CanYouTellMeWhatYoureWorkingOn
+"Interviews aren't my job," he says, his voice friendly, but also firm. "I've got three more jobs this afternoon and I still need to sandbag my own house."
+
+"Do you know who else I could talk to?"
+
+He thinks about it. "You can call the building inspector who referred me, if you want."
+
+<i>Get building inspector contact info</i>
+
+"Thanks," you say, as he disappears inside.
+
+$choice CallBuildingInspector; Call building inspector
+
+// Original Name: Sandbag Station: Hub
+:: SandbagStationHub
+You've got some leads. Time to choose your next move.
+
+$choice CallTheDNRAboutOut-Of-DateFloodMaps; Call the DNR about out-of-date flood maps.
+$choice VisitFloodProjectionExpertNoraRhodes; Visit flood projection expert, Nora Rhodes.
+$choice OfferTheNurseARideBackToHerNeighborhoodAndCheckOutTheSituationThere; Offer the nurse a ride back to her neighborhood and check out the situation there.
+
+// Original Name: "Where have you been living?"
+:: WhereHaveYouBeenLiving
+"I've been renting a motel room," he says. "The building owners gave us all $300 for temporary, but I burned through that in the first week."
+
+$choice DoYouHaveAnyIdeaWhenYoullBeAllowedBackIntoYourPlace; Do you have any idea when you'll be allowed back into your place?
+$choice WereYouAbleToSalvageAnythingFromYourApartment; Were you able to salvage anything from your apartment?
+
+// Original Name: "Have the building owners done anything to help you?"
+:: HaveTheBuildingOwnersDoneAnythingToHelpYou
+"They stopped requiring rent payments," he says. "And they gave everybody $300. But I've been staying at a motel that costs $30 a night. That money is long gone--I'm digging myself deep into debt."
+
+$choice DoYouHaveAnyIdeaWhenYoullBeAllowedBackIntoYourPlace; Do you have any idea when you'll be allowed back into your place?
+$choice WereYouAbleToSalvageAnythingFromYourApartment; Were you able to salvage anything from your apartment?
+$choice DidYouTellThePeopleHereAtTheShelterWhatsGoingOn; Did you tell the people here at the shelter what's going on?
+
+// Original Name: "Can you tell me about why you had to leave your apartment?"
+:: CanYouTellMeAboutWhyYouHadToLeaveYourApartment
+"It was that awful flood, of course," she says. "That morning, I looked out the window and saw three feet of water rushing past! Thank goodness that's over."
+
+$choice HowWereYouRescued; How were you rescued?
+$choice WhereHaveYouBeenStaying; Where have you been staying?
+
+// Original Name: "How long has it been since you had to leave?"
+:: HowLongHasItBeenSinceYouHadToLeave
+"It's been 21 days now," she says. "Since the day of the flood. It's the kind of thing you never expect to happen to you."
+
+$choice WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation; What do you think about how your building has handled the situation?
+$choice WhereHaveYouBeenStaying; Where have you been staying?
+
+// Original Name: Follow them inside.
+:: FollowThemInside
+The lobby is full of chairs and rugs and couches in various floral patterns. 
+
+Thanks to your new friends, you get a great view of the water-damaged hallway carpets and Out of Order elevators. 
+
+You snap a few pictures, then help the couple carry out some of their belongings.
+
+<i>Get apartment building photos</i>
+
+$choice SeniorCitizenAptHub; Plan your next step.
+
+// Original Name: Tell her if she doesn't want to be treated like a monster, she probably shouldn't act like one.
+:: TellHerIfSheDoesntWantToBeTreatedLikeAMonsterSheProbablyShouldntActLikeOne
+The woman's eyes flash. "Get off my property," she says. "Now. This is harassment. You're lucky I haven't already called security."
+
+// Original Name: "Have you done anything to help the residents?"
+:: HaveYouDoneAnythingToHelpTheResidents
+"Of course I have," she says. "What did they tell you?"
+
+"Just that the situation has been... challenging."
+
+"We gave them $300," she says. "It was the most we could offer. We told them they could stop paying rent for as long as this goes on. We paid for taxi rides to hotels. What more do these people want from me?"
+
+$choice CanYouTellMeWhyItsTakingSoLong; Can you tell me why it's taking so long to get people moved back in?
+$choice Was300TheMostYouCouldOfferThatsNotMuchComparedToTheCostOfHotels; Was $300 the most you could offer? That's not much, compared to the cost of hotels.
+
+// Original Name: "Can you tell me why it's taking so long?"
+:: CanYouTellMeWhyItsTakingSoLong
+"I don't know all the technical stuff," she says. "But the fire marshal said it's not safe. And they've been so busy with other damaged properties--I guess it's taking a while to get to us."
+
+$choice HaveYouDoneAnythingToHelpTheResidents; Have you done anything to help the residents?
+$choice HowWouldYouRespondToResidentsWhoSayThatYouHaventBeenKeepingThemInformed; How would you respond to residents who say that you haven't been keeping them informed?
+
+// Original Name: Call building inspector
+:: CallBuildingInspector
+Like almost everybody else you've talked to today, the building inspector sounds rushed and stressed out. 
+
+"I'd be happy to help," they tell you. "Only got a few minutes, though. What do you need to know?"
+
+$choice CanYouTellMeMoreAboutYourJobEntails; Can you tell me more about your job entails?
+$choice CanYouGiveMeASummaryOfTheSituationAtPicnicPlaceApartments; Can you give me a summary of the situation at Picnic Place Apartments?
+
+// Original Name: Call the DNR about out-of-date flood maps.
+:: CallTheDNRAboutOut-Of-DateFloodMaps
+It takes a few minutes to reach the right person, but you finally get connected with the person in charge of monitoring at-risk areas.
+
+As soon as he hears why you're calling, he agrees to talk.
+
+"We need to make the city aware of this issue," he says. "What do you need to know?"
+
+$choice IsItTrueThatTheFloodRiskMapsAreOutdated; Is it true that the flood risk maps are outdated?
+
+// Original Name: Visit flood projection expert, Nora Rhodes.
+:: VisitFloodProjectionExpertNoraRhodes
+You follow the directions that the city official gave you.
+
+But when you reach the lakeshore, you don't see any blue houses--only Nora's Arc, bobbing a few meters off shore.
+
+"Hello there, Dear!" she calls from across the water, sipping tea from an enormous cat-shaped mug. "Come back to talk?"
+
+$choice TryToGetRidOfHer2; Try to get rid of her.
+
+// Original Name: Offer the nurse a ride back to her neighborhood and check out the situation there.
+:: OfferTheNurseARideBackToHerNeighborhoodAndCheckOutTheSituationThere
+The nurse gratefully accepts. She's had enough of lugging sandbags on and off the bus.
+
+
+$if StatCheck(Endurance, 7)
+You help her load as many sandbag as you can fit into your trunk. 
+
+She thanks you, but it's still clearly not enough to protect an entire household. One person isn't going to be able to solve this. It'll take government action to help.
+$else
+You try to help her load up sandbags, but somehow they feel even heavier than last time.
+
+She smiles at your sheepish expression. "It's okay, Honey. I'm turning patients and doing hoyer lifts five days a week. I'm sure you've got plenty of other skills."
+$endif
+
+
+$choice ArriveAtRoyalHazelNeighborhood; Arrive at Royal Hazel neighborhood.
+
+// Original Name: "Do you have any idea when you'll be allowed back into your place?"
+:: DoYouHaveAnyIdeaWhenYoullBeAllowedBackIntoYourPlace
+"Not a clue," he says. "They haven't been keepin' us in the loop. Last week, they said it could be 4 to 6 days. Now, nothin'."
+
+$choice AskForTheAddressOfHisApartmentBuilding; Ask for the address of his apartment building.
+
+// Original Name: "Were you able to salvage anything from your apartment?"
+:: WereYouAbleToSalvageAnythingFromYourApartment
+"Well, there's all my books in here," he says, patting his suitcase. "And a few pairs of clothes, but only what could fit. Gotta keep your priorities straight. It was hard to convince them to let me in to salvage anything."
+
+$choice AskForTheAddressOfHisApartmentBuilding; Ask for the address of his apartment building.
+
+// Original Name: "Did you tell the people here at the shelter what's going on?"
+:: DidYouTellThePeopleHereAtTheShelterWhatsGoingOn
+"Yep," he says. "They said they can't break the no pets rule, but if I can get rid of Bruno here, I'm welcome to stay. I tried pretendin' he was an emotional support dog, but they didn't buy it."
+
+$choice AskForTheAddressOfHisApartmentBuilding; Ask for the address of his apartment building.
+
+// Original Name: "How were you rescued?"
+:: HowWereYouRescued
+"Firefighters came and gathered us into rescue vehicles and boats," she said. "There was no time to grab anything. I haven't been allowed back inside since then. I'm running out of food for poor Quigley, here."
+
+$choice WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation; What do you think about how your building has handled the situation?
+
+// Original Name: "Where have you been staying?"
+:: WhereHaveYouBeenStaying
+"I moved in with my daughter and her family," she says. "I've heard the city opened a shelter at the high school, but what would I do with Quigley? And besides, I have arthritis in my back. Those little cots are impossible for me."
+
+$choice WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation; What do you think about how your building has handled the situation?
+
+// Original Name: "What do you think about how your building has handled the situation?"
+:: WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation
+Her cheerful face darkens like the clouds overhead. "Dreadful," she says. "Terrible. Shameful."
+
+Wow.... for a sweet old lady, that was a quick 180.
+
+$choice CanYouTellMeMoreAboutThat; Can you tell me more about that?
+
+// Original Name: Senior Citizen Apt Hub
+:: SeniorCitizenAptHub
+$choice TalkToAnElderlyWomanSittingOnAParkBenchHoldingAPetBirdOnHerLap; Talk to an elderly woman sitting on a park bench, holding a pet bird on her lap.
+$choice TalkToAnOlderCoupleNearTheEntranceWhoLookAnxiousToGetInside; Talk to an older couple near the entrance, who look anxious to get inside. 
+$choice TalkToTheBuildingManager; Talk to the building manager.
+$choice TalkToTheElectricalWorker; Talk to the electrical worker.
+$choice CallTwinLakesFireMarshal; Call Twin Lakes Fire Marshal.
+$choice HeadToTheRiverToInterviewNoraAboutFloodRelief; Head to the river to interview Nora about flood relief.
+
+// Original Name: "Was $300 the most you could offer? That's not much, compared to the cost of hotels."
+:: Was300TheMostYouCouldOfferThatsNotMuchComparedToTheCostOfHotels
+She bristles at that. "Well, there's a free shelter now," she says. "What else am I supposed to do? That's the most that the central business office woudl let me give them. I'm not in charge here."
+
+// Original Name: "How would you respond to residents who say that you haven't been keeping them informed?"
+:: HowWouldYouRespondToResidentsWhoSayThatYouHaventBeenKeepingThemInformed
+She rubs her tired eyes. "Look," she says. "My basement at home flooded too. Three feet of water. I'm exhausted. No, I haven't been calling each person individually, but I'm posting updates on the building website. They should just check there. Now, if you'll excuse me..."
+
+$choice DidYouConsiderThatElderlyPeopleStayingAtMotelsWithAllTheirBelongingsLeftBehindMightNotHaveInternetAccess; Did you consider that elderly people staying at motels, with all their belongings left behind, might not have internet access?
+$choice IsThereAnythingElseYouWantToTellMe; Is there anything else you want to tell me?
+
+// Original Name: "Can you tell me more about your job entails?"
+:: CanYouTellMeMoreAboutYourJobEntails
+They chuckle. "Really? You couldn't just google it? Okay, well, my job is basically to inspect buildings and construction projects. I make sure they're up to code and that things are safe and structurally sound."
+
+You try to ask another question but they clear their throat. "Sorry, kid, don't mean to cut you off, but I've got an emergency call from downtown. Good luck with your story! I'm a big fan of your work."
+
+They hang up, before you can get a single word in.
+
+$choice SeniorCitizenAptHub; Plan your next move.
+
+// Original Name: "Can you give me a summary of the situation at Picnic Place Apartments?"
+:: CanYouGiveMeASummaryOfTheSituationAtPicnicPlaceApartments
+"Sure," they say. "I'll pull up my notes here.... yeah, it looks like there were a lot of issues. The electrical panel ended up submerged in water, none of the elevators work, and the fire panel is inoperable. That means no alarms or sprinklers in case of a fire. Until those things are fixed, I can't see any way to get those people moved in back in safely."
+
+You try to ask another question, but they cut you off. "Sorry, kid. Getting an emergency call from downtown. Good luck with your story. It was an honor to chat with you!"
+
+He hangs up. You're relieved--you got all the info you needed, just in time.
+
+$choice SeniorCitizenAptHub; Plan your next move
+
+// Original Name: "Is it true that the flood risk maps are outdated?"
+:: IsItTrueThatTheFloodRiskMapsAreOutdated
+"'Fraid so," he says. "The official government maps are based on old data. My team is trying to create more accurate local maps, but it's a big project."
+
+$choice HowDidTheMapsEndUpSoOutdated; How did the maps end up so outdated?
+$choice IfTheMapsAreOutdatedHowDoPeopleKnowIfTheyNeedToEvacuate; If the maps are outdated, how do people know if they need to evacuate?
+
+// Original Name: Try to get rid of her2
+:: TryToGetRidOfHer2
+"No, sorry," you say, distracted. "I'm looking for an expert named Nora--"
+
+That's when you make the connection. Holy cherry-glazed donut. 
+
+$choice BoardTheHouseboat2; Board the houseboat.
+
+// Original Name: Arrive at Royal Hazel neighborhood.
+:: ArriveAtRoyalHazelNeighborhood
+You help the nurse unload her sandbag, then take a look around. 
+
+Compared to your own neighborhood, which has mostly recovered, Royal Hazel is looking rough around the edges. The tree branches and debris piled along the sidewalks still haven't been picked up by the city. 
+
+A dad and a teenage boy are lugging damaged furniture and rolled-up carpets to the curb, while a few people stack sandbags in front of their house. 
+
+Everyone here (except for you) is Black and glancing at you with confusion, like maybe you've wandered into the wrong neighborhood, or are about to start handing out pamphlets. You have a feeling whatever trust points you've gained won't translate the same way here. 
+
+$choice CallKhalisaAndAskIfSheHasTimeToJoinYou; Call Khalisa and ask if she has time to join you.
+$choice StartTalkingToPeopleAndHopeForTheBest; Start talking to people and hope for the best.
+
+// Original Name: Ask for the address of his apartment building.
+:: AskForTheAddressOfHisApartmentBuilding
+He rattles it off: 8925 Compote Lane. 
+
+You thank him for the interview and ask if you can take a picture of him , his dog, which he agrees to. 
+
+<i>Get photo: elderly man and dog outside evacuation shelter</i>
+
+Time to choose your next step. Do you want to head to the man's apartment, or talk to the shelter coordinator about the situation here?
+
+$choice HeadToPicnicPlaceApartments; Head to Picnic Place Apartments.
+$choice AskToInterviewTheShelterCoordinator; Ask to interview the shelter coordinator.
+
+// Original Name: "Can you tell me more about that?"
+:: CanYouTellMeMoreAboutThat
+"I've had no clear communication from them," she says. "No idea when I'd be allowed to move back in. And it's nearly impossible to get inside and gather my things. They say it's a safety concern, but I think they're afraid I'll try to move out."
+
+$choice CanYouTellMeWhatWouldHelpYouTheMostRightNowMoneyShelter; Can you tell me what would help you the most right now? Money? Shelter?
+
+// Original Name: Call Twin Lakes Fire Marshal.
+:: CallTwinLakesFireMarshal
+The fire marshal picks up on the second ring. "Hello?"
+
+Oops... you must've called the wrong number. It's Khalisa's dad, Joe Bridges.
+
+"Sorry to bother you, Joe," you say, "meant to call the Fire Marshal."
+
+"Oh, that's me! Didn't I ever tell you that? How'd breakfast go, by the way? Khali said I should leave you alone, but you know how I am. Nosy as an anteater."
+
+$choice Um...WaitASec.YoureTheTwinLakesFireMarshalSeriously; Um... wait a sec. You're the Twin Lakes Fire Marshal?? Seriously?
+
+"
+
+// Original Name: Head to the river to interview Nora about flood relief.
+:: HeadToTheRiverToInterviewNoraAboutFloodRelief
+You follow the directions that the woman gave you. The place is only a few blocks away.
+
+When you reach the river, you don't see any blue houses--only the houseboat lady's blue-painted boat, bobbing on the river.
+
+"Hello there, Dear!" she calls from across the water, a cat resting on her arm. "Come back to talk?"
+
+$choice TryToGetRidOfHer; Try to get rid of her.
+
+// Original Name: "Did you consider that elderly people staying at motels, with all their belongings left behind, might not have internet access?"
+:: DidYouConsiderThatElderlyPeopleStayingAtMotelsWithAllTheirBelongingsLeftBehindMightNotHaveInternetAccess
+"No comment," she says flatly. "I really need to get back to work."
+
+She storms away before you can thank her.
+
+$choice SeniorCitizenAptHub; Plan your next move.
+
+// Original Name: "Is there anything else you want to tell me?"
+:: IsThereAnythingElseYouWantToTellMe
+She sighs. "Just that we're doing our best, and that if the city has any financial aid to give out, these people could sure use it."
+
+$choice SeniorCitizenAptHub; Thank her for her time.
+
+// Original Name: "How did the maps end up so outdated?"
+:: HowDidTheMapsEndUpSoOutdated
+"Climate change is a big part of it," he says. "The maps were built with rainfall data from more than a decade ago. Thing are changing fast around here. More rainfall and higher lakes has made the at-risk zones a lot larger."
+
+$choice IfTheMapsAreOutdatedHowDoPeopleKnowIfTheyNeedToEvacuate; If the maps are outdated, how do people know if they need to evacuate?
+$choice HowCanPeopleInTheRoyalHazelNeighborhoodStaySafe; How can people in the Royal Hazel neighborhood stay safe?
+
+// Original Name: "If the maps are outdated, how do people know if they need to evacuate?"
+:: IfTheMapsAreOutdatedHowDoPeopleKnowIfTheyNeedToEvacuate
+"We used our latest data from last week's flood to figure out the evacuation zones," he says. "The Royal Hazel neighborhood should be safe from real danger. But judging from our live maps, it's probably at risk for more flood damage."
+
+$choice HowDidTheMapsEndUpSoOutdated; How did the maps end up so outdated?
+$choice HowCanPeopleInTheRoyalHazelNeighborhoodStaySafe; How can people in the Royal Hazel neighborhood stay safe?
+
+// Original Name: Board the houseboat2
+:: BoardTheHouseboat2
+You're amazed at what you find. A bed and armchair, a small kitchen space with a microwave and hot plate, lacy curtains...and a lint roller covered in cat hair.
+
+"I heared about the storm," she says cheerfully. "You're welcome to stay here, if you'd like."
+
+$choice HowDidYouEndUpHereNora; How did you end up here, Nora?
+
+// Original Name: Call Khalisa and ask if she has time to join you.
+:: CallKhalisaAndAskIfSheHasTimeToJoinYou
+Khalisa has just finished her breaking news article! "I'd love to," she says. "I'll meet you out there."
+
+It takes extra time to wait for her, but you have a feeling you need her voice and her expertise here. 
+
+$choice GreetKhalisaWhenSheDrivesUp; Greet Khalisa when she drives up.
+
+// Original Name: Start talking to people and hope for the best.
+:: StartTalkingToPeopleAndHopeForTheBest
+You knock at a few doors, your press badge ready. 
+
+You hear rustling sounds inside, but nobody answers--totally understandable. You tend to hide behind furniture and play dead when somebody you don't know buzzes your apartment. 
+
+At the fourth house, a elementary-age girl opens the door. "Hi," she says. "Who're you?"
+
+The her mom comes over, wearing rubber gloves and a dust mask. "Sorry," she says. "Whatver you're selling, it's not a good time. We're in damage control mode here."
+
+$choice ActuallyThatsWhyImHere.ImAReporterWithTheGazetteReportingOnHowTheFloodHasAffectedTheNeighborhood; Actually, that's why I'm here. I'm a reporter with the Gazette, reporting on how the flood has affected the neighborhood.
+
+// Original Name: "Can you tell me what would help you the most right now? Money? Shelter?"
+:: CanYouTellMeWhatWouldHelpYouTheMostRightNowMoneyShelter
+"I just want to be home," she says, petting the plump, feathered quail on her lap. "But at least I'm not alone. I've got a good friend who's gonna help me get financial aid. She's brilliant at working within the system, finding loopholes, things like that."
+
+$choice CanYouShareHerContactInformation; Can you share her contact information?
+
+// Original Name: "Um... wait a sec. You're the Twin Lakes Fire Marshal?? Seriously?"
+:: Um...WaitASec.YoureTheTwinLakesFireMarshalSeriously
+"I speak the truth," he says cheerfully. "What do you need to know, kiddo?"
+
+$choice ImInvestigatingTheSituationAtPicnicPlaceApartments.CanYouTellMeWhatYouKnow; I'm investigating the situation at Picnic Place Apartments. Can you tell me what you know?
+
+// Original Name: Try to get rid of her.
+:: TryToGetRidOfHer
+"No, sorry," you say, distracted. "I'm looking for an expert named Nora--"
+
+That's when you make the connection. Holy cherries jubilee. 
+
+$choice BoardTheHouseboat; Board the houseboat.
+
+// Original Name: "How can people in the Royal Hazel neighborhood stay safe?"
+:: HowCanPeopleInTheRoyalHazelNeighborhoodStaySafe
+"Pretty much the same advice," he says. "Sandbag properties. Move anything valuable out of the basement. Stay off the roads." 
+
+You want to ask him about people who--just for example--are required to be at work and can't stay off the roads. Or bring up the fact that the Royal Hazel neighborhood doesnt currently have a sandbag station.
+
+But you hear a loud beep, and notice your phone battery hovering at 3%.
+
+"Uh oh." 
+
+
+$if StatCheck(Tech, 8)
+Thankfully, you came prepared! You dig into your bag for your wireless charger. Just in time.
+
+$choice AreYouAwareThatTheNeighborhoodDoesntHaveASandbagStation; Are you aware that the neighborhood doesn't have a sandbag station?
+$choice HowWouldYouAdvisePeopleWhoCantStayOffTheRoadsBecauseTheyNeedToWork; How would you advise people who can't stay off the roads, because they need to work?
+$else
+You dig into your backback for tech gear, but looks like you forgot your wireless charger.
+
+Before you can say another word, your phone goes black.
+
+Ugh. Rookie mistake. 
+
+$choice FindSomewhereToChargeYourPhone; Find somewhere to charge your phone.
+$endif
+
+// Original Name: "How did you end up here, Nora?"
+:: HowDidYouEndUpHereNora
+"On my houseboat?" she says. "It's quite a long story. But I suppose the simple version is that an awful flood hit Twin Lakes about a decade ago. Not as bad as this one, but it was for my neighborhood."
+
+$choice HowDidTheFloodAffectYou2; How did the flood affect you?
+
+// Original Name: Greet Khalisa when she drives up.
+:: GreetKhalisaWhenSheDrivesUp
+"Hey, Rookie," she says. "You know, you might want to think about officially changing your last name."
+
+You laugh. "Maybe someday, when there's not a huge storm headed our way."
+
+Already, the sky is cloudy and darkening. 
+
+$choice KnockAtTheFirstDoor; Knock at the first door.
+
+// Original Name: "Actually, that's why I'm here. I'm a reporter with the Gazette, reporting on how the flood has affected the neighborhood."
+:: ActuallyThatsWhyImHere.ImAReporterWithTheGazetteReportingOnHowTheFloodHasAffectedTheNeighborhood
+The woman considers this. "Okay. I can answer a couple a' questions. Then I better get back to work."
+
+$choice CanYouTellMeAboutTheBiggestProblemTheNeighborhoodIsFacing; Can you tell me about the biggest problem the neighborhood is facing?
+
+// Original Name: "Can you share her contact information?"
+:: CanYouShareHerContactInformation
+"Of course! Her name is Nora, and she lives down by the river. Bright blue place. You can't miss it!"
+
+$choice SeniorCitizenAptHub; Thank her for her help.
+
+// Original Name: "I'm investigating the situation at Picnic Place Apartments. Can you tell me what you know?"
+:: ImInvestigatingTheSituationAtPicnicPlaceApartments.CanYouTellMeWhatYouKnow
+"Ooh, yeah, that was a bad one," he says. "Can't believe those poor people are still out of a home, but the fire panel was totally down. No sprinkler systems or smoke detcters functioning.
+
+$choice DidYouGetTheSenseThatTheBuildingManagerWasHandlingItWell; Did you get the sense that the building manager was handling it well?
+$choice DoYouHaveAnySuggestionsForHowToGetThesePeopleBackIntoTheirHomesFaster; Do you have any suggestions for how to get these people back into their homes faster?
+
+// Original Name: Board the houseboat.
+:: BoardTheHouseboat
+You're amazed at what you find. A bed and armchair, a small kitchen space with a microwave and hot plate, lacy curtains...and yes, lots and lots of cat hair.
+
+"Sorry," she says cheerfully, "they shed a lot in the summer. How can I help you?"
+
+$choice How...HowDidYouEndUpHere; How...how did you end up here?
+
+// Original Name: "Are you aware that the neighborhood doesn't have a sandbag station?"
+:: AreYouAwareThatTheNeighborhoodDoesntHaveASandbagStation
+"Yes," he says, "I just got a text from my coworker at the high school station. I'm hoping we can get something set up out there. It's next on our list."
+
+$choice SandbagStationHub; Thank him for the interview.
+
+// Original Name: "How would you advise people who can't stay off the roads, because they need to work?"
+:: HowWouldYouAdvisePeopleWhoCantStayOffTheRoadsBecauseTheyNeedToWork
+"That's not an easy question," he says. "I'm not sure I have an answer for you. I guess I would say that city hall needs to do something about this, to make sure people can stay safe."
+
+Your editor was talking for equity issue. Looks like you found one.
+
+$choice SandbagStationHub; Thank him for the interview.
+
+// Original Name: Find somewhere to charge your phone.
+:: FindSomewhereToChargeYourPhone
+You head inside the high school. Luckily, there's an open outlet in the main hallway.
+
+Unfortunately, this little break wastes you 15 minutes. By the time you call the DNR back, the expert you were talking to is out of the office. 
+
+At least you're up to 20% battery. It'll have to do. 
+
+$choice SandbagStationHub; Plan your next move.
+
+// Original Name: "How did the flood affect you?"2
+:: HowDidTheFloodAffectYou2
+"I lost everything," she says calmly. "No one warned me I might need flood insurance. My home was destroyed. I looked into shelters, but they didn't allow cats. And I couldn't part with my fur babies."
+
+$choice But...WhyHouseboats; But...why houseboats?
+
+// Original Name: Knock at the first door.
+:: KnockAtTheFirstDoor
+The door swings open, revealing an elderly man with a walker. Behind him, the dad and teenage boy from earlier are carrying a trombone case and a piano keyboard up from the basement. 
+
+"How can I help you?" the man says politely, looking from you to Khalisa.
+
+"We're from the Gazette," Khalisa says. "This is my friend, Ella Rookie. She's new around here. Can we talk with you for a few minutes?"
+
+"I suppose so. How can I help you two?"
+
+$choice AskTheElderlyManWhatWouldHelpHimPrepareForTheNextStorm; Ask the elderly man what would help him prepare for the next storm.
+
+// Original Name: "Can you tell me about the biggest problem the neighborhood is facing?"
+:: CanYouTellMeAboutTheBiggestProblemTheNeighborhoodIsFacing
+"Just one?" she says dryly. "Let's see. The debris in the street that'll clog up the storm drains when the next storm comes. The nearest sandbagging station located ten blocks away. The fact that it's taken three weeks for somebody from the paper to get out here."
+
+Ouch.  
+
+"Um... yeah, you're right," you say, wishing Fred Finkler was around to offer some locally-grown aloe vera for that burn. "We should've come out here sooner."
+
+"I understand there's been a lot going on," the woman says. "But you might've noticed that there's been a lot of attention on downtown. Businesses, shops, the festival, things like that. Nobody was really taking notice of what was going on out here."
+
+$choice AskHerHowTheFloodHasAffectedHerFamily; Ask her how the flood has affected her family.
+$choice AskIfSheHadAnyWarningThatHerHomeWasInAFloodZone; Ask if she had any warning that her home was in a flood zone.
+
+// Original Name: "Did you get the sense that the building manager was handling it well?"
+:: DidYouGetTheSenseThatTheBuildingManagerWasHandlingItWell
+"Not sure if I can comment on that," he says. "But I can say that she hasn't called me again in more than two weeks. I don't have any fire panel inspection scheduled."
+
+$choice DoYouHaveAnySuggestionsForHowToGetThesePeopleBackIntoTheirHomesFaster; Do you have any suggestions for how to get these people back into their homes faster?
+$choice ThankHimForHisHelp; Thank him for his help.
+
+// Original Name: "Do you have any suggestions for how to get these people back into their homes faster?"
+:: DoYouHaveAnySuggestionsForHowToGetThesePeopleBackIntoTheirHomesFaster
+"Actually, I might be able to suggest something," he says. "I believe the city would allow for a 'fire watch'--in other words, the building could hire someone to patrol the building continuously and monitor for fires. Or a few someones, because, you know, lunch breaks. Bathroom breaks. Let's not be unreasonable."
+
+"Did you get the sense that the building manager was handling it well?"
+$choice ThankHimForHisHelp; Thank him for his help.
+
+// Original Name: "How...how did you end up here?"
+:: How...HowDidYouEndUpHere
+"On my houseboat?" she says. "It's quite a long story. But I suppose the simple version is that an awful flood hit Twin Lakes about a decade ago. Not as bad as this one, but it was for my neighborhood."
+
+$choice HowDidTheFloodAffectYou; How did the flood affect you?
+
+// Original Name: "But...why houseboats?"
+:: But...WhyHouseboats
+"I used to be a research assistant at the Department of Limnology," she says. "I did the flood projections. It's true that the entire town won't end up underwater... but the flooding will get worse every year, unless the city does something about it. There's nowhere that's sure to be safe."
+
+$choice ButWhatIfYouDidntNeedToMoveToAHouseboatWhatIfTheCityDoesSomethingToFixTheProblem; But what if you didn't need to move to a houseboat? What if the city does something to fix the problem?
+
+// Original Name: Ask the elderly man what would help him prepare for the next storm.
+:: AskTheElderlyManWhatWouldHelpHimPrepareForTheNextStorm
+"My neighbors already got it covered," he says, pointing to the father-son duo walking past. "They've been clearing out the basement. I've played in a lot of bands over the years, and fortunately most of my instruments could be salvaged. I just hope this place doesn't flood again."
+
+$choice IsThereAnythingYouFeelTheNeighborhoodNeeds; Is there anything you feel the neighborhood needs?
+
+// Original Name: Ask her how the flood has affected her family.
+:: AskHerHowTheFloodHasAffectedHerFamily
+"I've been working my usual shifts all week, because I don't get paid sick leave," she says. "It's the only way to keep up with bills. But that means the damage in the basement has gotten worse. It's a mess down there. I'm worried about mold. I want to keep my kids healthy, but we also have to make our mortgage payments."
+
+$choice AskIfShedBeOkayWithYouTakingPhotosOfTheWaterDamage; Ask if she'd be okay with you taking photos of the water damage.
+
+// Original Name: Ask if she had any warning that her home was in a flood zone.
+:: AskIfSheHadAnyWarningThatHerHomeWasInAFloodZone
+"None," she says. "I did my research when we moved in. I was told that this house wasn't in any danger, and that we didn't need flood insurance. Funny, huh?"
+
+$choice AskIfShedBeOkayWithYouTakingPhotosOfTheWaterDamage; Ask if she'd be okay with you taking photos of the water damage.
+
+// Original Name: Thank him for his help.
+:: ThankHimForHisHelp
+"Oh, not a problem," he says cheerfully. "You should come around for dinner on Thursday. You haven't tasted my wife's cherry pie!"
+
+$choice ThanksJoe.IdLoveTo.IfYouKnowTheWholeTownIsntUnderwater; Thanks, Joe. I'd love to. If, you know, the whole town isn't underwater.
+
+// Original Name: "How did the flood affect you?"
+:: HowDidTheFloodAffectYou
+"I lost everything," she says calmly. "No one warned me I might need flood insurance. My home was destroyed. I looked into shelters, but they didn't allow cats. And I couldn't part with my fur babies."
+
+$choice ButWhyHouseboats; But why houseboats?
+
+// Original Name: "But what if you didn't need to move to a houseboat? What if the city does something to fix the problem?"
+:: ButWhatIfYouDidntNeedToMoveToAHouseboatWhatIfTheCityDoesSomethingToFixTheProblem
+She smiles, as though she finds your naivete charming. "How likely do you think that is?"
+
+"I... don't know."
+
+"Well," she says, "at least out on my houseboat, I don't have to wonder. But I do hope the city of Twin Lakes surprises me. And please, Dear, come back anytime."
+
+$choice SandbagStationHub; Thank Nora for her help.
+
+// Original Name: "Is there anything you feel the neighborhood needs?"
+:: IsThereAnythingYouFeelTheNeighborhoodNeeds
+"There are a lot of working and single-parent families out here," he says. "And older folks, like me. We could use more helpers out here. My neighbors here can't do everything on their own."
+
+"Sure we can, Dez," the dad says, grinning. "Don't worry. Just go put your feet up."
+
+$choice ThankDeziForHisHelpAndHeadBackOutside; Thank Dezi for his help and head back outside.
+
+// Original Name: Ask if she'd be okay with you taking photos of the water damage.
+:: AskIfShedBeOkayWithYouTakingPhotosOfTheWaterDamage
+"Sorry, honey," she says. "I don't even know you. And I've got work in an hour. You better head out."
+
+$choice RoyalHazelNeighborhoodHub; Thank her for talking.
+
+// Original Name: "Thanks, Joe. I'd love to. If, you know, the whole town isn't underwater."
+:: ThanksJoe.IdLoveTo.IfYouKnowTheWholeTownIsntUnderwater
+"I've got a flood rescue vehicle," he reminds you. "I bet we could work it out. And good luck with your story!"
+
+$choice SeniorCitizenAptHub; Decide on your next move.
+
+// Original Name: "But why houseboats?"
+:: ButWhyHouseboats
+"I was able to find a loophole and get financial aid from the Twin Lakes government," she explains. "Not enough for a home. But it was enough for my houseboat here. Now every day is an adventure!" 
+
+$choice CanYouTellMeHowPeopleCanApplyForDisasterAid; Can you tell me how people can apply for disaster aid?
+
+// Original Name: Thank Dezi for his help and head back outside.
+:: ThankDeziForHisHelpAndHeadBackOutside
+You knock at the next house, a red-brick bungalow.
+
+You see the curtains rustle. Then a woman opens the door, a little girl hugging her legs.
+
+"Khalisa," she says, "my God, is that you? And who's your friend? Come on in!"
+
+$choice ReceiveAWarmWelcome--AndASliceOfCake; Receive a warm welcome--and a slice of cake.
+
+// Original Name: Royal Hazel Neighborhood: Hub
+:: RoyalHazelNeighborhoodHub
+Looks like you have some time left. Do you want to make any phone calls before your deadline?
+
+$choice VisitFloodProjectionExpertNoraRhodes; Visit flood projection expert, Nora Rhodes.
+$choice CallTheDNRAboutOut-Of-DateFloodMaps; Call the DNR about out-of-date flood maps.
+$choice CallTheMayorsOfficeToAskAboutDisasterAidPaymentsForTwinLakesians; Call the mayor's office to ask about disaster aid payments for Twin Lakesians.
+
+// Original Name: "Can you tell me how people can apply for disaster aid?"
+:: CanYouTellMeHowPeopleCanApplyForDisasterAid
+"Here," she says, pulling a thick sheet of papers out from under Houseboat: Stay Afloat flyers. "Read this. I offered to help people with the process, but no one was interested. People don't usually listen to me. Not like you, though, Dear. You've been kind to me from day one."
+
+"Um..." You're definitely feeling more than a little awkward. "Thank you so much, Nora. I appreciate your help."
+
+"Of course, Dear. Stop by anytime."
+
+$choice SeniorCitizenAptHub; Return to the senior citizen apartments.
+
+// Original Name: Receive a warm welcome--and a slice of cake.
+:: ReceiveAWarmWelcome--AndASliceOfCake
+You find yourself feeling extremely glad that you called Khalisa. Turns out the woman, Misty, used to volunteer at the cherry festival with Khalisa's mom.
+
+You end up at the table with her three kids--plus a glass of milk and a slice of cherry cheesecake. 
+
+"We're clearing out the fridge," the woman explains. "Lost power last time--don't want to risk losing a buch of food again. What can I do for you two?"
+
+$choice TellHerAboutTheStoryYoureWriting; Tell her about the story you're writing. 
+
+// Original Name: Call the mayor's office to ask about disaster aid payments for Twin Lakesians.
+:: CallTheMayorsOfficeToAskAboutDisasterAidPaymentsForTwinLakesians
+Still need to write this part! (Ran out of time.) Talk to the mayor or city representative about the possibility for payments to individuals to help them recover from the disaster (like with covid stimulus package). 
+
+$choice RoyalHazelNeighborhoodHub; Hang up.
+
+// Original Name: Tell her about the story you're writing.
+:: TellHerAboutTheStoryYoureWriting
+"I'm writing a story about how the city can help people before the next flood hits," you say. "Can you tell us about the situation in your neighborhood?" 
+
+"It's been a disaster," she says. "That mess in the street is gonna block the storm drains. Nobody has had time to recover from last time. And with all the attention on downtown, it feels like nobody has really noticed."
+
+$choice WhatWouldBeTheMostHelpfulForYou; What would be the most helpful for you?
+
+// Original Name: "What would be the most helpful for you?"
+:: WhatWouldBeTheMostHelpfulForYou
+"Honestly?" she says. "Money. Disaster aid, I mean. I can't get enough time off work to deal with the damaage, and I don't have thousands of dollars laying around for repairs. But I know that's not gonna happen. I'd settle with being on the city's radar. We need sandbags here in the neighborhood. And some volunteers to help stack them up for families and elderly folks."
+
+$choice AskIfShedBeOkayWithYouTakingPhotosOfTheWaterDamageInHerBasement; Ask if she'd be okay with you taking photos of the water damage in her basement.
+
+// Original Name: Ask if she'd be okay with you taking photos of the water damage in her basement.
+:: AskIfShedBeOkayWithYouTakingPhotosOfTheWaterDamageInHerBasement
+"Of course," she says. "I trust you, Honey. Especially if you're with Khalisa. Glad you both found somebody special." 
+
+"Oh--um, we're not--I mean, I don't think--" 
+
+You trail off, not sure what to say, and Khalisa laughs.
+
+"How about thoe photos, Rookie?"
+
+<i>Get photos of flood damaged basement</i>
+
+$choice RoyalHazelNeighborhoodHub; Go back outside.
+

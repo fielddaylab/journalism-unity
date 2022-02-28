@@ -303,6 +303,7 @@ namespace Journalism {
         static public bool AddStoryScrap(StringHash32 scrapId) {
             if (!s_Current.StoryScrapInventory.Contains(scrapId)) {
                 s_Current.StoryScrapInventory.Add(scrapId);
+                Log.Msg("[Player] Added story scrap '{0}'!", scrapId);
                 Game.Events.Dispatch(Events.InventoryUpdated, scrapId);
                 return true;
             }

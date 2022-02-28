@@ -35,7 +35,7 @@ namespace Journalism {
 
         #endregion // Inspector
 
-        private TextLine m_QueuedLine;
+        [NonSerialized] private TextLine m_QueuedLine;
         [NonSerialized] private TextAlignment m_ImagePosition = TextAlignment.Center;
         [NonSerialized] private float m_ImageColumnBaseline;
         [NonSerialized] private float m_AutoContinue = -1;
@@ -293,6 +293,11 @@ namespace Journalism {
         }
 
         public IEnumerator TypeLine(TagString inSourceString, TagTextData inType) {
+            StringHash32 characterId = GameText.FindCharacter(inSourceString);
+            if (GameText.IsPlayer(characterId) || inSourceString.TryFindEvent(GameText.Events.ForceInput, out var _)) {
+                yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, inSourceString.RichText, Assets.Style(characterId));
+            }
+
             yield return GameText.AnimateLocations(m_TextDisplay, 1);
             GameText.ClearOverflowLines(m_TextDisplay);
             yield return 0.5f;
@@ -308,8 +313,7 @@ namespace Journalism {
             var nextLineText = LookupNextLine();
             if (nextLineText != null) {
                 StringHash32 characterId = GameText.FindCharacter(nextLineText);
-                if (GameText.IsPlayer(characterId)) {
-                    yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, nextLineText.RichText, Assets.Style(characterId));
+                if (GameText.IsPlayer(characterId) || nextLineText.TryFindEvent(GameText.Events.ForceInput, out var _)) {
                     yield break;
                 }
             }
@@ -364,7 +368,7 @@ namespace Journalism {
 
                     yield return Routine.Combine(
                         m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y),
-                        m_Image.Root.AnchorPosTo(m_ImageColumnBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y)
+                        m_Image.Root.AnchorPosTo(m_ImageColumnBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y).DelayBy(0.03f)
                     );
                     
                     yield return GameText.AnimateLocations(m_ChoiceDisplay);
@@ -374,7 +378,7 @@ namespace Journalism {
 
                     yield return Routine.Combine(
                         m_TextDisplay.Root.AnchorPosTo(m_TextDisplay.RootBaseline, m_ChoiceRowsAnim, Axis.Y),
-                        m_Image.Root.AnchorPosTo(m_ImageColumnBaseline, m_ChoiceRowsAnim, Axis.Y)
+                        m_Image.Root.AnchorPosTo(m_ImageColumnBaseline, m_ChoiceRowsAnim, Axis.Y).DelayBy(0.03f)
                     );
                     yield return 0.2f;
                 }

@@ -110,8 +110,8 @@ namespace Journalism {
         /// Clamps the value of the given stat value.
         /// </summary>
         static public int Clamp(int statValue) {
-            if (statValue < 0) {
-                return 0;
+            if (statValue < 1) {
+                return 1;
             }
             return statValue > s_MaxValue ? s_MaxValue : statValue;
         }

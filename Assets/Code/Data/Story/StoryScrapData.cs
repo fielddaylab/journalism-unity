@@ -20,6 +20,8 @@ namespace Journalism {
     /// </summary>
     public enum StoryScrapType {
         Picture = 0x01,
+        Photo = Picture,
+        
         Graph = 0x02,
         Quote = 0x04,
         Fact = 0x08,

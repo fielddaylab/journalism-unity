@@ -12,10 +12,10 @@ using UnityEngine;
 namespace Journalism {
     static public class TwineConversion {
         private const string TwineFilePath = "Assets/Content/Testing/Journalism Table Prototype.json";
-        private const string LeafFilePath = "Assets/Content/Testing/Journalism Table Prototype.leaf";
+        public const string LeafFilePath = "Assets/Content/Testing/Journalism Table Prototype.leaf";
         private const string PrependFilePath = "Assets/Content/Testing/Macros.leaf";
 
-        [MenuItem("Journalism/Convert Twine File %T")]
+        [MenuItem("Journalism/Convert Twine File")]
         static private void Menu_ConvertTwine() {
             // StringSlice twinePath = EditorUtility.OpenFilePanel("Select Exported Twine JSON File", string.Empty, "json");
             // if (twinePath.IsEmpty) {

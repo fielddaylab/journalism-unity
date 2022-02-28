@@ -698,6 +698,7 @@ namespace Journalism {
             static public readonly StringHash32 Image = "image";
             static public readonly StringHash32 Anim = "animation";
             static public readonly StringHash32 Auto = "auto";
+            static public readonly StringHash32 ForceInput = "force-input";
             static public readonly StringHash32 ClearImage = "clear-image";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
@@ -733,12 +734,15 @@ namespace Journalism {
             config.AddEvent("bg", Events.Background).WithStringData();
             config.AddEvent("anim", Events.Anim).WithStringData();
             config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
+            config.AddEvent("force-input", Events.ForceInput);
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
 
             textDisplay.ConfigureHandlers(config, handler);
             visuals.ConfigureHandlers(config, handler);
+
+            handler.Register(Events.ForceInput, () => {});
         }
 
         /// <summary>
