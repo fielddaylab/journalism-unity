@@ -6,6 +6,7 @@ using Leaf.Runtime;
 using BeauRoutine;
 using BeauRoutine.Extensions;
 using System;
+using UnityEngine.Scripting;
 
 namespace Journalism.UI {
     public class UISystem : MonoBehaviour {
@@ -122,12 +123,12 @@ namespace Journalism.UI {
 
         #region Leaf
 
-        [LeafMember("SetHeaderEnabled")]
+        [LeafMember("SetHeaderEnabled"), Preserve]
         static private void SetHeaderEnabled(bool enabled) {
             Player.WriteVariable(Var_HeaderEnabled, enabled);
         }
 
-        [LeafMember("OpenWindow")]
+        [LeafMember("OpenWindow"), Preserve]
         static private void OpenWindow(StringHash32 id) {
             Game.UI.FindButton(id).Button.isOn = true;
         }
