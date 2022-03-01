@@ -31,6 +31,7 @@ namespace Journalism {
         public float RowSpacing = 128;
         public float ColumnSpacing = 320;
         public float RotationRange = 1;
+        public int MaxOptions = 6;
 
         [Header("Animation")]
         public TweenSettings NewChoiceAnimParams = new TweenSettings(0.3f, Curve.BackOut);

@@ -340,6 +340,12 @@ namespace Journalism {
                     }
                 }
 
+                int over = Math.Max(0, fullOptions.Count - m_ChoiceDisplay.MaxOptions);
+                if (over > 0) {
+                    Log.Error("[TextDisplaySystem] More than {0} options provided - trimming last {1} options", m_ChoiceDisplay.MaxOptions, over);
+                    fullOptions.RemoveRange(fullOptions.Count - over, over);
+                }
+
                 if (fullOptions.Count == 1 && !hasTime) {
                     var choices = inChoice.AvailableOptions().GetEnumerator();
                     choices.MoveNext();
