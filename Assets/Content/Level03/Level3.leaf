@@ -278,8 +278,8 @@ $if !!HasTime(0.3333333)
 This story is due in {timeLeft}.
 What do you want to do? 
 
-$HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.3333333)
-$HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.3333333)
+$HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5)
+$HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5)
 $HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5)
 
 
@@ -291,7 +291,7 @@ $elseif  "Read the bulletin board in the hallway"
 $set local:_localOr = true
 $endif
 $if local:_localOr
-$HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.3333333)
+$HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.5)
 $endif
 
 
@@ -355,13 +355,13 @@ Turns out even the DNR headquarters isn't safe from flooding!
 
 Workers are airing out the hallways with giant fans. The carpets squelch like swampland under your feet.
 
-$HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.3333333)
-$HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.3333333)
-$HubChoice(RunIntoTheMayorInHallway, "Head out", 0.3333333)
+$HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
+$HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.5)
+$HubChoice(RunIntoTheMayorInHallway, "Head out", 0.5)
 
 
 $if Visited(JenkinssComputer)
-$HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.3333333)
+$HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
 $endif
 
 
@@ -516,10 +516,10 @@ The floodwater has gone down, but there's mud and debris everywhere.
 You duck under the barricade and take a look around.
 
 
-$if !!HasTime(0.3333333)
+$if !!HasTime(0.5)
 $choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
 $choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
-$HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.3333333)
+$HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 
 $choice ScienceStoryMap; Twin Lakes Map 
 $else
@@ -714,7 +714,7 @@ Her eyes light up when she notices you.
 
 $choice InterviewCafeOwner; Ask to interview her
 $HubChoice(OrderTheDailySpecial, "Order the daily special", 0.25)
-$HubChoice(HelpWithHerComputer, "{@me} Actually, do you need help with that laptop?", 15)
+$HubChoice(HelpWithHerComputer, "{@me} Actually, do you need help with that laptop?", 0.25)
 
 // Original Name: Take photos of the debris
 :: TakePhotosOfTheDebris
@@ -924,7 +924,7 @@ $if StatCheck(Social, 4)
 
 He's so excited you've heard of his work that he agrees to an interview!
 
-$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 0.33333)
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 0.5)
 $choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
 $endif
 
@@ -1044,7 +1044,7 @@ You give him a locally-made protein bar and a bottle of water.
 
 "Thanks," he says, looking grateful. "I guess I could do a quick interview, while you're here."
 
-$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 20)
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", .5)
 $choice MainStreetFloodRecovery; ...actually, I gotta get going!
 $else
 You dig through your bag for something to offer him, but come up empty.
@@ -1083,7 +1083,7 @@ $endif
 
 He's so thankful for your help that he agrees to a quick interview!
 
-$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 20)
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 0.5)
 $choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
 $else
 You try to help him lift a sofa--no luck.

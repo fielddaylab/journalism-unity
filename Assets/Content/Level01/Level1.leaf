@@ -348,7 +348,7 @@ $if FirstVisit()
     $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
 $endif
 
-$HubChoice(Office1-Weather, "Check the weather online", 0.1666667)
+$HubChoice(Office1-Weather, "Check the weather online", 0.25)
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75)
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for background and flood safety advice", 0.5)
 $HubChoice(Office1-Police, "Call your police contact for safety information", 0.5)
