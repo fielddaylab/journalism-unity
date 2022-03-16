@@ -3,7 +3,9 @@
         "Anim/BossPhone5.png": {
             "Type": "Texture",
             "Texture": {
-                "Alpha": false
+                "Width": 335,
+                "Height": 335,
+                "Alpha": true
             }
         },
         "Anim/enml-buzzingphone.gif": {
@@ -12,42 +14,56 @@
         "Anim/enml-buzzingphone.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-coffeedonuts.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-dnrlady.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-escapedchicken.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-fridgeofcherries.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-oldcomputer.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-phoneaccessories.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
@@ -57,18 +73,24 @@
         "Anim/enml-rain.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-stuckcar.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "Anim/enml-textmessage.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
@@ -78,18 +100,152 @@
         "Anim/enml-waterrushing.jpg": {
             "Type": "Texture",
             "Texture": {
+                "Width": 480,
+                "Height": 480,
                 "Alpha": false
             }
         },
         "BG/Apartments.png": {
             "Type": "Texture",
             "Texture": {
+                "Width": 999,
+                "Height": 660,
+                "Alpha": true
+            }
+        },
+        "BG/BedroomMorning.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1126,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/BroadbandOwnerHouse.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1084,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/CherryCreekMarsh2.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1054,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/DNRSite.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1366,
+                "Height": 562,
+                "Alpha": false
+            }
+        },
+        "BG/EvacShelter.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1024,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/Farmhouse.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1043,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/FloodedLiminologyDept.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1128,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/LakesideSt.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1135,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/LowIncomeSt.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1178,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/RestoredOperaHouseInt.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1110,
+                "Height": 768,
                 "Alpha": false
             }
         },
         "BG/Room.png": {
             "Type": "Texture",
             "Texture": {
+                "Width": 998,
+                "Height": 660,
+                "Alpha": false
+            }
+        },
+        "BG/RuralCherryOrchard.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1256,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/SandbagStation.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1024,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/SeniorCitizenApts.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1070,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/TownMeeting.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 866,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/UpperLakeDam.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1006,
+                "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/UpperLakeDamBoat.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1281,
+                "Height": 768,
                 "Alpha": false
             }
         },
@@ -102,19 +258,25 @@
         "Photo/TestPhoto-Sandbags.png": {
             "Type": "Texture",
             "Texture": {
+                "Width": 776,
+                "Height": 444,
                 "Alpha": false
             }
         },
         "UI/MapPlaceholder.png": {
             "Type": "Texture",
             "Texture": {
-                "Alpha": false
+                "Width": 796,
+                "Height": 574,
+                "Alpha": true
             }
         },
         "UI/ticket-stub 1.png": {
             "Type": "Texture",
             "Texture": {
-                "Alpha": false
+                "Width": 490,
+                "Height": 512,
+                "Alpha": true
             }
         }
     },

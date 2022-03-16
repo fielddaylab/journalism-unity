@@ -10,6 +10,7 @@ using BeauUtil.Variants;
 using BeauRoutine;
 using BeauUtil.Extensions;
 using Journalism.UI;
+using EasyAssetStreaming;
 
 namespace Journalism {
 
@@ -38,6 +39,9 @@ namespace Journalism {
             Assets.DeclareStyles(m_Styles);
             Assets.DeclareLevelList(m_LevelDefs);
             Stats.Import(m_Stats);
+
+            Streaming.TextureMemoryBudget = 16 * 1024 * 1024;
+            Streaming.AudioMemoryBudget = 16 * 1024 * 1024;
         }
 
         private void Start() {

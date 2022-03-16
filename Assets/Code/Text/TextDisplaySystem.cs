@@ -177,8 +177,6 @@ namespace Journalism {
 
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_ImagePosition = TextAlignment.Center;
-
-            Streaming.UnloadUnusedAsync();
         }
 
         private void SetStyle(StringHash32 styleId) {
@@ -419,8 +417,6 @@ namespace Journalism {
 
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_ImagePosition = TextAlignment.Center;
-
-            Streaming.UnloadUnusedAsync();
         }
     }
 

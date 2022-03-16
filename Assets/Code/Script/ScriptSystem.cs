@@ -95,10 +95,14 @@ namespace Journalism {
                 return future;
             }
 
+            bool bUnloadScraps = m_CurrentLevel?.StoryScraps != level.StoryScraps;
+
             if (m_CurrentLevel != null) {
                 m_CurrentLevel.LoadedScript.Clear();
-                m_CurrentLevel.LoadedScript = null;
-                m_CurrentLevel.StoryScraps.Clear();
+                if (bUnloadScraps) {
+                    m_CurrentLevel.LoadedScript = null;
+                    m_CurrentLevel.StoryScraps.Clear();
+                }
             }
 
             m_CurrentLevel = level;
