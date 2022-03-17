@@ -1,7 +1,7 @@
 using BeauUtil;
 
 namespace Journalism {
-    static public class Events {
+    static public class GameEvents {
         static public readonly StringHash32 VariableUpdated = "save:variable-updated"; // TableKeyPair variableId
         static public readonly StringHash32 SaveDeclared = "save:declared"; // PlayerData data
         static public readonly StringHash32 TimeUpdated = "save:time-updated"; // uint timeUnits

@@ -90,6 +90,10 @@ namespace Journalism {
             m_BackgroundTextureB.Alpha = 0;
         }
 
+        public IEnumerator FadeOutBackgrounds() {
+            return HandleBackgroundFadeOut(default, null);
+        }
+
         #region Loading
 
         private IEnumerator PrepareNextBackground(string path) {

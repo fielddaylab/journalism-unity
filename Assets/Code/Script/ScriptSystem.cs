@@ -46,7 +46,7 @@ namespace Journalism {
             m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
             m_TextDisplay.LookupLine = m_Integration.LookupLine;
 
-            Game.Events.Register(Events.LevelStarted, OnLevelStarted, this);
+            Game.Events.Register(GameEvents.LevelStarted, OnLevelStarted, this);
 
             DeclareData(new PlayerData());
         }
@@ -65,6 +65,7 @@ namespace Journalism {
         private void OnLevelStarted() {
             m_Visuals.ClearBackgrounds();
             m_TextDisplay.ClearAll();
+            Player.SetupLevel(m_CurrentLevel);
         }
 
         #region Data
@@ -81,14 +82,22 @@ namespace Journalism {
         /// <summary>
         /// Loads level data.
         /// </summary>
-        public Future LoadLevel(int levelIndex) {
-            return LoadLevel(Assets.Level(levelIndex));
+        public Future LoadLevel(int levelIndex, bool killThread = true) {
+            return LoadLevel(Assets.Level(levelIndex), killThread);
+        }
+
+        /// <summary>
+        /// Loads the level for the current player.
+        /// </summary>
+        public Future LoadLevel(PlayerData playerData) {
+            int index = Math.Max(0, playerData.LevelIndex);
+            return LoadLevel(index);
         }
 
         /// <summary>
         /// Loads level data.
         /// </summary>
-        public Future LoadLevel(LevelDef level) {
+        public Future LoadLevel(LevelDef level, bool killThread) {
             Future future = new Future();
             if (m_CurrentLevel == level) {
                 future.Complete();
@@ -107,7 +116,7 @@ namespace Journalism {
 
             m_CurrentLevel = level;
 
-            var scriptLoader = m_Integration.LoadScript(level.Script).OnComplete((s) => {
+            var scriptLoader = m_Integration.LoadScript(level.Script, killThread).OnComplete((s) => {
                 Assets.DeclareLevel(m_CurrentLevel);
                 level.LoadedScript = s;
                 future.Complete();
@@ -157,6 +166,15 @@ namespace Journalism {
         [LeafMember("FirstVisit"), Preserve]
         static private bool LeafFirstVisit() {
             return Game.Scripting.m_FirstVisit;
+        }
+
+        [LeafMember("NextLevel"), Preserve]
+        static private IEnumerator LeafNextLevel() {
+            Future loader = Game.Scripting.LoadLevel(Player.Data.LevelIndex + 1, false);
+            yield return Game.Scripting.m_TextDisplay.ClearAllAnimated();
+            yield return Game.Scripting.m_Visuals.FadeOutBackgrounds();
+            yield return loader.Wait();
+            Game.Scripting.StartLevel();
         }
 
         #endregion // Leaf

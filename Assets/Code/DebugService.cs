@@ -11,6 +11,7 @@ using BeauUtil;
 using BeauUtil.Debugger;
 using BeauUtil.Services;
 using EasyAssetStreaming;
+using Journalism.UI;
 using TMPro;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -46,7 +47,35 @@ namespace Journalism {
         [NonSerialized] private long m_LastKnownStreamingMem;
 
         private void Start() {
+            s_Instance = this;
+
             s_RootMenu = new DMInfo("Debug Menu");
+
+            DMInfo levelMenu = new DMInfo("Levels", Assets.LevelCount);
+            foreach(var level in Assets.AllLevels) {
+                RegisterLoadLevel(levelMenu, level);
+            }
+
+            s_RootMenu.AddSubmenu(levelMenu);
+
+            DMInfo statsMenu = new DMInfo("Stats", Stats.Count);
+            RegisterAdjustStat(statsMenu, StatId.Research);
+            statsMenu.AddDivider();
+            RegisterAdjustStat(statsMenu, StatId.Resourceful);
+            statsMenu.AddDivider();
+            RegisterAdjustStat(statsMenu, StatId.Endurance);
+            statsMenu.AddDivider();
+            RegisterAdjustStat(statsMenu, StatId.Tech);
+            statsMenu.AddDivider();
+            RegisterAdjustStat(statsMenu, StatId.Social);
+            statsMenu.AddDivider();
+            RegisterAdjustStat(statsMenu, StatId.Trust);
+
+            s_RootMenu.AddSubmenu(statsMenu);
+
+            s_RootMenu.AddDivider();
+
+            s_RootMenu.AddToggle("Toggle Toolbar", () => UISystem.GetHeaderEnabled(), (b) => UISystem.SetHeaderEnabled(b));
 
             #if !UNITY_EDITOR
             SetMinimalLayer(false);
@@ -141,6 +170,25 @@ namespace Journalism {
             }
         }
 
+        static private void RegisterLoadLevel(DMInfo menu, LevelDef def) {
+            menu.AddButton("Load " + def.name, () => {
+                s_Instance.SetMinimalLayer(false);
+                Game.Scripting.LoadLevel(def, true).OnComplete(() => {
+                    Game.Scripting.StartLevel();
+                });
+            });
+        }
+
+        static private void RegisterAdjustStat(DMInfo menu, StatId statId) {
+            var info = Stats.Info(statId);
+            menu.AddButton(info.Name + " + 1", () => {
+                Player.SetStat(statId, Player.Stat(statId) + 1);
+            }, () => Player.Stat(statId) < Stats.MaxValue);
+            menu.AddButton(info.Name + " - 1", () => {
+                Player.SetStat(statId, Player.Stat(statId) - 1);
+            }, () => Player.Stat(statId) > 1);
+        }
+
         #region Pausing
 
         private void Pause() {
@@ -174,6 +222,6 @@ namespace Journalism {
             }
         }
 
-#endif // DEVELOPMENT
+        #endif // DEVELOPMENT
     }
 }

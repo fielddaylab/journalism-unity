@@ -1150,3 +1150,5 @@ You trail off, not sure what to say, and Khalisa laughs.
 
 $choice RoyalHazelNeighborhoodHub; Go back outside.
 
+:: STORYEVALUATION
+{@msg}  Story builder sequence here

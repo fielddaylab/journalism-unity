@@ -1666,3 +1666,6 @@ $choice AreYouWorriedAboutLowerLakeLevelsToo; Are you worried about lower lake l
 
 She smiles. "Don't worry too much. I'm sure he'll land on his feet."
 
+:: STORYEVALUATION
+{@msg}  Story builder sequence here
+$call NextLevel()

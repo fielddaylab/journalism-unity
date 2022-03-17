@@ -147,9 +147,6 @@ namespace EasyAssetStreaming {
 
             static public void StartLoading(StreamingAssetId id, AssetMeta meta) {
                 DownloadHandlerAudioClip audioDownload = (DownloadHandlerAudioClip) meta.Loader.downloadHandler;
-                audioDownload.streamAudio = true;
-                audioDownload.compressed = false;
-
                 var sent = meta.Loader.SendWebRequest();
                 sent.completed += (_) => {
                     HandleAudioUWRFinished(id, meta.Path, meta, meta.Loader);

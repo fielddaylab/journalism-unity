@@ -592,3 +592,6 @@ $set snippetLimit = 4
 $set destination = "Story 2 Intro"
 $goto STORYEVALUATION
 
+:: STORYEVALUATION
+{@msg}  Story builder sequence here
+$call NextLevel()

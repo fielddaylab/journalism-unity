@@ -255,6 +255,9 @@
         "Music/Jahzzar 04 Flood.mp3": {
             "Type": "Audio"
         },
+        "Music/NoHeaven.mp3": {
+            "Type": "Audio"
+        },
         "Photo/TestPhoto-Sandbags.png": {
             "Type": "Texture",
             "Texture": {
@@ -266,8 +269,8 @@
         "UI/MapPlaceholder.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 796,
-                "Height": 574,
+                "Width": 732,
+                "Height": 491,
                 "Alpha": true
             }
         },

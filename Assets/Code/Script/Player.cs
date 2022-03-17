@@ -47,7 +47,7 @@ namespace Journalism {
         static public bool SetLocation(StringHash32 locationId) {
             if (s_Current.LocationId != locationId) {
                 s_Current.LocationId = locationId;
-                Game.Events.Dispatch(Events.Locationupdated, locationId);
+                Game.Events.Dispatch(GameEvents.Locationupdated, locationId);
                 return true;
             }
 
@@ -164,7 +164,7 @@ namespace Journalism {
             }
 
             if (dispatchEvent && bChanged) {
-                Game.Events.Dispatch(Events.StatsUpdated, adjustments);
+                Game.Events.Dispatch(GameEvents.StatsUpdated, adjustments);
             }
         }
 
@@ -200,7 +200,7 @@ namespace Journalism {
             uint units = Stats.HoursToTimeUnits(hours);
             if (units != s_Current.TimeRemaining) {
                 s_Current.TimeRemaining = units;
-                Game.Events.DispatchAsync(Events.TimeUpdated, s_Current.TimeRemaining);
+                Game.Events.DispatchAsync(GameEvents.TimeUpdated, s_Current.TimeRemaining);
             }
         }
 
@@ -215,7 +215,7 @@ namespace Journalism {
             }
             if (units > 0) {
                 s_Current.TimeRemaining -= units;
-                Game.Events.DispatchAsync(Events.TimeUpdated, s_Current.TimeRemaining);
+                Game.Events.DispatchAsync(GameEvents.TimeUpdated, s_Current.TimeRemaining);
             }
         }
 
@@ -227,7 +227,7 @@ namespace Journalism {
             uint units = Stats.HoursToTimeUnits(hours);
             if (units > 0) {
                 s_Current.TimeRemaining += units;
-                Game.Events.DispatchAsync(Events.TimeUpdated, s_Current.TimeRemaining);
+                Game.Events.DispatchAsync(GameEvents.TimeUpdated, s_Current.TimeRemaining);
             }
         }
 
@@ -264,7 +264,7 @@ namespace Journalism {
                 return;
             }
             if (s_Resolver.TryModify(context, key, VariantModifyOperator.Set, value)) {
-                Game.Events.DispatchAsync(Events.VariableUpdated, key);
+                Game.Events.DispatchAsync(GameEvents.VariableUpdated, key);
             }
         }
 
@@ -273,7 +273,7 @@ namespace Journalism {
         /// </summary>
         static public void WriteVariable(TableKeyPair varId, Variant value, object context = null) {
             if (s_Resolver.TryModify(context, varId, VariantModifyOperator.Set, value)) {
-                Game.Events.DispatchAsync(Events.VariableUpdated, varId);
+                Game.Events.DispatchAsync(GameEvents.VariableUpdated, varId);
             }
         }
 
@@ -284,7 +284,6 @@ namespace Journalism {
         /// <summary>
         /// List of all story scraps accumulated for the current level.
         /// </summary>
-        /// <value></value>
         static public ListSlice<StringHash32> StoryScraps {
             get { return s_Current.StoryScrapInventory; }
         }
@@ -305,7 +304,7 @@ namespace Journalism {
             if (!s_Current.StoryScrapInventory.Contains(scrapId)) {
                 s_Current.StoryScrapInventory.Add(scrapId);
                 Log.Msg("[Player] Added story scrap '{0}'!", scrapId);
-                Game.Events.Dispatch(Events.InventoryUpdated, scrapId);
+                Game.Events.Dispatch(GameEvents.InventoryUpdated, scrapId);
                 return true;
             }
 
@@ -325,14 +324,24 @@ namespace Journalism {
         }
 
         /// <summary>
-        /// Resets level-specific data.
+        /// Sets up the current level.
         /// </summary>
-        [LeafMember("ResetForNewLevel"), Preserve]
-        static public void ResetForNewLevel() {
-            s_Current.StoryScrapInventory.Clear();
-            Array.Clear(s_Current.AllocatedScraps, 0, s_Current.AllocatedScraps.Length);
-            s_Current.CheckpointId = default;
-            s_Current.LocationId = default;
+        static public void SetupLevel(LevelDef def) {
+            if (def.StoryScraps.name != s_Current.StoryGroup) {
+                s_Current.StoryGroup = def.StoryScraps.name;
+                s_Current.StoryScrapInventory.Clear();
+                Array.Clear(s_Current.AllocatedScraps, 0, s_Current.AllocatedScraps.Length);
+                Log.Msg("[Player] New story scrap group '{0}' - clearing story inventory", def.StoryScraps.name);
+            }
+
+            if (def.LevelIndex != s_Current.LevelIndex) {
+                Array.Clear(s_Current.AllocatedScraps, 0, s_Current.AllocatedScraps.Length);
+                s_Current.LevelIndex = def.LevelIndex;
+                s_Current.CheckpointId = default;
+                s_Current.LocationId = default;
+                s_Current.TimeRemaining = 0;
+                Log.Msg("[Player] New level index {0} - clearing story and checkpoints", def.LevelIndex);
+            }
         }
 
         #endregion // Script

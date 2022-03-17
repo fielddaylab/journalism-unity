@@ -46,7 +46,7 @@ First things first. You need more tech and rain gear, or you'll be dead in the w
 $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
 $HubChoice(BorrowTech, "Ask to borrow tech", 0.25)
 $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
-$HubChoice:(BorrowCharger, "Borrow" someone's charger", 0.25)
+$HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
 $elseif !StatCheck(Resourceful, 2)
 It's a mess out there. You'll need some rain gear before you leave. 
 
@@ -57,7 +57,7 @@ You still need some tech before you head out.
 
 $HubChoice(BorrowTech, "Ask to borrow tech", 0.25)
 $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
-$HubChoice:(BorrowCharger, "Borrow" someone's charger", 0.25)
+$HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
 $elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
 You've got all the tech and gear you need! 
 
@@ -1151,3 +1151,6 @@ $call GiveSnippet(GreatFloodPhotos)
 $choice ArriveAtFloodSite; Arrive at flood site
 $endif
 
+:: STORYEVALUATION
+{@msg}  Story builder sequence here
+$call NextLevel()

@@ -612,8 +612,6 @@ She hangs up before you can even tell her your name. Come to think of it, maaaay
 
 $choice WetlandsStoryConstruction; Wetlands Story Construction
 
-# start Blankstart
-
 // Original Name: Ask why he's out here volunteering
 :: AskWhyHesOutHereVolunteering
 "The storm brought tons of urban runoff--chemicals, trash, stuff like that," he says. "We're here doing clean-up."
@@ -1910,3 +1908,6 @@ $call GiveSnippet(PoliciesToPreventFlooding)
 
 $choice DNRMap; Thank him for his time.
 
+:: STORYEVALUATION
+{@msg}  Story builder sequence here
+$call NextLevel()

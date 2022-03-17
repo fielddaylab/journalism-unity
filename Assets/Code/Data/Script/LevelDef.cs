@@ -8,9 +8,15 @@ namespace Journalism {
     public sealed class LevelDef : ScriptableObject {
         
         [Required] public LeafAsset Script;
+        
+        [Header("Story")]
+        public StoryConfig Story;
         [Required] public StoryScraps StoryScraps;
+        
+        [Header("Additional Assets")]
         public AudioBundle Audio;
 
+        [NonSerialized] public int LevelIndex;
         [NonSerialized] public Script LoadedScript;
     }
 }

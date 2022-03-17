@@ -631,6 +631,10 @@ namespace Journalism {
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
             }
+
+            choices.DefaultChoiceGroup.blocksRaycasts = false;
+            choices.DefaultNextButton.Selected = false;
+            choices.DefaultChoiceGroup.alpha = 0;
         }
 
         #region Defaults

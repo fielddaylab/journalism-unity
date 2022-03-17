@@ -667,6 +667,7 @@ namespace EasyAssetStreaming {
                 }
 
                 if ((meta.Status & (AssetStatus.PendingUnload | AssetStatus.Unloaded)) != 0) {
+                    UnloadSingle(id, now, 0);
                     s_LoadState.Count--;
                     continue;
                 }

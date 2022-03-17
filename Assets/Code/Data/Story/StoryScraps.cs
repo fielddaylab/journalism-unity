@@ -11,18 +11,11 @@ namespace Journalism {
         public const int MaxSlots = 6;
         
         private readonly Dictionary<StringHash32, StoryScrapData> m_Scraps = new Dictionary<StringHash32, StoryScrapData>();
-        private readonly List<StorySlot> m_Slots = new List<StorySlot>();
-
-        private string m_HeadlineType = string.Empty;
-
         public override int Count { get { return m_Scraps.Count; } }
 
         public override IEnumerator<StoryScrapData> GetEnumerator() {
             return m_Scraps.Values.GetEnumerator();
         }
-
-        public string HeadlineType { get { return m_HeadlineType; } }
-        public ListSlice<StorySlot> Slots { get { return m_Slots; } }
 
         public StoryScrapData Scrap(StringHash32 id) {
             StoryScrapData scrap = null;
@@ -36,14 +29,7 @@ namespace Journalism {
             base.Clear();
 
             m_Scraps.Clear();
-            m_Slots.Clear();
         }
-
-        #region Meta
-
-
-
-        #endregion // Meta
 
         #region Generator
 
@@ -54,7 +40,11 @@ namespace Journalism {
                 outBlock = new StoryScrapData() {
                     Id = inId.Id
                 };
-                inPackage.m_Scraps.Add(outBlock.Id, outBlock);
+                if (inPackage.m_Scraps.ContainsKey(outBlock.Id)) {
+                    Log.Error("[StoryScraps] Duplicate scrap id '{0}'", outBlock.Id);
+                } else {
+                    inPackage.m_Scraps.Add(outBlock.Id, outBlock);
+                }
                 return true;
             }
         }

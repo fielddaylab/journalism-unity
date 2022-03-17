@@ -9,8 +9,8 @@ using UnityEngine.Scripting;
 
 namespace Journalism {
     [Serializable]
-    public struct StorySlot {
-        public StoryScrapType AllowedTypes;
-        public int Width;
+    public class StoryConfig {
+        public string HeadlineType;
+        public StorySlot[] Slots;
     }
 }

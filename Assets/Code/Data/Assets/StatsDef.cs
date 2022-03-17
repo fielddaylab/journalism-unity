@@ -107,6 +107,13 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Maximum stat value.
+        /// </summary>
+        static public int MaxValue {
+            get { return s_MaxValue; }
+        }
+
+        /// <summary>
         /// Clamps the value of the given stat value.
         /// </summary>
         static public int Clamp(int statValue) {

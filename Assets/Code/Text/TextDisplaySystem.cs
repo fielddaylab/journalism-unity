@@ -52,8 +52,8 @@ namespace Journalism {
 
             m_ImageColumnBaseline = m_Image.Root.anchoredPosition.y;
 
-            Game.Events.Register<StringHash32>(Events.InventoryUpdated, OnInventoryUpdated, this)
-                .Register<int[]>(Events.StatsUpdated, OnStatsUpdated, this);
+            Game.Events.Register<StringHash32>(GameEvents.InventoryUpdated, OnInventoryUpdated, this)
+                .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this);
         }
 
         #endregion // Unity
@@ -417,6 +417,15 @@ namespace Journalism {
 
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_ImagePosition = TextAlignment.Center;
+        }
+
+        public IEnumerator ClearAllAnimated() {
+            if (m_ChoiceDisplay.Choices.Count > 0) {
+                yield return GameText.AnimateVanish(m_ChoiceDisplay);
+                GameText.ClearChoices(m_ChoiceDisplay);
+            }
+            yield return HandleImageClear(default, null);
+            yield return ClearLines();
         }
     }
 

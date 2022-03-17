@@ -11,9 +11,11 @@ namespace Journalism {
         public VariantTable UITable = new VariantTable("ui");
         public HashSet<StringHash32> VisitedNodeIds = new HashSet<StringHash32>();
         
-        public uint LevelIndex = 0;
+        public StringHash32 StoryGroup = null;
         public List<StringHash32> StoryScrapInventory = new List<StringHash32>();
         public StringHash32[] AllocatedScraps = new StringHash32[StoryScraps.MaxSlots];
+        
+        public int LevelIndex = -1;
         public StringHash32 CheckpointId = null;
         public StringHash32 LocationId = null;
         public uint TimeRemaining;
@@ -38,6 +40,7 @@ namespace Journalism {
             serializer.Object("uiVars", ref UITable);
             serializer.UInt32ProxySet("visited", ref VisitedNodeIds);
             
+            serializer.UInt32Proxy("storyGroup", ref StoryGroup);
             serializer.UInt32ProxyArray("scrapInventory", ref StoryScrapInventory);
             serializer.UInt32ProxyArray("allocatedScraps", ref AllocatedScraps);
 

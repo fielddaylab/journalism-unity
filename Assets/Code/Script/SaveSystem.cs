@@ -42,7 +42,7 @@ namespace Journalism {
         private void DeclareSave(PlayerData data) {
             m_CurrentData = data;
             Game.Scripting.DeclareData(data);
-            Game.Events.DispatchAsync(Events.SaveDeclared, data);
+            Game.Events.DispatchAsync(GameEvents.SaveDeclared, data);
         }
     }
 }

@@ -30,14 +30,16 @@ namespace Journalism {
 
         #region Loading
 
-        public Future<Script> LoadScript(LeafAsset asset) {
+        public Future<Script> LoadScript(LeafAsset asset, bool killThread) {
             if (m_CurrentAsset == asset) {
                 return Future.Completed<Script>(m_CurrentScript);
             }
 
             m_CurrentScript?.Clear();
             m_CurrentAsset = asset;
-            m_CurrentThread.Kill();
+            if (killThread) {
+                m_CurrentThread.Kill();
+            }
 
             Future<Script> future = new Future<Script>();
             m_ScriptLoader.Replace(m_RoutineHost, LoadScriptRoutine(future));
@@ -47,11 +49,12 @@ namespace Journalism {
         private IEnumerator LoadScriptRoutine(Future<Script> future) {
             m_CurrentScript = LeafAsset.CompileAsync(m_CurrentAsset, Script.Parser, out IEnumerator loader);
             AsyncHandle asyncHandle = Async.Schedule(loader, AsyncFlags.HighPriority);
-            using(asyncHandle)
-            using(Profiling.Time("loading script")) {
-                yield return asyncHandle;
+            using(asyncHandle) {
+                using(Profiling.Time("loading script")) {
+                    yield return asyncHandle;
+                }
+                future.Complete(m_CurrentScript);
             }
-            future.Complete(m_CurrentScript);
         }
     
         #endregion // Loading
@@ -79,21 +82,26 @@ namespace Journalism {
         public void StartFromBeginning() {
             Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
             m_CurrentScript.TryGetNode(m_CurrentScript.StartNodeId(), out ScriptNode start);
-            Game.Events.Dispatch(Events.LevelStarted);
+            Game.Events.Dispatch(GameEvents.LevelStarted);
             Run(start);
         }
 
         public void StartFromCheckpoint(PlayerData data) {
+            if (data.CheckpointId.IsEmpty) {
+                StartFromBeginning();
+                return;
+            }
+            
             Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
             m_CurrentScript.TryGetNode(data.CheckpointId, out ScriptNode start);
-            Game.Events.Dispatch(Events.LevelStarted);
+            Game.Events.Dispatch(GameEvents.LevelStarted);
             Run(start);
         }
 
         public void StartFromNode(StringHash32 nodeId) {
             Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
             m_CurrentScript.TryGetNode(nodeId, out ScriptNode start);
-            Game.Events.Dispatch(Events.LevelStarted);
+            Game.Events.Dispatch(GameEvents.LevelStarted);
             Run(start);
         }
 

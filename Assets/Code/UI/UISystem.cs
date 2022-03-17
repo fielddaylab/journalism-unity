@@ -32,9 +32,9 @@ namespace Journalism.UI {
         #region Unity Events
 
         private void Awake() {
-            Game.Events.Register<TableKeyPair>(Events.VariableUpdated, OnVariableUpdated, this)
-                .Register(Events.LevelStarted, OnLevelStarted, this)
-                .Register<uint>(Events.TimeUpdated, OnTimeUpdated, this);
+            Game.Events.Register<TableKeyPair>(GameEvents.VariableUpdated, OnVariableUpdated, this)
+                .Register(GameEvents.LevelStarted, OnLevelStarted, this)
+                .Register<uint>(GameEvents.TimeUpdated, OnTimeUpdated, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
@@ -124,12 +124,17 @@ namespace Journalism.UI {
         #region Leaf
 
         [LeafMember("SetHeaderEnabled"), Preserve]
-        static private void SetHeaderEnabled(bool enabled) {
+        static public void SetHeaderEnabled(bool enabled) {
             Player.WriteVariable(Var_HeaderEnabled, enabled);
         }
 
+        [LeafMember("HeaderEnabled"), Preserve]
+        static public bool GetHeaderEnabled() {
+            return Player.ReadVariable(Var_HeaderEnabled).AsBool();
+        }
+
         [LeafMember("OpenWindow"), Preserve]
-        static private void OpenWindow(StringHash32 id) {
+        static public void OpenWindow(StringHash32 id) {
             Game.UI.FindButton(id).Button.isOn = true;
         }
 

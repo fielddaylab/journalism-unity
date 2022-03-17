@@ -14,7 +14,10 @@ namespace Journalism {
         }
 
         static internal void DeclareLevelList(LevelDef[] levels) {
-            s_AllLevels = levels;;
+            s_AllLevels = levels;
+            for(int i = 0; i < levels.Length; i++) {
+                levels[i].LevelIndex = i;
+            }
         }
 
         static internal void DeclareLevel(LevelDef level) {

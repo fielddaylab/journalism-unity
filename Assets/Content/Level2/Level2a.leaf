@@ -1408,3 +1408,6 @@ $call GiveSnippet(PoliciesToPreventFlooding)
 
 $choice DNRMap; Thank him for his time.
 
+:: STORYEVALUATION
+{@msg}  Story builder sequence here
+$call NextLevel()
