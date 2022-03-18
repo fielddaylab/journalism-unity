@@ -312,6 +312,7 @@ $choice Crackers; Grab a few saltine crackers.
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
+{bg BG/UpperLakeDam.jpg}
 <b>Location: the Upper Lake Dam</b>
 
 $if FirstVisit()
@@ -462,6 +463,7 @@ $endif
 
 // Original Name: Talk to the houseboat lady
 :: TalkToTheHouseboatLady
+{bg BG/UpperLakeDamBoat.jpg}
 The houseboat lady is thrilled to talk with you.
 
 "Houseboat, stay afloat!" she chants.

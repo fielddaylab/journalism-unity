@@ -24,7 +24,7 @@
 // Original Name: START
 :: START
 $ActionChoice(Wake up)
-{bg BG/Room.png}
+{bg BG/BedroomMorning.jpg}
 $call Music(Music/Jahzzar 02 Wet Socks.mp3)
 It's 5AM.
 {img Anim/enml-rain.jpg}
