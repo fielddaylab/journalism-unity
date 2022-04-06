@@ -2,6 +2,8 @@ using BeauUtil;
 using BeauUtil.Blocks;
 using Leaf;
 using UnityEngine.Scripting;
+using UnityEngine;
+using System;
 
 namespace Journalism {
     /// <summary>
@@ -10,8 +12,10 @@ namespace Journalism {
     public sealed class StoryScrapData : IDataBlock {
         public StringHash32 Id;
         [BlockMeta("type")] public StoryScrapType Type;
-        [BlockMeta("quality")] public StoryScrapQuality Quality;
+        [BlockMeta("quality")] public StoryScrapQuality Quality = StoryScrapQuality.Good;
         [BlockMeta("image")] public string ImagePath;
+        [BlockMeta("align")] public TextAnchor Alignment = TextAnchor.MiddleCenter;
+        [BlockMeta("attr")] public StoryScrapAttribute Attributes = 0;
         [BlockContent] public string Content;
     }
 
@@ -35,5 +39,15 @@ namespace Journalism {
         Bad,
         Good,
         Great
+    }
+
+    /// <summary>
+    /// Attributes applied to story scrap.
+    /// </summary>
+    [Flags]
+    public enum StoryScrapAttribute {
+        Facts = 0x01,
+        Color = 0x02,
+        Useful = 0x04
     }
 }
