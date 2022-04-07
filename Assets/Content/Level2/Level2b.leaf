@@ -204,6 +204,7 @@ $choice HeadToCherryCreekMarsh; Head to Cherry Creek Marsh.
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
+{bg BG/CherryCreekMarsh2.jpg}
 When you arrive at the marsh, the CRANE director is waiting for you. 
 
 Plus two or three volunteers, and about a thousand mosquitoes. 
@@ -253,6 +254,7 @@ $choice MarshMap; Thank her for her help.
 
 // Original Name: Marsh Map
 :: MarshMap
+{bg BG/CherryCreekMarsh2.jpg}
 <b>Location: Snakebite Marsh</b>
 
 $if FirstVisit()
@@ -393,6 +395,7 @@ $endif
 
 // Original Name: Return to the Department of Limnology
 :: ReturnToTheDepartmentOfLimnology
+{bg BG/FloodedLiminologyDept.jpg}
 <b>Location: Department of Limnology</b>
 
 $if HasTime(0.5)
@@ -691,6 +694,7 @@ $choice MainStreetFloodRecovery; Head straight to Main Street
 
 // Original Name: DNR Map
 :: DNRMap
+{bg BG/DNRSite.jpg}
 <b>Location: DNR Headquarters</b>
 This story is due in {timeLeft}.
 
@@ -979,8 +983,7 @@ FLYER:
 * Prevent shoreline erosion
 * Stop flooding
 * Prepare for extreme weather
-Mayor Johnson is pushing to have the lake levels lowered! Hear more at this week's Town Hall meeting. 
-</b>
+Mayor Johnson is pushing to have the lake levels lowered! Hear more at this week's Town Hall meeting. </b>
 <color="magenta"><i>Gained new location: Department of Limnology</i></color>
 
 $call GiveSnippet(LakeLevelBackground)

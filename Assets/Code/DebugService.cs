@@ -60,15 +60,10 @@ namespace Journalism {
 
             DMInfo statsMenu = new DMInfo("Stats", Stats.Count);
             RegisterAdjustStat(statsMenu, StatId.Research);
-            statsMenu.AddDivider();
             RegisterAdjustStat(statsMenu, StatId.Resourceful);
-            statsMenu.AddDivider();
             RegisterAdjustStat(statsMenu, StatId.Endurance);
-            statsMenu.AddDivider();
             RegisterAdjustStat(statsMenu, StatId.Tech);
-            statsMenu.AddDivider();
             RegisterAdjustStat(statsMenu, StatId.Social);
-            statsMenu.AddDivider();
             RegisterAdjustStat(statsMenu, StatId.Trust);
 
             s_RootMenu.AddSubmenu(statsMenu);

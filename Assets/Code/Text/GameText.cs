@@ -677,6 +677,10 @@ namespace Journalism {
         /// </summary>
         static public void PopulateStoryScrap(StoryScrapDisplay display, StoryScrapData data, TextStyles.StyleData style) {
             if (display.Texture) {
+                RectTransform textureAlign = (RectTransform) display.Texture.transform;
+                CanvasUtility.SetAnchor(textureAlign, data.Alignment);
+                CanvasUtility.SetPivot(textureAlign, data.Alignment);
+
                 display.Texture.Path = data.ImagePath;
             }
 

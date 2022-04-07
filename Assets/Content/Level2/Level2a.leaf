@@ -348,6 +348,7 @@ $choice MainStreetFloodRecovery; Head straight to Main Street
 
 // Original Name: DNR Map
 :: DNRMap
+{bg BG/DNRSite.jpg}
 <b>Location: DNR Headquarters</b>
 This story is due in {timeLeft}.
 
