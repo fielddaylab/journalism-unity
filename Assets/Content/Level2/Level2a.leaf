@@ -15,6 +15,10 @@
 #macro ActionChoice(text) \
     $choice _null; {@action} $text \
     $choose continue
+#macro GameOver(text) \
+    $call GameOver() \
+    $text \
+    $call GameOverRestart()
 
 // Name: Journalism Table Prototype
 // Creator: Twine

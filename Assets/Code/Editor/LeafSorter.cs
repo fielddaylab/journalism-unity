@@ -4,7 +4,9 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using BeauUtil;
+using BeauUtil.Blocks;
 using BeauUtil.Debugger;
+using Leaf;
 using UnityEditor;
 
 namespace Journalism {
@@ -223,5 +225,53 @@ namespace Journalism {
         static private MatchEvaluator SnippetImageReplace = (m) => {
             return string.Format("@image {0}", m.Groups[1].Value);
         };
+
+        [MenuItem("Journalism/Scan for Missing Nodes")]
+        static private void FindAllMissingNodes() {
+            try
+            {
+                EditorUtility.DisplayProgressBar("Analyzing all node ids", "Reading Leaf File", 0);
+                HashSet<StringHash32> sourceNodeIds = new HashSet<StringHash32>();
+                var script = BlockParser.Parse("src", File.ReadAllText(TwineConversion.LeafFilePath), BlockParsingRules.Default, Script.Parser);
+                foreach(var node in script) {
+                    sourceNodeIds.Add(node.Id());
+                }
+
+                ScanAndStrip("Assets/Content/Level1/Level1-Scraps.scraps", StoryScraps.Parser, GetScrapId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level2/Level2-Scraps.scraps", StoryScraps.Parser, GetScrapId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level3/Level3-Scraps.scraps", StoryScraps.Parser, GetScrapId, sourceNodeIds);
+
+                ScanAndStrip("Assets/Content/Level1/Level1a.leaf", Script.Parser, GetNodeId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level1/Level1b.leaf", Script.Parser, GetNodeId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level2/Level2a.leaf", Script.Parser, GetNodeId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level2/Level2b.leaf", Script.Parser, GetNodeId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level3/Level3a.leaf", Script.Parser, GetNodeId, sourceNodeIds);
+                ScanAndStrip("Assets/Content/Level3/Level3b.leaf", Script.Parser, GetNodeId, sourceNodeIds);
+
+                foreach(var node in sourceNodeIds) {
+                    Log.Error("Node '{0}' does not show up in any in-use Leaf file", node);
+                }
+            }
+            finally {
+                EditorUtility.ClearProgressBar();
+            }
+        }
+
+        private delegate StringHash32 GetId<TBlock>(TBlock data);
+
+        static private GetId<StoryScrapData> GetScrapId = (d) => d.Id;
+        static private GetId<ScriptNode> GetNodeId = (d) => d.Id();
+
+        static private void ScanAndStrip<TBlock, TPackage>(string filePath, IBlockGenerator<TBlock, TPackage> parser, GetId<TBlock> getId,  HashSet<StringHash32> ids)
+            where TBlock : class, IDataBlock
+            where TPackage : class, IDataBlockPackage<TBlock>
+        {
+            var data = BlockParser.Parse("data", File.ReadAllText(filePath), BlockParsingRules.Default, parser);
+            if (data != null) {
+                foreach(var node in data) {
+                    ids.Remove(getId(node));
+                }
+            }
+        }
     }
 }

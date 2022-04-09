@@ -14,17 +14,32 @@ using BeauUtil.Variants;
 namespace Journalism {
     static public class GameText {
 
-        static private readonly char[] QuoteTrim = new char[] { '"' };
+        static public StringSlice StripQuotes(StringSlice textString) {
+            if (textString.Length > 1 && textString.StartsWith('\"') && textString.EndsWith('\"')) {
+                int innerQuoteCount = 0;
+                for(int i = 1; i < textString.Length - 1; i++) {
+                    if (textString[i] == '"') {
+                        innerQuoteCount++;
+                    }
+                }
+                if (innerQuoteCount == 0 || (innerQuoteCount % 2) != 0) {
+                    textString = textString.Substring(1, textString.Length - 2);
+                }
+            }
+            return textString;
+        }
 
         #region Lines
 
         /// <summary>
         /// Populates the contents of a given text line.
         /// </summary>
-        static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style) {
+        static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style, bool stripQuotes = false) {
             Assert.True(line.gameObject.activeInHierarchy, "TextLine must be active before calling PopulateTextLine");
 
-            textString = textString.Trim(QuoteTrim);
+            if (stripQuotes) {
+                textString = StripQuotes(textString);
+            }
 
             if (!textString.IsEmpty) {
                 line.Text.SetText(textString.ToString());
@@ -195,9 +210,7 @@ namespace Journalism {
             RectTransform lineRect = line.Root;
             lineRect.SetParent(scroll.ListRoot, false);
             lineRect.anchoredPosition = default;
-            line.Local.anchoredPosition = default;
-            lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
-            line.Group.alpha = 0;
+            PrepareTextLine(line, scroll.RotationRange);
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
                 LineAlloc = lineAlloc,
                 Line = line
@@ -233,14 +246,40 @@ namespace Journalism {
             RectTransform lineRect = line.Root;
             lineRect.SetParent(scroll.ListRoot, false);
             lineRect.anchoredPosition = default;
-            line.Local.anchoredPosition = default;
-            lineRect.SetRotation(RNG.Instance.NextFloat(-scroll.RotationRange, scroll.RotationRange), Axis.Z, Space.Self);
-            line.Group.alpha = 0;
+            PrepareTextLine(line, scroll.RotationRange);
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
                 ScrapAlloc = scrapAlloc,
                 Line = line
             });
             return scrapAlloc.Object;
+        }
+
+        /// <summary>
+        /// Prepares a text line for animation.
+        /// </summary>
+        static public void PrepareTextLine(TextLine line, float rotationRange) {
+            RectTransform lineRect = line.Root;
+            line.Local.anchoredPosition = default;
+            lineRect.SetRotation(RNG.Instance.NextFloat(-rotationRange, rotationRange), Axis.Z, Space.Self);
+            line.Group.alpha = 0;
+        }
+
+        /// <summary>
+        /// Animates the text line as an "effect" animation.
+        /// </summary>
+        static public IEnumerator AnimateTextLineEffect(TextLine line, Vector2 offset, float duration, float delay) {
+            line.gameObject.SetActive(true);
+            line.Local.anchoredPosition = offset;
+            yield return Routine.Combine(
+                line.Group.FadeTo(1, duration),
+                line.Local.AnchorPosTo(default(Vector2), duration).ForceOnCancel().Ease(Curve.BackOut)
+            );
+            yield return delay;
+            yield return Routine.Combine(
+                line.Group.FadeTo(0, duration),
+                line.Local.AnchorPosTo(-offset, duration).ForceOnCancel().Ease(Curve.QuadIn)
+            );
+            line.gameObject.SetActive(false);
         }
 
         /// <summary>
@@ -465,7 +504,9 @@ namespace Journalism {
         static public void InitializeChoices(TextChoiceGroup choices) {
             choices.DefaultChoiceGroup.alpha = 0;
             choices.DefaultChoiceGroup.blocksRaycasts = false;
-            choices.GridGroup.blocksRaycasts = false;
+            if (choices.GridGroup) {
+                choices.GridGroup.blocksRaycasts = false;
+            }
         }
 
         /// <summary>
@@ -478,9 +519,7 @@ namespace Journalism {
             RectTransform lineRect = line.Root;
             lineRect.SetParent(choices.GridRoot, false);
             lineRect.anchoredPosition = default;
-            line.Local.anchoredPosition = default;
-            lineRect.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            line.Group.alpha = 0;
+            PrepareTextLine(line, choices.RotationRange);
             choices.Choices.PushBack(new TextChoiceGroup.ChoiceState() {
                 Choice = choiceAlloc
             });
@@ -493,7 +532,7 @@ namespace Journalism {
         static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, TextStyles.StyleData style) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
 
-            textString = textString.Trim(QuoteTrim);
+            textString = StripQuotes(textString);
 
             TextLine line = choice.Line;
             line.Text.SetText(textString.ToString());
@@ -506,9 +545,11 @@ namespace Journalism {
             if (line.Icon != null) {
                 if (timeCost > 0) {
                     line.Icon.gameObject.SetActive(true);
-                    line.Icon.fillAmount = (float) timeCost / Stats.TimeUnitsPerHour;
+                    choice.Radial.gameObject.SetActive(true);
+                    choice.Radial.fillAmount = (float) timeCost / Stats.TimeUnitsPerHour;
                 } else {
-                    line.Icon.gameObject.SetActive(false);
+                    line.Icon.gameObject.SetActive(true);
+                    choice.Radial.gameObject.SetActive(false);
                 }
             }
 
@@ -640,7 +681,7 @@ namespace Journalism {
         #region Defaults
 
         static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style) {
-            PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style);
+            PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, true);
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
             choices.DefaultChoiceGroup.blocksRaycasts = true;
@@ -653,7 +694,7 @@ namespace Journalism {
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style) {
-            PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style);
+            PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style, true);
 
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
@@ -664,6 +705,23 @@ namespace Journalism {
             }
             choices.DefaultChoiceGroup.blocksRaycasts = false;
             yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
+        }
+
+        static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
+            PopulateTextLine(choices.DefaultNextButton.Line, yesText, null, default, yesStyle, true);
+            PopulateTextLine(choices.DefaultBackButton.Line, noText, null, default, yesStyle ?? noStyle, true);
+            choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
+            choices.DefaultBackButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
+            yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
+            choices.DefaultChoiceGroup.blocksRaycasts = true;
+            choices.DefaultNextButton.Selected = false;
+            choices.DefaultBackButton.Selected = false;
+            while(!choices.DefaultNextButton.Selected && !choices.DefaultBackButton.Selected) {
+                yield return null;
+            }
+            choices.DefaultChoiceGroup.blocksRaycasts = false;
+            yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
+            future.Complete(choices.DefaultNextButton.Selected);
         }
 
         #endregion // Defaults
@@ -736,8 +794,9 @@ namespace Journalism {
         /// </summary>
         static public void InitializeEvents(CustomTagParserConfig config, TagStringEventHandler handler, LeafIntegration integration, ScriptVisualsSystem visuals, TextDisplaySystem textDisplay) {
             LeafUtils.ConfigureDefaultParsers(config, integration, null); // TODO: Replace with appropriate localization callback
+            LeafUtils.ConfigureDefaultHandlers(handler, integration);
 
-            config.AddReplace("timeLeft", () => FormatTime(Player.Data.TimeRemaining));
+            config.AddReplace("timeLeft", () => FormatTime(Player.Data.TimeRemaining, false));
 
             config.AddEvent("bg", Events.Background).WithStringData();
             config.AddEvent("anim", Events.Anim).WithStringData();
@@ -773,29 +832,24 @@ namespace Journalism {
 
         #region Text Generation
 
-        static public string FormatTime(uint timeRemaining) {
+        static public string FormatTime(uint timeRemaining, bool abbreviated) {
             uint hours = timeRemaining / Stats.TimeUnitsPerHour;
             uint minutes = Stats.MinutesPerTimeUnit * (timeRemaining % Stats.TimeUnitsPerHour);
-
-            string hourStr = null, minuteStr = null;
             
             // TODO: Localization
-            if (hours > 1) {
-                hourStr = string.Format("<color=#EB8686>{0}</color> hours", hours);
-            } else if (hours == 1) {
-                hourStr = "<color=#EB8686>1</color> hour";
-            }
-
-            if (minutes > 0) {
-                minuteStr = string.Format("<color=#EB8686>{0}</color> minutes", minutes);
-            } else if (hours == 0) {
-                minuteStr = "<color=#EB8686>0</color> minutes";
-            }
-
-            if (hourStr != null && minuteStr != null) {
-                return string.Join(" and ", hourStr, minuteStr);
+            if (hours > 0) {
+                if (minutes > 0) {
+                    if (abbreviated) {
+                        return string.Format("<b>{0}</b> hr <b>{1}</b> min", hours, minutes);
+                    } else {
+                        return string.Format("<b>{0}</b> hours and <b>{1}</b> minutes", hours, minutes);
+                    }
+                }
+                return string.Format("<b>{0}</b> hours", hours);
+            } else if (minutes > 0) {
+                return string.Format("<b>{0}</b> minutes", minutes);
             } else {
-                return hourStr ?? minuteStr;
+                return string.Empty;
             }
         }
 

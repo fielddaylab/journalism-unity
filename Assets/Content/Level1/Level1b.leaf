@@ -15,6 +15,10 @@
 #macro ActionChoice(text) \
     $choice _null; {@action} $text \
     $choose continue
+#macro GameOver(text) \
+    $call GameOver() \
+    $text \
+    $call GameOverRestart()
 
 // Name: Journalism Table Prototype
 // Creator: Twine
@@ -64,10 +68,53 @@ You've got all the tech and gear you need!
 $choice GetReadyPart2; Prepare to brave the storm
 $endif
 
+// Original Name: "Borrow" charger
+:: BorrowCharger
+One of the copyeditors is away from his desk. 
+
+He left his phone charging, right out in the open. 
+
+$choice SwipeHisCharger; Swipe his charger
+$choice UnplugHisPhoneAndChargeYours; Unplug his phone and charge yours
+$choice GetReady; Forget it. I'll find another way.
+
+// Original Name: Swipe his charger
+:: SwipeHisCharger
+You grab his charger and tuck it into your pocket.
+
+His phone is at 92% battery. It'll be fine.
+
+At least, you think it will be, until your editor calls you into her office. 
+
+{@person} Look on the bright side.{auto}
+{@person} You'll have a fully charged phone for your job hunt!
+
+$GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
+
+// Original Name: Unplug his phone and charge yours
+:: UnplugHisPhoneAndChargeYours
+@tags Techie
+You can hear the copyeditor in the breakroom, bragging about his new, tricked-out jellyfish umbrella.
+
+You unplug his phone, plug in yours, and try to look innocent.
+
+When you hear him coming, you turn tail and run for it. 40% battery should be good enough. Probably. 
+
+$call AdjustStats(Tech + 2, Trust - 1)
+
+
+$if StatCheck(Resourceful, 2), StatCheck(Tech, 2)
+$choice GetReadyPart2; Back to your desk
+$endif
+
+$if !StatCheck(Resourceful, 2)
+$choice GetReady; Back to your desk
+$endif
+
 // Original Name: Get Ready part 2
 :: GetReadyPart2
 
-$if HasTime(0)
+$if TimeRemaining()
 You've got all the gear you need!
 
 Your coworkers are rushing around, making phone calls. You still have {timeLeft} to get ready.
@@ -193,9 +240,7 @@ $ContinueChoice({@me} But... shouldn't I head downtown?\" )
 
 {@person}Too late. I saw you were still wasting time here, so I gave the story to Khalisa.
 
-You lost the scoop, Rookie. Better luck next time.
-
-<b>GAME OVER</b>
+$GameOver("You lost the scoop, Rookie. Better luck next time.")
 
 // Original Name: Help Khalisa
 :: HelpKhalisa
@@ -265,6 +310,17 @@ The road ahead is totally covered!
 $choice FindHigherGround; Find higher ground and pull over ASAP
 $choice FloorIt; Try to drive through
 $endif
+
+// Original Name: Listen to the police scanner
+:: ListenToThePoliceScanner
+@tags Egghead
+There's no such thing as too much research! 
+
+Wellll....ok, maybe there is, but you're not about to go out in a 100-year-flood unprepared. 
+
+You check in with your coworker, Sudha, whose job includes police-scanner monitoring.
+
+She gives you an update--Main Street has become a rushing river, and half of the Cherry Festival tents have been swept away! You scribble down the details in your trusty notebook. 
 
 // Original Name: Track down an expert to help you
 :: TrackDownAnExpertToHelpYou
@@ -668,6 +724,43 @@ $endif
 
 $choice ArriveAtFloodSite; Back to the dam
 
+// Original Name: Record your observations
+:: RecordYourObservations
+
+$if StatCheck(Tech, 3)
+You use your voice app to rattle off some notes: 
+
+The overflowing dam, the 10 volunteers and the brand of rain jackets they're wearing, the make and models of the cars stranded in the street, even the name of the houseboat--Nora's Ark.
+
+$call GiveSnippet(SuperDetailedObservation)
+$elseif StatCheck(Resourceful, 3)
+Normally you'd take notes on your phone, but your battery power is alarmingly low. 
+
+Luckily, you came prepared! You whip out your trusty notebook and record your observations, writing to the glow of your light-up umbrella. 
+
+$call GiveSnippet(DetailedObservation)
+$elseif StatCheck(Social, 4)
+Your phone battery is low, and your notebook is lost somewhere in the war zone of your apartment.
+
+Thankfully, one of the volunteers is willing to lend you their charger!
+
+You charm them with witty conversation while your phone charges, and even end up with a quote for your story.
+
+$call GiveSnippet(DetailedObservation)
+$call GiveSnippet(VolunteerConversation)
+$else
+Your phone battery is alarmingly low.
+
+You switch to airplane mode to save power and take a few frantic notes.
+
+It's not exactly prize-winning prose, but it's better than nothing.
+
+$call GiveSnippet(BasicObservation)
+$endif
+
+
+$choice ArriveAtFloodSite; Back to the dam
+
 // Original Name: Bookworm answer
 :: BookwormAnswer
 She looks surprised. "Are you a limnologist, too?"
@@ -863,7 +956,7 @@ The good news: you're alive!
 
 The bad news: you lose your shoes, ruin all your tech, and sit on the bleachers for hours waiting to be rescued. 
 
-<b>GAME OVER</b>
+$GameOver("You needed to be rescued.")
 
 // Original Name: Take photos on the way
 :: TakePhotosOnTheWay
@@ -910,7 +1003,30 @@ She gives you the stats on the lake levels. She's been warning Twin Lakes about 
 $call GiveSnippet(LakeLevels)
 $call GiveSnippet(FloodCause)
 
-$choice ArriveAtFloodSite; Back to the dam 
+$choice ArriveAtFloodSite; Back to the dam
+
+// Original Name: Ask to go with her
+:: AskToGoWithHer
+
+$if StatCheck(Trust, 3)
+She's happy to take a fellow limnologist along for the ride! 
+
+She gives you some spare waders to put on, and you go out into the shallows, where she takes samples with some fancy tech.
+
+You end up getting some great photos and science info about the Twin Lakes watershed!
+
+Unfortunately, it also takes you an hour just to make it back to the dam.
+$call DecreaseTime(1)
+$call GiveSnippet(FloodScience)
+$call GiveSnippet(LakewaterStudy)
+
+$choice ArriveAtFloodSite; Back to flood site
+$else
+She gives you a sideways glance. "Uh... Sorry, I don't gather data together until at <i>least</i> the second date."
+
+She leaves in short order - and good thing, too, because that was getting awkward.
+$choice ArriveAtFloodSite; Back to the dam
+$endif
 
 // Original Name: "When will the situation be under control?"
 :: WhenWillTheSituationBeUnderControl

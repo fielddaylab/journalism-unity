@@ -15,6 +15,10 @@
 #macro ActionChoice(text) \
     $choice _null; {@action} $text \
     $choose continue
+#macro GameOver(text) \
+    $call GameOver() \
+    $text \
+    $call GameOverRestart()
 
 // Name: Journalism Table Prototype
 // Creator: Twine
@@ -29,6 +33,7 @@ $call Music(Music/Jahzzar 02 Wet Socks.mp3)
 It's 5AM.
 {img Anim/enml-rain.jpg}
 Dark, rainy, and way too early.
+
 $choice CheckYourPhone; Check your phone.
 
 // Original Name: Check your phone.
@@ -56,6 +61,7 @@ $choice OnMyWay; {@me} On my way.
 // Original Name: "On my way."
 :: OnMyWay
 @clearText
+@checkpoint
 {/img}
 {bg BG/Apartments.png}
 $call SetHeaderEnabled(true)
@@ -326,6 +332,7 @@ $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Breaking News Story
 :: BreakingNewsStory
+@checkpoint
 @clearText
 {/img}
 Get to work on your breaking news story!

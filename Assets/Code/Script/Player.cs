@@ -177,6 +177,19 @@ namespace Journalism {
         #region Time
 
         /// <summary>
+        /// Time update arguments
+        /// </summary>
+        public struct TimeUpdateArgs {
+            public readonly uint Units;
+            public readonly int Delta;
+
+            public TimeUpdateArgs(uint current, int delta) {
+                Units = current;
+                Delta = delta;
+            }
+        }
+
+        /// <summary>
         /// Returns the amount of time remaining, in hours.
         /// </summary>
         [LeafMember("TimeRemaining"), Preserve]
@@ -199,8 +212,9 @@ namespace Journalism {
         static public void SetTimeRemaining(float hours) {
             uint units = Stats.HoursToTimeUnits(hours);
             if (units != s_Current.TimeRemaining) {
+                int delta = (int) (units - s_Current.TimeRemaining);
                 s_Current.TimeRemaining = units;
-                Game.Events.DispatchAsync(GameEvents.TimeUpdated, s_Current.TimeRemaining);
+                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
             }
         }
 
@@ -215,7 +229,7 @@ namespace Journalism {
             }
             if (units > 0) {
                 s_Current.TimeRemaining -= units;
-                Game.Events.DispatchAsync(GameEvents.TimeUpdated, s_Current.TimeRemaining);
+                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, -(int) units));
             }
         }
 
@@ -227,7 +241,7 @@ namespace Journalism {
             uint units = Stats.HoursToTimeUnits(hours);
             if (units > 0) {
                 s_Current.TimeRemaining += units;
-                Game.Events.DispatchAsync(GameEvents.TimeUpdated, s_Current.TimeRemaining);
+                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, (int) units));
             }
         }
 
@@ -264,7 +278,7 @@ namespace Journalism {
                 return;
             }
             if (s_Resolver.TryModify(context, key, VariantModifyOperator.Set, value)) {
-                Game.Events.DispatchAsync(GameEvents.VariableUpdated, key);
+                Game.Events.Queue(GameEvents.VariableUpdated, key);
             }
         }
 
@@ -273,7 +287,7 @@ namespace Journalism {
         /// </summary>
         static public void WriteVariable(TableKeyPair varId, Variant value, object context = null) {
             if (s_Resolver.TryModify(context, varId, VariantModifyOperator.Set, value)) {
-                Game.Events.DispatchAsync(GameEvents.VariableUpdated, varId);
+                Game.Events.Queue(GameEvents.VariableUpdated, varId);
             }
         }
 
@@ -341,6 +355,7 @@ namespace Journalism {
                 s_Current.LocationId = default;
                 s_Current.TimeRemaining = 0;
                 Log.Msg("[Player] New level index {0} - clearing story and checkpoints", def.LevelIndex);
+                Game.Save.SaveCheckpoint();
             }
         }
 

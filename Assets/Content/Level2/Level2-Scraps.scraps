@@ -154,36 +154,6 @@ Snippet text unimplemented.
 @quality Great
 Snippet text unimplemented
 
-// Original Name: Science of flooding
-:: ScienceOfFlooding
-@type Fact
-@quality Good
-Snippet text unimplemented.
-
-// Original Name: Flood probability
-:: FloodProbability
-@type Graph
-@quality Good
-A clean graph of flood probability.
-
-// Original Name: Flood mumbo jumbo
-:: FloodMumboJumbo
-@type Observation
-@quality Bad
-Double-click this passage to edit it.
-
-// Original Name: Confusing graphic
-:: ConfusingGraphic
-@type Graph
-@quality Bad
-A squiggly misinterpreted graph.
-
-// Original Name: Basic flood background
-:: BasicFloodBackground
-@type Fact
-@quality Good
-Snippet text unimplemented.
-
 // Original Name: Wetlands and rainfall
 :: WetlandsAndRainfall
 @type Graph
@@ -195,36 +165,6 @@ Limnology graphs of wetland rainfall.
 @type Fact
 @quality Good
 Snippet text unimplemented.
-
-// Original Name: Basic flood prevention
-:: BasicFloodPrevention
-@type Quote
-@quality Good
-Snippet text unimplemented.
-
-// Original Name: Detailed flood background
-:: DetailedFloodBackground
-@type Fact
-@quality Great
-Snippet text unimplemented.
-
-// Original Name: Floods and climate change
-:: FloodsAndClimateChange
-@type Graph
-@quality Good
-Snippet text unimplemented
-
-// Original Name: Cause of flood
-:: CauseOfFlood
-@type Quote
-@quality Good
-Snippet text unimplemented
-
-// Original Name: Lake level background
-:: LakeLevelBackground
-@type Fact
-@quality Good
-Snippet text unimplemented
 
 // Original Name: Wetlands and flooding background
 :: WetlandsAndFloodingBackground
@@ -256,30 +196,6 @@ Snippet text unimplemented.
 @quality Good
 Double-click this passage to edit it.
 
-// Original Name: Inspiring downtown recovery
-:: InspiringDowntownRecovery
-@type Photo
-@quality Great
-Snippet text unimplemented.
-
-// Original Name: Downtown recovery
-:: DowntownRecovery
-@type Photo
-@quality Good
-Snippet text unimplemented.
-
-// Original Name: Blurry downtown recovery
-:: BlurryDowntownRecovery
-@type Photo
-@quality Bad
-Snippet text unimplemented.
-
-// Original Name: Rainfall stats
-:: RainfallStats
-@type Graph
-@quality Good
-Snippet text unimplemented.
-
 // Original Name: Shoreline damage
 :: ShorelineDamage
 @type Photo
@@ -298,27 +214,26 @@ Snippet text unimplemented
 @quality Good
 Snippet text unimplemented.
 
-// Original Name: Policies to prevent flooding
-:: PoliciesToPreventFlooding
-@type Quote
-@quality Great
-Snippet text unimplemented.
-
-// Original Name: Art business impact
-:: ArtBusinessImpact
-@type Quote
-@quality Great
-Double-click this passage to edit it.
-
-// Original Name: Impact of flood
-:: ImpactOfFlood
-@type Quote
-@quality Good
-Snippet text unimplemented.
-
 // Original Name: Annoyed business
 :: AnnoyedBusiness
 @type Quote
 @quality Good
 Snippet text unimplemented.
 
+// Original Name: Mayor - impact
+:: Mayor-Impact
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Mayor - Response
+:: Mayor-Response
+@type Quote
+@quality Great
+Snippet text unimplemented.
+
+// Original Name: Mayor - Policies
+:: Mayor-Policies
+@type Quote
+@quality Great
+Snippet text unimplemented.

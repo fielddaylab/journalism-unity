@@ -22,27 +22,27 @@ namespace Journalism.UI {
         [SerializeField] private HeaderUI m_Header = null;
         [SerializeField] private HeaderWindow m_HeaderWindow = null;
         [SerializeField] private CanvasGroup m_HeaderUnderFader = null;
+        [SerializeField] private GameOverWindow m_GameOver = null;
 
         #endregion // Inspector
 
-        [NonSerialized] private HeaderButton m_TimeButton;
-        [NonSerialized] private uint m_LastKnownTime;
         private Routine m_FaderRoutine;
+
+        public GameOverWindow GameOver { get { return m_GameOver; } }
 
         #region Unity Events
 
         private void Awake() {
             Game.Events.Register<TableKeyPair>(GameEvents.VariableUpdated, OnVariableUpdated, this)
+                .Register(GameEvents.LevelLoading, OnLevelLoading, this)
                 .Register(GameEvents.LevelStarted, OnLevelStarted, this)
-                .Register<uint>(GameEvents.TimeUpdated, OnTimeUpdated, this);
+                .Register(GameEvents.GameOver, OnGameOver, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
 
             m_HeaderWindow.OnShowEvent.AddListener(OnHeaderShow);
             m_HeaderWindow.OnHideEvent.AddListener(OnHeaderHide);
-
-            m_TimeButton = FindButton("Time");
         }
 
         private void OnDestroy() {
@@ -51,33 +51,7 @@ namespace Journalism.UI {
 
         #endregion // Unity Events
 
-        #region Queries
-
-        private HeaderButton FindButton(StringHash32 id) {
-            foreach(var button in m_Header.Buttons) {
-                if (button.Id == id) {
-                    return button;
-                }
-            }
-
-            return null;
-        }
-
-        #endregion // Queries
-
         #region Handlers
-
-        private void OnTimeUpdated(uint time) {
-            if (m_LastKnownTime == time) {
-                return;
-            }
-
-            int change = (int) (time - m_LastKnownTime);
-            m_LastKnownTime = time;
-            m_TimeButton.Button.interactable = time > 0;
-
-            // TODO: Animation/SFX for time increase/decrease
-        }
 
         private void OnVariableUpdated(TableKeyPair varId) {
             if (varId == Var_HeaderEnabled) {
@@ -85,10 +59,18 @@ namespace Journalism.UI {
             }
         }
 
+        private void OnGameOver() {
+            m_HeaderWindow.Hide();
+        }
+
+        private void OnLevelLoading() {
+            m_HeaderWindow.Hide();
+            m_GameOver.Hide();
+        }
+
         private void OnLevelStarted() {
             RefreshHeaderEnabled();
-            m_LastKnownTime = Player.Data.TimeRemaining;
-            m_TimeButton.Button.interactable = Player.TimeRemaining() > 0;
+            m_GameOver.InstantHide();
         }
 
         private void RefreshHeaderEnabled() {
@@ -135,7 +117,7 @@ namespace Journalism.UI {
 
         [LeafMember("OpenWindow"), Preserve]
         static public void OpenWindow(StringHash32 id) {
-            Game.UI.FindButton(id).Button.isOn = true;
+            Game.UI.m_Header.FindButton(id).Button.isOn = true;
         }
 
         #endregion // Leaf

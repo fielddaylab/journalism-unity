@@ -59,8 +59,13 @@ namespace Journalism {
         private IEnumerator HandleBackgroundTransition(TagEventData eventData, object context) {
             var args = eventData.ExtractStringArgs();
             LeafEvalContext eval = LeafEvalContext.FromObject(context);
+            string path = args[0].ToString();
 
-            yield return PrepareNextBackground(args[0].ToString());
+            if (m_CurrentBackgroundTexture != null && m_CurrentBackgroundTexture.Path == path && m_CurrentBackgroundTexture.Alpha > 0) {
+                yield break;
+            }
+
+            yield return PrepareNextBackground(path);
             yield return CrossFade(m_CurrentBackgroundTexture, m_QueuedBackgroundTexture, 0.3f);
             CompletedSwap();
         }

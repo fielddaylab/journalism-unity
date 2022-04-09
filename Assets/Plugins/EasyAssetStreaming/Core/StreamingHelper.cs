@@ -169,6 +169,7 @@ namespace EasyAssetStreaming {
         internal enum UpdatedResizeProperty {
             Size = 0x01,
             Clip = 0x02,
+            Pivot = 0x04
         }
 
         /// <summary>
@@ -221,7 +222,7 @@ namespace EasyAssetStreaming {
             }
         }
 
-        static internal UpdatedResizeProperty AutoSize(AutoSizeMode sizeMode, Texture2D texture, Rect sourceUV, Vector2 localPosition, Vector2 pivot, ref Vector2 size, ref Rect clippedUV, Vector2? parentSize) {
+        static internal UpdatedResizeProperty AutoSize(AutoSizeMode sizeMode, Texture2D texture, Rect sourceUV, Vector2 localPosition, Vector2 pivot, ref Vector2 size, ref Rect clippedUV, ref Vector2 appliedPivot, Vector2? parentSize) {
             if (sizeMode == AutoSizeMode.Disabled || !texture) {
                 if (clippedUV != sourceUV) {
                     clippedUV = sourceUV;
@@ -241,6 +242,7 @@ namespace EasyAssetStreaming {
             }
 
             Vector2 originalSize = size;
+            Vector2 originalPivot = appliedPivot;
             Vector2 parentSizeVector = parentSize.GetValueOrDefault();
             Rect originalUV = clippedUV;
             clippedUV = sourceUV;
@@ -263,6 +265,8 @@ namespace EasyAssetStreaming {
                     size.x = parentSizeVector.y * aspect;
                     size.y = parentSizeVector.y;
 
+                    appliedPivot = pivot;
+
                     if (size.x > parentSizeVector.x) {
                         size.x = parentSizeVector.x;
                         size.y = size.x / aspect;
@@ -280,6 +284,8 @@ namespace EasyAssetStreaming {
                     float aspect = textureSize.x / textureSize.y;
                     size.x = parentSizeVector.y * aspect;
                     size.y = parentSizeVector.y;
+
+                    appliedPivot = pivot;
 
                     if (size.x < parentSizeVector.x) {
                         size.x = parentSizeVector.x;
@@ -299,6 +305,8 @@ namespace EasyAssetStreaming {
                     float aspect = textureSize.x / textureSize.y;
                     size.x = parentSizeVector.y * aspect;
                     size.y = parentSizeVector.y;
+
+                    appliedPivot = pivot;
 
                     if (size.x < parentSizeVector.x) {
                         size.x = parentSizeVector.x;
@@ -331,6 +339,9 @@ namespace EasyAssetStreaming {
             }
             if (clippedUV != originalUV) {
                 prop |= UpdatedResizeProperty.Clip;
+            }
+            if (appliedPivot != originalPivot) {
+                prop |= UpdatedResizeProperty.Pivot;
             }
             return prop;
         }

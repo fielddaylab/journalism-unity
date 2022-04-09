@@ -15,6 +15,7 @@ namespace Journalism {
 
         public TextLine Line;
         public Button Button;
+        public Image Radial;
 
         #endregion // Inspector
 

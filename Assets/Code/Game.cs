@@ -51,7 +51,7 @@ namespace Journalism {
         }
 
         private void LateUpdate() {
-            m_EventDispatcher.ProcessAsync();
+            m_EventDispatcher.FlushQueue();
         }
 
         /// <summary>

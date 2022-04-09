@@ -395,16 +395,16 @@ namespace BeauUtil.Extensions {
         }
 
         /// <summary>
-        /// Dispatches the event to its handlers the next time ProcessAsync() is called.
+        /// Dispatches the event to its handlers the next time FlushQueue() is called.
         /// </summary>
-        public void DispatchAsync(StringHash32 eventId, TArg argument = default) {
+        public void Queue(StringHash32 eventId, TArg argument = default) {
             m_QueuedEvents.PushBack(new QueuedEvent(eventId, argument));
         }
 
         /// <summary>
-        /// Dispatches all events queued up with DispatchAsync.
+        /// Dispatches all events queued up with Queue.
         /// </summary>
-        public void ProcessAsync() {
+        public void FlushQueue() {
             QueuedEvent evt;
             while (m_QueuedEvents.TryPopFront(out evt)) {
                 Dispatch(evt.Id, evt.Argument);

@@ -22,6 +22,7 @@ namespace Journalism {
         [Header("Default Choice")]
         public CanvasGroup DefaultChoiceGroup = null;
         public TextChoice DefaultNextButton = null;
+        public TextChoice DefaultBackButton = null;
         public Sprite DefaultNextIcon = null;
         public Color DefaultNextIconColor = Color.black;
 

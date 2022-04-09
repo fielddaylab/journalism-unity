@@ -13,16 +13,22 @@ namespace Journalism.UI {
         public CanvasGroup Fader = null;
         public HeaderButton[] Buttons = null;
         public ToggleGroup ToggleGroup = null;
+        public ClockIncrements TimeClock = null;
+        public TextLine TimeEffect = null;
 
         #endregion // Inspector
 
+        [NonSerialized] private HeaderButton m_TimeButton;
         private Routine m_FaderRoutine;
         [NonSerialized] private bool m_FaderEvaluateQueued;
         [NonSerialized] private bool m_FaderState;
+        [NonSerialized] private Routine m_TimeEffectAnim;
 
         private void Awake() {
             Fader.alpha = 0;
             Fader.gameObject.SetActive(false);
+
+            m_TimeButton = FindButton("Time");
 
             for(int i = 0; i < Buttons.Length; i++) {
                 HeaderButton button = Buttons[i];
@@ -45,7 +51,24 @@ namespace Journalism.UI {
                     button.Button.SetIsOnWithoutNotify(false);
                     QueueFaderEvaluate();
                 });
+                button.Window.OnHideCompleteEvent.AddListener((_) => {
+                    m_TimeEffectAnim.Stop();
+                    TimeEffect.gameObject.SetActive(false);
+                });
             }
+
+            Game.Events.Register<Player.TimeUpdateArgs>(GameEvents.TimeUpdated, OnTimeUpdated, this)
+                .Register(GameEvents.LevelStarted, OnLevelStarted, this);
+        }
+
+        public HeaderButton FindButton(StringHash32 id) {
+            foreach(var button in Buttons) {
+                if (button.Id == id) {
+                    return button;
+                }
+            }
+
+            return null;
         }
 
         private void QueueFaderEvaluate() {
@@ -71,6 +94,25 @@ namespace Journalism.UI {
                 m_FaderRoutine.Replace(this, Fader.FadeTo(0, 0.2f).OnComplete(() => {
                     Fader.gameObject.SetActive(false);
                 }));
+            }
+        }
+
+        private void OnLevelStarted() {
+            m_TimeButton.Button.interactable = Player.TimeRemaining() > 0;
+
+            ClockIncrements.Populate(TimeClock, (int) Player.TimeRemaining());
+        }
+
+        private void OnTimeUpdated(Player.TimeUpdateArgs args) {
+            m_TimeButton.Button.interactable = args.Units > 0;
+
+            ClockIncrements.Populate(TimeClock, (int) args.Units);
+
+            if (args.Delta < 0) {
+                TimeEffect.gameObject.SetActive(true);
+                GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
+                GameText.PrepareTextLine(TimeEffect, 2);
+                m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
             }
         }
     }

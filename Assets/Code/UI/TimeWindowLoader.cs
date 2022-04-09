@@ -2,38 +2,30 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using BeauUtil;
 
 namespace Journalism.UI {
     [RequireComponent(typeof(HeaderWindow))]
     public sealed class TimeWindowLoader : MonoBehaviour {
-        public Image[] Clocks;
-        public TMP_Text TimeLabel;
+        public ClockIncrements Clocks;
+        public TMP_Text Hour0;
+        public TMP_Text Hour1;
+        public TMP_Text Min0;
+        public TMP_Text Min1;
 
         private void Awake() {
             GetComponent<HeaderWindow>().LoadData = () => {
                 int timeRemaining = (int) Player.Data.TimeRemaining;
+                ClockIncrements.Populate(Clocks, timeRemaining);
+
                 int hours = timeRemaining / Stats.TimeUnitsPerHour;
-                int hourChunks = timeRemaining % Stats.TimeUnitsPerHour;
+                int minutes = (timeRemaining % Stats.TimeUnitsPerHour) * Stats.MinutesPerTimeUnit;
 
-                int clocksUsed = (int) hours;
-                if (hourChunks > 0) {
-                    clocksUsed++;
-                }
+                Hour0.SetText((hours / 10).ToStringLookup());
+                Hour1.SetText((hours % 10).ToStringLookup());
 
-                Image clock;
-                int diff;
-                for(int i = 0; i < clocksUsed; i++) {
-                    clock = Clocks[i];
-                    diff = Math.Min(timeRemaining - (i * Stats.TimeUnitsPerHour), Stats.TimeUnitsPerHour);
-                    clock.fillAmount = (float) diff / Stats.TimeUnitsPerHour;
-                    clock.gameObject.SetActive(true);
-                }
-
-                for(int i = clocksUsed; i < Clocks.Length; i++) {
-                    Clocks[i].gameObject.SetActive(false);
-                }
-
-                TimeLabel.SetText(GameText.FormatTime((uint) timeRemaining));
+                Min0.SetText((minutes / 10).ToStringLookup());
+                Min1.SetText((minutes % 10).ToStringLookup());
             };
         }
     }

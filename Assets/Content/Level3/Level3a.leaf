@@ -15,6 +15,10 @@
 #macro ActionChoice(text) \
     $choice _null; {@action} $text \
     $choose continue
+#macro GameOver(text) \
+    $call GameOver() \
+    $text \
+    $call GameOverRestart()
 
 // Name: Journalism Table Prototype
 // Creator: Twine
@@ -1106,7 +1110,7 @@ Less fortunately: your car is stuck, and you can't find the road. You try to cal
 
 You choose a path and start walking. Surely you'll be out of here any minute now. How big can a sunflower maze be, anyway? 
 
-GAME OVER 
+$GameOver("How big can a sunflower maze be, anyway?"")
 
 // Original Name: "Of course. I won't quote you or print your name without permission."
 :: OfCourse.IWontQuoteYouOrPrintYourNameWithoutPermission
@@ -1531,6 +1535,12 @@ $choice SorryCanYouSayThatAgain; Sorry, can you say that again?
 // Original Name: "So what do you think the solution is?"
 :: SoWhatDoYouThinkTheSolutionIs
 "I think the county needs to do a better job listening to people," she says. "They can keep some regulations. But we need internet. They need to find a way to make that happen."
+
+$choice InternetIssuesStepThree; Thank her for her time (and the refreshingly normal tea)
+
+// Original Name: "So basically, people need to actually listen to each other?"
+:: SoBasicallyPeopleNeedToActuallyListenToEachOther
+Cora shrugs. "That would help. 
 
 $choice InternetIssuesStepThree; Thank her for her time (and the refreshingly normal tea)
 

@@ -267,3 +267,15 @@ Snippet text unimplemented.
 @type Photo
 @quality Good
 Snippet text unimplemented.
+
+// Original Name: Volunteer conversation
+:: VolunteerConversation
+@type Quote
+@quality Good
+Snippet text unimplemented.
+
+// Original Name: Super detailed observation
+:: SuperDetailedObservation
+@type Observation
+@quality Great
+Snippet text unimplemented

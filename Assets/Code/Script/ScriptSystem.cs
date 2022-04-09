@@ -46,7 +46,8 @@ namespace Journalism {
             m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
             m_TextDisplay.LookupLine = m_Integration.LookupLine;
 
-            Game.Events.Register(GameEvents.LevelStarted, OnLevelStarted, this);
+            Game.Events.Register(GameEvents.LevelStarted, OnLevelStarted, this)
+                .Register(GameEvents.LevelLoading, OnLevelLoading, this);
 
             DeclareData(new PlayerData());
         }
@@ -62,10 +63,26 @@ namespace Journalism {
             m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
         }
 
+        private void OnLevelLoading() {
+            m_Integration.ConfigureDisplay(m_TextDisplay, m_TextDisplay);
+        }
+
         private void OnLevelStarted() {
             m_Visuals.ClearBackgrounds();
             m_TextDisplay.ClearAll();
             Player.SetupLevel(m_CurrentLevel);
+        }
+
+        public void OverrideDisplay(ITextDisplayer displayer) {
+            m_Integration.ConfigureDisplay(displayer, null);
+        }
+
+        /// <summary>
+        /// Clears all visuals.
+        /// </summary>
+        public IEnumerator ClearAllVisuals() {
+            yield return m_TextDisplay.ClearAllAnimated();
+            yield return m_Visuals.FadeOutBackgrounds();
         }
 
         #region Data
@@ -100,6 +117,7 @@ namespace Journalism {
         public Future LoadLevel(LevelDef level, bool killThread) {
             Future future = new Future();
             if (m_CurrentLevel == level) {
+                Game.Events.Dispatch(GameEvents.LevelLoading);
                 future.Complete();
                 return future;
             }
@@ -115,6 +133,7 @@ namespace Journalism {
             }
 
             m_CurrentLevel = level;
+            Game.Events.Dispatch(GameEvents.LevelLoading);
 
             var scriptLoader = m_Integration.LoadScript(level.Script, killThread).OnComplete((s) => {
                 Assets.DeclareLevel(m_CurrentLevel);
@@ -171,10 +190,40 @@ namespace Journalism {
         [LeafMember("NextLevel"), Preserve]
         static private IEnumerator LeafNextLevel() {
             Future loader = Game.Scripting.LoadLevel(Player.Data.LevelIndex + 1, false);
-            yield return Game.Scripting.m_TextDisplay.ClearAllAnimated();
-            yield return Game.Scripting.m_Visuals.FadeOutBackgrounds();
+            yield return Game.Scripting.ClearAllVisuals();
             yield return loader.Wait();
             Game.Scripting.StartLevel();
+        }
+
+        [LeafMember("GameOver"), Preserve]
+        static private IEnumerator GameOver() {
+            Game.Events.Queue(GameEvents.GameOver);
+            yield return Game.Scripting.ClearAllVisuals();
+            Game.Scripting.OverrideDisplay(Game.UI.GameOver);
+            yield return Game.UI.GameOver.Show();
+        }
+
+        [LeafMember("GameOverRestart")]
+        static private IEnumerator GameOverChoice([BindThread] LeafThreadState thread) {
+            Future<bool> choice = Game.UI.GameOver.DisplayChoices();
+            yield return choice;
+
+            thread.Kill();
+            
+            if (choice.Get()) {
+                Routine.Start(LoadCheckpoint());
+            } else {
+                // TODO: Title screen? What do we do?
+                yield return Game.UI.GameOver.Hide();
+            }
+        }
+
+        static private IEnumerator LoadCheckpoint() {
+            Game.Save.LoadLastCheckpoint();
+            var loadLevel = Game.Scripting.LoadLevel(Player.Data);
+            yield return Game.UI.GameOver.Hide();
+            yield return loadLevel;
+            Game.Scripting.StartFromCheckpoint(Player.Data);
         }
 
         #endregion // Leaf

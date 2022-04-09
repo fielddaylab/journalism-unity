@@ -926,9 +926,7 @@ $ContinueChoice({@me} But... shouldn't I head downtown?\" )
 
 Your boss shakes her head. "I saw you were still sitting around, so I gave the story to Khalisa."
 
-You lost the scoop, rookie. Better luck next time! 
-
-<b>GAME OVER</b>
+$GameOver("You lost the scoop, rookie. Better luck next time!")
 
 // Original Name: "Borrow" charger
 :: BorrowCharger
@@ -951,8 +949,7 @@ At least, you think it will be, until your editor calls you into her office.
 {@person} Look on the bright side.{auto}
 {@person} You'll have a fully charged phone for your job hunt!
 
-Apparently, this is a journalistic way of saying "you're fired."
-<b>GAME OVER</b>
+$GameOver("Apparently, this is a journalistic way of saying \"you're fired.""")
 
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
@@ -1421,42 +1418,7 @@ $endif
 
 $choice ArriveAtFloodSite; Back to the dam
 
-// Original Name: Record your observations
-:: RecordYourObservations
 
-$if StatCheck(Tech, 3)
-You use your voice app to rattle off some notes: 
-
-The overflowing dam, the 10 volunteers and the brand of rain jackets they're wearing, the make and models of the cars stranded in the street, even the name of the houseboat--Nora's Ark.
-
-$call GiveSnippet(SuperDetailedObservation)
-$elseif StatCheck(Resourceful, 3)
-Normally you'd take notes on your phone, but your battery power is alarmingly low. 
-
-Luckily, you came prepared! You whip out your trusty notebook and record your observations, writing to the glow of your light-up umbrella. 
-
-$call GiveSnippet(DetailedObservation)
-$elseif StatCheck(Social, 4)
-Your phone battery is low, and your notebook is lost somewhere in the war zone of your apartment.
-
-Thankfully, one of the volunteers is willing to lend you their charger!
-
-You charm them with witty conversation while your phone charges, and even end up with a quote for your story.
-
-$call GiveSnippet(DetailedObservation)
-$call GiveSnippet(VolunteerConversation)
-$else
-Your phone battery is alarmingly low.
-
-You switch to airplane mode to save power and take a few frantic notes.
-
-It's not exactly prize-winning prose, but it's better than nothing.
-
-$call GiveSnippet(BasicObservation)
-$endif
-
-
-$choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Help move some sandbags.
 :: HelpMoveSomeSandbags
