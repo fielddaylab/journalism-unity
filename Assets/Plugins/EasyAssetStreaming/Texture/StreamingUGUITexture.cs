@@ -50,7 +50,7 @@ namespace EasyAssetStreaming {
 
         [NonSerialized] private Texture2D m_LoadedTexture;
         [NonSerialized] private Rect m_ClippedUVs;
-        [NonSerialized] private Vector2 m_AppliedPivot = new Vector2(float.NaN, float.NaN);
+        [NonSerialized] private Vector2 m_AppliedPivot;
         [NonSerialized] private bool m_ResizeGuard;
         private readonly Streaming.AssetCallback m_OnUpdatedEvent;
         private DrivenRectTransformTracker m_Tracker;
@@ -248,7 +248,7 @@ namespace EasyAssetStreaming {
             m_ResizeGuard = true;
 
             if ((updated & StreamingHelper.UpdatedResizeProperty.Pivot) != 0) {
-                rect.anchorMin = rect.anchorMax = m_AppliedPivot;
+                LoadAnchors();
             }
 
             if ((updated & StreamingHelper.UpdatedResizeProperty.Size) != 0) {
@@ -295,9 +295,13 @@ namespace EasyAssetStreaming {
                 if (m_ClippedUVs == default) {
                     m_ClippedUVs = m_UVRect;
                 }
+                if (m_AppliedPivot == default) {
+                    m_AppliedPivot = m_RawImage.rectTransform.pivot;
+                }
 
                 LoadTexture();
                 LoadClipping();
+                LoadAnchors();
                 ApplyVisible();
                 return;
             }
@@ -306,9 +310,13 @@ namespace EasyAssetStreaming {
             if (m_ClippedUVs == default) {
                 m_ClippedUVs = m_UVRect;
             }
+            if (m_AppliedPivot == default) {
+                m_AppliedPivot = m_RawImage.rectTransform.pivot;
+            }
 
             LoadTexture();
             LoadClipping();
+            LoadAnchors();
             ApplyVisible();
         }
 
@@ -355,6 +363,7 @@ namespace EasyAssetStreaming {
         public void Preload() {
             LoadTexture();
             LoadClipping();
+            LoadAnchors();
             ApplyVisible();
         }
 
@@ -387,6 +396,13 @@ namespace EasyAssetStreaming {
 
         private void LoadClipping() {
             m_RawImage.uvRect = m_ClippedUVs;
+        }
+
+        private void LoadAnchors() {
+            if (StreamingHelper.ControlsAnchors(m_AutoSize)) {
+                RectTransform rect = m_RawImage.rectTransform;
+                rect.anchorMin = rect.anchorMax = m_AppliedPivot;
+            }
         }
 
         private void ApplyVisible() {
@@ -464,6 +480,7 @@ namespace EasyAssetStreaming {
                 LoadTexture();
                 Resize(m_AutoSize);
                 LoadClipping();
+                LoadAnchors();
                 ApplyVisible();
             };
         }

@@ -222,6 +222,10 @@ namespace EasyAssetStreaming {
             }
         }
 
+        static internal bool ControlsAnchors(AutoSizeMode sizeMode) {
+            return sizeMode >= AutoSizeMode.FitToParent && sizeMode <= AutoSizeMode.FillParentWithClipping;
+        }
+
         static internal UpdatedResizeProperty AutoSize(AutoSizeMode sizeMode, Texture2D texture, Rect sourceUV, Vector2 localPosition, Vector2 pivot, ref Vector2 size, ref Rect clippedUV, ref Vector2 appliedPivot, Vector2? parentSize) {
             if (sizeMode == AutoSizeMode.Disabled || !texture) {
                 if (clippedUV != sourceUV) {

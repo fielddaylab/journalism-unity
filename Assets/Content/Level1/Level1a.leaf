@@ -538,7 +538,7 @@ $if Visited(HelpHer)
     You're shocked that he knows about this.
     {@me} Yeah, uh, that was me.
 
-    He gives you a great interview, including an anectdote about a man whose car got swept into a ditch! 
+    He gives you a great interview, including an anecdote about a man whose car got swept into a ditch! 
 
     {@phone} Rescuers pulled him out just in time.
     {@phone} People need to remember the flood-safety motto: turn around, don't drown!
@@ -572,7 +572,7 @@ $else
 
     $if StatCheck(Tech, 3)
         You've been waiting your whole life for this moment.
-        You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (whch you singlehandedly created).  
+        You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (which you singlehandedly created).  
         You've earned their permission--and their respect.
 
         $call GiveSnippet(LibraryLot)
