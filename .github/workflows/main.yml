@@ -1,4 +1,4 @@
-name: Aqualab Build
+name: Unity3d Build
 
 # Controls when the action will run. Triggers the workflow on creation of 
 # tags.  Creating new 'versions' via github is the most straightforward 
@@ -75,7 +75,7 @@ jobs:
     - name: Upload build as artifact
       uses: actions/upload-artifact@v2
       with:
-        name: aqualab-webgl_${{ env.VERSION }}
+        name: unity-webgl_${{ env.VERSION }}
         path: build/WebGL/WebGL
     
     - name: Upload to web server via rsync

@@ -10,7 +10,7 @@ using UnityEngine.Scripting;
 namespace Journalism {
     [Serializable]
     public struct StorySlot {
-        public StoryScrapType AllowedTypes;
+        [AutoEnum] public StoryScrapType AllowedTypes;
         public bool Wide;
     }
 }

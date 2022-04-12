@@ -3,6 +3,7 @@ using BeauPools;
 using BeauRoutine;
 using BeauUtil;
 using EasyAssetStreaming;
+using Journalism.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,21 +22,31 @@ namespace Journalism {
         [Required] public GameObject TextureGroup;
         [Required] public StreamingUGUITexture Texture;
         public ScrapAttributeDisplay Attributes;
+        public MaskingGroup Masks;
 
         #endregion // Inspector
 
         [NonSerialized] public StoryScrapData Data;
         [NonSerialized] public Routine Animation;
-        [NonSerialized] public float OriginalLayoutOffset;
 
         public SelectDelegate OnSelectChanged;
 
         private void Awake() {
             if (Toggle) {
                 Toggle.onValueChanged.AddListener((b) => {
-                    OnSelectChanged?.Invoke(this, b);
+                    if (isActiveAndEnabled) {
+                        OnSelectChanged?.Invoke(this, b);
+                    }
                 });
             }
+        }
+
+        private void OnDisable() {
+            if (Toggle) {
+                Toggle.SetIsOnWithoutNotify(false);
+            }
+            Animation.Stop();
+            Data = null;
         }
     }
 }

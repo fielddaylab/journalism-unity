@@ -69,6 +69,9 @@ namespace Journalism {
             s_RootMenu.AddSubmenu(statsMenu);
 
             s_RootMenu.AddDivider();
+            s_RootMenu.AddButton("Unlock All Story Snippets", UnlockAllSnippets);
+
+            s_RootMenu.AddDivider();
 
             s_RootMenu.AddToggle("Toggle Toolbar", () => UISystem.GetHeaderEnabled(), (b) => UISystem.SetHeaderEnabled(b));
 
@@ -182,6 +185,12 @@ namespace Journalism {
             menu.AddButton(info.Name + " - 1", () => {
                 Player.SetStat(statId, Player.Stat(statId) - 1);
             }, () => Player.Stat(statId) > 1);
+        }
+
+        static private void UnlockAllSnippets() {
+            foreach(var snippet in Assets.CurrentLevel.StoryScraps) {
+                Player.Data.StoryScrapInventory.Add(snippet.Id);
+            }
         }
 
         #region Pausing

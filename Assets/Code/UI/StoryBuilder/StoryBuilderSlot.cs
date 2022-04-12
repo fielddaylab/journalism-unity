@@ -5,25 +5,34 @@ using EasyAssetStreaming;
 using UnityEngine.UI;
 using System;
 using BeauRoutine;
+using BeauUtil.UI;
 
 namespace Journalism.UI {
     public sealed class StoryBuilderSlot : MonoBehaviour {
         
         public RectTransform Size;
-        public RectTransform LocalAnim;
-        public GameObject Background;
+        public Graphic Flash;
 
         [Header("Empty")]
-        public GameObject[] EmptyGroup;
+        public GameObject EmptyGroup;
         public Image EmptyIcon;
-        public TMP_Text TypeText;
+        public TMP_Text EmptyLabel;
+        public PointerListener Click;
+        public GameObject DisabledHighlight;
+        public GameObject HoverHighlight;
 
         [Header("Scrap")]
-        public GameObject SnippetGroup;
-        public TMP_Text Text;
-        public StreamingUGUITexture Image;
+        public StoryScrapDisplay Snippet;
+        public Button RemoveButton;
 
+        [NonSerialized] public StoryScrapType Filter;
+        [NonSerialized] public int Index;
         [NonSerialized] public StoryScrapData Data;
         [NonSerialized] public Routine Animation;
+
+        private void OnDisable() {
+            Data = null;
+            Animation.Stop();
+        }
     }
 }

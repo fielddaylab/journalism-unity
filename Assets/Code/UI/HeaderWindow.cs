@@ -23,7 +23,10 @@ namespace Journalism.UI {
         #endregion // Inspector
 
         public Action LoadData;
+        public Func<IEnumerator> LoadDataAsync;
         public Action UnloadData;
+
+        private AsyncHandle m_LoadAsyncHandle;
 
         #region Unity Events
 
@@ -40,6 +43,10 @@ namespace Journalism.UI {
 
             if (IsShowing()) {
                 LoadData?.Invoke();
+                IEnumerator asyncLoad = LoadDataAsync?.Invoke();
+                if (asyncLoad != null) {
+                    m_LoadAsyncHandle = Async.Schedule(asyncLoad, AsyncFlags.MainThreadOnly);
+                }
             }
 
             transform.SetRotation(RNG.Instance.SignNonZero() * RNG.Instance.NextFloat(m_RandomRotationRange * 0.5f, m_RandomRotationRange), Axis.Z, Space.Self);
@@ -49,6 +56,7 @@ namespace Journalism.UI {
             if (WasShowing()) {
                 UnloadData?.Invoke();
             }
+            m_LoadAsyncHandle.Cancel();
 
             base.OnDisable();
         }
@@ -59,7 +67,7 @@ namespace Journalism.UI {
 
         protected override IEnumerator TransitionToShow() {
             m_RootTransform.gameObject.SetActive(true);
-            while(Streaming.IsLoading()) {
+            while(Streaming.IsLoading() || m_LoadAsyncHandle.IsRunning()) {
                 yield return null;
             }
             Game.Audio.PlayOneShot(m_OpenAudio);

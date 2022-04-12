@@ -755,6 +755,7 @@ namespace Journalism {
             }
 
             SetTextLineStyle(display.Line, style);
+            display.Data = data;
 
             if (display.Attributes) {
                 PopulateStoryAttributes(display.Attributes, data);

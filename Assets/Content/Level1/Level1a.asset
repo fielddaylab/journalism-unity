@@ -13,6 +13,19 @@ MonoBehaviour:
   m_Name: Level1a
   m_EditorClassIdentifier: 
   Script: {fileID: -1942890987711236906, guid: 623072a7901267849b2862cfcb12bd60, type: 3}
+  Story:
+    HeadlineType: 
+    Slots:
+    - AllowedTypes: 1
+      Wide: 1
+    - AllowedTypes: 31
+      Wide: 0
+    - AllowedTypes: 31
+      Wide: 0
+    - AllowedTypes: 31
+      Wide: 0
+    - AllowedTypes: 31
+      Wide: 0
   StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
   Audio: {fileID: 0}

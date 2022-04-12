@@ -33,6 +33,7 @@ namespace Journalism {
     /// <summary>
     /// Type of story scrap.
     /// </summary>
+    [Flags]
     public enum StoryScrapType {
         Picture = 0x01,
         Photo = Picture,
@@ -40,7 +41,10 @@ namespace Journalism {
         Graph = 0x02,
         Quote = 0x04,
         Fact = 0x08,
-        Observation = 0x10
+        Observation = 0x10,
+
+        [Hidden]
+        ImageMask = Picture | Graph
     }
 
     /// <summary>

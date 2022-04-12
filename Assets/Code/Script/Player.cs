@@ -303,6 +303,13 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// List of all allocated story scraps.
+        /// </summary>
+        static public ListSlice<StringHash32> AllocatedScraps {
+            get { return new ListSlice<StringHash32>(s_Current.AllocatedScraps, 0, Assets.CurrentLevel.Story.Slots.Length); }
+        }
+
+        /// <summary>
         /// Returns if a story scrap is in the player's inventory.
         /// </summary>
         [LeafMember("HasSnippet"), Preserve]

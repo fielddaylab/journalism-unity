@@ -71,6 +71,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 49665413db1e1d84cb59245271b435cf, type: 3}
   - {fileID: 21300000, guid: a4bb5ff349a448c44a99e13478f70e43, type: 3}
   - {fileID: 21300000, guid: 863d051417f2ff7429b1a919f8062be7, type: 3}
+  - {fileID: 21300000, guid: 37aa0725f4b8eb745ba74318f7407627, type: 3}
   - {fileID: 21300000, guid: 21ceae85738130d4daf8c0fceb15a51c, type: 3}
   - {fileID: 21300000, guid: ed9dde853b85e4348973e8fbe28cf9b1, type: 3}
   - {fileID: 21300000, guid: 20175ef504f33ec4fba4519d705339e4, type: 3}
@@ -98,6 +99,7 @@ SpriteAtlas:
   - Stats
   - Notes
   - CircleGradient0
+  - Picture
   - RoundedRect100-gradientEdge
   - Map
   - CircleGradient75-Invert
