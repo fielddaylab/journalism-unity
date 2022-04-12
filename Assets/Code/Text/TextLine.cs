@@ -23,7 +23,8 @@ namespace Journalism {
 
         [Header("Animation")]
         [Required] public RectTransform Root;
-        [Required] public RectTransform Local;
+        [Required] public RectTransform Offset;
+        [Required] public RectTransform Inner;
         [Required] public CanvasGroup Group;
 
         [Header("Configuration")]

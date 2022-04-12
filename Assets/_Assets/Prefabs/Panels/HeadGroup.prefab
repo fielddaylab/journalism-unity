@@ -673,6 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fader: {fileID: 0}
+  Root: {fileID: 9070306471789199882}
   Buttons:
   - {fileID: 2088421219238667665}
   - {fileID: 1388600460432933792}

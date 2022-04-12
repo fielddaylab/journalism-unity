@@ -1,5 +1,6 @@
 using System;
 using BeauPools;
+using BeauRoutine;
 using BeauUtil;
 using EasyAssetStreaming;
 using UnityEngine;
@@ -18,10 +19,13 @@ namespace Journalism {
         public Toggle Toggle;
         
         public StreamingUGUITexture Texture;
+        public ScrapAttributeDisplay Attributes;
 
         #endregion // Inspector
 
         [NonSerialized] public StoryScrapData Data;
+        [NonSerialized] public Routine Animation;
+        [NonSerialized] public float OriginalLayoutOffset;
 
         public SelectDelegate OnSelectChanged;
 

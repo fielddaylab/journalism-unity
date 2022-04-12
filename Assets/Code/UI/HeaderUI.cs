@@ -11,6 +11,7 @@ namespace Journalism.UI {
         #region Inspector
 
         public CanvasGroup Fader = null;
+        public HeaderWindow Root = null;
         public HeaderButton[] Buttons = null;
         public ToggleGroup ToggleGroup = null;
         public ClockIncrements TimeClock = null;
@@ -108,11 +109,13 @@ namespace Journalism.UI {
 
             ClockIncrements.Populate(TimeClock, (int) args.Units);
 
-            if (args.Delta < 0) {
-                TimeEffect.gameObject.SetActive(true);
-                GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
-                GameText.PrepareTextLine(TimeEffect, 2);
-                m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
+            if (Root.IsShowing()) {
+                if (args.Delta < 0) {
+                    TimeEffect.gameObject.SetActive(true);
+                    GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
+                    GameText.PrepareTextLine(TimeEffect, 2);
+                    m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
+                }
             }
         }
     }

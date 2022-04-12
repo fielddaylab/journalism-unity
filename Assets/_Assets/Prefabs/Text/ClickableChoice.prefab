@@ -69,7 +69,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -285,6 +285,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 888343754436084789, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_VerticalFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 888343754436084789, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_HorizontalFit
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1279571670005624125, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
@@ -511,32 +521,42 @@ PrefabInstance:
     - target: {fileID: 7356030979128338848, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7356030979128338848, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7356030979128338848, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7356030979128338848, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7356030979128338848, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 310
       objectReference: {fileID: 0}
     - target: {fileID: 7356030979128338848, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825161129075916370, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 310
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825161129075916370, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

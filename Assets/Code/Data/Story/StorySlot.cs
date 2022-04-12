@@ -11,6 +11,6 @@ namespace Journalism {
     [Serializable]
     public struct StorySlot {
         public StoryScrapType AllowedTypes;
-        public int Width;
+        public bool Wide;
     }
 }

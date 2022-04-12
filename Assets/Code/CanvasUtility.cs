@@ -69,5 +69,21 @@ namespace Journalism {
                 group.blocksRaycasts = raycasts.Value;
             }
         }
+
+        static public void PropagateSizeUpwards(RectTransform start, RectTransform parent) {
+            if (start == parent) {
+                return;
+            }
+
+            RectTransform t = (RectTransform) start.parent;
+            Vector2 size = start.sizeDelta;
+            while(t) {
+                t.sizeDelta = size;
+                if (t == parent) {
+                    break;
+                }
+                t = (RectTransform) t.parent;
+            }
+        }
     }
 }

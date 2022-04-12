@@ -64,8 +64,16 @@ namespace Journalism {
                 SetTextLineStyle(line, style);
             }
 
-            line.Layout.ForceRebuild();
-            line.Root.SetSizeDelta(line.Local.sizeDelta);
+            LayoutLine(line);
+        }
+
+        static public void LayoutLine(TextLine line) {
+            if (line.Layout) {
+                line.Layout.ForceRebuild();
+                CanvasUtility.PropagateSizeUpwards(line.Layout.RectTransform(), line.Root);
+            } else if (line.Inner) {
+                CanvasUtility.PropagateSizeUpwards(line.Inner, line.Root);
+            }
         }
 
         /// <summary>
@@ -259,7 +267,7 @@ namespace Journalism {
         /// </summary>
         static public void PrepareTextLine(TextLine line, float rotationRange) {
             RectTransform lineRect = line.Root;
-            line.Local.anchoredPosition = default;
+            line.Offset.anchoredPosition = line.Inner.anchoredPosition = default;
             lineRect.SetRotation(RNG.Instance.NextFloat(-rotationRange, rotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
         }
@@ -269,15 +277,15 @@ namespace Journalism {
         /// </summary>
         static public IEnumerator AnimateTextLineEffect(TextLine line, Vector2 offset, float duration, float delay) {
             line.gameObject.SetActive(true);
-            line.Local.anchoredPosition = offset;
+            line.Offset.anchoredPosition = offset;
             yield return Routine.Combine(
                 line.Group.FadeTo(1, duration),
-                line.Local.AnchorPosTo(default(Vector2), duration).ForceOnCancel().Ease(Curve.BackOut)
+                line.Offset.AnchorPosTo(default(Vector2), duration).ForceOnCancel().Ease(Curve.BackOut)
             );
             yield return delay;
             yield return Routine.Combine(
                 line.Group.FadeTo(0, duration),
-                line.Local.AnchorPosTo(-offset, duration).ForceOnCancel().Ease(Curve.QuadIn)
+                line.Offset.AnchorPosTo(-offset, duration).ForceOnCancel().Ease(Curve.QuadIn)
             );
             line.gameObject.SetActive(false);
         }
@@ -548,7 +556,7 @@ namespace Journalism {
                     choice.Radial.gameObject.SetActive(true);
                     choice.Radial.fillAmount = (float) timeCost / Stats.TimeUnitsPerHour;
                 } else {
-                    line.Icon.gameObject.SetActive(true);
+                    line.Icon.gameObject.SetActive(false);
                     choice.Radial.gameObject.SetActive(false);
                 }
             }
@@ -749,10 +757,29 @@ namespace Journalism {
 
             SetTextLineStyle(display.Line, style);
 
-            if (display.Line.Layout) {
-                display.Line.Layout.ForceRebuild();
-                display.Line.Root.SetSizeDelta(display.Line.Local.sizeDelta);
+            if (display.Attributes) {
+                PopulateStoryAttributes(display.Attributes, data);
             }
+
+            LayoutLine(display.Line);
+        }
+
+        static public void PopulateStoryAttributes(ScrapAttributeDisplay display, StoryScrapData data) {
+            if (data == null || data.Attributes == 0) {
+                display.gameObject.SetActive(false);
+                return;
+            }
+
+            StoryScrapAttribute attr = data.Attributes;
+            int count = Bits.Count((int) attr);
+            display.Facts.SetActive((attr & StoryScrapAttribute.Facts) != 0);
+            display.Color.SetActive((attr & StoryScrapAttribute.Color) != 0);
+            display.Useful.SetActive((attr & StoryScrapAttribute.Useful) != 0);
+
+            display.DividerA.SetActive(count > 0);
+            display.DividerB.SetActive(count > 1);
+
+            display.gameObject.SetActive(true);
         }
 
         #endregion // Story Scraps
@@ -845,9 +872,17 @@ namespace Journalism {
                         return string.Format("<b>{0}</b> hours and <b>{1}</b> minutes", hours, minutes);
                     }
                 }
-                return string.Format("<b>{0}</b> hours", hours);
+                if (abbreviated) {
+                    return string.Format("<b>{0}</b> hrs", hours);
+                } else {
+                    return string.Format("<b>{0}</b> hours", hours);
+                }
             } else if (minutes > 0) {
-                return string.Format("<b>{0}</b> minutes", minutes);
+                if (abbreviated) {
+                    return string.Format("<b>{0}</b> min", minutes);
+                } else {
+                    return string.Format("<b>{0}</b> minutes", minutes);
+                }
             } else {
                 return string.Empty;
             }
@@ -869,15 +904,15 @@ namespace Journalism {
 
         static private IEnumerator TextAnim_Rumble(TextLine line) {
             return Routine.Combine(
-                line.Local.AnchorPosTo(1, 0.097f, Axis.X).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1),
-                line.Local.AnchorPosTo(1, 0.1117f, Axis.Y).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1)
+                line.Offset.AnchorPosTo(1, 0.097f, Axis.X).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1),
+                line.Offset.AnchorPosTo(1, 0.1117f, Axis.Y).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1)
             );
         }
 
         static private IEnumerator TextAnim_Sway(TextLine line) {
             return Routine.Combine(
-                line.Local.AnchorPosTo(4, 1, Axis.X).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1),
-                line.Local.AnchorPosTo(1, 2, Axis.Y).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1)
+                line.Offset.AnchorPosTo(4, 1, Axis.X).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1),
+                line.Offset.AnchorPosTo(1, 2, Axis.Y).Randomize().RevertOnCancel().Loop().Wave(Wave.Function.Sin, 1)
             );
         }
 
