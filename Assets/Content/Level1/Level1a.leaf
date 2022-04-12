@@ -299,8 +299,7 @@ $elseif StatCheck(Social, 2)
 $else
     The baker is stacking up bags of flour to stop the floodwater.
     {@me} I think you're supposed to use sandbags.
-    The baker seems exasperated. 
-    {@person} Quote me, I don't care. Just get the ^*#$(%)#$(&*) out of my way. 
+    The baker seems exasperated and tells you to stay out of the way.  
     Maybe you could use this in your story, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
@@ -450,6 +449,7 @@ $if StatCheck(Social, 2)
     {@phone} Everyone is still talking about those cherry glazed donuts you brought last time!
     She tells you that the flood started near the dam, which is at capacity.
     Volunteers are working to lay sandbags, while the city struggles to keep up with rescues and emergency calls.
+    If people aren't trained for this, they need to stay home and avoid becoming another person to rescue! 
     {@phone} I wish I could say nobody saw this coming
     {@phone} But Twin Lakes has been on the verge of a flood like this for years.
     You thank her for her time. These quotes will be amazing for your article!
@@ -459,6 +459,7 @@ $else
     You interviewed your city hall contact last week. She doesn't seem thrilled to hear from you again.
     Come to think of it, calling the cherry festival a "fun distraction from the soul-crushing boredom of small town life" might've been a mistake.   
     She tells you that volunteers are stacking sandbags near the dam to try to stop the flood. 
+    People need to stay home and avoid becoming another person to rescue.  
     {@phone}{auto} We're pretty busy here.
     {@phone} Check our website later.
 

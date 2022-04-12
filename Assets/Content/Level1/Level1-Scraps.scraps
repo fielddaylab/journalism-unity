@@ -2,6 +2,7 @@
 :: HospitalDucks
 @type Photo
 @quality Good
+@attr Color
 Insert a photo of ducks swimming in the hospital parking lot. 
 
 // Original Name: Difficult commute
@@ -14,102 +15,125 @@ Snippet body not implemented.
 :: FriendlyShopkeeper
 @type Quote
 @quality Good
-Snippet body not implemented.
+@attr Color 
+"I was just baking some croissants, and suddenly there was water coming into the shop. It all happened so fast!"
 
 // Original Name: Rude shopkeeper
 :: RudeShopkeeper
 @type Quote
 @quality Bad
-Snippet body not implemented.
+@attr Color
+"What are you staring at? My bakery is flooding. Help or get out of the way!"
 
 // Original Name: Abandoned Cherrymobile
 :: AbandonedCherrymobile
 @type Photo
 @quality Great
+@attr Color 
 @image Anim/enml-stuckcar.jpg
 
 // Original Name: Blurry cars
 :: BlurryCars
 @type Photo
 @quality Bad
+@attr Color 
 @image Anim/enml-stuckcar.jpg
 
 // Original Name: Flood map
 :: FloodMap
 @type Graph
 @quality Good
+@attr Useful
 Snippet body not implemented.
 
 // Original Name: Weather stats
 :: WeatherStats
 @type Fact
 @quality Good
-Snippet body not implemented.
+@attr Facts
+10 inches of rain fell overnight, with 4-6 more inches of rain expected. 
 
 // Original Name: Good DNR
 :: GoodDNR
 @type Quote
 @quality Good
-Snippet body not implemented.
+@attr Facts, Useful
+"This is the worst storm I've ever seen! The dam is at capacity and half of downtown is underwater. 
+People need to stay off the roads!" 
 
 // Original Name: Rehearsed DNR
 :: RehearsedDNR
 @type Quote
 @quality Bad
-Snippet body not implemented.
+@attr Useful 
+"We're advising Twin Lakes citizens to avoid driving through floodwater and stay tuned for udpates."
 
 // Original Name: DNR Data
 :: DNRData
 @type Fact
 @quality Great
-Snippet body not implemented.
+@attr Facts 
+We've gotten 11 inches of rain so far. Water volume at the dam is at capacity.
+The city is releasing water from the dam at a rate of 10 cubic feet per second. 
+This will cause more flooding, but should prevent the dam from failing! 
 
 // Original Name: Flood background
 :: FloodBackground
 @type Fact
 @quality Good
-Snippet body not implemented.
+@attr Facts 
+According to a statement from City Hall, Twin Lakes has been on the verge of a catastrophic flood for years. 
 
 // Original Name: City Hall shock
 :: CityHallShock
 @type Quote
 @quality Great
-Snippet body not implemented.
+@attr Facts, Useful 
+"Emergency workers and volunteers are out there rescuing trapped civilians and laying sandbags. 
+If you're not trained for this, please stay home. Avoid becoming another person to rescue!
+Check our website for updated information."  
 
 // Original Name: City Hall annoyance
 :: CityHallAnnoyance
 @type Observation
 @quality Bad
-Snippet body not implemented.
+@attr Useful 
+City hall officials were unavailable for further comment, but suggest checking their website for updated information. 
 
 // Original Name: Library lot
 :: LibraryLot
 @type Photo
 @quality Great
+@attr Color 
 Snippet body not implemented.
 
 // Original Name: Scientist quotes
 :: ScientistQuotes
 @type Fact, Quote
 @quality Great
-Snippet body not implemented.
+@attr Facts 
+Climate scientists in Twin Lakes have been predicting a flood like this for years. 
+"If the area gets more than ten inches of rain in a short enough period, Twin Lakes will experience a flood of disastrous proportions," warned local scientist, Rainn E. Daye, two years ago. 
 
 // Original Name: Police story
 :: PoliceStory
 @type Quote
 @quality Great
-Snippet body not implemented.
+@attr Color 
+"Conditions are awful out there. Just fifteen minutes ago, first responders were called in to rescue a man whose car got swept into a ditch. They pulled him out just in time!"
 
 // Original Name: Police safety quote
 :: PoliceSafetyQuote
 @type Quote
 @quality Good
-Snippet body not implemented.
+@attr Useful 
+"It's crucial for people to avoid driving on flooded streets. Remember: Turn around, don't drown!" 
 
 // Original Name: Grainy picture
 :: GrainyPicture
 @type Photo
 @quality Bad
+@attr Color
 Snippet body not implemented.
 
 // Original Name: Sandbag quote
