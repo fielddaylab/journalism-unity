@@ -39,8 +39,7 @@ namespace Journalism.UI {
             };
 
             GetComponent<HeaderWindow>().UnloadData = () => {
-                m_Pools.TextStoryPool.Reset();
-                m_Pools.ImageStoryPool.Reset();
+                m_Pools.ScrapPool.Reset();
                 m_Scraps.Clear();
                 m_ToggleGroup.SetAllTogglesOff(false);
             };

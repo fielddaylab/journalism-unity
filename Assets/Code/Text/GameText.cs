@@ -112,6 +112,12 @@ namespace Journalism {
             SetTailMode(line, style.Tail);
         }
 
+        static public void SetTextLineBackground(TextLine line, bool active) {
+            for(int i = 0; i < line.BackgroundColor.Length; i++) {
+                line.BackgroundColor[i].Visible = active;
+            }
+        }
+
         static public TextAlignment ComputeDesiredAlignment(TextLine line, TextLineScroll scroll) {
             TextLine.TailMode tail = line.CurrentStyle?.Tail ?? TextLine.TailMode.Hidden;
             switch(tail) {
@@ -230,26 +236,15 @@ namespace Journalism {
         /// Allocates a new story scrap.
         /// </summary>
         static public TempAlloc<StoryScrapDisplay> AllocScrap(StoryScrapData scrap, TextPools pools) {
-            TempAlloc<StoryScrapDisplay> scrapAlloc;
-            if (scrap.Type == StoryScrapType.Picture || scrap.Type == StoryScrapType.Graph) {
-                scrapAlloc = pools.ImageStoryPool.TempAlloc();
-            } else {
-                scrapAlloc = pools.TextStoryPool.TempAlloc();
-            }
-            return scrapAlloc;
+            return pools.ScrapPool.TempAlloc();
         }
 
         /// <summary>
         /// Allocates a new story scrap.
         /// </summary>
         static public StoryScrapDisplay AllocScrap(StoryScrapData scrap, TextLineScroll scroll, TextPools pools) {
-            TempAlloc<StoryScrapDisplay> scrapAlloc;
-            if (scrap.Type == StoryScrapType.Picture || scrap.Type == StoryScrapType.Graph) {
-                scrapAlloc = pools.ImageStoryPool.TempAlloc();
-            } else {
-                scrapAlloc = pools.TextStoryPool.TempAlloc();
-            }
-
+            TempAlloc<StoryScrapDisplay> scrapAlloc = pools.ScrapPool.TempAlloc();
+            
             TextLine line = scrapAlloc.Object.Line;
             RectTransform lineRect = line.Root;
             lineRect.SetParent(scroll.ListRoot, false);
@@ -742,17 +737,21 @@ namespace Journalism {
         /// Populates a story scrap.
         /// </summary>
         static public void PopulateStoryScrap(StoryScrapDisplay display, StoryScrapData data, TextStyles.StyleData style) {
-            if (display.Texture) {
+            if (StoryScrapData.ShouldContainImage(data.Type)) {
                 RectTransform textureAlign = (RectTransform) display.Texture.transform;
                 CanvasUtility.SetAnchor(textureAlign, data.Alignment);
                 CanvasUtility.SetPivot(textureAlign, data.Alignment);
 
-                display.Texture.Path = data.ImagePath;
-            }
+                SetTextLineBackground(display.Line, false);
+                display.Line.Text.gameObject.SetActive(false);
 
-            // TODO: Localization
-            if (display.Line.Text) {
+                display.Texture.Path = data.ImagePath ?? "Photo/ErrorPhoto.png";
+                display.TextureGroup.SetActive(true);
+            } else {
+                display.TextureGroup.SetActive(false);
                 display.Line.Text.SetText(data.Content);
+                display.Line.Text.gameObject.SetActive(true);
+                SetTextLineBackground(display.Line, true);
             }
 
             SetTextLineStyle(display.Line, style);

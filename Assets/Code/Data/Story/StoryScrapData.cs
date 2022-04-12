@@ -17,6 +17,17 @@ namespace Journalism {
         [BlockMeta("align")] public TextAnchor Alignment = TextAnchor.MiddleCenter;
         [BlockMeta("attr")] public StoryScrapAttribute Attributes = 0;
         [BlockContent] public string Content;
+
+        static public bool ShouldContainImage(StoryScrapType type) {
+            switch(type) {
+                case StoryScrapType.Picture:
+                case StoryScrapType.Graph:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
     }
 
     /// <summary>

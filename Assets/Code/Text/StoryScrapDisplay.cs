@@ -18,7 +18,8 @@ namespace Journalism {
         [Required] public TextLine Line;
         public Toggle Toggle;
         
-        public StreamingUGUITexture Texture;
+        [Required] public GameObject TextureGroup;
+        [Required] public StreamingUGUITexture Texture;
         public ScrapAttributeDisplay Attributes;
 
         #endregion // Inspector
