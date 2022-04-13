@@ -248,6 +248,7 @@ $choice ArriveAtWork; Rush to work
 :: ArriveAtWork
 @clearText
 {/img}
+{bg BG/Newsroom-Story1.jpg}
 The newsroom is the emptiest you've ever seen it.
 The lights are flickering and rainwater drips from the ceiling. 
 Your editor looks relieved to see you.

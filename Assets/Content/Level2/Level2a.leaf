@@ -334,6 +334,7 @@ $goto STORYEVALUATION
 
 // Original Name: Bike downtown to survey the damage
 :: BikeDowntownToSurveyTheDamage
+{bg BG/FirstStDowntownCleanup.jpg}
 You pedal through town, weaving around abandoned cars and piles of trash.
 $call AdjustStats(Endurance + 1)
 

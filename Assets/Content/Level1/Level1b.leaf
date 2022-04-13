@@ -27,6 +27,7 @@
 
 // Original Name: Story 2 Intro
 :: Story2Intro
+{bg BG/Newsroom-Story2.jpg}
 Your next assignment: get to the flood site and report on what's happening. 
 
 {@person}We need to get ahead of this story. Do you think you can handle it?
@@ -585,6 +586,7 @@ $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Cherry Festival Map
 :: CherryFestivalMap
+{bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
 You wade through a few inches of water to get to Main Street.
 
