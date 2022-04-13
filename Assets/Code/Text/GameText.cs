@@ -862,27 +862,38 @@ namespace Journalism {
         static public string FormatTime(uint timeRemaining, bool abbreviated) {
             uint hours = timeRemaining / Stats.TimeUnitsPerHour;
             uint minutes = Stats.MinutesPerTimeUnit * (timeRemaining % Stats.TimeUnitsPerHour);
-            
-            // TODO: Localization
-            if (hours > 0) {
-                if (minutes > 0) {
-                    if (abbreviated) {
-                        return string.Format("<b>{0}</b> hr <b>{1}</b> min", hours, minutes);
-                    } else {
-                        return string.Format("<b>{0}</b> hours and <b>{1}</b> minutes", hours, minutes);
-                    }
-                }
-                if (abbreviated) {
-                    return string.Format("<b>{0}</b> hrs", hours);
-                } else {
-                    return string.Format("<b>{0}</b> hours", hours);
-                }
+
+            // TODO: Localize this!
+
+            string hourSuffix, minuteSuffix;
+            if (hours == 1) {
+                hourSuffix = abbreviated ? "hr" : "hour";
+            } else if (hours > 0) {
+                hourSuffix = abbreviated ? "hr" : "hours";
+            } else {
+                hourSuffix = null;
+            }
+
+            if (minutes == 1) {
+                minuteSuffix = abbreviated ? "min" : "minute";
             } else if (minutes > 0) {
-                if (abbreviated) {
-                    return string.Format("<b>{0}</b> min", minutes);
+                minuteSuffix = abbreviated ? "min" : "minutes";
+            } else {
+                minuteSuffix = null;
+            }
+            
+            if (hourSuffix != null) {
+                if (minuteSuffix != null) {
+                    if (abbreviated) {
+                        return string.Format("<b>{0}</b> {1} <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
+                    } else {
+                        return string.Format("<b>{0}</b> and {1} <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
+                    }
                 } else {
-                    return string.Format("<b>{0}</b> minutes", minutes);
+                    return string.Format("<b>{0}</b> {1}", hours, hourSuffix);
                 }
+            } else if (minuteSuffix != null) {
+                return string.Format("<b>{0}</b> {1}", minutes, minuteSuffix);
             } else {
                 return string.Empty;
             }

@@ -12,13 +12,15 @@ namespace Journalism.UI {
         
         public RectTransform Size;
         public Graphic Flash;
+        public CanvasGroup Group;
 
         [Header("Empty")]
         public GameObject EmptyGroup;
+        public ColorGroup EmptyColor;
         public Image EmptyIcon;
         public TMP_Text EmptyLabel;
         public PointerListener Click;
-        public GameObject DisabledHighlight;
+        public GameObject AvailableHighlight;
         public GameObject HoverHighlight;
 
         [Header("Scrap")]

@@ -428,7 +428,7 @@ namespace EasyAssetStreaming {
             }
             #endif // USING_BEAUUTIL
 
-            if (Streaming.Unload(ref m_LoadedTexture)) {
+            if (Streaming.Unload(ref m_LoadedTexture, m_OnUpdatedEvent)) {
                 OnUpdated?.Invoke(this, Streaming.AssetStatus.Unloaded);
             }
         }

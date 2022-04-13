@@ -7,19 +7,27 @@ using BeauUtil;
 using BeauRoutine;
 using UnityEngine.EventSystems;
 using System.Collections;
+using BeauUtil.UI;
 
 namespace Journalism.UI {
     [RequireComponent(typeof(HeaderWindow))]
     public sealed class StoryWindowCtrl : MonoBehaviour {
 
         [SerializeField] private TextPools m_Pools = null;
+
+        [Header("Scrap List")]
         [SerializeField] private ToggleGroup m_ToggleGroup = null;
         [SerializeField] private LayoutGroup m_ListLayout = null;
+        [SerializeField] private PointerListener m_BGClick = null;
         [SerializeField] private ScrollRect m_ListScroll = null;
         [SerializeField] private RectTransform m_SelectedParent = null;
         [SerializeField] private RectTransform m_UnselectedParent = null;
         [SerializeField] private ContentSizeFitter m_ListFitter = null;
+
+        [Header("Slot Grid")]
         [SerializeField] private StorySlotLayout m_SlotLayout = null;
+        [SerializeField] private Color m_DefaultSlotColor = Color.white;
+        [SerializeField] private Color m_AvailableSlotColor = Color.green;
 
         [NonSerialized] private List<StoryScrapDisplay> m_Scraps = new List<StoryScrapDisplay>();
 
@@ -43,7 +51,14 @@ namespace Journalism.UI {
                 obj.Click.onPointerEnter.AddListener((p) => OnSlotHoverEnter(cachedSlot));
                 obj.Click.onPointerExit.AddListener((p) => OnSlotHoverExit(cachedSlot));
                 obj.Click.onClick.AddListener((p) => OnSlotClick(cachedSlot));
+                obj.EmptyColor.Color = m_DefaultSlotColor;
             }
+
+            m_BGClick.onClick.AddListener((p) => {
+                if (p.button == 0) {
+                    SetSelectedScrap(null);
+                }
+            });
         }
 
         private IEnumerator LoadAsync() {
@@ -92,8 +107,10 @@ namespace Journalism.UI {
             SetSelectedScrap(null);
         }
 
+        #region Handlers
+
         private void OnScrapSelected(StoryScrapDisplay display, bool state) {
-            if (!state) {
+            if (!state && m_SelectedScrap == display) {
                 SetSelectedScrap(null);
             } else {
                 SetSelectedScrap(display);
@@ -130,6 +147,10 @@ namespace Journalism.UI {
             }
         }
 
+        #endregion // Handlers
+
+        #region Slots
+
         private bool SetSlot(StoryBuilderSlot slot, StringHash32 id) {
             if (id.IsEmpty) {
                 return ClearSlot(slot);
@@ -165,6 +186,64 @@ namespace Journalism.UI {
             return false;
         }
 
+        static private bool CanAccept(StoryBuilderSlot slot, StoryScrapDisplay display) {
+            return display && slot.Data == null && (slot.Filter & display.Data.Type) != 0;
+        }
+
+        #endregion // Slots
+
+        #region Scraps
+
+        private void SetSelectedScrap(StoryScrapDisplay display) {
+            if (m_SelectedScrap == display) {
+                return;
+            }
+
+            if (m_SelectedScrap) {
+                m_SelectedScrap.Line.Root.SetParent(m_UnselectedParent);
+                m_SelectedScrap.Animation.Replace(this, StopHovering(m_SelectedScrap));
+                m_SelectedScrap.Toggle.SetIsOnWithoutNotify(false);
+            }
+
+            m_SelectedScrap = display;
+            m_ListScroll.enabled = !display;
+            m_ListScroll.verticalScrollbar.enabled = !display;
+
+            if (display) {
+                foreach(var slot in m_SlotLayout.ActiveSlots) {
+                    bool canAccept = CanAccept(slot, display);
+                    slot.AvailableHighlight.SetActive(canAccept);
+                    slot.Group.alpha = canAccept ? 1 : 0.5f;
+                    slot.EmptyColor.Color = canAccept ? m_AvailableSlotColor : m_DefaultSlotColor;
+                }
+            
+                display.Line.Root.SetParent(m_SelectedParent);
+                display.Animation.Replace(this, HoverScrap(display));
+                m_SelectedScrap.Toggle.SetIsOnWithoutNotify(true);
+            } else {
+                foreach(var slot in m_SlotLayout.ActiveSlots) {
+                    slot.Group.alpha = 1;
+                    slot.AvailableHighlight.SetActive(false);
+                    slot.HoverHighlight.SetActive(false);
+                    slot.EmptyColor.Color = m_DefaultSlotColor;
+                }
+            }
+        }
+
+        private StoryScrapDisplay FindScrapWithId(StringHash32 id) {
+            foreach(var scrap in m_Scraps) {
+                if (scrap.Data.Id == id) {
+                    return scrap;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion // Scraps
+
+        #region Animations
+
         static private IEnumerator FlashAnimation(Graphic graphic) {
             graphic.gameObject.SetActive(true);
             graphic.SetAlpha(1);
@@ -184,49 +263,6 @@ namespace Journalism.UI {
             yield return display.Line.Inner.AnchorPosTo(0, 0.1f, Axis.Y);
         }
 
-        private void SetSelectedScrap(StoryScrapDisplay display) {
-            if (m_SelectedScrap == display) {
-                return;
-            }
-
-            if (m_SelectedScrap) {
-                m_SelectedScrap.Line.Root.SetParent(m_UnselectedParent);
-                m_SelectedScrap.Animation.Replace(this, StopHovering(m_SelectedScrap));
-                m_SelectedScrap.Toggle.SetIsOnWithoutNotify(false);
-            }
-
-            m_SelectedScrap = display;
-            m_ListScroll.enabled = !display;
-            m_ListScroll.verticalScrollbar.enabled = !display;
-
-            if (display) {
-                foreach(var slot in m_SlotLayout.ActiveSlots) {
-                    slot.DisabledHighlight.SetActive((slot.Filter & display.Data.Type) == 0);
-                }
-            
-                display.Line.Root.SetParent(m_SelectedParent);
-                display.Animation.Replace(this, HoverScrap(display));
-                m_SelectedScrap.Toggle.SetIsOnWithoutNotify(true);
-            } else {
-                foreach(var slot in m_SlotLayout.ActiveSlots) {
-                    slot.DisabledHighlight.SetActive(false);
-                    slot.HoverHighlight.SetActive(false);
-                }
-            }
-        }
-
-        private StoryScrapDisplay FindScrapWithId(StringHash32 id) {
-            foreach(var scrap in m_Scraps) {
-                if (scrap.Data.Id == id) {
-                    return scrap;
-                }
-            }
-
-            return null;
-        }
-
-        static private bool CanAccept(StoryBuilderSlot slot, StoryScrapDisplay display) {
-            return display && slot.Data == null && (slot.Filter & display.Data.Type) != 0;
-        }
+        #endregion // Animations
     }
 }

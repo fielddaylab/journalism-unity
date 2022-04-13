@@ -63,9 +63,9 @@ namespace Journalism.UI {
 
                 layoutSlot.gameObject.SetActive(true);
                 layoutSlot.Size.SetSizeDelta(layoutWidth, Axis.X);
-                layoutSlot.HoverHighlight.gameObject.SetActive(false);
                 SetSlotType(layoutSlot, slotData, dataIdx);
-                layoutSlot.DisabledHighlight.gameObject.SetActive(false);
+                layoutSlot.HoverHighlight.gameObject.SetActive(false);
+                layoutSlot.AvailableHighlight.gameObject.SetActive(false);
                 layoutSlot.Flash.gameObject.SetActive(false);
                 layout.ActiveSlots.Add(layoutSlot);
             }
