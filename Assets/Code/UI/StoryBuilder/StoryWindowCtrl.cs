@@ -89,6 +89,7 @@ namespace Journalism.UI {
 
             m_EditorNotesButton.onClick.AddListener(OnViewNotesClick);
             m_EditorNotesBackButton.onClick.AddListener(OnCloseNotesClick);
+            m_PublishButton.onClick.AddListener(OnPublishClick);
 
             m_StoryGroup.ForceActive(false);
             m_NoStoryGroup.ForceActive(false);
@@ -235,6 +236,11 @@ namespace Journalism.UI {
             m_PublishButton.interactable = m_CachedStats.CanPublish;
         }
 
+        private void OnPublishClick() {
+            Game.Events.Queue(GameEvents.StoryPublished);
+            m_Window.Hide();
+        }
+
         #endregion // Handlers
 
         #region Slots
@@ -255,6 +261,10 @@ namespace Journalism.UI {
             if (scrap) {
                 scrap.Toggle.interactable = false;
             }
+            if (m_PublishMode) {
+                RefreshStats();
+                m_PublishButton.interactable = m_CachedStats.CanPublish;
+            }
 
             return true;
         }
@@ -267,6 +277,9 @@ namespace Journalism.UI {
                 var scrap = FindScrapWithId(current.Id);
                 if (scrap) {
                     scrap.Toggle.interactable = true;
+                }
+                if (m_PublishMode) {
+                    m_PublishButton.interactable = false;
                 }
                 return true;
             }

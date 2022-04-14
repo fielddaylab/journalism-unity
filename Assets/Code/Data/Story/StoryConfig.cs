@@ -21,5 +21,8 @@ namespace Journalism {
         [Range(0, 10)] public int FactWeight = 1;
         [Range(0, 10)] public int ColorWeight = 1;
         [Range(0, 10)] public int UsefulWeight = 1;
+
+        [Header("Final")]
+        public string FinalHeadline;
     }
 }

@@ -83,5 +83,46 @@ namespace Journalism.UI {
 
             layout.StoryType.SetText(configuration.HeadlineType);
         }
+
+        static public void LayoutNewspaper(NewspaperLayout layout, StoryConfig config, PlayerData data) {
+            int layoutIdx = 0;
+            StoryScrapDisplay layoutSlot;
+            float layoutWidth;
+            for(int dataIdx = 0; dataIdx < config.Slots.Length; dataIdx++) {
+                var slotData = config.Slots[dataIdx];
+                bool isLeft = (layoutIdx % 2) == 0;
+                if (slotData.Wide) {
+                    if (!isLeft) {
+                        layout.Slots[layoutIdx].gameObject.SetActive(false);
+                        layoutIdx++;
+                    }
+                    layoutSlot = layout.Slots[layoutIdx];
+                    layout.Slots[layoutIdx + 1].gameObject.SetActive(false);
+                    layoutIdx += 2;
+                    layoutWidth = layout.SlotWidth * 2 + layout.SlotSpacing;
+                } else {
+                    layoutSlot = layout.Slots[layoutIdx];
+                    layoutIdx++;
+                    layoutWidth = layout.SlotWidth;
+                }
+
+                StringHash32 id = data.AllocatedScraps[dataIdx];
+                if (id.IsEmpty) {
+                    layoutSlot.gameObject.SetActive(false);
+                } else {
+                    layoutSlot.gameObject.SetActive(true);
+                    layoutSlot.RectTransform().SetSizeDelta(layoutWidth, Axis.X);
+                    var scrapData = Assets.Scrap(id);
+                    GameText.PopulateStoryScrap(layoutSlot, scrapData, Assets.Style("snippet-in-story"));
+                    layoutSlot.ImageOnly.SetActive(StoryScrapData.ShouldContainImage(scrapData.Type));
+                }
+            }
+
+            for(; layoutIdx < layout.Slots.Length; layoutIdx++) {
+                layout.Slots[layoutIdx].gameObject.SetActive(false);
+            }
+
+            layout.Headline.SetText(config.FinalHeadline);
+        }
     }
 }

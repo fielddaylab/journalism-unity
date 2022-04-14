@@ -7,6 +7,7 @@ using BeauRoutine;
 using BeauRoutine.Extensions;
 using System;
 using UnityEngine.Scripting;
+using System.Collections;
 
 namespace Journalism.UI {
     public class UISystem : MonoBehaviour {
@@ -43,7 +44,10 @@ namespace Journalism.UI {
                 .Register(GameEvents.GameOver, OnGameOver, this)
                 .Register(GameEvents.EditorNotesOpen, OnNeedSolidBG, this)
                 .Register(GameEvents.EditorNotesClose, OnNoLongerNeedSolidBG, this)
-                .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG);
+                .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG)
+                .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this)
+                .Register(GameEvents.StoryEvalBegin, OnNeedSolidBG, this)
+                .Register(GameEvents.StoryEvalEnd, OnNoLongerNeedSolidBG, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
@@ -131,6 +135,10 @@ namespace Journalism.UI {
             m_SolidBGRoutine.Replace(this, m_SolidBGFader.Hide(0.2f));
         }
 
+        private void OnRequirePublish() {
+            m_Header.FindButton("Notes").Button.isOn = true;
+        }
+
         #endregion // Handlers
 
         #region Leaf
@@ -163,6 +171,15 @@ namespace Journalism.UI {
         [LeafMember("StoryEnabled"), Preserve]
         static public bool GetStoryEnabled() {
             return Player.ReadVariable(Var_ShowStory).AsBool();
+        }
+
+        [LeafMember("RunPublish"), Preserve]
+        static public IEnumerator RunPublish() {
+            ActivateStory();
+            Game.Events.Dispatch(GameEvents.RequireStoryPublish);
+            yield return Game.Events.Wait(GameEvents.StoryPublished);
+            yield return 0.2f;
+            yield return Game.Scripting.DisplayNewspaper();
         }
 
         #endregion // Leaf

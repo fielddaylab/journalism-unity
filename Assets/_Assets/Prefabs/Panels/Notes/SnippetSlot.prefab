@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 3446560440609093087}
   - component: {fileID: 3758745083688936142}
   - component: {fileID: 1430513783414998711}
-  - component: {fileID: 7099449741905550778}
   m_Layer: 5
   m_Name: Masked
   m_TagString: Untagged
@@ -311,20 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!114 &7099449741905550778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864616648585048234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 0
 --- !u!1 &2242494733359329967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,7 +1904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 8637255044060167455}
   Offset: {fileID: 8637255044060167455}
-  Inner: {fileID: 8299488322313958224}
+  Inner: {fileID: 0}
   Group: {fileID: 3854965193707495564}
   BackgroundColor:
   - {fileID: 2365808159848001826}
@@ -2011,7 +1996,9 @@ MonoBehaviour:
   TextureGroup: {fileID: 7944071744521697476}
   Texture: {fileID: 1849830872136838705}
   Attributes: {fileID: 1532563266031900597}
+  Quality: {fileID: 0}
   Masks: {fileID: 0}
+  ImageOnly: {fileID: 0}
 --- !u!1 &8821095768335169239
 GameObject:
   m_ObjectHideFlags: 0

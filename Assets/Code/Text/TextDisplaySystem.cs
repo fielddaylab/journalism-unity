@@ -10,6 +10,7 @@ using BeauRoutine;
 using EasyAssetStreaming;
 using BeauPools;
 using System;
+using Journalism.UI;
 
 namespace Journalism {
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
@@ -23,6 +24,7 @@ namespace Journalism {
         [SerializeField] private TextPools m_Pools = null;
         [SerializeField] private TextLineScroll m_TextDisplay = null;
         [SerializeField] private TextChoiceGroup m_ChoiceDisplay = null;
+        [SerializeField] private NewspaperLayout m_FinishedStoryLayout = null;
 
         [Header("Animation")]
         [SerializeField] private float m_ChoiceRowsOffset = 48;
@@ -415,6 +417,8 @@ namespace Journalism {
             m_TextDisplay.Root.SetAnchorPos(0, Axis.X);
             m_TextDisplay.ListRoot.SetAnchorPos(m_TextDisplay.RootBaseline, Axis.Y);
 
+            m_FinishedStoryLayout.gameObject.SetActive(false);
+
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_ImagePosition = TextAlignment.Center;
         }
@@ -426,6 +430,22 @@ namespace Journalism {
             }
             yield return HandleImageClear(default, null);
             yield return ClearLines();
+        }
+
+        public IEnumerator DisplayNewspaper() {
+            UISystem.SetHeaderEnabled(false);
+            yield return ClearAllAnimated();
+
+            m_FinishedStoryLayout.gameObject.SetActive(true);
+            m_FinishedStoryLayout.Root.SetAnchorPos(-660, Axis.Y);
+            m_FinishedStoryLayout.Root.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+            yield return null;
+            StoryText.LayoutNewspaper(m_FinishedStoryLayout, Assets.CurrentLevel.Story, Player.Data);
+            yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
+            yield return 1;
+            yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, "Talk to Editor", Assets.Style(GameText.Characters.Action));
+            yield return m_FinishedStoryLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
+            m_FinishedStoryLayout.gameObject.SetActive(false);
         }
     }
 

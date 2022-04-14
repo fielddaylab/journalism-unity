@@ -14,6 +14,7 @@ namespace Journalism {
         static public readonly StringHash32 EditorNotesOpen = "ui:editor-notes-open";
         static public readonly StringHash32 EditorNotesClose = "ui:editor-notes-close";
         static public readonly StringHash32 RequireStoryPublish = "level:require-story-publish";
+        static public readonly StringHash32 StoryPublished = "level:story-published";
         static public readonly StringHash32 StoryEvalBegin = "level:story-eval-begin";
         static public readonly StringHash32 StoryEvalEnd = "level:story-eval-end";
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments

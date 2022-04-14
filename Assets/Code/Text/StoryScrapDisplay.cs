@@ -24,6 +24,7 @@ namespace Journalism {
         public ScrapAttributeDisplay Attributes;
         public ScrapQualityDisplay Quality;
         public MaskingGroup Masks;
+        public GameObject ImageOnly;
 
         #endregion // Inspector
 
