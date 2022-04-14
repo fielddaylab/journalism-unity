@@ -372,11 +372,9 @@ namespace Journalism {
                         }
 
                         // save option locations for map
-                        /*
-                        StringHash32 locId = MapLocations.GetMapLocation(inChoice.GetCustomData(option.Index, GameText.ChoiceData.LocationId).AsStringHash()).Id;
+                        StringHash32 locId = inChoice.GetCustomData(option.Index, GameText.ChoiceData.LocationId).AsStringHash();
                         locIds[optionIndex] = locId;
                         optionIndex++;
-                        */
 
                         GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, Assets.Style(characterId));
                     }

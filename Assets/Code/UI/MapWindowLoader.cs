@@ -52,6 +52,9 @@ namespace Journalism.UI
 
             // Set player location
             // set PlayerMarker location banner text
+            if (Player.Location() == StringHash32.Null) {
+                Player.SetLocation(StringHash32.Parse("Newsroom"));
+            }
             MapLocationDef.MapLocation playerLoc = MapLocations.GetMapLocation(Player.Location());
             PlayerMarker.LocationIDText.SetText(playerLoc.Name);
             m_playerMarkerRect.localPosition = FitCoords(playerLoc.NormalizedCoords, m_mapRect);
@@ -61,13 +64,15 @@ namespace Journalism.UI
             // For each choice location:
             foreach (SerializedHash32 locId in m_choiceLocations) {
                 if (locId != Player.Location()) {
-                    // position the marker at the correct location
-                    RectTransform positionRect = MapMarkerRects[markerIndex];
-                    positionRect.localPosition = FitCoords(MapLocations.GetMapLocation(locId).NormalizedCoords, m_mapRect);
-                    positionRect.gameObject.SetActive(true);
+                    if (locId != StringHash32.Null) {
+                        // position the marker at the correct location
+                        RectTransform positionRect = MapMarkerRects[markerIndex];
+                        positionRect.localPosition = FitCoords(MapLocations.GetMapLocation(locId).NormalizedCoords, m_mapRect);
+                        positionRect.gameObject.SetActive(true);
 
-                    // progress to next marker
-                    markerIndex++;
+                        // progress to next marker
+                        markerIndex++;
+                    }
                 }
             }
         }
