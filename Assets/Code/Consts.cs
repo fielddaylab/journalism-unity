@@ -18,6 +18,7 @@ namespace Journalism {
         static public readonly StringHash32 StoryEvalBegin = "level:story-eval-begin";
         static public readonly StringHash32 StoryEvalEnd = "level:story-eval-end";
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments
-        static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated"; // 
+        static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated"; // StringHash32[] locIds
+        static public readonly StringHash32 ChoiceCompleted = "save:choice-completed";
     }
 }

@@ -634,6 +634,7 @@ namespace Journalism {
                 yield return null;
             }
             choices.GridGroup.blocksRaycasts = false;
+            Game.Events.Dispatch(GameEvents.ChoiceCompleted);
         }
 
         /// <summary>

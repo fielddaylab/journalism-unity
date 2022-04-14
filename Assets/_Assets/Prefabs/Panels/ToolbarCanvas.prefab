@@ -3500,6 +3500,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6299212319876626975, guid: b178e5920a1c80c4e8b1fc2c55bca865,
+        type: 3}
+      propertyPath: m_markerContainerPrefab
+      value: 
+      objectReference: {fileID: 7643668263520848459, guid: a463191c978fd574ca44aab8ffda8bf3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b178e5920a1c80c4e8b1fc2c55bca865, type: 3}
 --- !u!224 &933798195722773007 stripped
