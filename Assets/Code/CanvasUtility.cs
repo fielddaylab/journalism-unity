@@ -25,6 +25,26 @@ namespace Journalism {
             rect.pivot = s_Anchors[(int) anchor];
         }
 
+        static public void SetAnchorX(RectTransform rect, float x) {
+            Vector2 anchorMin = rect.anchorMin,
+                anchorMax = rect.anchorMax;
+            anchorMin.x = x;
+            anchorMax.x = x;
+            rect.anchorMin = anchorMin;
+            rect.anchorMax = anchorMax;
+        }
+
+        static public void SetAnchorsX(RectTransform rect, float left, float right) {
+            Vector2 anchorMin = rect.anchorMin,
+                anchorMax = rect.anchorMax;
+            anchorMin.x = left;
+            anchorMax.x = right;
+            rect.anchorMin = anchorMin;
+            rect.anchorMax = anchorMax;
+        }
+
+        #region RectTransform
+
         static public RectTransform RectTransform(this Component component) {
             return (RectTransform) component.transform;
         }
@@ -32,6 +52,10 @@ namespace Journalism {
         static public RectTransform RectTransform(this GameObject go) {
             return (RectTransform) go.transform;
         }
+
+        #endregion // RectTransform
+
+        #region CanvasGroup
 
         static public IEnumerator Show(this CanvasGroup group, float duration, bool? raycasts = true) {
             if (!group.gameObject.activeSelf) {
@@ -69,6 +93,8 @@ namespace Journalism {
                 group.blocksRaycasts = raycasts.Value;
             }
         }
+
+        #endregion // Canvas Group
 
         static public void PropagateSizeUpwards(RectTransform start, RectTransform parent) {
             if (start == parent) {

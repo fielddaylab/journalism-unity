@@ -41,6 +41,7 @@ namespace Journalism {
             m_Integration.ConfigureTagStringHandling(parserConfig, eventHandler);
 
             m_Integration.HandleNodeEnter = HandleNodeEnter;
+            m_Integration.HandleNodeExit = HandleNodeExit;
 
             m_TextDisplay.LookupNextChoice = m_Integration.PredictChoice;
             m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
@@ -57,10 +58,22 @@ namespace Journalism {
                 Player.Data.CheckpointId = node.CheckpointId();
                 Game.Save.SaveCheckpoint();
             }
+
+            if (node.HasFlags(ScriptNodeFlags.Feedback)) {
+                Game.Events.Queue(GameEvents.StoryEvalBegin);
+            }
             
             yield return m_TextDisplay.HandleNodeStart(node, thread);
 
             m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
+        }
+
+        private IEnumerator HandleNodeExit(ScriptNode node, LeafThreadState thread) {
+            if (node.HasFlags(ScriptNodeFlags.Feedback)) {
+                Game.Events.Queue(GameEvents.StoryEvalEnd);
+            }
+
+            return null;
         }
 
         private void OnLevelLoading() {
@@ -83,6 +96,13 @@ namespace Journalism {
         public IEnumerator ClearAllVisuals() {
             yield return m_TextDisplay.ClearAllAnimated();
             yield return m_Visuals.FadeOutBackgrounds();
+        }
+
+        /// <summary>
+        /// Displays the story the player made.
+        /// </summary>
+        public IEnumerator DisplayNewspaper() {
+            yield return m_TextDisplay.DisplayNewspaper();
         }
 
         #region Data
@@ -216,6 +236,8 @@ namespace Journalism {
                 // TODO: Title screen? What do we do?
                 yield return Game.UI.GameOver.Hide();
             }
+
+            Game.Events.Dispatch(GameEvents.GameOverClose);
         }
 
         static private IEnumerator LoadCheckpoint() {

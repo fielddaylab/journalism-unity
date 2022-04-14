@@ -67,6 +67,7 @@ SpriteAtlas:
   - {fileID: -6068790857114741763, guid: 2749eb22772ed334ebf026eb938312a5, type: 3}
   - {fileID: 21300000, guid: 15aa4a52245f4a14f97a18721c557943, type: 3}
   - {fileID: 21300000, guid: f392e7829398b1f4db653e6ebd198f5c, type: 3}
+  - {fileID: 21300000, guid: c0093ff28a1119346a4df66361c0ed17, type: 3}
   - {fileID: 21300000, guid: f746f2031973bdb4587a279ebc548704, type: 3}
   - {fileID: 21300000, guid: 49665413db1e1d84cb59245271b435cf, type: 3}
   - {fileID: 21300000, guid: a4bb5ff349a448c44a99e13478f70e43, type: 3}
@@ -74,11 +75,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 37aa0725f4b8eb745ba74318f7407627, type: 3}
   - {fileID: 21300000, guid: 21ceae85738130d4daf8c0fceb15a51c, type: 3}
   - {fileID: 21300000, guid: ed9dde853b85e4348973e8fbe28cf9b1, type: 3}
+  - {fileID: 21300000, guid: e4a140c5628a52048b73592a23019e71, type: 3}
   - {fileID: 21300000, guid: 20175ef504f33ec4fba4519d705339e4, type: 3}
   - {fileID: 21300000, guid: 0bb44e762e688a646aef628ede89f8df, type: 3}
+  - {fileID: 21300000, guid: 58bd53e6ae6a9ca4b903cd4a3b575639, type: 3}
   - {fileID: 21300000, guid: 48b2f1b7346efcf42942b5766b9a2106, type: 3}
   - {fileID: 21300000, guid: ac7df418fb00b094baf405cecda134b0, type: 3}
   - {fileID: 21300000, guid: e9b7af09a3ec2f54bb23ccce5480167d, type: 3}
+  - {fileID: 21300000, guid: fb4aec490a752b041b214a02b9055a10, type: 3}
   - {fileID: 21300000, guid: a10e8fe9fd6fbd347b87d1f493b29f39, type: 3}
   - {fileID: 21300000, guid: 237eff2a97bddf94e8109891d11b2470, type: 3}
   - {fileID: 21300000, guid: 43db8c6a54c3e244791c7d7c0ec7c083, type: 3}
@@ -95,6 +99,7 @@ SpriteAtlas:
   - HalfQuad0
   - Circle
   - RoundedRect100Outline
+  - ShoddyBox
   - Close
   - Stats
   - Notes
@@ -102,11 +107,14 @@ SpriteAtlas:
   - Picture
   - RoundedRect100-gradientEdge
   - Map
+  - QualityBox
   - CircleGradient75-Invert
   - sad-paper 1
+  - Back
   - Time
   - Gradient100_Down
   - ThickX
+  - StorySlotArrow
   - star
   - CircleGradient75
   - ClockFlipOver

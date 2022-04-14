@@ -10,7 +10,12 @@ using UnityEngine.Scripting;
 namespace Journalism {
     [Serializable]
     public struct StorySlot {
-        [AutoEnum] public StoryScrapType AllowedTypes;
+        public StorySlotType Type;
         public bool Wide;
+    }
+
+    public enum StorySlotType {
+        Any,
+        Picture
     }
 }

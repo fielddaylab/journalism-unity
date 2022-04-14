@@ -16,14 +16,14 @@ Snippet body not implemented.
 @type Quote
 @quality Good
 @attr Color 
-"I was just baking some croissants, and suddenly there was water coming into the shop. It all happened so fast!"
+"I was just putting some croissants in the oven, and suddenly there was water up to my ankles. It all happened so fast!"
 
 // Original Name: Rude shopkeeper
 :: RudeShopkeeper
 @type Quote
 @quality Bad
 @attr Color
-"What are you staring at? My bakery is flooding. Help or get out of the way!"
+"Um, in case you didn’t notice, my bakery is turning into a swamp. Help or get out of the way!"
 
 // Original Name: Abandoned Cherrymobile
 :: AbandonedCherrymobile
@@ -51,31 +51,28 @@ Snippet body not implemented.
 @type Fact
 @quality Good
 @attr Facts
-10 inches of rain fell overnight, with 4-6 more inches of rain expected. 
+Twin Lakes saw a record-breaking 12 inches of rainfall overnight, with 4-6 more inches expected. 
 
 // Original Name: Good DNR
 :: GoodDNR
 @type Quote
 @quality Good
 @attr Facts, Useful
-"This is the worst storm I've ever seen! The dam is at capacity and half of downtown is underwater. 
-People need to stay off the roads!" 
+"This is the worst flood I've ever seen! Half of downtown is underwater. People need to stay off the roads!" 
 
 // Original Name: Rehearsed DNR
 :: RehearsedDNR
 @type Quote
 @quality Bad
 @attr Useful 
-"We're advising Twin Lakes citizens to avoid driving through floodwater and stay tuned for udpates."
+"We're advising Twin Lakes citizens to avoid driving through floodwater and stay tuned for updates."
 
 // Original Name: DNR Data
 :: DNRData
 @type Fact
 @quality Great
 @attr Facts 
-We've gotten 11 inches of rain so far. Water volume at the dam is at capacity.
-The city is releasing water from the dam at a rate of 10 cubic feet per second. 
-This will cause more flooding, but should prevent the dam from failing! 
+“The lake volume is up by 7%. We’re releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting!”
 
 // Original Name: Flood background
 :: FloodBackground
@@ -89,16 +86,14 @@ According to a statement from City Hall, Twin Lakes has been on the verge of a c
 @type Quote
 @quality Great
 @attr Facts, Useful 
-"Emergency workers and volunteers are out there rescuing trapped civilians and laying sandbags. 
-If you're not trained for this, please stay home. Avoid becoming another person to rescue!
-Check our website for updated information."  
+"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statistic!” 
 
 // Original Name: City Hall annoyance
 :: CityHallAnnoyance
 @type Observation
 @quality Bad
 @attr Useful 
-City hall officials were unavailable for further comment, but suggest checking their website for updated information. 
+City officials were unavailable for comment. Check the City of Twin Lakes website for updates. 
 
 // Original Name: Library lot
 :: LibraryLot
@@ -112,22 +107,21 @@ Snippet body not implemented.
 @type Fact, Quote
 @quality Great
 @attr Facts 
-Climate scientists in Twin Lakes have been predicting a flood like this for years. 
-"If the area gets more than ten inches of rain in a short enough period, Twin Lakes will experience a flood of disastrous proportions," warned local scientist, Rainn E. Daye, two years ago. 
+This flood is record-breaking, but not surprising. Local scientist, Rainn E. Daye, warned about flooding two years ago. 
 
 // Original Name: Police story
 :: PoliceStory
 @type Quote
 @quality Great
 @attr Color 
-"Conditions are awful out there. Just fifteen minutes ago, first responders were called in to rescue a man whose car got swept into a ditch. They pulled him out just in time!"
+“Over on St. Lucie, a man tried to drive through the flood and got swept into a ditch. First responders saved him just in time!” 
 
 // Original Name: Police safety quote
 :: PoliceSafetyQuote
 @type Quote
 @quality Good
 @attr Useful 
-"It's crucial for people to avoid driving on flooded streets. Remember: Turn around, don't drown!" 
+"Stay home, bring valuables upstairs, and avoid driving on flooded streets. Remember: Turn around, don't drown!" 
 
 // Original Name: Grainy picture
 :: GrainyPicture

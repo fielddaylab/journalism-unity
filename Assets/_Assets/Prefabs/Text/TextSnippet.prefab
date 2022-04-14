@@ -160,7 +160,6 @@ MonoBehaviour:
   InnerTail: {fileID: 7532016704658727623}
   Layout: {fileID: 6103029026025727545}
   TailHeight: 16
-  InvertSizePropagation: 0
   Text: {fileID: 468769718010146141}
   Icon: {fileID: 4174921025481320418}
 --- !u!114 &4507121683936925807
@@ -551,7 +550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 32, y: -4.11}
+  m_AnchoredPosition: {x: 32, y: -3.92}
   m_SizeDelta: {x: 11, y: 15.770004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3973760493482949426

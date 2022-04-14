@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using BeauUtil;
 
@@ -412,5 +413,100 @@ namespace BeauUtil.Extensions {
         }
 
         #endregion // Operations
+
+        #region Helpers
+
+        /// <summary>
+        /// Coroutine/iterator. Waits for an event with the given id to dispatch before continuing.
+        /// </summary>
+        public IEnumerator Wait(StringHash32 eventId) {
+            return new WaitIterator(this, eventId, null);
+        }
+
+        /// <summary>
+        /// Coroutine/iterator. Waits for an event with the given id to dispatch before continuing.
+        /// </summary>
+        public IEnumerator Wait(StringHash32 eventId, Action callback) {
+            return new WaitIterator(this, eventId, CastableAction<TArg>.Create(callback));
+        }
+
+        /// <summary>
+        /// Coroutine/iterator. Waits for an event with the given id to dispatch before continuing.
+        /// </summary>
+        public IEnumerator Wait(StringHash32 eventId, Action<TArg> callback) {
+            return new WaitIterator(this, eventId, CastableAction<TArg>.Create(callback));
+        }
+
+        /// <summary>
+        /// Coroutine/iterator. Waits for an event with the given id to dispatch before continuing.
+        /// </summary>
+        public IEnumerator Wait<T>(StringHash32 eventId, Action<T> callback) {
+            return new WaitIterator(this, eventId, CastableAction<TArg>.Create(callback));
+        }
+
+        private class WaitIterator : IEnumerator, IDisposable {
+            private const int Phase_Init = 0;
+            private const int Phase_Wait = 1;
+            private const int Phase_Done = 2;
+
+            private EventDispatcher<TArg> m_Parent;
+            private readonly StringHash32 m_EventId;
+            private Action<TArg> m_InnerCallback;
+            private CastableAction<TArg>? m_CustomCallback;
+            private int m_Phase = 0;
+
+            public WaitIterator(EventDispatcher<TArg> parent, StringHash32 eventId, CastableAction<TArg>? customCallback) {
+                m_Parent = parent;
+                m_EventId = eventId;
+                m_InnerCallback = InnerCallback;
+                m_CustomCallback = customCallback;
+            }
+
+            public object Current { get { return null; } }
+
+            public bool MoveNext() {
+                switch(m_Phase) {
+                    case Phase_Init: {
+                        m_Parent.Register(m_EventId, m_InnerCallback);
+                        m_Phase++;
+                        return true;
+                    }
+
+                    case Phase_Wait: {
+                        return true;
+                    }
+
+                    case Phase_Done:
+                    default: {
+                        return false;
+                    }
+                }
+            }
+
+            public void Reset() {
+                throw new NotSupportedException();
+            }
+
+            public void Dispose() {
+                if (m_Phase == Phase_Wait) {
+                    m_Parent.Deregister(m_EventId, m_InnerCallback);
+                }
+                m_Phase = Phase_Done;
+                m_CustomCallback = null;
+                m_Parent = null;
+                m_InnerCallback = null;
+            }
+
+            private void InnerCallback(TArg arg) {
+                m_Phase = Phase_Done;
+                m_Parent.Deregister(m_EventId, m_InnerCallback);
+                m_CustomCallback?.Invoke(arg);
+                m_InnerCallback = null;
+                m_Parent = null;
+                m_CustomCallback = null;
+            }
+        }
+
+        #endregion // Helpers
     }
 }

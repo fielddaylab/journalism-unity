@@ -7,6 +7,7 @@ using BeauRoutine;
 using BeauRoutine.Extensions;
 using System;
 using UnityEngine.Scripting;
+using System.Collections;
 
 namespace Journalism.UI {
     public class UISystem : MonoBehaviour {
@@ -14,6 +15,7 @@ namespace Journalism.UI {
         #region Consts
 
         static private readonly TableKeyPair Var_HeaderEnabled = TableKeyPair.Parse("ui:header-enabled");
+        static private readonly TableKeyPair Var_ShowStory = TableKeyPair.Parse("ui:show-story");
 
         #endregion // Consts
 
@@ -22,11 +24,14 @@ namespace Journalism.UI {
         [SerializeField] private HeaderUI m_Header = null;
         [SerializeField] private HeaderWindow m_HeaderWindow = null;
         [SerializeField] private CanvasGroup m_HeaderUnderFader = null;
+        [SerializeField] private CanvasGroup m_SolidBGFader = null;
         [SerializeField] private GameOverWindow m_GameOver = null;
 
         #endregion // Inspector
 
         private Routine m_FaderRoutine;
+        private Routine m_SolidBGRoutine;
+        [NonSerialized] private bool m_SolidBGState;
 
         public GameOverWindow GameOver { get { return m_GameOver; } }
 
@@ -36,7 +41,13 @@ namespace Journalism.UI {
             Game.Events.Register<TableKeyPair>(GameEvents.VariableUpdated, OnVariableUpdated, this)
                 .Register(GameEvents.LevelLoading, OnLevelLoading, this)
                 .Register(GameEvents.LevelStarted, OnLevelStarted, this)
-                .Register(GameEvents.GameOver, OnGameOver, this);
+                .Register(GameEvents.GameOver, OnGameOver, this)
+                .Register(GameEvents.EditorNotesOpen, OnNeedSolidBG, this)
+                .Register(GameEvents.EditorNotesClose, OnNoLongerNeedSolidBG, this)
+                .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG)
+                .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this)
+                .Register(GameEvents.StoryEvalBegin, OnNeedSolidBG, this)
+                .Register(GameEvents.StoryEvalEnd, OnNoLongerNeedSolidBG, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
@@ -61,16 +72,21 @@ namespace Journalism.UI {
 
         private void OnGameOver() {
             m_HeaderWindow.Hide();
+            OnNeedSolidBG();
         }
 
         private void OnLevelLoading() {
             m_HeaderWindow.Hide();
             m_GameOver.Hide();
+            OnNoLongerNeedSolidBG();
         }
 
         private void OnLevelStarted() {
             RefreshHeaderEnabled();
             m_GameOver.InstantHide();
+            m_SolidBGFader.Hide();
+            m_SolidBGState = false;
+            m_SolidBGRoutine.Stop();
         }
 
         private void RefreshHeaderEnabled() {
@@ -101,6 +117,28 @@ namespace Journalism.UI {
             }
         }
 
+        private void OnNeedSolidBG() {
+            if (m_SolidBGState) {
+                return;
+            }
+
+            m_SolidBGState = true;
+            m_SolidBGRoutine.Replace(this, m_SolidBGFader.Show(0.2f));
+        }
+
+        private void OnNoLongerNeedSolidBG() {
+            if (!m_SolidBGState) {
+                return;
+            }
+
+            m_SolidBGState = false;
+            m_SolidBGRoutine.Replace(this, m_SolidBGFader.Hide(0.2f));
+        }
+
+        private void OnRequirePublish() {
+            m_Header.FindButton("Notes").Button.isOn = true;
+        }
+
         #endregion // Handlers
 
         #region Leaf
@@ -118,6 +156,30 @@ namespace Journalism.UI {
         [LeafMember("OpenWindow"), Preserve]
         static public void OpenWindow(StringHash32 id) {
             Game.UI.m_Header.FindButton(id).Button.isOn = true;
+        }
+
+        [LeafMember("SetStoryEnabled"), Preserve]
+        static public void SetStoryEnabled(bool enabled) {
+            Player.WriteVariable(Var_ShowStory, enabled);
+        }
+
+        [LeafMember("ActivateStory"), Preserve]
+        static public void ActivateStory() {
+            Player.WriteVariable(Var_ShowStory, true);
+        }
+
+        [LeafMember("StoryEnabled"), Preserve]
+        static public bool GetStoryEnabled() {
+            return Player.ReadVariable(Var_ShowStory).AsBool();
+        }
+
+        [LeafMember("RunPublish"), Preserve]
+        static public IEnumerator RunPublish() {
+            ActivateStory();
+            Game.Events.Dispatch(GameEvents.RequireStoryPublish);
+            yield return Game.Events.Wait(GameEvents.StoryPublished);
+            yield return 0.2f;
+            yield return Game.Scripting.DisplayNewspaper();
         }
 
         #endregion // Leaf

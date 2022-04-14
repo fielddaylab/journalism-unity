@@ -758,13 +758,17 @@ namespace Journalism {
             display.Data = data;
 
             if (display.Attributes) {
-                PopulateStoryAttributes(display.Attributes, data);
+                PopulateScrapAttributes(display.Attributes, data);
+            }
+
+            if (display.Quality) {
+                PopulateScrapQuality(display.Quality, data.Quality);
             }
 
             LayoutLine(display.Line);
         }
 
-        static public void PopulateStoryAttributes(ScrapAttributeDisplay display, StoryScrapData data) {
+        static public void PopulateScrapAttributes(ScrapAttributeDisplay display, StoryScrapData data) {
             if (data == null || data.Attributes == 0) {
                 display.gameObject.SetActive(false);
                 return;
@@ -776,10 +780,74 @@ namespace Journalism {
             display.Color.SetActive((attr & StoryScrapAttribute.Color) != 0);
             display.Useful.SetActive((attr & StoryScrapAttribute.Useful) != 0);
 
-            display.DividerA.SetActive(count > 0);
-            display.DividerB.SetActive(count > 1);
+            display.DividerA.SetActive(count > 1);
+            display.DividerB.SetActive(count > 2);
 
             display.gameObject.SetActive(true);
+        }
+
+        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, StoryConfig config) {
+            PopulateStoryAttributeDistribution(display, config.FactWeight, config.ColorWeight, config.UsefulWeight);
+        }
+
+        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, int factCount, int colorCount, int usefulCount) {
+            int typeCount = 0;
+            if (factCount > 0) {
+                typeCount++;
+            }
+            if (colorCount > 0) {
+                typeCount++;
+            }
+            if (usefulCount > 0) {
+                typeCount++;
+            }
+
+            int totalCount = factCount + colorCount + usefulCount;
+
+            float factRatio = totalCount == 0 ? 0 : (float) factCount / totalCount;
+            float colorRatio = totalCount == 0 ? 0 : (float) colorCount / totalCount;
+            float usefulRatio = totalCount == 0 ? 0 : (float) usefulCount / totalCount;
+
+            display.Facts.SetActive(factRatio > 0);
+            display.Color.SetActive(colorCount > 0);
+            display.Useful.SetActive(usefulRatio > 0);
+            display.Empty.SetActive(totalCount == 0);
+
+            CanvasUtility.SetAnchorsX(display.Facts.RectTransform(), 0, factRatio);
+            CanvasUtility.SetAnchorsX(display.Color.RectTransform(), factRatio, factRatio + colorRatio);
+            CanvasUtility.SetAnchorsX(display.Useful.RectTransform(), factRatio + colorRatio, 1);
+
+            display.DividerA.SetActive(typeCount > 1);
+            display.DividerB.SetActive(typeCount > 2);
+
+            CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), factRatio);
+            CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), factRatio + colorRatio);
+        }
+
+        static public void PopulateScrapQuality(ScrapQualityDisplay display, StoryScrapQuality quality) {
+            display.Bad.gameObject.SetActive(quality == StoryScrapQuality.Bad);
+            display.Great.gameObject.SetActive(quality == StoryScrapQuality.Great);
+            display.gameObject.SetActive(quality != StoryScrapQuality.Good);
+            if (quality != StoryScrapQuality.Good) {
+                display.Bad.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+                display.Great.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+            }
+        }
+
+        static public void PopulateStoryQuality(StoryQualityDisplay display, StoryStats stats) {
+            for(int i = 0; i < display.Icons.Length; i++) {
+                PopulateScrapQuality(display.Icons[i], i < stats.QualitySubtract, i < stats.QualityAdd);
+            }
+        }
+
+        static public void PopulateScrapQuality(ScrapQualityDisplay display, bool bad, bool great) {
+            display.Bad.gameObject.SetActive(bad);
+            display.Great.gameObject.SetActive(great);
+            display.gameObject.SetActive(bad || great);
+            if (bad || great) {
+                display.Bad.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+                display.Great.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+            }
         }
 
         #endregion // Story Scraps
@@ -863,27 +931,38 @@ namespace Journalism {
         static public string FormatTime(uint timeRemaining, bool abbreviated) {
             uint hours = timeRemaining / Stats.TimeUnitsPerHour;
             uint minutes = Stats.MinutesPerTimeUnit * (timeRemaining % Stats.TimeUnitsPerHour);
-            
-            // TODO: Localization
-            if (hours > 0) {
-                if (minutes > 0) {
-                    if (abbreviated) {
-                        return string.Format("<b>{0}</b> hr <b>{1}</b> min", hours, minutes);
-                    } else {
-                        return string.Format("<b>{0}</b> hours and <b>{1}</b> minutes", hours, minutes);
-                    }
-                }
-                if (abbreviated) {
-                    return string.Format("<b>{0}</b> hrs", hours);
-                } else {
-                    return string.Format("<b>{0}</b> hours", hours);
-                }
+
+            // TODO: Localize this!
+
+            string hourSuffix, minuteSuffix;
+            if (hours == 1) {
+                hourSuffix = abbreviated ? "hr" : "hour";
+            } else if (hours > 0) {
+                hourSuffix = abbreviated ? "hr" : "hours";
+            } else {
+                hourSuffix = null;
+            }
+
+            if (minutes == 1) {
+                minuteSuffix = abbreviated ? "min" : "minute";
             } else if (minutes > 0) {
-                if (abbreviated) {
-                    return string.Format("<b>{0}</b> min", minutes);
+                minuteSuffix = abbreviated ? "min" : "minutes";
+            } else {
+                minuteSuffix = null;
+            }
+            
+            if (hourSuffix != null) {
+                if (minuteSuffix != null) {
+                    if (abbreviated) {
+                        return string.Format("<b>{0}</b> {1} <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
+                    } else {
+                        return string.Format("<b>{0}</b> and {1} <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
+                    }
                 } else {
-                    return string.Format("<b>{0}</b> minutes", minutes);
+                    return string.Format("<b>{0}</b> {1}", hours, hourSuffix);
                 }
+            } else if (minuteSuffix != null) {
+                return string.Format("<b>{0}</b> {1}", minutes, minuteSuffix);
             } else {
                 return string.Empty;
             }

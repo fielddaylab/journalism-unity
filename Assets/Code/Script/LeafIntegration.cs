@@ -12,7 +12,7 @@ using UnityEngine;
 namespace Journalism {
     public sealed class LeafIntegration : DefaultLeafManager<ScriptNode> {
         
-        public delegate IEnumerator HandleNodeStartDelegate(ScriptNode node, LeafThreadState thread);
+        public delegate IEnumerator HandleNodeDelegate(ScriptNode node, LeafThreadState thread);
 
         private LeafAsset m_CurrentAsset;
         private Script m_CurrentScript;
@@ -26,7 +26,8 @@ namespace Journalism {
             m_MethodCache.LoadStatic();
         }
 
-        public HandleNodeStartDelegate HandleNodeEnter;
+        public HandleNodeDelegate HandleNodeEnter;
+        public HandleNodeDelegate HandleNodeExit;
 
         #region Loading
 
@@ -118,6 +119,15 @@ namespace Journalism {
             }
 
             IEnumerator process = HandleNodeEnter?.Invoke(inNode, inThreadState);
+            if (process != null) {
+                inThreadState.Interrupt(process);
+            }
+        }
+
+        public override void OnNodeExit(ScriptNode inNode, LeafThreadState<ScriptNode> inThreadState) {
+            base.OnNodeExit(inNode, inThreadState);
+
+            IEnumerator process = HandleNodeExit?.Invoke(inNode, inThreadState);
             if (process != null) {
                 inThreadState.Interrupt(process);
             }
