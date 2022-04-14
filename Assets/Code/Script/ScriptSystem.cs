@@ -201,6 +201,10 @@ namespace Journalism {
             m_Integration.Interrupt(routine);
         }
 
+        internal void SkipTo(StringHash32 id) {
+            m_Integration.SkipTo(id);
+        }
+
         #region Leaf
 
         [LeafMember("FirstVisit"), Preserve]
