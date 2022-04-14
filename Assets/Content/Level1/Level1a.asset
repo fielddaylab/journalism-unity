@@ -14,18 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Script: {fileID: -1942890987711236906, guid: 623072a7901267849b2862cfcb12bd60, type: 3}
   Story:
-    HeadlineType: 
+    HeadlineType: Breaking News
     Slots:
-    - AllowedTypes: 1
+    - Type: 1
       Wide: 1
-    - AllowedTypes: 31
+    - Type: 0
       Wide: 0
-    - AllowedTypes: 31
+    - Type: 0
       Wide: 0
-    - AllowedTypes: 31
+    - Type: 0
       Wide: 0
-    - AllowedTypes: 31
+    - Type: 0
       Wide: 0
+    EditorBrief: 'We need a breaking news announcement! Things to include:
+
+      -
+      Facts about what''s happening and where.
+
+      - "News you can use": actionable
+      info to help people stay safe.
+
+      - Quotes and photos.
+
+      - Rainfall
+      and flooding statistics'
+    FactWeight: 3
+    ColorWeight: 1
+    UsefulWeight: 3
   StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
   Audio: {fileID: 0}

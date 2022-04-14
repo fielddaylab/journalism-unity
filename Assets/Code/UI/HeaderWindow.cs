@@ -28,6 +28,10 @@ namespace Journalism.UI {
 
         private AsyncHandle m_LoadAsyncHandle;
 
+        public Button CloseButton {
+            get { return m_CloseButton; }
+        }
+
         #region Unity Events
 
         protected override void Awake() {

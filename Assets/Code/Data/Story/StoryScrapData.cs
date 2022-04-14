@@ -44,7 +44,10 @@ namespace Journalism {
         Observation = 0x10,
 
         [Hidden]
-        ImageMask = Picture | Graph
+        ImageMask = Picture | Graph,
+
+        [Hidden]
+        AnyMask = Picture | Graph | Quote | Fact | Observation
     }
 
     /// <summary>

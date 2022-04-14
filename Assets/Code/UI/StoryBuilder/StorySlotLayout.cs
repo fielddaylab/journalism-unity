@@ -8,6 +8,10 @@ using BeauRoutine;
 
 namespace Journalism.UI {
     public sealed class StorySlotLayout : MonoBehaviour {
+
+        public TMP_Text StoryType;
+
+        [Header("Slots")]
         public StoryBuilderSlot[] Slots;
         public CanvasGroup SlotGroup;
         

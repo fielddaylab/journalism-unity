@@ -7,6 +7,7 @@ using BeauUtil.Debugger;
 using Leaf;
 using System;
 using UnityEngine.Scripting;
+using Journalism.UI;
 
 namespace Journalism {
     static public class Player {
@@ -361,6 +362,7 @@ namespace Journalism {
                 s_Current.CheckpointId = default;
                 s_Current.LocationId = default;
                 s_Current.TimeRemaining = 0;
+                UISystem.SetStoryEnabled(false);
                 Log.Msg("[Player] New level index {0} - clearing story and checkpoints", def.LevelIndex);
                 Game.Save.SaveCheckpoint();
             }

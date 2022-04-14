@@ -74,6 +74,7 @@ namespace Journalism {
             s_RootMenu.AddDivider();
 
             s_RootMenu.AddToggle("Toggle Toolbar", () => UISystem.GetHeaderEnabled(), (b) => UISystem.SetHeaderEnabled(b));
+            s_RootMenu.AddToggle("Toggle Story Visible", () => UISystem.GetStoryEnabled(), (b) => UISystem.SetStoryEnabled(b));
 
             #if !UNITY_EDITOR
             SetMinimalLayer(false);

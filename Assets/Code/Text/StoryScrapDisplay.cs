@@ -22,6 +22,7 @@ namespace Journalism {
         [Required] public GameObject TextureGroup;
         [Required] public StreamingUGUITexture Texture;
         public ScrapAttributeDisplay Attributes;
+        public ScrapQualityDisplay Quality;
         public MaskingGroup Masks;
 
         #endregion // Inspector

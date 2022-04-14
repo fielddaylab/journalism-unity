@@ -26,15 +26,22 @@ namespace Journalism.UI {
         }
 
         static public void SetSlotType(StoryBuilderSlot slot, StorySlot data, int index) {
-            slot.Filter = data.AllowedTypes;
             slot.Index = index;
 
-            if (data.AllowedTypes == StoryScrapType.Photo) {
-                slot.EmptyIcon.gameObject.SetActive(true);
-                slot.EmptyLabel.text = "Picture Lead"; // TODO: Real text?
-            } else {
-                slot.EmptyIcon.gameObject.SetActive(false);
-                slot.EmptyLabel.text = "Snippet";
+            switch(data.Type) {
+                case StorySlotType.Picture: {
+                    slot.EmptyIcon.gameObject.SetActive(true);
+                    slot.EmptyLabel.text = "Picture Lead"; // TODO: Real text?
+                    slot.Filter = StoryScrapType.ImageMask;
+                    break;
+                }
+
+                default: {
+                    slot.EmptyIcon.gameObject.SetActive(false);
+                    slot.EmptyLabel.text = "Snippet";
+                    slot.Filter = StoryScrapType.AnyMask;
+                    break;
+                }
             }
         }
 
@@ -73,6 +80,8 @@ namespace Journalism.UI {
             for(; layoutIdx < layout.Slots.Length; layoutIdx++) {
                 layout.Slots[layoutIdx].gameObject.SetActive(false);
             }
+
+            layout.StoryType.SetText(configuration.HeadlineType);
         }
     }
 }

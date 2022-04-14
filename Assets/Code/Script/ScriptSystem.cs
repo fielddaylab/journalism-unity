@@ -216,6 +216,8 @@ namespace Journalism {
                 // TODO: Title screen? What do we do?
                 yield return Game.UI.GameOver.Hide();
             }
+
+            Game.Events.Dispatch(GameEvents.GameOverClose);
         }
 
         static private IEnumerator LoadCheckpoint() {

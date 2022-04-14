@@ -758,13 +758,17 @@ namespace Journalism {
             display.Data = data;
 
             if (display.Attributes) {
-                PopulateStoryAttributes(display.Attributes, data);
+                PopulateScrapAttributes(display.Attributes, data);
+            }
+
+            if (display.Quality) {
+                PopulateScrapQuality(display.Quality, data.Quality);
             }
 
             LayoutLine(display.Line);
         }
 
-        static public void PopulateStoryAttributes(ScrapAttributeDisplay display, StoryScrapData data) {
+        static public void PopulateScrapAttributes(ScrapAttributeDisplay display, StoryScrapData data) {
             if (data == null || data.Attributes == 0) {
                 display.gameObject.SetActive(false);
                 return;
@@ -776,10 +780,74 @@ namespace Journalism {
             display.Color.SetActive((attr & StoryScrapAttribute.Color) != 0);
             display.Useful.SetActive((attr & StoryScrapAttribute.Useful) != 0);
 
-            display.DividerA.SetActive(count > 0);
-            display.DividerB.SetActive(count > 1);
+            display.DividerA.SetActive(count > 1);
+            display.DividerB.SetActive(count > 2);
 
             display.gameObject.SetActive(true);
+        }
+
+        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, StoryConfig config) {
+            PopulateStoryAttributeDistribution(display, config.FactWeight, config.ColorWeight, config.UsefulWeight);
+        }
+
+        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, int factCount, int colorCount, int usefulCount) {
+            int typeCount = 0;
+            if (factCount > 0) {
+                typeCount++;
+            }
+            if (colorCount > 0) {
+                typeCount++;
+            }
+            if (usefulCount > 0) {
+                typeCount++;
+            }
+
+            int totalCount = factCount + colorCount + usefulCount;
+
+            float factRatio = totalCount == 0 ? 0 : (float) factCount / totalCount;
+            float colorRatio = totalCount == 0 ? 0 : (float) colorCount / totalCount;
+            float usefulRatio = totalCount == 0 ? 0 : (float) usefulCount / totalCount;
+
+            display.Facts.SetActive(factRatio > 0);
+            display.Color.SetActive(colorCount > 0);
+            display.Useful.SetActive(usefulRatio > 0);
+            display.Empty.SetActive(totalCount == 0);
+
+            CanvasUtility.SetAnchorsX(display.Facts.RectTransform(), 0, factRatio);
+            CanvasUtility.SetAnchorsX(display.Color.RectTransform(), factRatio, factRatio + colorRatio);
+            CanvasUtility.SetAnchorsX(display.Useful.RectTransform(), factRatio + colorRatio, 1);
+
+            display.DividerA.SetActive(typeCount > 1);
+            display.DividerB.SetActive(typeCount > 2);
+
+            CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), factRatio);
+            CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), factRatio + colorRatio);
+        }
+
+        static public void PopulateScrapQuality(ScrapQualityDisplay display, StoryScrapQuality quality) {
+            display.Bad.gameObject.SetActive(quality == StoryScrapQuality.Bad);
+            display.Great.gameObject.SetActive(quality == StoryScrapQuality.Great);
+            display.gameObject.SetActive(quality != StoryScrapQuality.Good);
+            if (quality != StoryScrapQuality.Good) {
+                display.Bad.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+                display.Great.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+            }
+        }
+
+        static public void PopulateStoryQuality(StoryQualityDisplay display, StoryStats stats) {
+            for(int i = 0; i < display.Icons.Length; i++) {
+                PopulateScrapQuality(display.Icons[i], i < stats.QualitySubtract, i < stats.QualityAdd);
+            }
+        }
+
+        static public void PopulateScrapQuality(ScrapQualityDisplay display, bool bad, bool great) {
+            display.Bad.gameObject.SetActive(bad);
+            display.Great.gameObject.SetActive(great);
+            display.gameObject.SetActive(bad || great);
+            if (bad || great) {
+                display.Bad.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+                display.Great.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
+            }
         }
 
         #endregion // Story Scraps

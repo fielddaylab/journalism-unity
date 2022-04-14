@@ -15,6 +15,7 @@ namespace Journalism {
         public GameObject Facts;
         public GameObject Color;
         public GameObject Useful;
+        public GameObject Empty;
 
         public GameObject DividerA;
         public GameObject DividerB;
