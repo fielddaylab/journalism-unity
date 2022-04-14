@@ -29,10 +29,11 @@
 // Original Name: START
 :: START
 $ActionChoice(Wake up)
+$call SetLocation("Apartment")
 {bg BG/BedroomMorning.jpg}
 $call Music(Music/Jahzzar 02 Wet Socks.mp3)
 It's 5AM.
-{img Anim/enml-rain.jpg}
+{map UI/MapPlaceholder.png}
 Dark, rainy, and way too early.
 
 $choice CheckYourPhone; Check your phone.
@@ -40,6 +41,7 @@ $choice CheckYourPhone; Check your phone.
 // Original Name: Check your phone.
 :: CheckYourPhone
 @clearText
+{/map}
 {img Anim/enml-buzzingphone.jpg}
 5 missed calls from your editor.
 Probably checking up on your puff piece about the cherry festival.
@@ -250,6 +252,7 @@ $choice ArriveAtWork; Rush to work
 @clearText
 {/img}
 {bg BG/Newsroom-Story1.jpg}
+$call SetLocation("Newsroom")
 The newsroom is the emptiest you've ever seen it.
 The lights are flickering and rainwater drips from the ceiling. 
 Your editor looks relieved to see you.
@@ -351,6 +354,7 @@ $if FirstVisit()
     $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
 $endif
 
+{map UI/MapPlaceholder.png}
 $HubChoice(Office1-Weather, "Check the weather online", 0.25, "Newsroom")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "Newsroom")
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for background and flood safety advice", 0.5, "Newsroom")
@@ -377,6 +381,7 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 // Original Name: Office 1 - Weather
 :: Office1-Weather
 @clearText
+{/map}
 You check the forecast: 10 inches of rain fell overnight, and more is on the way. 
 The website includes a live flood map, which includes flooded streets and at-risk areas.
 This will be perfect to include in your story!
@@ -389,6 +394,7 @@ $goto Office1-Clock
 // Original Name: Office 1 - Coworker
 :: Office1-Coworker
 @clearText
+{/map}
 You've heard coworkers talk about the field reporter whose position you filled, Jenkins Something-or-Other.
 Before he retired, he spent years gathering info about natural disasters. 
 Maybe he's got old files you can look through!
@@ -398,6 +404,7 @@ $choice JenkinssComputer; Track down his computer.
 // Original Name: Office 1 - DNR
 :: Office1-DNR
 @clearText
+{/map}
 You ask the DNR worker what's going on.
 
 $if StatCheck(Social, 2)
@@ -436,6 +443,7 @@ $goto Office1-Clock
 // Original Name: Office 1 - Police
 :: Office1-Police
 @clearText
+{/map}
 The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
 {@phone} Who did you say you work for?
@@ -445,6 +453,7 @@ $choice PoliceResponse; {@me} The Twin Lakes Herald.
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
 @clearText
+{/map}
 
 $if StatCheck(Social, 2)
     {img Anim/enml-coffeedonuts.jpg}
@@ -476,6 +485,7 @@ $goto Office1-Clock
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
 @clearText
+{/map}
 
 $if StatCheck(Research, 2)
     You get online and see what your friends are posting.

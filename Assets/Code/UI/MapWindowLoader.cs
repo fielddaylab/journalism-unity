@@ -27,7 +27,6 @@ namespace Journalism.UI
         }
 
         private IEnumerator LoadDataAsync() {
-
             // wait for the map's streaming texture to finish loading
             while (!m_streamingTex.IsLoaded()) {
                 yield return null;
@@ -86,20 +85,15 @@ namespace Journalism.UI
                 rect.gameObject.SetActive(false);
             }
 
-            if (m_choiceLocations == null) {
-                return;
-            }
-
             // Set player location
             // set PlayerMarker location banner text
-
-            //TODO: Set location via leaf script
-            if (Player.Location() == StringHash32.Null) {
-                Player.SetLocation(StringHash32.Parse("Newsroom"));
-            }
             MapLocationDef.MapLocation playerLoc = MapLocations.GetMapLocation(Player.Location());
             container.PlayerMarker.LocationIDText.SetText(playerLoc.Name);
             playerMarkerRect.localPosition = FitCoords(playerLoc.NormalizedCoords, mapRect);
+
+            if (m_choiceLocations == null) {
+                return;
+            }
 
             // Load choice locations into markers
             int markerIndex = 0;

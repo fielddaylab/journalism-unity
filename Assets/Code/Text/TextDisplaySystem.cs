@@ -33,12 +33,14 @@ namespace Journalism {
 
         [Header("Image Contents")]
         [SerializeField] private ImageColumn m_Image = null;
+        [SerializeField] private ImageColumn m_Map = null;
         [SerializeField] private float m_ColumnShift = 250;
 
         #endregion // Inspector
 
         [NonSerialized] private TextLine m_QueuedLine;
         [NonSerialized] private TextAlignment m_ImagePosition = TextAlignment.Center;
+        [NonSerialized] private TextAlignment m_MapPosition = TextAlignment.Center;
         [NonSerialized] private float m_ImageColumnBaseline;
         [NonSerialized] private float m_AutoContinue = -1;
 
@@ -67,7 +69,9 @@ namespace Journalism {
                 .Register(GameText.Events.Image, HandleImage)
                 .Register(GameText.Events.ClearImage, HandleImageClear)
                 .Register(GameText.Events.Anim, HandleAnim)
-                .Register(GameText.Events.Auto, HandleAuto);
+                .Register(GameText.Events.Auto, HandleAuto)
+                .Register(GameText.Events.Map, HandleMap)
+                .Register(GameText.Events.ClearMap, HandleMapClear);
         }
 
         private void HandleCharacter(TagEventData evtData, object context) {
@@ -179,6 +183,106 @@ namespace Journalism {
 
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_ImagePosition = TextAlignment.Center;
+        }
+
+        private IEnumerator HandleMap(TagEventData evtData, object context) {
+            var args = evtData.ExtractStringArgs();
+            StringSlice path = args[0];
+
+            TextAlignment align = m_ImagePosition;
+            if (args.Count > 1) {
+                align = StringParser.ConvertTo<TextAlignment>(args[1], m_ImagePosition);
+            }
+            if (align == TextAlignment.Center) {
+                align = TextAlignment.Left;
+            }
+
+            // if everything is aligned, no need to do anything more.
+            bool needsRealign = align != m_MapPosition;
+            bool needsFadeOut = m_Map.Root.gameObject.activeSelf;
+            bool needsChangeTexture = path != m_Map.Texture.Path;
+
+            if (!needsRealign && !needsFadeOut && !needsChangeTexture) {
+                yield break;
+            }
+
+            m_MapPosition = align;
+
+            using (PooledList<IEnumerator> anims = PooledList<IEnumerator>.Create()) {
+                if (needsRealign) {
+                    anims.Add(ClearLines());
+                }
+                if (needsFadeOut) {
+                    anims.Add(m_Map.TextureGroup.FadeTo(0, 0.3f));
+                }
+
+                yield return Routine.Combine(anims);
+                anims.Clear();
+
+                if (needsChangeTexture) {
+                    m_Map.Texture.Path = path.ToString();
+                    m_Map.Texture.Preload();
+                    while (m_Map.Texture.IsLoading()) {
+                        yield return null;
+                    }
+
+                    // resize texture to match root width
+                    Vector2 dimsRatio = new Vector2(1,
+                        m_Map.Root.GetComponent<RectTransform>().rect.height
+                        / m_Map.Root.GetComponent<RectTransform>().rect.width);
+
+                    RectTransform mapTexRect = m_Map.Texture.GetComponent<RectTransform>();
+                    mapTexRect.sizeDelta = 
+                        new Vector2(mapTexRect.rect.width * dimsRatio.x, mapTexRect.rect.width * dimsRatio.y);
+                }
+
+                if (needsRealign) {
+                    float imgX = 0, textX = 0;
+                    switch (m_MapPosition) {
+                        case TextAlignment.Left: {
+                                imgX = -m_ColumnShift;
+                                textX = m_ColumnShift;
+                                break;
+                            }
+                        case TextAlignment.Right: {
+                                imgX = m_ColumnShift;
+                                textX = -m_ColumnShift;
+                                break;
+                            }
+                    }
+
+                    m_TextDisplay.Root.SetAnchorPos(textX, Axis.X);
+                    m_Map.Root.SetAnchorPos(imgX, Axis.X);
+                    m_TextDisplay.Alignment = TextAlignment.Left;
+                }
+
+                m_Map.TextureGroup.alpha = 0;
+                m_Map.Root.gameObject.SetActive(true);
+                anims.Add(m_Map.TextureGroup.FadeTo(1, 0.3f));
+
+                yield return Routine.Combine(anims);
+            }
+        }
+
+        private IEnumerator HandleMapClear(TagEventData evtData, object context) {
+
+            if (m_MapPosition == TextAlignment.Center) {
+                yield break;
+            }
+
+            if (m_Map.Root.gameObject.activeSelf) {
+                yield return Routine.Combine(
+                    m_Map.TextureGroup.FadeTo(0, 0.3f),
+                    ClearLines()
+                );
+
+                m_Map.Texture.Unload();
+                m_Map.Root.gameObject.SetActive(false);
+                m_TextDisplay.Root.SetAnchorPos(0, Axis.X);
+            }
+
+            m_TextDisplay.Alignment = TextAlignment.Center;
+            m_MapPosition = TextAlignment.Center;
         }
 
         private void SetStyle(StringHash32 styleId) {
