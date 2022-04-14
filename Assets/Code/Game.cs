@@ -21,6 +21,7 @@ namespace Journalism {
         [Header("Assets")]
         [SerializeField] private TextStyles m_Styles = null;
         [SerializeField] private StatsDef m_Stats = null;
+        [SerializeField] private MapLocationDef m_MapLocationDef;
         [SerializeField] private LevelDef[] m_LevelDefs = null;
         
         [Header("Controllers")]
@@ -39,6 +40,7 @@ namespace Journalism {
             Assets.DeclareStyles(m_Styles);
             Assets.DeclareLevelList(m_LevelDefs);
             Stats.Import(m_Stats);
+            MapLocations.Import(m_MapLocationDef);
 
             Streaming.TextureMemoryBudget = 16 * 1024 * 1024;
             Streaming.AudioMemoryBudget = 16 * 1024 * 1024;

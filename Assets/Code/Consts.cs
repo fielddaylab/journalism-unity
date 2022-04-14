@@ -11,5 +11,6 @@ namespace Journalism {
         static public readonly StringHash32 LevelStarted = "level:started";
         static public readonly StringHash32 GameOver = "level:game-over";
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments
+        static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated"; // 
     }
 }

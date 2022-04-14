@@ -11,7 +11,7 @@ namespace Journalism
         [SerializeField] private RectTransform m_mapRect;
 
         [SerializeField] private Transform m_markerTransform;
-        [SerializeField] private SerializedHash32 m_locationName;
+        [SerializeField] private string m_locationName;
 
         [ContextMenu("DefineLocation")]
         public void DefineLocation() {

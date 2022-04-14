@@ -13,79 +13,40 @@ namespace Journalism
         [Serializable]
         public class MapLocation
         {
-            public SerializedHash32 Id;
+            [HideInInspector] public StringHash32 Id;
+            public string Name;
             public Vector2 NormalizedCoords;
 
-            /*
-            public StatId Id;
-
-            [Header("Text")] // TODO: Localize these!!
-            public string Name;
-            public string[] RankNames;
-
-            [Header("Image")]
-            public Sprite Icon;
-
-            [NonSerialized] public ushort RankInterval;
-            */
-
-            public MapLocation(SerializedHash32 id, Vector2 coords) {
+            public MapLocation(StringHash32 id, string name, Vector2 coords) {
                 Id = id;
+                Name = name;
                 NormalizedCoords = coords;
             }
         }
 
-
         [SerializeField] private MapLocation[] m_MapLocations = null;
 
-        private Dictionary<SerializedHash32, Vector2> locationDict;
-
-        /*
-        [SerializeField] private ushort m_MaxValue = 30;
-        [SerializeField] private Gradient m_StatColorGradient = null;
-
-        [NonSerialized] private bool m_Processed;
-        */
-
-
-
-        public void DefineLocation(SerializedHash32 id, Vector2 coords) {
+        public void DefineLocation(string name, Vector2 coords) {
             // TODO: check if id is already present
             // if so, update instead of append
 
             // append to list of locations
             int currLength = m_MapLocations.Length;
             System.Array.Resize(ref m_MapLocations, (currLength) + 1);
-            m_MapLocations[currLength] = new MapLocation(id, coords);
+            m_MapLocations[currLength] = new MapLocation(StringHash32.Parse(name), name, coords);
         }
 
         #region Data Retrieval
 
-        public Vector2 GetNormalizedCoords(SerializedHash32 locationId) {
-            // initialize the dict if it does not exist
-            if (locationDict == null) {
-                locationDict = new Dictionary<SerializedHash32, Vector2>();
-                foreach (MapLocation loc in m_MapLocations) {
-                    locationDict.Add(loc.Id, loc.NormalizedCoords);
-                }
-            }
-            if (locationDict.ContainsKey(locationId)) {
-                return locationDict[locationId];
-            }
-            else {
-                throw new KeyNotFoundException(string.Format("No Map Location " +
-                    "with id `{0}' is in the database", locationId
-                ));
+        public MapLocation[] MapLocations {
+            get {
+                return m_MapLocations;
             }
         }
 
         #endregion // Data Retrieval
 
-        /*
-        public ushort MaxValue {
-            get { return m_MaxValue; }
-        }
-        */
+
 
         /*public Stat[] Stats {
             get {
@@ -128,6 +89,31 @@ namespace Journalism
     /// </summary>
     static public class MapLocations
     {
+        static private MapLocationDef.MapLocation[] s_MapLocations;
+        private static Dictionary<StringHash32, MapLocationDef.MapLocation> locationDict;
+
+        static internal void Import(MapLocationDef def) {
+            s_MapLocations = def.MapLocations;
+        }
+
+        public static MapLocationDef.MapLocation GetMapLocation(StringHash32 locationId) {
+            // initialize the dict if it does not exist
+            if (locationDict == null) {
+                locationDict = new Dictionary<StringHash32, MapLocationDef.MapLocation>();
+                foreach (MapLocationDef.MapLocation loc in s_MapLocations) {
+                    locationDict.Add(loc.Id, loc);
+                }
+            }
+            if (locationDict.ContainsKey(locationId)) {
+                return locationDict[locationId];
+            }
+            else {
+                throw new KeyNotFoundException(string.Format("No Map Location " +
+                    "with id `{0}' is in the database", locationId
+                ));
+            }
+        }
+
         /*
         /// <summary>
         /// Total number of stats.

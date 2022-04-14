@@ -357,6 +357,11 @@ namespace Journalism {
                     yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, choiceText.RichText, Assets.Style(characterId));
                     inChoice.Choose(choice.TargetId);
                 } else {
+                    // init option locations for map
+                    int numOptions = fullOptions.Count;
+                    StringHash32[] locIds = new StringHash32[numOptions];
+                    int optionIndex = 0;
+
                     foreach(var option in fullOptions) {
                         TextChoice choice = GameText.AllocChoice(m_ChoiceDisplay, m_Pools);
                         uint timeCost = Stats.HoursToTimeUnits(inChoice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat());
@@ -365,8 +370,18 @@ namespace Journalism {
                         if (characterId.IsEmpty) {
                             characterId = GameText.Characters.Action;
                         }
+
+                        // save option locations for map
+                        /*
+                        StringHash32 locId = MapLocations.GetMapLocation(inChoice.GetCustomData(option.Index, GameText.ChoiceData.LocationId).AsStringHash()).Id;
+                        locIds[optionIndex] = locId;
+                        optionIndex++;
+                        */
+
                         GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, Assets.Style(characterId));
                     }
+                    // send option locations to map
+                    Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdated, locIds);
 
                     GameText.RecomputeAllLocations(m_ChoiceDisplay);
 

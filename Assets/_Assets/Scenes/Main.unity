@@ -1328,22 +1328,22 @@ PrefabInstance:
     - target: {fileID: 1065849402168782054, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1065849402168782054, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.y
-      value: NaN
+      value: 0.48039237
       objectReference: {fileID: 0}
     - target: {fileID: 1065849402168782054, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.width
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1065849402168782054, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.height
-      value: NaN
+      value: 0.039215278
       objectReference: {fileID: 0}
     - target: {fileID: 1245555091069132682, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
@@ -1760,6 +1760,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1898579599119552446, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_locationName
+      value: Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898579599119552446, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_locationId.m_Source
+      value: Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898579599119552446, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_locationId.m_HashValue
+      value: 805092869
+      objectReference: {fileID: 0}
     - target: {fileID: 1996353486516108276, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1788,22 +1803,22 @@ PrefabInstance:
     - target: {fileID: 2010932938985485433, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2010932938985485433, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.y
-      value: NaN
+      value: 0.48039237
       objectReference: {fileID: 0}
     - target: {fileID: 2010932938985485433, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.width
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2010932938985485433, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.height
-      value: NaN
+      value: 0.039215278
       objectReference: {fileID: 0}
     - target: {fileID: 2077659705171756639, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
@@ -3078,22 +3093,22 @@ PrefabInstance:
     - target: {fileID: 5807011277967232935, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5807011277967232935, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.y
-      value: NaN
+      value: 0.48039237
       objectReference: {fileID: 0}
     - target: {fileID: 5807011277967232935, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.width
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5807011277967232935, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.height
-      value: NaN
+      value: 0.039215278
       objectReference: {fileID: 0}
     - target: {fileID: 5858933837179662910, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
@@ -3258,22 +3273,22 @@ PrefabInstance:
     - target: {fileID: 6096817080204955410, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6096817080204955410, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.y
-      value: NaN
+      value: 0.48039237
       objectReference: {fileID: 0}
     - target: {fileID: 6096817080204955410, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.width
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6096817080204955410, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.height
-      value: NaN
+      value: 0.039215278
       objectReference: {fileID: 0}
     - target: {fileID: 6158997427700301135, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
@@ -3563,22 +3578,22 @@ PrefabInstance:
     - target: {fileID: 6906404840391874236, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6906404840391874236, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.y
-      value: NaN
+      value: 0.48039237
       objectReference: {fileID: 0}
     - target: {fileID: 6906404840391874236, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.width
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6906404840391874236, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.height
-      value: NaN
+      value: 0.039215278
       objectReference: {fileID: 0}
     - target: {fileID: 6984902147209076422, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
@@ -3778,22 +3793,22 @@ PrefabInstance:
     - target: {fileID: 7442875463890972705, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7442875463890972705, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.y
-      value: NaN
+      value: 0.48039237
       objectReference: {fileID: 0}
     - target: {fileID: 7442875463890972705, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.width
-      value: NaN
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7442875463890972705, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_UVRect.height
-      value: NaN
+      value: 0.039215278
       objectReference: {fileID: 0}
     - target: {fileID: 7647214206131568917, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}

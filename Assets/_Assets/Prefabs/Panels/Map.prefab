@@ -310,8 +310,7 @@ MonoBehaviour:
   - {fileID: 243095422520191000}
   - {fileID: 3062851638821543558}
   - {fileID: 5709915458887351295}
-  m_mapRect: {fileID: 605846728468832783}
-  m_mapLocationDef: {fileID: 11400000, guid: ad719474e92ed384da55e9aed570254e, type: 2}
+  m_streamingTex: {fileID: 113894050746671816}
 --- !u!1 &7749162105908693409
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8427113908734724450
 Transform:
   m_ObjectHideFlags: 0
@@ -398,9 +397,7 @@ MonoBehaviour:
   m_mapLocationDef: {fileID: 11400000, guid: ad719474e92ed384da55e9aed570254e, type: 2}
   m_mapRect: {fileID: 605846728468832783}
   m_markerTransform: {fileID: 690856396016978321}
-  m_locationName:
-    m_Source: Apartment
-    m_HashValue: 742923569
+  m_locationName: Shop
 --- !u!1001 &923841258076676155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -979,12 +976,12 @@ PrefabInstance:
     - target: {fileID: 2761634476632899261, guid: c89342563e03e6444992138dc04978d0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -134
+      value: -115
       objectReference: {fileID: 0}
     - target: {fileID: 2761634476632899261, guid: c89342563e03e6444992138dc04978d0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -134
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2761634476632899261, guid: c89342563e03e6444992138dc04978d0,
         type: 3}

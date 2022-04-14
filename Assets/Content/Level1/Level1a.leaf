@@ -3,7 +3,7 @@
 #macro HubChoice(nodeId, text, time) \
     $choice $nodeId; $text \
         $data time = $time \
-        $data once
+        $data once \
 #macro TimeChoice(nodeId, text, time) \
     $choice $nodeId; $text \
         $data time = $time

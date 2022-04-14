@@ -805,6 +805,7 @@ namespace Journalism {
         static public class ChoiceData {
             static public readonly StringHash32 Time = "time";
             static public readonly StringHash32 Once = "once";
+            static public readonly StringHash32 LocationId = "location";
         }
 
         static public class Characters {
