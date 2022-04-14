@@ -21,15 +21,20 @@ namespace Journalism {
 
         [Header("Transitions")]
         [SerializeField] private float m_DefaultCrossfadeDuration = 0.5f;
+        [SerializeField] private ColorGroup m_FullScreenSolid = null;
     
         #endregion // Inspector
 
         [NonSerialized] private StreamingQuadTexture m_CurrentBackgroundTexture = null;
         [NonSerialized] private StreamingQuadTexture m_QueuedBackgroundTexture = null;
         private Routine m_CurrentBackgroundTransition;
+        private Routine m_FullScreenTransition;
 
         private void Awake() {
             m_CameraBackground.backgroundColor = Color.black;
+
+            Game.Events.Register(GameEvents.StoryEvalBegin, OnEvalBegin, this)
+                .Register(GameEvents.StoryEvalEnd, OnEvalEnd, this);
         }
 
         private StreamingQuadTexture GetNextBackground() {
@@ -93,6 +98,8 @@ namespace Journalism {
             m_BackgroundTextureB.Unload();
             m_BackgroundTextureA.Alpha = 0;
             m_BackgroundTextureB.Alpha = 0;
+            m_FullScreenSolid.Hide();
+            m_FullScreenTransition.Stop();
         }
 
         public IEnumerator FadeOutBackgrounds() {
@@ -174,6 +181,14 @@ namespace Journalism {
                 yield return Tween.Color(background.Color, Color.white, (f) => background.Color = f, duration);
                 background.SharedMaterial = m_BackgroundOpaqueMaterial;
             }
+        }
+
+        private void OnEvalBegin() {
+            m_FullScreenTransition.Replace(this, m_FullScreenSolid.Show(0.2f));
+        }
+
+        private void OnEvalEnd() {
+            m_FullScreenTransition.Replace(this, m_FullScreenSolid.Hide(0.2f));
         }
     
         #endregion // Transitions

@@ -70,6 +70,7 @@ namespace Journalism {
 
             s_RootMenu.AddDivider();
             s_RootMenu.AddButton("Unlock All Story Snippets", UnlockAllSnippets);
+            s_RootMenu.AddButton("Skip to Story Publish", SkipToStoryPublish);
 
             s_RootMenu.AddDivider();
 
@@ -192,6 +193,10 @@ namespace Journalism {
             foreach(var snippet in Assets.CurrentLevel.StoryScraps) {
                 Player.Data.StoryScrapInventory.Add(snippet.Id);
             }
+        }
+
+        static private void SkipToStoryPublish() {
+            Game.Scripting.SkipTo("STORYEVALUATION");
         }
 
         #region Pausing

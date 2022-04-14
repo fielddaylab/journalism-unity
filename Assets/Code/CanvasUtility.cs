@@ -96,6 +96,47 @@ namespace Journalism {
 
         #endregion // Canvas Group
 
+        #region ColorGroup
+
+        static public IEnumerator Show(this ColorGroup group, float duration, bool? raycasts = true) {
+            if (!group.gameObject.activeSelf) {
+                group.SetAlpha(0);
+                group.gameObject.SetActive(true);
+            }
+            if (raycasts.HasValue)
+                group.BlocksRaycasts = false;
+            yield return Tween.Float(group.GetAlpha(), 1, group.SetAlpha, duration);
+            if (raycasts.HasValue)
+                group.BlocksRaycasts = raycasts.Value;
+        }
+
+        static public void Show(this ColorGroup group, bool? raycasts = true) {
+            group.SetAlpha(1);
+            if (raycasts.HasValue) {
+                group.BlocksRaycasts = raycasts.Value;
+            }
+            group.gameObject.SetActive(true);
+        }
+
+        static public IEnumerator Hide(this ColorGroup group, float duration, bool? raycasts = false) {
+            if (group.gameObject.activeSelf) {
+                if (raycasts.HasValue)
+                    group.BlocksRaycasts = raycasts.Value;
+                yield return Tween.Float(group.GetAlpha(), 0, group.SetAlpha, duration);
+                group.gameObject.SetActive(false);
+            }
+        }
+
+        static public void Hide(this ColorGroup group, bool? raycasts = false) {
+            group.gameObject.SetActive(false);
+            group.SetAlpha(0);
+            if (raycasts.HasValue) {
+                group.BlocksRaycasts = raycasts.Value;
+            }
+        }
+
+        #endregion // ColorGroup
+
         static public void PropagateSizeUpwards(RectTransform start, RectTransform parent) {
             if (start == parent) {
                 return;

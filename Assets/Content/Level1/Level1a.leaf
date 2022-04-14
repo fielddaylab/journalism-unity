@@ -269,6 +269,7 @@ $ContinueChoice({@me} Where is everybody??)
 
 $ContinueChoice({@me} What should I do?)
 
+$call ActivateStory()
 {@person} We need a breaking news story.
 {@person} People need to know what's happening and how to stay safe. 
 {@person} Make sure to include a photo! 
@@ -352,7 +353,7 @@ $if FirstVisit()
     $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
 $endif
 
-$HubChoice(Office1-Weather, "Check the weather online", 0.25)
+$HubChoice("Office1-Weather", "Check the weather online", 0.25)
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75)
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for background and flood safety tips", 0.5)
 $HubChoice(Office1-Police, "Call the police spokesman for safety advice", 0.5)
@@ -604,5 +605,51 @@ $call RunPublish()
 $goto StoryFeedback
 
 :: StoryFeedback
-{@msg}  Feedback sequence goes here...
+@feedback
+{img Anim/Editor.png}
+{@person} Alright, let's see how you did...
+{story-stats}
+$if StoryScore() == "good"
+    $if StoryAlignment() >= 0.6
+        {@person}   Stellar work Rookie! I can tell you worked hard on this one.
+        {@person}   Solid story construction and lots of actionable info.
+        {@person}   Maybe you've got a Pulitzer Prize in your future.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Wow, nice work, Rookie! You really put a great story together.
+        {@person}   You definitely got off-topic there a little, but nobody's perfect.
+        {@person}   Hopefully it'll be enough to keep Twin Lakes safe.
+    $else
+        {@person}   Wow, your writing is top notch! Gorgeous story construction! Quality quotes and photos!
+        {@person}   Too bad it has nothing to do with the assignment I gave you.
+        {@person}   At least people will have something entertaining to read while they're waiting to be rescued... 
+    $endif
+$elseif StoryScore() == "medium"
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work getting the right info out there!
+        {@person}   Your work could use some quality control. Maybe a little more style.
+        {@person}   But all in all, great work. Twin Lakes is lucky to have you.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Hmm... this is sort of the turkey sandwich of breaking news stories.
+        {@person}   Not amazing, but not bad, either.
+        {@person}   I bet this story will help a lot of people. Good work.
+    $else
+        {@person}   Hate to say it, Rookie, but this is some amateur-level work.
+        {@person}   Your story is halfway decent...
+        {@person}   Too bad it has nothing to do with the assignment I gave you.
+    $endif
+$else
+    $if StoryAlignment() >= 0.6
+        {@person}   Well... your quality control could use some work.
+        {@person}   At least people will know how to stay safe.
+        {@person}   Next time, try bringing a decent camera. And maybe a spellchecker.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Yikes. Did you intern at a tabloid? This quality isn't up to our standards.
+        {@person}   You did a decent job sticking to the assignment, at least.
+        {@person}   Now if only I could tell what that photo is supposed to be...
+    $else
+        {@person}   Well.... You put some words on the page. Sort of.
+        {@person}   We expect better from our reporters around here.
+        {@person}   I wonder if Fred Finkler is still looking for a job...
+    $endif
+$endif
 $call NextLevel()
