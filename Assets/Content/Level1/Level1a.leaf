@@ -541,10 +541,12 @@ $if Visited(HelpHer)
     You're shocked that he knows about this.
     {@me} Yeah, uh, that was me.
 
+    You ask him for advice on how people can stay safe. 
+
     He gives you a great interview, including an anecdote about a man whose car got swept into a ditch! 
 
-    {@phone} Rescuers pulled him out just in time.
-    {@phone} People need to remember the flood-safety motto: turn around, don't drown!
+    {@phone} Rescuers pulled him out just in time!
+    {@phone} Remember: Turn around, don't drown! 
 
     $call GiveSnippet(FloodBackground)
     $call GiveSnippet(PoliceStory)
