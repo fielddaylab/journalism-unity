@@ -24,7 +24,12 @@ namespace Journalism {
         [SerializeField] private TextPools m_Pools = null;
         [SerializeField] private TextLineScroll m_TextDisplay = null;
         [SerializeField] private TextChoiceGroup m_ChoiceDisplay = null;
+        
+        [Header("Feedback Sequence")]
         [SerializeField] private NewspaperLayout m_FinishedStoryLayout = null;
+        [SerializeField] private StoryQualityDisplay m_StoryQualityLayout = null;
+        [SerializeField] private StoryAttributeDisplay m_StoryAttributeLayout = null;
+        [SerializeField] private CanvasGroup m_EditorOverlay = null;
 
         [Header("Animation")]
         [SerializeField] private float m_ChoiceRowsOffset = 48;
@@ -41,6 +46,7 @@ namespace Journalism {
         [NonSerialized] private TextAlignment m_ImagePosition = TextAlignment.Center;
         [NonSerialized] private float m_ImageColumnBaseline;
         [NonSerialized] private float m_AutoContinue = -1;
+        private Routine m_OverlayAnim;
 
         public LookupLineDelegate LookupLine;
         public NextLineDelegate LookupNextLine;
@@ -55,7 +61,9 @@ namespace Journalism {
             m_ImageColumnBaseline = m_Image.Root.anchoredPosition.y;
 
             Game.Events.Register<StringHash32>(GameEvents.InventoryUpdated, OnInventoryUpdated, this)
-                .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this);
+                .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this)
+                .Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
+                .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this);
         }
 
         #endregion // Unity
@@ -67,7 +75,8 @@ namespace Journalism {
                 .Register(GameText.Events.Image, HandleImage)
                 .Register(GameText.Events.ClearImage, HandleImageClear)
                 .Register(GameText.Events.Anim, HandleAnim)
-                .Register(GameText.Events.Auto, HandleAuto);
+                .Register(GameText.Events.Auto, HandleAuto)
+                .Register(GameText.Events.DisplayStoryStats, HandleStoryStats);
         }
 
         private void HandleCharacter(TagEventData evtData, object context) {
@@ -181,6 +190,31 @@ namespace Journalism {
             m_ImagePosition = TextAlignment.Center;
         }
 
+        private IEnumerator HandleStoryStats(TagEventData evtData, object context) {
+            // Attribute Distribution
+            m_StoryAttributeLayout.gameObject.SetActive(true);
+            GameText.PopulateStoryAttributeDistribution(m_StoryAttributeLayout.Target, Assets.CurrentLevel.Story);
+            GameText.PopulateStoryAttributeDistribution(m_StoryAttributeLayout.Current, Player.StoryStatistics);
+            GameText.InsertTextLine(m_TextDisplay, m_StoryAttributeLayout.Line, HandleFreeStoryStat);
+            GameText.AlignTextLine(m_StoryAttributeLayout.Line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(m_TextDisplay, 1);
+            yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            GameText.ClearOverflowLines(m_TextDisplay);
+            yield return 0.2f;
+
+            // Quality
+            m_StoryQualityLayout.gameObject.SetActive(true);
+            GameText.PopulateStoryQuality(m_StoryQualityLayout, Player.StoryStatistics);
+            GameText.InsertTextLine(m_TextDisplay, m_StoryQualityLayout.Line, HandleFreeStoryStat);
+            GameText.AlignTextLine(m_StoryQualityLayout.Line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(m_TextDisplay, 1);
+            yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            GameText.ClearOverflowLines(m_TextDisplay);
+            yield return 0.2f;
+
+            yield return CompleteLine();
+        }
+
         private void SetStyle(StringHash32 styleId) {
             var style = Assets.Style(styleId);
             Assert.NotNull(m_QueuedLine);
@@ -201,6 +235,14 @@ namespace Journalism {
             }
 
             Game.Scripting.Interrupt(DisplayNewStoryScrap(scrapId));
+        }
+
+        private void OnFeedbackBegin() {
+            m_OverlayAnim.Replace(this, m_EditorOverlay.Show(0.2f));
+        }
+
+        private void OnFeedbackEnd() {
+            m_OverlayAnim.Replace(this, m_EditorOverlay.Hide(0.2f));
         }
 
         private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {
@@ -265,6 +307,11 @@ namespace Journalism {
 
                 yield return CompleteLine();
             }
+        }
+
+        private void HandleFreeStoryStat(TextLine line) {
+            line.gameObject.SetActive(false);
+            line.transform.SetParent(m_Pools.LinePool.PoolTransform);
         }
 
         #endregion // Events
@@ -418,6 +465,8 @@ namespace Journalism {
             m_TextDisplay.ListRoot.SetAnchorPos(m_TextDisplay.RootBaseline, Axis.Y);
 
             m_FinishedStoryLayout.gameObject.SetActive(false);
+            m_EditorOverlay.Hide();
+            m_OverlayAnim.Stop();
 
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_ImagePosition = TextAlignment.Center;

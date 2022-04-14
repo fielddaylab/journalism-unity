@@ -41,8 +41,7 @@ namespace Journalism.UI {
         [SerializeField] private Button m_EditorNotesBackButton = null;
         [SerializeField] private ActiveGroup m_EditorNotesGroup = null;
         [SerializeField] private TMP_Text m_EditorNotesText = null;
-        [SerializeField] private ScrapAttributeDisplay m_EditorTargetDistributions = null;
-        [SerializeField] private ScrapAttributeDisplay m_CurrentDistributions = null;
+        [SerializeField] private StoryAttributeDisplay m_Distributions = null;
         [SerializeField] private StoryQualityDisplay m_CurrentQuality = null;
 
         #endregion // Inspector
@@ -123,11 +122,6 @@ namespace Journalism.UI {
                 }
             }
 
-            yield return new AsyncSleep(TimeSpan.FromSeconds(0.002f));
-            m_ListLayout.ForceRebuild();
-            m_ListLayout.enabled = false;
-            m_ListFitter.enabled = false;
-
             m_StoryActive = UISystem.GetStoryEnabled();
 
             if (m_StoryActive) {
@@ -135,7 +129,7 @@ namespace Journalism.UI {
                 m_StoryGroup.SetActive(true);
                 if (Ref.Replace(ref m_LastKnownLevelIdx, Player.Data.LevelIndex)) {
                     StoryText.LayoutSlots(m_SlotLayout, Assets.CurrentLevel.Story);
-                    GameText.PopulateStoryAttributeDistribution(m_EditorTargetDistributions, Assets.CurrentLevel.Story);
+                    GameText.PopulateStoryAttributeDistribution(m_Distributions.Target, Assets.CurrentLevel.Story);
                     m_EditorNotesText.SetText(Assets.CurrentLevel.Story.EditorBrief);
                     yield return null;
                 }
@@ -159,6 +153,12 @@ namespace Journalism.UI {
             m_StoryInput.blocksRaycasts = true;
 
             m_EditorNotesGroup.SetActive(false);
+
+            m_ListLayout.ForceRebuild();
+            Async.InvokeAsync(() => {
+                m_ListLayout.enabled = false;
+                m_ListFitter.enabled = false;
+            });
         }
 
         #region Handlers
@@ -170,8 +170,10 @@ namespace Journalism.UI {
 
             if (!state && m_SelectedScrap == display) {
                 SetSelectedScrap(null);
+                Game.Audio.PlayOneShot("NotebookDrop");
             } else {
                 SetSelectedScrap(display);
+                Game.Audio.PlayOneShot("NotebookLift");
             }
         }
 
@@ -195,6 +197,7 @@ namespace Journalism.UI {
             if (SetSlot(slot, m_SelectedScrap.Data.Id)) {
                 slot.Animation.Replace(this, FlashAnimation(slot.Flash));
                 SetSelectedScrap(null);
+                Game.Audio.PlayOneShot("NotebookInsert");
             }
         }
 
@@ -202,21 +205,24 @@ namespace Journalism.UI {
             if (ClearSlot(slot)) {
                 slot.Animation.Replace(this, FlashAnimation(slot.Flash));
                 SetSelectedScrap(null);
+                Game.Audio.PlayOneShot("NotebookRemove");
             }
         }
 
         private void OnViewNotesClick() {
             SetSelectedScrap(null);
+            Game.Audio.PlayOneShot("NotebookEditorNotes");
             Game.Events.Queue(GameEvents.EditorNotesOpen);
             m_Window.CanvasGroup.blocksRaycasts = false;
             m_Window.CloseButton.gameObject.SetActive(false);
             RefreshStats();
-            GameText.PopulateStoryAttributeDistribution(m_CurrentDistributions, m_CachedStats.FactCount, m_CachedStats.ColorCount, m_CachedStats.UsefulCount);
+            GameText.PopulateStoryAttributeDistribution(m_Distributions.Current, m_CachedStats);
             GameText.PopulateStoryQuality(m_CurrentQuality, m_CachedStats);
             m_EditorNotesAnim.Replace(this, AnimateEditorNotesOn()).TryManuallyUpdate(0);
         }
 
         private void OnCloseNotesClick() {
+            Game.Audio.PlayOneShot("NotebookEditorNotes");
             Game.Events.Queue(GameEvents.EditorNotesClose);
             m_Window.CanvasGroup.blocksRaycasts = false;
             m_EditorNotesAnim.Replace(this, AnimateEditorNotesOff()).TryManuallyUpdate(0);

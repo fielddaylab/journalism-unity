@@ -12,6 +12,7 @@ namespace Journalism {
         public struct LineState {
             public TempAlloc<TextLine> LineAlloc;
             public TempAlloc<StoryScrapDisplay> ScrapAlloc;
+            public Action<TextLine> CustomFree;
             public TextLine Line;
             public float LocationX;
             public float LocationY;

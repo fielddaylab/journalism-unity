@@ -61,6 +61,7 @@ namespace Journalism {
 
             if (node.HasFlags(ScriptNodeFlags.Feedback)) {
                 Game.Events.Queue(GameEvents.StoryEvalBegin);
+                Player.CompileStoryStatistics();
             }
             
             yield return m_TextDisplay.HandleNodeStart(node, thread);
