@@ -97,6 +97,12 @@ namespace Journalism {
                     m_StreamingDebugText.SetText(string.Format("{0} / {1:0.00}MB", m_LastKnownStreamingCount, (double)m_LastKnownStreamingMem / (1024 * 1024)));
                 }
             }
+
+            // unity whyyyyyyy
+            if (UnityEngine.Debug.developerConsoleVisible) {
+                UnityEngine.Debug.developerConsoleVisible = false;
+                UnityEngine.Debug.ClearDeveloperConsole();
+            }
         }
 
         private void CheckInput() {
