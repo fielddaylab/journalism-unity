@@ -629,7 +629,7 @@ namespace Journalism {
             StoryText.LayoutNewspaper(m_FinishedStoryLayout, Assets.CurrentLevel.Story, Player.Data);
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 1;
-            yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, "Talk to Editor", Assets.Style(GameText.Characters.Action));
+            yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, "Talk to Editor", Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_FinishedStoryLayout.gameObject.SetActive(false);
         }

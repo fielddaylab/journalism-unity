@@ -154,11 +154,11 @@ namespace Journalism.UI {
 
             m_EditorNotesGroup.SetActive(false);
 
-            m_ListLayout.ForceRebuild();
-            Async.InvokeAsync(() => {
+            Routine.StartDelay(() => {
+                m_ListLayout.ForceRebuild();
                 m_ListLayout.enabled = false;
                 m_ListFitter.enabled = false;
-            });
+            }, 0.05f);
         }
 
         #region Handlers

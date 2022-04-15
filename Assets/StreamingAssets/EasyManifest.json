@@ -1,11 +1,22 @@
 {
     "Assets": {
+        "__buildInfo.txt": {
+            "Type": "Unknown"
+        },
         "Anim/BossPhone5.png": {
             "Type": "Texture",
             "Texture": {
                 "Width": 335,
                 "Height": 335,
                 "Alpha": true
+            }
+        },
+        "Anim/Editor.jpeg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2147,
+                "Height": 1961,
+                "Alpha": false
             }
         },
         "Anim/enml-buzzingphone.gif": {
@@ -78,11 +89,27 @@
                 "Alpha": false
             }
         },
-        "Anim/enml-stuckcar.jpg": {
+        "Anim/enml-stuckcar-blurry.jpg": {
             "Type": "Texture",
             "Texture": {
                 "Width": 480,
                 "Height": 480,
+                "Alpha": false
+            }
+        },
+        "Anim/enml-stuckcar-blurry.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2146,
+                "Height": 942,
+                "Alpha": false
+            }
+        },
+        "Anim/enml-stuckcar.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2146,
+                "Height": 942,
                 "Alpha": false
             }
         },
@@ -140,7 +167,7 @@
         "BG/DNRSite.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1366,
+                "Width": 786,
                 "Height": 562,
                 "Alpha": false
             }
@@ -158,6 +185,14 @@
             "Texture": {
                 "Width": 1043,
                 "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/FirstStDowntownCleanup.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 4032,
+                "Height": 3024,
                 "Alpha": false
             }
         },
@@ -182,6 +217,38 @@
             "Texture": {
                 "Width": 1178,
                 "Height": 768,
+                "Alpha": false
+            }
+        },
+        "BG/MainStCherryFestFlood.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 4032,
+                "Height": 3024,
+                "Alpha": false
+            }
+        },
+        "BG/Newsroom-Story1.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 4032,
+                "Height": 3024,
+                "Alpha": false
+            }
+        },
+        "BG/Newsroom-Story2.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 4032,
+                "Height": 3024,
+                "Alpha": false
+            }
+        },
+        "BG/OutsideApt-Map.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2048,
+                "Height": 1320,
                 "Alpha": false
             }
         },
@@ -255,8 +322,45 @@
         "Music/Jahzzar 04 Flood.mp3": {
             "Type": "Audio"
         },
-        "Music/NoHeaven.mp3": {
-            "Type": "Audio"
+        "Photo/ErrorPhoto.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 155,
+                "Height": 88,
+                "Alpha": false
+            }
+        },
+        "Photo/FloodedLibrary.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1500,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Photo/FloodedStreetDark.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1001,
+                "Height": 745,
+                "Alpha": false
+            }
+        },
+        "Photo/FloodMap-Lv1.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2228,
+                "Height": 1434,
+                "Alpha": false
+            }
+        },
+        "Photo/HospitalDucks.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1085,
+                "Height": 849,
+                "Alpha": false
+            }
         },
         "Photo/TestPhoto-Sandbags.png": {
             "Type": "Texture",

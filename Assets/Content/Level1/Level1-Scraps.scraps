@@ -25,14 +25,14 @@ Insert a photo of ducks swimming in the hospital parking lot.
 @type Photo
 @quality Great
 @attr Color 
-@image Anim/enml-stuckcar.jpg
+@image Anim/enml-stuckcar.png
 
 // Original Name: Blurry cars
 :: BlurryCars
 @type Photo
 @quality Bad
 @attr Color 
-@image Anim/enml-stuckcar-blurry.jpg
+@image Anim/enml-stuckcar-blurry.png
 
 // Original Name: Flood map
 :: FloodMap

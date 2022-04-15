@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultChoiceGroup: {fileID: 3423866196288712626}
   DefaultNextButton: {fileID: 81271057768246589}
+  DefaultBackButton: {fileID: 0}
   DefaultNextIcon: {fileID: 21300000, guid: af2bc8b02aad38541a9b4c776ad85556, type: 3}
   DefaultNextIconColor: {r: 0.12941177, g: 0.02745098, b: 0.011764706, a: 1}
   GridRoot: {fileID: 8144963194590921723}
@@ -107,6 +108,7 @@ MonoBehaviour:
   RowSpacing: 100
   ColumnSpacing: 326
   RotationRange: 1
+  MaxOptions: 6
   NewChoiceAnimParams:
     Time: 0.3
     Curve: 15
@@ -152,7 +154,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &3423866196288712626
 CanvasGroup:
@@ -176,12 +178,12 @@ PrefabInstance:
     - target: {fileID: 755865192213537972, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 755865192213537972, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 755865192213537972, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
@@ -362,6 +364,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.14509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295099824692344811, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295099824692344811, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295099824692344811, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295099824692344811, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295099824692344811, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295099824692344811, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825161129075916370, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825161129075916370, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b88f00acf087a54f8010af06d31a69b, type: 3}

@@ -234,7 +234,7 @@ $ActionChoice(Stop to look around.)
 A baker is piling up sacks of flour in front of her shop.
 
 Cars are abandoned--including the famous Twin Lakes Cherrymobile!
-{img Anim/enml-stuckcar.jpg}
+{img Anim/enml-stuckcar.png}
 
 $choice HelpTheBaker; Help the baker
 $choice TakeSomePhotos; Take some photos

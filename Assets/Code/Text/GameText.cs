@@ -741,8 +741,11 @@ namespace Journalism {
 
         #region Defaults
 
-        static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style) {
+        static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
             PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, true);
+            CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
+            CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
+            
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
             choices.DefaultChoiceGroup.blocksRaycasts = true;
@@ -754,8 +757,10 @@ namespace Journalism {
             yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
         }
 
-        static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style) {
+        static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
             PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style, true);
+            CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
+            CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
