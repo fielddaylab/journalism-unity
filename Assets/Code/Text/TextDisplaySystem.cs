@@ -541,7 +541,7 @@ namespace Journalism {
                         // save option locations for map
                         StringHash32 locId = inChoice.GetCustomData(option.Index, GameText.ChoiceData.LocationId).AsStringHash();
                         MapMarker iconMarker = null;
-                        if (locId != currentLocation && !locId.IsEmpty) {
+                        if (!locId.IsEmpty) {
                             locIds[optionIndex] = locId;
                             optionIndex++;
                             iconMarker = MapMarkerLoader.StreamIn(locId, this.gameObject);
