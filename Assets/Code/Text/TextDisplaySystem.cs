@@ -29,6 +29,7 @@ namespace Journalism {
         [SerializeField] private NewspaperLayout m_FinishedStoryLayout = null;
         [SerializeField] private StoryQualityDisplay m_StoryQualityLayout = null;
         [SerializeField] private StoryAttributeDisplay m_StoryAttributeLayout = null;
+        [SerializeField] private StoryScoreDisplay m_StoryScoreLayout = null;
         [SerializeField] private CanvasGroup m_EditorOverlay = null;
 
         [Header("Animation")]
@@ -79,6 +80,7 @@ namespace Journalism {
                 .Register(GameText.Events.Anim, HandleAnim)
                 .Register(GameText.Events.Auto, HandleAuto)
                 .Register(GameText.Events.DisplayStoryStats, HandleStoryStats)
+                .Register(GameText.Events.DisplayStoryScore, HandleStoryScore)
                 .Register(GameText.Events.Map, HandleMap)
                 .Register(GameText.Events.ClearMap, HandleMapClear);
         }
@@ -318,6 +320,41 @@ namespace Journalism {
             GameText.PopulateStoryQuality(m_StoryQualityLayout, Player.StoryStatistics);
             GameText.InsertTextLine(m_TextDisplay, m_StoryQualityLayout.Line, HandleFreeStoryStat);
             GameText.AlignTextLine(m_StoryQualityLayout.Line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(m_TextDisplay, 1);
+            yield return GameText.AnimateLocations(m_TextDisplay, 1);
+            GameText.ClearOverflowLines(m_TextDisplay);
+            yield return 0.2f;
+
+            yield return CompleteLine();
+        }
+
+        private IEnumerator HandleStoryScore(TagEventData evtData, object context) {
+            // TODO: Make this much better
+            m_StoryScoreLayout.gameObject.SetActive(true);
+            GameText.InsertTextLine(m_TextDisplay, m_StoryScoreLayout.Line, HandleFreeStoryStat);
+            switch(Player.StoryStatistics.Score) {
+                case StoryScore.Bad: {
+                    m_StoryScoreLayout.ScoreName.SetText("LOW");
+                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#FA6464");
+                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "Technically better than a sharp stick to the eye.", null, default, null);
+                    break;
+                }
+
+                case StoryScore.Medium: {
+                    m_StoryScoreLayout.ScoreName.SetText("MEDIUM");
+                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#EAC74B");
+                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "Not too shabby, but it's not winning any awards.", null, default, null);
+                    break;
+                }
+
+                case StoryScore.Good: {
+                    m_StoryScoreLayout.ScoreName.SetText("HIGH");
+                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#AFFA64");
+                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "This story is fantastic. You're going places kid.", null, default, null);
+                    break;
+                }
+            }
+            GameText.AlignTextLine(m_StoryScoreLayout.Line, TextAlignment.Center);
             GameText.AdjustComputedLocations(m_TextDisplay, 1);
             yield return GameText.AnimateLocations(m_TextDisplay, 1);
             GameText.ClearOverflowLines(m_TextDisplay);

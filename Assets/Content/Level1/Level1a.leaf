@@ -664,6 +664,13 @@ $else
         {@person}   I wonder if Fred Finkler is still looking for a job...
     $endif
 $endif
+{story-score}
 {/img}
-{@msg}  This is the end of the first Story.
 // $call NextLevel()
+$goto PLAYTESTEND
+
+:: PLAYTESTEND
+@clearText
+{/bg}{/img}
+{@msg}  This is the end of the first Story.
+{@msg}  You're free to close your browser, or refresh the browser if you'd like to try again!

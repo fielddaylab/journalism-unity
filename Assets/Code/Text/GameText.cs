@@ -933,6 +933,7 @@ namespace Journalism {
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
             static public readonly StringHash32 DisplayStoryStats = "display-story-stats";
+            static public readonly StringHash32 DisplayStoryScore = "display-story-score";
         }
 
         static public class TextAnims {
@@ -972,6 +973,7 @@ namespace Journalism {
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
+            config.AddEvent("story-score", Events.DisplayStoryScore);
             config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);
 
             textDisplay.ConfigureHandlers(config, handler);
