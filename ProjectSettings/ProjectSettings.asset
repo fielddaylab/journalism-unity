@@ -590,7 +590,7 @@ PlayerSettings:
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
   managedStrippingLevel:
-    Standalone: 3
+    Standalone: 2
     WebGL: 2
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
