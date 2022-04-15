@@ -228,7 +228,7 @@ namespace Journalism {
             yield return Game.UI.GameOver.Show();
         }
 
-        [LeafMember("GameOverRestart")]
+        [LeafMember("GameOverRestart"), Preserve]
         static private IEnumerator GameOverChoice([BindThread] LeafThreadState thread) {
             Future<bool> choice = Game.UI.GameOver.DisplayChoices();
             yield return choice;
