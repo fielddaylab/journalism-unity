@@ -527,6 +527,7 @@ namespace Journalism {
                     StringHash32[] locIds = new StringHash32[numOptions];
                     int optionIndex = 0;
                     MapMarkerLoader.OpenMarkerStream(this.gameObject);
+                    StringHash32 currentLocation = Player.Location();
 
                     foreach(var option in fullOptions) {
                         TextChoice choice = GameText.AllocChoice(m_ChoiceDisplay, m_Pools);
@@ -539,9 +540,12 @@ namespace Journalism {
 
                         // save option locations for map
                         StringHash32 locId = inChoice.GetCustomData(option.Index, GameText.ChoiceData.LocationId).AsStringHash();
-                        locIds[optionIndex] = locId;
-                        optionIndex++;
-                        MapMarker iconMarker = MapMarkerLoader.StreamIn(locId, this.gameObject);
+                        MapMarker iconMarker = null;
+                        if (locId != currentLocation && !locId.IsEmpty) {
+                            locIds[optionIndex] = locId;
+                            optionIndex++;
+                            iconMarker = MapMarkerLoader.StreamIn(locId, this.gameObject);
+                        }
 
                         GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId));
                     }

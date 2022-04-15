@@ -959,7 +959,7 @@ namespace Journalism {
 
             config.AddReplace("timeLeft", () => FormatTime(Player.Data.TimeRemaining, false));
 
-            config.AddEvent("bg", Events.Background).WithStringData();
+            config.AddEvent("bg", Events.Background).WithStringData().CloseWith(Events.BackgroundFadeOut);
             config.AddEvent("anim", Events.Anim).WithStringData();
             config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
             config.AddEvent("force-input", Events.ForceInput);

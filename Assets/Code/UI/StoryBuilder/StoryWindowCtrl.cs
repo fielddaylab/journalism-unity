@@ -325,6 +325,7 @@ namespace Journalism.UI {
                 }
             
                 display.Line.Root.SetParent(m_SelectedParent);
+                display.Line.Root.SetAsFirstSibling();
                 display.Animation.Replace(this, HoverScrap(display));
                 m_SelectedScrap.Toggle.SetIsOnWithoutNotify(true);
             } else {

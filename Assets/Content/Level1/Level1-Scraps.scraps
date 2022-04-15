@@ -3,6 +3,7 @@
 @type Photo
 @quality Good
 @attr Color
+@image Photo/HospitalDucks.jpg
 Insert a photo of ducks swimming in the hospital parking lot. 
 
 // Original Name: Difficult commute
@@ -23,7 +24,7 @@ Snippet body not implemented.
 @type Quote
 @quality Bad
 @attr Color
-"Um, in case you didn’t notice, my bakery is turning into a swamp. Help or get out of the way!"
+"Um, in case you didn't notice, my bakery is turning into a swamp. Help or get out of the way!"
 
 // Original Name: Abandoned Cherrymobile
 :: AbandonedCherrymobile
@@ -44,7 +45,7 @@ Snippet body not implemented.
 @type Graph
 @quality Good
 @attr Useful
-Snippet body not implemented.
+@image Photo/FloodMap-Lv1.png
 
 // Original Name: Weather stats
 :: WeatherStats
@@ -72,7 +73,7 @@ Twin Lakes saw a record-breaking 12 inches of rainfall overnight, with 4-6 more 
 @type Fact
 @quality Great
 @attr Facts 
-“The lake volume is up by 7%. We’re releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting!”
+“The lake volume is up by 7%. We're releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting!”
 
 // Original Name: Flood background
 :: FloodBackground
@@ -99,8 +100,8 @@ City officials were unavailable for comment. Check the City of Twin Lakes websit
 :: LibraryLot
 @type Photo
 @quality Great
-@attr Color 
-Snippet body not implemented.
+@attr Color
+@image Photo/FloodedLibrary.png
 
 // Original Name: Scientist quotes
 :: ScientistQuotes
@@ -128,6 +129,7 @@ This flood is record-breaking, but not surprising. Local scientist, Rainn E. Day
 @type Photo
 @quality Bad
 @attr Color
+@image Photo/FloodedStreetDark.jpg
 Snippet body not implemented.
 
 // Original Name: Sandbag quote

@@ -73,7 +73,7 @@ namespace Journalism {
         /// <summary>
         /// Number of time units per hour.
         /// </summary>
-        public const int TimeUnitsPerHour = 12;
+        public const int TimeUnitsPerHour = 4;
 
         /// <summary>
         /// Number of minutes per time unit.

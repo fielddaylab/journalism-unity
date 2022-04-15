@@ -67,7 +67,6 @@ $choice OnMyWay; {@me} On my way.
 @clearText
 @checkpoint
 {/img}
-{bg BG/Apartments.png}
 $call SetHeaderEnabled(true)
 This is it, Rookie. Your first big scoop. 
 You have time to do one thing before you head to the newsroom.
@@ -81,6 +80,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
 @clearText
+{bg BG/OutsideApt-Map.jpg}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
 You help her find batteries for her flashlight and put out some food for her cats. 
@@ -97,6 +97,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 @clearText
+{bg BG/OutsideApt-Map.jpg}
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
 Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
@@ -108,6 +109,7 @@ $choice OffToWork; Off to work
 :: DigThroughTheFridgeForSomethingNourishing
 @tags Endurance
 @clearText
+{bg BG/OutsideApt-Map.jpg}
 You've been eating ramen and take-out all week.  
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and a slice of cherry summer sausage.
@@ -118,6 +120,7 @@ $choice OffToWork; Off to work
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 @clearText
+{bg BG/OutsideApt-Map.jpg}
 You scroll through posts on Squawker.
 {auto}A photo from a local nurse: 
 {@person}Whoa. Stuck at the hospital, and ducks are swimming through the parking lot! 
@@ -356,10 +359,10 @@ $endif
 $HubChoice("Office1-Weather", "Check the weather online", 0.25, "Newsroom")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "Newsroom")
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for background and flood safety tips", 0.5, "Newsroom")
-$HubChoice(Office1-Police, "Call the police spokesman for safety advice", 0.5, "Shop")
+$HubChoice(Office1-Police, "Call the police spokesman for safety advice", 0.5, "Newsroom")
 $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the city's response", 0.5, "Newsroom")
 $HubChoice(Office1-SocialMedia, "Check Squawker for photos to use in your story", 0.25, "Newsroom")
-{map UI/MapPlaceholder.png}
+// {map UI/MapPlaceholder.png}
 
 // Original Name: Answer the phone
 :: AnswerThePhone
@@ -493,7 +496,7 @@ $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
-    $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(10 minutes)</color>
+    $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(15 minutes)</color>
 $endif
 
 $goto Office1-Clock
@@ -575,7 +578,7 @@ $goto Office1-Clock
 
 // Original Name: Message CherryCharlie07
 :: MessageCherryCharlie07
-$call DecreaseTime(0.1666667)
+$call DecreaseTime(0.25)
 
 $if StatCheck(Trust, 2)
     {@person}oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊
@@ -602,6 +605,8 @@ $goto Office1-Clock
 
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
+@clearText
+{/img}
 It's been a hectic morning, but you think you might be able to piece together a halfway decent story out of this melange.
 $set storyType = "Breaking News"
 $set snippetLimit = 4
@@ -614,7 +619,8 @@ $goto StoryFeedback
 
 :: StoryFeedback
 @feedback
-{img Anim/Editor.png}
+{/bg}
+{img Anim/Editor.jpeg}
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryScore() == "good"
@@ -660,4 +666,6 @@ $else
         {@person}   I wonder if Fred Finkler is still looking for a job...
     $endif
 $endif
-$call NextLevel()
+{/img}
+{@msg}  This is the end of the first Story.
+// $call NextLevel()

@@ -1529,7 +1529,7 @@ PrefabInstance:
     - target: {fileID: 4929893826474217688, guid: 9873d0d4295fe5441ab8a6f9e4600494,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.36789775
+      value: 0.37928587
       objectReference: {fileID: 0}
     - target: {fileID: 4929893826474217688, guid: 9873d0d4295fe5441ab8a6f9e4600494,
         type: 3}
@@ -1539,7 +1539,7 @@ PrefabInstance:
     - target: {fileID: 4929893826474217688, guid: 9873d0d4295fe5441ab8a6f9e4600494,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.26420453
+      value: 0.24142829
       objectReference: {fileID: 0}
     - target: {fileID: 5120043652989181028, guid: 9873d0d4295fe5441ab8a6f9e4600494,
         type: 3}
@@ -1705,16 +1705,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6403697739928518797, guid: 9873d0d4295fe5441ab8a6f9e4600494,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 480
-      objectReference: {fileID: 0}
-    - target: {fileID: 6403697739928518797, guid: 9873d0d4295fe5441ab8a6f9e4600494,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 6403697739928518797, guid: 9873d0d4295fe5441ab8a6f9e4600494,
         type: 3}
