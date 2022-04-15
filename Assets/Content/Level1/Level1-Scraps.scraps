@@ -6,12 +6,6 @@
 @image Photo/HospitalDucks.jpg
 Insert a photo of ducks swimming in the hospital parking lot. 
 
-// Original Name: Difficult commute
-:: DifficultCommute
-@type Observation
-@quality Bad
-Snippet body not implemented.
-
 // Original Name: Friendly shopkeeper
 :: FriendlyShopkeeper
 @type Quote
@@ -73,7 +67,7 @@ Twin Lakes saw a record-breaking 12 inches of rainfall overnight, with 4-6 more 
 @type Fact
 @quality Great
 @attr Facts 
-“The lake volume is up by 7%. We're releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting!”
+"The lake volume is up by 7%. We're releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting!"
 
 // Original Name: Flood background
 :: FloodBackground
@@ -87,7 +81,7 @@ According to a statement from City Hall, Twin Lakes has been on the verge of a c
 @type Quote
 @quality Great
 @attr Facts, Useful 
-"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statistic!” 
+"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statistic!" 
 
 // Original Name: City Hall annoyance
 :: CityHallAnnoyance
@@ -99,7 +93,7 @@ City officials were unavailable for comment. Check the City of Twin Lakes websit
 // Original Name: Library lot
 :: LibraryLot
 @type Photo
-@quality Great
+@quality Bad
 @attr Color
 @image Photo/FloodedLibrary.png
 
@@ -115,7 +109,7 @@ This flood is record-breaking, but not surprising. Local scientist, Rainn E. Day
 @type Quote
 @quality Great
 @attr Color 
-“Over on St. Lucie, a man tried to drive through the flood and got swept into a ditch. First responders saved him just in time!” 
+"Over on St. Lucie, a man tried to drive through the flood and got swept into a ditch. First responders saved him just in time!"
 
 // Original Name: Police safety quote
 :: PoliceSafetyQuote

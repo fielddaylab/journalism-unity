@@ -450,7 +450,37 @@ The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
 {@phone} Who did you say you work for?
 
-$choice PoliceResponse; {@me} The Twin Lakes Herald.
+{@me} The Twin Lakes Herald.
+
+// Moved from: Police Response
+
+$if Visited(HelpHer)
+    The officer is suddenly more cheerful.
+    {@phone} Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?
+
+    You're shocked that he knows about this.
+    {@me} Yeah, uh, that was me.
+
+    You ask him for advice on how people can stay safe. 
+
+    He gives you a great interview, including an anecdote about a man whose car got swept into a ditch! 
+
+    {@phone} He thought he could drive through the flood. Rescuers pulled him out just in time!
+    {@phone} Remember: Turn around, don't drown! 
+
+    $call GiveSnippet(FloodBackground)
+    $call GiveSnippet(PoliceStory)
+$else
+    The officer coughs awkwardly.
+    {@phone} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
+    {@phone} She said you almost ran over her chickens this morning.
+    {@me} I wouldn't say 'ran over,' exactly...
+    He gives you a few basic quotes about safety.
+    {@phone} And just a tip... I don't know what it's like in New York, but around here, we help our neighbors. Even feathered ones.   
+    $call GiveSnippet(PoliceSafetyQuote)
+$endif
+
+$goto Office1-Clock
 
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
@@ -540,37 +570,6 @@ You don't even know how to turn it on.
 
 But at least you find a post-it note on his desk: 
 {@article}Wynne D. Storme, flooding expert @ DNR
-$endif
-
-$goto Office1-Clock
-
-// Original Name: Police Response
-:: PoliceResponse
-
-$if Visited(HelpHer)
-    The officer is suddenly more cheerful.
-    {@phone} Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?
-
-    You're shocked that he knows about this.
-    {@me} Yeah, uh, that was me.
-
-    You ask him for advice on how people can stay safe. 
-
-    He gives you a great interview, including an anecdote about a man whose car got swept into a ditch! 
-
-    {@phone} He thought he could drive through the flood. Rescuers pulled him out just in time!
-    {@phone} Remember: Turn around, don't drown! 
-
-    $call GiveSnippet(FloodBackground)
-    $call GiveSnippet(PoliceStory)
-$else
-    The officer coughs awkwardly.
-    {@phone} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
-    {@phone} She said you almost ran over her chickens this morning.
-    {@me} I wouldn't say 'ran over,' exactly...
-    He gives you a few basic quotes about safety.
-    {@phone} And just a tip... I don't know what it's like in New York, but around here, we help our neighbors. Even feathered ones.   
-    $call GiveSnippet(PoliceSafetyQuote)
 $endif
 
 $goto Office1-Clock

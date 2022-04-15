@@ -134,3 +134,15 @@ MonoBehaviour:
     Tail: 0
     RoundingScale: 1.5
     Texture: {fileID: 0}
+  - Id:
+      m_Source: snippet
+      m_HashValue: 1377386334
+    Background:
+      serializedVersion: 2
+      rgba: 4289986047
+    Outline:
+      serializedVersion: 2
+      rgba: 4278915113
+    Tail: 0
+    RoundingScale: 1.5
+    Texture: {fileID: 0}

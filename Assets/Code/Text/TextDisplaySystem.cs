@@ -369,7 +369,7 @@ namespace Journalism {
             StoryScrapData data = Assets.Scrap(scrapId);
             if (data != null) {
                 StoryScrapDisplay scrap = GameText.AllocScrap(data, m_TextDisplay, m_Pools);
-                GameText.PopulateStoryScrap(scrap, data, Assets.DefaultStyle);
+                GameText.PopulateStoryScrap(scrap, data, Assets.Style("snippet"));
                 GameText.AlignTextLine(scrap.Line, TextAlignment.Center);
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
                 yield return GameText.AnimateLocations(m_TextDisplay, 1);

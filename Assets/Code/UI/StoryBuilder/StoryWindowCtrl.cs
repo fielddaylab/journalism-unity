@@ -113,7 +113,7 @@ namespace Journalism.UI {
                 var scrapData = Assets.Scrap(scrapId);
                 if (scrapData != null) {
                     var display = GameText.AllocScrap(scrapData, m_Pools);
-                    GameText.PopulateStoryScrap(display, scrapData, Assets.DefaultStyle);
+                    GameText.PopulateStoryScrap(display, scrapData, Assets.Style("snippet"));
                     display.Object.Toggle.group = m_ToggleGroup;
                     display.Object.OnSelectChanged = onSelectChanged;
                     display.Object.Toggle.interactable = !allocated.Contains(scrapId);
@@ -325,7 +325,7 @@ namespace Journalism.UI {
                 }
             
                 display.Line.Root.SetParent(m_SelectedParent);
-                display.Line.Root.SetAsFirstSibling();
+                display.Line.Root.SetAsLastSibling();
                 display.Animation.Replace(this, HoverScrap(display));
                 m_SelectedScrap.Toggle.SetIsOnWithoutNotify(true);
             } else {

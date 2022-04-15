@@ -52,6 +52,8 @@ namespace Journalism {
                 }
             }
 
+            stats.CanPublish = stats.ScrapCount > 0;
+
             if (attributeCount > 0 && targetCount > 0) {
                 float factRatioDiff = (float) stats.FactCount / attributeCount - (float) config.FactWeight / targetCount;
                 float colorRatioDiff = (float) stats.ColorCount / attributeCount - (float) config.ColorWeight / targetCount;
@@ -61,6 +63,12 @@ namespace Journalism {
                 stats.Alignment = 0.8f - totalDiff;
             }
 
+            int missing = config.Slots.Length - stats.ScrapCount;
+            if (stats.ScrapCount < config.Slots.Length) {
+                stats.Alignment *= 1 - (missing * 0.15f);
+                stats.TotalQuality -= missing / 2;
+            }
+
             if (stats.TotalQuality >= 3) {
                 stats.Score = StoryScore.Good;
             } else if (stats.TotalQuality >= 1) {
@@ -68,8 +76,6 @@ namespace Journalism {
             } else {
                 stats.Score = StoryScore.Bad;
             }
-
-            stats.CanPublish = stats.ScrapCount == config.Slots.Length;
 
             return stats;
         }
