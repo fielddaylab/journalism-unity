@@ -39,7 +39,7 @@ jobs:
       with:
         args:  |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git submodule foreach --recursive 'git config --global -- add safe.directory "$displaypath"'
+          git submodule foreach --recursive 'git config --global --add safe.directory "$displaypath"'
           git submodule update --init --recursive
 
     # Extracts branch name into BRANCH environment variable
