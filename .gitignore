@@ -65,3 +65,6 @@ crashlytics-build.properties
 /Assets/mcs.rsp.meta
 /Assets/us.rsp
 /Assets/us.rsp.meta
+/bin
+/Assets/StreamingAssets/__buildInfo.txt
+/Assets/StreamingAssets/__buildInfo.txt.meta
