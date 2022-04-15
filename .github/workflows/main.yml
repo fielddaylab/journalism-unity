@@ -39,7 +39,9 @@ jobs:
       with:
         args:  |
           git config --global --add safe.directory "/github/workspace"
-          git submodule foreach --recursive git config --global --add safe.directory /github/workspace/\$displaypath
+          git config --global --add safe.directory /github/workspace/Submodules/BeauUtil
+          git config --global --add safe.directory /github/workspace/Submodules/Leaf
+          git config --global --add safe.directory /github/workspace/Submodules/Leaf/Submodules/BeauUtil
           git submodule update --init --recursive
 
     # Extracts branch name into BRANCH environment variable
