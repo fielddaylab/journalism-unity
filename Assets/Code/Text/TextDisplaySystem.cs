@@ -43,6 +43,7 @@ namespace Journalism {
         [NonSerialized] private TextAlignment m_MapPosition = TextAlignment.Center;
         [NonSerialized] private float m_ImageColumnBaseline;
         [NonSerialized] private float m_AutoContinue = -1;
+        [NonSerialized] private bool m_AwaitingChoiceUpdate = false;
 
         public LookupLineDelegate LookupLine;
         public NextLineDelegate LookupNextLine;
@@ -186,6 +187,8 @@ namespace Journalism {
         }
 
         private IEnumerator HandleMap(TagEventData evtData, object context) {
+            Game.Events.Register(GameEvents.ChoiceOptionsUpdated, OnChoiceOptionsUpdated);
+
             var args = evtData.ExtractStringArgs();
             StringSlice path = args[0];
 
@@ -283,6 +286,11 @@ namespace Journalism {
 
             m_TextDisplay.Alignment = TextAlignment.Center;
             m_MapPosition = TextAlignment.Center;
+            
+            // Clear markers from the map
+            MapMarkerLoader.ClearMarkerContainer(m_Map.gameObject);
+
+            Game.Events.Deregister(GameEvents.ChoiceOptionsUpdated, OnChoiceOptionsUpdated);
         }
 
         private void SetStyle(StringHash32 styleId) {
@@ -370,6 +378,12 @@ namespace Journalism {
                 yield return CompleteLine();
             }
         }
+
+        private void OnChoiceOptionsUpdated() {
+            // Add markers to the map
+            MapMarkerLoader.PopulateMapWithMarkers(m_Map.Texture, m_Map.gameObject);
+        }
+
 
         #endregion // Events
 
@@ -467,6 +481,7 @@ namespace Journalism {
                     int numOptions = fullOptions.Count;
                     StringHash32[] locIds = new StringHash32[numOptions];
                     int optionIndex = 0;
+                    MapMarkerLoader.OpenMarkerStream(this.gameObject);
 
                     foreach(var option in fullOptions) {
                         TextChoice choice = GameText.AllocChoice(m_ChoiceDisplay, m_Pools);
@@ -481,11 +496,14 @@ namespace Journalism {
                         StringHash32 locId = inChoice.GetCustomData(option.Index, GameText.ChoiceData.LocationId).AsStringHash();
                         locIds[optionIndex] = locId;
                         optionIndex++;
+                        MapMarker iconMarker = MapMarkerLoader.StreamIn(locId, this.gameObject);
 
-                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, Assets.Style(characterId));
+                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId));
                     }
                     // send option locations to map
                     Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdated, locIds);
+
+                    MapMarkerLoader.CloseMarkerStream(this.gameObject);
 
                     GameText.RecomputeAllLocations(m_ChoiceDisplay);
 

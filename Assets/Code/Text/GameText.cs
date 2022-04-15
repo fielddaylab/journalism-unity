@@ -10,6 +10,7 @@ using BeauPools;
 using BeauUtil.Tags;
 using Leaf;
 using BeauUtil.Variants;
+using Journalism.UI;
 
 namespace Journalism {
     static public class GameText {
@@ -532,7 +533,7 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given choice.
         /// </summary>
-        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, TextStyles.StyleData style) {
+        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, MapMarker choiceMarker, TextStyles.StyleData style) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
 
             textString = StripQuotes(textString);
@@ -553,6 +554,26 @@ namespace Journalism {
                 } else {
                     line.Icon.gameObject.SetActive(false);
                     choice.Radial.gameObject.SetActive(false);
+                }
+            }
+
+            if (line.MarkerIcon != null) {
+                if (choiceMarker != null) {
+                    line.MarkerIcon.gameObject.SetActive(true);
+                    choice.Marker.gameObject.SetActive(true);
+                    choice.Marker.sprite = choiceMarker.Image.sprite;
+                    choice.Marker.SetColor(choiceMarker.Image.color);
+                    // player marker has no num text
+                    if (choiceMarker.NumText != null) {
+                        choice.MarkerNum.SetText(choiceMarker.NumText.text);
+                    }
+
+                    line.MarkerIcon.sprite = choiceMarker.Image.sprite;
+                    line.MarkerIcon.SetColor(choiceMarker.Image.color);
+                }
+                else {
+                    line.MarkerIcon.gameObject.SetActive(false);
+                    line.MarkerIcon.sprite = null;
                 }
             }
 

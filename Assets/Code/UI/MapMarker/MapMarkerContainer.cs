@@ -7,6 +7,6 @@ namespace Journalism.UI
     public class MapMarkerContainer : MonoBehaviour
     {
         public PlayerMarker PlayerMarker;
-        public RectTransform[] MarkerRects;
+        public MapMarker[] Markers;
     }
 }

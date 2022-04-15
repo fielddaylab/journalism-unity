@@ -33,7 +33,6 @@ $call SetLocation("Apartment")
 {bg BG/BedroomMorning.jpg}
 $call Music(Music/Jahzzar 02 Wet Socks.mp3)
 It's 5AM.
-{map UI/MapPlaceholder.png}
 Dark, rainy, and way too early.
 
 $choice CheckYourPhone; Check your phone.
@@ -41,7 +40,6 @@ $choice CheckYourPhone; Check your phone.
 // Original Name: Check your phone.
 :: CheckYourPhone
 @clearText
-{/map}
 {img Anim/enml-buzzingphone.jpg}
 5 missed calls from your editor.
 Probably checking up on your puff piece about the cherry festival.
@@ -354,13 +352,13 @@ $if FirstVisit()
     $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
 $endif
 
-{map UI/MapPlaceholder.png}
 $HubChoice(Office1-Weather, "Check the weather online", 0.25, "Newsroom")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "Newsroom")
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for background and flood safety advice", 0.5, "Newsroom")
 $HubChoice(Office1-Police, "Call your police contact for safety information", 0.5, "Newsroom")
 $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the city's response", 0.5, "Newsroom")
 $HubChoice(Office1-SocialMedia, "Check Squawker for photos to use in your story", 0.25, "Newsroom")
+{map UI/MapPlaceholder.png}
 
 // Original Name: Answer the phone
 :: AnswerThePhone

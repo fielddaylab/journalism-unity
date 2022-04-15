@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Journalism.UI
 {
-    public class PlayerMarker : MonoBehaviour
+    public class PlayerMarker : MapMarker
     {
         public TMP_Text LocationIDText;
     }
