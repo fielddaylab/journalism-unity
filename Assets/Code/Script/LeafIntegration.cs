@@ -106,6 +106,11 @@ namespace Journalism {
             Run(start);
         }
 
+        public void SkipTo(StringHash32 nodeId) {
+            var threadState = m_CurrentThread.GetThread<LeafThreadState<ScriptNode>>();
+            LeafRuntime.TryGotoNode(this, threadState, threadState.PeekNode(), nodeId);
+        }
+
         #endregion // Starting
 
         #region Run

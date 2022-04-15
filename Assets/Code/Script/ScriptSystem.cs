@@ -61,6 +61,7 @@ namespace Journalism {
 
             if (node.HasFlags(ScriptNodeFlags.Feedback)) {
                 Game.Events.Queue(GameEvents.StoryEvalBegin);
+                Player.CompileStoryStatistics();
             }
             
             yield return m_TextDisplay.HandleNodeStart(node, thread);
@@ -198,6 +199,10 @@ namespace Journalism {
         /// </summary>
         public void Interrupt(IEnumerator routine) {
             m_Integration.Interrupt(routine);
+        }
+
+        internal void SkipTo(StringHash32 id) {
+            m_Integration.SkipTo(id);
         }
 
         #region Leaf

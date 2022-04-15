@@ -222,14 +222,7 @@ namespace Journalism {
         static public TextLine AllocLine(TextLineScroll scroll, TextPools pools) {
             TempAlloc<TextLine> lineAlloc = pools.LinePool.TempAlloc();
             TextLine line = lineAlloc.Object;
-            RectTransform lineRect = line.Root;
-            lineRect.SetParent(scroll.ListRoot, false);
-            lineRect.anchoredPosition = default;
-            PrepareTextLine(line, scroll.RotationRange);
-            scroll.Lines.PushFront(new TextLineScroll.LineState() {
-                LineAlloc = lineAlloc,
-                Line = line
-            });
+            InsertTextLine(scroll, line, lineAlloc);
             return line;
         }
 
@@ -247,14 +240,7 @@ namespace Journalism {
             TempAlloc<StoryScrapDisplay> scrapAlloc = pools.ScrapPool.TempAlloc();
             
             TextLine line = scrapAlloc.Object.Line;
-            RectTransform lineRect = line.Root;
-            lineRect.SetParent(scroll.ListRoot, false);
-            lineRect.anchoredPosition = default;
-            PrepareTextLine(line, scroll.RotationRange);
-            scroll.Lines.PushFront(new TextLineScroll.LineState() {
-                ScrapAlloc = scrapAlloc,
-                Line = line
-            });
+            InsertTextLine(scroll, line, scrapAlloc);
             return scrapAlloc.Object;
         }
 
@@ -266,6 +252,51 @@ namespace Journalism {
             line.Offset.anchoredPosition = line.Inner.anchoredPosition = default;
             lineRect.SetRotation(RNG.Instance.NextFloat(-rotationRange, rotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
+        }
+
+        /// <summary>
+        /// Inserts a text line into the scroll.
+        /// </summary>
+        static public ref TextLineScroll.LineState InsertTextLine(TextLineScroll scroll, TextLine line, TempAlloc<TextLine> lineAlloc) {
+            RectTransform lineRect = line.Root;
+            lineRect.SetParent(scroll.ListRoot, false);
+            lineRect.anchoredPosition = default;
+            PrepareTextLine(line, scroll.RotationRange);
+            scroll.Lines.PushFront(new TextLineScroll.LineState() {
+                LineAlloc = lineAlloc,
+                Line = line
+            });
+            return ref scroll.Lines[0];
+        }
+
+        /// <summary>
+        /// Inserts a text line into the scroll.
+        /// </summary>
+        static public ref TextLineScroll.LineState InsertTextLine(TextLineScroll scroll, TextLine line, TempAlloc<StoryScrapDisplay> scrapAlloc) {
+            RectTransform lineRect = line.Root;
+            lineRect.SetParent(scroll.ListRoot, false);
+            lineRect.anchoredPosition = default;
+            PrepareTextLine(line, scroll.RotationRange);
+            scroll.Lines.PushFront(new TextLineScroll.LineState() {
+                ScrapAlloc = scrapAlloc,
+                Line = line
+            });
+            return ref scroll.Lines[0];
+        }
+
+        /// <summary>
+        /// Inserts a text line into the scroll.
+        /// </summary>
+        static public ref TextLineScroll.LineState InsertTextLine(TextLineScroll scroll, TextLine line, Action<TextLine> customFree) {
+            RectTransform lineRect = line.Root;
+            lineRect.SetParent(scroll.ListRoot, false);
+            lineRect.anchoredPosition = default;
+            PrepareTextLine(line, scroll.RotationRange);
+            scroll.Lines.PushFront(new TextLineScroll.LineState() {
+                CustomFree = customFree,
+                Line = line
+            });
+            return ref scroll.Lines[0];
         }
 
         /// <summary>
@@ -479,6 +510,7 @@ namespace Journalism {
                 var state = states.PopBack();
                 state.LineAlloc?.Dispose();
                 state.ScrapAlloc?.Dispose();
+                state.CustomFree?.Invoke(state.Line);
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
                 state.StyleAnimation.Stop();
@@ -495,6 +527,7 @@ namespace Journalism {
                 var state = states.PopBack();
                 state.LineAlloc?.Dispose();
                 state.ScrapAlloc?.Dispose();
+                state.CustomFree?.Invoke(state.Line);
                 state.LocationAnimation.Stop();
                 state.RevealAnimation.Stop();
                 state.StyleAnimation.Stop();
@@ -566,6 +599,9 @@ namespace Journalism {
                     // player marker has no num text
                     if (choiceMarker.NumText != null) {
                         choice.MarkerNum.SetText(choiceMarker.NumText.text);
+                    }
+                    else {
+                        choice.MarkerNum.SetText("");
                     }
 
                     line.MarkerIcon.sprite = choiceMarker.Image.sprite;
@@ -812,6 +848,10 @@ namespace Journalism {
             PopulateStoryAttributeDistribution(display, config.FactWeight, config.ColorWeight, config.UsefulWeight);
         }
 
+        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, StoryStats stats) {
+            PopulateStoryAttributeDistribution(display, stats.FactCount, stats.ColorCount, stats.UsefulCount);
+        }
+
         static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, int factCount, int colorCount, int usefulCount) {
             int typeCount = 0;
             if (factCount > 0) {
@@ -887,6 +927,7 @@ namespace Journalism {
             static public readonly StringHash32 ClearMap = "clear-map";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
+            static public readonly StringHash32 DisplayStoryStats = "display-story-stats";
         }
 
         static public class TextAnims {
@@ -925,6 +966,7 @@ namespace Journalism {
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
+            config.AddEvent("story-stats", Events.DisplayStoryStats);
             config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);
 
             textDisplay.ConfigureHandlers(config, handler);
@@ -981,7 +1023,7 @@ namespace Journalism {
                     if (abbreviated) {
                         return string.Format("<b>{0}</b> {1} <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
                     } else {
-                        return string.Format("<b>{0}</b> and {1} <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
+                        return string.Format("<b>{0}</b> {1} and <b>{2}</b> {3}", hours, hourSuffix, minutes, minuteSuffix);
                     }
                 } else {
                     return string.Format("<b>{0}</b> {1}", hours, hourSuffix);

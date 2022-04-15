@@ -13,6 +13,7 @@ namespace Journalism {
     static public class Player {
         static private PlayerData s_Current;
         static private CustomVariantResolver s_Resolver;
+        static private StoryStats s_Stats;
 
         static private readonly StringUtils.ArgsList.Splitter s_ArgsSplitter = new StringUtils.ArgsList.Splitter();
 
@@ -333,6 +334,60 @@ namespace Journalism {
             return false;
         }
 
+        /// <summary>
+        /// Returns the current story stats.
+        /// </summary>
+        static public StoryStats StoryStatistics {
+            get { return s_Stats; }
+        }
+
+        /// <summary>
+        /// Compiles current story statistics.
+        /// </summary>
+        static public void CompileStoryStatistics() {
+            s_Stats = StoryStats.FromPlayerData(s_Current, Assets.CurrentLevel.Story);
+            Log.Msg("[Player] Story Statistics: Quality {0} ({1} - {2}) / Alignment {3} / Score {4}", s_Stats.TotalQuality, s_Stats.QualityAdd, s_Stats.QualitySubtract, s_Stats.Alignment, s_Stats.Score);
+        }
+
+        [LeafMember("StoryScore"), Preserve]
+        static private StringHash32 LeafGetStoryScore() {
+            switch(s_Stats.Score) {
+                case StoryScore.Bad: {
+                    return "bad";
+                }
+                case StoryScore.Medium: {
+                    return "medium";
+                }
+                case StoryScore.Good: {
+                    return "good";
+                }
+                default: {
+                    Assert.Fail("Unknown story score");
+                    return null;
+                }
+            }
+        }
+
+        [LeafMember("StoryAlignment"), Preserve]
+        static private float LeafGetStoryAlignment() {
+            return s_Stats.Alignment;
+        }
+
+        [LeafMember("StoryNetQuality"), Preserve]
+        static private float LeafGetStoryQuality() {
+            return s_Stats.TotalQuality;
+        }
+
+        [LeafMember("StoryQuality"), Preserve]
+        static private float LeafGetStoryQualityCount() {
+            return s_Stats.QualityAdd;
+        }
+
+        [LeafMember("StoryFluff"), Preserve]
+        static private float LeafGetStoryFluffCount() {
+            return s_Stats.QualitySubtract;
+        }
+
         #endregion // Inventory
 
         #region Script
@@ -366,6 +421,8 @@ namespace Journalism {
                 Log.Msg("[Player] New level index {0} - clearing story and checkpoints", def.LevelIndex);
                 Game.Save.SaveCheckpoint();
             }
+
+            s_Stats = default;
         }
 
         #endregion // Script

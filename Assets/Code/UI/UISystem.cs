@@ -45,9 +45,7 @@ namespace Journalism.UI {
                 .Register(GameEvents.EditorNotesOpen, OnNeedSolidBG, this)
                 .Register(GameEvents.EditorNotesClose, OnNoLongerNeedSolidBG, this)
                 .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG)
-                .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this)
-                .Register(GameEvents.StoryEvalBegin, OnNeedSolidBG, this)
-                .Register(GameEvents.StoryEvalEnd, OnNoLongerNeedSolidBG, this);
+                .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
