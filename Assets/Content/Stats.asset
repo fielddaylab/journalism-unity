@@ -17,7 +17,7 @@ MonoBehaviour:
     Name: Research
     RankNames:
     - Unaware
-    - Miopic
+    - Myopic
     - Aware
     - Bookworm
     - Wonk
@@ -46,7 +46,7 @@ MonoBehaviour:
   - Id: 3
     Name: Tech
     RankNames:
-    - Boom
+    - Luddite
     - Newbie
     - User
     - Nerd
