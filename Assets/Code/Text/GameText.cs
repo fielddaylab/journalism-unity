@@ -10,6 +10,7 @@ using BeauPools;
 using BeauUtil.Tags;
 using Leaf;
 using BeauUtil.Variants;
+using Journalism.UI;
 
 namespace Journalism {
     static public class GameText {
@@ -565,7 +566,7 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given choice.
         /// </summary>
-        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, TextStyles.StyleData style) {
+        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, MapMarker choiceMarker, TextStyles.StyleData style) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
 
             textString = StripQuotes(textString);
@@ -586,6 +587,29 @@ namespace Journalism {
                 } else {
                     line.Icon.gameObject.SetActive(false);
                     choice.Radial.gameObject.SetActive(false);
+                }
+            }
+
+            if (line.MarkerIcon != null) {
+                if (choiceMarker != null) {
+                    line.MarkerIcon.gameObject.SetActive(true);
+                    choice.Marker.gameObject.SetActive(true);
+                    choice.Marker.sprite = choiceMarker.Image.sprite;
+                    choice.Marker.SetColor(choiceMarker.Image.color);
+                    // player marker has no num text
+                    if (choiceMarker.NumText != null) {
+                        choice.MarkerNum.SetText(choiceMarker.NumText.text);
+                    }
+                    else {
+                        choice.MarkerNum.SetText("");
+                    }
+
+                    line.MarkerIcon.sprite = choiceMarker.Image.sprite;
+                    line.MarkerIcon.SetColor(choiceMarker.Image.color);
+                }
+                else {
+                    line.MarkerIcon.gameObject.SetActive(false);
+                    line.MarkerIcon.sprite = null;
                 }
             }
 
@@ -667,6 +691,7 @@ namespace Journalism {
                 yield return null;
             }
             choices.GridGroup.blocksRaycasts = false;
+            Game.Events.Dispatch(GameEvents.ChoiceCompleted);
         }
 
         /// <summary>
@@ -896,8 +921,10 @@ namespace Journalism {
             static public readonly StringHash32 Image = "image";
             static public readonly StringHash32 Anim = "animation";
             static public readonly StringHash32 Auto = "auto";
+            static public readonly StringHash32 Map = "map";
             static public readonly StringHash32 ForceInput = "force-input";
             static public readonly StringHash32 ClearImage = "clear-image";
+            static public readonly StringHash32 ClearMap = "clear-map";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
             static public readonly StringHash32 DisplayStoryStats = "display-story-stats";
@@ -911,6 +938,7 @@ namespace Journalism {
         static public class ChoiceData {
             static public readonly StringHash32 Time = "time";
             static public readonly StringHash32 Once = "once";
+            static public readonly StringHash32 LocationId = "location";
         }
 
         static public class Characters {
@@ -939,6 +967,7 @@ namespace Journalism {
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
+            config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);
 
             textDisplay.ConfigureHandlers(config, handler);
             visuals.ConfigureHandlers(config, handler);

@@ -31,8 +31,8 @@ RectTransform:
   m_Children:
   - {fileID: 1497781541138799974}
   - {fileID: 7726520255425172201}
-  - {fileID: 8697539331646744849}
   - {fileID: 5177547347682467948}
+  - {fileID: 8697539331646744849}
   m_Father: {fileID: 7532949225604565750}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99,7 +99,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6698059784604243389}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -356,7 +356,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6698059784604243389}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -410,8 +410,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RawImage: {fileID: 5221953142442421950}
+  m_ColorGroup: {fileID: 0}
   m_Path: 
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   m_AutoSize: 1
+  m_Visible: 1
 --- !u!1 &8154163453260399482
 GameObject:
   m_ObjectHideFlags: 0

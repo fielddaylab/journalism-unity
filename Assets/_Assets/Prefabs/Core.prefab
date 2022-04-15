@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Styles: {fileID: 11400000, guid: 533ea3383763ef848b13390e009eafa0, type: 2}
   m_Stats: {fileID: 11400000, guid: 2ddce71665de3e340bad9657a6cee8b8, type: 2}
+  m_MapLocationDef: {fileID: 11400000, guid: ad719474e92ed384da55e9aed570254e, type: 2}
   m_LevelDefs:
   - {fileID: 11400000, guid: 97339f1e642c6b348ab2ae9c0a8dcf7c, type: 2}
   - {fileID: 11400000, guid: efabde7dcd7f2784d960021afc0ff95c, type: 2}

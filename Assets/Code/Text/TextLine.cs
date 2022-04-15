@@ -42,7 +42,8 @@ namespace Journalism {
 
         [Header("Contents")]
         public TMP_Text Text;
-        public Image Icon;
+        public Image Icon; // Radial
+        public Image MarkerIcon; // Marker
 
         #endregion // Inspector
 

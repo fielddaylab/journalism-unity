@@ -58,6 +58,7 @@ MonoBehaviour:
   Line: {fileID: 4413433015435185681}
   Button: {fileID: 113725342295144593}
   Radial: {fileID: 0}
+  Marker: {fileID: 0}
 --- !u!114 &6033855620536902525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,12 +97,12 @@ PrefabInstance:
     - target: {fileID: 1790606738348245180, guid: 94734c464490466479d12202c8948983,
         type: 3}
       propertyPath: m_UVRect.width
-      value: -0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1790606738348245180, guid: 94734c464490466479d12202c8948983,
         type: 3}
       propertyPath: m_UVRect.height
-      value: -0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2292807403366890664, guid: 94734c464490466479d12202c8948983,
         type: 3}

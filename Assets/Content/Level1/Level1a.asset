@@ -26,22 +26,13 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: 'We need a breaking news announcement! Things to include:
-
-      -
-      Facts about what''s happening and where.
-
-      - "News you can use": actionable
-      info to help people stay safe.
-
-      - Quotes and photos.
-
-      - Rainfall
-      and flooding statistics'
-    FactWeight: 3
+    EditorBrief: We need a breaking news announcement! Make sure people know what
+      to do to stay safe. Include lots of useful, actionable information! We also
+      need basic facts about the flood, plus a photo or quote for color.
+    FactWeight: 1
     ColorWeight: 1
-    UsefulWeight: 6
-    FinalHeadline: Hold Up There's a Flood
+    UsefulWeight: 1
+    FinalHeadline: 
   StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
   Audio: {fileID: 0}
