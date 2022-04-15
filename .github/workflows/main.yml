@@ -38,8 +38,8 @@ jobs:
       uses: srt32/git-actions@v0.0.3
       with:
         args:  |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git submodule foreach --recursive 'git config --global --add safe.directory "$displaypath"'
+          git config --global --add safe.directory "/github/workspace"
+          git submodule foreach --recursive 'git config --global --add safe.directory "/github/workspace${displaypath}"'
           git submodule update --init --recursive
 
     # Extracts branch name into BRANCH environment variable
