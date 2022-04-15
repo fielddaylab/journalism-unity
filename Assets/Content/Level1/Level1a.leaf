@@ -98,7 +98,7 @@ $choice OffToWork; Off to work
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
 Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
-Not exactly stylish, but this is Twin Lakes. You'll fit right in. 
+Not exactly stylish, but at least you'll stay dry.   
 $call AdjustStats(Tech + 1, Resourceful + 1)
 $choice OffToWork; Off to work
 
@@ -107,7 +107,7 @@ $choice OffToWork; Off to work
 @tags Endurance
 @clearText
 You've been eating ramen and take-out all week.  
-Luckily, your fridge is full of cherry-themed gifts from your aggressively friendly neighbors.
+Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and a slice of cherry summer sausage.
 Might as well pack up the cherry granola for later. Could come in handy. 
 $call AdjustStats(Endurance + 1, Resourceful + 1)
@@ -131,8 +131,7 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 {img Anim/enml-waterrushing.jpg}
 Outside, water is rushing down the street. 
 Your neighbor, Maureen, is chasing her backyard chickens, which have escaped their coop.
-{@person}{auto}{anim rumble}Help!
-she cries, her arms full of clucking, feathered things. 
+{@person}{auto}{anim rumble}Help! 
 
 $choice HelpHer; Help her
 $choice RushToWork; There's no time, I've got to get to work!
@@ -190,8 +189,8 @@ $choice ImInAHurryTheresNoNeedToBringTheBike; I'm in a hurry, there's no need to
 @tags Trust, Endurance
 You help round up the chickens and only get pecked twice.
 {@person}Oh, thank you so much for your help! 
-{me}{auto}No big deal.
-you tell her, plucking feathers out of your hair. 
+{@me}{auto}No big deal.
+You head to your car, plucking feathers out of your hair. 
 
 $call AdjustStats(Trust + 1, Endurance + 1)
 $choice HitTheRoad; Hit the road
@@ -263,16 +262,15 @@ $else
 $endif
 
 $ContinueChoice({@me} Where is everybody??)
-{@person}{auto}Ben and Sudha are still on their way. 
-{@person}{auto}Khalisa is stuck at home, bailing out her basement.
-{@person}Right now, you're our lead reporter. 
+{@person}Ben and Sudha are on their way. Khalisa is stuck at home, bailing out her basement.
+{@person}Right now, you're my lead reporter. 
 
-$ContinueChoice({@me} What should I do?)
+$ContinueChoice({@me} How can I help?)
 
 $call ActivateStory()
 {@person} We need a breaking news story.
 {@person} People need to know what's happening and how to stay safe. 
-{@person} Make sure to include a photo! 
+{@person} You've got 2 hours.
 $call ActivateStory()
 
 $choice BreakingNewsStory; {@me} On it.
@@ -284,8 +282,7 @@ $if StatCheck(Endurance, 2)
     You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
     The baker is stacking up bags of pastry flour. 
     You're not sure if this will actually protect her shop or just turn into play dough, but you help anyway.
-    {@person} I don't know where to get sandbags{auto}
-    she explains.
+    {@person} I don't know where to get sandbags. 
     {@person} It all happened so fast!
 
     $call GiveSnippet(FriendlyShopkeeper)
@@ -574,7 +571,7 @@ $if StatCheck(Trust, 2)
 
     $call GiveSnippet(LibraryLot)
 $else
-    {@person}the twin lakes herald?? that sounds fake. how do i know you're a real reporter?</i>
+    {@person}the twin lakes herald?? that sounds fake. how do i know you're a real reporter?
 
     $if StatCheck(Tech, 3)
         You've been waiting your whole life for this moment.
@@ -611,44 +608,44 @@ $goto StoryFeedback
 {story-stats}
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.6
-        {@person}   Stellar work Rookie! I can tell you worked hard on this one.
+        {@person}   Stellar work Rookie! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of actionable info.
         {@person}   Maybe you've got a Pulitzer Prize in your future.
     $elseif StoryAlignment() >= 0.4
-        {@person}   Wow, nice work, Rookie! You really put a great story together.
-        {@person}   You definitely got off-topic there a little, but nobody's perfect.
-        {@person}   Hopefully it'll be enough to keep Twin Lakes safe.
+        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@person}   Admittedly, it's not quite what I asked for in my notes...
+        {@person}   But this should still help a lot of people. 
     $else
-        {@person}   Wow, your writing is top notch! Gorgeous story construction! Quality quotes and photos!
-        {@person}   Too bad it has nothing to do with the assignment I gave you.
-        {@person}   At least people will have something entertaining to read while they're waiting to be rescued... 
+        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@person}   Too bad it's nothing like the story type I asked for.
+        {@person}   Try reading my notes next time. It's all in there. 
     $endif
 $elseif StoryScore() == "medium"
     $if StoryAlignment() >= 0.6
         {@person}   Nice work getting the right info out there!
-        {@person}   Your work could use some quality control. Maybe a little more style.
-        {@person}   But all in all, great work. Twin Lakes is lucky to have you.
+        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
+        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
     $elseif StoryAlignment() >= 0.4
-        {@person}   Hmm... this is sort of the turkey sandwich of breaking news stories.
-        {@person}   Not amazing, but not bad, either.
-        {@person}   I bet this story will help a lot of people. Good work.
+        {@person}   Hmm... not bad, Rookie. Decent quotes, decent story construction.
+        {@person}   This should be enough to let people know what's going on.  
+        {@person}   Next time, make sure to check my notes. And maybe brush up on your interviewing skills.  
     $else
-        {@person}   Hate to say it, Rookie, but this is some amateur-level work.
-        {@person}   Your story is halfway decent...
-        {@person}   Too bad it has nothing to do with the assignment I gave you.
+        {@person}   Hate to say it, Rookie, but this is amateur-level work.
+        {@person}   Your reporting is halfway decent...
+        {@person}   But this isn't the story I asked for. Didn't you read my notes? 
     $endif
 $else
     $if StoryAlignment() >= 0.6
-        {@person}   Well... your quality control could use some work.
-        {@person}   At least people will know how to stay safe.
-        {@person}   Next time, try bringing a decent camera. And maybe a spellchecker.
+        {@person}   On the plus side, you got a lot of useful information out there! 
+        {@person}   This story should keep people safe... if they actually read it. 
+        {@person}   Next time, bring a decent camera. And maybe try not to annoy everybody you interview. 
     $elseif StoryAlignment() >= 0.4
-        {@person}   Yikes. Did you intern at a tabloid? This quality isn't up to our standards.
-        {@person}   You did a decent job sticking to the assignment, at least.
+        {@person}   Yikes. Did you intern at a tabloid? This reporting isn't up to our standards.
+        {@person}   You did a decent job sticking to the assignment. Lots of useful info. 
         {@person}   Now if only I could tell what that photo is supposed to be...
     $else
         {@person}   Well.... You put some words on the page. Sort of.
-        {@person}   We expect better from our reporters around here.
+        {@person}   But this quality of reporting isn't up to our standards. 
         {@person}   I wonder if Fred Finkler is still looking for a job...
     $endif
 $endif

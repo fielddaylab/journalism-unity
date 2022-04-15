@@ -26,18 +26,9 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: 'We need a breaking news announcement! Things to include:
+    EditorBrief: 'We need a breaking news announcement! Make sure people know what to do to stay safe. Include lots of useful, actionable information! We also need basic facts about the flood, plus a photo or quote for color.'
 
-      -
-      Facts about what''s happening and where.
-
-      - "News you can use": actionable
-      info to help people stay safe.
-
-      - Quotes and photos.
-
-      - Rainfall
-      and flooding statistics'
+      
     FactWeight: 3
     ColorWeight: 1
     UsefulWeight: 6
