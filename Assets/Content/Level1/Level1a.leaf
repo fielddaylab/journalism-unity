@@ -666,11 +666,4 @@ $else
 $endif
 {story-score}
 {/img}
-// $call NextLevel()
-$goto PLAYTESTEND
-
-:: PLAYTESTEND
-@clearText
-{/bg}{/img}
-{@msg}  This is the end of the first Story.
-{@msg}  You're free to close your browser, or refresh the browser if you'd like to try again!
+$call NextLevel()
