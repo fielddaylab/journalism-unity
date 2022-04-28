@@ -59,8 +59,9 @@ Before you can tell her where you've been (sleeping, because it's <i>FIVE</i> in
 
 {@phone} Downtown is flooding!
 {@phone} You need to get to the newsroom and put out a breaking news update, ASAP.
+{@phone} Remember, you're new in town, so keep a lookout for ways to build your cred around here. 
 
-$choice OnMyWay; {@me} On my way.
+$choice OnMyWay; {@me} Got it. On my way.
 
 // Original Name: "On my way."
 :: OnMyWay
@@ -136,9 +137,11 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 {img Anim/enml-waterrushing.jpg}
 Outside, water is rushing down the street. 
 Your neighbor, Maureen, is chasing her backyard chickens, which have escaped their coop.
-{@person}{auto}{anim rumble}Help! 
+{@person}{anim rumble}Help! They're everywhere!! 
+It might be nice to help her. She did bring you a giant cherry strudel the other day.
+But then you'd really need to rush to get to the newsroom on time. 
 
-$choice HelpHer; Help her
+$choice HelpHer; Help her  
 $choice RushToWork; There's no time, I've got to get to work!
 
 // Original Name: Message Nurse
@@ -216,19 +219,25 @@ $choice HitTheRoad; Hit the road
 @tags Resourceful
 You pump up the tires and squeeze your bike into the trunk. 
 The hatch doesn't shut all the way, but it's nothing a bungee cord can't fix.
-You drive to work, navigating a maze of flooded streets.
-There are some great photo ops, but you don't have time to stop. 
 {@msg} You can use your bike later
-
 $call AdjustStats(Resourceful + 1)
 $set hasBike = true
+$choice DriveWithBike; Drive to the newsroom 
 
-$choice ArriveAtWork; Arrive at work.
+// Original Name: Drive to the newsroom  
+:: DriveWithBike
+@clearText
+Uh oh. Looks like the storm is worse than you thought. 
+The town's famous Cherrymobile is abandoned in high water, and a shopkeeper is struggling to protect her bakery from flooding!. 
+You can't stop to interview her. You spent too much time loading up your bike. 
+But you should have time to snag a quick photo! 
+
+$choice TakeSomePhotos; Take some photos
 
 // Original Name: I'm in a hurry, there's no need to bring the bike!
 :: ImInAHurryTheresNoNeedToBringTheBike
 You drive toward the newsroom, windshield wipers on full blast. 
-
+The flooding is worse than you expected. 
 
 $ActionChoice(Stop to look around.)
 A baker is piling up sacks of flour in front of her shop.
@@ -317,6 +326,7 @@ $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Take some photos
 :: TakeSomePhotos
+@clearText
 
 $if StatCheck(Tech, 2)
 You knew all this tech gear would pay off!
@@ -327,7 +337,7 @@ $call GiveSnippet(AbandonedCherrymobile)
 $else
 You pull over and snap some photos. 
 
-You wish you had your zoom lens, but it's buried in your closet somewhere. 
+You think wistfully of your zoom lens, buried in your closet somewhere. 
 
 At least blurry cars in blurry water is better than nothing. 
 
@@ -489,11 +499,15 @@ $goto Office1-Clock
 
 $if StatCheck(Social, 2)
     {img Anim/enml-coffeedonuts.jpg}
-    Your city council contact is thrilled to hear from you. 
-    {@phone} Everyone is still talking about those cherry glazed donuts you brought last time!
-    She tells you that the flood started near the dam, which is at capacity.
-    Volunteers are working to lay sandbags, while the city struggles to keep up with rescues and emergency calls.
-    If people aren't trained for this, they need to stay home and avoid becoming another person to rescue! 
+    Your City Hall contact is thrilled to hear from you. 
+    {@phone} Everyone is still talking about those cherry donuts you brought from Sophia's last time!
+    $if Visited(HelpTheBaker)
+        {@phone}I heard you helped shore up her bakery this morning. Nice work!!     
+    $else
+        {@phone}Poor Sophia. Did you hear about all the pastries that got washed away this morning? What a tragedy.
+    $endif
+    She tells you that the flood started near the dam, which can't hold any more water.
+    Volunteers are stacking sandbags, while the city struggles to keep up with rescues and emergency calls.
     {@phone} I wish I could say nobody saw this coming
     {@phone} But Twin Lakes has been on the verge of a flood like this for years.
     You thank her for her time. These quotes will be amazing for your article!
@@ -628,12 +642,12 @@ $if StoryScore() == "good"
         {@person}   Maybe you've got a Pulitzer Prize in your future.
     $elseif StoryAlignment() >= 0.4
         {@person}   Nice work, Rookie! Your quotes and photos are top notch.
-        {@person}   Admittedly, it's not quite what I asked for in my notes...
+        {@person}   Admittedly, we could've used a little more useful info... 
         {@person}   But this should still help a lot of people. 
     $else
         {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
-        {@person}   Too bad it's nothing like the story type I asked for.
-        {@person}   Try reading my notes next time. It's all in there. 
+        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@person}   Make sure to check my notes next time. It's all in there.  
     $endif
 $elseif StoryScore() == "medium"
     $if StoryAlignment() >= 0.6
@@ -641,27 +655,27 @@ $elseif StoryScore() == "medium"
         {@person}   Your reporting could use some quality control. Maybe a quick proofread.
         {@person}   But still, a solid story. Twin Lakes is lucky to have you.
     $elseif StoryAlignment() >= 0.4
-        {@person}   Hmm... not bad, Rookie. Decent quotes, decent story construction.
-        {@person}   This should be enough to let people know what's going on.  
-        {@person}   Next time, make sure to check my notes. And maybe brush up on your interviewing skills.  
+        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@person}   This should be enough to help a lot of people.  
+        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
     $else
-        {@person}   Hate to say it, Rookie, but this is amateur-level work.
-        {@person}   Your reporting is halfway decent...
-        {@person}   But this isn't the story I asked for. Didn't you read my notes? 
+        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@person}   Still. Not bad for your first natural disaster. 
     $endif
 $else
     $if StoryAlignment() >= 0.6
-        {@person}   On the plus side, you got a lot of useful information out there! 
-        {@person}   This story should keep people safe... if they actually read it. 
-        {@person}   Next time, bring a decent camera. And maybe try not to annoy everybody you interview. 
+        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   This story should help a lot of people... 
+        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
     $elseif StoryAlignment() >= 0.4
-        {@person}   Yikes. Did you intern at a tabloid? This reporting isn't up to our standards.
-        {@person}   You did a decent job sticking to the assignment. Lots of useful info. 
-        {@person}   Now if only I could tell what that photo is supposed to be...
+        {@person}   Nice work, Rookie. Your story construction is pretty solid!
+        {@person}   Your quality control could definitely use some work. 
+        {@person}   Still. Not bad for your first natural disaster. 
     $else
-        {@person}   Well.... You put some words on the page. Sort of.
-        {@person}   But this quality of reporting isn't up to our standards. 
-        {@person}   I wonder if Fred Finkler is still looking for a job...
+        {@person}   Well.... this could be worse. Sort of.  
+        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@person}   This was your first natural disaster, so I'll let it slide. 
     $endif
 $endif
 {story-score}

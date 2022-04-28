@@ -130,24 +130,35 @@ Snippet body not implemented.
 :: SandbagQuote
 @type Quote
 @quality Great
-Snippet text unimplemented.
+@attr Useful
+"Stacking up sandbags can help create a barrier to stop floodwater. There are filling stations at the local schools!"
 
 // Original Name: Volunteer info
 :: VolunteerInfo
 @type Fact
 @quality Good
-Snippet text unimplemented
+@attr Useful
+"The community center is looking for volunteers! People can fill sandbags, check on neighbors, and staff the flood shelter." 
+
+// Original Name: Fire Chief Quote
+:: FireChiefQuote
+@type Quote
+@quality Great
+@attr Color
+"I was the fire chief around these parts for twenty years. I've never seen a storm like this." 
 
 // Original Name: Houseboat photos
 :: HouseboatPhotos
 @type Photo
 @quality Great
+@attr Color
 Snippet text unimplemented.
 
 // Original Name: Okay houseboat photos
 :: OkayHouseboatPhotos
 @type Photo
 @quality Good
+@attr Color
 Snippet text unimplemented.
 
 // Original Name: Blurry houseboat photos
@@ -160,136 +171,163 @@ Snippet text unimplemented.
 :: GreatVolunteeringQuote
 @type Quote
 @quality Great
-Snippet text unimplemented.
+@attr Color
+"I’ve volunteered with the DNR for years. It’s amazing to see how the whole town comes together in times of crisis!"
 
 // Original Name: Great houseboat story
 :: GreatHouseboatStory
 @type Quote
 @quality Great
-Snippet text unimplemented.
+@attr Color
+"I was just floating along when water rushed out over the dam! The street flooded in seconds. Lucky I was safe on my Ark!"
 
 // Original Name: Houseboat story
 :: HouseboatStory
 @type Quote
-@quality Good
-Snippet text unimplemented.
+@quality Bad
+Trust me, Dear. Houseboats are the future! Stylish, off the grid, and your cats can't escape! Well... unless they can swim. 
 
 // Original Name: Dog rescue
 :: DogRescue
 @type Observation
 @quality Good
-Snippet text unimplemented
+@attr Color
+Near Main Street, a pickup truck got swept into a flooded ditch! Firefighters rescued the driver-—and his dog—-just in time.  
 
 // Original Name: Dog rescue picture
 :: DogRescuePicture
 @type Photo
 @quality Good
+@attr Color
 Insert picture of a rescue worker saving a dog from the flood.
 
-// Original Name: Great flood photos
-:: GreatFloodPhotos
+// Original Name: Great flood photos from kayak
+:: GreatFloodPhotosKayak
 @type Photo
 @quality Great
+@attr Color
 Snippet text unimplemented.
 
-// Original Name: Blurry flood photos
-:: BlurryFloodPhotos
+// Original Name: Good flood photos from kayak
+:: GoodFloodPhotosKayak
+@type Photo
+@quality Good
+@attr Color
+Snippet text unimplemented.
+
+// Original Name: Great flood photos from truck or bike ride downtown
+:: GreatFloodPhotosTruck
+@type Photo
+@quality Great
+@attr Color
+Snippet text unimplemented.
+
+// Original Name: Blurry flood photos from truck 
+:: BlurryFloodPhotosTruck
 @type Photo
 @quality Bad
+Snippet text unimplemented.
+
+// Original Name: Flooded Main Street Photo
+:: FloodedMainStreet
+@type Photo
+@quality Great
 Snippet text unimplemented.
 
 // Original Name: Lake levels
 :: LakeLevels
 @type Quote
 @quality Good
-Double-click this passage to edit it.
+@attr Fact
+We've been trying to make people understand. The levels are just too high to handle all this extreme rainfall! 
 
 // Original Name: Flood cause
 :: FloodCause
 @type Fact
 @quality Good
-Snippet text unimplemented.
+@attr Fact
+According to a local limnology expert, the flood was caused by a combination of high lake levels and rainfall from climate change. 
 
 // Original Name: Flood science
 :: FloodScience
 @type Fact
 @quality Good
-Snippet text unimplemented.
-
-// Original Name: Lakewater study
-:: LakewaterStudy
-@type Photo
-@quality Good
-Snippet text unimplemented.
-
-// Original Name: DNR expectations
-:: DNRExpectations
-@type Quote
-@quality Great
-Snippet text unimplemented.
+@attr Fact
+The lake levels have been kept artificially high. This means a lot more flooding, and a lot more harmful phosphorus swept into our lakes.  
 
 // Original Name: Flood info
 :: FloodInfo
 @type Fact
 @quality Good
-Snippet text unimplemented.
+@attr Fact
+"It's supposed to keep raining all day. We're expecting things to get worse before they get better."
 
 // Original Name: Sandbag troubles
 :: SandbagTroubles
 @type Quote
 @quality Great
-Snippet text unimplemented.
+@attr Useful
+"Right now, the best thing people can do is clear out their basements, stay off the roads, and find higher ground."
 
 // Original Name: Sandbag location
 :: SandbagLocation
 @type Fact
 @quality Good
-Snippet text unimplemented.
+@attr Useful
+There are free sandbags the Twin Lakes community center—-but people need to make sure they can get there safely.  
 
 // Original Name: Great flood quote
 :: GreatFloodQuote
 @type Quote
 @quality Great
-Snippet text unimplemented.
+@attr Color
+My family is doing okay, but lots of other folks aren't so lucky. Not sure how downtown is gonna come back from this. 
 
 // Original Name: Flood safety tips
 :: FloodSafetyTips
 @type Fact
 @quality Good
-Snippet text unimplemented.
+@attr Useful
+"Don't drive through water if you can't see the bottom. Cars can get swept up in an instant. Turn around, don’t drown!"
 
 // Original Name: Cheese rescue
 :: CheeseRescue
 @type Observation
 @quality Great
-Snippet text unimplemented.
-
-// Original Name: Flooded street from above
-:: FloodedStreetFromAbove
-@type Photo
-@quality Great
-Insert birds-eye view of flooded Cherry Festival main street.
+@attr Color
+Local man Colby Jenkins escaped to the second floor as his cheese shop flooded. From the window above, he watched as wheels of gouda and brie floated away.
 
 // Original Name: Firefighter rescue
 :: FirefighterRescue
 @type Observation
 @quality Good
-Snippet text unimplemented.
-
-// Original Name: Good flood photos
-:: GoodFloodPhotos
-@type Photo
-@quality Good
-Snippet text unimplemented.
+@attr Color
+As water rose, firefighters rescued a local cheese shop owner, Colby Jenkins, who was trapped by the flood! 
 
 // Original Name: Volunteer conversation
 :: VolunteerConversation
 @type Quote
 @quality Good
-Snippet text unimplemented.
+@attr Color
+"What a mess. I woke up with water pouring into my basement! Hopefully these sandbags will get things under control."
 
 // Original Name: Super detailed observation
 :: SuperDetailedObservation
 @type Observation
 @quality Great
-Snippet text unimplemented
+@attr Color
+The mood at the dam was intense and focused. A DNR worker in a blue poncho directed 12 volunteers hauling sandbags. A houseboat floated serenely nearby.
+
+// Original Name: Detailed observation
+:: DetailedObservation
+@type Observation
+@quality Good
+@attr Color
+The mood at the dam was intense and focused. A DNR worker directed several volunteers hauling sandbags, while a houseboat floated nearby. 
+
+// Original Name: Basic observation
+:: BasicObservation
+@type Observation
+@quality Bad
+@attr Color
+At the dam, a DNR worker directed volunteers hauling sandbags. A houseboat floated nearby. 
