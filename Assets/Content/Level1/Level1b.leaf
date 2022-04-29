@@ -1090,6 +1090,8 @@ $call DecreaseTime(1)
 $call GiveSnippet(FloodScience)
 
 $choice ArriveAtFloodSite; Back to flood site
+$endif
+
 $if Visited(BorrowGear)
 The limnologist shakes her head.
 
@@ -1304,7 +1306,7 @@ You float in the street and snap some photos.
 
 As expected, they turn out awful. You're already wishing you had those lenses back.
 
-$call GiveSnippet(BlurryFloodPhotos)
+$call GiveSnippet(GoodFloodPhotosKayak)
 
 
 $choice ArriveAtFloodSite; Arrive at flood site
