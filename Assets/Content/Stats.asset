@@ -73,23 +73,23 @@ MonoBehaviour:
     - Esteemed
     - Community Pillar
     Icon: {fileID: 0}
-  m_MaxValue: 12
+  m_MaxValue: 10
   m_StatColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0, g: 1, b: 0.13333344, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.87843144, g: 0.23137257, b: 0.34117648, a: 1}
+    key1: {r: 0.882353, g: 0.21176472, b: 0.5764706, a: 1}
+    key2: {r: 0.8352941, g: 0.74149185, b: 0.31156468, a: 0}
+    key3: {r: 0.3254902, g: 0.68235296, b: 0.6392157, a: 0}
+    key4: {r: 0.27425492, g: 0.77254903, b: 0.5032009, a: 0}
+    key5: {r: 0.3647059, g: 0.29803923, b: 0.80392164, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
+    ctime1: 13107
+    ctime2: 26214
+    ctime3: 39321
+    ctime4: 52428
+    ctime5: 65535
     ctime6: 0
     ctime7: 0
     atime0: 0
@@ -100,6 +100,6 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
+    m_Mode: 1
+    m_NumColorKeys: 6
     m_NumAlphaKeys: 2

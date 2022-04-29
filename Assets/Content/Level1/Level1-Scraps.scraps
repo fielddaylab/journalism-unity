@@ -248,28 +248,28 @@ Snippet text unimplemented.
 :: LakeLevels
 @type Quote
 @quality Good
-@attr Fact
+@attr Facts
 We've been trying to make people understand. The levels are just too high to handle all this extreme rainfall! 
 
 // Original Name: Flood cause
 :: FloodCause
 @type Fact
 @quality Good
-@attr Fact
+@attr Facts
 According to a local limnology expert, the flood was caused by a combination of high lake levels and rainfall from climate change. 
 
 // Original Name: Flood science
 :: FloodScience
 @type Fact
 @quality Good
-@attr Fact
+@attr Facts
 The lake levels have been kept artificially high. This means a lot more flooding, and a lot more harmful phosphorus swept into our lakes.  
 
 // Original Name: Flood info
 :: FloodInfo
 @type Fact
 @quality Good
-@attr Fact
+@attr Facts
 "It's supposed to keep raining all day. We're expecting things to get worse before they get better."
 
 // Original Name: Sandbag troubles

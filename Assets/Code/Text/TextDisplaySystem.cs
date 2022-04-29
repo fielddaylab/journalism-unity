@@ -334,22 +334,16 @@ namespace Journalism {
             GameText.InsertTextLine(m_TextDisplay, m_StoryScoreLayout.Line, HandleFreeStoryStat);
             switch(Player.StoryStatistics.Score) {
                 case StoryScore.Bad: {
-                    m_StoryScoreLayout.ScoreName.SetText("LOW");
-                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#FA6464");
-                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "Technically better than a sharp stick to the eye.", null, default, null);
+                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "I know you're just a rookie, but I expected more from someone who went to a fancy school.", null, default, null);
                     break;
                 }
 
                 case StoryScore.Medium: {
-                    m_StoryScoreLayout.ScoreName.SetText("MEDIUM");
-                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#EAC74B");
                     GameText.PopulateTextLine(m_StoryScoreLayout.Line, "Not too shabby, but it's not winning any awards.", null, default, null);
                     break;
                 }
 
                 case StoryScore.Good: {
-                    m_StoryScoreLayout.ScoreName.SetText("HIGH");
-                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#AFFA64");
                     GameText.PopulateTextLine(m_StoryScoreLayout.Line, "This story is fantastic. You're going places kid.", null, default, null);
                     break;
                 }

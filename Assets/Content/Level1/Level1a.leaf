@@ -333,6 +333,7 @@ You knew all this tech gear would pay off!
 
 With your zoom lens, you snag an amazing photo: the abandoned Cherrymobile, juxtaposed with the stacking shopkeep!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
 $else
 You pull over and snap some photos. 
@@ -341,6 +342,7 @@ You think wistfully of your zoom lens, buried in your closet somewhere.
 
 At least blurry cars in blurry water is better than nothing. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
 $endif
 
@@ -539,7 +541,11 @@ $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
-    $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(15 minutes)</color>
+    $if HasTime(0.25)
+        $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(15 minutes)</color>
+    $else
+        Too bad you don't have enough time to ask anyone for permission to use them.
+    $endif
 $endif
 
 $goto Office1-Clock
@@ -609,6 +615,7 @@ $else
         You don't have time for this. You log off and snap a picture of the flooded parking lot outside the newsroom. 
         Kinda boring, but it's better than nothing. Probably.
 
+        $call SFX(PhotoSnap)
         $call GiveSnippet(GrainyPicture)
     $endif
 $endif

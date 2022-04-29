@@ -16,6 +16,7 @@ namespace Journalism.UI {
         public ToggleGroup ToggleGroup = null;
         public ClockIncrements TimeClock = null;
         public TextLine TimeEffect = null;
+        public TextLine StatsEffect = null;
 
         #endregion // Inspector
 
@@ -23,6 +24,7 @@ namespace Journalism.UI {
         private Routine m_FaderRoutine;
         [NonSerialized] private bool m_FaderEvaluateQueued;
         [NonSerialized] private bool m_FaderState;
+        [NonSerialized] private Routine m_StatsEffectAnim;
         [NonSerialized] private Routine m_TimeEffectAnim;
 
         private void Awake() {
@@ -54,11 +56,14 @@ namespace Journalism.UI {
                 });
                 button.Window.OnHideCompleteEvent.AddListener((_) => {
                     m_TimeEffectAnim.Stop();
+                    m_StatsEffectAnim.Stop();
                     TimeEffect.gameObject.SetActive(false);
+                    StatsEffect.gameObject.SetActive(false);
                 });
             }
 
             Game.Events.Register<Player.TimeUpdateArgs>(GameEvents.TimeUpdated, OnTimeUpdated, this)
+                .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this)
                 .Register(GameEvents.LevelStarted, OnLevelStarted, this);
         }
 
@@ -104,6 +109,36 @@ namespace Journalism.UI {
             ClockIncrements.Populate(TimeClock, (int) Player.TimeRemaining());
         }
 
+        private void OnStatsUpdated(int[] adjusted) {
+            bool hasAdd = false, hasSubtract = false;
+            for(int i = 0; i < Stats.Count; i++) {
+                if (adjusted[i] > 0) {
+                    hasAdd = true;
+                } else if (adjusted[i] < 0) {
+                    hasSubtract = false;
+                }
+            }
+
+            if (Root.IsShowing()) {
+                if (hasAdd || hasSubtract) {
+                    StatsEffect.gameObject.SetActive(true);
+                    if (hasAdd) {
+                        Game.Audio.PlayOneShot("StatIncrease");
+                        if (hasSubtract) {
+                            GameText.PopulateTextLine(StatsEffect, "<b>+ -</b>", null, default, Assets.Style("stat-increase-decrease"));
+                        } else {
+                            GameText.PopulateTextLine(StatsEffect, "<b>+</b>", null, default, Assets.Style("stat-increase"));
+                        }
+                    } else if (hasSubtract) {
+                        Game.Audio.PlayOneShot("StatDecrease");
+                        GameText.PopulateTextLine(StatsEffect, "<b>-</b>", null, default, Assets.Style("stat-decrease"));
+                    }
+                    GameText.PrepareTextLine(StatsEffect, 2);
+                    m_StatsEffectAnim.Replace(this, GameText.AnimateTextLineEffect(StatsEffect, new Vector2(0, 15), 0.3f, 2));
+                }
+            }
+        }
+
         private void OnTimeUpdated(Player.TimeUpdateArgs args) {
             m_TimeButton.Button.interactable = args.Units > 0;
 
@@ -115,6 +150,7 @@ namespace Journalism.UI {
                     GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
                     GameText.PrepareTextLine(TimeEffect, 2);
                     m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
+                    Game.Audio.PlayOneShot("ClockTick");
                 }
             }
         }

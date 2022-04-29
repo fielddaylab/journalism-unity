@@ -27,6 +27,7 @@
 
 // Original Name: Story 2 Intro
 :: Story2Intro
+$call SetLocation("Newsroom")
 {bg BG/Newsroom-Story2.jpg}
 Your first breaking news update is in the books!
 More people have arrived. The newsroom is buzzing with activity. 
@@ -43,6 +44,7 @@ $choice GetReady; No. Don't worry. I'm on it.
 // Original Name: Get Ready
 :: GetReady
 @clearText
+$call SetHeaderEnabled(true)
 
 $if FirstVisit()
 $call SetTimeRemaining(0.75)
@@ -300,6 +302,7 @@ You hop on your bike, weave around flooded areas, and make it downtown in record
 
 Plus, you snag a great photo along the way!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $call AdjustStats(Endurance + 1)
 
@@ -569,6 +572,7 @@ Luckily you've got a fully charged phone and a fancy zoom lens!
 
 You snag some great photos--the volunteers working, the overflowing dam, and two cats peeking out the window of the houseboat. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $endif
 
@@ -591,18 +595,21 @@ You rig up a tripod with a broken branch, a shoelace, and a hair scrunchie.
 
 You didn't binge-watch all those old episodes of MacGyver for nothing. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
 You can't get a clear shot without a zoom lens.
 
 You're about to give up when when you hear a voice from behind you.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2
 You use your modest tech gear to snap some photos.
 
 They might not win any prizes, but they should be good enough.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(OkayHouseboatPhotos)
 $endif
 
@@ -612,6 +619,7 @@ The conditions are terrible and so is your photography gear.
 
 You manage to snap a few blurry shots. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryHouseboatPhotos)
 $endif
 
@@ -946,6 +954,7 @@ All that's missing is the seedy-underbelly side plot and the rival-turned-love i
 
 Still, the day isn't over yet...
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(FloodedMainStreet)
 
 $choice CherryFestivalMap; Cherry Festival Map
@@ -959,6 +968,7 @@ A pickup truck is stuck in a ditch, water rushing all around it.
 Firefighters pull the driver and his dog out of the car, just in time!
 
 $call GiveSnippet(DogRescue)
+$call SFX(PhotoSnap)
 $call GiveSnippet(DogRescuePicture)
 
 $choice CherryFestivalMap; Cherry Festival Map
@@ -1036,6 +1046,7 @@ $GameOver("You needed to be rescued.")
 $if StatCheck(Tech, 3)
 On the ride downtown, you get some great shots with your zoom lens!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
 You snap photos of the street around you. 
@@ -1044,6 +1055,7 @@ Too bad you don't have the right lens.
 
 There's a crate of cherries floating through the water, but it ends up looking like a brown and red blur.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryFloodPhotosTruck)
 $endif
 
@@ -1306,6 +1318,7 @@ You float in the street and snap some photos.
 
 As expected, they turn out awful. You're already wishing you had those lenses back.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GoodFloodPhotosKayak)
 
 
@@ -1318,6 +1331,7 @@ You float in the street and snap some photos.
 
 You don't have your zoom lens, but you're right in the middle of the action, so the photos turn out okay!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GoodFloodPhotosKayak)
 
 $choice ArriveAtFloodSite; Arrive at flood site
@@ -1328,6 +1342,7 @@ You use your tech gear to snap some amazing photos!
 
 Jars of cherry jam, fish flopping out of the water, and even a snake slithering by.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosKayak)
 
 $choice ArriveAtFloodSite; Arrive at flood site

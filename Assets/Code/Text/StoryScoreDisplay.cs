@@ -14,7 +14,6 @@ namespace Journalism {
         #region Inspector
 
         public TextLine Line;
-        public TMP_Text ScoreName;
 
         #endregion // Inspector
     }

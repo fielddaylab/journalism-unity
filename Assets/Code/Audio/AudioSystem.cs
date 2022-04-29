@@ -61,23 +61,23 @@ namespace Journalism {
 
         #region Playing
 
-        public void PlayOneShot(StringHash32 id) {
+        public float PlayOneShot(StringHash32 id) {
             if (id.IsEmpty) {
-                return;
+                return 0;
             }
             
             AudioEvent evt;
             if (!m_Events.TryGetValue(id, out evt)) {
                 Log.Warn("[AudioSystem] Event with id '{0}' is not loaded", id);
-                return;
+                return 0;
             }
 
-            PlayOneShot(evt);
+            return PlayOneShot(evt);
         }
 
-        public void PlayOneShot(AudioEvent evt) {
+        public float PlayOneShot(AudioEvent evt) {
             if (evt == null) {
-                return;
+                return 0;
             }
 
             if (evt.SampleRandomizer == null) {
@@ -86,6 +86,7 @@ namespace Journalism {
 
             AudioClip clip = evt.SampleRandomizer.Next();
             AudioSource.PlayClipAtPoint(clip, default, evt.Volume.Generate());
+            return clip.length;
         }
 
         public void SetAmbience(string url, float volume) {
@@ -131,9 +132,19 @@ namespace Journalism {
 
         #region Leaf
 
+        private enum WaitMode {
+            Forget,
+            Wait,
+        }
+
         [LeafMember("SFX"), UnityEngine.Scripting.Preserve]
-        static private void LeafPlayOneShot(StringHash32 id) {
-            Game.Audio.PlayOneShot(id);
+        static private IEnumerator LeafPlayOneShot(StringHash32 id, WaitMode wait = WaitMode.Forget) {
+            float duration = Game.Audio.PlayOneShot(id);
+            if (wait == WaitMode.Wait) {
+                return Routine.Yield(duration);
+            } else {
+                return null;
+            }
         }
 
         [LeafMember("Music"), UnityEngine.Scripting.Preserve]
