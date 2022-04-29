@@ -29,6 +29,7 @@
 :: Story2Intro
 $call SetLocation("Newsroom")
 {bg BG/Newsroom-Story2.jpg}
+$call Music(Music/morning journal.mp3)
 Your first breaking news update is in the books!
 More people have arrived. The newsroom is buzzing with activity. 
 You're about to grab some coffee when your editor finds you.
