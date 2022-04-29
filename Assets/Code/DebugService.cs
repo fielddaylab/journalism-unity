@@ -18,7 +18,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Journalism {
     public sealed class DebugService : MonoBehaviour {
-#if DEVELOPMENT
+        #if DEVELOPMENT
 
         #region Static
 
@@ -236,6 +236,12 @@ namespace Journalism {
                 m_DebugMenu.gameObject.SetActive(false);
                 Resume();
             }
+        }
+
+        #else
+
+        private void Start() {
+            Destroy(gameObject);
         }
 
         #endif // DEVELOPMENT

@@ -14,8 +14,8 @@
         "Anim/Editor.jpeg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 2147,
-                "Height": 1961,
+                "Width": 1024,
+                "Height": 935,
                 "Alpha": false
             }
         },
@@ -89,27 +89,19 @@
                 "Alpha": false
             }
         },
-        "Anim/enml-stuckcar-blurry.jpg": {
-            "Type": "Texture",
-            "Texture": {
-                "Width": 480,
-                "Height": 480,
-                "Alpha": false
-            }
-        },
         "Anim/enml-stuckcar-blurry.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 2146,
-                "Height": 942,
+                "Width": 1024,
+                "Height": 449,
                 "Alpha": false
             }
         },
         "Anim/enml-stuckcar.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 2146,
-                "Height": 942,
+                "Width": 1024,
+                "Height": 449,
                 "Alpha": false
             }
         },
@@ -143,24 +135,24 @@
         "BG/BedroomMorning.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1126,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 698,
                 "Alpha": false
             }
         },
         "BG/BroadbandOwnerHouse.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1084,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 725,
                 "Alpha": false
             }
         },
         "BG/CherryCreekMarsh2.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1054,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 746,
                 "Alpha": false
             }
         },
@@ -183,80 +175,80 @@
         "BG/Farmhouse.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1043,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 754,
                 "Alpha": false
             }
         },
         "BG/FirstStDowntownCleanup.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 4032,
-                "Height": 3024,
+                "Width": 1024,
+                "Height": 768,
                 "Alpha": false
             }
         },
         "BG/FloodedLiminologyDept.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1128,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 697,
                 "Alpha": false
             }
         },
         "BG/LakesideSt.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1135,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 693,
                 "Alpha": false
             }
         },
         "BG/LowIncomeSt.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1178,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 668,
                 "Alpha": false
             }
         },
         "BG/MainStCherryFestFlood.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 4032,
-                "Height": 3024,
+                "Width": 1024,
+                "Height": 768,
                 "Alpha": false
             }
         },
         "BG/Newsroom-Story1.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 4032,
-                "Height": 3024,
+                "Width": 1024,
+                "Height": 768,
                 "Alpha": false
             }
         },
         "BG/Newsroom-Story2.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 4032,
-                "Height": 3024,
+                "Width": 1024,
+                "Height": 768,
                 "Alpha": false
             }
         },
         "BG/OutsideApt-Map.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 2048,
-                "Height": 1320,
+                "Width": 1024,
+                "Height": 660,
                 "Alpha": false
             }
         },
         "BG/RestoredOperaHouseInt.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1110,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 708,
                 "Alpha": false
             }
         },
@@ -271,8 +263,8 @@
         "BG/RuralCherryOrchard.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1256,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 626,
                 "Alpha": false
             }
         },
@@ -287,8 +279,8 @@
         "BG/SeniorCitizenApts.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1070,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 735,
                 "Alpha": false
             }
         },
@@ -311,15 +303,12 @@
         "BG/UpperLakeDamBoat.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1281,
-                "Height": 768,
+                "Width": 1024,
+                "Height": 614,
                 "Alpha": false
             }
         },
-        "Music/Jahzzar 02 Wet Socks.mp3": {
-            "Type": "Audio"
-        },
-        "Music/Jahzzar 04 Flood.mp3": {
+        "Music/morning journal.mp3": {
             "Type": "Audio"
         },
         "Photo/ErrorPhoto.png": {
@@ -333,8 +322,8 @@
         "Photo/FloodedLibrary.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1500,
-                "Height": 644,
+                "Width": 1024,
+                "Height": 440,
                 "Alpha": false
             }
         },
@@ -349,16 +338,16 @@
         "Photo/FloodMap-Lv1.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 2228,
-                "Height": 1434,
+                "Width": 1024,
+                "Height": 659,
                 "Alpha": false
             }
         },
         "Photo/HospitalDucks.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1085,
-                "Height": 849,
+                "Width": 1024,
+                "Height": 801,
                 "Alpha": false
             }
         },
