@@ -84,7 +84,7 @@ $endif
 @clearText
 One of the copyeditors, Ben, is away from his desk.
 
-He left his phone charging, right out in the openn.
+He left his phone charging, right out in the open.
 
 You can't believe small town people are really this trusting. They probably leave their front doors unlocked, too.
 
@@ -980,11 +980,11 @@ $choice CherryFestivalMap; Cherry Festival Map
 $if StatCheck(Trust, 4)
 The driver is happy to lend you their kayak. 
 
-{@person}You seem trustoworthy. 
-{@person}By the way, I loved your piece about the possom family living behind the school.
-{@person}I had no idea possoms were so amazing!! 
+{@person}You seem trustworthy. 
+{@person}By the way, I loved your piece about the possum family living behind the school.
+{@person}I had no idea possums were so amazing!! 
 
-You remember writing that story, the day after you moved here: Playing Possom at Twin Lakes High School. 
+You remember writing that story, the day after you moved here: Playing Possum at Twin Lakes High School. 
 
 You'd considered cleaning out your desk then and there. 
 
@@ -1037,7 +1037,7 @@ The good news: you're alive!
 
 The bad news: you lost your shoes, ruined all your tech, and spend all day sitting on the bleachers, waiting to be rescued. 
 
-At least you have a friendly possom family for company. 
+At least you have a friendly possum family for company. 
 
 $GameOver("You needed to be rescued.")
 
@@ -1350,5 +1350,62 @@ $choice ArriveAtFloodSite; Arrive at flood site
 $endif
 
 :: STORYEVALUATION
-{@msg}  Story builder sequence here
-$call NextLevel()
+$call RunPublish()
+$goto StoryFeedback
+
+:: StoryFeedback
+$call BeginFeedback()
+{/bg}
+{img Anim/Editor.jpeg}
+{@person} Alright, let's see how you did...
+{story-stats}
+$if StoryScore() == "good"
+    $if StoryAlignment() >= 0.6
+        {@person}   Stellar work Rookie! I can tell you put your heart into this.
+        {@person}   Solid story construction and lots of actionable info.
+        {@person}   Maybe you've got a Pulitzer Prize in your future.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@person}   Admittedly, we could've used a little more useful info... 
+        {@person}   But this should still help a lot of people. 
+    $else
+        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@person}   Make sure to check my notes next time. It's all in there.  
+    $endif
+$elseif StoryScore() == "medium"
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work getting the right info out there!
+        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
+        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@person}   This should be enough to help a lot of people.  
+        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+    $else
+        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@person}   Still. Not bad for your first natural disaster. 
+    $endif
+$else
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   This story should help a lot of people... 
+        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Nice work, Rookie. Your story construction is pretty solid!
+        {@person}   Your quality control could definitely use some work. 
+        {@person}   Still. Not bad for your first natural disaster. 
+    $else
+        {@person}   Well.... this could be worse. Sort of.  
+        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@person}   This was your first natural disaster, so I'll let it slide. 
+    $endif
+$endif
+{story-score}
+{/img}
+$call EndFeedback()
+
+{@msg}  This is the end of Level 1.
+{@msg}  You are now free to close your browser.
+// $call NextLevel()

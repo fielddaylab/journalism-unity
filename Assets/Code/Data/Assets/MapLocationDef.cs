@@ -57,18 +57,27 @@ namespace Journalism
 
         static internal void Import(MapLocationDef def) {
             s_MapLocations = def.MapLocations;
+
+            locationDict = new Dictionary<StringHash32, MapLocationDef.MapLocation>(s_MapLocations.Length);
+            foreach (MapLocationDef.MapLocation loc in s_MapLocations) {
+                locationDict.Add(loc.Id, loc);
+            }
         }
 
         public static MapLocationDef.MapLocation GetMapLocation(StringHash32 locationId) {
-            // initialize the dict if it does not exist
-            if (locationDict == null) {
-                locationDict = new Dictionary<StringHash32, MapLocationDef.MapLocation>();
-                foreach (MapLocationDef.MapLocation loc in s_MapLocations) {
-                    locationDict.Add(loc.Id, loc);
-                }
-            }
             if (locationDict.ContainsKey(locationId)) {
                 return locationDict[locationId];
+            }
+            else {
+                throw new KeyNotFoundException(string.Format("No Map Location " +
+                    "with id `{0}' is in the database", locationId
+                ));
+            }
+        }
+
+        public static Vector2 NormalizedCoords(StringHash32 locationId) {
+            if (locationDict.ContainsKey(locationId)) {
+                return locationDict[locationId].NormalizedCoords;
             }
             else {
                 throw new KeyNotFoundException(string.Format("No Map Location " +

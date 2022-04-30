@@ -152,5 +152,9 @@ namespace Journalism {
                 t = (RectTransform) t.parent;
             }
         }
+
+        static public bool IsVisible(this Graphic graphic) {
+            return graphic.isActiveAndEnabled && graphic.GetAlpha() > 0;
+        }
     }
 }

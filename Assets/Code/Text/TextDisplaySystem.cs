@@ -30,12 +30,14 @@ namespace Journalism {
         [SerializeField] private StoryQualityDisplay m_StoryQualityLayout = null;
         [SerializeField] private StoryAttributeDisplay m_StoryAttributeLayout = null;
         [SerializeField] private StoryScoreDisplay m_StoryScoreLayout = null;
-        [SerializeField] private CanvasGroup m_EditorOverlay = null;
+        [SerializeField] private AnimatedElement m_FeedbackOverlay = null;
 
         [Header("Animation")]
         [SerializeField] private float m_ChoiceRowsOffset = 48;
         [SerializeField] private TweenSettings m_ChoiceRowsAnim = new TweenSettings(0.2f, Curve.Smooth);
         [SerializeField] private float m_StatsOffset = 32;
+        [SerializeField] private float m_FeedbackOverlayEditorY = -170f;
+        [SerializeField] private float m_FeedbackOverlayImpactY = -75f;
 
         [Header("Image Contents")]
         [SerializeField] private ImageColumn m_Image = null;
@@ -380,11 +382,20 @@ namespace Journalism {
         }
 
         private void OnFeedbackBegin() {
-            m_OverlayAnim.Replace(this, m_EditorOverlay.Show(0.2f));
+            m_FeedbackOverlay.RectTransform.SetAnchorPos(m_FeedbackOverlayEditorY, Axis.Y);
+            AnimatedElement.SwapText(m_FeedbackOverlay, "Editor:");
+            m_OverlayAnim.Replace(this, AnimatedElement.Show(m_FeedbackOverlay, 0.2f, null));
+        }
+
+        private void OnFeedbackSwapToImpact() {
+            m_OverlayAnim.Replace(this, Routine.Combine(
+                m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayImpactY, 0.5f, Axis.Y).Ease(Curve.Smooth),
+                AnimatedElement.SwapText(m_FeedbackOverlay, "Story Impact:", 0.5f)
+            ));
         }
 
         private void OnFeedbackEnd() {
-            m_OverlayAnim.Replace(this, m_EditorOverlay.Hide(0.2f));
+            m_OverlayAnim.Replace(this, AnimatedElement.Hide(m_FeedbackOverlay, 0.2f, null));
         }
 
         private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {
@@ -633,7 +644,7 @@ namespace Journalism {
             m_TextDisplay.ListRoot.SetAnchorPos(m_TextDisplay.RootBaseline, Axis.Y);
 
             m_FinishedStoryLayout.gameObject.SetActive(false);
-            m_EditorOverlay.Hide();
+            AnimatedElement.Hide(m_FeedbackOverlay);
             m_OverlayAnim.Stop();
 
             m_TextDisplay.Alignment = TextAlignment.Center;

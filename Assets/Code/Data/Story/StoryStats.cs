@@ -66,7 +66,6 @@ namespace Journalism {
             int missing = config.Slots.Length - stats.ScrapCount;
             if (stats.ScrapCount < config.Slots.Length) {
                 stats.Alignment *= 1 - (missing * 0.15f);
-                stats.TotalQuality -= missing / 2;
             }
 
             if (stats.TotalQuality >= 3) {

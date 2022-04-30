@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: Level1b
   m_EditorClassIdentifier: 
   Script: {fileID: -1942890987711236906, guid: 50f6f2469b89a60418181a359df5b99b, type: 3}
+  Story:
+    HeadlineType: Human Interest
+    Slots:
+    - Type: 1
+      Wide: 1
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    EditorBrief: 
+    FactWeight: 2
+    ColorWeight: 4
+    UsefulWeight: 1
+    FinalHeadline: 
   StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
   Audio: {fileID: 0}

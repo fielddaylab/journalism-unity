@@ -318,6 +318,29 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Animates the text line as a "pinned" animation.
+        /// </summary>
+        static public IEnumerator AnimateTextLinePinnedShow(TextLine line, Vector2 offset, float duration) {
+            line.gameObject.SetActive(true);
+            line.Offset.anchoredPosition = offset;
+            yield return Routine.Combine(
+                line.Group.FadeTo(1, duration),
+                line.Offset.AnchorPosTo(default(Vector2), duration).ForceOnCancel().Ease(Curve.BackOut)
+            );
+        }
+
+        /// <summary>
+        /// Animates the text line as an "effect" animation.
+        /// </summary>
+        static public IEnumerator AnimateTextLinePinnedHide(TextLine line, Vector2 offset, float duration) {
+            yield return Routine.Combine(
+                line.Group.FadeTo(0, duration),
+                line.Offset.AnchorPosTo(-offset, duration).ForceOnCancel().Ease(Curve.QuadIn)
+            );
+            line.gameObject.SetActive(false);
+        }
+
+        /// <summary>
         /// Adjusts computed line positions based on computed positions of new lines.
         /// </summary>
         static public void AdjustComputedLocations(TextLineScroll scroll, int newLineCount) {

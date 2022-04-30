@@ -637,7 +637,7 @@ $call RunPublish()
 $goto StoryFeedback
 
 :: StoryFeedback
-@feedback
+$call BeginFeedback()
 {/bg}
 {img Anim/Editor.jpeg}
 {@person} Alright, let's see how you did...
@@ -686,5 +686,6 @@ $else
     $endif
 $endif
 {story-score}
+$call EndFeedback()
 {/img}
 $call NextLevel()

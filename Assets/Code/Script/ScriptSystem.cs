@@ -58,11 +58,6 @@ namespace Journalism {
                 Player.Data.CheckpointId = node.CheckpointId();
                 Game.Save.SaveCheckpoint();
             }
-
-            if (node.HasFlags(ScriptNodeFlags.Feedback)) {
-                Game.Events.Queue(GameEvents.StoryEvalBegin);
-                Player.CompileStoryStatistics();
-            }
             
             yield return m_TextDisplay.HandleNodeStart(node, thread);
 
@@ -70,10 +65,6 @@ namespace Journalism {
         }
 
         private IEnumerator HandleNodeExit(ScriptNode node, LeafThreadState thread) {
-            if (node.HasFlags(ScriptNodeFlags.Feedback)) {
-                Game.Events.Queue(GameEvents.StoryEvalEnd);
-            }
-
             return null;
         }
 
@@ -251,6 +242,22 @@ namespace Journalism {
             yield return Game.UI.GameOver.Hide();
             yield return loadLevel;
             Game.Scripting.StartFromCheckpoint(Player.Data);
+        }
+
+        [LeafMember("BeginFeedback"), Preserve]
+        static private void BeginFeedback() {
+            Game.Events.Queue(GameEvents.StoryEvalBegin);
+            Player.CompileStoryStatistics();
+        }
+
+        [LeafMember("ImpactFeedback"), Preserve]
+        static private void ImpactFeedback() {
+            Game.Events.Queue(GameEvents.StoryEvalImpact);
+        }
+
+        [LeafMember("EndFeedback"), Preserve]
+        static private void EndFeedback() {
+            Game.Events.Queue(GameEvents.StoryEvalEnd);
         }
 
         #endregion // Leaf
