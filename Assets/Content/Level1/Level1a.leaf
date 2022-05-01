@@ -20,6 +20,9 @@
     $call GameOver() \
     $text \
     $call GameOverRestart()
+#macro Feedback(location, type, text) \
+    $call NextFeedback(location, type) \
+    $text
 
 // Name: Journalism Table Prototype
 // Creator: Twine

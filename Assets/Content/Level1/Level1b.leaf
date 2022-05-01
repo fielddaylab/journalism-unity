@@ -71,7 +71,7 @@ $elseif !StatCheck(Resourceful, 2)
 It's a mess out there. You'll need some rain gear before you leave. 
 
 $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
-$HubChoice(LostAndFound, "Check the Lost and Found", 0.5)
+$HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $elseif !StatCheck(Tech, 2)
 You still need some tech gear before you head out.
 
@@ -135,25 +135,23 @@ $endif
 @clearText
 
 $if TimeRemaining()
-You still have {timeLeft} to get ready.
+    You still have {timeLeft} to get ready.
 
+    $if !Visited(HelpKhalisa)
+        {force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
+        $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
+    $endif
 
-$if !Visited(HelpKhalisa)
-{force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
+    $HubChoice(Breakroom, "Search the break room for snacks", 0.25)
 
-$HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
-$endif
+    // $HubChoice(ResearchOption-FillIn, "Read up on flooding at the library across the street", 0.5)
 
-
-$HubChoice(Breakroom, "Search the break room for snacks", 0.25)
-
-// $HubChoice(ResearchOption-FillIn, "Read up on flooding at the library across the street", 0.5)
-
-$choice HeadOut; Enough stalling. Time to go.
+    $choice HeadOut; Enough stalling. Time to go.
+$elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
+    $choice HeadOut; Enough stalling. Time to go.
 $else
-You return to the office one last time and check the clock.
-
-$choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
+    You return to the office one last time and check the clock.
+    $choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
 $endif
 
 // Original Name: Borrow gear
@@ -406,9 +404,8 @@ $choice Crackers; Grab a few saltine crackers.
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
-$call SetLocation("Upper Lake Dam")
-{bg BG/UpperLakeDam.jpg}
 @clearText
+{bg BG/UpperLakeDam.jpg}
 <b>Location: the Upper Lake Dam</b>
 
 $if FirstVisit()
