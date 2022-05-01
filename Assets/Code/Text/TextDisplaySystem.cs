@@ -51,6 +51,7 @@ namespace Journalism {
         [NonSerialized] private TextAlignment m_MapPosition = TextAlignment.Center;
         [NonSerialized] private float m_ImageColumnBaseline;
         [NonSerialized] private float m_AutoContinue = -1;
+        [NonSerialized] private bool m_ForceNext = false;
         private Routine m_OverlayAnim;
 
         public LookupLineDelegate LookupLine;
@@ -399,6 +400,8 @@ namespace Journalism {
         }
 
         private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {
+            StoryScrapData data = Assets.Scrap(scrapId);
+
             // TODO: Localization
             TextLine line = GameText.AllocLine(m_TextDisplay, m_Pools);
             GameText.PopulateTextLine(line, "New Story Snippet!", null, default, Assets.Style("msg"));
@@ -408,12 +411,14 @@ namespace Journalism {
             GameText.ClearOverflowLines(m_TextDisplay);
             yield return 0.1f;
 
-            StoryScrapData data = Assets.Scrap(scrapId);
             if (data != null) {
                 StoryScrapDisplay scrap = GameText.AllocScrap(data, m_TextDisplay, m_Pools);
                 GameText.PopulateStoryScrap(scrap, data, Assets.Style("snippet"));
                 GameText.AlignTextLine(scrap.Line, TextAlignment.Center);
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
+                while(Streaming.IsLoading()) {
+                    yield return null;
+                }
                 yield return GameText.AnimateLocations(m_TextDisplay, 1);
             } else {
                 TextLine scrap = GameText.AllocLine(m_TextDisplay, m_Pools);
@@ -492,6 +497,8 @@ namespace Journalism {
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
             }
 
+            m_ForceNext = inString.TryFindEvent(GameText.Events.ForceNext, out var _);
+
             m_AutoContinue = -1;
 
             return null;
@@ -509,17 +516,19 @@ namespace Journalism {
         }
 
         public IEnumerator CompleteLine() {
-            bool hasChoices = LookupNextChoice();
-            if (hasChoices) {
-                yield return 0.5f;
-                yield break;
-            }
-
-            var nextLineText = LookupNextLine();
-            if (nextLineText != null) {
-                StringHash32 characterId = GameText.FindCharacter(nextLineText);
-                if (GameText.IsPlayer(characterId) || nextLineText.TryFindEvent(GameText.Events.ForceInput, out var _)) {
+            if (!m_ForceNext) {
+                bool hasChoices = LookupNextChoice();
+                if (hasChoices) {
+                    yield return 0.5f;
                     yield break;
+                }
+
+                var nextLineText = LookupNextLine();
+                if (nextLineText != null) {
+                    StringHash32 characterId = GameText.FindCharacter(nextLineText);
+                    if (GameText.IsPlayer(characterId) || nextLineText.TryFindEvent(GameText.Events.ForceInput, out var _)) {
+                        yield break;
+                    }
                 }
             }
 
@@ -669,6 +678,9 @@ namespace Journalism {
             m_FinishedStoryLayout.Root.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
             yield return null;
             StoryText.LayoutNewspaper(m_FinishedStoryLayout, Assets.CurrentLevel.Story, Player.Data);
+            while(Streaming.IsLoading()) {
+                yield return null;
+            }
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 1;
             yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, "Talk to Editor", Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);

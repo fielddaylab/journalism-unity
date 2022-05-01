@@ -42,6 +42,7 @@ namespace Journalism {
 
         [Header("Contents")]
         public TMP_Text Text;
+        public TMP_Text CharacterHeader;
         public Image Icon; // Radial
         public Image MarkerIcon; // Marker
 

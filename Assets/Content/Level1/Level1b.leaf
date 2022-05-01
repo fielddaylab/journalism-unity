@@ -35,13 +35,17 @@ More people have arrived. The newsroom is buzzing with activity.
 You're about to grab some coffee when your editor finds you.
 {@person}You said you wanted more excitement, right?
 {@me}Um.... yeah, I guess so...
+$call ActivateStory()
 {@person}Good. We need to get ahead of this story. 
 {@person}The dam is still overflowing. Water is rising all over town. 
 {@person}I need you to get out there and report on what's happening.
-$call ActivateStory()
 {@me}You mean... now?
 {@person}Unless you think I should give the story to someone else...
-$choice GetReady; No. Don't worry. I'm on it. 
+$choice GetReadyCheckpoint; No. Don't worry. I'm on it. 
+
+:: GetReadyCheckpoint
+@checkpoint
+$goto GetReady
 
 // Original Name: Get Ready
 :: GetReady
@@ -128,13 +132,14 @@ $endif
 
 // Original Name: Get Ready part 2
 :: GetReadyPart2
+@clearText
 
 $if TimeRemaining()
 You still have {timeLeft} to get ready.
 
 
 $if !Visited(HelpKhalisa)
-Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.  
+{force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
 
 $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
 $endif
@@ -225,6 +230,8 @@ $choice GetReadyPart2; Back to your desk
 
 // Original Name: Head out
 :: HeadOut
+@checkpoint
+@clearText
 Forget cats and dogs. It's raining an entire pet store. 
 
 How are you going to get downtown in this mess? 
@@ -256,6 +263,7 @@ $GameOver("You lost the scoop, Rookie. Better luck next time.")
 
 // Original Name: Help Khalisa
 :: HelpKhalisa
+@clearText
 @tags Endurance, Trust
 Khalisa's car is stuck in a few inches of water, just outside the parking lot.
 {@person}Ugh. If my dad finds out about this, he's never gonna let me live it down. 
@@ -263,7 +271,7 @@ Khalisa's car is stuck in a few inches of water, just outside the parking lot.
 {@person}Retired fire chief. I swear, if I hear "turn around, don't drown" one more time...
 
 $if StatCheck(Endurance, 2)
-Luckiliy, you're there to help. 
+Luckily, you're there to help. 
 You and Khalisa muster up all your strength and manage to push her car to dry ground!
 $else
 You wish you could help, but at this point, you're mostly running on coffee and self-doubt. 
@@ -399,6 +407,7 @@ $choice Crackers; Grab a few saltine crackers.
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
 {bg BG/UpperLakeDam.jpg}
+@clearText
 <b>Location: the Upper Lake Dam</b>
 
 $if FirstVisit()
@@ -492,6 +501,7 @@ $goto STORYEVALUATION
 
 // Original Name: Talk to volunteer # 1
 :: TalkToVolunteer1
+@clearText
 $if StatCheck(Trust, 3)
 The volunteer is thrilled when you ask to interview him. 
 
@@ -629,6 +639,8 @@ $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Cherry Festival Map
 :: CherryFestivalMap
+@clearText
+
 {bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
 You wade through a few inches of water to get to Main Street.
