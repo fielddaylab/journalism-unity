@@ -228,6 +228,7 @@ $choice GetReadyPart2; Back to your desk
 :: HeadOut
 @checkpoint
 @clearText
+$call SetTimeRemaining(0)
 Forget cats and dogs. It's raining an entire pet store. 
 
 How are you going to get downtown in this mess? 
@@ -401,12 +402,13 @@ $choice Crackers; Grab a few saltine crackers.
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
 $call SetLocation("Upper Lake Dam")
-{bg BG/UpperLakeDam.jpg}
-<b>Location: the Upper Lake Dam</b>
 
 $if FirstVisit()
-$call SetTimeRemaining(2)
+    $call SetTimeRemaining(2)
 $endif
+
+{bg BG/UpperLakeDam.jpg}
+<b>Location: the Upper Lake Dam</b>
 
 Volunteers are stacking sandbags by the road, with a DNR worker leading the effort. 
 
