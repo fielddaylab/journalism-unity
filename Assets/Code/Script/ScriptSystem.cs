@@ -82,6 +82,10 @@ namespace Journalism {
             m_Integration.ConfigureDisplay(displayer, null);
         }
 
+        public void ClearDisplayOverride() {
+            m_Integration.ConfigureDisplay(m_TextDisplay, m_TextDisplay);
+        }
+
         /// <summary>
         /// Clears all visuals.
         /// </summary>

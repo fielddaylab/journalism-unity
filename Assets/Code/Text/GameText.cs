@@ -948,16 +948,17 @@ namespace Journalism {
             static public readonly StringHash32 Background = "background";
             static public readonly StringHash32 Image = "image";
             static public readonly StringHash32 Anim = "animation";
-            static public readonly StringHash32 Auto = "auto";
-            static public readonly StringHash32 ForceNext = "force-next";
             static public readonly StringHash32 Map = "map";
-            static public readonly StringHash32 ForceInput = "force-input";
             static public readonly StringHash32 ClearImage = "clear-image";
             static public readonly StringHash32 ClearMap = "clear-map";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
             static public readonly StringHash32 DisplayStoryStats = "display-story-stats";
             static public readonly StringHash32 DisplayStoryScore = "display-story-score";
+
+            static public readonly StringHash32 ForceInput = "force-input";
+            static public readonly StringHash32 Auto = "auto";
+            static public readonly StringHash32 ForceNext = "force-next";
         }
 
         static public class TextAnims {
@@ -991,15 +992,16 @@ namespace Journalism {
 
             config.AddEvent("bg", Events.Background).WithStringData().CloseWith(Events.BackgroundFadeOut);
             config.AddEvent("anim", Events.Anim).WithStringData();
-            config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
-            config.AddEvent("force-next", Events.ForceNext);
-            config.AddEvent("force-input", Events.ForceInput);
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
             config.AddEvent("story-score", Events.DisplayStoryScore);
             config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);
+
+            config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
+            config.AddEvent("force-next", Events.ForceNext);
+            config.AddEvent("force-input", Events.ForceInput);
 
             textDisplay.ConfigureHandlers(config, handler);
             visuals.ConfigureHandlers(config, handler);
@@ -1064,7 +1066,11 @@ namespace Journalism {
             } else if (minuteSuffix != null) {
                 return string.Format("<b>{0}</b> {1}", minutes, minuteSuffix);
             } else {
-                return string.Empty;
+                if (abbreviated) {
+                    return "0 min";
+                } else {
+                    return "0 minutes";
+                }
             }
         }
 

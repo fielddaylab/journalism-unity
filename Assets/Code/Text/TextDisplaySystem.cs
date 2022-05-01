@@ -30,6 +30,7 @@ namespace Journalism {
         [SerializeField] private StoryQualityDisplay m_StoryQualityLayout = null;
         [SerializeField] private StoryAttributeDisplay m_StoryAttributeLayout = null;
         [SerializeField] private StoryScoreDisplay m_StoryScoreLayout = null;
+        [SerializeField] private ImpactLayout m_ImpactLayout = null;
         [SerializeField] private AnimatedElement m_FeedbackOverlay = null;
 
         [Header("Animation")]
@@ -653,6 +654,7 @@ namespace Journalism {
             m_TextDisplay.ListRoot.SetAnchorPos(m_TextDisplay.RootBaseline, Axis.Y);
 
             m_FinishedStoryLayout.gameObject.SetActive(false);
+            m_ImpactLayout.gameObject.SetActive(false);
             AnimatedElement.Hide(m_FeedbackOverlay);
             m_OverlayAnim.Stop();
 
@@ -686,6 +688,11 @@ namespace Journalism {
             yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, "Talk to Editor", Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_FinishedStoryLayout.gameObject.SetActive(false);
+        }
+
+        public void EnqueueFeedbackItem(StringHash32 id, StringHash32 style) {
+            // Game.Scripting.OverrideDisplay(m_ImpactLayout);
+            // m_ImpactLayout.
         }
     }
 

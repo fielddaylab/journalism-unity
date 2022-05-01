@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 4574727086497451631}
   Icon: {fileID: 59673066259835341}
+  LineAnchor: {fileID: 8918214658697738870}
   Line: {fileID: 4792547205410902255}
   Alignment: 0
 --- !u!1 &5351644717283176225

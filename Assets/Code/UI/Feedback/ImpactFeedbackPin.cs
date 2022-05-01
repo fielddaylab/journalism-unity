@@ -10,6 +10,9 @@ namespace Journalism.UI {
     public sealed class ImpactFeedbackPin : MonoBehaviour {
         public RectTransform Root;
         public Image Icon;
+
+        [Header("Line")]
+        public RectTransform LineAnchor;
         public TextLine Line;
         public TextAlignment Alignment;
     }
