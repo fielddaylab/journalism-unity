@@ -15,6 +15,8 @@ namespace Journalism.UI {
         public TMP_Text Text;
         public ColorGroup Colors;
 
+        public Routine Animation;
+
         #if UNITY_EDITOR
 
         private void Reset() {

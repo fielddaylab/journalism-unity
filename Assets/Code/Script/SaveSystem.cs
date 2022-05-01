@@ -36,9 +36,12 @@ namespace Journalism {
             Log.Msg("[SaveSystem] Loaded checkpoint from node '{0}'", m_CurrentData.CheckpointId);
         }
 
-        public void SaveCheckpoint() {
+        public void SaveCheckpoint(bool dispatchEvent = true) {
             m_CheckpointData = Serializer.Write(m_CurrentData, OutputOptions.None, Serializer.Format.Binary);
             Log.Msg("[SaveSystem] Saved checkpoint at node '{0}'", m_CurrentData.CheckpointId);
+            if (dispatchEvent) {
+                Game.Events.Queue(GameEvents.LevelCheckpoint);
+            }
         }
 
         private void DeclareSave(PlayerData data) {
