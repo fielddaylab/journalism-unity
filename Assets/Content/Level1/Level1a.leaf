@@ -478,7 +478,7 @@ $if Visited(HelpHer)
     {@phone} He thought he could drive through the flood. Rescuers pulled him out just in time!
     {@phone} Remember: Turn around, don't drown! 
 
-    $call GiveSnippet(FloodBackground)
+    $call GiveSnippet(PoliceSafetyQuote)
     $call GiveSnippet(PoliceStory)
 $else
     The officer coughs awkwardly.
