@@ -282,7 +282,6 @@ $ContinueChoice({@me} Where is everybody??)
 
 $ContinueChoice({@me} How can I help?)
 
-$call ActivateStory()
 {@person} We need a breaking news story.
 {@person} People need to know what's happening and how to stay safe. 
 {@person} You've got 2 hours.

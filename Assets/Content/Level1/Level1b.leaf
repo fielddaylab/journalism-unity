@@ -38,6 +38,7 @@ You're about to grab some coffee when your editor finds you.
 {@person}Good. We need to get ahead of this story. 
 {@person}The dam is still overflowing. Water is rising all over town. 
 {@person}I need you to get out there and report on what's happening.
+$call ActivateStory()
 {@me}You mean... now?
 {@person}Unless you think I should give the story to someone else...
 $choice GetReady; No. Don't worry. I'm on it. 
