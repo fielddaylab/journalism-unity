@@ -26,11 +26,11 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: 
+    EditorBrief: For this story, we need a lot of color. Get people's attention and get some local flood stories out there! Plus, throw in some useful info and facts about what's happening. 
     FactWeight: 2
     ColorWeight: 4
     UsefulWeight: 1
-    FinalHeadline: 
+    FinalHeadline: Twin Lakes Battles Rising Water 
   StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
   Audio: {fileID: 0}

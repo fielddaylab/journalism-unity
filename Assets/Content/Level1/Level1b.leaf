@@ -36,9 +36,7 @@ You're about to grab some coffee when your editor finds you.
 {@person}You said you wanted more excitement, right?
 {@me}Um.... yeah, I guess so...
 $call ActivateStory()
-{@person}Good. We need to get ahead of this story. 
-{@person}The dam is still overflowing. Water is rising all over town. 
-{@person}I need you to get out there and report on what's happening.
+{@person}Good. I need you to get out there and report on what's happening.
 {@me}You mean... now?
 {@person}Unless you think I should give the story to someone else...
 $choice GetReadyCheckpoint; No. Don't worry. I'm on it. 
@@ -238,7 +236,7 @@ $if hasBike == true
 $choice Bike; Bike
 $endif
 
-$choice Drive; Drive
+$choice Drive; Drive  
 
 $if !Visited(TrackDownAnExpertToHelpYou)
 $choice TrackDownAnExpertToHelpYou; Track down an expert to help you
@@ -322,11 +320,9 @@ $choice ArriveAtFloodSite; Arrive at flood site
 $if StatCheck(Research, 2)
 All your research has paid off! 
 
-You use the city's interactive map and your flood safety know-how to avoid the worst flood zones. 
+You use the city's interactive map to avoid the worst flood zones. 
 
-Admittedly, it also takes three times longer than usual to get downtown.
-
-But you're alive and not stranded, so that's something!
+It takes longer than usual to get downtown, but at least you're not stranded!
 
 $choice ArriveAtFloodSite; Arrive at flood site
 $else
@@ -373,7 +369,7 @@ Now might not be the best time to bother her.
 
 $choice HeadOut; Back to your desk
 $elseif Visited(HelpKhalisa)
-Khalisa swings by your desk.
+Then Khalisa swings by your desk.
 {@person}You need help getting downtown, Rookie? I bet my dad could help.  
 {@person}He's a little...opinionated...sometimes, but he's the best in the business. 
 
@@ -404,7 +400,6 @@ $choice Crackers; Grab a few saltine crackers.
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
-@clearText
 $call SetLocation("Upper Lake Dam")
 {bg BG/UpperLakeDam.jpg}
 <b>Location: the Upper Lake Dam</b>
@@ -413,19 +408,19 @@ $if FirstVisit()
 $call SetTimeRemaining(2)
 $endif
 
-Volunteers are stacking sandbags by the road, with a DNR worker leading the effort.
+Volunteers are stacking sandbags by the road, with a DNR worker leading the effort. 
+
+A houseboat floats on the river nearby.
 
 You have {timeLeft} remaining to submit this story.
 
 
 $if HasTime(0.3333333)
-A houseboat floats on the overflowing river, with Nora's Ark painted on the hull.
-A woman in a rain poncho and goggles stands on deck, sipping tea and watching the scene unfold. 
 
 $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5)
 $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5)
 $HubChoice(InterviewTheDNRWorker, "Interview the DNR worker", 0.5)
-$HubChoice(TalkToTheHouseboatLady, "Climb up onto... \"Nora's Ark\"", 0.5)
+$HubChoice(TalkToTheHouseboatLady, "Climb up onto \"Nora's Ark\"", 0.5)
 $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5)
 $HubChoice(CherryFestivalMap, "Walk down the street to the Cherry Festival", 0.25)
 $else
@@ -440,10 +435,6 @@ $endif
 // Original Name: Find higher ground
 :: FindHigherGround
 You swerve into a parking lot, just in time. 
-
-
-
-You still need to get downtown. You try to check the flood map, but your wifi won't cooperate. 
 
 $choice LookAroundForSomethingUseful; Look around for something useful
 
@@ -462,8 +453,6 @@ $choice WaitForRescue; Climb out on top of the car and wait for rescue
 :: CallInformant
 Khalisa's firefighter dad is thrilled to give you a lift downtown.
 
-{@person} It's not safe out there for out-of-towners{auto}.
-{@person}Or for anybody, really. 
 {@person} Wait out front, I'll come get you!
 
 $choice WaitOutside; Wait for a ride
@@ -525,7 +514,7 @@ $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Talk to volunteer # 2
 :: TalkToVolunteer2
-You approach a volunteer as she's just packing up.
+You approach a volunteer just as she's packing up.
 
 {@person}Sorry, can't talk, gotta go sample the bacterial contamination in the epilimnion of Upper Lake. 
 
@@ -567,7 +556,7 @@ $endif
 {bg BG/UpperLakeDamBoat.jpg}
 The houseboat lady is thrilled to talk with you.
 
-{@person}{@auto}Houseboat, stay afloat!
+{@person}Houseboat, stay afloat!
 she chants, holding up a picket sign. 
 
 $choice CanYouTellMeHowTheFloodHasAffectedYou; Can you tell me how the flood has affected you?
@@ -595,7 +584,7 @@ You climb to the top branches for a perfect shot.
 $if Visited(ChaseChickens)
 Turns out running around after chickens is a pretty great workout.
 $else
-Looks like your cherry-themed breakfast is paying off.
+Looks like the energy boost from your cherry-themed breakfast is paying off.
 $endif
 
 $call GiveSnippet(HouseboatPhotos)
@@ -642,24 +631,18 @@ $choice ArriveAtFloodSite; Back to the dam
 $call SetLocation("Cherry Festival")
 {bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
-You wade through a few inches of water to get to Main Street.
-
 As soon as you arrive, you realize you might be out of your depth. 
 
 The street is a rushing river, with thousands of cherries floating past. 
 
 Cars are stranded, and people are clustered in dry areas and on rooftops. 
 
-From around the corner, you can hear sirens. 
-
-A man is rushing around inside a cheese shop nearby. 
-
 You have {timeLeft} remaining to submit this story.
 
 $if HasTime(0.5)
 $HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25)
 $HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5)
-$HubChoice(FollowTheSirens, "Follow the sirens", 0.5)
+$HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5)
 
 $HubChoice(ArriveAtFloodSite, "Head back to the flood site", 0.5)
 $else
@@ -671,9 +654,9 @@ $endif
 :: LookAroundForSomethingUseful
 You've ended up in a deli parking lot, with a <color="red">Come On In!</color> sign flashing. 
 
-Another driver is parked here, waiting out the storm. 
+You try to check the flood map, but your wifi is acting glitchy. 
 
-You notice a pair of kayaks strapped to their car roof. 
+Another driver is parked next to you, a pair of kayaks strapped to their car roof. 
 
 $choice AskToBorrowAKayak; Ask to borrow a kayak
 $choice UseDeliWifi; Go into the deli and use their wifi
@@ -723,8 +706,7 @@ $endif
 :: WaitOutside
 The former fire chief shows up in a tricked-out flood rescue vehicle. 
 
-{@person} Rigged this baby up in my spare time{auto}
-he says, and ferries you off into the floodwater. 
+{@person} Rigged this baby up in my spare time!
 
 $choice TakePhotosOnTheWay; Take photos on the way
 $choice AskForAnInterview; Ask for an interview
@@ -749,8 +731,7 @@ $endif
 $if !StatCheck(Resourceful, 4)
 You dig through your backpack and find half a protein bar.
 
-{@me}{auto}Um...do you want this?
-you say awkwardly.
+{@me}Um...do you want this?
 
 {@person}Nah. Thanks, but I better get back to work.
 
@@ -887,14 +868,15 @@ $endif
 {@person}The flood has been lovely. Though all those volunteers would probably be happier on a houseboat.
 
 $if StatCheck(Trust, 3)
-You agree with her, they probably would.
-
-The houseboat lady, Nora Watters, seems to trust you.
+The houseboat lady seems to trust you.
 
 She tells you all about what she saw when the flood started, and she even offers to let you pet her cats. 
 
 $call GiveSnippet(GreatHouseboatStory)
+$choice ArriveAtFloodSite; Back to the dam
+
 $elseif StatCheck(Research, 3)
+
 You try to explain that a world full of houseboats probably isn't a sustainable solution to climate change.
 
 Nora the houseboat lady isn't convinced. 
@@ -1077,9 +1059,9 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Ask for an interview
 :: AskForAnInterview
-The former chief is eager to chat with you!
+The former chief is eager to chat with you.
 
-He spends most of the ride trying to set you up with Khalisa (she's single, adventurous, loves yogurt and long walks on the beach). 
+He spends most of the ride trying to set you up with Khalisa (single, adventurous, loves frozen yogurt). 
 
 You should have time to squeeze in one question. 
 
@@ -1254,8 +1236,6 @@ He gives you some great tips.
 
 {@person}Don't try to drive through water if you can't see the bottom. 
 {@person}You might end up getting lucky, but it's not worth the risk.
-{@person}Now if only Khalisa would listen... but at least she made it to work without any issues!
-{@me}Uh... yeah. No issues at all!
 
 $call GiveSnippet(GreatFloodQuote)
 $call GiveSnippet(FloodSafetyTips)
@@ -1373,45 +1353,48 @@ $call BeginFeedback()
 {story-stats}
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.6
-        {@person}   Stellar work Rookie! I can tell you put your heart into this.
-        {@person}   Solid story construction and lots of actionable info.
-        {@person}   Maybe you've got a Pulitzer Prize in your future.
+        {@person}   Amazing work today, Rookie!
+        {@person}   You stuck to the assignment and gathered high-quality quotes and photos. 
+        {@person}   So many people read your story that it broke the server!
+        {@person}   Now if only I had any clue how to get the website back online... 
     $elseif StoryAlignment() >= 0.4
-        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
-        {@person}   Admittedly, we could've used a little more useful info... 
-        {@person}   But this should still help a lot of people. 
+        {@person}   Nice work out there, Rookie.
+        {@person}   You could've stuck a little more closely to my notes.
+        {@person}   But still a solid story. We're already getting tons of engagement online! 
     $else
-        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
-        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
-        {@person}   Make sure to check my notes next time. It's all in there.  
+        {@person}   Your reporting is top-notch, Rookie! 
+        {@person}   Although... your story construction didn't quite match what I asked for.  
+        {@person}   Make sure to stick to the assignment to hook more readers... and hopefully help more people.  
     $endif
 $elseif StoryScore() == "medium"
     $if StoryAlignment() >= 0.6
-        {@person}   Nice work getting the right info out there!
-        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
-        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+        {@person}   Great work, Rookie! You stuck to the assignment and gathered some solid info. 
+        {@person}   Look at those numbers climbing. We're getting tons of engagement!
+        {@person}   Glad you were here to get the word out. 
     $elseif StoryAlignment() >= 0.4
-        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
-        {@person}   This should be enough to help a lot of people.  
-        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+        {@person}   Not bad, Rookie! You got some solid quotes and photos. 
+        {@person}   You veered away from the story breakdown a little. 
+        {@person}   Still, your story should get plenty of engagement--and hopefully help a lot of people. 
     $else
-        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
-        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
-        {@person}   Still. Not bad for your first natural disaster. 
+        {@person}   Well... you did put a halfway decent story together.  
+        {@person}   It's not quite the breakdown I asked for.  
+        {@person}   Still, you got the word out. Hopefully it'll be enough to keep people safe. 
     $endif
 $else
     $if StoryAlignment() >= 0.6
-        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
-        {@person}   This story should help a lot of people... 
-        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
+        {@person}   Great job sticking to the assignment, Rookie! 
+        {@person}   Yikes... your quality control could use some work, though. 
+        {@person}   See if you can scrape together some better photos and quotes next time.  
     $elseif StoryAlignment() >= 0.4
-        {@person}   Nice work, Rookie. Your story construction is pretty solid!
-        {@person}   Your quality control could definitely use some work. 
-        {@person}   Still. Not bad for your first natural disaster. 
+        {@person}   Not bad, Rookie! Pretty decent story construction. 
+        {@person}   These quotes and photos are.... interesting. 
+        {@person}   Bigger papers have more help, but out here, you need to be a little scrappy. 
+        {@person}   The higher the quality of quotes and photos, the more people we'll reach. 
     $else
-        {@person}   Well.... this could be worse. Sort of.  
-        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
-        {@person}   This was your first natural disaster, so I'll let it slide. 
+        {@person}   Yikes. Got a little distracted out there, huh, Rookie?   
+        {@person}   Your story didn't match my notes. 
+        {@person}   I'm glad we got something out there. But keep an eye on the story breakdown next time.
+        {@person}   And some higher quality content couldn't hurt. 
     $endif
 $endif
 {story-score}
