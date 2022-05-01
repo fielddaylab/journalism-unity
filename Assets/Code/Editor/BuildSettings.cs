@@ -51,7 +51,7 @@ namespace Journalism.Editor
                 }
             }
 
-            PlayerSettings.SetManagedStrippingLevel(EditorUserBuildSettings.selectedBuildTargetGroup, bDesiredDevBuild ? ManagedStrippingLevel.Medium : ManagedStrippingLevel.High);
+            PlayerSettings.SetManagedStrippingLevel(EditorUserBuildSettings.selectedBuildTargetGroup, ManagedStrippingLevel.Medium);
         }
 
         private class BuildPreprocess : IPreprocessBuildWithReport

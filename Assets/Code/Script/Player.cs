@@ -404,6 +404,8 @@ namespace Journalism {
         /// Sets up the current level.
         /// </summary>
         static public void SetupLevel(LevelDef def) {
+            bool wasActive = s_Current.LevelIndex >= 0;
+
             if (def.StoryScraps.name != s_Current.StoryGroup) {
                 s_Current.StoryGroup = def.StoryScraps.name;
                 s_Current.StoryScrapInventory.Clear();
@@ -419,7 +421,7 @@ namespace Journalism {
                 s_Current.TimeRemaining = 0;
                 UISystem.SetStoryEnabled(false);
                 Log.Msg("[Player] New level index {0} - clearing story and checkpoints", def.LevelIndex);
-                Game.Save.SaveCheckpoint();
+                Game.Save.SaveCheckpoint(wasActive);
             }
 
             s_Stats = default;

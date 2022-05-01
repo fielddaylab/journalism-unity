@@ -38,7 +38,7 @@ Insert a photo of ducks swimming in the hospital parking lot.
 :: FloodMap
 @type Graph
 @quality Good
-@attr Useful
+@attr Useful, Color
 @image Photo/FloodMap-Lv1.png
 
 // Original Name: Weather stats
@@ -152,6 +152,7 @@ Snippet body not implemented.
 @type Photo
 @quality Great
 @attr Color
+@image Anim/twin-lakes-dam.jpg
 Snippet text unimplemented.
 
 // Original Name: Okay houseboat photos
@@ -159,12 +160,14 @@ Snippet text unimplemented.
 @type Photo
 @quality Good
 @attr Color
+@image Anim/twin-lakes-dam-good.png
 Snippet text unimplemented.
 
 // Original Name: Blurry houseboat photos
 :: BlurryHouseboatPhotos
 @type Photo
 @quality Bad
+@image Anim/twin-lakes-dam-blurry.png
 Snippet text unimplemented.
 
 // Original Name: Great volunteering quote
@@ -192,6 +195,7 @@ Trust me, Dear. Houseboats are the future! Stylish, off the grid, and your cats 
 @type Observation
 @quality Good
 @attr Color
+@image Anim/dog-rescue.png
 Near Main Street, a pickup truck got swept into a flooded ditch! Firefighters rescued the driver-—and his dog—-just in time.  
 
 // Original Name: Dog rescue picture
@@ -199,6 +203,7 @@ Near Main Street, a pickup truck got swept into a flooded ditch! Firefighters re
 @type Photo
 @quality Good
 @attr Color
+@image Anim/dog-rescue.png
 Insert picture of a rescue worker saving a dog from the flood.
 
 // Original Name: Great flood photos from kayak
@@ -206,6 +211,7 @@ Insert picture of a rescue worker saving a dog from the flood.
 @type Photo
 @quality Great
 @attr Color
+@image Anim/downtown-flooding-kayak.png
 Snippet text unimplemented.
 
 // Original Name: Good flood photos from kayak
@@ -213,6 +219,7 @@ Snippet text unimplemented.
 @type Photo
 @quality Good
 @attr Color
+@image Anim/downtown-flooding-kayak-good.png
 Snippet text unimplemented.
 
 // Original Name: Great flood photos from truck or bike ride downtown
@@ -220,46 +227,49 @@ Snippet text unimplemented.
 @type Photo
 @quality Great
 @attr Color
+@image Anim/downtown-flooding-truck.png
 Snippet text unimplemented.
 
 // Original Name: Blurry flood photos from truck 
 :: BlurryFloodPhotosTruck
 @type Photo
 @quality Bad
+@image Anim/downtown-flooding-truck-blurry.png
 Snippet text unimplemented.
 
 // Original Name: Flooded Main Street Photo
 :: FloodedMainStreet
 @type Photo
 @quality Great
+@image Anim/flooded-main-st.png
 Snippet text unimplemented.
 
 // Original Name: Lake levels
 :: LakeLevels
 @type Quote
 @quality Good
-@attr Fact
+@attr Facts
 We've been trying to make people understand. The levels are just too high to handle all this extreme rainfall! 
 
 // Original Name: Flood cause
 :: FloodCause
 @type Fact
 @quality Good
-@attr Fact
+@attr Facts
 According to a local limnology expert, the flood was caused by a combination of high lake levels and rainfall from climate change. 
 
 // Original Name: Flood science
 :: FloodScience
 @type Fact
 @quality Good
-@attr Fact
+@attr Facts
 The lake levels have been kept artificially high. This means a lot more flooding, and a lot more harmful phosphorus swept into our lakes.  
 
 // Original Name: Flood info
 :: FloodInfo
 @type Fact
 @quality Good
-@attr Fact
+@attr Facts
 "It's supposed to keep raining all day. We're expecting things to get worse before they get better."
 
 // Original Name: Sandbag troubles

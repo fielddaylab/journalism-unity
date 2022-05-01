@@ -31,7 +31,7 @@
 $ActionChoice(Wake up)
 $call SetLocation("Apartment")
 {bg BG/BedroomMorning.jpg}
-$call Music(Music/Jahzzar 02 Wet Socks.mp3)
+$call Music(Music/morning journal.mp3)
 It's 5AM.
 {img Anim/enml-rain.jpg}
 Dark, rainy, a train rumbling past. 
@@ -111,7 +111,7 @@ $choice OffToWork; Off to work
 @tags Endurance
 @clearText
 {bg BG/OutsideApt-Map.jpg}
-You've been eating ramen and take-out all week.  
+You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and a slice of cherry summer sausage.
 Might as well pack up the cherry granola for later. Could come in handy. 
@@ -286,7 +286,6 @@ $call ActivateStory()
 {@person} We need a breaking news story.
 {@person} People need to know what's happening and how to stay safe. 
 {@person} You've got 2 hours.
-$call ActivateStory()
 
 $choice BreakingNewsStory; {@me} On it.
 
@@ -333,6 +332,7 @@ You knew all this tech gear would pay off!
 
 With your zoom lens, you snag an amazing photo: the abandoned Cherrymobile, juxtaposed with the stacking shopkeep!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
 $else
 You pull over and snap some photos. 
@@ -341,6 +341,7 @@ You think wistfully of your zoom lens, buried in your closet somewhere.
 
 At least blurry cars in blurry water is better than nothing. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
 $endif
 
@@ -539,7 +540,11 @@ $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
-    $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(15 minutes)</color>
+    $if HasTime(0.25)
+        $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(15 minutes)</color>
+    $else
+        Too bad you don't have enough time to ask anyone for permission to use them.
+    $endif
 $endif
 
 $goto Office1-Clock
@@ -609,6 +614,7 @@ $else
         You don't have time for this. You log off and snap a picture of the flooded parking lot outside the newsroom. 
         Kinda boring, but it's better than nothing. Probably.
 
+        $call SFX(PhotoSnap)
         $call GiveSnippet(GrainyPicture)
     $endif
 $endif
@@ -630,7 +636,7 @@ $call RunPublish()
 $goto StoryFeedback
 
 :: StoryFeedback
-@feedback
+$call BeginFeedback()
 {/bg}
 {img Anim/Editor.jpeg}
 {@person} Alright, let's see how you did...
@@ -679,5 +685,6 @@ $else
     $endif
 $endif
 {story-score}
+$call EndFeedback()
 {/img}
 $call NextLevel()

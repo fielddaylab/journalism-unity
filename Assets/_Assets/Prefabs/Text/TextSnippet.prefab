@@ -290,6 +290,7 @@ MonoBehaviour:
   Layout: {fileID: 6103029026025727545}
   TailHeight: 16
   Text: {fileID: 468769718010146141}
+  CharacterHeader: {fileID: 0}
   Icon: {fileID: 4174921025481320418}
   MarkerIcon: {fileID: 6025144781850365269}
 --- !u!114 &4507121683936925807

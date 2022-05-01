@@ -11,7 +11,7 @@ namespace Journalism.UI {
                 foreach(var stat in StatLines) {
                     ushort statVal = (ushort) Player.Stat(stat.Stat);
                     stat.Name.SetText(Stats.Name(stat.Stat));
-                    stat.Rank.SetText(Stats.RankLabel(stat.Stat, statVal));
+                    stat.Rank.SetText(string.Format("{0} ({1})", Stats.RankLabel(stat.Stat, statVal), statVal));
                     stat.Rank.color = Stats.RankColor(statVal);
                 }
             };

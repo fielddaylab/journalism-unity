@@ -27,22 +27,30 @@
 
 // Original Name: Story 2 Intro
 :: Story2Intro
+$call SetLocation("Newsroom")
 {bg BG/Newsroom-Story2.jpg}
+$call Music(Music/morning journal.mp3)
 Your first breaking news update is in the books!
 More people have arrived. The newsroom is buzzing with activity. 
 You're about to grab some coffee when your editor finds you.
 {@person}You said you wanted more excitement, right?
 {@me}Um.... yeah, I guess so...
+$call ActivateStory()
 {@person}Good. We need to get ahead of this story. 
 {@person}The dam is still overflowing. Water is rising all over town. 
 {@person}I need you to get out there and report on what's happening.
 {@me}You mean... now?
 {@person}Unless you think I should give the story to someone else...
-$choice GetReady; No. Don't worry. I'm on it. 
+$choice GetReadyCheckpoint; No. Don't worry. I'm on it. 
+
+:: GetReadyCheckpoint
+@checkpoint
+$goto GetReady
 
 // Original Name: Get Ready
 :: GetReady
 @clearText
+$call SetHeaderEnabled(true)
 
 $if FirstVisit()
 $call SetTimeRemaining(0.75)
@@ -81,7 +89,7 @@ $endif
 @clearText
 One of the copyeditors, Ben, is away from his desk.
 
-He left his phone charging, right out in the openn.
+He left his phone charging, right out in the open.
 
 You can't believe small town people are really this trusting. They probably leave their front doors unlocked, too.
 
@@ -124,13 +132,14 @@ $endif
 
 // Original Name: Get Ready part 2
 :: GetReadyPart2
+@clearText
 
 $if TimeRemaining()
 You still have {timeLeft} to get ready.
 
 
 $if !Visited(HelpKhalisa)
-Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.  
+{force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
 
 $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
 $endif
@@ -138,7 +147,7 @@ $endif
 
 $HubChoice(Breakroom, "Search the break room for snacks", 0.25)
 
-$HubChoice(ResearchOption-FillIn, "Read up on flooding at the library across the street", 0.5)
+// $HubChoice(ResearchOption-FillIn, "Read up on flooding at the library across the street", 0.5)
 
 $choice HeadOut; Enough stalling. Time to go.
 $else
@@ -221,6 +230,8 @@ $choice GetReadyPart2; Back to your desk
 
 // Original Name: Head out
 :: HeadOut
+@checkpoint
+@clearText
 Forget cats and dogs. It's raining an entire pet store. 
 
 How are you going to get downtown in this mess? 
@@ -252,6 +263,7 @@ $GameOver("You lost the scoop, Rookie. Better luck next time.")
 
 // Original Name: Help Khalisa
 :: HelpKhalisa
+@clearText
 @tags Endurance, Trust
 Khalisa's car is stuck in a few inches of water, just outside the parking lot.
 {@person}Ugh. If my dad finds out about this, he's never gonna let me live it down. 
@@ -259,7 +271,7 @@ Khalisa's car is stuck in a few inches of water, just outside the parking lot.
 {@person}Retired fire chief. I swear, if I hear "turn around, don't drown" one more time...
 
 $if StatCheck(Endurance, 2)
-Luckiliy, you're there to help. 
+Luckily, you're there to help. 
 You and Khalisa muster up all your strength and manage to push her car to dry ground!
 $else
 You wish you could help, but at this point, you're mostly running on coffee and self-doubt. 
@@ -300,6 +312,7 @@ You hop on your bike, weave around flooded areas, and make it downtown in record
 
 Plus, you snag a great photo along the way!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $call AdjustStats(Endurance + 1)
 
@@ -394,6 +407,7 @@ $choice Crackers; Grab a few saltine crackers.
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
 {bg BG/UpperLakeDam.jpg}
+@clearText
 <b>Location: the Upper Lake Dam</b>
 
 $if FirstVisit()
@@ -422,7 +436,7 @@ $endif
 
 
 
-$choice Level2Story3TheScienceStory; Skip to Level 2, Story 3: The Science Story
+//$choice Level2Story3TheScienceStory; Skip to Level 2, Story 3: The Science Story
 
 // Original Name: Find higher ground
 :: FindHigherGround
@@ -487,6 +501,7 @@ $goto STORYEVALUATION
 
 // Original Name: Talk to volunteer # 1
 :: TalkToVolunteer1
+@clearText
 $if StatCheck(Trust, 3)
 The volunteer is thrilled when you ask to interview him. 
 
@@ -569,6 +584,7 @@ Luckily you've got a fully charged phone and a fancy zoom lens!
 
 You snag some great photos--the volunteers working, the overflowing dam, and two cats peeking out the window of the houseboat. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $endif
 
@@ -591,18 +607,21 @@ You rig up a tripod with a broken branch, a shoelace, and a hair scrunchie.
 
 You didn't binge-watch all those old episodes of MacGyver for nothing. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
 You can't get a clear shot without a zoom lens.
 
 You're about to give up when when you hear a voice from behind you.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2
 You use your modest tech gear to snap some photos.
 
 They might not win any prizes, but they should be good enough.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(OkayHouseboatPhotos)
 $endif
 
@@ -612,6 +631,7 @@ The conditions are terrible and so is your photography gear.
 
 You manage to snap a few blurry shots. 
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryHouseboatPhotos)
 $endif
 
@@ -619,6 +639,8 @@ $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Cherry Festival Map
 :: CherryFestivalMap
+@clearText
+
 {bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
 You wade through a few inches of water to get to Main Street.
@@ -888,7 +910,7 @@ $else
 You ask her about the flooding.
 
 {@person}It's not just about flooding.
-{person}Houseboats are great in winter, too!
+{@person}Houseboats are great in winter, too!
 {@person}If geese can migrate south, why not us? 
 
 $ContinueChoice({@me} Yeah, that's great. So about the flooding...)
@@ -946,6 +968,7 @@ All that's missing is the seedy-underbelly side plot and the rival-turned-love i
 
 Still, the day isn't over yet...
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(FloodedMainStreet)
 
 $choice CherryFestivalMap; Cherry Festival Map
@@ -959,6 +982,7 @@ A pickup truck is stuck in a ditch, water rushing all around it.
 Firefighters pull the driver and his dog out of the car, just in time!
 
 $call GiveSnippet(DogRescue)
+$call SFX(PhotoSnap)
 $call GiveSnippet(DogRescuePicture)
 
 $choice CherryFestivalMap; Cherry Festival Map
@@ -969,11 +993,11 @@ $choice CherryFestivalMap; Cherry Festival Map
 $if StatCheck(Trust, 4)
 The driver is happy to lend you their kayak. 
 
-{@person}You seem trustoworthy. 
-{@person}By the way, I loved your piece about the possom family living behind the school.
-{@person}I had no idea possoms were so amazing!! 
+{@person}You seem trustworthy. 
+{@person}By the way, I loved your piece about the possum family living behind the school.
+{@person}I had no idea possums were so amazing!! 
 
-You remember writing that story, the day after you moved here: Playing Possom at Twin Lakes High School. 
+You remember writing that story, the day after you moved here: Playing Possum at Twin Lakes High School. 
 
 You'd considered cleaning out your desk then and there. 
 
@@ -1026,7 +1050,7 @@ The good news: you're alive!
 
 The bad news: you lost your shoes, ruined all your tech, and spend all day sitting on the bleachers, waiting to be rescued. 
 
-At least you have a friendly possom family for company. 
+At least you have a friendly possum family for company. 
 
 $GameOver("You needed to be rescued.")
 
@@ -1036,6 +1060,7 @@ $GameOver("You needed to be rescued.")
 $if StatCheck(Tech, 3)
 On the ride downtown, you get some great shots with your zoom lens!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
 You snap photos of the street around you. 
@@ -1044,6 +1069,7 @@ Too bad you don't have the right lens.
 
 There's a crate of cherries floating through the water, but it ends up looking like a brown and red blur.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryFloodPhotosTruck)
 $endif
 
@@ -1090,6 +1116,8 @@ $call DecreaseTime(1)
 $call GiveSnippet(FloodScience)
 
 $choice ArriveAtFloodSite; Back to flood site
+$endif
+
 $if Visited(BorrowGear)
 The limnologist shakes her head.
 
@@ -1304,7 +1332,8 @@ You float in the street and snap some photos.
 
 As expected, they turn out awful. You're already wishing you had those lenses back.
 
-$call GiveSnippet(BlurryFloodPhotos)
+$call SFX(PhotoSnap)
+$call GiveSnippet(GoodFloodPhotosKayak)
 
 
 $choice ArriveAtFloodSite; Arrive at flood site
@@ -1316,6 +1345,7 @@ You float in the street and snap some photos.
 
 You don't have your zoom lens, but you're right in the middle of the action, so the photos turn out okay!
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GoodFloodPhotosKayak)
 
 $choice ArriveAtFloodSite; Arrive at flood site
@@ -1326,11 +1356,69 @@ You use your tech gear to snap some amazing photos!
 
 Jars of cherry jam, fish flopping out of the water, and even a snake slithering by.
 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosKayak)
 
 $choice ArriveAtFloodSite; Arrive at flood site
 $endif
 
 :: STORYEVALUATION
-{@msg}  Story builder sequence here
-$call NextLevel()
+$call RunPublish()
+$goto StoryFeedback
+
+:: StoryFeedback
+$call BeginFeedback()
+{/bg}
+{img Anim/Editor.jpeg}
+{@person} Alright, let's see how you did...
+{story-stats}
+$if StoryScore() == "good"
+    $if StoryAlignment() >= 0.6
+        {@person}   Stellar work Rookie! I can tell you put your heart into this.
+        {@person}   Solid story construction and lots of actionable info.
+        {@person}   Maybe you've got a Pulitzer Prize in your future.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@person}   Admittedly, we could've used a little more useful info... 
+        {@person}   But this should still help a lot of people. 
+    $else
+        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@person}   Make sure to check my notes next time. It's all in there.  
+    $endif
+$elseif StoryScore() == "medium"
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work getting the right info out there!
+        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
+        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@person}   This should be enough to help a lot of people.  
+        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+    $else
+        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@person}   Still. Not bad for your first natural disaster. 
+    $endif
+$else
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   This story should help a lot of people... 
+        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Nice work, Rookie. Your story construction is pretty solid!
+        {@person}   Your quality control could definitely use some work. 
+        {@person}   Still. Not bad for your first natural disaster. 
+    $else
+        {@person}   Well.... this could be worse. Sort of.  
+        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@person}   This was your first natural disaster, so I'll let it slide. 
+    $endif
+$endif
+{story-score}
+{/img}
+$call EndFeedback()
+
+{@msg}  This is the end of Level 1.
+{@msg}  You are now free to close your browser.
+// $call NextLevel()

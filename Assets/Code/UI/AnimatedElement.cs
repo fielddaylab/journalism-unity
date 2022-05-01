@@ -15,6 +15,8 @@ namespace Journalism.UI {
         public TMP_Text Text;
         public ColorGroup Colors;
 
+        public Routine Animation;
+
         #if UNITY_EDITOR
 
         private void Reset() {
@@ -28,7 +30,9 @@ namespace Journalism.UI {
         private void OnValidate() {
             Transform = transform;
             RectTransform = Transform as RectTransform;
-            Text = Graphic as TMP_Text;
+            if (!Text) {
+                Text = Graphic as TMP_Text;
+            }
         }
 
         #endif // UNITY_EDITOR
@@ -74,6 +78,30 @@ namespace Journalism.UI {
                 return Tween.Float(element.Colors.GetAlpha(), alpha, element.Colors.SetAlpha, duration);
             } else {
                 return null;
+            }
+        }
+
+        static public void SwapText(AnimatedElement element, string newText) {
+            if (element.Text && element.Text.text != newText) {
+                element.Text.text = newText;
+            }
+        }
+
+        static public IEnumerator SwapText(AnimatedElement element, string newText, float duration) {
+            if (element.Text && element.Text.text != newText) {
+                if (string.IsNullOrEmpty(newText)) {
+                    yield return element.Text.FadeTo(0, duration);
+                    element.Text.text = string.Empty;
+                    element.Text.SetAlpha(1);
+                } else if (!string.IsNullOrEmpty(element.Text.text) && element.Text.IsVisible()) {
+                    yield return element.Text.FadeTo(0, duration / 2);
+                    element.Text.text = newText;
+                    yield return element.Text.FadeTo(1, duration / 2);
+                } else {
+                    element.Text.text = newText;
+                    element.Text.SetAlpha(0);
+                    yield return element.Text.FadeTo(1, duration);
+                }
             }
         }
 

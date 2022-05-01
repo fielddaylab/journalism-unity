@@ -123,6 +123,42 @@ MonoBehaviour:
     RoundingScale: 1.5
     Texture: {fileID: 0}
   - Id:
+      m_Source: stat-increase
+      m_HashValue: 4002119670
+    Background:
+      serializedVersion: 2
+      rgba: 4292908416
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+    RoundingScale: 1.5
+    Texture: {fileID: 0}
+  - Id:
+      m_Source: stat-decrease
+      m_HashValue: 2757424582
+    Background:
+      serializedVersion: 2
+      rgba: 4282006211
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+    RoundingScale: 1.5
+    Texture: {fileID: 0}
+  - Id:
+      m_Source: stat-increase-decrease
+      m_HashValue: 3105769597
+    Background:
+      serializedVersion: 2
+      rgba: 4282030275
+    Outline:
+      serializedVersion: 2
+      rgba: 4278388513
+    Tail: 0
+    RoundingScale: 1.5
+    Texture: {fileID: 0}
+  - Id:
       m_Source: snippet-in-story
       m_HashValue: 3872775442
     Background:

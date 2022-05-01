@@ -43,11 +43,6 @@ namespace Journalism {
             m_Flags |= ScriptNodeFlags.Hub;
         }
 
-        [BlockMeta("feedback"), Preserve]
-        private void SetFeedbackFlag() {
-            m_Flags |= ScriptNodeFlags.Feedback;
-        }
-
         [BlockMeta("checkpoint"), Preserve]
         private void SetCheckpoint(StringHash32 id = default) {
             m_Flags |= ScriptNodeFlags.Checkpoint;
@@ -65,7 +60,6 @@ namespace Journalism {
     public enum ScriptNodeFlags : ushort {
         ClearText = 0x01,
         Hub = 0x02,
-        Checkpoint = 0x04,
-        Feedback = 0x08
+        Checkpoint = 0x04
     }
 }

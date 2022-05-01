@@ -30,12 +30,14 @@ namespace Journalism {
         [SerializeField] private StoryQualityDisplay m_StoryQualityLayout = null;
         [SerializeField] private StoryAttributeDisplay m_StoryAttributeLayout = null;
         [SerializeField] private StoryScoreDisplay m_StoryScoreLayout = null;
-        [SerializeField] private CanvasGroup m_EditorOverlay = null;
+        [SerializeField] private AnimatedElement m_FeedbackOverlay = null;
 
         [Header("Animation")]
         [SerializeField] private float m_ChoiceRowsOffset = 48;
         [SerializeField] private TweenSettings m_ChoiceRowsAnim = new TweenSettings(0.2f, Curve.Smooth);
         [SerializeField] private float m_StatsOffset = 32;
+        [SerializeField] private float m_FeedbackOverlayEditorY = -170f;
+        [SerializeField] private float m_FeedbackOverlayImpactY = -75f;
 
         [Header("Image Contents")]
         [SerializeField] private ImageColumn m_Image = null;
@@ -49,6 +51,7 @@ namespace Journalism {
         [NonSerialized] private TextAlignment m_MapPosition = TextAlignment.Center;
         [NonSerialized] private float m_ImageColumnBaseline;
         [NonSerialized] private float m_AutoContinue = -1;
+        [NonSerialized] private bool m_ForceNext = false;
         private Routine m_OverlayAnim;
 
         public LookupLineDelegate LookupLine;
@@ -334,22 +337,16 @@ namespace Journalism {
             GameText.InsertTextLine(m_TextDisplay, m_StoryScoreLayout.Line, HandleFreeStoryStat);
             switch(Player.StoryStatistics.Score) {
                 case StoryScore.Bad: {
-                    m_StoryScoreLayout.ScoreName.SetText("LOW");
-                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#FA6464");
-                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "Technically better than a sharp stick to the eye.", null, default, null);
+                    GameText.PopulateTextLine(m_StoryScoreLayout.Line, "I know you're just a rookie, but I expected more from someone who went to a fancy school.", null, default, null);
                     break;
                 }
 
                 case StoryScore.Medium: {
-                    m_StoryScoreLayout.ScoreName.SetText("MEDIUM");
-                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#EAC74B");
                     GameText.PopulateTextLine(m_StoryScoreLayout.Line, "Not too shabby, but it's not winning any awards.", null, default, null);
                     break;
                 }
 
                 case StoryScore.Good: {
-                    m_StoryScoreLayout.ScoreName.SetText("HIGH");
-                    m_StoryScoreLayout.ScoreName.color = Colors.Hex("#AFFA64");
                     GameText.PopulateTextLine(m_StoryScoreLayout.Line, "This story is fantastic. You're going places kid.", null, default, null);
                     break;
                 }
@@ -386,14 +383,25 @@ namespace Journalism {
         }
 
         private void OnFeedbackBegin() {
-            m_OverlayAnim.Replace(this, m_EditorOverlay.Show(0.2f));
+            m_FeedbackOverlay.RectTransform.SetAnchorPos(m_FeedbackOverlayEditorY, Axis.Y);
+            AnimatedElement.SwapText(m_FeedbackOverlay, "Editor:");
+            m_OverlayAnim.Replace(this, AnimatedElement.Show(m_FeedbackOverlay, 0.2f, null));
+        }
+
+        private void OnFeedbackSwapToImpact() {
+            m_OverlayAnim.Replace(this, Routine.Combine(
+                m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayImpactY, 0.5f, Axis.Y).Ease(Curve.Smooth),
+                AnimatedElement.SwapText(m_FeedbackOverlay, "Story Impact:", 0.5f)
+            ));
         }
 
         private void OnFeedbackEnd() {
-            m_OverlayAnim.Replace(this, m_EditorOverlay.Hide(0.2f));
+            m_OverlayAnim.Replace(this, AnimatedElement.Hide(m_FeedbackOverlay, 0.2f, null));
         }
 
         private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {
+            StoryScrapData data = Assets.Scrap(scrapId);
+
             // TODO: Localization
             TextLine line = GameText.AllocLine(m_TextDisplay, m_Pools);
             GameText.PopulateTextLine(line, "New Story Snippet!", null, default, Assets.Style("msg"));
@@ -403,12 +411,14 @@ namespace Journalism {
             GameText.ClearOverflowLines(m_TextDisplay);
             yield return 0.1f;
 
-            StoryScrapData data = Assets.Scrap(scrapId);
             if (data != null) {
                 StoryScrapDisplay scrap = GameText.AllocScrap(data, m_TextDisplay, m_Pools);
                 GameText.PopulateStoryScrap(scrap, data, Assets.Style("snippet"));
                 GameText.AlignTextLine(scrap.Line, TextAlignment.Center);
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
+                while(Streaming.IsLoading()) {
+                    yield return null;
+                }
                 yield return GameText.AnimateLocations(m_TextDisplay, 1);
             } else {
                 TextLine scrap = GameText.AllocLine(m_TextDisplay, m_Pools);
@@ -487,6 +497,8 @@ namespace Journalism {
                 GameText.AdjustComputedLocations(m_TextDisplay, 1);
             }
 
+            m_ForceNext = inString.TryFindEvent(GameText.Events.ForceNext, out var _);
+
             m_AutoContinue = -1;
 
             return null;
@@ -504,17 +516,19 @@ namespace Journalism {
         }
 
         public IEnumerator CompleteLine() {
-            bool hasChoices = LookupNextChoice();
-            if (hasChoices) {
-                yield return 0.5f;
-                yield break;
-            }
-
-            var nextLineText = LookupNextLine();
-            if (nextLineText != null) {
-                StringHash32 characterId = GameText.FindCharacter(nextLineText);
-                if (GameText.IsPlayer(characterId) || nextLineText.TryFindEvent(GameText.Events.ForceInput, out var _)) {
+            if (!m_ForceNext) {
+                bool hasChoices = LookupNextChoice();
+                if (hasChoices) {
+                    yield return 0.5f;
                     yield break;
+                }
+
+                var nextLineText = LookupNextLine();
+                if (nextLineText != null) {
+                    StringHash32 characterId = GameText.FindCharacter(nextLineText);
+                    if (GameText.IsPlayer(characterId) || nextLineText.TryFindEvent(GameText.Events.ForceInput, out var _)) {
+                        yield break;
+                    }
                 }
             }
 
@@ -639,7 +653,7 @@ namespace Journalism {
             m_TextDisplay.ListRoot.SetAnchorPos(m_TextDisplay.RootBaseline, Axis.Y);
 
             m_FinishedStoryLayout.gameObject.SetActive(false);
-            m_EditorOverlay.Hide();
+            AnimatedElement.Hide(m_FeedbackOverlay);
             m_OverlayAnim.Stop();
 
             m_TextDisplay.Alignment = TextAlignment.Center;
@@ -664,6 +678,9 @@ namespace Journalism {
             m_FinishedStoryLayout.Root.SetRotation(RNG.Instance.NextFloat(-1, 1), Axis.Z, Space.Self);
             yield return null;
             StoryText.LayoutNewspaper(m_FinishedStoryLayout, Assets.CurrentLevel.Story, Player.Data);
+            while(Streaming.IsLoading()) {
+                yield return null;
+            }
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 1;
             yield return GameText.WaitForPlayerNext(m_ChoiceDisplay, "Talk to Editor", Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);

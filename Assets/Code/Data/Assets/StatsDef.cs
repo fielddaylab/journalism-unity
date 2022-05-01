@@ -35,7 +35,7 @@ namespace Journalism {
                 if (!m_Processed) {
                     Array.Sort(m_Stats, (a, b) => a.Id.CompareTo(b.Id));
                     foreach(var stat in m_Stats) {
-                        stat.RankInterval = (ushort) ((m_MaxValue + 1) / stat.RankNames.Length);
+                        stat.RankInterval = (ushort) ((m_MaxValue + 1) / (stat.RankNames.Length - 1));
                     }
                     m_Processed = true;
                 }

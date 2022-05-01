@@ -318,6 +318,29 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Animates the text line as a "pinned" animation.
+        /// </summary>
+        static public IEnumerator AnimateTextLinePinnedShow(TextLine line, Vector2 offset, float duration) {
+            line.gameObject.SetActive(true);
+            line.Offset.anchoredPosition = offset;
+            yield return Routine.Combine(
+                line.Group.FadeTo(1, duration),
+                line.Offset.AnchorPosTo(default(Vector2), duration).ForceOnCancel().Ease(Curve.BackOut)
+            );
+        }
+
+        /// <summary>
+        /// Animates the text line as an "effect" animation.
+        /// </summary>
+        static public IEnumerator AnimateTextLinePinnedHide(TextLine line, Vector2 offset, float duration) {
+            yield return Routine.Combine(
+                line.Group.FadeTo(0, duration),
+                line.Offset.AnchorPosTo(-offset, duration).ForceOnCancel().Ease(Curve.QuadIn)
+            );
+            line.gameObject.SetActive(false);
+        }
+
+        /// <summary>
         /// Adjusts computed line positions based on computed positions of new lines.
         /// </summary>
         static public void AdjustComputedLocations(TextLineScroll scroll, int newLineCount) {
@@ -926,6 +949,7 @@ namespace Journalism {
             static public readonly StringHash32 Image = "image";
             static public readonly StringHash32 Anim = "animation";
             static public readonly StringHash32 Auto = "auto";
+            static public readonly StringHash32 ForceNext = "force-next";
             static public readonly StringHash32 Map = "map";
             static public readonly StringHash32 ForceInput = "force-input";
             static public readonly StringHash32 ClearImage = "clear-image";
@@ -968,6 +992,7 @@ namespace Journalism {
             config.AddEvent("bg", Events.Background).WithStringData().CloseWith(Events.BackgroundFadeOut);
             config.AddEvent("anim", Events.Anim).WithStringData();
             config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
+            config.AddEvent("force-next", Events.ForceNext);
             config.AddEvent("force-input", Events.ForceInput);
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
@@ -979,7 +1004,8 @@ namespace Journalism {
             textDisplay.ConfigureHandlers(config, handler);
             visuals.ConfigureHandlers(config, handler);
 
-            handler.Register(Events.ForceInput, () => {});
+            handler.Register(Events.ForceInput, () => {})
+                .Register(Events.ForceNext, () => {});
         }
 
         /// <summary>

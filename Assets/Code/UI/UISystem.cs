@@ -26,6 +26,7 @@ namespace Journalism.UI {
         [SerializeField] private CanvasGroup m_HeaderUnderFader = null;
         [SerializeField] private CanvasGroup m_SolidBGFader = null;
         [SerializeField] private GameOverWindow m_GameOver = null;
+        [SerializeField] private AnimatedElement m_CheckpointNotification = null;
 
         #endregion // Inspector
 
@@ -45,10 +46,13 @@ namespace Journalism.UI {
                 .Register(GameEvents.EditorNotesOpen, OnNeedSolidBG, this)
                 .Register(GameEvents.EditorNotesClose, OnNoLongerNeedSolidBG, this)
                 .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG)
-                .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this);
+                .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this)
+                .Register(GameEvents.LevelCheckpoint, OnCheckpointSaved, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
+
+            AnimatedElement.Hide(m_CheckpointNotification);
 
             m_HeaderWindow.OnShowEvent.AddListener(OnHeaderShow);
             m_HeaderWindow.OnHideEvent.AddListener(OnHeaderHide);
@@ -77,6 +81,8 @@ namespace Journalism.UI {
             m_HeaderWindow.Hide();
             m_GameOver.Hide();
             OnNoLongerNeedSolidBG();
+            AnimatedElement.Hide(m_CheckpointNotification);
+            m_CheckpointNotification.Animation.Stop();
         }
 
         private void OnLevelStarted() {
@@ -85,6 +91,8 @@ namespace Journalism.UI {
             m_SolidBGFader.Hide();
             m_SolidBGState = false;
             m_SolidBGRoutine.Stop();
+            AnimatedElement.Hide(m_CheckpointNotification);
+            m_CheckpointNotification.Animation.Stop();
         }
 
         private void RefreshHeaderEnabled() {
@@ -104,6 +112,16 @@ namespace Journalism.UI {
                 m_HeaderUnderFader.gameObject.SetActive(true);
                 m_FaderRoutine.Replace(this, m_HeaderUnderFader.FadeTo(1, 0.2f));
             }
+        }
+
+        private void OnCheckpointSaved() {
+            m_CheckpointNotification.Animation.Replace(this, CheckpointAnim());
+        }
+
+        private IEnumerator CheckpointAnim() {
+            yield return AnimatedElement.Show(m_CheckpointNotification, 0.5f);
+            yield return 2;
+            yield return AnimatedElement.Hide(m_CheckpointNotification, 0.5f);
         }
 
         private void OnHeaderHide(BasePanel.TransitionType type) {
