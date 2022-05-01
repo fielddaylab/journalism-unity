@@ -355,7 +355,7 @@ MonoBehaviour:
   m_mapLocationDef: {fileID: 11400000, guid: ad719474e92ed384da55e9aed570254e, type: 2}
   m_mapRect: {fileID: 605846728468832783}
   m_markerTransform: {fileID: 690856396016978321}
-  m_locationName: Shop
+  m_locationName: Cherry Festival
 --- !u!1001 &115209204709278698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,6 +372,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 98093905340401499, guid: a463191c978fd574ca44aab8ffda8bf3,
+        type: 3}
+      propertyPath: m_text
+      value: Upper Lake Dam
       objectReference: {fileID: 0}
     - target: {fileID: 743937671520972061, guid: a463191c978fd574ca44aab8ffda8bf3,
         type: 3}
@@ -661,12 +666,12 @@ PrefabInstance:
     - target: {fileID: 2761634476632899261, guid: c89342563e03e6444992138dc04978d0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -115
+      value: 111
       objectReference: {fileID: 0}
     - target: {fileID: 2761634476632899261, guid: c89342563e03e6444992138dc04978d0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 2761634476632899261, guid: c89342563e03e6444992138dc04978d0,
         type: 3}

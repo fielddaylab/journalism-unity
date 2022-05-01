@@ -406,6 +406,7 @@ $choice Crackers; Grab a few saltine crackers.
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
+$call SetLocation("Upper Lake Dam")
 {bg BG/UpperLakeDam.jpg}
 @clearText
 <b>Location: the Upper Lake Dam</b>
@@ -640,7 +641,7 @@ $choice ArriveAtFloodSite; Back to the dam
 // Original Name: Cherry Festival Map
 :: CherryFestivalMap
 @clearText
-
+$call SetLocation("Cherry Festival")
 {bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
 You wade through a few inches of water to get to Main Street.
