@@ -141,7 +141,7 @@ $endif
 
 $HubChoice(Breakroom, "Search the break room for snacks", 0.25)
 
-$HubChoice(ResearchOption-FillIn, "Read up on flooding at the library across the street", 0.5)
+// $HubChoice(ResearchOption-FillIn, "Read up on flooding at the library across the street", 0.5)
 
 $choice HeadOut; Enough stalling. Time to go.
 $else
