@@ -552,10 +552,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 852019052019667976, guid: 77661922a2756244d9a0295568d61b16,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 459
+      objectReference: {fileID: 0}
+    - target: {fileID: 852019052019667976, guid: 77661922a2756244d9a0295568d61b16,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594300693501235664, guid: 77661922a2756244d9a0295568d61b16,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1981457766476510988, guid: 77661922a2756244d9a0295568d61b16,
         type: 3}
       propertyPath: m_Name
       value: MarkerPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569993263304332659, guid: 77661922a2756244d9a0295568d61b16,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77661922a2756244d9a0295568d61b16, type: 3}

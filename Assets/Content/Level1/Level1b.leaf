@@ -426,7 +426,7 @@ $endif
 
 
 
-$choice Level2Story3TheScienceStory; Skip to Level 2, Story 3: The Science Story
+//$choice Level2Story3TheScienceStory; Skip to Level 2, Story 3: The Science Story
 
 // Original Name: Find higher ground
 :: FindHigherGround
@@ -897,7 +897,7 @@ $else
 You ask her about the flooding.
 
 {@person}It's not just about flooding.
-{person}Houseboats are great in winter, too!
+{@person}Houseboats are great in winter, too!
 {@person}If geese can migrate south, why not us? 
 
 $ContinueChoice({@me} Yeah, that's great. So about the flooding...)

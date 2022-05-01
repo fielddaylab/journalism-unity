@@ -38,7 +38,7 @@ Insert a photo of ducks swimming in the hospital parking lot.
 :: FloodMap
 @type Graph
 @quality Good
-@attr Useful
+@attr Useful, Color
 @image Photo/FloodMap-Lv1.png
 
 // Original Name: Weather stats
