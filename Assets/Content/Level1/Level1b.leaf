@@ -405,6 +405,7 @@ $choice Crackers; Grab a few saltine crackers.
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
 @clearText
+$call SetLocation("Upper Lake Dam")
 {bg BG/UpperLakeDam.jpg}
 <b>Location: the Upper Lake Dam</b>
 
