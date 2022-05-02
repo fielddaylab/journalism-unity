@@ -449,9 +449,9 @@ namespace Journalism {
                         }
                         string name = Stats.Name((StatId) i);
                         if (adjust > 0) {
-                            psb.Builder.Append("<b>").Append(name).Append("</b>").Append('+', Mathf.CeilToInt(adjust / 4f));
+                            psb.Builder.Append("<b>").Append(name).Append("</b>").Append('+', adjust);
                         } else {
-                            psb.Builder.Append("<b>").Append(name).Append("</b>").Append('-', Mathf.CeilToInt(-adjust / 4f));
+                            psb.Builder.Append("<b>").Append(name).Append("</b>").Append('-', -adjust);
                         }
                     }
                 }

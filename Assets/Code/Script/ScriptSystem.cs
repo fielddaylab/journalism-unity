@@ -54,7 +54,7 @@ namespace Journalism {
         }
 
         private IEnumerator HandleNodeEnter(ScriptNode node, LeafThreadState thread) {
-            if (node.HasFlags(ScriptNodeFlags.Checkpoint)) {
+            if (node.HasFlags(ScriptNodeFlags.Checkpoint) && !Player.Data.VisitedNodeIds.Contains(node.Id())) {
                 Player.Data.CheckpointId = node.CheckpointId();
                 Game.Save.SaveCheckpoint();
             }

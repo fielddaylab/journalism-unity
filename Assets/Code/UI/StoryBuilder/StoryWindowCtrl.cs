@@ -285,7 +285,8 @@ namespace Journalism.UI {
                     scrap.Toggle.interactable = true;
                 }
                 if (m_PublishMode) {
-                    m_PublishButton.interactable = false;
+                    RefreshStats();
+                    m_PublishButton.interactable = m_CachedStats.CanPublish;
                 }
                 return true;
             }

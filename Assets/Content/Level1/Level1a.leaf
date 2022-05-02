@@ -355,13 +355,13 @@ $choice ArriveAtWork; Arrive at work.
 :: BreakingNewsStory
 @checkpoint
 @clearText
-{/img}
-Get to work on your breaking news story!
 
+{/img}
 $if FirstVisit()
     $call SetTimeRemaining(2)
     $set DNRnumber = false
 $endif
+Get to work on your breaking news story!
 
 You have {timeLeft} remaining to submit the story.
 

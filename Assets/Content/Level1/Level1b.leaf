@@ -43,6 +43,7 @@ $choice GetReadyCheckpoint; No. Don't worry. I'm on it.
 
 :: GetReadyCheckpoint
 @checkpoint
+{bg BG/Newsroom-Story2.jpg}
 $goto GetReady
 
 // Original Name: Get Ready
@@ -228,6 +229,7 @@ $choice GetReadyPart2; Back to your desk
 :: HeadOut
 @checkpoint
 @clearText
+{bg BG/Newsroom-Story2.jpg}
 $call SetTimeRemaining(0)
 Forget cats and dogs. It's raining an entire pet store. 
 
@@ -401,6 +403,7 @@ $choice Crackers; Grab a few saltine crackers.
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
+@clearText
 $call SetLocation("Upper Lake Dam")
 
 $if FirstVisit()
