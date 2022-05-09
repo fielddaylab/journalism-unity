@@ -62,6 +62,12 @@ namespace Journalism.UI {
 
             m_Window.LoadDataAsync = LoadAsync;
 
+            m_Window.BuildLayout = () => {
+                m_ListLayout.ForceRebuild();
+                m_ListLayout.enabled = false;
+                m_ListFitter.enabled = false;
+            };
+
             m_Window.UnloadData = () => {
                 m_Pools.ScrapPool.Reset();
                 m_Scraps.Clear();
@@ -153,12 +159,6 @@ namespace Journalism.UI {
             m_StoryInput.blocksRaycasts = true;
 
             m_EditorNotesGroup.SetActive(false);
-
-            Routine.StartDelay(() => {
-                m_ListLayout.ForceRebuild();
-                m_ListLayout.enabled = false;
-                m_ListFitter.enabled = false;
-            }, 0.05f);
         }
 
         #region Handlers

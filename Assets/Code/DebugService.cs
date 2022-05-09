@@ -192,7 +192,7 @@ namespace Journalism {
             }, () => Player.Stat(statId) < Stats.MaxValue);
             menu.AddButton(info.Name + " - 1", () => {
                 Player.SetStat(statId, Player.Stat(statId) - 1);
-            }, () => Player.Stat(statId) > 1);
+            }, () => Player.Stat(statId) > 0);
         }
 
         static private void UnlockAllSnippets() {

@@ -22,7 +22,7 @@ namespace Journalism {
 
         [SerializeField] private Stat[] m_Stats = null;
         [SerializeField] private ushort m_MaxValue = 30;
-        [SerializeField] private Gradient m_StatColorGradient = null;
+        [SerializeField] private Color[] m_StatColors = null;
         
         [NonSerialized] private bool m_Processed;
 
@@ -35,7 +35,7 @@ namespace Journalism {
                 if (!m_Processed) {
                     Array.Sort(m_Stats, (a, b) => a.Id.CompareTo(b.Id));
                     foreach(var stat in m_Stats) {
-                        stat.RankInterval = (ushort) ((m_MaxValue + 1) / (stat.RankNames.Length - 1));
+                        stat.RankInterval = (ushort) (m_MaxValue / (stat.RankNames.Length - 1));
                     }
                     m_Processed = true;
                 }
@@ -44,8 +44,8 @@ namespace Journalism {
         }
 
 
-        public Gradient StatGradient {
-            get { return m_StatColorGradient; }
+        public Color[] StatColors {
+            get { return m_StatColors; }
         }
     }
 
@@ -80,14 +80,19 @@ namespace Journalism {
         /// </summary>
         public const int MinutesPerTimeUnit = 60 / TimeUnitsPerHour;
 
+        /// <summary>
+        /// Minimum stat value.
+        /// </summary>
+        public const int MinValue = 0;
+
         static private ushort s_MaxValue;
         static private StatsDef.Stat[] s_Stats;
-        static private Gradient s_Gradient;
+        static private Color[] s_Gradient;
 
         static internal void Import(StatsDef def) {
             s_MaxValue = def.MaxValue;
             s_Stats = def.Stats;
-            s_Gradient = def.StatGradient;
+            s_Gradient = def.StatColors;
         }
 
         /// <summary>
@@ -117,8 +122,8 @@ namespace Journalism {
         /// Clamps the value of the given stat value.
         /// </summary>
         static public int Clamp(int statValue) {
-            if (statValue < 1) {
-                return 1;
+            if (statValue < MinValue) {
+                return MinValue;
             }
             return statValue > s_MaxValue ? s_MaxValue : statValue;
         }
@@ -128,7 +133,8 @@ namespace Journalism {
         /// </summary>
         static public Color RankColor(ushort statValue) {
             Assert.NotNull(s_Gradient, "Stats not loaded");
-            return s_Gradient.Evaluate((float) statValue / s_MaxValue);
+            int amt = (int) ((s_Gradient.Length - 1) * (float) statValue / s_MaxValue);
+            return s_Gradient[amt];
         }
 
         /// <summary>

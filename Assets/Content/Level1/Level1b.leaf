@@ -1406,6 +1406,4 @@ $endif
 {/img}
 $call EndFeedback()
 
-{@msg}  This is the end of Level 1.
-{@msg}  You are now free to close your browser.
-// $call NextLevel()
+$call NextLevel()
