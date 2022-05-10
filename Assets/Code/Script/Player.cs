@@ -320,6 +320,14 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Returns if a story scrap is in the player's story.
+        /// </summary>
+        [LeafMember("IncludedSnippet"), Preserve]
+        static public bool IncludedStoryScrap(StringHash32 scrapId) {
+            return ArrayUtils.Contains(s_Current.AllocatedScraps, scrapId);
+        }
+
+        /// <summary>
         /// Adds a story scrap to the player's inventory.
         /// </summary>
         [LeafMember("GiveSnippet"), Preserve]
@@ -347,6 +355,17 @@ namespace Journalism {
         static public void CompileStoryStatistics() {
             s_Stats = StoryStats.FromPlayerData(s_Current, Assets.CurrentLevel.Story);
             Log.Msg("[Player] Story Statistics: Quality {0} ({1} - {2}) / Alignment {3} / Score {4}", s_Stats.TotalQuality, s_Stats.QualityAdd, s_Stats.QualitySubtract, s_Stats.Alignment, s_Stats.Score);
+        }
+
+        /// <summary>
+        /// Removes used snippets from the player's inventory.
+        /// </summary>
+        static public void RemoveUsedSnippets() {
+            foreach(var scrap in s_Current.AllocatedScraps) {
+                if (!scrap.IsEmpty) {
+                    s_Current.StoryScrapInventory.Remove(scrap);
+                }
+            }
         }
 
         [LeafMember("StoryScore"), Preserve]

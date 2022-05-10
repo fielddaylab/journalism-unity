@@ -17,15 +17,7 @@ namespace Journalism {
 
         static public StringSlice StripQuotes(StringSlice textString) {
             if (textString.Length > 1 && textString.StartsWith('\"') && textString.EndsWith('\"')) {
-                int innerQuoteCount = 0;
-                for(int i = 1; i < textString.Length - 1; i++) {
-                    if (textString[i] == '"') {
-                        innerQuoteCount++;
-                    }
-                }
-                if (innerQuoteCount == 0 || (innerQuoteCount % 2) != 0) {
-                    textString = textString.Substring(1, textString.Length - 2);
-                }
+                textString = textString.Substring(1, textString.Length - 2);
             }
             return textString;
         }
@@ -155,7 +147,7 @@ namespace Journalism {
             line.CurrentAlignment = alignment;
         }
 
-        static private void SetTailMode(TextLine line, TextLine.TailMode tailMode) {
+        static public void SetTailMode(TextLine line, TextLine.TailMode tailMode) {
             RectTransform tail = line.Tail;
             RectTransform innerTail = line.InnerTail;
 

@@ -18,6 +18,7 @@ namespace Journalism.UI {
 
         private void Awake() {
             GetComponent<HeaderWindow>().LoadData = () => {
+                float lineAdjust = DistributionLine.thickness * 0.5f;
                 for(int i = 0; i < StatOrder.Length; i++) {
                     StatLine line = StatLines[i];
                     StatBead bead = StatBeads[i];
@@ -32,7 +33,7 @@ namespace Journalism.UI {
 
                     float angle = Mathf.Deg2Rad * (AngleOffset + 360f / StatOrder.Length * i);
                     float dist = Mathf.Lerp(MinRadius, MaxRadius, (float) val / Stats.MaxValue);
-                    float normalizedDist = (dist + DistributionLine.thickness) / MaxRadius;
+                    float normalizedDist = (dist + lineAdjust) / MaxRadius;
 
                     bead.Color.color = color;
                     bead.Value.SetText(((int) val).ToStringLookup());

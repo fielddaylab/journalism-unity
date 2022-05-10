@@ -70,6 +70,8 @@ namespace Journalism {
             Game.Events.Register<StringHash32>(GameEvents.InventoryUpdated, OnInventoryUpdated, this)
                 .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this)
                 .Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
+                .Register(GameEvents.StoryEvalEditor, OnFeedbackSwapToEditor, this)
+                .Register(GameEvents.StoryEvalImpact, OnFeedbackSwapToImpact, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this);
         }
 
@@ -387,16 +389,23 @@ namespace Journalism {
             m_FeedbackOverlay.RectTransform.SetAnchorPos(m_FeedbackOverlayEditorY, Axis.Y);
             AnimatedElement.SwapText(m_FeedbackOverlay, "Editor:");
             m_OverlayAnim.Replace(this, AnimatedElement.Show(m_FeedbackOverlay, 0.2f, null));
+            m_ImpactLayout.Clear();
         }
 
         private void OnFeedbackSwapToImpact() {
+            m_OverlayAnim.Stop();
+            Game.Scripting.Interrupt(DisplayImpact());
+        }
+
+        private void OnFeedbackSwapToEditor() {
             m_OverlayAnim.Replace(this, Routine.Combine(
-                m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayImpactY, 0.5f, Axis.Y).Ease(Curve.Smooth),
-                AnimatedElement.SwapText(m_FeedbackOverlay, "Story Impact:", 0.5f)
+                m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayEditorY, 0.5f, Axis.Y).Ease(Curve.Smooth),
+                AnimatedElement.SwapText(m_FeedbackOverlay, "Editor:", 0.5f)
             ));
         }
 
         private void OnFeedbackEnd() {
+            m_ImpactLayout.Clear();
             m_OverlayAnim.Replace(this, AnimatedElement.Hide(m_FeedbackOverlay, 0.2f, null));
         }
 
@@ -655,6 +664,7 @@ namespace Journalism {
 
             m_FinishedStoryLayout.gameObject.SetActive(false);
             m_ImpactLayout.gameObject.SetActive(false);
+            m_ImpactLayout.Clear();
             AnimatedElement.Hide(m_FeedbackOverlay);
             m_OverlayAnim.Stop();
 
@@ -690,9 +700,38 @@ namespace Journalism {
             m_FinishedStoryLayout.gameObject.SetActive(false);
         }
 
-        public void EnqueueFeedbackItem(StringHash32 id, StringHash32 style) {
-            // Game.Scripting.OverrideDisplay(m_ImpactLayout);
-            // m_ImpactLayout.
+        public IEnumerator DisplayImpact() {
+            UISystem.SetHeaderEnabled(false);
+            yield return ClearAllAnimated();
+
+            m_ImpactLayout.gameObject.SetActive(true);
+            m_ImpactLayout.Root.SetAnchorPos(660f, Axis.Y);
+            m_ImpactLayout.Root.SetRotation(RNG.Instance.NextFloat(-0.2f, 0.2f), Axis.Z, Space.Self);
+            yield return null;
+
+            StoryText.CullFeedback(m_ImpactLayout.Items, m_ImpactLayout.Pins.Length);
+            while(Streaming.IsLoading()) {
+                yield return null;
+            }
+
+            StoryText.LayoutFeedback(m_ImpactLayout);
+
+            m_OverlayAnim.Replace(this, Routine.Combine(
+                m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayImpactY, 0.5f, Axis.Y).Ease(Curve.Smooth),
+                AnimatedElement.SwapText(m_FeedbackOverlay, "Story Impact:", 0.5f)
+            ));
+
+            yield return m_ImpactLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
+            yield return 0.2f;
+            yield return StoryText.AnimateFeedback(m_ImpactLayout);
+            yield return GameText.WaitForDefaultNext(m_ChoiceDisplay, Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
+            yield return m_ImpactLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
+            m_ImpactLayout.gameObject.SetActive(false);
+        }
+
+        public void EnqueueFeedbackItem(StringHash32 snippetId, StringHash32 location) {
+            Game.Scripting.OverrideDisplay(m_ImpactLayout);
+            m_ImpactLayout.Enqueue(snippetId, location);
         }
     }
 

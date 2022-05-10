@@ -1,15 +1,19 @@
 // MACROS
 
-#macro HubChoice(nodeId, text, time) \
+#macro HubChoice(nodeId, text, time, location?) \
     $choice $nodeId; $text \
         $data time = $time \
-        $data once
+        $data once \
+        $data location = "$location"
 #macro TimeChoice(nodeId, text, time) \
     $choice $nodeId; $text \
         $data time = $time
 #macro OnceChoice(nodeId, text) \
     $choice $nodeId; $text \
         $data once
+#macro LocationChoice(nodeId, text, location) \
+    $choice $nodeId; $text \
+        $data location = "$location"
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
@@ -19,6 +23,14 @@
     $call GameOver() \
     $text \
     $call GameOverRestart()
+#macro Feedback(snippet, location, text) \
+    $if IncludedSnippet($snippet) \
+        $call NextFeedback($snippet, $location) \
+        $text \
+    $endif
+#macro DefaultFeedback(location, text) \
+    $call NextFeedback("", $location) \
+    $text
 
 // Name: Journalism Table Prototype
 // Creator: Twine
@@ -417,9 +429,6 @@ Volunteers are stacking sandbags by the road, with a DNR worker leading the effo
 
 A houseboat floats on the river nearby.
 
-You have {timeLeft} remaining to submit this story.
-
-
 $if HasTime(0.3333333)
 
 $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5)
@@ -641,8 +650,6 @@ As soon as you arrive, you realize you might be out of your depth.
 The street is a rushing river, with thousands of cherries floating past. 
 
 Cars are stranded, and people are clustered in dry areas and on rooftops. 
-
-You have {timeLeft} remaining to submit this story.
 
 $if HasTime(0.5)
 $HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25)

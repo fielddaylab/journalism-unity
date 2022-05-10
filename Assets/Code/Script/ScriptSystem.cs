@@ -252,11 +252,22 @@ namespace Journalism {
         static private void BeginFeedback() {
             Game.Events.Queue(GameEvents.StoryEvalBegin);
             Player.CompileStoryStatistics();
+            Player.RemoveUsedSnippets();
         }
 
         [LeafMember("ImpactFeedback"), Preserve]
         static private void ImpactFeedback() {
-            Game.Events.Queue(GameEvents.StoryEvalImpact);
+            Game.Events.Dispatch(GameEvents.StoryEvalImpact);
+        }
+
+        [LeafMember("EditorFeedback"), Preserve]
+        static private void EditorFeedback() {
+            Game.Events.Queue(GameEvents.StoryEvalEditor);
+        }
+
+        [LeafMember("NextFeedback"), Preserve]
+        static private void NextFeedback(StringHash32 snippetId, StringHash32 locationId) {
+            Game.Scripting.m_TextDisplay.EnqueueFeedbackItem(snippetId, locationId);
         }
 
         [LeafMember("EndFeedback"), Preserve]

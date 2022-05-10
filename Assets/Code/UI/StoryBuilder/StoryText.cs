@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using BeauUtil;
 using BeauRoutine;
+using BeauPools;
+using System.Collections;
 
 namespace Journalism.UI {
     static public class StoryText {
@@ -123,6 +125,99 @@ namespace Journalism.UI {
             }
 
             layout.Headline.SetText(config.FinalHeadline);
+        }
+
+        static public void CullFeedback(RingBuffer<ImpactLayout.Item> items, int max) {
+            RNG.Instance.Shuffle((IRingBuffer<ImpactLayout.Item>) items);
+            using(PooledSet<StringHash32> allocatedLocations = PooledSet<StringHash32>.Create())
+            using(PooledSet<StringHash32> allocatedSnippets = PooledSet<StringHash32>.Create()) {
+                
+                // first pass - try to get one per location and snippet
+                for(int i = items.Count - 1; i >= 0; i--) {
+                    ref var item = ref items[i];
+                    if (item.Locked || item.SnippetId.IsEmpty) {
+                        continue;
+                    }
+
+                    if (allocatedLocations.Contains(item.Location)) {
+                        items.FastRemoveAt(i);
+                    } else if (allocatedSnippets.Add(item.SnippetId)) {
+                        allocatedLocations.Add(item.Location);
+                        item.Locked = true;
+                    }
+                }
+
+                // second pass - allow multiple per snippet
+                for(int i = items.Count - 1; i >= 0; i--) {
+                    ref var item = ref items[i];
+                    if (item.Locked) {
+                        continue;
+                    }
+
+                    if (allocatedLocations.Contains(item.Location)) {
+                        items.FastRemoveAt(i);
+                    } else {
+                        allocatedSnippets.Add(item.SnippetId);
+                        allocatedLocations.Add(item.Location);
+                        item.Locked = true;
+                    }
+                }
+
+                while(items.Count > max) {
+                    items.PopBack();
+                }
+            }
+        }
+
+        static public void LayoutFeedback(ImpactLayout layout) {
+            // TODO: Assign to correct locations
+
+            for(int i = 0; i < layout.Pins.Length; i++) {
+                var pin = layout.Pins[i];
+                if (i >= layout.Items.Count) {
+                    pin.Root.gameObject.SetActive(false);
+                    return;
+                }
+
+                var item = layout.Items[i];
+                pin.Line.gameObject.SetActive(true);
+                GameText.PopulateTextLine(pin.Line, item.RichText, null, default, Assets.Style(item.Style));
+                GameText.AlignTextLine(pin.Line, pin.Alignment);
+
+                switch(pin.Alignment) {
+                    case TextAlignment.Left: {
+                        pin.LineAnchor.SetAnchorPos(-layout.PinLineOffset, Axis.X);
+                        CanvasUtility.SetAnchorX(pin.Line.Root, 0);
+                        GameText.SetTailMode(pin.Line, TextLine.TailMode.Left);
+                        break;
+                    }
+                    case TextAlignment.Center: {
+                        pin.LineAnchor.SetAnchorPos(0, Axis.X);
+                        CanvasUtility.SetAnchorX(pin.Line.Root, 0.5f);
+                        GameText.SetTailMode(pin.Line, TextLine.TailMode.Hidden);
+                        break;
+                    }
+                    case TextAlignment.Right: {
+                        pin.LineAnchor.SetAnchorPos(layout.PinLineOffset, Axis.X);
+                        CanvasUtility.SetAnchorX(pin.Line.Root, 1);
+                        GameText.SetTailMode(pin.Line, TextLine.TailMode.Right);
+                        break;
+                    }
+                }
+
+                GameText.PrepareTextLine(pin.Line, 0.5f);
+            }
+        }
+
+        static public IEnumerator AnimateFeedback(ImpactLayout layout) {
+            // TODO: Get the correct pins for the items
+            RNG.Instance.Shuffle(layout.Pins, 0, layout.Items.Count);
+
+            for(int i = 0; i < layout.Items.Count; i++) {
+                var pin = layout.Pins[i];
+                yield return GameText.AnimateTextLinePinnedShow(pin.Line, new Vector2(0, -16), 0.2f);
+                yield return 0.3f;
+            }
         }
     }
 }

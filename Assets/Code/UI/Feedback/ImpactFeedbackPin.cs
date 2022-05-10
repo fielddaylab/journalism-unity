@@ -10,6 +10,7 @@ namespace Journalism.UI {
     public sealed class ImpactFeedbackPin : MonoBehaviour {
         public RectTransform Root;
         public Image Icon;
+        public SerializedHash32 LocationId;
 
         [Header("Line")]
         public RectTransform LineAnchor;

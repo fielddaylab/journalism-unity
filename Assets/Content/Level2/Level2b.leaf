@@ -1,15 +1,19 @@
 // MACROS
 
-#macro HubChoice(nodeId, text, time) \
+#macro HubChoice(nodeId, text, time, location?) \
     $choice $nodeId; $text \
         $data time = $time \
-        $data once
+        $data once \
+        $data location = "$location"
 #macro TimeChoice(nodeId, text, time) \
     $choice $nodeId; $text \
         $data time = $time
 #macro OnceChoice(nodeId, text) \
     $choice $nodeId; $text \
         $data once
+#macro LocationChoice(nodeId, text, location) \
+    $choice $nodeId; $text \
+        $data location = "$location"
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
@@ -19,6 +23,14 @@
     $call GameOver() \
     $text \
     $call GameOverRestart()
+#macro Feedback(snippet, location, text) \
+    $if IncludedSnippet($snippet) \
+        $call NextFeedback($snippet, $location) \
+        $text \
+    $endif
+#macro DefaultFeedback(location, text) \
+    $call NextFeedback("", $location) \
+    $text
 
 // Name: Journalism Table Prototype
 // Creator: Twine

@@ -1,6 +1,6 @@
 // MACROS
 
-#macro HubChoice(nodeId, text, time, location) \
+#macro HubChoice(nodeId, text, time, location?) \
     $choice $nodeId; $text \
         $data time = $time \
         $data once \
@@ -11,6 +11,9 @@
 #macro OnceChoice(nodeId, text) \
     $choice $nodeId; $text \
         $data once
+#macro LocationChoice(nodeId, text, location) \
+    $choice $nodeId; $text \
+        $data location = "$location"
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
@@ -20,8 +23,13 @@
     $call GameOver() \
     $text \
     $call GameOverRestart()
-#macro Feedback(location, type, text) \
-    $call NextFeedback(location, type) \
+#macro Feedback(snippet, location, text) \
+    $if IncludedSnippet($snippet) \
+        $call NextFeedback($snippet, $location) \
+        $text \
+    $endif
+#macro DefaultFeedback(location, text) \
+    $call NextFeedback("", $location) \
     $text
 
 // Name: Journalism Table Prototype
@@ -363,8 +371,6 @@ $if FirstVisit()
 $endif
 Get to work on your breaking news story!
 
-You have {timeLeft} remaining to submit the story.
-
 $if FirstVisit()
     {anim rumble} RRRRING.
     $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
@@ -687,7 +693,31 @@ $else
         {@person}   This was your first natural disaster, so I'll let it slide. 
     $endif
 $endif
-{story-score}
+
+$Feedback("HospitalDucks", "feedbackA", "Aww, poor ducks...")
+$Feedback("FriendlyShopkeeper", "feedbackB", "Oh no, those poor croissants")
+$Feedback("RudeShopkeeper", "feedbackC", "What did you say to the baker to make them so rude?")
+$Feedback("AbandonedCherrymobile", "feedbackD", "Noooo not the cherrymobile!")
+$Feedback("BlurryCars", "feedbackA", "You really need to upgrade your camera")
+$Feedback("FloodMap", "feedbackB", "The flooding really is everywhere, huh...")
+$Feedback("WeatherStats", "feedbackC", "Holy %^#@ that's a lot of rain!")
+$Feedback("GoodDNR", "feedbackD", "The WORST flood???")
+$Feedback("RehearsedDNR", "feedbackA", "Now I know not to drive through floodwaters!")
+$Feedback("DNRData", "feedbackB", "7 percent? 7 PERCENT?! ...I don't know what to make of that.")
+$Feedback("FloodBackground", "feedbackC", "Why didn't we do anything to prepare?")
+$Feedback("CityHallShock", "feedbackD", "Staying at home, thanks!")
+$Feedback("CityHallAnnoyance", "feedbackA", "Guess I'll check the city website...")
+$Feedback("LibraryLot", "feedbackB", "That is... a picture of some kind?")
+$Feedback("ScientistQuotes", "feedbackC", "There goes Rainn E. Daye... hey wait isn't that name kinda on the nose?")
+$Feedback("PoliceStory", "feedbackD", "Thank goodness the first responders got there in time!")
+$Feedback("PoliceSafetyQuote", "feedbackA", "I don't even know what I'm looking at with this photo.")
+
+$call ImpactFeedback()
+$call EditorFeedback()
+{img Anim/Editor.jpeg}
+{@person}   ...{auto}
+{@person}   Yeah our readers are a chatty bunch.
+
 $call EndFeedback()
 {/img}
 $call NextLevel()
