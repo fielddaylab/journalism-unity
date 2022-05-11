@@ -53,7 +53,9 @@ namespace Journalism {
                 .Register(GameEvents.StoryEvalEditor, OnFeedbackSwapToEditor, this)
                 .Register(GameEvents.StoryEvalImpact, OnFeedbackSwapToImpact, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
-                .Register(GameEvents.ChoiceOptionsUpdated, OnChoiceOptionsUpdated, this);
+                .Register(GameEvents.ChoiceOptionsUpdated, OnChoiceOptionsUpdated, this)
+                .Register(GameEvents.TutorialBegin, OnTutorialBegin, this)
+                .Register(GameEvents.TutorialEnd, OnTutorialEnd, this);
 
             m_CurrentLayer = m_BaseLayer;
             
@@ -163,6 +165,21 @@ namespace Journalism {
         private void OnFeedbackEnd() {
             m_ImpactLayout.Clear();
             m_OverlayAnim.Replace(this, AnimatedElement.Hide(m_FeedbackOverlay, 0.2f, null));
+        }
+
+        private void OnTutorialBegin() {
+            m_CurrentLayer = m_OverLayer;
+        }
+
+        private void OnTutorialEnd() {
+            if (m_CurrentLayer != m_BaseLayer) {
+                Game.Scripting.Interrupt(SwitchToBaseLayer());
+            }
+        }
+
+        private IEnumerator SwitchToBaseLayer() {
+            yield return m_CurrentLayer.ClearAllAnimated();
+            m_CurrentLayer = m_BaseLayer;
         }
 
         private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {

@@ -289,14 +289,40 @@ $endif
 
 $ContinueChoice({@me} Where is everybody??)
 {@person}Ben and Sudha are on their way. Khalisa is stuck at home, bailing out her basement.
-{@person}Right now, you're my lead reporter. 
+{@person}Right now, you're my lead reporter.
 
 $ContinueChoice({@me} How can I help?)
 
 $call ActivateStory()
 {@person} We need a breaking news story.
-{@person} People need to know what's happening and how to stay safe. 
-{@person} You've got 2 hours. {auto}
+{@person} People need to know what's happening and how to stay safe.
+{@person} Let's take a look at your notebook.
+$call BeginTutorial()
+    $call OpenWindow(Notes)
+    $call Wait(0.4)
+    {@person}   So this is your fabled "Notebook"...
+    {layout Left}
+    $call PointTo(TutorialEditorNotes, 0, -12)
+    {@person}   You can find my notes for your story through the "Editor Notes" section.
+    $call ClickOn(EditorNotes)
+    $call ClearPointer()
+    $call Wait(0.5)
+    $call PointTo(TutorialDescription, -24, 0)
+    {@person}   Make sure to reference these from time to time.
+    $call PointTo(TutorialPlayerAttributes, -24, 0)
+    {@person}   Long story short: you want this...
+    $call PointTo(TutorialTargetAttributes, -24, 0)
+    {@person}   To line up with this.
+    $call PointTo(TutorialQuality, -24, 0)
+    {@person}   Oh, and try to get as many quality snippets as possible.
+    $call ClearPointer()
+    $call ClickOn(BackToNotes)
+    {clear-text}
+    $call Wait(0.5)
+    $call CloseWindow()
+$call EndTutorial()
+
+{@person} Oh you've got 2 hours by the way {auto}
 $call SetTimeRemaining(2)
 
 $choice BreakingNewsStory; {@me} On it.

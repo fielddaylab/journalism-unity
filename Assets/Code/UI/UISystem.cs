@@ -8,6 +8,9 @@ using BeauRoutine.Extensions;
 using System;
 using UnityEngine.Scripting;
 using System.Collections;
+using BeauUtil.Debugger;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace Journalism.UI {
     public class UISystem : MonoBehaviour {
@@ -17,22 +20,31 @@ namespace Journalism.UI {
         static private readonly TableKeyPair Var_HeaderEnabled = TableKeyPair.Parse("ui:header-enabled");
         static private readonly TableKeyPair Var_ShowStory = TableKeyPair.Parse("ui:show-story");
 
+        public const InputLayerFlags DefaultInputMask = InputLayerFlags.AllStory | InputLayerFlags.Toolbar;
+
         #endregion // Consts
 
         #region Inspector
 
+        [SerializeField] private EventSystem m_UnityEvents = null;
         [SerializeField] private HeaderUI m_Header = null;
         [SerializeField] private HeaderWindow m_HeaderWindow = null;
         [SerializeField] private CanvasGroup m_HeaderUnderFader = null;
         [SerializeField] private CanvasGroup m_SolidBGFader = null;
         [SerializeField] private GameOverWindow m_GameOver = null;
         [SerializeField] private AnimatedElement m_CheckpointNotification = null;
+        [SerializeField] private TutorialArrow m_TutorialArrow = null;
 
         #endregion // Inspector
 
         private Routine m_FaderRoutine;
         private Routine m_SolidBGRoutine;
+        [NonSerialized] private PointerEventData m_PointerEvtData;
         [NonSerialized] private bool m_SolidBGState;
+        [NonSerialized] private InputLayer[] m_InputLayers = null;
+        private readonly Dictionary<StringHash32, InputElement> m_InputElements = new Dictionary<StringHash32, InputElement>();
+        private readonly RingBuffer<InputLayerFlags> m_InputStack = new RingBuffer<InputLayerFlags>();
+        private InputLayerFlags m_InputMask = DefaultInputMask;
 
         public HeaderUI Header { get { return m_Header; } }
         public GameOverWindow GameOver { get { return m_GameOver; } }
@@ -57,6 +69,11 @@ namespace Journalism.UI {
 
             m_HeaderWindow.OnShowEvent.AddListener(OnHeaderShow);
             m_HeaderWindow.OnHideEvent.AddListener(OnHeaderHide);
+
+            m_InputLayers = FindObjectsOfType<InputLayer>();
+            UpdateInputLayers();
+
+            m_PointerEvtData = new PointerEventData(m_UnityEvents);
         }
 
         private void OnDestroy() {
@@ -76,6 +93,7 @@ namespace Journalism.UI {
         private void OnGameOver() {
             m_HeaderWindow.Hide();
             OnNeedSolidBG();
+            PushInputMask(InputLayerFlags.GameOver);
         }
 
         private void OnLevelLoading() {
@@ -94,6 +112,11 @@ namespace Journalism.UI {
             m_SolidBGRoutine.Stop();
             AnimatedElement.Hide(m_CheckpointNotification);
             m_CheckpointNotification.Animation.Stop();
+            m_TutorialArrow.Hide(true);
+
+            m_InputStack.Clear();
+            m_InputMask = DefaultInputMask;
+            UpdateInputLayers();
         }
 
         private void RefreshHeaderEnabled() {
@@ -158,6 +181,31 @@ namespace Journalism.UI {
 
         #endregion // Handlers
 
+        #region Buttons
+
+        public void RegisterInputElement(InputElement element) {
+            m_InputElements.Add(element.Id.IsEmpty ? element.gameObject.name : element.Id, element);
+        }
+
+        public void DeregisterInputElement(InputElement element) {
+            m_InputElements.Remove(element.Id.IsEmpty ? element.gameObject.name : element.Id);
+        }
+
+        public bool ForceClick(GameObject inRoot) {
+            return ExecuteEvents.Execute(inRoot, m_PointerEvtData, ExecuteEvents.pointerClickHandler);
+        }
+
+        public bool ForceClick(StringHash32 id) {
+            if (!m_InputElements.TryGetValue(id, out InputElement element)) {
+                Log.Msg("[UISystem] No input element with id '{0}' is active", id);
+                return false;
+            }
+
+            return ForceClick(element.gameObject);
+        }
+
+        #endregion // Buttons
+
         #region Tutorial
 
         static public IEnumerator SimpleTutorial(StringSlice windowId) {
@@ -179,7 +227,51 @@ namespace Journalism.UI {
             yield return 0.2f;
         }
 
+        public void PointTo(GameObject inRoot, Vector2 offset) {
+            m_TutorialArrow.Focus(inRoot.transform, offset);
+        }
+
+        public void PointTo(StringHash32 id, Vector2 offset) {
+            if (!m_InputElements.TryGetValue(id, out InputElement element)) {
+                Log.Msg("[UISystem] No input element with id '{0}' is active", id);
+                return;
+            }
+
+            PointTo(element.gameObject, offset);
+        }
+
+        public void ClearPointer() {
+            m_TutorialArrow.Hide();
+        }
+
         #endregion // Tutorial
+
+        #region Input
+
+        private void UpdateInputLayers() {
+            foreach(var input in m_InputLayers) {
+                bool active = (input.Type & m_InputMask) != 0;
+                input.Raycaster.enabled = active;
+            }
+        }
+
+        public void PushInputMask(InputLayerFlags mask) {
+            m_InputStack.PushBack(m_InputMask);
+            m_InputMask = mask;
+            UpdateInputLayers();
+        }
+
+        public void PopInputMask() {
+            if (m_InputStack.Count > 0) {
+                m_InputMask = m_InputStack.PopBack();
+            } else {
+                Log.Error("[UISystem] Unbalanced input mask push/pop");
+                m_InputMask = DefaultInputMask;
+            }
+            UpdateInputLayers();
+        }
+
+        #endregion // Input
 
         #region Leaf
 
@@ -196,6 +288,36 @@ namespace Journalism.UI {
         [LeafMember("OpenWindow"), Preserve]
         static public void OpenWindow(StringHash32 id) {
             Game.UI.m_Header.FindButton(id).Button.isOn = true;
+        }
+
+        [LeafMember("CloseWindow"), Preserve]
+        static private IEnumerator CloseWindow(StringHash32 id = default) {
+            if (id.IsEmpty) {
+                Game.UI.Header.ToggleGroup.SetAllTogglesOff();
+            } else {
+                Game.UI.m_Header.FindButton(id).Button.isOn = false;
+            }
+            if (Game.UI.Header.AnyOpen()) {
+                while(Game.UI.Header.AnyOpen()) {
+                    yield return null;
+                }
+                yield return 0.2f;
+            }
+        }
+
+        [LeafMember("ClickOn"), Preserve]
+        static private void ClickElement(StringHash32 id) {
+            Game.UI.ForceClick(id);
+        }
+
+        [LeafMember("PointTo"), Preserve]
+        static private void PointTo(StringHash32 id, float offsetX = 0, float offsetY = 16) {
+            Game.UI.PointTo(id, new Vector2(offsetX, offsetY));
+        }
+
+        [LeafMember("ClearPointer"), Preserve]
+        static private void LeafClearPointer() {
+            Game.UI.ClearPointer();
         }
 
         [LeafMember("SetStoryEnabled"), Preserve]
@@ -218,7 +340,9 @@ namespace Journalism.UI {
         static public IEnumerator RunPublish() {
             ActivateStory();
             Game.Events.Dispatch(GameEvents.RequireStoryPublish);
+            Game.UI.PushInputMask(InputLayerFlags.Toolbar);
             yield return Game.Events.Wait(GameEvents.StoryPublished);
+            Game.UI.PopInputMask();
             yield return 0.2f;
             yield return Game.Scripting.DisplayNewspaper();
         }

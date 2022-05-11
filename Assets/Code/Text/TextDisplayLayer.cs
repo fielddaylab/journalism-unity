@@ -80,7 +80,9 @@ namespace Journalism {
         public void ConfigureHandlers() {
             m_Handlers.Register(LeafUtils.Events.Character, HandleCharacter)
                 .Register(GameText.Events.Anim, HandleAnim)
-                .Register(GameText.Events.Auto, HandleAuto);
+                .Register(GameText.Events.Auto, HandleAuto)
+                .Register(GameText.Events.Layout, HandleLayout)
+                .Register(GameText.Events.ClearText, ClearLines);
         }
 
         private void HandleCharacter(TagEventData evtData, object context) {
@@ -105,6 +107,15 @@ namespace Journalism {
             m_AutoContinue = evtData.GetFloat();
         }
         
+        private IEnumerator HandleLayout(TagEventData evtData, object context) {
+            if (evtData.IsClosing) {
+                return ResetLayout();
+            } else {
+                TextAlignment textAlign = StringParser.ConvertTo<TextAlignment>(evtData.StringArgument, TextAlignment.Left);
+                return ShiftLayout(textAlign, evtData, null);
+            }
+        }
+
         public IEnumerator ShiftLayout(TextAlignment? textAlignOverride, TagEventData evtData = default, StringSlice columnArg = default) {
             TextAlignment textAlignment = textAlignOverride.GetValueOrDefault(Text.Alignment);
 
@@ -113,7 +124,7 @@ namespace Journalism {
                 yield break;
             }
 
-            var desiredAltState = NeedReloadColumn(evtData, columnArg);
+            var desiredAltState = NeedReloadColumn?.Invoke(evtData, columnArg) ?? DesiredColumnState.NoChange;
             TextAlignment altAlign = textAlignment.Mirror();
 
             // if everything is aligned, no need to do anything more.

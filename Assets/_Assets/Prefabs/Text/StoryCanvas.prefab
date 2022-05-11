@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 2439538860523810115}
   - component: {fileID: 5080964454005279747}
   - component: {fileID: 7003111796427796825}
+  - component: {fileID: 4243239771728532627}
   m_Layer: 5
   m_Name: StoryCanvas
   m_TagString: Untagged
@@ -292,6 +293,21 @@ MonoBehaviour:
     m_DefaultPoolRoot: {fileID: 0}
     m_DefaultSpawnRoot: {fileID: 0}
     m_ResetTransformOnAlloc: 1
+--- !u!114 &4243239771728532627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2439538860523810114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c16844eaf1b9d468120d9ab7a9ee62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Raycaster: {fileID: 2439538860523810115}
+  Group: {fileID: 0}
+  Type: 1
 --- !u!1 &6446690121446083745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1206,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2771619636026444607, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_UVRect.width
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771619636026444607, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_UVRect.height
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3111864364706828191, guid: c8eac0e6a005e15478da841e18edff5a,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1206,6 +1232,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3141814056676269498, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_UVRect.height
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900902561511482388, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_UVRect.width
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900902561511482388, guid: c8eac0e6a005e15478da841e18edff5a,
         type: 3}
       propertyPath: m_UVRect.height
       value: 0
@@ -1433,6 +1469,16 @@ PrefabInstance:
     - target: {fileID: 7878337414856418931, guid: c8eac0e6a005e15478da841e18edff5a,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918204699560850518, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_UVRect.width
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918204699560850518, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_UVRect.height
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8137519814062546909, guid: c8eac0e6a005e15478da841e18edff5a,

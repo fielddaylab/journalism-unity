@@ -771,7 +771,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, true, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, true, -0.1f, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
@@ -780,7 +780,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, false, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, false, 0.4f, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
@@ -792,12 +792,16 @@ namespace Journalism {
             future.Complete(choices.DefaultNextButton.Selected);
         }
 
-        static public IEnumerator WaitForButtonOrSkip(TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, bool allowClickAnywhere, TweenSettings vanishAnimParams) {
+        static public IEnumerator WaitForButtonOrSkip(TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, bool allowClickAnywhere, float holdDelay, TweenSettings vanishAnimParams) {
             using(Routine fadeIn = fade.FadeTo(1, newAnimParams.Time / 2).Play()) {
                 fade.blocksRaycasts = true;
                 button.Selected = false;
-                while(!button.Selected && !(!fadeIn && Input.GetKey(KeyCode.Space)) && !(allowClickAnywhere && Input.GetMouseButtonDown(0))) {
+                float spaceDelay = newAnimParams.Time + holdDelay;
+                while(!button.Selected && !(spaceDelay <= 0 && Input.GetKey(KeyCode.Space)) && !(allowClickAnywhere && Input.GetMouseButtonDown(0))) {
                     yield return null;
+                    if (spaceDelay > 0) {
+                        spaceDelay -= Time.deltaTime;
+                    }
                 }
             }
             fade.blocksRaycasts = false;
@@ -950,11 +954,13 @@ namespace Journalism {
 
         static public class Events {
             static public readonly StringHash32 Background = "background";
-            static public readonly StringHash32 Image = "image";
+            static public readonly StringHash32 Layout = "layout";
             static public readonly StringHash32 Anim = "animation";
+            static public readonly StringHash32 Image = "image";
             static public readonly StringHash32 Map = "map";
             static public readonly StringHash32 ClearImage = "clear-image";
             static public readonly StringHash32 ClearMap = "clear-map";
+            static public readonly StringHash32 ClearText = "clear-text";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
             static public readonly StringHash32 DisplayStoryStats = "display-story-stats";
@@ -998,8 +1004,10 @@ namespace Journalism {
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
+            config.AddEvent("layout", Events.Layout).WithStringData().CloseWith(Events.Layout);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
             config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);
+            config.AddEvent("clear-text", Events.ClearText);
 
             config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);
             config.AddEvent("force-next", Events.ForceNext);

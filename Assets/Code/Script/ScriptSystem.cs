@@ -10,6 +10,7 @@ using BeauUtil.Variants;
 using BeauRoutine;
 using System;
 using UnityEngine.Scripting;
+using Journalism.UI;
 
 namespace Journalism {
     public sealed class ScriptSystem : MonoBehaviour {
@@ -271,6 +272,18 @@ namespace Journalism {
         [LeafMember("EndFeedback"), Preserve]
         static private void EndFeedback() {
             Game.Events.Queue(GameEvents.StoryEvalEnd);
+        }
+
+        [LeafMember("BeginTutorial"), Preserve]
+        static private void BeginTutorial() {
+            Game.Events.Dispatch(GameEvents.TutorialBegin);
+            Game.UI.PushInputMask(InputLayerFlags.OverStory);
+        }
+
+        [LeafMember("EndTutorial"), Preserve]
+        static private void EndTutorial() {
+            Game.Events.Dispatch(GameEvents.TutorialEnd);
+            Game.UI.PopInputMask();
         }
 
         #endregion // Leaf

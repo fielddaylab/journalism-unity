@@ -1835,6 +1835,11 @@ PrefabInstance:
       propertyPath: m_GameOver
       value: 
       objectReference: {fileID: 317768738}
+    - target: {fileID: 1546881371502847982, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_TutorialArrow
+      value: 
+      objectReference: {fileID: 4496913529121955248}
     - target: {fileID: 1548995343001587963, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -9240,6 +9245,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cbc43a38b5123f4eb6cdd00772cedf1, type: 3}
+--- !u!114 &4496913529121955248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 557044598967944237, guid: 0cbc43a38b5123f4eb6cdd00772cedf1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4496913529121955247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8366a176632aae3478d3d8bd65924060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7466770506417136570
 PrefabInstance:
   m_ObjectHideFlags: 0
