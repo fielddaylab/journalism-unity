@@ -4,6 +4,7 @@ using BeauRoutine;
 using UnityEngine.UI;
 using BeauUtil;
 using System;
+using System.Collections;
 
 namespace Journalism.UI {
     public sealed class HeaderUI : MonoBehaviour {
@@ -65,6 +66,10 @@ namespace Journalism.UI {
             Game.Events.Register<Player.TimeUpdateArgs>(GameEvents.TimeUpdated, OnTimeUpdated, this)
                 .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this)
                 .Register(GameEvents.LevelStarted, OnLevelStarted, this);
+        }
+
+        public bool AnyOpen() {
+            return m_FaderState || m_FaderRoutine;
         }
 
         public HeaderButton FindButton(StringHash32 id) {
@@ -144,14 +149,14 @@ namespace Journalism.UI {
 
             ClockIncrements.Populate(TimeClock, (int) args.Units);
 
-            if (Root.IsShowing()) {
-                if (args.Delta < 0) {
-                    TimeEffect.gameObject.SetActive(true);
-                    GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
-                    GameText.PrepareTextLine(TimeEffect, 2);
-                    m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
-                    Game.Audio.PlayOneShot("ClockTick");
-                }
+            if (args.Delta < 0 && Root.IsShowing()) {
+                TimeEffect.gameObject.SetActive(true);
+                GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
+                GameText.PrepareTextLine(TimeEffect, 2);
+                m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
+                Game.Audio.PlayOneShot("ClockTick");
+            } else if (args.Delta > 0) {
+                Game.Scripting.Interrupt(UISystem.SimpleTutorial("Time"));
             }
         }
     }

@@ -34,6 +34,7 @@ namespace Journalism.UI {
         private Routine m_SolidBGRoutine;
         [NonSerialized] private bool m_SolidBGState;
 
+        public HeaderUI Header { get { return m_Header; } }
         public GameOverWindow GameOver { get { return m_GameOver; } }
 
         #region Unity Events
@@ -157,6 +158,29 @@ namespace Journalism.UI {
 
         #endregion // Handlers
 
+        #region Tutorial
+
+        static public IEnumerator SimpleTutorial(StringSlice windowId) {
+            if (Player.WriteVariable("ui:tutorial.windowId." + windowId.ToString(), true)) {
+                return TutorialRoutine(windowId);
+            }
+
+            return null;
+        }
+
+        static private IEnumerator TutorialRoutine(StringHash32 id) {
+            UISystem.SetHeaderEnabled(true);
+            yield return null;
+            UISystem.OpenWindow(id);
+            yield return null;
+            while(Game.UI.Header.AnyOpen()) {
+                yield return null;
+            }
+            yield return 0.2f;
+        }
+
+        #endregion // Tutorial
+
         #region Leaf
 
         [LeafMember("SetHeaderEnabled"), Preserve]
@@ -181,7 +205,9 @@ namespace Journalism.UI {
 
         [LeafMember("ActivateStory"), Preserve]
         static public void ActivateStory() {
-            Player.WriteVariable(Var_ShowStory, true);
+            if (Player.WriteVariable(Var_ShowStory, true)) {
+                Game.Scripting.Interrupt(UISystem.SimpleTutorial("Notes"));
+            }
         }
 
         [LeafMember("StoryEnabled"), Preserve]

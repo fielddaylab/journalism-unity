@@ -448,6 +448,8 @@ namespace Journalism {
         }
 
         private IEnumerator DisplayStatsAdjusted(int[] adjustments) {
+            UISystem.SetHeaderEnabled(true);
+
             // TODO: Implement for real
             using(PooledStringBuilder psb = PooledStringBuilder.Create()) {
                 for(int i = 0; i < Stats.Count; i++) {
@@ -473,7 +475,7 @@ namespace Journalism {
                 GameText.ClearOverflowLines(m_TextDisplay);
                 yield return 0.1f;
 
-                yield return CompleteLine();
+                yield return UISystem.SimpleTutorial("Stats");
             }
         }
 

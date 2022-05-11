@@ -216,7 +216,7 @@ namespace Journalism {
             if (units != s_Current.TimeRemaining) {
                 int delta = (int) (units - s_Current.TimeRemaining);
                 s_Current.TimeRemaining = units;
-                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
+                Game.Events.Dispatch(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
             }
         }
 
@@ -243,7 +243,7 @@ namespace Journalism {
             uint units = Stats.HoursToTimeUnits(hours);
             if (units > 0) {
                 s_Current.TimeRemaining += units;
-                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, (int) units));
+                Game.Events.Dispatch(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, (int) units));
             }
         }
 
@@ -274,23 +274,29 @@ namespace Journalism {
         /// <summary>
         /// Writes a value to the variable with the given id.
         /// </summary>
-        static public void WriteVariable(StringSlice varId, Variant value, object context = null) {
+        static public bool WriteVariable(StringSlice varId, Variant value, object context = null) {
             if (!TableKeyPair.TryParse(varId, out var key)) {
                 Log.Error("[Player] Unable to parse '{0}' as a variable key", varId);
-                return;
+                return false;
             }
-            if (s_Resolver.TryModify(context, key, VariantModifyOperator.Set, value)) {
+            s_Resolver.TryGetVariant(context, key, out Variant current);
+            if (value != current && s_Resolver.TryModify(context, key, VariantModifyOperator.Set, value)) {
                 Game.Events.Queue(GameEvents.VariableUpdated, key);
+                return true;
             }
+            return false;
         }
 
         /// <summary>
         /// Writes a value to the variable with the given id.
         /// </summary>
-        static public void WriteVariable(TableKeyPair varId, Variant value, object context = null) {
-            if (s_Resolver.TryModify(context, varId, VariantModifyOperator.Set, value)) {
+        static public bool WriteVariable(TableKeyPair varId, Variant value, object context = null) {
+            s_Resolver.TryGetVariant(context, varId, out Variant current);
+            if (value != current && s_Resolver.TryModify(context, varId, VariantModifyOperator.Set, value)) {
                 Game.Events.Queue(GameEvents.VariableUpdated, varId);
+                return true;
             }
+            return false;
         }
 
         #endregion // Variables
