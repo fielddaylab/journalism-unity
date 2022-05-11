@@ -82,7 +82,8 @@ namespace Journalism.UI {
                 obj.RemoveButton.onClick.AddListener(() => OnSlotDeleteClick(cachedSlot));
                 obj.Click.onPointerEnter.AddListener((p) => OnSlotHoverEnter(cachedSlot));
                 obj.Click.onPointerExit.AddListener((p) => OnSlotHoverExit(cachedSlot));
-                obj.Click.onClick.AddListener((p) => OnSlotClick(cachedSlot));
+                obj.Click.onPointerUp.AddListener((p) => OnSlotPointerUp(cachedSlot));
+                //obj.Click.onClick.AddListener((p) => OnSlotClick(cachedSlot));
                 obj.EmptyColor.Color = m_DefaultSlotColor;
             }
 
@@ -189,6 +190,23 @@ namespace Journalism.UI {
             slot.HoverHighlight.SetActive(false);
         }
 
+        private void OnSlotPointerUp(StoryBuilderSlot slot) {
+            // TODO: assign story scrap if you PointerDown on StoryScrapDisplay and release on StoryBuilderSlot.
+            // currently works like OnSlotClick because
+            // OnSlotPointerDown is not called when you click on a story scrap, so OnSlotPointerUp is not called.
+
+            if (!CanAccept(slot, m_SelectedScrap)) {
+                return;
+            }
+
+            if (SetSlot(slot, m_SelectedScrap.Data.Id)) {
+                slot.Animation.Replace(this, FlashAnimation(slot.Flash));
+                SetSelectedScrap(null);
+                Game.Audio.PlayOneShot("NotebookInsert");
+            }
+        }
+
+        /*
         private void OnSlotClick(StoryBuilderSlot slot) {
             if (!CanAccept(slot, m_SelectedScrap)) {
                 return;
@@ -200,6 +218,7 @@ namespace Journalism.UI {
                 Game.Audio.PlayOneShot("NotebookInsert");
             }
         }
+        */
 
         private void OnSlotDeleteClick(StoryBuilderSlot slot) {
             if (ClearSlot(slot)) {
