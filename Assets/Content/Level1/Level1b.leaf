@@ -40,7 +40,7 @@
 // Original Name: Story 2 Intro
 :: Story2Intro
 $call SetLocation("Newsroom")
-{bg BG/Newsroom-Story2.jpg}
+{bg BG/Newsroom-Front.jpeg}
 $call Music(Music/morning journal.mp3)
 Your first breaking news update is in the books!
 More people have arrived. The newsroom is buzzing with activity. 
@@ -55,7 +55,7 @@ $choice GetReadyCheckpoint; No. Don't worry. I'm on it.
 
 :: GetReadyCheckpoint
 @checkpoint
-{bg BG/Newsroom-Story2.jpg}
+{bg BG/Newsroom-Front.jpeg}
 $goto GetReady
 
 // Original Name: Get Ready
@@ -239,7 +239,7 @@ $choice GetReadyPart2; Back to your desk
 :: HeadOut
 @checkpoint
 @clearText
-{bg BG/Newsroom-Story2.jpg}
+{bg BG/Newsroom-Front.jpeg}
 $call SetTimeRemaining(0)
 Forget cats and dogs. It's raining an entire pet store. 
 
