@@ -146,8 +146,6 @@ $endif
 @clearText
 
 $if TimeRemaining()
-    You still have {timeLeft} to get ready.
-
     $if !Visited(HelpKhalisa)
         {force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
         $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
