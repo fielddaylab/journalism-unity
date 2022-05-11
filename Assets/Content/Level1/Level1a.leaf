@@ -41,7 +41,7 @@
 :: START
 $ActionChoice(Wake up)
 $call SetLocation("Apartment")
-{bg BG/BedroomMorning.jpg}
+{bg BG/BedroomMorning.jpeg}
 $call Music(Music/morning journal.mp3)
 It's 5AM.
 {img Anim/enml-rain.jpg}
@@ -275,7 +275,7 @@ $choice ArriveAtWork; Rush to work
 @clearText
 {/img}
 $call SetLocation("Newsroom")
-{bg BG/Newsroom-Story1.jpg}
+{bg BG/Newsroom-Front.jpeg}
 Your editor looks relieved to see you.
 
 $if Visited(HelpHer)
