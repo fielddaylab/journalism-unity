@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using BeauRoutine;
 using BeauUtil;
+using EasyAssetStreaming;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +16,11 @@ namespace Journalism.UI {
         public Graphic Graphic;
         public TMP_Text Text;
         public ColorGroup Colors;
+        public StreamingUGUITexture Streaming;
 
         public Routine Animation;
+        [NonSerialized] public TextAlignment Alignment;
+        public object Data;
 
         #if UNITY_EDITOR
 
@@ -25,6 +30,7 @@ namespace Journalism.UI {
             Group = GetComponent<CanvasGroup>();
             Graphic = GetComponent<Graphic>();
             Colors = GetComponent<ColorGroup>();
+            Streaming = GetComponent<StreamingUGUITexture>();
         }
 
         private void OnValidate() {

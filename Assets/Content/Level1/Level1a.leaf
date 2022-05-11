@@ -296,7 +296,8 @@ $ContinueChoice({@me} How can I help?)
 $call ActivateStory()
 {@person} We need a breaking news story.
 {@person} People need to know what's happening and how to stay safe. 
-{@person} You've got 2 hours.
+{@person} You've got 2 hours. {auto}
+$call SetTimeRemaining(2)
 
 $choice BreakingNewsStory; {@me} On it.
 
@@ -366,7 +367,6 @@ $choice ArriveAtWork; Arrive at work.
 
 {/img}
 $if FirstVisit()
-    $call SetTimeRemaining(2)
     $set DNRnumber = false
 $endif
 Get to work on your breaking news story!

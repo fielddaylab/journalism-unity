@@ -263,6 +263,7 @@ namespace Journalism.UI {
 
         private void OnPublishClick() {
             Game.Events.Queue(GameEvents.StoryPublished);
+            m_Window.CanvasGroup.blocksRaycasts = false;
             m_Window.Hide();
         }
 

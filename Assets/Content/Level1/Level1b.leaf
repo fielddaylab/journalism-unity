@@ -427,8 +427,7 @@ Volunteers are stacking sandbags by the road, with a DNR worker leading the effo
 
 A houseboat floats on the river nearby.
 
-$if HasTime(0.3333333)
-
+$if HasTime(0.5)
 $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5)
 $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5)
 $HubChoice(InterviewTheDNRWorker, "Interview the DNR worker", 0.5)
@@ -1407,7 +1406,6 @@ $else
         {@person}   And some higher quality content couldn't hurt. 
     $endif
 $endif
-{story-score}
 {/img}
 $call EndFeedback()
 

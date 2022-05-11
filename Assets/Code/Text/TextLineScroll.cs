@@ -30,7 +30,6 @@ namespace Journalism {
         public float Spacing = 12;
         public int MaxLines = 8;
         public float RotationRange = 1;
-        public TextAlignment Alignment = TextAlignment.Center;
         public float DialogInset = 16;
 
         [Header("Animation")]
@@ -43,6 +42,7 @@ namespace Journalism {
 
         #endregion // Inspector
 
+        [NonSerialized] public TextAlignment Alignment = TextAlignment.Center;
         [NonSerialized] public float RootBaseline;
         public RingBuffer<LineState> Lines = new RingBuffer<LineState>();
     }

@@ -205,9 +205,8 @@ namespace Journalism.UI {
 
         [LeafMember("ActivateStory"), Preserve]
         static public void ActivateStory() {
-            if (Player.WriteVariable(Var_ShowStory, true)) {
-                Game.Scripting.Interrupt(UISystem.SimpleTutorial("Notes"));
-            }
+            Player.WriteVariable(HeaderUI.Var_NotesEnabled, true);
+            Player.WriteVariable(Var_ShowStory, true);
         }
 
         [LeafMember("StoryEnabled"), Preserve]

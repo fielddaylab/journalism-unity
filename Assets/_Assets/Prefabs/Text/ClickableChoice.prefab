@@ -549,7 +549,42 @@ PrefabInstance:
     - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
       propertyPath: m_margin.x
-      value: 29.54596
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_xAdvance
+      value: 143.55139
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_marginWidth
+      value: 198
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_preferredWidth
+      value: 736.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_firstCharacterOfLine
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_lineVisibleCharacterCount
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516716765893093498, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_firstVisibleCharacterOfLine
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 3361021996822683584, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}
@@ -635,6 +670,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4772101800344676568, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_MinWidth
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4772101800344676568, guid: 6b88f00acf087a54f8010af06d31a69b,
+        type: 3}
+      propertyPath: m_MinHeight
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 4772101800344676568, guid: 6b88f00acf087a54f8010af06d31a69b,
         type: 3}

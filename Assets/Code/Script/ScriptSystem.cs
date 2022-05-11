@@ -43,9 +43,7 @@ namespace Journalism {
             m_Integration.HandleNodeEnter = HandleNodeEnter;
             m_Integration.HandleNodeExit = HandleNodeExit;
 
-            m_TextDisplay.LookupNextChoice = m_Integration.PredictChoice;
-            m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
-            m_TextDisplay.LookupLine = m_Integration.LookupLine;
+            m_TextDisplay.HookIntegration(m_Integration);
 
             Game.Events.Register(GameEvents.LevelStarted, OnLevelStarted, this)
                 .Register(GameEvents.LevelLoading, OnLevelLoading, this);
@@ -59,7 +57,7 @@ namespace Journalism {
                 Game.Save.SaveCheckpoint();
             }
             
-            yield return m_TextDisplay.HandleNodeStart(node, thread);
+            yield return m_TextDisplay.CurrentLayer.HandleNodeStart(node, thread);
 
             m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
         }

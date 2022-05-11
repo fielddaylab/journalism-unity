@@ -54,19 +54,18 @@ MonoBehaviour:
   Spacing: 8
   MaxLines: 10
   RotationRange: 1
-  Alignment: 1
   DialogInset: 24
   NewTextAnimParams:
-    Time: 0.3
+    Time: 0.25
     Curve: 1
   TextScrollAnimParams:
-    Time: 0.3
+    Time: 0.25
     Curve: 1
   VanishAnimParams:
-    Time: 0.4
+    Time: 0.25
     Curve: 2
   TextScrollDelay: 0.005
-  TextVanishDelay: 0.08
+  TextVanishDelay: 0.06
   VanishAnimDistance: 80
 --- !u!225 &4747825516198467238
 CanvasGroup:

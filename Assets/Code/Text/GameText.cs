@@ -121,7 +121,14 @@ namespace Journalism {
                     return TextAlignment.Right;
                 }
                 default: {
-                    return scroll.Alignment;
+                    switch(scroll.Alignment) {
+                        case TextAlignment.Center: {
+                            return scroll.Alignment;
+                        }
+                        default: {
+                            return TextAlignment.Left;
+                        }
+                    }
                 }
             }
         }
@@ -607,6 +614,7 @@ namespace Journalism {
 
             if (line.MarkerIcon != null) {
                 if (choiceMarker != null) {
+                    line.Text.margin = new Vector4(28f, 0, 0, 0);
                     line.MarkerIcon.gameObject.SetActive(true);
                     choice.Marker.gameObject.SetActive(true);
                     choice.Marker.sprite = choiceMarker.Image.sprite;
@@ -625,6 +633,7 @@ namespace Journalism {
                 else {
                     line.MarkerIcon.gameObject.SetActive(false);
                     line.MarkerIcon.sprite = null;
+                    line.Text.margin = new Vector4(0, 0, 0, 0);
                 }
             }
 
@@ -762,14 +771,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
-            choices.DefaultChoiceGroup.blocksRaycasts = true;
-            choices.DefaultNextButton.Selected = false;
-            while(!choices.DefaultNextButton.Selected) {
-                yield return null;
-            }
-            choices.DefaultChoiceGroup.blocksRaycasts = false;
-            yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
+            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, true, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
@@ -778,14 +780,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
-            choices.DefaultChoiceGroup.blocksRaycasts = true;
-            choices.DefaultNextButton.Selected = false;
-            while(!choices.DefaultNextButton.Selected) {
-                yield return null;
-            }
-            choices.DefaultChoiceGroup.blocksRaycasts = false;
-            yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
+            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, false, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
@@ -793,16 +788,33 @@ namespace Journalism {
             PopulateTextLine(choices.DefaultBackButton.Line, noText, null, default, yesStyle ?? noStyle, true);
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             choices.DefaultBackButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return choices.DefaultChoiceGroup.FadeTo(1, choices.NewChoiceAnimParams.Time / 2);
-            choices.DefaultChoiceGroup.blocksRaycasts = true;
-            choices.DefaultNextButton.Selected = false;
-            choices.DefaultBackButton.Selected = false;
-            while(!choices.DefaultNextButton.Selected && !choices.DefaultBackButton.Selected) {
-                yield return null;
-            }
-            choices.DefaultChoiceGroup.blocksRaycasts = false;
-            yield return choices.DefaultChoiceGroup.FadeTo(0, choices.VanishAnimParams.Time / 2);
+            yield return WaitForButtons(choices.DefaultNextButton, choices.DefaultBackButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, choices.VanishAnimParams);
             future.Complete(choices.DefaultNextButton.Selected);
+        }
+
+        static public IEnumerator WaitForButtonOrSkip(TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, bool allowClickAnywhere, TweenSettings vanishAnimParams) {
+            using(Routine fadeIn = fade.FadeTo(1, newAnimParams.Time / 2).Play()) {
+                fade.blocksRaycasts = true;
+                button.Selected = false;
+                while(!button.Selected && !(!fadeIn && Input.GetKey(KeyCode.Space)) && !(allowClickAnywhere && Input.GetMouseButtonDown(0))) {
+                    yield return null;
+                }
+            }
+            fade.blocksRaycasts = false;
+            yield return fade.FadeTo(0, vanishAnimParams.Time / 2);
+        }
+
+        static public IEnumerator WaitForButtons(TextChoice button1, TextChoice button2, CanvasGroup fade, TweenSettings newAnimParams, TweenSettings vanishAnimParams) {
+            using(Routine fadeIn = fade.FadeTo(1, newAnimParams.Time / 2).Play()) {
+                fade.blocksRaycasts = true;
+                button1.Selected = false;
+                button2.Selected = false;
+                while(!button1.Selected && !button2.Selected) {
+                    yield return null;
+                }
+            }
+            fade.blocksRaycasts = false;
+            yield return fade.FadeTo(0, vanishAnimParams.Time / 2);
         }
 
         #endregion // Defaults
@@ -946,7 +958,6 @@ namespace Journalism {
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
             static public readonly StringHash32 BackgroundFadeIn = "background-fadein";
             static public readonly StringHash32 DisplayStoryStats = "display-story-stats";
-            static public readonly StringHash32 DisplayStoryScore = "display-story-score";
 
             static public readonly StringHash32 ForceInput = "force-input";
             static public readonly StringHash32 Auto = "auto";
@@ -988,7 +999,6 @@ namespace Journalism {
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
-            config.AddEvent("story-score", Events.DisplayStoryScore);
             config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);
 
             config.AddEvent("auto", Events.Auto).WithFloatData(0.2f);

@@ -176,10 +176,11 @@ namespace Journalism.UI {
                 var pin = layout.Pins[i];
                 if (i >= layout.Items.Count) {
                     pin.Root.gameObject.SetActive(false);
-                    return;
+                    continue;
                 }
 
                 var item = layout.Items[i];
+                pin.Root.gameObject.SetActive(true);
                 pin.Line.gameObject.SetActive(true);
                 GameText.PopulateTextLine(pin.Line, item.RichText, null, default, Assets.Style(item.Style));
                 GameText.AlignTextLine(pin.Line, pin.Alignment);

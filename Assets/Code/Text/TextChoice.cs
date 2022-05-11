@@ -16,6 +16,7 @@ namespace Journalism {
         public TextLine Line;
         public Button Button;
         public Image Radial;
+        
         public Image Marker;
         public TMP_Text MarkerNum;
 
