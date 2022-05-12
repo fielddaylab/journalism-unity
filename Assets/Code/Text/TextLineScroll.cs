@@ -39,6 +39,7 @@ namespace Journalism {
         [Range(0, 1)] public float TextScrollDelay = 0.05f;
         [Range(0, 1)] public float TextVanishDelay = 0.08f;
         public float VanishAnimDistance = 80;
+        public float MaxTextWidth = 400;
 
         #endregion // Inspector
 

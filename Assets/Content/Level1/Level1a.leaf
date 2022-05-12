@@ -303,10 +303,11 @@ $call BeginTutorial()
     {@person}   So this is your fabled "Notebook"...
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
-    {@person}   You can find my notes for your story through the "Editor Notes" section.
+    {@person}   Details about the story I've assigned are in the "Editor Notes" section.
     $call ClickOn(EditorNotes)
     $call ClearPointer()
-    $call Wait(0.5)
+    {clear-text}
+    $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
     {@person}   Make sure to reference these from time to time.
     $call PointTo(TutorialPlayerAttributes, -24, 0)
@@ -318,11 +319,11 @@ $call BeginTutorial()
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
-    $call Wait(0.5)
+    $call Wait(0.2)
     $call CloseWindow()
 $call EndTutorial()
 
-{@person} Oh you've got 2 hours by the way {auto}
+{@person} You've got 2 hours. {auto}
 $call SetTimeRemaining(2)
 
 $choice BreakingNewsStory; {@me} On it.

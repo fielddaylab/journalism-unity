@@ -27,7 +27,7 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given text line.
         /// </summary>
-        static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style, bool stripQuotes = false) {
+        static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style, float maxWidth = 0, bool stripQuotes = false) {
             Assert.True(line.gameObject.activeInHierarchy, "TextLine must be active before calling PopulateTextLine");
 
             if (stripQuotes) {
@@ -51,6 +51,10 @@ namespace Journalism {
                     line.Icon.gameObject.SetActive(false);
                     line.Icon.sprite = null;
                 }
+            }
+
+            if (line.MaxSize && maxWidth > 0) {
+                line.MaxSize.MaxWidth = maxWidth;
             }
 
             if (style != null) {
@@ -766,7 +770,7 @@ namespace Journalism {
         #region Defaults
 
         static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
-            PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, true);
+            PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, 0, true);
             CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
@@ -775,7 +779,7 @@ namespace Journalism {
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
-            PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style, true);
+            PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style, 0, true);
             CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
@@ -784,8 +788,8 @@ namespace Journalism {
         }
 
         static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
-            PopulateTextLine(choices.DefaultNextButton.Line, yesText, null, default, yesStyle, true);
-            PopulateTextLine(choices.DefaultBackButton.Line, noText, null, default, yesStyle ?? noStyle, true);
+            PopulateTextLine(choices.DefaultNextButton.Line, yesText, null, default, yesStyle, 0, true);
+            PopulateTextLine(choices.DefaultBackButton.Line, noText, null, default, yesStyle ?? noStyle, 0, true);
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             choices.DefaultBackButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             yield return WaitForButtons(choices.DefaultNextButton, choices.DefaultBackButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, choices.VanishAnimParams);

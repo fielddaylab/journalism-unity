@@ -229,7 +229,7 @@ namespace Journalism {
             if (inString.RichText.Length > 0) {
                 m_QueuedLine = GameText.AllocLine(Text, Pools);
                 StringHash32 characterId = GameText.FindCharacter(inString);
-                GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, Assets.Style(characterId));
+                GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, Assets.Style(characterId), Text.MaxTextWidth);
                 GameText.AlignTextLine(m_QueuedLine, GameText.ComputeDesiredAlignment(m_QueuedLine, Text));
                 GameText.AdjustComputedLocations(Text, 1);
             }

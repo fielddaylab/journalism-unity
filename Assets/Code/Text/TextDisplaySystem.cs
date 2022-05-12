@@ -335,7 +335,7 @@ namespace Journalism {
 
         static private IEnumerator DisplayCustomMessage(TextDisplayLayer layer, string text, StringHash32 style) {
             TextLine line = GameText.AllocLine(layer.Text, layer.Pools);
-            GameText.PopulateTextLine(line, text, null, default, Assets.Style("msg"));
+            GameText.PopulateTextLine(line, text, null, default, Assets.Style("msg"), layer.Text.MaxTextWidth);
             GameText.AlignTextLine(line, TextAlignment.Center);
             GameText.AdjustComputedLocations(layer.Text, 1);
             yield return GameText.AnimateLocations(layer.Text, 1);

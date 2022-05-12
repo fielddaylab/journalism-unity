@@ -127,7 +127,7 @@ MonoBehaviour:
     Time: 0.2
     Curve: 1
   AltColumn: {fileID: 4976413759512972182}
-  m_ColumnShift: 275
+  m_ColumnShift: 290
   m_RequireInputForPlayerText: 0
   m_AlignDefaultChoiceButtonToText: 1
 --- !u!1 &1350283383301837245
@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 3423866195601940845, guid: 7a905d8f1146a834e8c5bbe48e852a70,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 600
+      value: 630
       objectReference: {fileID: 0}
     - target: {fileID: 3423866195601940845, guid: 7a905d8f1146a834e8c5bbe48e852a70,
         type: 3}
@@ -695,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 4747825516198467232, guid: cf751048ec247af44870815af06055af,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 450
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 4747825516198467232, guid: cf751048ec247af44870815af06055af,
         type: 3}
@@ -771,6 +771,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Anchor
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747825516198467239, guid: cf751048ec247af44870815af06055af,
+        type: 3}
+      propertyPath: MaxTextWidth
+      value: 350
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf751048ec247af44870815af06055af, type: 3}
