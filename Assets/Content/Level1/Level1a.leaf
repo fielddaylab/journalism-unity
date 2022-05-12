@@ -203,7 +203,7 @@ You help round up the chickens and only get pecked twice.
 {@me}{auto}No big deal.
 You head to your car, plucking feathers out of your hair. 
 
-$call AdjustStats(Trust + 1, Endurance + 1)
+$call AdjustStats(Trust + 1, Endurance + 1, Social + 1)
 $choice HitTheRoad; Hit the road
 
 // Original Name: Lure chickens
@@ -214,7 +214,7 @@ You make a trail of cherry granola and the chickens come running!
 The good news: the chickens are safe now.
 The bad news: they follow you to your car, clucking for more treats. 
 
-$call AdjustStats(Resourceful + 1, Trust + 1)
+$call AdjustStats(Resourceful + 1, Trust + 1, Social + 1)
 $choice HitTheRoad; Hit the road 
 
 // Original Name: Load your bike, it could be useful later.
@@ -311,7 +311,7 @@ $elseif StatCheck(Social, 2)
     Talking to you seems to cheer her up. 
     She agrees to let you quote her for your story, and she gives you a chocolate croissant for the road! 
 
-    $call AdjustStats(Trust + 1, Endurance + 1)
+    $call AdjustStats(Social + 1, Endurance + 1, Trust + 1)
     $call GiveSnippet(FriendlyShopkeeper)
 $else
     The baker is stacking up bags of flour to stop the floodwater.
@@ -647,7 +647,7 @@ $call BeginFeedback()
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.6
         {@person}   Stellar work Rookie! I can tell you put your heart into this.
-        {@person}   Solid story construction and lots of actionable info.
+        {@person}   Solid story construction and lots of useful info.
         {@person}   Maybe you've got a Pulitzer Prize in your future.
     $elseif StoryAlignment() >= 0.4
         {@person}   Nice work, Rookie! Your quotes and photos are top notch.
