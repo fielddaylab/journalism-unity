@@ -6,6 +6,7 @@ using BeauUtil.Debugger;
 using BeauRoutine;
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace Journalism {
     static public class CanvasUtility {
@@ -155,6 +156,11 @@ namespace Journalism {
 
         static public bool IsVisible(this Graphic graphic) {
             return graphic.isActiveAndEnabled && graphic.GetAlpha() > 0;
+        }
+
+        [MethodImpl(256)]
+        static public TextAlignment Mirror(this TextAlignment alignment) {
+            return 2 - alignment;
         }
     }
 }

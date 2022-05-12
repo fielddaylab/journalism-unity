@@ -62,6 +62,12 @@ namespace Journalism.UI {
 
             m_Window.LoadDataAsync = LoadAsync;
 
+            m_Window.BuildLayout = () => {
+                m_ListLayout.ForceRebuild();
+                m_ListLayout.enabled = false;
+                m_ListFitter.enabled = false;
+            };
+
             m_Window.UnloadData = () => {
                 m_Pools.ScrapPool.Reset();
                 m_Scraps.Clear();
@@ -76,7 +82,8 @@ namespace Journalism.UI {
                 obj.RemoveButton.onClick.AddListener(() => OnSlotDeleteClick(cachedSlot));
                 obj.Click.onPointerEnter.AddListener((p) => OnSlotHoverEnter(cachedSlot));
                 obj.Click.onPointerExit.AddListener((p) => OnSlotHoverExit(cachedSlot));
-                obj.Click.onClick.AddListener((p) => OnSlotClick(cachedSlot));
+                obj.Click.onPointerUp.AddListener((p) => OnSlotPointerUp(cachedSlot));
+                //obj.Click.onClick.AddListener((p) => OnSlotClick(cachedSlot));
                 obj.EmptyColor.Color = m_DefaultSlotColor;
             }
 
@@ -153,12 +160,6 @@ namespace Journalism.UI {
             m_StoryInput.blocksRaycasts = true;
 
             m_EditorNotesGroup.SetActive(false);
-
-            Routine.StartDelay(() => {
-                m_ListLayout.ForceRebuild();
-                m_ListLayout.enabled = false;
-                m_ListFitter.enabled = false;
-            }, 0.05f);
         }
 
         #region Handlers
@@ -189,6 +190,23 @@ namespace Journalism.UI {
             slot.HoverHighlight.SetActive(false);
         }
 
+        private void OnSlotPointerUp(StoryBuilderSlot slot) {
+            // TODO: assign story scrap if you PointerDown on StoryScrapDisplay and release on StoryBuilderSlot.
+            // currently works like OnSlotClick because
+            // OnSlotPointerDown is not called when you click on a story scrap, so OnSlotPointerUp is not called.
+
+            if (!CanAccept(slot, m_SelectedScrap)) {
+                return;
+            }
+
+            if (SetSlot(slot, m_SelectedScrap.Data.Id)) {
+                slot.Animation.Replace(this, FlashAnimation(slot.Flash));
+                SetSelectedScrap(null);
+                Game.Audio.PlayOneShot("NotebookInsert");
+            }
+        }
+
+        /*
         private void OnSlotClick(StoryBuilderSlot slot) {
             if (!CanAccept(slot, m_SelectedScrap)) {
                 return;
@@ -200,6 +218,7 @@ namespace Journalism.UI {
                 Game.Audio.PlayOneShot("NotebookInsert");
             }
         }
+        */
 
         private void OnSlotDeleteClick(StoryBuilderSlot slot) {
             if (ClearSlot(slot)) {
@@ -244,6 +263,7 @@ namespace Journalism.UI {
 
         private void OnPublishClick() {
             Game.Events.Queue(GameEvents.StoryPublished);
+            m_Window.CanvasGroup.blocksRaycasts = false;
             m_Window.Hide();
         }
 
@@ -285,7 +305,8 @@ namespace Journalism.UI {
                     scrap.Toggle.interactable = true;
                 }
                 if (m_PublishMode) {
-                    m_PublishButton.interactable = false;
+                    RefreshStats();
+                    m_PublishButton.interactable = m_CachedStats.CanPublish;
                 }
                 return true;
             }

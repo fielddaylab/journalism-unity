@@ -4,9 +4,14 @@ using BeauRoutine;
 using UnityEngine.UI;
 using BeauUtil;
 using System;
+using System.Collections;
+using BeauUtil.Variants;
 
 namespace Journalism.UI {
     public sealed class HeaderUI : MonoBehaviour {
+
+        static public readonly TableKeyPair Var_StatsEnabled = TableKeyPair.Parse("ui:stats.visible");
+        static public readonly TableKeyPair Var_NotesEnabled = TableKeyPair.Parse("ui:notes.visible");
 
         #region Inspector
 
@@ -64,7 +69,12 @@ namespace Journalism.UI {
 
             Game.Events.Register<Player.TimeUpdateArgs>(GameEvents.TimeUpdated, OnTimeUpdated, this)
                 .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this)
-                .Register(GameEvents.LevelStarted, OnLevelStarted, this);
+                .Register(GameEvents.LevelStarted, OnLevelStarted, this)
+                .Register<TableKeyPair>(GameEvents.VariableUpdated, OnVariableChanged, this);
+        }
+
+        public bool AnyOpen() {
+            return m_FaderState || m_FaderRoutine;
         }
 
         public HeaderButton FindButton(StringHash32 id) {
@@ -75,6 +85,11 @@ namespace Journalism.UI {
             }
 
             return null;
+        }
+
+        private void ReevaluateVisibleButtons() {
+            FindButton("Stats").Button.interactable = Player.ReadVariable(Var_StatsEnabled).AsBool();
+            FindButton("Notes").Button.interactable = Player.ReadVariable(Var_NotesEnabled).AsBool();
         }
 
         private void QueueFaderEvaluate() {
@@ -105,6 +120,7 @@ namespace Journalism.UI {
 
         private void OnLevelStarted() {
             m_TimeButton.Button.interactable = Player.TimeRemaining() > 0;
+            ReevaluateVisibleButtons();
 
             ClockIncrements.Populate(TimeClock, (int) Player.TimeRemaining());
         }
@@ -144,14 +160,23 @@ namespace Journalism.UI {
 
             ClockIncrements.Populate(TimeClock, (int) args.Units);
 
-            if (Root.IsShowing()) {
-                if (args.Delta < 0) {
-                    TimeEffect.gameObject.SetActive(true);
-                    GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
-                    GameText.PrepareTextLine(TimeEffect, 2);
-                    m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
-                    Game.Audio.PlayOneShot("ClockTick");
+            if (args.Delta < 0 && Root.IsShowing()) {
+                TimeEffect.gameObject.SetActive(true);
+                GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
+                GameText.PrepareTextLine(TimeEffect, 2);
+                m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
+                Game.Audio.PlayOneShot("ClockTick");
+            } else if (args.Delta > 0) {
+                IEnumerator tutorial = UISystem.SimpleTutorial("Time");
+                if (tutorial != null) {
+                    Game.Scripting.Interrupt(tutorial);
                 }
+            }
+        }
+    
+        private void OnVariableChanged(TableKeyPair keyPair) {
+            if (keyPair == Var_StatsEnabled || keyPair == Var_NotesEnabled) {
+                ReevaluateVisibleButtons();
             }
         }
     }

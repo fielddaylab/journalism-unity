@@ -11,10 +11,7 @@ namespace Journalism {
         
         #region Inspector
 
-        public RectTransform Root;
-
         [Header("Texture")]
-        public CanvasGroup TextureGroup;
         public StreamingUGUITexture Texture;
 
         #endregion // Inspector

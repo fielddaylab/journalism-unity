@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using BeauPools;
 using EasyAssetStreaming;
+using BeauUtil.UI;
 
 namespace Journalism {
     
@@ -35,6 +36,7 @@ namespace Journalism {
         public Mask PatternMask;
         public RectTransform Tail;
         [ShowIfField("Tail")] public RectTransform InnerTail;
+        [ShowIfField("Text")] public MaxSizeLayoutConstraint MaxSize;
 
         [Header("Layout")]
         public LayoutGroup Layout;

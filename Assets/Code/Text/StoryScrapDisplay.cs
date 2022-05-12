@@ -17,7 +17,7 @@ namespace Journalism {
         #region Inspector
 
         [Required] public TextLine Line;
-        public Toggle Toggle;
+        public StoryScrapToggle Toggle;
         
         [Required] public GameObject TextureGroup;
         [Required] public StreamingUGUITexture Texture;

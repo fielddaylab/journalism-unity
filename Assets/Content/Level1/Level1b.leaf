@@ -1,15 +1,19 @@
 // MACROS
 
-#macro HubChoice(nodeId, text, time) \
+#macro HubChoice(nodeId, text, time, location?) \
     $choice $nodeId; $text \
         $data time = $time \
-        $data once
+        $data once \
+        $data location = "$location"
 #macro TimeChoice(nodeId, text, time) \
     $choice $nodeId; $text \
         $data time = $time
 #macro OnceChoice(nodeId, text) \
     $choice $nodeId; $text \
         $data once
+#macro LocationChoice(nodeId, text, location) \
+    $choice $nodeId; $text \
+        $data location = "$location"
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
@@ -19,6 +23,14 @@
     $call GameOver() \
     $text \
     $call GameOverRestart()
+#macro Feedback(snippet, location, text) \
+    $if IncludedSnippet($snippet) \
+        $call NextFeedback($snippet, $location) \
+        $text \
+    $endif
+#macro DefaultFeedback(location, text) \
+    $call NextFeedback("", $location) \
+    $text
 
 // Name: Journalism Table Prototype
 // Creator: Twine
@@ -28,7 +40,7 @@
 // Original Name: Story 2 Intro
 :: Story2Intro
 $call SetLocation("Newsroom")
-{bg BG/Newsroom-Story2.jpg}
+{bg BG/Newsroom-Front.jpeg}
 $call Music(Music/morning journal.mp3)
 Your first breaking news update is in the books!
 More people have arrived. The newsroom is buzzing with activity. 
@@ -45,6 +57,7 @@ $choice GetReadyCheckpoint; No. Don't worry. I'm on it.
 
 :: GetReadyCheckpoint
 @checkpoint
+{bg BG/Newsroom-Front.jpeg}
 $goto GetReady
 
 // Original Name: Get Ready
@@ -133,8 +146,6 @@ $endif
 @clearText
 
 $if TimeRemaining()
-    You still have {timeLeft} to get ready.
-
     $if !Visited(HelpKhalisa)
         {force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
         $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
@@ -227,6 +238,7 @@ $choice GetReadyPart2; Back to your desk
 :: HeadOut
 @checkpoint
 @clearText
+{bg BG/Newsroom-Front.jpeg}
 $call SetTimeRemaining(0)
 You're on a deadline.
 
@@ -406,6 +418,7 @@ $choice Crackers; Grab a few saltine crackers.
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
+@clearText
 $call SetLocation("Upper Lake Dam")
 
 $if FirstVisit()
@@ -419,11 +432,7 @@ Volunteers are stacking sandbags by the road, with a DNR worker leading the effo
 
 A houseboat floats on the river nearby.
 
-You have {timeLeft} remaining to submit this story.
-
-
-$if HasTime(0.3333333)
-
+$if HasTime(0.5)
 $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5)
 $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5)
 $HubChoice(InterviewTheDNRWorker, "Interview the DNR worker", 0.5)
@@ -643,8 +652,6 @@ As soon as you arrive, you realize you might be out of your depth.
 The street is a rushing river, with thousands of cherries floating past. 
 
 Cars are stranded, and people are clustered in dry areas and on rooftops. 
-
-You have {timeLeft} remaining to submit this story.
 
 $if HasTime(0.5)
 $HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25)
@@ -1404,10 +1411,7 @@ $else
         {@person}   And some higher quality content couldn't hurt. 
     $endif
 $endif
-{story-score}
 {/img}
 $call EndFeedback()
 
-{@msg}  This is the end of Level 1.
-{@msg}  You are now free to close your browser.
-// $call NextLevel()
+$call NextLevel()

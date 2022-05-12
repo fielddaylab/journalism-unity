@@ -110,10 +110,10 @@ MonoBehaviour:
   RotationRange: 1
   MaxOptions: 6
   NewChoiceAnimParams:
-    Time: 0.3
+    Time: 0.2
     Curve: 15
   VanishAnimParams:
-    Time: 0.4
+    Time: 0.25
     Curve: 2
   NewScrollDelay: 0.05
   TextVanishDelay: 0.08

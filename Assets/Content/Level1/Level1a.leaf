@@ -1,6 +1,6 @@
 // MACROS
 
-#macro HubChoice(nodeId, text, time, location) \
+#macro HubChoice(nodeId, text, time, location?) \
     $choice $nodeId; $text \
         $data time = $time \
         $data once \
@@ -11,6 +11,9 @@
 #macro OnceChoice(nodeId, text) \
     $choice $nodeId; $text \
         $data once
+#macro LocationChoice(nodeId, text, location) \
+    $choice $nodeId; $text \
+        $data location = "$location"
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
@@ -20,8 +23,13 @@
     $call GameOver() \
     $text \
     $call GameOverRestart()
-#macro Feedback(location, type, text) \
-    $call NextFeedback(location, type) \
+#macro Feedback(snippet, location, text) \
+    $if IncludedSnippet($snippet) \
+        $call NextFeedback($snippet, $location) \
+        $text \
+    $endif
+#macro DefaultFeedback(location, text) \
+    $call NextFeedback("", $location) \
     $text
 
 // Name: Journalism Table Prototype
@@ -33,7 +41,7 @@
 :: START
 $ActionChoice(Wake up)
 $call SetLocation("Apartment")
-{bg BG/BedroomMorning.jpg}
+{bg BG/BedroomMorning.jpeg}
 $call Music(Music/morning journal.mp3)
 It's 5AM.
 {img Anim/enml-rain.jpg}
@@ -267,7 +275,7 @@ $choice ArriveAtWork; Rush to work
 @clearText
 {/img}
 $call SetLocation("Newsroom")
-{bg BG/Newsroom-Story1.jpg}
+{bg BG/Newsroom-Front.jpeg}
 Your editor looks relieved to see you.
 
 $if Visited(HelpHer)
@@ -281,14 +289,42 @@ $endif
 
 $ContinueChoice({@me} Where is everybody??)
 {@person}Ben and Sudha are on their way. Khalisa is stuck at home, bailing out her basement.
-{@person}Right now, you're my lead reporter. 
+{@person}Right now, you're my lead reporter.
 
 $ContinueChoice({@me} How can I help?)
 
 $call ActivateStory()
 {@person} We need a breaking news story.
-{@person} People need to know what's happening and how to stay safe. 
-{@person} You've got 2 hours.
+{@person} People need to know what's happening and how to stay safe.
+{@person} Let's take a look at your notebook.
+$call BeginTutorial()
+    $call OpenWindow(Notes)
+    $call Wait(0.4)
+    {@person}   So this is your fabled "Notebook"...
+    {layout Left}
+    $call PointTo(TutorialEditorNotes, 0, -12)
+    {@person}   Details about the story I've assigned are in the "Editor Notes" section.
+    $call ClickOn(EditorNotes)
+    $call ClearPointer()
+    {clear-text}
+    $call Wait(0.2)
+    $call PointTo(TutorialDescription, -24, 0)
+    {@person}   Make sure to reference these from time to time.
+    $call PointTo(TutorialPlayerAttributes, -24, 0)
+    {@person}   Long story short: you want this...
+    $call PointTo(TutorialTargetAttributes, -24, 0)
+    {@person}   To line up with this.
+    $call PointTo(TutorialQuality, -24, 0)
+    {@person}   Oh, and try to get as many quality snippets as possible.
+    $call ClearPointer()
+    $call ClickOn(BackToNotes)
+    {clear-text}
+    $call Wait(0.2)
+    $call CloseWindow()
+$call EndTutorial()
+
+{@person} You've got 2 hours. {auto}
+$call SetTimeRemaining(2)
 
 $choice BreakingNewsStory; {@me} On it.
 
@@ -355,15 +391,12 @@ $choice ArriveAtWork; Arrive at work.
 :: BreakingNewsStory
 @checkpoint
 @clearText
-{/img}
-Get to work on your breaking news story!
 
+{/img}
 $if FirstVisit()
-    $call SetTimeRemaining(2)
     $set DNRnumber = false
 $endif
-
-You have {timeLeft} remaining to submit the story.
+Get to work on your breaking news story!
 
 $if FirstVisit()
     {anim rumble} RRRRING.
@@ -687,7 +720,31 @@ $else
         {@person}   This was your first natural disaster, so I'll let it slide. 
     $endif
 $endif
-{story-score}
+
+$Feedback("HospitalDucks", "feedbackA", "Aww, poor ducks...")
+$Feedback("FriendlyShopkeeper", "feedbackB", "Oh no, those poor croissants")
+$Feedback("RudeShopkeeper", "feedbackC", "What did you say to the baker to make them so rude?")
+$Feedback("AbandonedCherrymobile", "feedbackD", "Noooo not the cherrymobile!")
+$Feedback("BlurryCars", "feedbackA", "You really need to upgrade your camera")
+$Feedback("FloodMap", "feedbackB", "The flooding really is everywhere, huh...")
+$Feedback("WeatherStats", "feedbackC", "Holy %^#@ that's a lot of rain!")
+$Feedback("GoodDNR", "feedbackD", "The WORST flood???")
+$Feedback("RehearsedDNR", "feedbackA", "Now I know not to drive through floodwaters!")
+$Feedback("DNRData", "feedbackB", "7 percent? 7 PERCENT?! ...I don't know what to make of that.")
+$Feedback("FloodBackground", "feedbackC", "Why didn't we do anything to prepare?")
+$Feedback("CityHallShock", "feedbackD", "Staying at home, thanks!")
+$Feedback("CityHallAnnoyance", "feedbackA", "Guess I'll check the city website...")
+$Feedback("LibraryLot", "feedbackB", "That is... a picture of some kind?")
+$Feedback("ScientistQuotes", "feedbackC", "There goes Rainn E. Daye... hey wait isn't that name kinda on the nose?")
+$Feedback("PoliceStory", "feedbackD", "Thank goodness the first responders got there in time!")
+$Feedback("PoliceSafetyQuote", "feedbackA", "I don't even know what I'm looking at with this photo.")
+
+$call ImpactFeedback()
+$call EditorFeedback()
+{img Anim/Editor.jpeg}
+{@person}   ...{auto}
+{@person}   Yeah our readers are a chatty bunch.
+
 $call EndFeedback()
 {/img}
 $call NextLevel()

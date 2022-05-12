@@ -24,6 +24,7 @@ namespace Journalism.UI {
 
         public Action LoadData;
         public Func<IEnumerator> LoadDataAsync;
+        public Action BuildLayout;
         public Action UnloadData;
 
         private AsyncHandle m_LoadAsyncHandle;
@@ -73,6 +74,10 @@ namespace Journalism.UI {
             m_RootTransform.gameObject.SetActive(true);
             while(Streaming.IsLoading() || m_LoadAsyncHandle.IsRunning()) {
                 yield return null;
+            }
+            if (BuildLayout != null) {
+                yield return null;
+                BuildLayout();
             }
             Game.Audio.PlayOneShot(m_OpenAudio);
             yield return m_RootTransform.AnchorPosTo(0, m_ShowAnim, Axis.Y);

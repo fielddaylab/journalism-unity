@@ -216,7 +216,7 @@ namespace Journalism {
             if (units != s_Current.TimeRemaining) {
                 int delta = (int) (units - s_Current.TimeRemaining);
                 s_Current.TimeRemaining = units;
-                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
+                Game.Events.Dispatch(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
             }
         }
 
@@ -243,7 +243,7 @@ namespace Journalism {
             uint units = Stats.HoursToTimeUnits(hours);
             if (units > 0) {
                 s_Current.TimeRemaining += units;
-                Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, (int) units));
+                Game.Events.Dispatch(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, (int) units));
             }
         }
 
@@ -274,23 +274,29 @@ namespace Journalism {
         /// <summary>
         /// Writes a value to the variable with the given id.
         /// </summary>
-        static public void WriteVariable(StringSlice varId, Variant value, object context = null) {
+        static public bool WriteVariable(StringSlice varId, Variant value, object context = null) {
             if (!TableKeyPair.TryParse(varId, out var key)) {
                 Log.Error("[Player] Unable to parse '{0}' as a variable key", varId);
-                return;
+                return false;
             }
-            if (s_Resolver.TryModify(context, key, VariantModifyOperator.Set, value)) {
+            s_Resolver.TryGetVariant(context, key, out Variant current);
+            if (value != current && s_Resolver.TryModify(context, key, VariantModifyOperator.Set, value)) {
                 Game.Events.Queue(GameEvents.VariableUpdated, key);
+                return true;
             }
+            return false;
         }
 
         /// <summary>
         /// Writes a value to the variable with the given id.
         /// </summary>
-        static public void WriteVariable(TableKeyPair varId, Variant value, object context = null) {
-            if (s_Resolver.TryModify(context, varId, VariantModifyOperator.Set, value)) {
+        static public bool WriteVariable(TableKeyPair varId, Variant value, object context = null) {
+            s_Resolver.TryGetVariant(context, varId, out Variant current);
+            if (value != current && s_Resolver.TryModify(context, varId, VariantModifyOperator.Set, value)) {
                 Game.Events.Queue(GameEvents.VariableUpdated, varId);
+                return true;
             }
+            return false;
         }
 
         #endregion // Variables
@@ -317,6 +323,14 @@ namespace Journalism {
         [LeafMember("HasSnippet"), Preserve]
         static public bool HasStoryScrap(StringHash32 scrapId) {
             return s_Current.StoryScrapInventory.Contains(scrapId);
+        }
+
+        /// <summary>
+        /// Returns if a story scrap is in the player's story.
+        /// </summary>
+        [LeafMember("IncludedSnippet"), Preserve]
+        static public bool IncludedStoryScrap(StringHash32 scrapId) {
+            return ArrayUtils.Contains(s_Current.AllocatedScraps, scrapId);
         }
 
         /// <summary>
@@ -347,6 +361,17 @@ namespace Journalism {
         static public void CompileStoryStatistics() {
             s_Stats = StoryStats.FromPlayerData(s_Current, Assets.CurrentLevel.Story);
             Log.Msg("[Player] Story Statistics: Quality {0} ({1} - {2}) / Alignment {3} / Score {4}", s_Stats.TotalQuality, s_Stats.QualityAdd, s_Stats.QualitySubtract, s_Stats.Alignment, s_Stats.Score);
+        }
+
+        /// <summary>
+        /// Removes used snippets from the player's inventory.
+        /// </summary>
+        static public void RemoveUsedSnippets() {
+            foreach(var scrap in s_Current.AllocatedScraps) {
+                if (!scrap.IsEmpty) {
+                    s_Current.StoryScrapInventory.Remove(scrap);
+                }
+            }
         }
 
         [LeafMember("StoryScore"), Preserve]

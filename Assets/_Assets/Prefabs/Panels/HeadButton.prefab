@@ -74,7 +74,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -109,6 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e50fd6c2b92bbc43a66c62988d53b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id:
+    m_Source: 
+    m_HashValue: 0
   Button: {fileID: 6777147068596989931}
   Window: {fileID: 0}
 --- !u!114 &7990968673446711712

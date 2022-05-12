@@ -287,6 +287,7 @@ MonoBehaviour:
   PatternMask: {fileID: 5405889722665014734}
   Tail: {fileID: 7137245139446556717}
   InnerTail: {fileID: 7532016704658727623}
+  MaxSize: {fileID: 9019479986259184805}
   Layout: {fileID: 6103029026025727545}
   TailHeight: 16
   Text: {fileID: 468769718010146141}
@@ -682,7 +683,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 32, y: -3.92}
-  m_SizeDelta: {x: 11, y: 15.770004}
+  m_SizeDelta: {x: 14, y: 15.770004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3973760493482949426
 MonoBehaviour:
@@ -1228,7 +1229,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 32, y: -1}
-  m_SizeDelta: {x: 16, y: 24}
+  m_SizeDelta: {x: 16, y: 22}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &3526289341804566909
 MonoBehaviour:

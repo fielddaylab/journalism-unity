@@ -10,6 +10,7 @@ using BeauUtil.Variants;
 using BeauRoutine;
 using System;
 using UnityEngine.Scripting;
+using Journalism.UI;
 
 namespace Journalism {
     public sealed class ScriptSystem : MonoBehaviour {
@@ -43,9 +44,7 @@ namespace Journalism {
             m_Integration.HandleNodeEnter = HandleNodeEnter;
             m_Integration.HandleNodeExit = HandleNodeExit;
 
-            m_TextDisplay.LookupNextChoice = m_Integration.PredictChoice;
-            m_TextDisplay.LookupNextLine = m_Integration.PredictNextLine;
-            m_TextDisplay.LookupLine = m_Integration.LookupLine;
+            m_TextDisplay.HookIntegration(m_Integration);
 
             Game.Events.Register(GameEvents.LevelStarted, OnLevelStarted, this)
                 .Register(GameEvents.LevelLoading, OnLevelLoading, this);
@@ -54,12 +53,12 @@ namespace Journalism {
         }
 
         private IEnumerator HandleNodeEnter(ScriptNode node, LeafThreadState thread) {
-            if (node.HasFlags(ScriptNodeFlags.Checkpoint)) {
+            if (node.HasFlags(ScriptNodeFlags.Checkpoint) && !Player.Data.VisitedNodeIds.Contains(node.Id())) {
                 Player.Data.CheckpointId = node.CheckpointId();
                 Game.Save.SaveCheckpoint();
             }
             
-            yield return m_TextDisplay.HandleNodeStart(node, thread);
+            yield return m_TextDisplay.CurrentLayer.HandleNodeStart(node, thread);
 
             m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
         }
@@ -252,16 +251,39 @@ namespace Journalism {
         static private void BeginFeedback() {
             Game.Events.Queue(GameEvents.StoryEvalBegin);
             Player.CompileStoryStatistics();
+            Player.RemoveUsedSnippets();
         }
 
         [LeafMember("ImpactFeedback"), Preserve]
         static private void ImpactFeedback() {
-            Game.Events.Queue(GameEvents.StoryEvalImpact);
+            Game.Events.Dispatch(GameEvents.StoryEvalImpact);
+        }
+
+        [LeafMember("EditorFeedback"), Preserve]
+        static private void EditorFeedback() {
+            Game.Events.Queue(GameEvents.StoryEvalEditor);
+        }
+
+        [LeafMember("NextFeedback"), Preserve]
+        static private void NextFeedback(StringHash32 snippetId, StringHash32 locationId) {
+            Game.Scripting.m_TextDisplay.EnqueueFeedbackItem(snippetId, locationId);
         }
 
         [LeafMember("EndFeedback"), Preserve]
         static private void EndFeedback() {
             Game.Events.Queue(GameEvents.StoryEvalEnd);
+        }
+
+        [LeafMember("BeginTutorial"), Preserve]
+        static private void BeginTutorial() {
+            Game.Events.Dispatch(GameEvents.TutorialBegin);
+            Game.UI.PushInputMask(InputLayerFlags.OverStory);
+        }
+
+        [LeafMember("EndTutorial"), Preserve]
+        static private void EndTutorial() {
+            Game.Events.Dispatch(GameEvents.TutorialEnd);
+            Game.UI.PopInputMask();
         }
 
         #endregion // Leaf
