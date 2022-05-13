@@ -42,7 +42,7 @@
 $ActionChoice(Wake up)
 $call SetLocation("Apartment")
 {bg BG/BedroomMorning.jpeg}
-$call Music(Music/morning journal.mp3)
+$call Music(Music/rainy day in cherry town.mp3)
 It's 5AM.
 {img Anim/enml-rain.jpg}
 Dark, rainy, a train rumbling past. 
