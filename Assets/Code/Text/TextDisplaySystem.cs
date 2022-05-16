@@ -385,7 +385,7 @@ namespace Journalism {
             yield return m_ImpactLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 0.2f;
             yield return StoryText.AnimateFeedback(m_ImpactLayout);
-            yield return GameText.WaitForDefaultNext(m_CurrentLayer.Choices, Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
+            yield return GameText.WaitForDefaultNext(m_CurrentLayer.Choices, Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight, false);
             yield return m_ImpactLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_ImpactLayout.gameObject.SetActive(false);
         }

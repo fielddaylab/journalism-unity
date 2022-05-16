@@ -769,13 +769,13 @@ namespace Journalism {
 
         #region Defaults
 
-        static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
+        static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter, bool? overrideAllowFullScreen = null) {
             PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, 0, true);
             CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, true, -0.1f, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, overrideAllowFullScreen.GetValueOrDefault(true), -0.1f, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
