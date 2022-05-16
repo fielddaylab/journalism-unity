@@ -334,7 +334,7 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Drive
 :: Drive
-
+$call SetLocation("Downtown")
 $if StatCheck(Research, 2)
 All your research has paid off! 
 
@@ -350,10 +350,12 @@ If you'd done more research, maybe you'd know which streets to avoid, but it's t
 
 You're half a mile from downtown when water starts rising. 
 
-The road ahead is totally covered! 
+The road ahead is totally covered!
 
-$choice FindHigherGround; Find higher ground and pull over ASAP
-$choice FloorIt; Try to drive through
+$LocationChoice(FindHigherGround, "Find higher ground and pull over ASAP", "Deli Lot")
+$LocationChoice(FloorIt, "Try to drive through", "Downtown")
+{map UI/MapPlaceholder.png}
+
 $endif
 
 // Original Name: Listen to the police scanner
@@ -450,12 +452,15 @@ $endif
 
 // Original Name: Find higher ground
 :: FindHigherGround
+{/map}
+$call SetLocation("Deli Parking Lot")
 You swerve into a parking lot, just in time. 
 
 $choice LookAroundForSomethingUseful; Look around for something useful
 
 // Original Name: Floor it
 :: FloorIt
+{/map}
 You floor it and hope for the best. 
 
 Your car splashes along valiantly for a few seconds, then sputters and dies. You’re stranded! 

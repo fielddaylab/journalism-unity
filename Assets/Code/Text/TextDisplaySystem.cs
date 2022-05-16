@@ -34,6 +34,10 @@ namespace Journalism {
         [SerializeField] private ImageColumn m_Image = null;
         [SerializeField] private ImageColumn m_Map = null;
 
+        [Header("Default Dimensions")]
+        [SerializeField] private Vector2 m_DefaultImageDims = new Vector2(320, 320);
+        [SerializeField] private Vector2 m_DefaultMapDims = new Vector2(366, 245);
+
         #endregion // Inspector
 
         [NonSerialized] private TextDisplayLayer m_CurrentLayer;
@@ -76,14 +80,29 @@ namespace Journalism {
 
         public void ConfigureHandlers(CustomTagParserConfig config, TagStringEventHandler handlers) {
             handlers
-                .Register(GameText.Events.Image, HandleImageOrMap)
+                .Register(GameText.Events.Image, HandleImage)
                 .Register(GameText.Events.ClearImage, HandleImageOrMapClear)
                 .Register(GameText.Events.DisplayStoryStats, HandleStoryStats)
-                .Register(GameText.Events.Map, HandleImageOrMap)
+                .Register(GameText.Events.Map, HandleMap)
                 .Register(GameText.Events.ClearMap, HandleImageOrMapClear);
 
             m_BaseLayer.ConfigureHandlers();
             m_OverLayer.ConfigureHandlers();
+        }
+
+        private IEnumerator HandleImage(TagEventData evtData, object context) {
+            // TODO: define the image size as const
+            this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultImageDims);
+
+            yield return HandleImageOrMap(evtData, context);
+        }
+
+        private IEnumerator HandleMap(TagEventData evtData, object context) {
+            // TODO: define the map size as const
+
+            this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultMapDims);
+
+            yield return HandleImageOrMap(evtData, context);
         }
 
         private IEnumerator HandleImageOrMap(TagEventData evtData, object context) {
@@ -247,7 +266,7 @@ namespace Journalism {
         private void OnChoiceOptionsUpdated() {
             // Add markers to the map
             if (m_Map.gameObject.activeSelf) {
-                MapMarkerLoader.PopulateMapWithMarkers(m_Map.Texture, m_Map.gameObject);
+                MapMarkerLoader.PopulateMapWithMarkers(m_Map.Texture, m_BaseLayer.AltColumn.gameObject);
             }
         }
 
@@ -303,7 +322,7 @@ namespace Journalism {
 
             m_Map.Texture.Unload();
             m_Map.Texture.Path = string.Empty;
-            MapMarkerLoader.ClearMarkerContainer(m_Map.gameObject);
+            MapMarkerLoader.ClearMarkerContainer(m_BaseLayer.AltColumn.gameObject);
             m_Map.gameObject.SetActive(false);
         }
 

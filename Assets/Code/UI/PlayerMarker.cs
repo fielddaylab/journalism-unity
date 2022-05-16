@@ -8,5 +8,6 @@ namespace Journalism.UI
     public class PlayerMarker : MapMarker
     {
         public TMP_Text LocationIDText;
+        public RectTransform BannerRect;
     }
 }

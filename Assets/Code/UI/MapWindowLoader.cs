@@ -51,7 +51,7 @@ namespace Journalism.UI
 
         private static Dictionary<GameObject, MapMarkerContainer> m_containerDict;
         private static Dictionary<GameObject, MarkerStream> m_streamDict;
-        private static Vector2 m_markerScale;
+        private static Vector2 m_markerScale, m_bannerScale;
         private static MarkerScaling m_markerScaling;
 
         private static Vector2 REF_MAP_DIMS = new Vector2(745, 500); // the map dimensions markers are scaled according to
@@ -97,7 +97,7 @@ namespace Journalism.UI
 
         public static void Setup(GameObject containerPrefab, StreamingUGUITexture mapTex) {
             // Register handler to load choice options for marker placement
-            Game.Events.Register<StringHash32[]>(GameEvents.ChoiceOptionsUpdated, OnChoiceOptionsUpdated);
+            Game.Events.Register<StringHash32[]>(GameEvents.ChoiceOptionsUpdating, OnChoiceOptionsUpdating);
             Game.Events.Register(GameEvents.ChoiceCompleted, OnChoiceCompleted);
 
             m_markerContainerPrefab = containerPrefab;
@@ -108,13 +108,16 @@ namespace Journalism.UI
 
             // normalize marker scales
             MapMarker sampleMarker = m_markerContainerPrefab.GetComponent<MapMarkerContainer>().Markers[0];
+            PlayerMarker samplePlayerMarker = m_markerContainerPrefab.GetComponent<MapMarkerContainer>().PlayerMarker;
             Vector2 markerDims = new Vector2(sampleMarker.Root.rect.width, sampleMarker.Root.rect.height);
+            //Vector2 bannerPos = new Vector2(samplePlayerMarker.BannerRect.localPosition.x, samplePlayerMarker.BannerRect.localPosition.y);
 
             //Rect baseMapRect = mapTex.GetComponent<RectTransform>().rect;
             //new Vector2(baseMapRect.width, baseMapRect.height);
             Vector2 mapDims = REF_MAP_DIMS;
 
             m_markerScale = new Vector2(markerDims.x / mapDims.x, markerDims.y / mapDims.y);
+            //m_bannerScale = new Vector2(bannerPos.x / mapDims.x, bannerPos.y / mapDims.y);
 
             m_markerScaling = new MarkerScaling(
                 markerDims.x / mapDims.x,
@@ -129,6 +132,8 @@ namespace Journalism.UI
         #region Member Functions
 
         public static void PopulateMapWithMarkers(StreamingUGUITexture mapTex, GameObject owner) {
+            Debug.Log("[Map Window Loader] Populating map with markers...");
+
             // Save map rect
             RectTransform mapRect = mapTex.GetComponent<RectTransform>();
 
@@ -152,11 +157,15 @@ namespace Journalism.UI
 
 
             // Set player location
-            // set PlayerMarker location banner text
+            // set PlayerMarker location banner text and position
             MapLocationDef.MapLocation playerLoc = MapLocations.GetMapLocation(Player.Location());
             container.PlayerMarker.LocationIDText.SetText(playerLoc.Name);
+            //container.PlayerMarker.BannerRect.localPosition = new Vector2(m_bannerScale.x * mapDims.x, m_bannerScale.y * mapDims.y);
+
             playerMarkerRect.sizeDelta = new Vector2(m_markerScale.x * mapDims.x, m_markerScale.y * mapDims.y);
             playerMarkerRect.localPosition = FitCoords(playerLoc.NormalizedCoords, mapRect);
+
+            Debug.Log("[Map Window Loader] Placed Player marker");
 
             if (m_choiceLocations == null) {
                 return;
@@ -178,12 +187,16 @@ namespace Journalism.UI
                         markerIndex++;
 
                         coveredLocations.Add(locId);
+
+                        Debug.Log("[Map Window Loader] Placed marker at new location");
                     }
                     else {
                         // TODO: Handle multiple tasks at one location 
                     }
                 }
             }
+
+            Debug.Log("[Map Window Loader] Map marker population completed");
         }
 
         public static void ClearMarkerContainer(GameObject owner) {
@@ -198,11 +211,15 @@ namespace Journalism.UI
             if (!m_streamDict.ContainsKey(requester)) {
                 MarkerStream newStream = new MarkerStream(0, new List<LocIndexPair>());
                 m_streamDict.Add(requester, newStream);
+
+                Debug.Log("[MapWindowLoader] Marker stream opened");
             }
         }
 
         public static MapMarker StreamIn(StringHash32 locId, GameObject requester) {
             if (locId == Player.Location()) {
+                Debug.Log("[MapWindowLoader] Found location with id " + locId);
+
                 // return player marker
                 return m_markerContainer.PlayerMarker;
             }
@@ -218,6 +235,8 @@ namespace Journalism.UI
 
                     foreach (LocIndexPair pair in stream.CoveredLocations) {
                         if (pair.LocationId == locId) {
+                            Debug.Log("[MapWindowLoader] Found location with id " + locId);
+
                             return m_markerContainer.Markers[pair.MarkerIndex];
                         }
                     }
@@ -236,6 +255,8 @@ namespace Journalism.UI
                 MapMarker marker = m_markerContainer.Markers[streamIndex];
                 m_streamDict[requester] = new MarkerStream(streamIndex + 1, stream.CoveredLocations);
 
+                Debug.Log("[MapWindowLoader] Found location with id " + locId);
+
                 return marker;
             }
         }
@@ -243,6 +264,8 @@ namespace Journalism.UI
         public static void CloseMarkerStream(GameObject requester) {
             if (m_streamDict.ContainsKey(requester)) {
                 m_streamDict.Remove(requester);
+
+                Debug.Log("[MapWindowLoader] Marker stream closed");
             }
         }
 
@@ -277,7 +300,8 @@ namespace Journalism.UI
 
         #region Event Handlers
 
-        private static void OnChoiceOptionsUpdated(StringHash32[] locIds) {
+        private static void OnChoiceOptionsUpdating(StringHash32[] locIds) {
+            Debug.Log("[Map Window Loader] Updated choice locations");
             m_choiceLocations = locIds;
         }
 

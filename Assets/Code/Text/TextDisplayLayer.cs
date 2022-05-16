@@ -335,7 +335,8 @@ namespace Journalism {
                         GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId));
                     }
                     // send option locations to map
-                    Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdated, locIds);
+                    Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdating, locIds);
+                    Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdated);
 
                     MapMarkerLoader.CloseMarkerStream(this.gameObject);
 

@@ -227,6 +227,7 @@ MonoBehaviour:
   NumText: {fileID: 0}
   Image: {fileID: 6841662036654005910}
   LocationIDText: {fileID: 1594300693501235664}
+  BannerRect: {fileID: 1495944205083511296}
 --- !u!1 &2070594378502268289
 GameObject:
   m_ObjectHideFlags: 0
