@@ -2,7 +2,7 @@
 :: ScienceOfFlooding
 @type Fact
 @quality Good
-Snippet text unimplemented.
+Extreme rainfall events in the Twin Lakes watershed have increased by 10% in the last decade.
 
 // Original Name: Flood probability
 :: FloodProbability
@@ -14,7 +14,7 @@ A clean graph of flood probability.
 :: FloodMumboJumbo
 @type Observation
 @quality Bad
-Double-click this passage to edit it.
+Twin Lakes watershed rainfall data shows something significant, probably. 
 
 // Original Name: Confusing graphic
 :: ConfusingGraphic
@@ -22,41 +22,41 @@ Double-click this passage to edit it.
 @quality Bad
 A squiggly misinterpreted graph.
 
-// Original Name: Basic flood background
+// Original Name: Basic flood background from DNR phone call
 :: BasicFloodBackground
 @type Fact
 @quality Good
-Snippet text unimplemented.
+This is the worst flood Twin Lakes has ever had. It's already caused millions of dollars in damages. 
 
 // Original Name: Basic flood prevention
 :: BasicFloodPrevention
 @type Quote
 @quality Good
-Snippet text unimplemented.
+We need better policies to prevent future disasters. 
 
 // Original Name: Detailed flood background
 :: DetailedFloodBackground
 @type Fact
 @quality Great
-Snippet text unimplemented.
+Twin Lakes has a history of flooding. We're surrounded by water, and the city keeps the lake levels much higher than they used to.
 
 // Original Name: Floods and climate change
 :: FloodsAndClimateChange
 @type Graph
 @quality Good
-Snippet text unimplemented
+In the last decade, extreme rainfall in the region has increased by 10% due to climate change. 
 
 // Original Name: Cause of flood
 :: CauseOfFlood
 @type Quote
 @quality Good
-Snippet text unimplemented
+Developers have paved over 30% of our wetlands, which soak up water. It's basically a perfect storm. 
 
 // Original Name: Lake level background
 :: LakeLevelBackground
 @type Fact
 @quality Good
-Snippet text unimplemented
+At the Town Hall meeting, Mayor Johnson will call to lower lake levels--an issue that many people blame for the flooding. 
 
 // Original Name: Inspiring downtown recovery
 :: InspiringDowntownRecovery
@@ -80,13 +80,24 @@ Snippet text unimplemented.
 :: ArtBusinessImpact
 @type Quote
 @quality Great
-Double-click this passage to edit it.
+I put all my savings into this place. I'm not sure how I'm gonna recover.
+
+:: QuoteHeartAndSoul
+@type Quote
+@quality Great
+We gotta do our best to pick up and rebuild. Small business is the heart and soul of this town. I gotta hope it'll work out okay. 
+
+:: InTroubleQuote
+@type Quote
+@quality Great
+The Cherry Festival is usually my most profitable week, but the flood scared everybody away. If this keeps up, I'm in trouble.
+
 
 // Original Name: Impact of flood
 :: ImpactOfFlood
 @type Quote
 @quality Good
-Snippet text unimplemented.
+Flood events will drive away people with enough money to move. If we lose too many people and businesses, the town won't survive.
 
 // Original Name: Rainfall stats
 :: RainfallStats
@@ -98,7 +109,7 @@ Snippet text unimplemented.
 :: PoliciesToPreventFlooding
 @type Quote
 @quality Great
-Snippet text unimplemented.
+The city could change things with new policies: funding for storm drains, rain gardens, lower lake levels, and wetland protection!
 
 // Original Name: Flooded neighborhood
 :: FloodedNeighborhood

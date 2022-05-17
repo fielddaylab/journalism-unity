@@ -447,10 +447,7 @@ $choice ScienceStoryMap; Map
 $if StatCheck(Social, 5)
 {@person}You've been making quite a name for yourself around here!
 
-She gives you a ton of great info and statistics: 
-Since 1900, rainfall in Twin Lakes has increased by 10%.
-The volume of the river is up 40%.
-Oh, and Upper Lake is being kept 5 feet higher than its normal level.
+She gives you a ton of great info and statistics. 
 {@person}It's basically a perfect storm. No pun intended.
 
 $call GiveSnippet(DetailedFloodBackground)
@@ -459,9 +456,6 @@ $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Research, 5)
 She's excited to talk to someone who's so well-informed on floods and climate change!
 She gives you a ton of great info and statistics: 
-Since 1900, rainfall in Twin Lakes has increased by 10%.
-The volume of the river is up 40%.
-Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 {@person}It's basically a perfect storm. No pun intended.
 
 $call GiveSnippet(DetailedFloodBackground)
@@ -561,7 +555,7 @@ FLYER:
 * Prevent shoreline erosion
 * Stop flooding
 * Prepare for extreme weather
-Mayor Johnson is pushing to have the lake levels lowered! Hear more at this week's Town Hall meeting. 
+Mayor Johnson is calling to have the lake levels lowered! Hear more at this week's Town Hall meeting. 
 </b>
 <color="magenta"><i>Gained new location: Department of Limnology</i></color>
 
@@ -999,7 +993,7 @@ $choice MainStreetFloodRecovery; Head back out to Main Street. She seems too bus
 You sit down with the DNR worker and polish off your interviewing skills.
 
 $choice WhatWasTheCauseOfTheFlood; What was the cause of the flood?
-$choice HasTwinLakesEverHadAFloodLikeThisBefore; Has Twin Lakes ever had a flood like this before?
+$choice CanYouDescribeTheImpactOfFloodingOnTwinLakes; Can you describe the long-term impact of flooding on Twin Lakes?
 
 // Original Name: DNR Statement
 :: DNRStatement
@@ -1108,8 +1102,10 @@ $endif
 // Original Name: Interview Gallery Owner
 :: InterviewGalleryOwner
 He tells you this is his third year running the gallery. 
-{@person}We've had some minor flooding here and there, but nothing like this. 
-{@person}I'm not sure how I'm gonna recover. 
+{@person}I put all my savings into this place. I'm not sure how I'm gonna recover.
+{@me}Do you think the city should be responsible for helping business owners? 
+{@person}Well, they're the ones who let this happen.
+{@person}The least they could do is help bail us out. 
 
 $call GiveSnippet(ArtBusinessImpact)
 
@@ -1156,10 +1152,10 @@ $call GiveSnippet(CauseOfFlood)
 $choice CanYouGiveMeTheRainfallStatistics; Can you give me the rainfall statistics?
 $choice WhatDoYouMeanLessPlacesForTheWaterToGo; What do you mean, less places for the water to go?
 
-// Original Name: "Has Twin Lakes ever had a flood like this before?"
-:: HasTwinLakesEverHadAFloodLikeThisBefore
-{@person}We deal with flash flooding all the time, but it's never been this serious before. 
-{@person}With climate change, it'll only keep getting worse unless we do something.
+// Original Name: "Can you describe the long-term impact of flooding on Twin Lakes?" "
+:: CanYouDescribeTheImpactOfFloodingOnTwinLakes
+{@person}More and more flood events will drive away the people with enough money and privilege to move.
+{@person}If we lose too many people and businesses, the town won't survive. 
 
 $call GiveSnippet(ImpactOfFlood)
 
@@ -1222,8 +1218,8 @@ $choice CanYouGiveMeSomeExamples; Can you give me some examples?
 
 // Original Name: Ask if she has graphics you can use
 :: AskIfSheHasGraphicsYouCanUse
-She pulls up some files on her phone.
-{@person}I've got tons of great visuals in my research!
+She pulls up a graph on her phone.
+{@person}Take a look at the trends. We're seeing an unprecedented increase in rainfall!
 
 $call GiveSnippet(RainfallStats)
 
@@ -1232,9 +1228,11 @@ $choice DepartmentOfLimnology; Thank her for her help
 
 // Original Name: "How has the flood affected your business?"
 :: HowHasTheFloodAffectedYourBusiness
-{@person}It's just a disaster.
-{@person}The Cherry Festival is usually my best week of business...
-{@person}But you're the first customer I've seen all day.
+{@person}It's a disaster.
+{@person}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
+{@person}If this keeps up, I'm in trouble.
+
+$call GiveSnippet(InTroubleQuote)
 
 
 $if !Visited(AreYouWorriedAboutMoreRainComing)
@@ -1263,8 +1261,11 @@ $endif
 
 // Original Name: "Are you worried about more rain coming?"
 :: AreYouWorriedAboutMoreRainComing
-"Well, yah. Of course I am."
+{@person}Of course I am. But we gotta do our best to pick up and rebuild.
+{@person}Small business is the heart and soul of this town.
+{@person}I gotta hope it'll work out okay. 
 
+$call GiveSnippet(QuoteHeartAndSoul)
 
 $if !Visited(HowHasTheFloodAffectedYourBusiness)
 $choice HowHasTheFloodAffectedYourBusiness; How has the flood affected your business?
