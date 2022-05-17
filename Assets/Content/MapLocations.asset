@@ -29,3 +29,11 @@ MonoBehaviour:
       m_HashValue: 2339622852
     Name: Upper Lake Dam
     NormalizedCoords: {x: 0.048909947, y: 0.008333334}
+  - Id:
+      m_HashValue: 1950899829
+    Name: Downtown
+    NormalizedCoords: {x: 0.32140824, y: -0.2875}
+  - Id:
+      m_HashValue: 3599652654
+    Name: Deli Lot
+    NormalizedCoords: {x: 0.36472848, y: -0.29791668}

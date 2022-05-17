@@ -1,6 +1,7 @@
 ﻿using BeauUtil;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Journalism
@@ -17,6 +18,7 @@ namespace Journalism
         public void DefineLocation() {
             Vector2 normalizedCoords = new Vector2(m_markerTransform.localPosition.x / m_mapRect.rect.width, m_markerTransform.localPosition.y / m_mapRect.rect.height);
             m_mapLocationDef.DefineLocation(m_locationName, normalizedCoords);
+            EditorUtility.SetDirty(m_mapLocationDef);
 
             // TODO: scale marker dimensions to match map (not just coords)
         }
