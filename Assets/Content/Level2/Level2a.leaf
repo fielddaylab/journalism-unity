@@ -69,6 +69,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Go outside and help your neighbors
 :: GoOutsideAndHelpYourNeighbors
+{bg BG/OutsideApt-Map.jpg}
 The street is covered in puddles and debris. 
 
 
@@ -258,6 +259,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Make an excuse and rush back inside
 :: MakeAnExcuseAndRushBackInside
+{bg BG/Bedroom2Temp.jpg}
 Ahh. Back in the blissful silence of your apartment. 
 $call AdjustStats(Social - 1)
 
@@ -285,9 +287,9 @@ $choice ScienceStoryMap; Got it. Thanks.
 
 // Original Name: Science Story Map
 :: ScienceStoryMap
-<b>Twin Lakes Map</b>
-
+{bg BG/OutsideApt-Map.jpg}
 $if FirstVisit()
+<b>Twin Lakes Map</b>
 $call SetTimeRemaining(3)
 $endif
 
@@ -379,7 +381,7 @@ $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne
 $endif
 
 
-$choice ScienceStoryMap; Head out
+$choice ScienceStoryMap; Leave the DNR
 
 // Original Name: Gather flooding info from academic papers
 :: GatherFloodingInfoFromAcademicPapers
@@ -407,6 +409,7 @@ $choice ScienceStoryMap; Do something else
 
 // Original Name: Department of Limnology
 :: DepartmentOfLimnology
+{bg BG/Limnology.jpg}
 You arrive at the Department of Limnology, located right on the lake.
 
 The dock is covered in murky, greenish water.
@@ -510,7 +513,8 @@ $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 
 // Original Name: Main Street Flood Recovery
 :: MainStreetFloodRecovery
-<b>LOCATION MAP: MAIN STREET</b>
+$if FirstVisit()
+
 Your story is due in {timeLeft}.
 
 Main Street is cordoned off. 
@@ -519,8 +523,9 @@ The floodwater has gone down, but there's mud and debris everywhere.
 
 You duck under the barricade and take a look around.
 
+$endif
 
-$if !!HasTime(0.5)
+$if HasTime(0.5)
 $choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
 $choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
@@ -1030,7 +1035,7 @@ $choice ScienceStoryMap; Science Story Map
 $choice WhatCausedTheFlood; What caused the flood?
 $choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening next time?
 
-$choice ScienceStoryMap; Leave the DNR
+$choice ScienceStoryMap; Leave the Department of Limnology
 
 // Original Name: In-Depth Interview: Limnology Expert
 :: In-DepthInterviewLimnologyExpert
