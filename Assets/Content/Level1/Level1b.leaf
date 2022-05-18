@@ -39,8 +39,9 @@
 
 // Original Name: Story 2 Intro
 :: Story2Intro
+$call SetHeaderEnabled(true)
 $call SetLocation("Newsroom")
-{bg BG/Newsroom-Front.jpeg}
+{bg BG/rainyGazette.jpg}
 $call Music(Music/rainy day in cherry town.mp3)
 Your first breaking news update is in the books!
 By now, more of your coworkers have showed up.  
