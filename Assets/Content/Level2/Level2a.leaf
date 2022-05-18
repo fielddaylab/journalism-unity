@@ -41,6 +41,7 @@
 :: Level2Story3TheScienceStory
 
 $ActionChoice(The next morning...)
+{bg BG/Bedroom2Temp.jpg}
 It's an eerily quiet morning in Twin Lakes. 
 
 The chance of rain is hovering at 50%. 
@@ -332,7 +333,7 @@ $if Visited(AskAroundForItsOwner)
 $HubChoice(PhoneCallMayorsPersonalNumber, "Mayor's Personal Number", 0.5)
 $endif
 
-$choice ScienceStoryMap; Back to map
+$choice ScienceStoryMap; Put away your phone
 
 // Original Name: Time to assemble the science story...
 :: TimeToAssembleTheScienceStory
@@ -402,7 +403,7 @@ $call GiveSnippet(ConfusingGraphic)
 $endif
 
 
-$choice ScienceStoryMap; Science Story Map
+$choice ScienceStoryMap; Do something else
 
 // Original Name: Department of Limnology
 :: DepartmentOfLimnology
@@ -416,7 +417,7 @@ People are rushing in and out of the boathouse, bailing out water.
 $if !!HasTime(0.25)
 $HubChoice(PhotographFloodedDock, "Take some pictures of the flooded dock", 0.25)
 $choice LookForSomeoneToInterview; Look for someone to interview 
-$choice ScienceStoryMap; Science Story Map
+$choice ScienceStoryMap; Leave the Department of Limnology
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
@@ -436,8 +437,8 @@ Going in person might've gotten you more info... but at least this was quicker.
 $call GiveSnippet(BasicFloodBackground)
 $call GiveSnippet(BasicFloodPrevention)
 
-$choice PhoneContacts; Phone Contacts
-$choice ScienceStoryMap; Map
+$choice PhoneContacts; Back to Contacts
+$choice ScienceStoryMap; Put away your phone
 
 // Original Name: Phone Call: Wynne D. Storme @ DNR
 :: PhoneCallWynneD.StormeDNR
@@ -473,7 +474,7 @@ $endif
 
 
 $choice PhoneContacts; Phone Contacts
-$choice ScienceStoryMap; Map
+$choice ScienceStoryMap; Put away your phone
 
 // Original Name: Phone Call: City Hall
 :: PhoneCallCityHall
@@ -487,7 +488,7 @@ He gives you a clearly rehearsed quote:
 $call GiveSnippet(BasicCityHallInfo)
 
 $choice PhoneContacts; Phone Contacts
-$choice ScienceStoryMap; Map
+$choice ScienceStoryMap; Put away your phone
 
 // Original Name: Phone Call: Mayor's Personal Number
 :: PhoneCallMayorsPersonalNumber
@@ -524,7 +525,7 @@ $choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
 $choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 
-$choice ScienceStoryMap; Twin Lakes Map 
+$choice ScienceStoryMap; Do someting else
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
@@ -849,7 +850,7 @@ $if !Visited(LookForSomeoneToInterview)
 $choice LookForSomeoneToInterview; Look for someone else to talk to
 $endif
 
-$choice ScienceStoryMap; Back to Twin Lakes Map
+$choice ScienceStoryMap; Leave the Limnology Department
 $endif
 
 $if StatCheck(Social, 4)
@@ -897,8 +898,7 @@ $ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
 $choice PhoneContacts; Open Phone Contacts
 $choice MainStreetFloodRecovery; Keep biking toward Main Street
 
-
-$choice ScienceStoryMap; Science Story Map
+$choice ScienceStoryMap; Go somewhere else
 
 // Original Name: Ask to interview him
 :: AskToInterviewHim
@@ -1004,7 +1004,7 @@ He tells you the cause of the flooding: extreme rainfall, and less places (like 
 $call GiveSnippet(BasicFloodBackground)
 $call GiveSnippet(BasicFloodPrevention)
 
-$choice DNRMap; DNR Map
+$choice DNRMap; Look elsewhere in the DNR
 
 // Original Name: "How is the state helping with flood recovery?"
 :: HowIsTheStateHelpingWithFloodRecovery
@@ -1030,7 +1030,7 @@ $choice ScienceStoryMap; Science Story Map
 $choice WhatCausedTheFlood; What caused the flood?
 $choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening next time?
 
-$choice ScienceStoryMap; Twin Lakes Map
+$choice ScienceStoryMap; Leave the DNR
 
 // Original Name: In-Depth Interview: Limnology Expert
 :: In-DepthInterviewLimnologyExpert
@@ -1181,8 +1181,7 @@ $choice PhotographFloodedDock; Thank him and go take photos of the dock
 $endif
 
 
-$choice ScienceStoryMap; Twin Lakes Map
-
+$choice ScienceStoryMap; Leave the Department of Limnology
 // Original Name: "How can the city prevent this from happening next time?"
 :: HowCanTheCityPreventThisFromHappeningNextTime
 {@person}It'll take more than some sandbags.
@@ -1205,7 +1204,7 @@ $choice PhotographFloodedDock; Thank him and go take photos of the dock
 $endif
 
 
-$choice ScienceStoryMap; Twin Lakes Map
+$choice ScienceStoryMap; Leave the Department of Limnology
 
 // Original Name: Ask what people can do to help
 :: AskWhatPeopleCanDoToHelp
@@ -1331,15 +1330,15 @@ She gives you the address for the Department of Limnology.
 
 <color="magenta"><i>Gained new location: Department of Limnology</i></color>
 
-$choice MainStreetFloodRecovery; Back to Main Street
-$choice ScienceStoryMap; Twin Lakes Map
+$choice MainStreetFloodRecovery; Return to Main Street
+$choice ScienceStoryMap; Leave Main Street
 
 // Original Name: Thanks
 :: Thanks
 {@person}No problem. Stop by any time!
 
 $choice MainStreetFloodRecovery; Back to Main Street
-$choice ScienceStoryMap; Twin Lakes Map
+$choice ScienceStoryMap; Leave Main Street
 
 // Original Name: "Can you give me the rainfall statistics?"
 :: CanYouGiveMeTheRainfallStatistics
