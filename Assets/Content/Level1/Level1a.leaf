@@ -271,7 +271,7 @@ $choice ArriveAtWork; Rush to work
 @clearText
 {/img}
 $call SetLocation("Newsroom")
-{bg BG/Newsroom-Front.jpeg}
+{bg BG/rainyGazette.jpg}
 Your editor looks relieved to see you.
 
 $if Visited(HelpHer)

@@ -42,6 +42,7 @@
 
 $ActionChoice(The next morning...)
 {bg BG/Bedroom2Temp.jpg}
+$call SetHeaderEnabled(true)
 It's an eerily quiet morning in Twin Lakes. 
 
 The chance of rain is hovering at 50%. 
