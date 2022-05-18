@@ -302,10 +302,10 @@ $HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic p
 $set local:_localOr = false
 $if Visited(ThanksPlusUniversityContact) 
 $set local:_localOr = true
-$elseif  "Read the bulletin board in the hallway"
-
+$elseif  Visited(ReadTheBulletinBoardInTheHallway)
 $set local:_localOr = true
 $endif
+
 $if local:_localOr
 $HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.5)
 $endif
