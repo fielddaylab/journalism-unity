@@ -291,7 +291,7 @@ $call SetTimeRemaining(3)
 $endif
 
 
-$if !!HasTime(0.3333333)
+$if HasTime(0.25)
 Your story is due in {timeLeft}.
 
 $HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5)
@@ -356,8 +356,7 @@ $else
 From down a side street, you hear a soft clucking. Amelia Egghart???
 $endif
 
-
-$choice FollowTheChicken; Follow the chicken <color="purple">(10 minutes)</color>
+$HubChoice(FollowTheChicken, "Follow the chicken", 0.25)
 $choice MainStreetFloodRecovery; Head straight to Main Street
 
 // Original Name: DNR Map
@@ -414,7 +413,7 @@ The dock is covered in murky, greenish water.
 People are rushing in and out of the boathouse, bailing out water. 
 
 
-$if !!HasTime(0.3333333)
+$if !!HasTime(0.25)
 $HubChoice(PhotographFloodedDock, "Take some pictures of the flooded dock", 0.25)
 $choice LookForSomeoneToInterview; Look for someone to interview 
 $choice ScienceStoryMap; Science Story Map
@@ -502,11 +501,11 @@ $choice PhoneContacts; Phone Contacts
 :: FollowTheChicken
 You race around the corner like an Olympic biker out for gold.
 $call AdjustStats(Endurance + 1)
-$call DecreaseTime(0.1666667)
+
 There's a chicken wandering in circles in the middle of a puddle!
 
-$choice CallYourNeighborAndSeeIfItsHers; Call your neighbor and see if it's hers <color="purple">(10 minutes)</color>
-$choice AskAroundForItsOwner; Ask around for its owner <color="purple">(20 minutes)</color>
+$HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
+$HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 
 // Original Name: Main Street Flood Recovery
 :: MainStreetFloodRecovery
@@ -572,7 +571,7 @@ As you're leaving, you literally run into someone.
 
 You recognize her from state-wide press conferences: the governor!!
 
-$choice InterviewGovernor; Ask for an interview <color="purple">(20 minutes)</color>
+$HubChoice(InterviewGovernor, "Ask for an interview", 0.5)
 $choice ScienceStoryMap; Gotta go!
 
 // Original Name: Look for your DNR Contact, Wynne D. Storme
@@ -657,7 +656,7 @@ $endif
 
 // Original Name: Call your neighbor and see if it's hers
 :: CallYourNeighborAndSeeIfItsHers
-$call DecreaseTime(0.1666667)
+
 
 $if Visited(HelpHer)
 You call Maureen. "Hey! Um, weird question... did any more of your chickens fly the coop?"
@@ -667,7 +666,7 @@ $call AdjustStats(Trust + 1)
 
 She hangs up, leaving you with a strange chicken staring up at you hopefully. 
 
-$choice AskAroundForItsOwner; Ask around for its owner <color="purple">(20 minutes)</color>
+$HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
 $else
 {@me}Hey!! I think I found your chicken!
@@ -680,14 +679,14 @@ $call AdjustStats(Trust + 1)
 
 She hangs up, leaving you with a strange chicken staring up at you hopefully. 
 
-$choice AskAroundForItsOwner; Ask around for its owner <color="purple">(20 minutes)</color>
+$HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
 $endif
 
 // Original Name: Ask around for its owner
 :: AskAroundForItsOwner
 You wander the area, the chicken fidgeting in your arms.
-$call DecreaseTime(0.3333333)
+
 You're about to give up when a frazzled-looking woman rushes over to you. 
 
 {@person}Oh, you found Omelette! Thank you so much! My daughter is heartbroken.
@@ -704,7 +703,7 @@ The gallery owner is hanging soggy art prints on a clothesline, grumbling under 
 
 $choice AskToInterviewHim; Ask to interview him
 $choice AskIfHeNeedsHelp; Ask if he needs help
-$choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work <color="purple">(10 minutes)</color>
+$HubChoice(TellHimYoureABigFanOfHisWork, "Tell him you're a big fan of his work", 0.25)
 
 // Original Name: Main Street Cafe
 :: MainStreetCafe
@@ -800,7 +799,7 @@ $goto MathJoke
 // Original Name: Interview mayor
 :: InterviewGovernor
 {@person}I'm always happy to talk to the press. Ask away. 
-$call DecreaseTime(0.3333333)
+
 This will be an amazing boost for your article, but you try to play it cool. 
 
 $choice HowIsTheStateHelpingWithFloodRecovery; How is the state helping with flood recovery? 
