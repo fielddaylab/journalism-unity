@@ -1430,5 +1430,83 @@ $call GiveSnippet(PoliciesToPreventFlooding)
 $choice DNRMap; Thank him for his time.
 
 :: STORYEVALUATION
-{@msg}  Story builder sequence here
-$call NextLevel()
+$call RunPublish()
+$goto StoryFeedback
+
+:: StoryFeedback
+$call BeginFeedback()
+{/bg}
+{img Anim/Editor.jpeg}
+{@person} Alright, let's see how you did...
+{story-stats}
+$if StoryScore() == "good"
+    $if StoryAlignment() >= 0.6
+        {@person}   Stellar work Rookie! I can tell you put your heart into this.
+        {@person}   Solid story construction and lots of useful info.
+        {@person}   Maybe you've got a Pulitzer Prize in your future.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@person}   Admittedly, we could've used a little more useful info... 
+        {@person}   But this should still help a lot of people. 
+    $else
+        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@person}   Make sure to check my notes next time. It's all in there.  
+    $endif
+$elseif StoryScore() == "medium"
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work getting the right info out there!
+        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
+        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@person}   This should be enough to help a lot of people.  
+        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+    $else
+        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@person}   Still. Not bad for your first natural disaster. 
+    $endif
+$else
+    $if StoryAlignment() >= 0.6
+        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   This story should help a lot of people... 
+        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
+    $elseif StoryAlignment() >= 0.4
+        {@person}   Nice work, Rookie. Your story construction is pretty solid!
+        {@person}   Your quality control could definitely use some work. 
+        {@person}   Still. Not bad for your first natural disaster. 
+    $else
+        {@person}   Well.... this could be worse. Sort of.  
+        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@person}   This was your first natural disaster, so I'll let it slide. 
+    $endif
+$endif
+
+$Feedback("HospitalDucks", "feedbackA", "Aww, poor ducks...")
+$Feedback("FriendlyShopkeeper", "feedbackB", "Oh no, those poor croissants")
+$Feedback("RudeShopkeeper", "feedbackC", "What did you say to the baker to make them so rude?")
+$Feedback("AbandonedCherrymobile", "feedbackD", "Noooo not the cherrymobile!")
+$Feedback("BlurryCars", "feedbackA", "You really need to upgrade your camera")
+$Feedback("FloodMap", "feedbackB", "The flooding really is everywhere, huh...")
+$Feedback("WeatherStats", "feedbackC", "Holy %^#@ that's a lot of rain!")
+$Feedback("GoodDNR", "feedbackD", "The WORST flood???")
+$Feedback("RehearsedDNR", "feedbackA", "Now I know not to drive through floodwaters!")
+$Feedback("DNRData", "feedbackB", "7 percent? 7 PERCENT?! ...I don't know what to make of that.")
+$Feedback("FloodBackground", "feedbackC", "Why didn't we do anything to prepare?")
+$Feedback("CityHallShock", "feedbackD", "Staying at home, thanks!")
+$Feedback("CityHallAnnoyance", "feedbackA", "Guess I'll check the city website...")
+$Feedback("LibraryLot", "feedbackB", "That is... a picture of some kind?")
+$Feedback("ScientistQuotes", "feedbackC", "There goes Rainn E. Daye... hey wait isn't that name kinda on the nose?")
+$Feedback("PoliceStory", "feedbackD", "Thank goodness the first responders got there in time!")
+$Feedback("PoliceSafetyQuote", "feedbackA", "I don't even know what I'm looking at with this photo.")
+
+$call ImpactFeedback()
+$call EditorFeedback()
+{img Anim/Editor.jpeg}
+{@person}   ...{auto}
+{@person}   Yeah our readers are a chatty bunch.
+
+$call EndFeedback()
+{/img}
+//$call NextLevel()
