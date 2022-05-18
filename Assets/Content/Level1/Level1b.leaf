@@ -145,12 +145,10 @@ $endif
 @clearText
 
 $if TimeRemaining()
-    $if !Visited(HelpKhalisa)
-        $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
-    $endif
-    $HubChoice(Breakroom, "Search the break room for snacks", 0.25)
-    $choice HeadOut; Enough stalling. Time to go.
-    
+    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
+    $HubChoice(Breakroom, "Search the break room for snacks", .25)
+    $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
+
 $elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
     $choice HeadOut; Enough stalling. Time to go.
 $else
