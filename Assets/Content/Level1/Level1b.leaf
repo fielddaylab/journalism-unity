@@ -43,17 +43,16 @@ $call SetLocation("Newsroom")
 {bg BG/Newsroom-Front.jpeg}
 $call Music(Music/rainy day in cherry town.mp3)
 Your first breaking news update is in the books!
-More people have arrived. The newsroom is buzzing with activity. 
+By now, more of your coworkers have showed up.  
 You're about to grab some coffee when your editor finds you.
 {@person}You said you wanted more excitement, right?
-{@me}Um.... yeah, I guess so...
+{@me}Um.... I guess so...
 $call ActivateStory()
 {@person}Good. I need you to get out there and report on what's happening.
 {@me}You mean... now?
 {@person}Well, you can take 45 minutes to get ready.
 {@person}Then I want you out there. 
-{@person}Unless you think I should give the story to someone else...
-$choice GetReadyCheckpoint; No. Don't worry. I'm on it. 
+$choice GetReadyCheckpoint; I'm on it. 
 
 :: GetReadyCheckpoint
 @checkpoint
@@ -147,13 +146,11 @@ $endif
 
 $if TimeRemaining()
     $if !Visited(HelpKhalisa)
-        {force-next} Outside, you notice Khalisa--the other field reporter--stranded in the flooded street.
         $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
     $endif
-
     $HubChoice(Breakroom, "Search the break room for snacks", 0.25)
-
     $choice HeadOut; Enough stalling. Time to go.
+    
 $elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
     $choice HeadOut; Enough stalling. Time to go.
 $else
@@ -240,13 +237,7 @@ $choice GetReadyPart2; Back to your desk
 @clearText
 {bg BG/Newsroom-Front.jpeg}
 $call SetTimeRemaining(0)
-You're on a deadline.
-
-You need quotes, anecdotes, lots of color.
-
-Unfortunately, that will require you to navigate the flooded streets...
-
-Which all the experts just finished telling you to stay off of. 
+It's still raining outside. 
 
 How are you going to get downtown in this mess? 
 
@@ -361,7 +352,7 @@ $endif
 // Original Name: Listen to the police scanner
 :: ListenToThePoliceScanner
 @tags Egghead
-There's no such thing as too much research! 
+There's no such thing as too much research.
 
 Wellll....ok, maybe there is, but you're not about to go out in a 100-year-flood unprepared. 
 
@@ -383,7 +374,7 @@ Khalisa might know someone. Too bad she's still bailing out her flooded car.
 
 $choice HeadOut; Back to your desk
 $elseif Visited(Yogurt)
-Khalisa might know someone, but she's eating a soggy cherry donut, grumbling about somebody stealing her yogurt. 
+Khalisa might know someone, but she's eating a soggy donut, grumbling about somebody stealing her yogurt. 
 
 Now might not be the best time to bother her. 
 
@@ -424,16 +415,13 @@ $choice Crackers; Grab a few saltine crackers.
 $call SetLocation("Upper Lake Dam")
 
 $if FirstVisit()
+<b>Location: the Upper Lake Dam</b>
+Volunteers are stacking sandbags, with a DNR worker leading the effort. 
+A houseboat floats on the river nearby.
     $call SetTimeRemaining(2)
 $endif
 
 {bg BG/UpperLakeDam.jpg}
-<b>Location: the Upper Lake Dam</b>
-
-Volunteers are stacking sandbags by the road, with a DNR worker leading the effort. 
-
-A houseboat floats on the river nearby.
-
 $if HasTime(0.5)
 $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5)
 $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5)
@@ -652,11 +640,6 @@ $choice ArriveAtFloodSite; Back to the dam
 $call SetLocation("Cherry Festival")
 {bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
-As soon as you arrive, you realize you might be out of your depth. 
-
-The street is a rushing river, with thousands of cherries floating past. 
-
-Cars are stranded, and people are clustered in dry areas and on rooftops. 
 
 $if HasTime(0.5)
 $HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25)

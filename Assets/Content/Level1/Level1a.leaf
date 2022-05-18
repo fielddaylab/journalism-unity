@@ -43,11 +43,11 @@ $ActionChoice(Wake up)
 $call SetLocation("Apartment")
 {bg BG/BedroomMorning.jpeg}
 $call Music(Music/rainy day in cherry town.mp3)
-It's 5AM.
-{img Anim/enml-rain.jpg}
-Dark, rainy, a train rumbling past. 
-If you keep your eyes shut, you can almost pretend you're back in New York.
-But this... this is not New York. 
+Twin Lakes. Day 11. 
+The Cherry Capitol of the Upper Midwest. 
+Your friends in New York were SO JEALOUS you snagged a reporting job straight out of college.
+Even if it's in a tiny, isolated, cherry-obsessed town. 
+Lucky you. 
 
 $choice CheckYourPhone; Check your phone.
 
@@ -56,7 +56,8 @@ $choice CheckYourPhone; Check your phone.
 @clearText
 {img Anim/enml-buzzingphone.jpg}
 5 missed calls from your editor.
-Probably checking on your puff piece about the Cherry Festival.
+Probably checking up on your puff piece about the Cherry Festival. 
+
 $choice CallYourEditor; Call back.
 
 // Original Name: Call your editor.
@@ -65,14 +66,13 @@ $choice CallYourEditor; Call back.
 // rumble text style
 {anim rumble}{@phone} FINALLY!
 {@phone} Where have you been??
+{@me}Um... sleeping. It's 5 A.M.
+{@phone}Seriously, you slept through all that thunder??
+{@me}What thunder? 
+{@phone}It's been raining all night. Downtown is flooding!
+{@phone} I need you to get to the newsroom, ASAP.
 
-Before you can tell her where you've been (sleeping, because it's <i>FIVE</i> in the <i>MORNING</i>), she gives you the lowdown:
-
-{@phone} Downtown is flooding!
-{@phone} You need to get to the newsroom and put out a breaking news update, ASAP.
-{@phone} Remember, you're new in town, so keep a lookout for ways to build your cred around here. 
-
-$choice OnMyWay; {@me} Got it. On my way.
+$choice OnMyWay; {@me} On my way.
 
 // Original Name: "On my way."
 :: OnMyWay
@@ -80,8 +80,10 @@ $choice OnMyWay; {@me} Got it. On my way.
 @checkpoint
 {/img}
 $call SetHeaderEnabled(true)
-This is it, Rookie. Your first big scoop. 
-You have time to do one thing before you head to the newsroom.
+You're in a one-year contract with the Twin Lakes Herald.
+One year, and you'll be on to bigger and better things.
+But for now, you need to prove yourself.
+You have time to do one thing before you head to the newsroom. 
 
 $choice CheckOnYourUpstairsNeighborWhoHatesThunderstorms; Check on your upstairs neighbor, who hates thunderstorms
 $choice RoundUpYourTechAndRainGear; Round up your tech and rain gear
@@ -124,8 +126,7 @@ $choice OffToWork; Off to work
 {bg BG/OutsideApt-Map.jpg}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
-You eat a cherry muffin and a slice of cherry summer sausage.
-Might as well pack up the cherry granola for later. Could come in handy. 
+You eat a cherry muffin and pack up some cherry granola for later. 
 $call AdjustStats(Endurance + 1, Resourceful + 1)
 $choice OffToWork; Off to work
 
@@ -134,25 +135,22 @@ $choice OffToWork; Off to work
 @clearText
 {bg BG/OutsideApt-Map.jpg}
 You scroll through posts on Squawker.
-{auto}A photo from a local nurse: 
-{@person}Whoa. Stuck at the hospital, and ducks are swimming through the parking lot! 
-{auto}An article shared by a local college student: 
-{@person}Check out this article for tips to stay safe!  
 
-$choice MessageNurse; See if the nurse will let you use his photo.
+{@article}PHOTO: Just showed up for work at the hospital. Ducks swimming through the parking lot! 
+{@article}ARTICLE: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
+
+$choice MessageNurse; See if the hospital employee will let you use his photo.
 $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 
 // Original Name: Off to work
 :: OffToWork
 @clearText
 {img Anim/enml-waterrushing.jpg}
-Outside, water is rushing down the street. 
-Your neighbor, Maureen, is chasing her backyard chickens, which have escaped their coop.
+Your neighbor, Maureen, is chasing her escaped backyard chickens.
 {@person}{anim rumble}Help! They're everywhere!! 
-It might be nice to help her. She did bring you a giant cherry strudel the other day.
-But then you'd really need to rush to get to the newsroom on time. 
+It might be nice to help her. She did bring you a cherry strudel the other day.
 
-$choice HelpHer; Help her  
+$choice HelpHer; Help her and rack up some good karma 
 $choice RushToWork; There's no time, I've got to get to work!
 
 // Original Name: Message Nurse
@@ -238,7 +236,6 @@ $choice DriveWithBike; Drive to the newsroom
 // Original Name: Drive to the newsroom  
 :: DriveWithBike
 @clearText
-Uh oh. Looks like the storm is worse than you thought. 
 The town's famous Cherrymobile is abandoned in high water, and a shopkeeper is struggling to protect her bakery from flooding!. 
 You can't stop to interview her. You spent too much time loading up your bike. 
 But you should have time to snag a quick photo! 
@@ -248,7 +245,6 @@ $choice TakeSomePhotos; Take some photos
 // Original Name: I'm in a hurry, there's no need to bring the bike!
 :: ImInAHurryTheresNoNeedToBringTheBike
 You drive toward the newsroom, windshield wipers on full blast. 
-The flooding is worse than you expected. 
 
 $ActionChoice(Stop to look around.)
 A baker is piling up sacks of flour in front of her shop.
@@ -405,10 +401,10 @@ $endif
 
 $HubChoice("Office1-Weather", "Check the weather online", 0.25, "")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "")
-$HubChoice(Office1-DNR, "Call the Department of Natural Resources for background and flood safety tips", 0.5, "")
-$HubChoice(Office1-Police, "Call the police spokesman for safety advice", 0.5, "")
-$HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the city's response", 0.5, "")
-$HubChoice(Office1-SocialMedia, "Check Squawker for photos to use in your story", 0.25, "")
+$HubChoice(Office1-DNR, "Call the Department of Natural Resources for expert advice", 0.5, "")
+$HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.5, "")
+$HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situation", 0.5, "")
+$HubChoice(Office1-SocialMedia, "Check Squawker for photos to add to your story", 0.25, "")
 
 // Original Name: Answer the phone
 :: AnswerThePhone
@@ -454,16 +450,14 @@ $choice JenkinssComputer; Track down his computer.
 :: Office1-DNR
 @clearText
 {/map}
-You ask the DNR worker what's going on out there.
-
 $if StatCheck(Social, 2)
-    The worker sounds relieved to have someone to talk to.
+    The DNR worker seems relieved to have someone sympathetic to talk to. 
     He vents about the flooding, and you end up with a great quote!
     $call GiveSnippet(GoodDNR)
 $else
-    Apparently you don't sound friendly enough to get into this guy's good graces. 
-    {@person}We're literally swamped here.
-    {@person}I'll give you our official statement, and then I need to run. 
+    The DNR worker sounds stressed out--and your New Yorker vibe isn't helping.
+    {@person}Sorry, but are you even from here??  
+    {@person}I'll give you our official statement, but then I need to run. 
     $call GiveSnippet(RehearsedDNR)
 $endif
 
@@ -471,13 +465,16 @@ $endif
 $if Visited(JenkinssComputer)
     $ActionChoice(Try Jenkins's DNR Contact)
     
-    Jenkins's contact, Wynne, is excited to talk to you. 
+    Wynne answers on the first ring. 
+    She's thrilled to tell you all about the science!
     {@phone} Climate scientists have been warning about a disaster like this for years. 
     {@phone} What we're seeing right now is a 100-year flood!
 
     $if StatCheck(Research, 2)
-        You remember that term from your research: a flood that only happens once every century.
-        Wynne is impressed by your book smarts. She gives you tons of data for your story.
+        You remember that term from your research: a flood that only happens once a century.
+        Wynne is impressed by your book smarts.
+        {@phone}I can tell you've done your research.
+        {@phone}Here's some more data for your story. 
         $call GiveSnippet(DNRData)
     $else
         Yikes. A flood that lasts 100 years??? 
