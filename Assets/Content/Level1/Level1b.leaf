@@ -44,6 +44,7 @@ $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
 {layout Left}
 $call Music(Music/rainy day in cherry town.mp3)
+$call Ambience(Ambience/rain-inside.mp3)
 Your first breaking news update is in the books. 
 You're about to grab some coffee when your editor finds you.
 {@person}You said you wanted more excitement, right?
@@ -129,8 +130,8 @@ $GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
 
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
-{layout Left}
 @tags Techie
+{layout Left}
 You unplug Ben's phone, plug in yours, and try to look innocent. 
 
 When you hear him coming, you grab your phone and run for it. 
@@ -167,9 +168,8 @@ $endif
 
 // Original Name: Borrow gear
 :: BorrowGear
-{layout Left}
 @tags Resourceful
-
+{layout Left}
 $if Visited(BorrowTech)
 Your coworkers take pity on you and lend you stuff. Again. 
 
@@ -195,8 +195,8 @@ $endif
 
 // Original Name: Borrow tech
 :: BorrowTech
-{layout Left}
 @tags Techie
+{layout Left}
 
 $if Visited(BorrowGear)
 You have a feeling you're starting to get a reputation around here.
@@ -228,8 +228,8 @@ $endif
 
 // Original Name: Lost and Found
 :: LostAndFound
-{layout Left}
 @tags Resourceful, Techie
+{layout Left}
 Wow... it looks like they haven't cleaned out the Lost and Found in a while. 
 
 You dig through a mountain of old T-shirts and moldy snacks. 
@@ -333,7 +333,7 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Drive
 :: Drive
-$call SetLocation("Downtown")
+$call SetLocation("Newsroom")
 $if StatCheck(Research, 2)
 All your research has paid off! 
 
@@ -350,7 +350,7 @@ If you'd done more research, maybe you'd know which streets to avoid, but now it
 The road ahead is totally covered in water!
 
 $LocationChoice(FindHigherGround, "Find higher ground and pull over ASAP", "Deli Lot")
-$LocationChoice(FloorIt, "Try to drive through", "Downtown")
+$LocationChoice(FloorIt, "Try to drive through", "Upper Lake Dam")
 {map UI/MapPlaceholder.png}
 
 $endif
@@ -419,7 +419,7 @@ $choice Crackers; Grab a few saltine crackers.
 :: ArriveAtFloodSite
 {clear-text}
 $call SetLocation("Upper Lake Dam")
-
+{/map}
 $if FirstVisit()
 <b>Location: the Upper Lake Dam</b>
 Volunteers are stacking sandbags, with a DNR worker leading the effort. 
@@ -429,12 +429,13 @@ $endif
 
 {bg BG/UpperLakeDam.jpg}
 $if HasTime(0.5)
-$HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5)
-$HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5)
-$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker", 0.5)
-$HubChoice(TalkToTheHouseboatLady, "Climb up onto \"Nora's Ark\"", 0.5)
-$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5)
-$HubChoice(CherryFestivalMap, "Walk down the street to the Cherry Festival", 0.25)
+$HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, "Upper Lake Dam")
+$HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "Upper Lake Dam")
+$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker", 0.5, "Upper Lake Dam")
+$HubChoice(TalkToTheHouseboatLady, "Climb up onto \"Nora's Ark\"", 0.5, "Upper Lake Dam")
+$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "Upper Lake Dam")
+$HubChoice(CherryFestivalMap, "Walk down the street to the Cherry Festival", 0.25, "Cherry Festival")
+{map UI/MapPlaceholder.png}
 $else
 That leaves just enough time to compile your story!
 $choice CompileYourStory; Compile your story
@@ -658,16 +659,18 @@ $choice ArriveAtFloodSite; Back to the dam
 // Original Name: Cherry Festival Map
 :: CherryFestivalMap
 {clear-text}
+{/map}
 $call SetLocation("Cherry Festival")
 {bg BG/MainStCherryFestFlood.jpg}
 <b>Location: the Main Street Cherry Festival</b>
 
 $if HasTime(0.5)
-$HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25)
-$HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5)
-$HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5)
+$HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25, "Cherry Festival")
+$HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5, "Cherry Festival")
+$HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5, "Cherry Festival")
 
-$HubChoice(ArriveAtFloodSite, "Head back to the flood site", 0.5)
+$HubChoice(ArriveAtFloodSite, "Head back to the flood site", 0.5, "Upper Lake Dam")
+{map UI/MapPlaceholder.png}
 $else
 Time's up, Rookie. Time to put your story together!
 $choice CompileYourStory; Compile your story
@@ -951,6 +954,7 @@ $endif
 
 // Original Name: Go inside specialty cheese shop
 :: GoInsideSpecialtyCheeseShop
+{/map}
 The street is flooded, but you manage to wade up onto the sidewalk and go inside. 
 
 The panicked shop owner is carrying armfuls of fancy cheese up to the second floor. 
@@ -963,6 +967,7 @@ $choice TellTheShopOwnerToLeaveTheCheeseAndRun; Tell the shop owner to leave the
 
 // Original Name: Take photos of the street
 :: TakePhotosOfTheStreet
+{/map}
 You get some amazing photos of water rushing down Main Street. 
 
 It looks like a disaster movie. 
@@ -974,10 +979,11 @@ Still, the day isn't over yet...
 $call SFX(PhotoSnap)
 $call GiveSnippet(FloodedMainStreet)
 
-$choice CherryFestivalMap; Cherry Festival Map
+$choice CherryFestivalMap; Do something else
 
 // Original Name: Follow the sirens
 :: FollowTheSirens
+{/map}
 You turn the corner and find a rescue in progress!
 
 A pickup truck is stuck in a ditch, water rushing all around it.
@@ -988,7 +994,7 @@ $call GiveSnippet(DogRescue)
 $call SFX(PhotoSnap)
 $call GiveSnippet(DogRescuePicture)
 
-$choice CherryFestivalMap; Cherry Festival Map
+$choice CherryFestivalMap; Do something else
 
 // Original Name: Ask to borrow a kayak
 :: AskToBorrowAKayak

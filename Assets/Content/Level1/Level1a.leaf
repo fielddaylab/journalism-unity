@@ -44,6 +44,7 @@ $ActionChoice(Wake up)
 $call SetLocation("Apartment")
 {bg BG/BedroomMorning.jpeg}
 $call Music(Music/rainy day in cherry town.mp3)
+$call Ambience(Ambience/rain-inside.mp3)
 Twin Lakes. Day 11. 
 The Cherry Capitol of the Upper Midwest. 
 Your friends in New York were SO JEALOUS you snagged a reporting job straight out of college.
@@ -77,8 +78,8 @@ $choice OnMyWay; {@me} On my way.
 
 // Original Name: "On my way."
 :: OnMyWay
-{clear-text}
 @checkpoint
+{clear-text}
 {/img}
 $call SetHeaderEnabled(true)
 You're in a one-year contract with the Twin Lakes Gazette.
@@ -149,6 +150,7 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 :: OffToWork
 {clear-text}
 {img Anim/enml-waterrushing.jpg}
+$call Ambience(Ambience/rain-inside.mp3)
 Outside, your neighbor, Maureen, is running around in a panic.
 Her backyard chickens have escaped their coop. 
 {@person}{anim rumble}Help! They're everywhere!! 
@@ -285,6 +287,7 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
+$call Ambience(Ambience/rain-inside.mp3)
 
 Your editor greets you at the door.
 

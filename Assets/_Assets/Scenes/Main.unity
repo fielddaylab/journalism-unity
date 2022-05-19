@@ -2070,6 +2070,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1898579599119552446, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_locationName
+      value: DNR
+      objectReference: {fileID: 0}
     - target: {fileID: 1926713223704835411, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}
       propertyPath: m_fontColor.b
@@ -3534,6 +3539,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -4.7199993
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102521072198435742, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -184
+      objectReference: {fileID: 0}
+    - target: {fileID: 5102521072198435742, guid: 115436d88cdfb9e409d8693c12c43626,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 5110375279201905283, guid: 115436d88cdfb9e409d8693c12c43626,
         type: 3}

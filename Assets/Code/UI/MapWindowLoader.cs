@@ -137,6 +137,12 @@ namespace Journalism.UI
             // Save map rect
             RectTransform mapRect = mapTex.GetComponent<RectTransform>();
 
+            // if the current owner already has a map, clear the old map
+            if (m_containerDict.ContainsKey(owner)) {
+                CloseMarkerStream(owner);
+                ClearMarkerContainer(owner);
+            }
+
             // Generate marker container
             MapMarkerContainer container = GameObject.Instantiate(m_markerContainerPrefab, owner.transform)
                 .GetComponent<MapMarkerContainer>();

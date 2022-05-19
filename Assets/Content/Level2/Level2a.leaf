@@ -42,7 +42,7 @@
 
 // Original Name: Level 2, Story 3: The Science Story
 :: Level2Story3TheScienceStory
-
+$call SetLocation("Apartment")
 $ActionChoice(The next morning...)
 {bg BG/Bedroom2Temp.jpg}
 $call SetHeaderEnabled(true)
@@ -296,16 +296,16 @@ $choice ScienceStoryMap; Got it. Thanks.
 :: ScienceStoryMap
 {bg BG/HouseExterior.jpg}
 $if FirstVisit()
-$call SetTimeRemaining(3)
+    $call SetTimeRemaining(3)
 $endif
 
 
 $if HasTime(0.25)
 Your story is due in {timeLeft}.
 
-$HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5)
-$HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5)
-$HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5)
+$HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5, "Downtown")
+$HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5, "DNR")
+$HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5, "Apartment")
 
 
 $set local:_localOr = false
@@ -316,7 +316,7 @@ $set local:_localOr = true
 $endif
 
 $if local:_localOr
-$HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.5)
+$HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.5, "Limnology")
 $endif
 
 
@@ -324,9 +324,11 @@ $choice PhoneContacts; Check your phone contacts for someone to call
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
+{map UI/MapPlaceholder.png}
 
 // Original Name: Phone Contacts
 :: PhoneContacts
+{/map}
 Phone Contacts:
 
 $HubChoice(PhoneCallDNRHeadquarters, "Main DNR Number", 0.5)
@@ -354,6 +356,8 @@ $goto STORYEVALUATION
 // Original Name: Bike downtown to survey the damage
 :: BikeDowntownToSurveyTheDamage
 {clear-text}
+{/map}
+$call SetLocation("Downtown")
 {bg BG/FirstStDowntownCleanup.jpg}
 You pedal through town, weaving around abandoned cars and piles of sandbags.
 $call AdjustStats(Endurance + 1)
@@ -371,6 +375,9 @@ $choice MainStreetFloodRecovery; Head straight to Main Street
 // Original Name: DNR Map
 :: DNRMap
 {bg BG/DNRSite.jpg}
+{/map}
+$call SetLocation("DNR")
+
 <b>Location: DNR Headquarters</b>
 Your story is due in {timeLeft}.
 
@@ -385,7 +392,7 @@ $endif
 
 // Original Name: Gather flooding info from academic papers
 :: GatherFloodingInfoFromAcademicPapers
-
+{/map}
 $if StatCheck(Research, 3)
 You get online and find several academic papers about flooding! 
 
@@ -409,6 +416,8 @@ $choice ScienceStoryMap; Do something else
 
 // Original Name: Department of Limnology
 :: DepartmentOfLimnology
+$call SetLocation("Limnology")
+{/map}
 {bg BG/Limnology.jpg}
 $if FirstVisit()
 You arrive at the Department of Limnology.
@@ -509,6 +518,7 @@ $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 
 // Original Name: Main Street Flood Recovery
 :: MainStreetFloodRecovery
+$call SetLocation("Downtown")
 $if FirstVisit()
 
 Your story is due in {timeLeft}.
