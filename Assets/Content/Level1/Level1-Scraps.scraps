@@ -223,6 +223,14 @@ Snippet text unimplemented.
 @image Anim/downtown-flooding-kayak-good.png
 Snippet text unimplemented.
 
+// Original Name: Good flood photos from kayak
+:: BlurryFloodPhotosKayak
+@type Photo
+@quality Bad
+@attr Color
+@image Anim/downtown-flooding-kayak-blurry.png
+Snippet text unimplemented.
+
 // Original Name: Great flood photos from truck or bike ride downtown
 :: GreatFloodPhotosTruck
 @type Photo

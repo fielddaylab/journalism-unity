@@ -1334,7 +1334,7 @@ As expected, they turn out awful.
 You're already wishing you had those lenses back.
 
 $call SFX(PhotoSnap)
-$call GiveSnippet(GoodFloodPhotosKayak)
+$call GiveSnippet(BlurryFloodPhotosKayak)
 
 
 $choice ArriveAtFloodSite; Arrive at flood site
