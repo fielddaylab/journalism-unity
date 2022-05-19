@@ -353,7 +353,7 @@ $goto STORYEVALUATION
 
 // Original Name: Bike downtown to survey the damage
 :: BikeDowntownToSurveyTheDamage
-@clearText
+{clear-text}
 {bg BG/FirstStDowntownCleanup.jpg}
 You pedal through town, weaving around abandoned cars and piles of sandbags.
 $call AdjustStats(Endurance + 1)
@@ -558,7 +558,6 @@ $choice NoThanks; No thanks.
 There are articles and flyers taped up. A few of them catch your eye:  
 
 TWIN LAKES COLLEGE NEWS:
-9402272171493f70ddbd5eb70e07aa472363e727
 <b>Twin Lakes in danger of catastrophic flood!
 by Sarah McCloud, climate researcher at the Dept. of Limnology</b>
 
