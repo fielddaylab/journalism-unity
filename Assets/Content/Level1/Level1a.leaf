@@ -321,12 +321,12 @@ $call BeginTutorial()
     $call PointTo(TutorialDescription, -24, 0)
     {@person}  Pay attention to the breakdown for each story type. 
     $call PointTo(TutorialPlayerAttributes, -24, 0)
-    {@person}   You want this...
+    {@person}   You want your story...
     $call PointTo(TutorialTargetAttributes, -24, 0)
     {@person}   To line up with this.
     $call PointTo(TutorialQuality, -24, 0)
     {@person}  Oh, and try to get high-quality snippets.
-    {@person} A blurry photo or a basic quote is better than nothing, but we have high standards here. 
+    {@person} A blurry photo is better than nothing, but we have high standards here. 
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
@@ -574,7 +574,7 @@ $if StatCheck(Social, 2)
     $call GiveSnippet(CityHallShock)
 $else
     Your city hall contact doesn't seem thrilled to hear from you.
-    Come to think of it, calling the Cherry Festival a "cute distraction from the boredom of small town life" might've been a mistake.    
+    Come to think of it, calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
     {@phone}{auto} We're pretty busy here.
     {@phone} You can check our website later.
 

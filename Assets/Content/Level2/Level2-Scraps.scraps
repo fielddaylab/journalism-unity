@@ -22,6 +22,28 @@ Twin Lakes watershed rainfall data shows something significant, probably.
 @quality Bad
 A squiggly misinterpreted graph.
 
+// Original Name: Less Places For Water To Go
+:: DNRLessPlacesForWater
+@type Quote
+@quality Great
+The lakes are extra high and wetlands are being destroyed. There's nothing to soak up the rain water. 
+
+:: DNRFinancialDamage
+@type Fact
+@quality Great
+The DNR estimates that the flood has already caused $50 million in damages. 
+
+:: DNRPreventFromHappeningAgain
+@type Quote
+@quality Great
+"Hate to say it, but sandbags aren't going to be enough. We need better policies if we want the town to survive."
+
+// Original Name: DNR Rainfall Info
+:: DNRRainfallInfo
+@type Fact
+@quality Good
+According to the DNR, some areas of Twin Lakes got 15 inches of rain in 24 hours--the worst rain since 1957.
+
 // Original Name: Basic flood background from DNR phone call
 :: BasicFloodBackground
 @type Fact
@@ -33,6 +55,12 @@ This is the worst flood Twin Lakes has ever had. It's already caused millions of
 @type Quote
 @quality Good
 We need better policies to prevent future disasters. 
+
+// Original Name: Wynne - Basic Flood Background
+:: WynneBasicFloodBackground
+@type Quote
+@quality Good
+Over time, storms in Twin Lakes are becoming more severe AND more frequent. We've had a lot of floods around here, but this one is by far the worst.
 
 // Original Name: Detailed flood background
 :: DetailedFloodBackground
@@ -63,6 +91,30 @@ At the Town Hall meeting, Mayor Johnson will call to lower lake levels--an issue
 @type Photo
 @quality Great
 @image Anim/inspiring-downtown-recovery.jpg
+
+// Original Name: What Caused the Flood
+:: WhatCausedTheFlood
+@type Fact
+@quality Good
+According to a local limnologist, the flood was caused by a combination of climate change and higher lake levels. 
+
+// Original Name: How Can The City Prevent...
+:: LimnologyFloodPrevention
+@type Quote
+@quality Good
+"We need lower lake levels and city-wide engineering solutions. The problem is, it'll be expensive." 
+
+// Original Name: Engineered Solutions 
+:: EngineeredSolutions
+@type Fact
+@quality Good
+Local lake experts suggest several changes: better storm drains, flood walls, and rain gardens to soak up water. 
+
+// Original Name: Limnology Lake Levels 
+:: LimnologyLakeLevels
+@type Quote
+@quality Good
+"The city is using the dam to keep Upper Lake five feet higher than its natural level. When it rains, where is all that water supposed to go?"
 
 // Original Name: Downtown recovery
 :: DowntownRecovery
@@ -97,6 +149,16 @@ The Cherry Festival is usually my most profitable week, but the flood scared eve
 @quality Bad
 City Hall is working to evacuate people from at-risk areas and mitigate damage. 
 
+:: DNRCauseOfFlood
+@type Fact
+@quality Good
+According to the local DNR, the flood was caused by extreme rainfall and less places for that water to go.
+
+:: DNRHighLakeLevels
+@type Quote
+@quality Good
+"The lake levels are a big problem. People won't support lower lakes if they think they'll be losing money." 
+
 // Original Name: Impact of flood
 :: ImpactOfFlood
 @type Quote
@@ -109,7 +171,7 @@ Flood events will drive away people with enough money to move. If we lose too ma
 @quality Good
 Snippet text unimplemented.
 
-// Original Name: Policies to prevent flooding
+// Original Name: DNR Policies to prevent flooding
 :: PoliciesToPreventFlooding
 @type Quote
 @quality Great

@@ -247,11 +247,9 @@ $choice GetReadyPart2; Back to your desk
 {layout Left}
 {bg BG/rainyGazette.jpg}
 $call SetTimeRemaining(0)
-All the experts just finished telling you to stay out of floodwater.
-So, of course, you're going straight out into it. 
 
 $if hasBike == true
-$choice Bike; Ride your bike and weave around the flooded areas
+$choice Bike; Ride your bike downtown and weave around the flooded areas
 $endif
 
 $choice Drive; Drive downtown, with the help of the live flood map 
@@ -280,6 +278,7 @@ $GameOver("You lost the scoop, Rookie. Better luck next time.")
 {clear-text}
 @tags Endurance, Trust
 Khalisa's car is stuck in a deep puddle that comes almost to your knees. 
+She looks dejected. 
 {@person}Ugh. My dad is never gonna let me live this down. 
 {@me}Your dad?
 {@person}Retired fire chief. I swear, if I hear "turn around, don't drown" one more time...
