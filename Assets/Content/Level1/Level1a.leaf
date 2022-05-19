@@ -78,8 +78,8 @@ $choice OnMyWay; {@me} On my way.
 
 // Original Name: "On my way."
 :: OnMyWay
-{clear-text}
 @checkpoint
+{clear-text}
 {/img}
 $call SetHeaderEnabled(true)
 You're in a one-year contract with the Twin Lakes Gazette.
