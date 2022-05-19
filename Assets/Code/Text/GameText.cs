@@ -592,7 +592,7 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given choice.
         /// </summary>
-        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, uint timeCost, MapMarker choiceMarker, TextStyles.StyleData style) {
+        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, float timeCost, MapMarker choiceMarker, TextStyles.StyleData style) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
 
             textString = StripQuotes(textString);
@@ -602,14 +602,18 @@ namespace Journalism {
             line.Text.gameObject.SetActive(true);
 
             choice.TargetId = targetId;
-            choice.TimeCost = timeCost;
+            choice.TimeCost = Stats.HoursToTimeUnits(Mathf.Max(0, timeCost));
             choice.Selected = false;
 
             if (line.Icon != null) {
                 if (timeCost > 0) {
                     line.Icon.gameObject.SetActive(true);
                     choice.Radial.gameObject.SetActive(true);
-                    choice.Radial.fillAmount = (float) timeCost / Stats.TimeUnitsPerHour;
+                    choice.Radial.fillAmount = Mathf.Clamp01(timeCost);
+                } else if (timeCost < 0) {
+                    line.Icon.gameObject.SetActive(true);
+                    choice.QuestionMark.gameObject.SetActive(true);
+                    choice.Radial.gameObject.SetActive(false);
                 } else {
                     line.Icon.gameObject.SetActive(false);
                     choice.Radial.gameObject.SetActive(false);
