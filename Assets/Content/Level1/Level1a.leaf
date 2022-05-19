@@ -80,7 +80,7 @@ $choice OnMyWay; {@me} On my way.
 @checkpoint
 {/img}
 $call SetHeaderEnabled(true)
-You're in a one-year contract with the Twin Lakes Herald.
+You're in a one-year contract with the Twin Lakes Gazette.
 One year, and you'll be on to bigger and better things.
 But for now, you need to prove yourself.
 You have time to do one thing before you head to the newsroom. 
@@ -94,7 +94,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
 You help her find batteries for her flashlight and put out some food for her cats. 
@@ -111,7 +111,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
 Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
@@ -123,7 +123,7 @@ $choice OffToWork; Off to work
 :: DigThroughTheFridgeForSomethingNourishing
 @tags Endurance
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and pack up some cherry granola for later. 
@@ -133,7 +133,7 @@ $choice OffToWork; Off to work
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 You scroll through posts on Squawker.
 
 {img Photo/HospitalDucks.jpg}
@@ -168,8 +168,8 @@ $ActionChoice(Send message)
 {@person}I could even give you some headline suggestions!
 {@me}Oh, um...
 // sway text
-{@person}{anim sway}Fowl weather at the quack of dawn!
-{@person}{anim sway}Storm expected to rack up large bill.
+{@phone}{anim sway}Fowl weather at the quack of dawn!
+{@phone}{anim sway}Storm expected to rack up large bill.
 
 $ContinueChoice({@me} Thanks. I'll keep those in mind.)
 
@@ -279,6 +279,7 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
+{layout Left}
 Your editor looks relieved to see you.
 
 $if Visited(HelpHer)
@@ -303,7 +304,7 @@ $call ActivateStory()
 $call BeginTutorial()
     $call OpenWindow(Notes)
     $call Wait(0.4)
-    {@person}   So this is your fabled "Notebook"...
+    {@person}   Here's where you can see your collected story snippets.
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
     {@person}   Details about the story I've assigned are in the "Editor Notes" section.
@@ -391,7 +392,8 @@ $choice ArriveAtWork; Arrive at work.
 :: BreakingNewsStory
 @checkpoint
 @clearText
-
+{bg BG/rainyGazette.jpg}
+{layout Left}
 {/img}
 $if FirstVisit()
     $set DNRnumber = false
@@ -403,7 +405,7 @@ $if FirstVisit()
     $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
 $endif
 
-$HubChoice("Office1-Weather", "Check the weather online", 0.25, "")
+$HubChoice(Office1-Weather, "Check the weather online", 0.25, "")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "")
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for expert advice", 0.5, "")
 $HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.5, "")
@@ -430,6 +432,8 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 // Original Name: Office 1 - Weather
 :: Office1-Weather
 @clearText
+{bg BG/rainyGazette.jpg}
+{layout Left}
 {/map}
 You check the forecast and stumble upon an amazing resource: a live flood map! 
 You grab the link and write up a quick blurb on how to use it. 
@@ -443,6 +447,8 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Coworker
 :: Office1-Coworker
+{bg BG/rainyGazette.jpg}
+{layout Left}
 @clearText
 {/map}
 You ask your editor if the newsroom has any records of past flood stories.
@@ -454,6 +460,8 @@ $choice JenkinssComputer; Track down Jenkins's computer.
 // Original Name: Office 1 - DNR
 :: Office1-DNR
 @clearText
+{bg BG/rainyGazette.jpg}
+{layout Left}
 {/map}
 $if StatCheck(Social, 2)
     The DNR worker sounds stressed out.
@@ -494,13 +502,15 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Police
 :: Office1-Police
+{bg BG/rainyGazette.jpg}
+{layout Left}
 @clearText
 {/map}
 The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
 {@phone} Who did you say you work for?
 
-{@me} The Twin Lakes Herald.
+{@me} The Twin Lakes Gazette.
 
 // Moved from: Police Response
 
@@ -535,6 +545,8 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
+{bg BG/rainyGazette.jpg}
+{layout Left}
 @clearText
 {/map}
 
@@ -569,6 +581,8 @@ $goto Office1-Clock
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
 @clearText
+{bg BG/rainyGazette.jpg}
+{layout Left}
 {/map}
 
 $if StatCheck(Research, 2)
@@ -592,6 +606,8 @@ $goto Office1-Clock
 
 // Original Name: N/a
 :: AnswerThePhoneContinue
+{bg BG/rainyGazette.jpg}
+{layout Left}
 $call DecreaseTime(0.5)
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
 
@@ -602,7 +618,8 @@ $choice BreakingNewsStory; Return to your desk
 
 // Original Name: Office 1 - Clock
 :: Office1-Clock
-
+{bg BG/rainyGazette.jpg}
+{layout Left}
 $if !HasTime(0.5)
     $choice YouHaveJustEnoughTimeToCompileTheStoryNow; You have just enough time to compile the story now.
 $else
@@ -636,19 +653,21 @@ $goto Office1-Clock
 
 // Original Name: Message CherryCharlie07
 :: MessageCherryCharlie07
+{bg BG/rainyGazette.jpg}
+{layout Left}
 $call DecreaseTime(0.25)
 
 $if StatCheck(Trust, 2)
-    {@person}oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊
+    {@phone}oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊
 
     $call GiveSnippet(LibraryLot)
 $else
-    {@person}the twin lakes herald?? that sounds fake. how do i know you're a real reporter?
+    {@phone}the twin lakes gazette?? that sounds fake. how do i know you're a real reporter?
 
     $if StatCheck(Tech, 3)
         You've been waiting your whole life for this moment.
         You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (which you singlehandedly created).  
-        {@person}yikes. ok. i get the point. 
+        {@phone}sheesh, ok. i get the point. 
 
         $call GiveSnippet(LibraryLot)
     $else
@@ -664,6 +683,8 @@ $goto Office1-Clock
 
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
+{bg BG/rainyGazette.jpg}
+{layout Left}
 @clearText
 {/img}
 It's been a hectic morning, but you think you might be able to piece together a halfway decent story out of this melange.

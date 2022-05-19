@@ -291,7 +291,7 @@ $choice ScienceStoryMap; Got it. Thanks.
 
 // Original Name: Science Story Map
 :: ScienceStoryMap
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExterior.jpg}
 $if FirstVisit()
 $call SetTimeRemaining(3)
 $endif
@@ -554,7 +554,7 @@ $choice NoThanks; No thanks.
 :: ReadTheBulletinBoardInTheHallway
 There are articles and flyers taped up. A few of them catch your eye:  
 
-TWIN LAKES COLLEGE GAZETTE:
+TWIN LAKES COLLEGE HERALD:
 <b>Twin Lakes in danger of catastrophic flood!
 by Sarah McCloud, climate researcher at the Dept. of Limnology</b>
 
