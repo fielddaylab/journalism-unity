@@ -94,7 +94,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
 You help her find batteries for her flashlight and put out some food for her cats. 
@@ -111,7 +111,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
 Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
@@ -123,7 +123,7 @@ $choice OffToWork; Off to work
 :: DigThroughTheFridgeForSomethingNourishing
 @tags Endurance
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and pack up some cherry granola for later. 
@@ -133,7 +133,7 @@ $choice OffToWork; Off to work
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 @clearText
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExteriorRainy.jpg}
 You scroll through posts on Squawker.
 
 {img Photo/HospitalDucks.jpg}

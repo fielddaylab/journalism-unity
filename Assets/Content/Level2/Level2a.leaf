@@ -291,7 +291,7 @@ $choice ScienceStoryMap; Got it. Thanks.
 
 // Original Name: Science Story Map
 :: ScienceStoryMap
-{bg BG/OutsideApt-Map.jpg}
+{bg BG/HouseExterior.jpg}
 $if FirstVisit()
 $call SetTimeRemaining(3)
 $endif
