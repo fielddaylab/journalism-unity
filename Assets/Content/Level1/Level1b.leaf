@@ -42,6 +42,7 @@
 $call SetHeaderEnabled(true)
 $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
+{layout Left}
 $call Music(Music/rainy day in cherry town.mp3)
 Your first breaking news update is in the books. 
 You're about to grab some coffee when your editor finds you.
@@ -59,11 +60,12 @@ $choice GetReadyCheckpoint; I'm on it.
 
 :: GetReadyCheckpoint
 @checkpoint
-{bg BG/Newsroom-Front.jpeg}
+{bg BG/rainyGazette.jpg}
 $goto GetReady
 
 // Original Name: Get Ready
 :: GetReady
+{layout Left}
 @clearText
 $call SetHeaderEnabled(true)
 
@@ -101,6 +103,7 @@ $endif
 
 // Original Name: "Borrow" charger
 :: BorrowCharger
+{layout Left}
 @clearText
 One of the copyeditors, Ben, is away from his desk.
 
@@ -112,6 +115,7 @@ $choice GetReady; Forget it. I'll find another way.
 
 // Original Name: Swipe his charger
 :: SwipeHisCharger
+{layout Left}
 You grab his charger and tuck it into your pocket.
 
 His phone is already at 92% battery. It'll be fine.
@@ -125,6 +129,7 @@ $GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
 
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
+{layout Left}
 @tags Techie
 You unplug Ben's phone, plug in yours, and try to look innocent. 
 
@@ -145,6 +150,7 @@ $endif
 
 // Original Name: Get Ready part 2
 :: GetReadyPart2
+{layout Left}
 @clearText
 
 $if TimeRemaining()
@@ -161,6 +167,7 @@ $endif
 
 // Original Name: Borrow gear
 :: BorrowGear
+{layout Left}
 @tags Resourceful
 
 $if Visited(BorrowTech)
@@ -188,6 +195,7 @@ $endif
 
 // Original Name: Borrow tech
 :: BorrowTech
+{layout Left}
 @tags Techie
 
 $if Visited(BorrowGear)
@@ -220,6 +228,7 @@ $endif
 
 // Original Name: Lost and Found
 :: LostAndFound
+{layout Left}
 @tags Resourceful, Techie
 Wow... it looks like they haven't cleaned out the Lost and Found in a while. 
 
@@ -235,7 +244,8 @@ $choice GetReadyPart2; Back to your desk
 :: HeadOut
 @checkpoint
 @clearText
-{bg BG/Newsroom-Front.jpeg}
+{layout Left}
+{bg BG/rainyGazette.jpg}
 $call SetTimeRemaining(0)
 All the experts just finished telling you to stay out of floodwater.
 So, of course, you're going straight out into it. 
