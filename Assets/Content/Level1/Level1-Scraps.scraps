@@ -18,7 +18,7 @@ Insert a photo of ducks swimming in the hospital parking lot.
 @type Quote
 @quality Bad
 @attr Color
-"Um, in case you didn't notice, my bakery is turning into a swamp. Help or get out of the way!"
+"In case you didn't notice, my bakery is turning into a swimming pool. Help or get out of the way!"
 
 // Original Name: Abandoned Cherrymobile
 :: AbandonedCherrymobile
@@ -51,14 +51,14 @@ Twin Lakes saw a record-breaking 12 inches of rainfall overnight, with 4-6 more 
 // Original Name: Good DNR
 :: GoodDNR
 @type Quote
-@quality Good
+@quality Great
 @attr Facts, Useful
 "This is the worst flood I've ever seen. Half of downtown is underwater. People need to stay off the roads." 
 
 // Original Name: Rehearsed DNR
 :: RehearsedDNR
 @type Quote
-@quality Bad
+@quality Good
 @attr Useful 
 "We're advising Twin Lakes citizens to avoid driving through floodwater and stay tuned for updates."
 
@@ -81,7 +81,7 @@ According to a statement from City Hall, Twin Lakes has been on the verge of a c
 @type Quote
 @quality Great
 @attr Facts, Useful 
-"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statisti." 
+"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statistic." 
 
 // Original Name: City Hall annoyance
 :: CityHallAnnoyance

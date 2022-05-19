@@ -2,12 +2,14 @@
 :: ScienceOfFlooding
 @type Fact
 @quality Good
+@attr Facts
 Extreme rainfall events in the Twin Lakes watershed have increased by 10% in the last decade.
 
 // Original Name: Flood probability
 :: FloodProbability
 @type Graph
 @quality Good
+@attr Facts
 @image Anim/flood-probability.png
 A clean graph of flood probability.
 
@@ -15,12 +17,14 @@ A clean graph of flood probability.
 :: FloodMumboJumbo
 @type Observation
 @quality Bad
-Twin Lakes watershed rainfall data shows something significant, probably.
+@attr Facts
+Twin Lakes watershed rainfall data shows something significant, probably. 
 
 // Original Name: Confusing graphic
 :: ConfusingGraphic
 @type Graph
 @quality Bad
+@attr Facts
 @image Anim/flood-confusing-graphic.png
 A squiggly misinterpreted graph.
 
@@ -28,149 +32,175 @@ A squiggly misinterpreted graph.
 :: DNRLessPlacesForWater
 @type Quote
 @quality Great
+@attr Facts
 The lakes are extra high and wetlands are being destroyed. There's nothing to soak up the rain water. 
 
 :: DNRFinancialDamage
 @type Fact
 @quality Great
+@attr Facts
 The DNR estimates that the flood has already caused $50 million in damages. 
 
 :: DNRPreventFromHappeningAgain
 @type Quote
 @quality Great
+@attr Facts
 "Hate to say it, but sandbags aren't going to be enough. We need better policies if we want the town to survive."
 
 // Original Name: DNR Rainfall Info
 :: DNRRainfallInfo
 @type Fact
 @quality Good
+@attr Facts
 According to the DNR, some areas of Twin Lakes got 15 inches of rain in 24 hours--the worst rain since 1957.
 
 // Original Name: Basic flood background from DNR phone call
 :: BasicFloodBackground
 @type Fact
 @quality Good
+@attr Facts
 This is the worst flood Twin Lakes has ever had. It's already caused millions of dollars in damages. 
 
 // Original Name: Basic flood prevention
 :: BasicFloodPrevention
 @type Quote
 @quality Good
+@attr Facts
 We need better policies to prevent future disasters. 
 
 // Original Name: Wynne - Basic Flood Background
 :: WynneBasicFloodBackground
 @type Quote
 @quality Good
+@attr Facts
 Over time, storms in Twin Lakes are becoming more severe AND more frequent. We've had a lot of floods around here, but this one is by far the worst.
 
 // Original Name: Detailed flood background
 :: DetailedFloodBackground
 @type Fact
 @quality Great
+@attr Facts
 Twin Lakes has a history of flooding. We're surrounded by water, and the city keeps the lake levels much higher than they used to.
 
 // Original Name: Floods and climate change
 :: FloodsAndClimateChange
 @type Graph
 @quality Good
+@attr Facts
 In the last decade, extreme rainfall in the region has increased by 10% due to climate change. 
 
 // Original Name: Cause of flood
 :: CauseOfFlood
 @type Quote
 @quality Good
+@attr Facts
 Developers have paved over 30% of our wetlands, which soak up water. It's basically a perfect storm. 
 
 // Original Name: Lake level background
 :: LakeLevelBackground
 @type Fact
 @quality Good
+@attr Facts
 At the Town Hall meeting, Mayor Johnson will call to lower lake levels--an issue that many people blame for the flooding. 
 
 // Original Name: Inspiring downtown recovery
 :: InspiringDowntownRecovery
 @type Photo
 @quality Great
+@attr Color
 @image Anim/inspiring-downtown-recovery.jpg
 
 // Original Name: What Caused the Flood
 :: WhatCausedTheFlood
 @type Fact
 @quality Good
+@attr Facts
 According to a local limnologist, the flood was caused by a combination of climate change and higher lake levels. 
 
 // Original Name: How Can The City Prevent...
 :: LimnologyFloodPrevention
 @type Quote
 @quality Good
+@attr Facts
 "We need lower lake levels and city-wide engineering solutions. The problem is, it'll be expensive." 
 
 // Original Name: Engineered Solutions 
 :: EngineeredSolutions
 @type Fact
 @quality Good
+@attr Facts, Useful
 Local lake experts suggest several changes: better storm drains, flood walls, and rain gardens to soak up water. 
 
 // Original Name: Limnology Lake Levels 
 :: LimnologyLakeLevels
 @type Quote
 @quality Good
+@attr Facts
 "The city is using the dam to keep Upper Lake five feet higher than its natural level. When it rains, where is all that water supposed to go?"
 
 // Original Name: Downtown recovery
 :: DowntownRecovery
 @type Photo
 @quality Good
+@attr Color
 @image Anim/downtown-recovery.jpg
 
 // Original Name: Blurry downtown recovery
 :: BlurryDowntownRecovery
 @type Photo
 @quality Bad
+@attr Color
 @image Anim/downtown-recovery-blurry.jpg
 
 // Original Name: Art business impact
 :: ArtBusinessImpact
 @type Quote
 @quality Great
+@attr Color
 I put all my savings into this place. I'm not sure how I'm gonna recover.
 
 :: QuoteHeartAndSoul
 @type Quote
 @quality Great
+@attr Color
 We gotta do our best to pick up and rebuild. Small business is the heart and soul of this town. I gotta hope it'll work out okay. 
 
 :: InTroubleQuote
 @type Quote
 @quality Great
+@attr Color
 The Cherry Festival is usually my most profitable week, but the flood scared everybody away. If this keeps up, I'm in trouble.
 
 :: BasicCityHallInfo
 @type Quote
 @quality Bad
+@attr Facts
 City Hall is working to evacuate people from at-risk areas and mitigate damage. 
 
 :: DNRCauseOfFlood
 @type Fact
 @quality Good
+@attr Facts
 According to the local DNR, the flood was caused by extreme rainfall and less places for that water to go.
 
 :: DNRHighLakeLevels
 @type Quote
 @quality Good
+@attr Facts
 "The lake levels are a big problem. People won't support lower lakes if they think they'll be losing money." 
 
 // Original Name: Impact of flood
 :: ImpactOfFlood
 @type Quote
 @quality Good
+@attr Facts, Color
 Flood events will drive away people with enough money to move. If we lose too many people and businesses, the town won't survive.
 
 // Original Name: Rainfall stats
 :: RainfallStats
 @type Graph
 @quality Good
+@attr Facts, Color
 @image Anim/rainfall-stats.png
 Snippet text unimplemented.
 
@@ -178,6 +208,7 @@ Snippet text unimplemented.
 :: PoliciesToPreventFlooding
 @type Quote
 @quality Great
+@attr Facts, Useful
 The city could change things with new policies: funding for storm drains, rain gardens, lower lake levels, and wetland protection.
 
 // Original Name: Flooded neighborhood
@@ -220,8 +251,8 @@ Snippet text unimplemented.
 :: LimnologyDocks
 @type Photo
 @quality Great
+@attr Color
 @image Anim/limnology-docks.jpg
-Double-click this passage to edit it.
 
 // Original Name: Marsh loss
 :: MarshLoss
@@ -301,17 +332,17 @@ Snippet text unimplemented.
 @quality Good
 Snippet text unimplemented.
 
-// Original Name: Mayor - impact
-:: Mayor-Impact
+// Original Name: Governor - impact
+:: Governor-Impact
 @type Quote
 @quality Great
-Snippet text unimplemented.
+"I declared a State of Emergency as soon as I found out what was happening. We need to make sure Twin Lakes gets the help it needs."
 
 // Original Name: Mayor - Response
-:: Mayor-Response
+:: GovernorComments
 @type Quote
 @quality Great
-Snippet text unimplemented.
+"The people of Twin Lakes are incredibly resilient," said the Governor. "Plus, I can always count on them for a good pun." 
 
 // Original Name: Mayor - Policies
 :: Mayor-Policies

@@ -511,7 +511,9 @@ $choice PhoneContacts; Phone Contacts
 You race around the corner like an Olympic biker out for gold.
 $call AdjustStats(Endurance + 1)
 
-There's a chicken wandering in circles in the middle of a puddle!
+{img Anim/enml-escapedchicken.jpg}
+Yes--there! A stray chicken!
+{/img}
 
 $HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
 $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
@@ -1040,21 +1042,23 @@ $choice DNRMap; Look elsewhere in the DNR
 
 // Original Name: "How is the state helping with flood recovery?"
 :: HowIsTheStateHelpingWithFloodRecovery
-{@person}I just declared a State of Emergency for Twin Lakes. 
-{@person}We want to make sure the city gets as much help as possible. 
-$call GainSnippet(State-Impact)
+{@person}I declared a State of Emergency as soon as I found out what was happening. 
+{@person}We need to make sure Twin Lakes gets the help it needs. 
+$call GainSnippet(Governor-Impact)
 $choice WhatDoYouKnowAboutTheCauseOfTheFlood; What do you know about the cause of the flood? 
 
 // Original Name: "What do you know about the cause of the flood?"
 :: WhatDoYouKnowAboutTheCauseOfTheFlood
 {@person}Well... I'm unclear on the specifics.
 {@person}But I know the town will come together and work on solutions.
-{@person}The people of Twin Lakes are incredibly... unique.
+{@person}The people of Twin Lakes are incredibly resilient.
+{@person}Plus, I can always count on them for a good pun. 
 {@me}Yeah. I've noticed.
 Before you can ask more, the governor's assistant whisks her away.
 You head out, feeling like a star reporter. 
 Now you'll just need to convince your editor that this actually happened...
 
+$call GainSnippet(GovernorComments)
 $choice ScienceStoryMap; Head back outside 
 
 // Original Name: Interview scientist
