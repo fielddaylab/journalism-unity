@@ -705,7 +705,7 @@ From down a side street, you hear a soft clucking. Amelia Egghart???
 $endif
 
 
-$choice FollowTheChicken; Follow the chicken <color="purple">(10 minutes)</color>
+$HubChoice(FollowTheChicken, "Follow the chicken", 0.25)
 $choice MainStreetFloodRecovery; Head straight to Main Street
 
 // Original Name: DNR Map

@@ -284,6 +284,7 @@ $choice ArriveAtWork; Rush to work
 // Original Name: Arrive at work.
 :: ArriveAtWork
 {clear-text}
+{layout Left}
 {/img}
 $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
@@ -411,7 +412,7 @@ Get to work on your breaking news story!
 
 $if FirstVisit()
     {anim rumble} RRRRING.
-    $choice AnswerThePhone; Answer the phone <color="purple">(??? minutes)</color>
+    $HubChoice(AnswerThePhone, "Answer the phone", -1)
 $endif
 
 $HubChoice(Office1-Weather, "Check the weather online", 0.25, "")
@@ -605,7 +606,7 @@ $else
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
     $if HasTime(0.25)
-        $choice MessageCherryCharlie07; Message CherryCharlie07 for permission to use their photo <color="purple">(15 minutes)</color>
+        $HubChoice(MessageCherryCharlie07, "Message CherryCharlie07 for permission to use their photo", 0.25)
     $else
         Too bad you don't have enough time to ask anyone for permission to use them.
     $endif

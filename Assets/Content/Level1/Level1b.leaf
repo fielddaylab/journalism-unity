@@ -1190,13 +1190,13 @@ He's beside himself.
 
 For goodness sake. People will pun about anything in this town. 
 
-$choice HelpHimPackUpHisWares; Help him pack up his wares. <color="purple">(30 minutes)</color>
+$HubChoice(HelpHimPackUpHisWares, "Help him pack up his wares.",0.5)
 
 $if Visited(TakePhotosOfTheStreet)
-$choice ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation; Show him the photos you took outside, to help him understand this dire situation. <color="purple">(20 minutes)</color>
+$HubChoice(ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation, "Show him the photos you took outside, to help him understand this dire situation.", 0.5)
 $endif
 
-$choice Evacuate--YouArentWillingToDieOverCheese; Evacuate--you aren't willing to die over cheese! <color="purple">(10 minutes)</color>
+$HubChoice(Evacuate--YouArentWillingToDieOverCheese, "Evacuate--you aren't willing to die over cheese!", 0.25)
 
 // Original Name: Start paddling
 :: StartPaddling

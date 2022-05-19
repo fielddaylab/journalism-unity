@@ -316,7 +316,7 @@ namespace Journalism {
 
                     foreach(var option in fullOptions) {
                         TextChoice choice = GameText.AllocChoice(Choices, Pools);
-                        uint timeCost = Stats.HoursToTimeUnits(inChoice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat());
+                        float timeCost = inChoice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat();
                         TagString choiceText = LookupLine(option.LineCode);
                         StringHash32 characterId = GameText.FindCharacter(choiceText);
                         if (characterId.IsEmpty) {
@@ -362,7 +362,7 @@ namespace Journalism {
         }
 
         static public readonly LeafChoice.OptionPredicate ChoicePredicate = (choice, option) => {
-            float timeCost = choice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat();
+            float timeCost = Mathf.Max(0, choice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat());
             if (!Player.HasTime(timeCost)) {
                 return false;
             }
