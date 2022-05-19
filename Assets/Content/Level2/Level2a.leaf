@@ -413,15 +413,15 @@ $choice ScienceStoryMap; Do something else
 // Original Name: Department of Limnology
 :: DepartmentOfLimnology
 {bg BG/Limnology.jpg}
-You arrive at the Department of Limnology, located right on the lake.
+You arrive at the Department of Limnology.
 
-The dock is covered in murky, greenish water.
+The dock is covered in murky, greenish water. 
 
-People are rushing in and out of the boathouse, bailing out water. 
+People are rushing in and out of the boathouse. 
 
 
 $if !!HasTime(0.25)
-$HubChoice(PhotographFloodedDock, "Take some pictures of the flooded dock", 0.25)
+$HubChoice(PhotographFloodedDock, "Take a photo of the flooded dock", 0.25)
 $choice LookForSomeoneToInterview; Look for someone to interview 
 $choice ScienceStoryMap; Leave the Department of Limnology
 $else
@@ -554,7 +554,7 @@ $choice NoThanks; No thanks.
 :: ReadTheBulletinBoardInTheHallway
 There are articles and flyers taped up. A few of them catch your eye:  
 
-TWIN LAKES COLLEGE GAZETTE:
+TWIN LAKES COLLEGE NEWS:
 <b>Twin Lakes in danger of catastrophic flood!
 by Sarah McCloud, climate researcher at the Dept. of Limnology</b>
 
@@ -600,7 +600,7 @@ The volume of the river that connects the two lakes is up by 40%.
 
 Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 
-"It's basically a perfect storm," she says. 
+{@person}It's basically a perfect storm. 
 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
@@ -616,7 +616,7 @@ The volume of the river that connects the two lakes is up 40%.
 
 Oh, and Upper Lake is being kept 5 feet higher than its normal level.
 
-"It's basically a perfect storm," she says. 
+{@person}It's basically a perfect storm. 
 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
@@ -651,16 +651,20 @@ $choice DepartmentOfLimnology; Head back to the docks
 
 // Original Name: Photograph flooded dock
 :: PhotographFloodedDock
-The dock is covered with murky-looking water. The lighting is great--you get some photos of an eerie blue-green shine on the water. More artful than journalistic, but hey - they'll make a great addition to your collection.
+You snag a perfect photo: two people standing on the flooded dock.
 
-As you turn to leave, you bump into someone--a researcher in knee-high boots and waders. Her nametag says "S. McCloud." 
+$call GiveSnippet(LimnologyDocks)
 
-"Hey!" she says. "Careful out here, that's toxic blue-green algae. I'm here to take some samples."
+As you turn to leave, you bump into someone...
 
-$choice QuickInterviewLimnologyExpert; Ask if she has time to talk
+A researcher with a nametag that says "S. McCloud." 
 
+{@person}Hey! Careful out there, kid. 
+{@person}That's toxic blue-green algae.
+
+$choice QuickInterviewLimnologyExpert; Ask if she has time for an interview
 $if Visited(ThanksPlusUniversityContact)
-$choice TellHerYouMetHerSister; Tell her you met her sister!
+$choice TellHerYouMetHerSister; Tell her you met her sister this morning
 $endif
 
 // Original Name: Call your neighbor and see if it's hers
@@ -865,7 +869,7 @@ $endif
 $if StatCheck(Social, 4)
 She seems busy, but your social graces win her over. 
 
-"Sure," she says, "I'd be happy to talk!" 
+{@person}Sure. I'd be happy to talk!
 
 $HubChoice(InterviewScientist, "Well, let's get started then...", 0.25)
 $choice DepartmentOfLimnology; ...actually, I gotta go!
@@ -873,14 +877,14 @@ $endif
 
 // Original Name: Tell her you met her sister!
 :: TellHerYouMetHerSister
-"I met your sister this morning," you say. "Her cafe is amazing!"
+{@me}I met your sister this morning. Her cafe is amazing!
+{@person}Awww! Did she make you her world-famous PB&J? 
+{@person}Sourdough and cherry preserves....it's the best in town.
 
-"Aww! How's she doing? Did she make you her world-famous PB&J? Sourdough and cherry preserves....it's the best in town."
+When she hears that you helped out her sister, she's happy to do an in-depth interview. 
 
-When she hears that you helped out her sister, she's happy to do an in-depth interview!
-
-$HubChoice(In-DepthInterviewLimnologyExpert, "Well, let's get started then!", 0.5)
-$choice DepartmentOfLimnology; ...actually, I gotta get going!
+$HubChoice(In-DepthInterviewLimnologyExpert, "Okay, let's get started!", 0.5)
+$choice DepartmentOfLimnology; "Actually, I better get going.
 
 // Original Name: Leave the chicken to fend for itself
 :: LeaveTheChickenToFendForItself
@@ -892,7 +896,8 @@ $choice MainStreetFloodRecovery; Arrive at Main Street
 
 // Original Name: "No problem. I better go, I've got a story to write.
 :: NoProblem.IBetterGoIveGotAStoryToWrite
-The woman looks surprised. "Oh, you're a reporter? You should talk to my brother! He'll know all the details."
+The woman looks surprised. 
+{@person}You're a reporter? You should talk to my brother! He'll know all the details.
 
 She scribbles down her brother's contact info: <i>Barry Zingerman, 555-1678</i>
 
@@ -900,9 +905,11 @@ She scribbles down her brother's contact info: <i>Barry Zingerman, 555-1678</i>
 $ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
 
 
-"Oh, you've heard of him? Give him a call. Tell him you rescued his niece's pet. I'm sure he'd love to chat."
+{@person}Oh, you've heard of him? 
+{@person}Give him a call. Tell him you rescued his niece's chicken! 
+{@person}I'm sure he'd be happy to chat.
 
-<i>Get Mayor's Contact Info</i>
+<i>New Contact: Mayor's Presonal Number</i>
 
 $choice PhoneContacts; Open Phone Contacts
 $choice MainStreetFloodRecovery; Keep biking toward Main Street
@@ -911,7 +918,8 @@ $choice ScienceStoryMap; Go somewhere else
 
 // Original Name: Ask to interview him
 :: AskToInterviewHim
-He doesn't even glance at you. "Do I look like I'm in a chatty mood?"
+He doesn't even glance at you. 
+{@person}Do I look like I'm in a chatty mood? 
 
 $choice AskIfHeNeedsHelp; Ask if he needs help
 $choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
@@ -919,7 +927,10 @@ $choice MainStreetFloodRecovery; Leave him alone. There must be someone else you
 
 // Original Name: Ask if he needs help
 :: AskIfHeNeedsHelp
-"Hmm. Let's see. My gallery is totally destroyed. The storm kept me up all night. And all I had for breakfast was tic tacs and oyster crackers. Would <i>you</i> say I need help?"
+{@person}Hmm. Let's see. My gallery is totally destroyed. 
+{@person}The storm kept me up all night. 
+{@person}And all I had for breakfast was tic tacs and oyster crackers. 
+{@person}Would <i>you</i> say I need help?"
 
 $choice OfferHimSomeFood; Offer him some food
 $HubChoice(HelpHimCarryFurnitureOutside, "Help him carry furniture outside", 0.25)
@@ -929,16 +940,16 @@ $choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
 :: TellHimYoureABigFanOfHisWork
 
 $if StatCheck(Social, 4)
-"Really?" he says, sounding doubtful. 
+{@person}Wait. You know my work?
+{@me}Yeah, I saw your art installation at the ice cream social last week! 
+{@me}I'm so sorry you got caught in the flood.
+He looks more cheerful now. 
+{@person}Well, this is my series on toxic lakewater bacteria, so it's actually sort of fitting!
 
-"Yeah, I saw your new art installation at the ice cream social! Sorry you got caught in the flood."
+He's so excited you've heard of his work that he agrees to an interview. 
 
-"Well," he says, more cheerful now, "this is my series on toxic lakewater bacteria, so it's actually pretty meta. I'm guessing these prints are soaked with it by now."
-
-He's so excited you've heard of his work that he agrees to an interview!
-
-$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 0.5)
-$choice MainStreetFloodRecovery; ...nevermind, I gotta get going!
+$HubChoice(InterviewGalleryOwner, "{@me} Okay, let's get started!", 0.5)
+$choice MainStreetFloodRecovery; Actually, I better go. 
 $endif
 
 $if !StatCheck(Social, 3)
@@ -1336,11 +1347,10 @@ $endif
 She gives you the address for the Department of Limnology.
 
 {@person}Thanks again! Stop by any time.
-
-<color="magenta"><i>Gained new location: Department of Limnology</i></color>
+{@article}New location: Department of Limnology 
 
 $choice MainStreetFloodRecovery; Return to Main Street
-$choice ScienceStoryMap; Leave Main Street
+$choice ScienceStoryMap; Go somewhere else 
 
 // Original Name: Thanks
 :: Thanks

@@ -80,7 +80,7 @@ $choice OnMyWay; {@me} On my way.
 @checkpoint
 {/img}
 $call SetHeaderEnabled(true)
-You're in a one-year contract with the Twin Lakes Herald.
+You're in a one-year contract with the Twin Lakes Gazette.
 One year, and you'll be on to bigger and better things.
 But for now, you need to prove yourself.
 You have time to do one thing before you head to the newsroom. 
@@ -148,11 +148,12 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 :: OffToWork
 @clearText
 {img Anim/enml-waterrushing.jpg}
-Your neighbor, Maureen, is chasing her escaped backyard chickens.
+Outside, your neighbor, Maureen, is running around in a panic.
+Her backyard chickens have escaped their coop. 
 {@person}{anim rumble}Help! They're everywhere!! 
 It might be nice to help her. She did bring you a cherry strudel the other day.
 
-$choice HelpHer; Help her and rack up some good karma 
+$choice HelpHer; Help her and earn her trust 
 $choice RushToWork; There's no time, I've got to get to work!
 
 // Original Name: Message Nurse
@@ -160,7 +161,7 @@ $choice RushToWork; There's no time, I've got to get to work!
 @clearText
 {@me}Hi, can I ask if you took this photo?
 {@person}Yep! Literally happening right now. Crazy, right? 
-{@me}I'm a reporter at the Herald. 
+{@me}I'm a reporter at the Gazette. 
 {@me}Would you be okay with us using this photo and crediting you? 
 
 $ActionChoice(Send message)
@@ -192,7 +193,7 @@ $choice OffToWork; Off to work
 :: HelpHer
 @clearText
 {img Anim/enml-escapedchicken.jpg}
-Since you moved here, the chickens have woken you up at an ungodly hour every. single. day.
+On the one hand, Maureen's chickens wake you up at an ungodly hour every. single. day. 
 On the other hand, they are pretty cute. 
 
 $choice ChaseChickens; Chase after the chickens
@@ -211,8 +212,9 @@ $choice ImInAHurryTheresNoNeedToBringTheBike; You're in a hurry, there's no need
 // Original Name: Chase chickens
 :: ChaseChickens
 @tags Trust, Endurance
-You help round up the chickens and only get pecked twice.
-{@person}Oh, thank you so much!
+You run around after the chickens and only get pecked twice.
+Maureen is beside herself with gratitude. 
+{@person}Oh, thank you so much! 
 {@me}No big deal. Happy to help. 
 You head to your car, plucking feathers out of your hair. 
 
@@ -223,6 +225,9 @@ $choice HitTheRoad; Hit the road
 :: LureChickens
 @tags Trust, Resourceful
 You make a trail of cherry granola and the chickens come running!
+Maureen is beside herself with gratitude. 
+{@person}Oh, thank you so much!
+{@me}No big deal. Happy to help. 
 The good news: the chickens are safe now.
 The bad news: they follow you to your car, clucking for more treats. 
 
@@ -232,7 +237,7 @@ $choice HitTheRoad; Hit the road
 // Original Name: Load your bike, it could be useful later.
 :: LoadYourBikeItCouldBeUsefulLater
 @tags Resourceful
-You pump up the tires and squeeze your bike into the trunk. 
+You squeeze your bike into the trunk of your car. 
 The hatch doesn't shut all the way, but it's nothing a bungee cord can't fix.
 {@msg} You can use your bike later
 $call AdjustStats(Resourceful + 1)
@@ -279,7 +284,7 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
-Your editor looks relieved to see you.
+Your editor greets you at the door.
 
 $if Visited(HelpHer)
     {@person} I'm not even gonna ask why you're covered in feathers.
@@ -291,34 +296,35 @@ $else
 $endif
 
 $ContinueChoice({@me} Where is everybody??)
-{@person}Ben and Sudha are on their way. Khalisa is stuck at home, bailing out her basement.
+{@person}Ben and Sudha are still trying to get here. 
+{@person}Khalisa is bailing out her flooded basement. 
 {@person}Right now, you're my lead reporter.
 
 $ContinueChoice({@me} How can I help?)
 
 $call ActivateStory()
 {@person} We need a breaking news story.
-{@person} People need to know what's happening and how to stay safe.
-{@person} Let's take a look at your notebook.
+{@person} Grab your notebook. I'll talk you through it. 
 $call BeginTutorial()
     $call OpenWindow(Notes)
     $call Wait(0.4)
-    {@person}   So this is your fabled "Notebook"...
+    {@person}   Your quotes, photos, and other story snippets will show up here. 
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
-    {@person}   Details about the story I've assigned are in the "Editor Notes" section.
+    {@person}   I put your assignment in the "Editor's Notes" tab. 
     $call ClickOn(EditorNotes)
     $call ClearPointer()
     {clear-text}
     $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
-    {@person}   Make sure to reference these from time to time.
+    {@person}  Pay attention to the breakdown for each story type. 
     $call PointTo(TutorialPlayerAttributes, -24, 0)
-    {@person}   Long story short: you want this...
+    {@person}   You want this...
     $call PointTo(TutorialTargetAttributes, -24, 0)
     {@person}   To line up with this.
     $call PointTo(TutorialQuality, -24, 0)
-    {@person}   Oh, and try to get as many quality snippets as possible.
+    {@person}  Oh, and try to get high-quality snippets.
+    {@person} A blurry photo or a basic quote is better than nothing, but we have high standards here. 
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
@@ -337,7 +343,7 @@ $choice BreakingNewsStory; {@me} On it.
 $if StatCheck(Endurance, 2)
     You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
     The baker is stacking up bags of pastry flour. 
-    You're not sure if this will actually protect her shop or just turn into play dough, but you help anyway.
+    You're not sure if this will actually protect her shop or just turn into Play Doh, but you help anyway.
     {@person} I don't know where to get sandbags. 
     {@person} It all happened so fast!
 
@@ -376,9 +382,8 @@ Your good camera and zoom lens is enough to get a clear shot!
 $call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
 $else
-You think wistfully of your good camera and zoom lens, buried somewhere in your closet. 
-
-At least a phone picture of blurry cars in blurry water is better than nothing. 
+You snap a few phone pictures, thinking wistfully of your camera and zoom lens, buried somewhere in your apartment.  
+At least blurry cars in blurry water is better than nothing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
@@ -500,7 +505,7 @@ The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
 {@phone} Who did you say you work for?
 
-{@me} The Twin Lakes Herald.
+{@me} The Twin Lakes Gazette.
 
 // Moved from: Police Response
 
@@ -643,11 +648,11 @@ $if StatCheck(Trust, 2)
 
     $call GiveSnippet(LibraryLot)
 $else
-    {@person}the twin lakes herald?? that sounds fake. how do i know you're a real reporter?
+    {@person}the twin lakes gazette?? that sounds fake. how do i know you're a real reporter?
 
     $if StatCheck(Tech, 3)
         You've been waiting your whole life for this moment.
-        You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Herald website (which you singlehandedly created).  
+        You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Gazette website (which you singlehandedly created).  
         {@person}yikes. ok. i get the point. 
 
         $call GiveSnippet(LibraryLot)

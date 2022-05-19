@@ -63,21 +63,18 @@ At the Town Hall meeting, Mayor Johnson will call to lower lake levels--an issue
 @type Photo
 @quality Great
 @image Anim/inspiring-downtown-recovery.jpg
-Snippet text unimplemented.
 
 // Original Name: Downtown recovery
 :: DowntownRecovery
 @type Photo
 @quality Good
 @image Anim/downtown-recovery.jpg
-Snippet text unimplemented.
 
 // Original Name: Blurry downtown recovery
 :: BlurryDowntownRecovery
 @type Photo
 @quality Bad
 @image Anim/downtown-recovery-blurry.jpg
-Snippet text unimplemented.
 
 // Original Name: Art business impact
 :: ArtBusinessImpact
@@ -95,6 +92,10 @@ We gotta do our best to pick up and rebuild. Small business is the heart and sou
 @quality Great
 The Cherry Festival is usually my most profitable week, but the flood scared everybody away. If this keeps up, I'm in trouble.
 
+:: BasicCityHallInfo
+@type Quote
+@quality Bad
+City Hall is working to evacuate people from at-risk areas and mitigate damage. 
 
 // Original Name: Impact of flood
 :: ImpactOfFlood
@@ -112,7 +113,7 @@ Snippet text unimplemented.
 :: PoliciesToPreventFlooding
 @type Quote
 @quality Great
-The city could change things with new policies: funding for storm drains, rain gardens, lower lake levels, and wetland protection!
+The city could change things with new policies: funding for storm drains, rain gardens, lower lake levels, and wetland protection.
 
 // Original Name: Flooded neighborhood
 :: FloodedNeighborhood

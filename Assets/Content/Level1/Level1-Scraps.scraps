@@ -53,7 +53,7 @@ Twin Lakes saw a record-breaking 12 inches of rainfall overnight, with 4-6 more 
 @type Quote
 @quality Good
 @attr Facts, Useful
-"This is the worst flood I've ever seen! Half of downtown is underwater. People need to stay off the roads!" 
+"This is the worst flood I've ever seen. Half of downtown is underwater. People need to stay off the roads." 
 
 // Original Name: Rehearsed DNR
 :: RehearsedDNR
@@ -67,7 +67,7 @@ Twin Lakes saw a record-breaking 12 inches of rainfall overnight, with 4-6 more 
 @type Fact
 @quality Great
 @attr Facts 
-"The lake volume is up by 7%. We're releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting!"
+"The lake volume is up by 7%. We're releasing water from the dam at a rate of 10 cfs. This should stop the dam from bursting."
 
 // Original Name: Flood background
 :: FloodBackground
@@ -81,7 +81,7 @@ According to a statement from City Hall, Twin Lakes has been on the verge of a c
 @type Quote
 @quality Great
 @attr Facts, Useful 
-"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statistic!" 
+"Emergency workers are out there helping trapped civilians. People should stay home and avoid becoming another rescue statisti." 
 
 // Original Name: City Hall annoyance
 :: CityHallAnnoyance
@@ -109,14 +109,14 @@ This flood is record-breaking, but not surprising. Local scientist, Rainn E. Day
 @type Quote
 @quality Great
 @attr Color 
-"Over on St. Lucie, a man tried to drive through the flood and got swept into a ditch. First responders saved him just in time!"
+"Over on St. Lucie, a man tried to drive through the flood and got swept into a ditch. First responders saved him just in time."
 
 // Original Name: Police safety quote
 :: PoliceSafetyQuote
 @type Quote
 @quality Good
 @attr Useful 
-"Stay home, bring valuables upstairs, and avoid driving on flooded streets. Remember: Turn around, don't drown!" 
+"Stay home, bring valuables upstairs, and avoid driving on flooded streets. Remember: Turn around, don't drown." 
 
 // Original Name: Grainy picture
 :: GrainyPicture
@@ -133,14 +133,14 @@ Snippet body not implemented.
 @type Quote
 @quality Great
 @attr Useful
-"Stacking up sandbags can help create a barrier to stop floodwater. There are filling stations at the local schools!"
+"Stacking up sandbags can help create a barrier to stop floodwater. There are filling stations at the local schools."
 
 // Original Name: Volunteer info
 :: VolunteerInfo
 @type Fact
 @quality Good
 @attr Useful
-"The community center is looking for volunteers! People can fill sandbags, check on neighbors, and staff the flood shelter." 
+"The community center is looking for volunteers. People can fill sandbags, check on neighbors, and staff the flood shelter." 
 
 // Original Name: Fire Chief Quote
 :: FireChiefQuote
@@ -177,7 +177,7 @@ Snippet text unimplemented.
 @type Quote
 @quality Great
 @attr Color
-"I've volunteered with the DNR for years. It's amazing to see how the whole town comes together in times of crisis!"
+"I've volunteered with the DNR for years. It's amazing to see how the whole town comes together in times of crisis."
 
 // Original Name: Great houseboat story
 :: GreatHouseboatStory
@@ -197,7 +197,7 @@ Trust me, Dear. Houseboats are the future! Stylish, off the grid, and your cats 
 @quality Good
 @attr Color
 @image Anim/dog-rescue.png
-Near Main Street, a pickup truck got swept into a flooded ditch! Firefighters rescued the driver-—and his dog—-just in time.  
+Near Main Street, a pickup truck got swept into a flooded ditch. Firefighters rescued the driver-—and his dog—-just in time.  
 
 // Original Name: Dog rescue picture
 :: DogRescuePicture
@@ -250,7 +250,7 @@ Snippet text unimplemented.
 @type Quote
 @quality Good
 @attr Facts
-We've been trying to make people understand. The levels are just too high to handle all this extreme rainfall! 
+We've been trying to make people understand. The levels are just too high to handle all this extreme rainfall. 
 
 // Original Name: Flood cause
 :: FloodCause
@@ -313,14 +313,14 @@ Local man Colby Jenkins escaped to the second floor as his cheese shop flooded. 
 @type Observation
 @quality Good
 @attr Color
-As water rose, firefighters rescued a local cheese shop owner, Colby Jenkins, who was trapped by the flood! 
+As water rose, firefighters rescued a local cheese shop owner, Colby Jenkins, who was trapped by the flood.
 
 // Original Name: Volunteer conversation
 :: VolunteerConversation
 @type Quote
 @quality Good
 @attr Color
-"What a mess. I woke up with water pouring into my basement! Hopefully these sandbags will get things under control."
+"What a mess. I woke up with water pouring into my basement. Hopefully these sandbags will get things under control."
 
 // Original Name: Super detailed observation
 :: SuperDetailedObservation

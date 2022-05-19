@@ -130,7 +130,7 @@ You unplug Ben's phone, plug in yours, and try to look innocent.
 
 When you hear him coming, you grab your phone and run for it. 
 
-40% battery should be good enough. Probably. 
+40% battery should be good enough. 
 
 $call AdjustStats(Tech + 2, Trust - 1)
 
@@ -538,7 +538,7 @@ $endif
 $if StatCheck(Social, 3)
 The DNR worker seems to recognize you.
 
-{@person}You work for the Herald, right? I've heard of you!
+{@person}You work for the Gazette, right? I've heard of you!
 {@person}Sounds like you've been making a lot of friends around here.
 {@person}Would you like an update on the situation? 
 
@@ -572,48 +572,63 @@ $choice WhatsTheDealWithTheHouseboat; What's the deal with the houseboat?
 :: TakePhotosOfTheFloodSite
 
 $if StatCheck(Tech, 3)
-The conditions are terrible out here.
+Back in New York, you'd have a professional photographer to help you.
 
-At a big ciity paper, you'd have a professional photographer to help you. 
+Out here, you're on your own. 
 
-Out here, you'll have to make do with what you've got. 
+Luckily, you came prepared!
 
-Luckily you've got a fully charged phone, a sturdy tripod, and a fancy zoom lens!
+You use your tech gear to snag an amazing shot.  
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $endif
 
 $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
-Your gear isn't good enough for these terrible conditions. 
+The wind and rain make it tricky to get a good shot. 
 
-Then you notice a sturdy-looking tree near the dam--the perfect vantage point!
+Then you notice a sturdy-looking tree near the dam.
 
-You might not have access to a professional photographer out here in Cherry Festival country. 
+The perfect vantage point!
 
-But at least you get to brush up on your tree-climbing skills. 
+Thanks to your energy-boosting breakfast, you make it easily to the top. 
 
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Resourceful, 3)
-Your gear isn't fancy, but you'll have to make do.
+Your gear isn't fancy.
+
+Luckily, Twin Lakes has taught you how to make do with what you've got. 
 
 You rig up a tripod with a broken branch, a shoelace, and a hair scrunchie. 
-
-You didn't binge-watch all those old episodes of MacGyver for nothing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
-You can't get a clear shot without a zoom lens.
+Oh no... your camera battery is dead!
 
 You're about to give up when when you hear a voice from behind you.
 
+{@person}I brought a camera from home. Want to borrow it? 
+One of the volunteers!
+{@me}Wow, that would be great! Are you sure?
+{@person}Of course. 
+{@person}I can tell you're out here trying to help the town.
+{@person}Just glad I can pitch in. 
+
+$call AdjustStats(Tech + 1)
 $call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2
-You use your modest tech gear to snap some photos.
+Oh no... your camera battery is dead!
+Nearby, a bystander is snapping away with a fancy DSLR. 
+Couldn't hurt to ask... 
 
-They might not win any prizes, but they should be good enough.
+{@me}Excuse me. Would you mind if I borrowed your camera. 
+{@person}Are you serious??
+{@person}I don't even know you, kid. Use your phone or something. 
+
+You adjust your phone settings and snap a picture.
+A little shaky, but better than nothing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(OkayHouseboatPhotos)
@@ -621,9 +636,9 @@ $endif
 
 
 $if Stat(Tech) == 1
-The conditions are terrible and so is your photography gear.
-
-You manage to snap a few blurry shots. 
+The conditions are terrible and your camera is dead.
+You wish you knew how to adjust your phone settings for a better picture...
+At least this is better than nothing. Probably. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryHouseboatPhotos)
@@ -645,20 +660,19 @@ $HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5)
 
 $HubChoice(ArriveAtFloodSite, "Head back to the flood site", 0.5)
 $else
-That leaves just enough time to compile your story...
+Time's up, Rookie. Time to put your story together!
 $choice CompileYourStory; Compile your story
 $endif
 
 // Original Name: Look around for something useful
 :: LookAroundForSomethingUseful
-You've ended up in a deli parking lot, with a <color="red">Come On In!</color> sign flashing. 
+You've ended up in a parking lot.
+You scan your surroundings: 
+-A deli with a <color="red">Come On In!</color> sign flashing. 
+-Another stranded car with kayaks strapped to the roof 
 
-You try to check the flood map, but your wifi is acting glitchy. 
-
-Another driver is parked next to you, a pair of kayaks strapped to their car roof. 
-
-$choice AskToBorrowAKayak; Ask to borrow a kayak
-$choice UseDeliWifi; Go into the deli and use their wifi
+$choice AskToBorrowAKayak; Ask to borrow a kayak from the stranded driver
+$choice UseDeliWifi; Go into the deli and ask for help 
 
 // Original Name: Swim for it
 :: SwimForIt
@@ -999,23 +1013,20 @@ $endif
 @tags Bookworm, Resourceful
 
 $if StatCheck(Social, 3)
-Inside, you check the flood map and find a safer route. 
-
-The deli owner is amazed to find out you're actually heading <i>toward</i>downtown.
-
-{@person}You know it's flooded, right? The Herald just posted a breaking news update! 
+Inside, the deli owner is happy to help you plan a safer route. 
+Seems your social cred is going up a little. 
+{@person}So... you're heading <i>toward</i> downtown??
+{@person}You know it's flooded, right? The Gazette just posted a breaking news update! 
 {@me}Yeah. I heard. 
 
 He gives you a free sandwich wrapped in paper and tells you to be careful out there.
 $call AdjustStats(Research + 1, Resourceful + 1)
 $else
-Inside, you check the flood map and find a safer route.
-
-The deli owner gives you the side-eye. 
-
-You must not look friendly enough to make up for your non-traditional flood gear. 
-
-{@person}Buy something if you wanna stick around. This place is for paying customers only. 
+Inside, you check the flood map.
+You could use the deli owner's help, but he's too busy giving you the side-eye.
+You still don't have the best reputation around here. 
+{@person}Buy something if you wanna stick around, kid. 
+{@person}This place is for paying customers only. 
 $call AdjustStats(Research + 1)
 $endif
 
@@ -1024,13 +1035,13 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Eject: Just keep swimming...
 :: EjectJustKeepSwimming
-You end up washed into a lake, which used to be the high school football field.  
+You end up washed into the high school football field...
+
+Now a small lake. 
 
 The good news: you're alive!
 
 The bad news: you lost your shoes, ruined all your tech, and spend all day sitting on the bleachers, waiting to be rescued. 
-
-At least you have a friendly possum family for company. 
 
 $GameOver("You needed to be rescued.")
 
@@ -1038,16 +1049,20 @@ $GameOver("You needed to be rescued.")
 :: TakePhotosOnTheWay
 
 $if StatCheck(Tech, 3)
-On the ride downtown, you get some great shots with your zoom lens!
+On the ride downtown, you snag some great shots with your zoom lens!
+The scene is full of cherry-themed drama.
+Your editor is gonna LOVE this. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
-You snap photos of the street around you. 
+Oh no... you must've dropped your zoom lens! 
 
-Too bad you don't have the right lens. 
+You try to snap a photo of a crate full of cherries floating past. 
 
-There's a crate of cherries floating through the water, but it ends up looking like a brown and red blur.
+The result: a brownish area, with points.
+
+You're reeeally missing your New York newsroom right about now.  
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryFloodPhotosTruck)
@@ -1307,8 +1322,8 @@ $choice ArriveAtFloodSite; Return to the dam
 
 $if !StatCheck(Tech, 2)
 You float in the street and snap some photos.
-
-As expected, they turn out awful. You're already wishing you had those lenses back.
+As expected, they turn out awful. 
+You're already wishing you had those lenses back.
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GoodFloodPhotosKayak)
@@ -1319,9 +1334,8 @@ $endif
 
 
 $if Stat(Tech) == 2
-You float in the street and snap some photos.
-
-You don't have your zoom lens, but you're right in the middle of the action, so the photos turn out okay!
+You can't find the right lens for these conditions. 
+Luckily, you're right in the middle of the action, so the photos still turn out pretty good!
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GoodFloodPhotosKayak)
@@ -1330,9 +1344,10 @@ $choice ArriveAtFloodSite; Arrive at flood site
 $endif
 
 $if StatCheck(Tech, 3)
-You use your tech gear to snap some amazing photos!
 
-Jars of cherry jam, fish flopping out of the water, and even a snake slithering by.
+You use your tech gear to take some photos.
+You do miss working with a whole team of photographers back in New York...
+But you have to admit, these snaps turned out amazing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosKayak)
