@@ -44,6 +44,7 @@ $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
 {layout Left}
 $call Music(Music/rainy day in cherry town.mp3)
+$call Ambience(Ambience/rain-inside.mp3)
 Your first breaking news update is in the books. 
 You're about to grab some coffee when your editor finds you.
 {@person}You said you wanted more excitement, right?
