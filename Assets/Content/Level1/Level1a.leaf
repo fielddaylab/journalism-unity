@@ -46,7 +46,7 @@ $call SetLocation("Apartment")
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
 Twin Lakes. Day 11. 
-The Cherry Capitol of the Upper Midwest. 
+The Cherry Capitol of the Midwest. 
 Your friends in New York were SO JEALOUS you snagged a reporting job straight out of college.
 Even if it's in a tiny, isolated, cherry-obsessed town. 
 Lucky you. 
@@ -68,7 +68,7 @@ $choice CallYourEditor; Call back.
 // rumble text style
 {anim rumble}{@phone} FINALLY!
 {@phone} Where have you been??
-{@me}Um... sleeping. It's 5 A.M.
+{@me}Um... sleeping. It's 6:30 A.M.
 {@phone}Seriously, you slept through all that thunder??
 {@me}What thunder? 
 {@phone}It's been raining all night. Downtown is flooding!
@@ -140,11 +140,11 @@ You scroll through posts on Squawker.
 
 {img Photo/HospitalDucks.jpg}
 {@article}Stranded at work @ the hospital. Ducks are swimming through the parking lot!
-{/img} 
 {@article}5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
+{/img} 
 
 $choice MessageNurse; See if the hospital employee will let you use his photo.
-$choice ReadFloodingArticle; Read article and brush up on your survival skills.
+$choice ReadFloodingArticle; Read click-bait article and brush up on your survival skills.
 
 // Original Name: Off to work
 :: OffToWork
@@ -190,14 +190,14 @@ $choice OffToWork; Off to work
 {@me}Well... that's promising.
 
 $call AdjustStats(Research + 1)
-$choice OffToWork; Off to work
+$choice OffToWork; Head to work
 
 // Original Name: Help her
 :: HelpHer
 {clear-text}
 {img Anim/enml-escapedchicken.jpg}
-On the one hand, Maureen's chickens wake you up at an ungodly hour every. single. day. 
-On the other hand, they are pretty cute. 
+Maureen's chickens wake you up at an ungodly hour every. single. day. 
+But on the other hand, they are pretty cute. 
 
 $choice ChaseChickens; Chase after the chickens
 $choice LureChickens; Lure them with food
@@ -313,7 +313,7 @@ $call ActivateStory()
 $call BeginTutorial()
     $call OpenWindow(Notes)
     $call Wait(0.4)
-    {@person}   Your quotes, photos, and other story snippets will show up here. 
+    {@person}   Your quotes, photos, and other snippets will show up here. 
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
     {@person}   I put your assignment in the "Editor's Notes" tab. 
@@ -322,7 +322,7 @@ $call BeginTutorial()
     {clear-text}
     $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
-    {@person}  Pay attention to the breakdown for each story type. 
+    {@person}  Pay attention to the story breakdown. 
     $call PointTo(TutorialPlayerAttributes, -24, 0)
     {@person}   You want your story...
     $call PointTo(TutorialTargetAttributes, -24, 0)
@@ -365,11 +365,12 @@ $elseif StatCheck(Social, 2)
     $call GiveSnippet(FriendlyShopkeeper)
 $else
     The baker is stacking up bags of flour to stop the floodwater.
+    Unfortunately, you're too tired to think of something comforting to say. 
     {@me} Um... I think you're supposed to use sandbags. Flour might not work.
     The baker seems exasperated.  
     {@person}I think YOU'RE supposed to mind your own business. And feel free to quote me.
-    You ask her for an interview, but the baker is, to put it mildly, not interested. 
-    Maybe you could use this in your story, if you remove the profanity...
+    You ask for an interview, but the baker is, to put it mildly, not interested. 
+    Maybe you could quote this, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
 $endif
@@ -405,9 +406,9 @@ $choice ArriveAtWork; Arrive at work.
 {layout Left}
 {/img}
 $if FirstVisit()
+Get to work on your breaking news story!
     $set DNRnumber = false
 $endif
-Get to work on your breaking news story!
 
 $if FirstVisit()
     {anim rumble} RRRRING.
@@ -461,7 +462,7 @@ $goto Office1-Clock
 {clear-text}
 {/map}
 You ask your editor if the newsroom has any records of past flood stories.
-{@person}Hmmm. Jenkins was writing a lot about climate chnage before he retired.
+{@person}Hmmm. Jenkins was working on something about climate change before he retired.
 {@person}Feel free to look through his files... if you can find them. 
 
 $choice JenkinssComputer; Track down Jenkins's computer.
@@ -534,7 +535,7 @@ $if Visited(HelpHer)
 
     He gives you tons of great info, including a story about a local man whose car got swept into a ditch! 
 
-    {@phone} Water was rising fast. Resc saved him and his dog just in time.
+    {@phone} Water was rising fast. Rescuers saved him and his dog just in time.
     {@phone} Remember: Turn around, don't drown!
 
     $call GiveSnippet(PoliceSafetyQuote)
@@ -569,8 +570,8 @@ $if StatCheck(Social, 2)
         {@phone}Poor Sophia. Did you hear about all the pastries that got washed away this morning? What a tragedy.
     $endif
     She tells you that the flood started near the dam.
-    Volunteers are stacking sandbags, while emergency workers struggle to keep up with rescues and evacuations.
-    {@phone} I wish I could say nobody saw this coming
+    {@phone} Volunteers are stacking sandbags, while emergency workers deal with rescues and evacuations.
+    {@phone} I wish I could say nobody saw this coming.
     {@phone} But Twin Lakes has been on the verge of a flood like this for years.
 
     $call GiveSnippet(FloodBackground)
@@ -644,7 +645,7 @@ Jenkins's computer is basically an antique.
 
 Luckily, you love old 90's tech and manage to log on without much trouble. 
 
-You find a treasure trove of quotes from local scientists! Turns out people have been warning about a flood disaster for years now. 
+You find a treasure trove of quotes from local scientists!
 
 You also dig up Jenkins's old DNR contact: Wynne D. Storme. 
 
@@ -696,7 +697,7 @@ $goto Office1-Clock
 {layout Left}
 {clear-text}
 {/img}
-It's been a hectic morning, but you think you might be able to piece together a halfway decent story out of this melange.
+It's been a hectic morning, but you think you might be able to piece together a halfway decent story.
 $set storyType = "Breaking News"
 $set snippetLimit = 4
 $set destination = "Story 2 Intro"
