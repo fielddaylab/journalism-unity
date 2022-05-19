@@ -287,7 +287,6 @@ $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
 
 Your editor greets you at the door.
-9402272171493f70ddbd5eb70e07aa472363e727
 
 $if Visited(HelpHer)
     {@person} I'm not even gonna ask why you're covered in feathers.
