@@ -21,7 +21,7 @@
 
 // Original Name: "On my way."
 :: OnMyWay
-@clearText
+{clear-text}
 {/img}
 {bg BG/Apartments.png}
 $call SetHeaderEnabled(true)
@@ -65,7 +65,7 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 
 // Original Name: Off to work
 :: OffToWork
-@clearText
+{clear-text}
 {img Anim/enml-waterrushing.jpg}
 Your apartment is located over a local bookstore.
 You come downstairs and walk through the enormous, decorative metal bird sculptures out front. They look even more terrifying in the dark.  
@@ -78,7 +78,7 @@ $choice RushToWork; There's no time, I've got to get into work!
 
 // Original Name: Help her
 :: HelpHer
-@clearText
+{clear-text}
 {img Anim/enml-escapedchicken.jpg}
 The whole coop is running around like chickens with... well, you know.
 You need to save them before they get swept away! 
@@ -102,7 +102,7 @@ $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Office 1 - Weather
 :: Office1-Weather
-@clearText
+{clear-text}
 You check the forecast: 10 inches of rain fell overnight, and more is on the way. 
 The website includes a live flood map of the city, which includes flooded streets and areas at risk.
 This will be perfect to include in your story!
@@ -114,7 +114,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Coworker
 :: Office1-Coworker
-@clearText
+{clear-text}
 You've heard about a retired reporter who used to cover local floods, Jenkins Something.
 Maybe he's got old files you could look through!
 
@@ -122,7 +122,7 @@ $choice JenkinssComputer; Track down his computer.
 
 // Original Name: Office 1 - DNR
 :: Office1-DNR
-@clearText
+{clear-text}
 You ask the DNR worker what's going on.
 
 $if StatCheck(Social, 2)
@@ -158,7 +158,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Police
 :: Office1-Police
-@clearText
+{clear-text}
 The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
 {@phone} Who did you say you work for?
@@ -167,7 +167,7 @@ $choice PoliceResponse; {@me} The Twin Lakes Herald.
 
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
-@clearText
+{clear-text}
 
 $if StatCheck(Social, 2)
     {img Anim/enml-coffeedonuts.jpg}
@@ -197,7 +197,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
-@clearText
+{clear-text}
 
 $if StatCheck(Research, 2)
     You get online and see what your friends are posting.
@@ -218,7 +218,7 @@ $goto Office1-Clock
 // Original Name: Answer the phone
 :: AnswerThePhone
 @tags Trust, Social
-@clearText
+{clear-text}
 {@me} Hello?
 {@phone} Hiya!! This is Fred Finkler.
 {@phone} You might remember me from the town hall meetings.
@@ -402,7 +402,7 @@ $choice OffToWork; Off to work
 // Original Name: Check on your upstairs neighbor, who hates thunderstorms
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
-@clearText
+{clear-text}
 The sweet old lady in the upstairs flat, Jeanie, gets nervous when it rains.
 
 You help her find batteries for her flashlight and put out some food for her cats.
@@ -421,7 +421,7 @@ $choice OffToWork; Off to work
 
 // Original Name: Check your phone.
 :: CheckYourPhone
-@clearText
+{clear-text}
 {img Anim/enml-buzzingphone.jpg}
 5 missed calls from your editor.
 Probably checking up on your puff piece about the cherry festival.
@@ -429,7 +429,7 @@ $choice CallYourEditor; Call back.
 
 // Original Name: Call your editor.
 :: CallYourEditor
-@clearText
+{clear-text}
 // rumble text style
 {anim rumble}{@phone} FINALLY!
 {@phone} Where have you been??
@@ -443,7 +443,7 @@ $choice OnMyWay; {@me} On my way.
 
 // Original Name: Rush to work
 :: RushToWork
-@clearText
+{clear-text}
 You make up an excuse and hurry to your car.
 Your neighbor can get her own coop in a group!
 {/img}
@@ -477,7 +477,7 @@ $choice HitTheRoad; Hit the road
 
 // Original Name: Hit the road
 :: HitTheRoad
-@clearText
+{clear-text}
 {/img}
 Turns out the flood is a little more serious than you thought. 
 The town's famous Cherrymobile is abandoned in high water.
@@ -504,7 +504,7 @@ $choice TakeSomePhotos; Take some photos
 
 // Original Name: Arrive at work.
 :: ArriveAtWork
-@clearText
+{clear-text}
 {/img}
 The newsroom is the emptiest you've ever seen it.
 The lights are flickering and rainwater drips from the ceiling. 
@@ -588,7 +588,7 @@ $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Breaking News Story
 :: BreakingNewsStory
-@clearText
+{clear-text}
 {/img}
 Get to work on your breaking news story!
 

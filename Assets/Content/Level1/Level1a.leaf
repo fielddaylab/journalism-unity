@@ -54,7 +54,7 @@ $choice CheckYourPhone; Check your phone.
 
 // Original Name: Check your phone.
 :: CheckYourPhone
-@clearText
+{clear-text}
 {img Anim/enml-buzzingphone.jpg}
 5 missed calls from your editor.
 Probably checking up on your puff piece about the Cherry Festival. 
@@ -63,7 +63,7 @@ $choice CallYourEditor; Call back.
 
 // Original Name: Call your editor.
 :: CallYourEditor
-@clearText
+{clear-text}
 // rumble text style
 {anim rumble}{@phone} FINALLY!
 {@phone} Where have you been??
@@ -77,7 +77,7 @@ $choice OnMyWay; {@me} On my way.
 
 // Original Name: "On my way."
 :: OnMyWay
-@clearText
+{clear-text}
 @checkpoint
 {/img}
 $call SetHeaderEnabled(true)
@@ -94,7 +94,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 // Original Name: Check on your upstairs neighbor, who hates thunderstorms
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
-@clearText
+{clear-text}
 {bg BG/HouseExteriorRainy.jpg}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
@@ -111,7 +111,7 @@ $choice OffToWork; Off to work
 // Original Name: Round up your tech and rain gear
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
-@clearText
+{clear-text}
 {bg BG/HouseExteriorRainy.jpg}
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
@@ -123,7 +123,7 @@ $choice OffToWork; Off to work
 // Original Name: Dig through the fridge for something nourishing
 :: DigThroughTheFridgeForSomethingNourishing
 @tags Endurance
-@clearText
+{clear-text}
 {bg BG/HouseExteriorRainy.jpg}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
@@ -133,7 +133,7 @@ $choice OffToWork; Off to work
 
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
-@clearText
+{clear-text}
 {bg BG/HouseExteriorRainy.jpg}
 You scroll through posts on Squawker.
 
@@ -147,7 +147,7 @@ $choice ReadFloodingArticle; Read article and brush up on your survival skills.
 
 // Original Name: Off to work
 :: OffToWork
-@clearText
+{clear-text}
 {img Anim/enml-waterrushing.jpg}
 Outside, your neighbor, Maureen, is running around in a panic.
 Her backyard chickens have escaped their coop. 
@@ -159,7 +159,7 @@ $choice RushToWork; There's no time, I've got to get to work!
 
 // Original Name: Message Nurse
 :: MessageNurse
-@clearText
+{clear-text}
 {@me}Hi, can I ask if you took this photo?
 {@person}Yep! Literally happening right now. Crazy, right? 
 {@me}I'm a reporter at the Gazette. 
@@ -181,7 +181,7 @@ $choice OffToWork; Off to work
 // Original Name: Read flooding article.
 :: ReadFloodingArticle
 @tags Egghead
-@clearText
+{clear-text}
 {auto}You open the article and learn about flood safety:
 {@article} Move to higher ground and stay off the roads! 
 {@article}The #1 cause of death during flash flooding is trying to drive through it. 
@@ -192,7 +192,7 @@ $choice OffToWork; Off to work
 
 // Original Name: Help her
 :: HelpHer
-@clearText
+{clear-text}
 {img Anim/enml-escapedchicken.jpg}
 On the one hand, Maureen's chickens wake you up at an ungodly hour every. single. day. 
 On the other hand, they are pretty cute. 
@@ -202,7 +202,7 @@ $choice LureChickens; Lure them with food
 
 // Original Name: Rush to work
 :: RushToWork
-@clearText
+{clear-text}
 You make up an excuse and hurry to your car.
 Your neighbor can get her own coop in a group!
 {/img}
@@ -247,7 +247,7 @@ $choice DriveWithBike; Drive to the newsroom
 
 // Original Name: Drive to the newsroom  
 :: DriveWithBike
-@clearText
+{clear-text}
 {img Anim/enml-stuckcar.png}
 Wow. The streets are looking worse than you thought. 
 You don't have time to interview anyone--you spent too long loading up your bike.
@@ -270,7 +270,7 @@ $choice TakeSomePhotos; Take some photos
 
 // Original Name: Hit the road
 :: HitTheRoad
-@clearText
+{clear-text}
 {/img}
 Turns out the flood is a little more serious than you thought. 
 The town's famous Cherrymobile is abandoned in high water.
@@ -281,7 +281,7 @@ $choice ArriveAtWork; Rush to work
 
 // Original Name: Arrive at work.
 :: ArriveAtWork
-@clearText
+{clear-text}
 {/img}
 $call SetLocation("Newsroom")
 {bg BG/rainyGazette.jpg}
@@ -375,7 +375,7 @@ $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Take some photos
 :: TakeSomePhotos
-@clearText
+{clear-text}
 
 $if StatCheck(Tech, 2)
 Good thing you thought to grab all this tech gear. 
@@ -397,7 +397,7 @@ $choice ArriveAtWork; Arrive at work.
 // Original Name: Breaking News Story
 :: BreakingNewsStory
 @checkpoint
-@clearText
+{clear-text}
 {bg BG/rainyGazette.jpg}
 {layout Left}
 {/img}
@@ -421,7 +421,7 @@ $HubChoice(Office1-SocialMedia, "Check Squawker for photos to add to your story"
 // Original Name: Answer the phone
 :: AnswerThePhone
 @tags Trust, Social
-@clearText
+{clear-text}
 {/map}
 {@me} Hello?
 {@phone} Hiya!! This is Fred Finkler.
@@ -437,7 +437,7 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 
 // Original Name: Office 1 - Weather
 :: Office1-Weather
-@clearText
+{clear-text}
 {bg BG/rainyGazette.jpg}
 {layout Left}
 {/map}
@@ -455,7 +455,7 @@ $goto Office1-Clock
 :: Office1-Coworker
 {bg BG/rainyGazette.jpg}
 {layout Left}
-@clearText
+{clear-text}
 {/map}
 You ask your editor if the newsroom has any records of past flood stories.
 {@person}Hmmm. Jenkins was writing a lot about climate chnage before he retired.
@@ -465,7 +465,7 @@ $choice JenkinssComputer; Track down Jenkins's computer.
 
 // Original Name: Office 1 - DNR
 :: Office1-DNR
-@clearText
+{clear-text}
 {bg BG/rainyGazette.jpg}
 {layout Left}
 {/map}
@@ -510,7 +510,7 @@ $goto Office1-Clock
 :: Office1-Police
 {bg BG/rainyGazette.jpg}
 {layout Left}
-@clearText
+{clear-text}
 {/map}
 The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
@@ -553,7 +553,7 @@ $goto Office1-Clock
 :: Office1-CityHall
 {bg BG/rainyGazette.jpg}
 {layout Left}
-@clearText
+{clear-text}
 {/map}
 
 $if StatCheck(Social, 2)
@@ -586,7 +586,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
-@clearText
+{clear-text}
 {bg BG/rainyGazette.jpg}
 {layout Left}
 {/map}
@@ -691,7 +691,7 @@ $goto Office1-Clock
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
 {bg BG/rainyGazette.jpg}
 {layout Left}
-@clearText
+{clear-text}
 {/img}
 It's been a hectic morning, but you think you might be able to piece together a halfway decent story out of this melange.
 $set storyType = "Breaking News"
