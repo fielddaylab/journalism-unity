@@ -100,7 +100,7 @@ Maureen shoves a stack of Lost Chicken posters into your hands.
 {@person}Not that I'm blaming you, of course. 
 
 $choice HangLostChickenPosters; Hang Lost Chicken posters
-$choice HelpWithTheCleanUp; Take some posters for later and join the clean-up effort
+$choice HelpWithTheCleanUp; Join the neighborhood clean-up effort
 $choice MakeAnExcuseAndRushBackInside; Make an excuse and rush back inside
 $endif
 
@@ -114,7 +114,8 @@ Your cupboards are still pretty empty.
 
 Luckily, Maureen stops by with a carton of fresh eggs from her coop!
 
-You chat with her while you whip up an omelet. 
+{@person}Here you go, Dear. 
+{@person}If you ever need backyard-fresh eggs, don't hesitate to ask. 
 
 $call AdjustStats(Endurance + 1, Social + 1)
 $elseif Visited(HelpTheBaker)
@@ -237,7 +238,8 @@ $choice AnswerPhone; Answer phone
 @tags Trust, Techie
 Jim is a genius when it comes to cherry-themed breakfast foods, but technology isn't his thing.
 
-You turn off airplane mode so he can use his phone, and you also get him caught up with the latest 16 software updates.
+{@me}Okay, so, I think I see the problem, Jim.
+{@me}You've got airplane mode turned on.
 
 $call AdjustStats(Trust + 1, Tech + 1)
 
@@ -278,10 +280,11 @@ $choice Ok.Uh...AnyTips; Ok. Uh... any tips?
 :: Ok.Uh...AnyTips
 She must hear some of the expertly hidden panic in your voice. 
 
-{@person}Talk to the DNR for science info, or head downtown for photos and anecdotes.
-{@person}Oh... and see if you can get a quote from the mayor!
+{@person}Relax, Rookie. You'll be fine. 
+{@person}Talk to the DNR for science info, or head downtown for some color.
+{@person}I wouldn't put you on this story if I didn't think you could handle it. 
 
-You miss your NYC journalism school, where there was a whole team of science reporters.
+You miss your college newspaper in the city, where there was a whole team of science reporters.
 Sure, Twin Lakes has amazing pie.... but at what cost?? 
 
 $choice ScienceStoryMap; Got it. Thanks.
@@ -290,7 +293,6 @@ $choice ScienceStoryMap; Got it. Thanks.
 :: ScienceStoryMap
 {bg BG/OutsideApt-Map.jpg}
 $if FirstVisit()
-<b>Twin Lakes Map</b>
 $call SetTimeRemaining(3)
 $endif
 
@@ -531,7 +533,7 @@ $choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
 $choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 
-$choice ScienceStoryMap; Do someting else
+$choice ScienceStoryMap; Do something else
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
@@ -821,7 +823,7 @@ You grab your extra-large water bottle and join in, scooping out floodwater.
 
 The scientist looks grateful. 
 
-{@person}Thanks, kid! Just make sure not to accidentally drink from that bottle later. This floodwater is nasty stuff."
+{@person}Thanks, kid! Just make sure not to drink from that bottle later. This floodwater is nasty stuff."
 
 $HubChoice(InterviewScientist, "Well, let's get started then...", 0.25)
 $choice DepartmentOfLimnology; ...actually, I gotta go!
@@ -843,11 +845,12 @@ $choice DepartmentOfLimnology; ...actually, I gotta go!
 :: QuickInterviewLimnologyExpert
 
 $if !StatCheck(Social, 4)
-"Well..... I guess I could chat for a minute," she says.
+{@person}Well... I guess I can chat for a minute. 
 
 She tells you about one of the main causes of the flooding: more extreme weather from climate change. 
 
-"We're going to keep seeing more and more heavy rain," she says. "The town is going to need to make some changes if it wants to survive. Sorry, wish I could talk more, but I gotta run."
+{@person}We're going to keep seeing more and more heavy rain. 
+{@person}This town needs to make some changes if it wants to survive.
 
 $call GiveSnippet(BasicFloodBackground)
 
