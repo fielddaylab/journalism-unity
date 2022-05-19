@@ -1237,6 +1237,12 @@ PrefabInstance:
       propertyPath: m_UVRect.height
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3332646689298761470, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 911af60d779fd2645afd1be67763751d,
+        type: 3}
     - target: {fileID: 3900902561511482388, guid: c8eac0e6a005e15478da841e18edff5a,
         type: 3}
       propertyPath: m_UVRect.width
@@ -1462,6 +1468,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7325712714938284439, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 48c5978ab2ab6c646929e11880ea1a01,
+        type: 3}
+    - target: {fileID: 7513440709641989906, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 48c5978ab2ab6c646929e11880ea1a01,
+        type: 3}
     - target: {fileID: 7878337414856418931, guid: c8eac0e6a005e15478da841e18edff5a,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1492,6 +1510,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8502276642996115132, guid: c8eac0e6a005e15478da841e18edff5a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3a5f2cada1a65074fbf44ab7eebf8e78,
+        type: 3}
     - target: {fileID: 9078402197534720313, guid: c8eac0e6a005e15478da841e18edff5a,
         type: 3}
       propertyPath: m_SizeDelta.x
