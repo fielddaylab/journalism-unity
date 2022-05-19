@@ -665,10 +665,13 @@ MonoBehaviour:
   PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
+  MaxSize: {fileID: 0}
   Layout: {fileID: 4990863165261155573}
   TailHeight: 16
   Text: {fileID: 391201767105956323}
+  CharacterHeader: {fileID: 0}
   Icon: {fileID: 0}
+  MarkerIcon: {fileID: 0}
 --- !u!114 &1580839085192885030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,6 +746,9 @@ MonoBehaviour:
   TextureGroup: {fileID: 6643367078183568694}
   Texture: {fileID: 8380535963445819349}
   Attributes: {fileID: 0}
+  Quality: {fileID: 0}
+  Masks: {fileID: 0}
+  ImageOnly: {fileID: 0}
 --- !u!1 &2694547450807071562
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,10 +829,10 @@ RectTransform:
   m_Father: {fileID: 4743405704802073215}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 200}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7733074061552129837
 CanvasRenderer:
@@ -843,7 +849,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5069869493167217607}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -899,7 +905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Renderer: {fileID: 0}
   m_Graphic: {fileID: 3379182987824571418}
-  m_Visible: 0
+  m_Visible: 1
   m_Colors:
     Main: {r: 1, g: 1, b: 1, a: 1}
     Emissive: {r: 1, g: 1, b: 1, a: 1}

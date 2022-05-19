@@ -8,18 +8,20 @@ Extreme rainfall events in the Twin Lakes watershed have increased by 10% in the
 :: FloodProbability
 @type Graph
 @quality Good
+@image Anim/flood-probability.png
 A clean graph of flood probability.
 
 // Original Name: Flood mumbo jumbo
 :: FloodMumboJumbo
 @type Observation
 @quality Bad
-Twin Lakes watershed rainfall data shows something significant, probably. 
+Twin Lakes watershed rainfall data shows something significant, probably.
 
 // Original Name: Confusing graphic
 :: ConfusingGraphic
 @type Graph
 @quality Bad
+@image Anim/flood-confusing-graphic.png
 A squiggly misinterpreted graph.
 
 // Original Name: Less Places For Water To Go
@@ -169,6 +171,7 @@ Flood events will drive away people with enough money to move. If we lose too ma
 :: RainfallStats
 @type Graph
 @quality Good
+@image Anim/rainfall-stats.png
 Snippet text unimplemented.
 
 // Original Name: DNR Policies to prevent flooding
