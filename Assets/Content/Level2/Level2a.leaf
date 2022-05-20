@@ -535,8 +535,8 @@ You duck under the barricade and take a look around.
 $endif
 
 $if HasTime(0.5)
-$choice MainStreetGalleryOwner; Talk to the gallery owner airing out his artwork
-$choice MainStreetCafe; Go into the cafe with a "PLEASE COME IN, WE'RE OPEN!! (REALLY!)" sign in the window
+$HubChoice(MainStreetGalleryOwner, " Talk to the gallery owner airing out his artwork", 0)
+$HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!! (REALLY!)'' sign in the window", 0)
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 
 $choice ScienceStoryMap; Do something else
