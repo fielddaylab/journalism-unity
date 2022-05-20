@@ -609,6 +609,7 @@ namespace Journalism {
                 if (timeCost > 0) {
                     line.Icon.gameObject.SetActive(true);
                     choice.Radial.gameObject.SetActive(true);
+                    choice.QuestionMark.gameObject.SetActive(false);
                     choice.Radial.fillAmount = Mathf.Clamp01(timeCost);
                 } else if (timeCost < 0) {
                     line.Icon.gameObject.SetActive(true);
@@ -617,6 +618,8 @@ namespace Journalism {
                 } else {
                     line.Icon.gameObject.SetActive(false);
                     choice.Radial.gameObject.SetActive(false);
+                    choice.QuestionMark.gameObject.SetActive(false);
+
                 }
             }
 

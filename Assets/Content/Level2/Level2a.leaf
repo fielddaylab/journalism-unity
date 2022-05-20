@@ -46,6 +46,7 @@ $call SetLocation("Apartment")
 $ActionChoice(The next morning...)
 {bg BG/Bedroom2Temp.jpg}
 $call SetHeaderEnabled(true)
+$call StopAmbience()
 It's an eerily quiet morning in Twin Lakes. 
 The chance of rain is hovering at 50%. 
 You're still missing New York.
@@ -295,7 +296,7 @@ $choice ScienceStoryMap; Got it. Thanks.
 
 // Original Name: Science Story Map
 :: ScienceStoryMap
-{bg BG/HouseExterior.jpg}
+
 $if FirstVisit()
     $call SetTimeRemaining(3)
 $endif
@@ -306,7 +307,7 @@ Your story is due in {timeLeft}.
 
 $HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5, "Downtown")
 $HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5, "DNR")
-$HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5, "Apartment")
+$HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5, "")
 
 
 $set local:_localOr = false
@@ -383,8 +384,8 @@ $call SetLocation("DNR")
 Your story is due in {timeLeft}.
 
 $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
-$HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.5)
-$HubChoice(RunIntoTheMayorInHallway, "Head out", 0.5)
+$HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
+$HubChoice(RunIntoTheMayorInHallway, "Head out", 0.25)
 
 
 $if Visited(JenkinssComputer)
