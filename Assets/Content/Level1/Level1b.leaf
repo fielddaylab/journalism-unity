@@ -298,7 +298,7 @@ $endif
 
 
 
-$if StatCheck(Endurance, 3)
+$if StatCheck(Endurance, 2)
 {@person}Wow. You're stronger than you look. Thanks, Rookie! 
 $else
 {@person}Aw, it's okay, Rookie. I appreciate the effort. 
