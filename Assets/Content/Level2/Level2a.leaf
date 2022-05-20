@@ -1529,4 +1529,7 @@ $call EditorFeedback()
 
 $call EndFeedback()
 {/img}
+
+{@msg}  You are finished!
+{@msg}  You are now free to close your browser.
 //$call NextLevel()
