@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Script: {fileID: -1942890987711236906, guid: a942cbb2cc93bd240b646835c63c28b0, type: 3}
   Story:
-    HeadlineType: 
+    HeadlineType: Science Story
     Slots:
     - Type: 1
-      Wide: 0
+      Wide: 1
     - Type: 0
       Wide: 0
     - Type: 0
@@ -26,11 +26,11 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: 
-    FactWeight: 1
+    EditorBrief: People want to know what happened. Give 'em facts.
+    FactWeight: 2
     ColorWeight: 1
     UsefulWeight: 1
-    FinalHeadline: 
+    FinalHeadline: The Why Behind the Twin Lakes Flood
   StoryScraps: {fileID: -4270002856181823206, guid: 7cced83b472c88b4db34af015325e684,
     type: 3}
   Audio: {fileID: 0}
