@@ -141,7 +141,7 @@ You're struggling to find some not-expired food when a neighbor taps at the fron
 {@person}Hiya! You wrote that story yesterday, right? 
 {@person}Thanks to you, I got all my stuff out of the basement in time!
 
-He offers you a homemade lemon loaf--a little off-brand for the Cherry Capital of the Midwest, but still delicious.  
+He offers you a homemade lemon loaf--a little off-brand for the Cherry Capitol of the Midwest, but still delicious.  
 
 $call AdjustStats(Endurance + 1, Trust + 1)
 $endif
@@ -289,7 +289,7 @@ She must hear some of the expertly hidden panic in your voice.
 {@phone}Relax, Rookie. You'll be fine. 
 {@phone}Talk to the DNR for science info, or head downtown for some color.
 
-You miss your college newspaper in the city, where there was a whole team of science reporters.
+You miss your college newspaper, which had a whole team of science reporters.
 Sure, Twin Lakes has amazing pie.... but at what cost?? 
 
 $choice ScienceStoryMap; Got it. Thanks.
@@ -314,6 +314,8 @@ $set local:_localOr = false
 $if Visited(ThanksPlusUniversityContact) 
 $set local:_localOr = true
 $elseif  Visited(ReadTheBulletinBoardInTheHallway)
+$set local:_localOr = true
+$elseif  Visited(InterviewGovernor)
 $set local:_localOr = true
 $endif
 
@@ -502,11 +504,17 @@ $choice ScienceStoryMap; Put away your phone
 
 // Original Name: Phone Call: Mayor's Personal Number
 :: PhoneCallMayorsPersonalNumber
-The mayor has already heard about how you rescued poor Omelette!
+The mayor has already heard about how you rescued poor Omelette.
+{@phone}You're a hero! Twin Lakes is lucky to have a reporter like you. 
+{@me}Oh... uh, thanks!
+{@me}Can you tell me what you think was the biggest cause of the flood?
+{@phone}Oh, that would be the high lake levels. No question about it.
+{@phone}I've been trying to convince our city council to vote to lower them for years.
+{@phone}There won't be any town left if this flooding keeps up!
+{@me}Thank you, Mr. Mayor. I appreciate your time. 
 
-He's happy to talk with you and give you some type of quote.
-
-$choice PhoneContacts; Phone Contacts
+$call GiveSnippet(MayorLakeLevelsQuote)
+$choice MainStreetFloodRecovery; Keep biking toward Main Street
 
 // Original Name: Follow the chicken
 :: FollowTheChicken
@@ -916,9 +924,9 @@ $ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
 {@person}Give him a call. Tell him you rescued his niece's chicken! 
 {@person}I'm sure he'd be happy to chat.
 
-<i>New Contact: Mayor's Presonal Number</i>
+<i>New Contact: Mayor's Personal Number</i>
 
-$choice PhoneContacts; Open Phone Contacts
+$choice PhoneCallMayorsPersonalNumber; Call the Mayor
 $choice MainStreetFloodRecovery; Keep biking toward Main Street
 
 $choice ScienceStoryMap; Go somewhere else
@@ -960,7 +968,6 @@ $choice MainStreetFloodRecovery; Actually, I better go.
 $endif
 
 $if !StatCheck(Social, 3)
-Apparently, this guy's not easy to win over. 
 {@person}Ha. Sure you are.
 {@person}Name one thing you've noticed about my paintings. 
 {@me}They're very.... um.... green?
@@ -977,16 +984,15 @@ $if Visited(OrderTheDailySpecial)
 {@person}Of course! 
 {@person}You're my first customer of the day. It's the least I can do. 
 $elseif Visited(HelpWithHerComputer)
-{@person}You helped me with that migraine-inducing nightmare of a website.
-{@person}It's the least I can do.
+{@person}Sure! I could use a break from my computer, anyway. 
 $else
 Her face falls. 
 {@person}Sure, I guess. It's not like I've got any customers, anyhow.
 $endif
 
 
-$HubChoice(InterviewQuestionsCafeOwner, "Well, let's get started then...", 0.25)
-$choice MainStreetFloodRecovery; ...nevermind, I gotta go!
+$HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.25)
+$choice MainStreetFloodRecovery; Actually, never mind. I gotta go. 
 
 // Original Name: Order the daily special
 :: OrderTheDailySpecial
@@ -1016,14 +1022,12 @@ $choice InterviewCafeOwner; Ask if she has time for an interview
 $else
 Your heart goes out to her. 
 You try to help, but you're as clueless about tech stuff as she is.
-{@me}I'm so sorry. This is such a headache. 
+{@me}I'm so sorry. What a headache. 
 {@person}Aww, that's okay. 
 {@person}I appreciate you tryin' to help. 
 $call AdjustStats(Trust + 1)
+$choice InterviewCafeOwner; Ask if she has time for an interview
 $endif
-
-$choice OrderTheDailySpecial; Ask to order food
-$choice MainStreetFloodRecovery; Head back out to Main Street. She seems too busy to talk.
 
 // Original Name: Good DNR Interview
 :: GoodDNRInterview
@@ -1058,7 +1062,7 @@ $goto WhatDoYouKnowAboutTheCauseOfTheFlood
 :: WhatDoYouKnowAboutTheCauseOfTheFlood
 {@person}Well... I'm unclear on the specifics.
 {@person}But I know the town will come together and work on solutions.
-{@person}The people of Twin Lakes are incredibly resilient.
+{@person}The Department of Limnology here is the best in the state. 
 {@person}Plus, I can always count on them for a good pun. 
 {@me}Yeah. I've noticed.
 Before you can ask more, the governor's assistant whisks her away.

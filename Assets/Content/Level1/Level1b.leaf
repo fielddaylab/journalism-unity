@@ -897,7 +897,7 @@ $choice ArriveAtFloodSite; Decide what to do next
 
 $elseif StatCheck(Research, 3)
 
-{@me}Um... so... I'm not sure a world full of houseboats is a sustainable solution to climate change.  
+{@me}Um... I'm not sure a world full of houseboats is a sustainable solution to climate change.  
 
 The houseboat lady pats your arm kindly. 
 
