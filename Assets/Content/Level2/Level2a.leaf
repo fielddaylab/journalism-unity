@@ -219,7 +219,8 @@ $choice AnswerPhone; Answer phone
 :: AnswerPhone
 It's your editor, calling from the newsroom. 
 
-{@phone}I've got your next assignment: a science story. 
+{@phone}I've got your next assignment: a science story.
+$call ActivateStory()
 {@phone}People need to know what caused the flood. 
 
 $choice AssignmentScienceStory; Um... I'm not really a science writer.
