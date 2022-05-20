@@ -666,7 +666,6 @@ $goto Office1-Clock
 :: MessageCherryCharlie07
 {bg BG/rainyGazette.jpg}
 {layout Left}
-$call DecreaseTime(0.25)
 
 $if StatCheck(Trust, 2)
     {@phone}oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊
