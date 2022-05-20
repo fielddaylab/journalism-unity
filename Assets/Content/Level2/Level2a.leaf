@@ -224,7 +224,8 @@ It's your editor, calling from the newsroom.
 $call ActivateStory()
 {@phone}People need to know what caused the flood. 
 
-$choice AssignmentScienceStory; Um... I'm not really a science writer.
+$ContinueChoice({@me} Um... I'm not really a science writer.)
+$goto AssignmentScienceStory; 
 
 // Original Name: Help with the clean up
 :: HelpWithTheCleanUp
