@@ -821,7 +821,9 @@ $goto MathJoke
 
 This will be an amazing boost for your article, but you try to play it cool. 
 
-$choice HowIsTheStateHelpingWithFloodRecovery; How is the state helping with flood recovery? 
+$ContinueChoice({@me} How is the state helping with flood recovery?)
+
+$goto HowIsTheStateHelpingWithFloodRecovery
 
 // Original Name: Help bail out water from boathouse
 :: HelpBailOutWaterFromBoathouse
@@ -1047,7 +1049,10 @@ $choice DNRMap; Look elsewhere in the DNR
 {@person}I declared a State of Emergency as soon as I found out what was happening. 
 {@person}We need to make sure Twin Lakes gets the help it needs. 
 $call GainSnippet(Governor-Impact)
-$choice WhatDoYouKnowAboutTheCauseOfTheFlood; What do you know about the cause of the flood? 
+
+$ContinueChoice({@me} What do you know about the cause of the flood? )
+
+$goto WhatDoYouKnowAboutTheCauseOfTheFlood
 
 // Original Name: "What do you know about the cause of the flood?"
 :: WhatDoYouKnowAboutTheCauseOfTheFlood
