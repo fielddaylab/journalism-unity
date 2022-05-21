@@ -808,7 +808,7 @@ namespace Journalism {
                 fade.blocksRaycasts = true;
                 button.Selected = false;
                 float spaceDelay = newAnimParams.Time + holdDelay;
-                while(!button.Selected && !(spaceDelay <= 0 && Input.GetKey(KeyCode.Space)) && !(allowClickAnywhere && Input.GetMouseButtonDown(0))) {
+                while(!button.Selected && !(spaceDelay <= 0 && Input.GetKey(KeyCode.Space)) && !(allowClickAnywhere && Input.GetMouseButtonDown(0) && !Game.UI.Header.AnyOpen())) {
                     yield return null;
                     if (spaceDelay > 0) {
                         spaceDelay -= Time.deltaTime;

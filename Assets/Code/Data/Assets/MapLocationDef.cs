@@ -33,8 +33,22 @@ namespace Journalism
             // append to list of locations
             int currLength = m_MapLocations.Length;
             System.Array.Resize(ref m_MapLocations, (currLength) + 1);
-            m_MapLocations[currLength] = new MapLocation(StringHash32.Parse(name), name, coords);
+            m_MapLocations[currLength] = new MapLocation(name, name, coords);
         }
+
+        #if UNITY_EDITOR
+
+        private void OnValidate() {
+            if (Application.isPlaying) {
+                return;
+            }
+
+            foreach(var loc in m_MapLocations) {
+                loc.Id = loc.Name;
+            }
+        }
+
+        #endif // UNITY_EDITOR
 
         #region Data Retrieval
 
@@ -65,25 +79,19 @@ namespace Journalism
         }
 
         public static MapLocationDef.MapLocation GetMapLocation(StringHash32 locationId) {
-            if (locationDict.ContainsKey(locationId)) {
-                return locationDict[locationId];
+            MapLocationDef.MapLocation location;
+            if (!locationDict.TryGetValue(locationId, out location)) {
+                Assert.Fail("No map location with id '{0}' defined", locationId);
             }
-            else {
-                throw new KeyNotFoundException(string.Format("No Map Location " +
-                    "with id `{0}' is in the database", locationId
-                ));
-            }
+            return location;
         }
 
         public static Vector2 NormalizedCoords(StringHash32 locationId) {
-            if (locationDict.ContainsKey(locationId)) {
-                return locationDict[locationId].NormalizedCoords;
+            MapLocationDef.MapLocation location;
+            if (!locationDict.TryGetValue(locationId, out location)) {
+                Assert.Fail("No map location with id '{0}' defined", locationId);
             }
-            else {
-                throw new KeyNotFoundException(string.Format("No Map Location " +
-                    "with id `{0}' is in the database", locationId
-                ));
-            }
+            return location.NormalizedCoords;
         }
     }
 }
