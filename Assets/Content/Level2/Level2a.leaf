@@ -571,15 +571,15 @@ $choice NoThanks; No thanks.
 There are articles and flyers taped up. A few of them catch your eye:  
 
 TWIN LAKES COLLEGE NEWS:
-<b>Twin Lakes in danger of catastrophic flood!
-by Sarah McCloud, climate researcher at the Dept. of Limnology</b>
+<b>Twin Lakes in danger of catastrophic flood! \
+by Sarah McCloud, climate researcher at the Dept. of Limnology</b> \
 
 FLYER:
-<b>Why lower lake levels?
-* Prevent shoreline erosion
-* Stop flooding
-* Prepare for extreme weather
-Mayor Johnson is calling to have the lake levels lowered! Hear more at this week's Town Hall meeting. 
+<b>Why lower lake levels? \
+* Prevent shoreline erosion \
+* Stop flooding \
+* Prepare for extreme weather \
+Mayor Johnson is calling to have the lake levels lowered! Hear more at this week's Town Hall meeting. \
 </b>
 {@article}New location: Department of Limnology
 
@@ -1053,7 +1053,7 @@ $choice DNRMap; Look elsewhere in the DNR
 :: HowIsTheStateHelpingWithFloodRecovery
 {@person}I declared a State of Emergency as soon as I found out what was happening. 
 {@person}We need to make sure Twin Lakes gets the help it needs. 
-$call GainSnippet(Governor-Impact)
+$call GiveSnippet(Governor-Impact)
 
 $ContinueChoice({@me} What do you know about the cause of the flood? )
 
@@ -1070,7 +1070,7 @@ Before you can ask more, the governor's assistant whisks her away.
 You head out, feeling like a star reporter. 
 Now you'll just need to convince your editor that this actually happened...
 
-$call GainSnippet(GovernorComments)
+$call GiveSnippet(GovernorComments)
 $choice ScienceStoryMap; Head back outside 
 
 // Original Name: Interview scientist

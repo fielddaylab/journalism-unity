@@ -8,6 +8,7 @@ using EasyAssetStreaming;
 using BeauPools;
 using Leaf;
 using System.Collections.Generic;
+using BeauUtil.Debugger;
 
 namespace Journalism.UI
 {
@@ -132,7 +133,7 @@ namespace Journalism.UI
         #region Member Functions
 
         public static void PopulateMapWithMarkers(StreamingUGUITexture mapTex, GameObject owner) {
-            Debug.Log("[Map Window Loader] Populating map with markers...");
+            Log.Msg("[Map Window Loader] Populating map with markers...");
 
             // Save map rect
             RectTransform mapRect = mapTex.GetComponent<RectTransform>();
@@ -171,7 +172,7 @@ namespace Journalism.UI
             playerMarkerRect.sizeDelta = new Vector2(m_markerScale.x * mapDims.x, m_markerScale.y * mapDims.y);
             playerMarkerRect.localPosition = FitCoords(playerLoc.NormalizedCoords, mapRect);
 
-            Debug.Log("[Map Window Loader] Placed Player marker");
+            Log.Msg("[Map Window Loader] Placed Player marker");
 
             if (m_choiceLocations == null) {
                 return;
@@ -194,7 +195,7 @@ namespace Journalism.UI
 
                         coveredLocations.Add(locId);
 
-                        Debug.Log("[Map Window Loader] Placed marker at new location");
+                        Log.Msg("[Map Window Loader] Placed marker at new location");
                     }
                     else {
                         // TODO: Handle multiple tasks at one location 
@@ -202,7 +203,7 @@ namespace Journalism.UI
                 }
             }
 
-            Debug.Log("[Map Window Loader] Map marker population completed");
+            Log.Msg("[Map Window Loader] Map marker population completed");
         }
 
         public static void ClearMarkerContainer(GameObject owner) {
@@ -218,13 +219,13 @@ namespace Journalism.UI
                 MarkerStream newStream = new MarkerStream(0, new List<LocIndexPair>());
                 m_streamDict.Add(requester, newStream);
 
-                Debug.Log("[MapWindowLoader] Marker stream opened");
+                Log.Msg("[MapWindowLoader] Marker stream opened");
             }
         }
 
         public static MapMarker StreamIn(StringHash32 locId, GameObject requester) {
             if (locId == Player.Location()) {
-                Debug.Log("[MapWindowLoader] Found location with id " + locId);
+                Log.Msg("[MapWindowLoader] Found location with id '{0}'", locId);
 
                 // return player marker
                 return m_markerContainer.PlayerMarker;
@@ -241,7 +242,7 @@ namespace Journalism.UI
 
                     foreach (LocIndexPair pair in stream.CoveredLocations) {
                         if (pair.LocationId == locId) {
-                            Debug.Log("[MapWindowLoader] Found location with id " + locId);
+                            Log.Msg("[MapWindowLoader] Found location with id " + locId);
 
                             return m_markerContainer.Markers[pair.MarkerIndex];
                         }
@@ -261,7 +262,7 @@ namespace Journalism.UI
                 MapMarker marker = m_markerContainer.Markers[streamIndex];
                 m_streamDict[requester] = new MarkerStream(streamIndex + 1, stream.CoveredLocations);
 
-                Debug.Log("[MapWindowLoader] Found location with id " + locId);
+                Log.Msg("[MapWindowLoader] Found location with id " + locId);
 
                 return marker;
             }
@@ -271,7 +272,7 @@ namespace Journalism.UI
             if (m_streamDict.ContainsKey(requester)) {
                 m_streamDict.Remove(requester);
 
-                Debug.Log("[MapWindowLoader] Marker stream closed");
+                Log.Msg("[MapWindowLoader] Marker stream closed");
             }
         }
 
@@ -307,7 +308,7 @@ namespace Journalism.UI
         #region Event Handlers
 
         private static void OnChoiceOptionsUpdating(StringHash32[] locIds) {
-            Debug.Log("[Map Window Loader] Updated choice locations");
+            Log.Msg("[Map Window Loader] Updated choice locations");
             m_choiceLocations = locIds;
         }
 

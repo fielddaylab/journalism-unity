@@ -1599,7 +1599,7 @@ $choice DNRMap; DNR Map
 :: WhatKindOfImpactWillThisFloodHaveOnTwinLakes
 "It will be a long recovery, with millions of dollars in damages," he says. "Right now I'm just hoping we don't get another storm this week--I don't think the watershed could take it." 
 
-$call GainSnippet(Mayor-Impact)
+$call GiveSnippet(Mayor-Impact)
 
 $choice WhatIsTheCityDoingToStopThisFromHappeningAgain; What is the city doing to stop this from happening again?
 
@@ -1607,7 +1607,7 @@ $choice WhatIsTheCityDoingToStopThisFromHappeningAgain; What is the city doing t
 :: WhatIsTheCityDoingToStopThisFromHappeningAgain
 "Of course we're working on getting sandbags to the right people," he says. "But in the long-term, that won't be enough. We need new policies. I'm hoping this disaster will push people to make some changes around here."
 
-$call GainSnippet(Mayor-Response)
+$call GiveSnippet(Mayor-Response)
 
 $choice WhatKindOfNewPolicies; What kind of new policies?
 $choice WhatKindOfImpactWillThisFloodHaveOnTwinLakes; What kind of impact will this flood have on Twin Lakes?
@@ -1753,7 +1753,7 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 :: WhatKindOfNewPolicies
 "I've been fighting for years to get those lake levels down," he tells you. "A lot of people don't like the idea. They think it'll ruin tourist season, or ruin their docks. But we won't have ANY tourists if floods keep destroying the town every year!"
 
-$call GainSnippet(Mayor-Policies)
+$call GiveSnippet(Mayor-Policies)
 
 $choice ScienceStoryMap; Science Story Map
 
