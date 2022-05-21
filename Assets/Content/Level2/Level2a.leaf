@@ -326,10 +326,10 @@ $endif
 
 
 $choice PhoneContacts; Check your phone contacts for someone to call
+
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
-{map UI/MapPlaceholder.png}
 
 // Original Name: Phone Contacts
 :: PhoneContacts
@@ -383,16 +383,20 @@ $choice MainStreetFloodRecovery; Head straight to Main Street
 {/map}
 $call SetLocation("DNR")
 
-<b>Location: DNR Headquarters</b>
-Your story is due in {timeLeft}.
+$if HasTime(0.25)
+    <b>Location: DNR Headquarters</b>
+    Your story is due in {timeLeft}.
 
-$HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
-$HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
-$HubChoice(RunIntoTheMayorInHallway, "Head out", 0.25)
+    $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
+    $HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
+    $HubChoice(RunIntoTheMayorInHallway, "Head out", 0.25)
 
 
-$if Visited(JenkinssComputer)
-$HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
+    $if Visited(JenkinssComputer)
+    $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
+    $endif
+$else
+    $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
 
 // Original Name: Gather flooding info from academic papers

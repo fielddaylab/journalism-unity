@@ -18,7 +18,7 @@ MonoBehaviour:
     RankNames:
     - Unaware
     - Myopic
-    - Aware
+    - Curious
     - Bookworm
     - Wonk
     - Professor
@@ -26,32 +26,32 @@ MonoBehaviour:
   - Id: 1
     Name: Resourcefulness
     RankNames:
-    - Clumsy
-    - All Thumbs
-    - What
+    - Forgetful
+    - Inattentive
+    - Distracted
     - Prepared
-    - Guyver
+    - Geared Up
     - Cherry Scout
     Icon: {fileID: 0}
   - Id: 2
     Name: Endurance
     RankNames:
+    - Out of Shape
+    - Couch Potato
     - Sleepy
-    - Exhausted
-    - Hanging In There
-    - What
-    - Skilled
-    - Survivor
+    - Fit
+    - Athlete
+    - Olympian
     Icon: {fileID: 0}
   - Id: 3
     Name: Tech
     RankNames:
     - Luddite
     - Newbie
-    - User
-    - Nerd
+    - Dabbler
+    - Geek
     - Techie
-    - Cyber Warrior
+    - Cyber Punk
     Icon: {fileID: 0}
   - Id: 4
     Name: Social
