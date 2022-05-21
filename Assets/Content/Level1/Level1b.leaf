@@ -1374,13 +1374,13 @@ $call BeginFeedback()
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryScore() == "good"
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Amazing work today, Rookie!
         {@person}   You stuck to the assignment and gathered high-quality quotes and photos. 
         {@person}   So many people read your story that it broke the server!
         {@person}   Now if only I had any clue how to get the website back online... 
-    $elseif StoryAlignment() >= 0.4
-        {@person}   Nice work out there, Rookie.
+    $elseif StoryAlignment() >= 0.3
+        {@person}   Nice work out there, Rookie. This is some high-quality stuff!
         {@person}   You could've stuck a little more closely to my notes.
         {@person}   But still a solid story. We're already getting tons of engagement online! 
     $else
@@ -1389,11 +1389,11 @@ $if StoryScore() == "good"
         {@person}   Make sure to stick to the assignment to hook more readers... and hopefully help more people.  
     $endif
 $elseif StoryScore() == "medium"
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Great work, Rookie! You stuck to the assignment and gathered some solid info. 
         {@person}   Look at those numbers climbing. We're getting tons of engagement!
         {@person}   Glad you were here to get the word out. 
-    $elseif StoryAlignment() >= 0.4
+    $elseif StoryAlignment() >= 0.3
         {@person}   Not bad, Rookie! You got some solid quotes and photos. 
         {@person}   You veered away from the story breakdown a little. 
         {@person}   Still, your story should get plenty of engagement--and hopefully help a lot of people. 
@@ -1403,13 +1403,13 @@ $elseif StoryScore() == "medium"
         {@person}   Still, you got the word out. Hopefully it'll be enough to keep people safe. 
     $endif
 $else
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Great job sticking to the assignment, Rookie! 
         {@person}   Yikes... your quality control could use some work, though. 
-        {@person}   See if you can scrape together some better photos and quotes next time.  
-    $elseif StoryAlignment() >= 0.4
+        {@person}   See if you can scrape together some more quality images and
+    $elseif StoryAlignment() >= 0.3
         {@person}   Not bad, Rookie! Pretty decent story construction. 
-        {@person}   These quotes and photos are.... interesting. 
+        {@person}   These story segments are... a little out there.
         {@person}   Bigger papers have more help, but out here, you need to be a little scrappy. 
         {@person}   The higher the quality of quotes and photos, the more people we'll reach. 
     $else
@@ -1419,7 +1419,137 @@ $else
         {@person}   And some higher quality content couldn't hurt. 
     $endif
 $endif
-{/img}
-$call EndFeedback()
 
+
+$Feedback("SandbagQuote", "feedbackA", "These old bones won't be much help filling sandbags, but I'll be spreading the word!")
+$Feedback("VolunteerInfo", "feedbackA", "These old bones won't be much help filling sandbags, but I'll be spreading the word!")
+$Feedback("FireChiefQuote", "feedbackA", "I remember that fire chief! I definitely trust those words.")
+$Feedback("HouseboatPhotos", "feedbackA", "Houseboats, huh? Well now I've seen everything!")
+$Feedback("OkayHouseboatPhotos", "feedbackA", "Houseboats, huh? Well now I've seen everything!")
+$Feedback("BlurryHouseboatPhotos", "feedbackA", "Houseboat? That picture just looks like a smudge to me!")
+$Feedback("GreatVolunteeringQuote", "feedbackA", "So glad to see my fellow Twin Lakers coming out to volunteer!")
+$Feedback("GreatHouseboatStory", "feedbackA", "Houseboats, huh? Well now I've seen everything!")
+$Feedback("HouseboatStory", "feedbackA", "What are they going on about with houseboats?")
+$Feedback("DogRescue", "feedbackA", "Thank you firefighters! Good to know they're watching out for us AND our furry friends!")
+$Feedback("DogRescuePicture", "feedbackA", "Thank you firefighters! Good to know they're watching out for us AND our furry friends!")
+$Feedback("GreatFloodPhotosKayak", "feedbackA", "They took a kayak to get those photos?? THAT'S the quality reporting I read the Gazette for!")
+$Feedback("GoodFloodPhotosKayak", "feedbackA", "They took a kayak to get those photos?? THAT'S the quality reporting I read the Gazette for!")
+$Feedback("GreatFloodPhotosTruck", "feedbackA", "More reasons to stay off the road, folks!")
+$Feedback("BlurryFloodPhotosTruck", "feedbackA", "Looks like... A blurry smudge in the flood?")
+$Feedback("FloodedMainStreet", "feedbackA", "So strange to see the street I've walked many times full of water!")
+$Feedback("LakeLevels", "feedbackA", "So the rain overflows the lake... like taking a shower in a full tub! Makes sense!")
+$Feedback("FloodCause", "feedbackA", "So the rain overflows the lake... like taking a shower in a full tub! Makes sense!")
+$Feedback("FloodScience", "feedbackA", "Makes me wonder why the lake levels would be kept so high...")
+$Feedback("FloodInfo", "feedbackA", "A worrying forecast... But we Twin Lakers will stand together!")
+$Feedback("SandbagTroubles", "feedbackA", "I hadn't thought to clear my basement... I'll be sure to get right on that!")
+$Feedback("SandbagLocation", "feedbackA", "I don't think I can reach the Community Center... but I will spread the word!")
+$Feedback("GreatFloodQuote", "feedbackA", "An important reminder to spare a thought for our less fortunate citizens!")
+$Feedback("FloodSafetyTips", "feedbackA", "Another great reason to stay off those streets!")
+$Feedback("CheeseRescue", "feedbackA", "What a disaster! I'll be sure to stop by and get some cheese to help them out.")
+$Feedback("FirefighterRescue", "feedbackA", "I'm just glad to hear our brave cheesemonger is safe!")
+$Feedback("VolunteerConversation", "feedbackA", "That reminds me to clear out my own basement!")
+$Feedback("SuperDetailedObservation", "feedbackA", "Harrowing scene at that dam... We'll get through this, Twin Lakers!")
+$Feedback("DetailedObservation", "feedbackA", "Harrowing scene at that dam... We'll get through this, Twin Lakers!")
+$Feedback("BasicObservation", "feedbackA", "I wish we could hear more about those dam volunteers!")
+
+$Feedback("SandbagQuote", "feedbackB", "It's refreshing to see something we can actually do to help!")
+$Feedback("VolunteerInfo", "feedbackB", "It's good to see something we can actually do to help.")
+$Feedback("FireChiefQuote", "feedbackB", "Scary that such an experienced fire chief was caught off guard by this too.")
+$Feedback("HouseboatPhotos", "feedbackB", "Houseboats? A little silly but a much-needed moment of levity.")
+$Feedback("OkayHouseboatPhotos", "feedbackB", "It seems to me there are more important things to report than houseboats...")
+$Feedback("BlurryHouseboatPhotos", "feedbackB", "If you're going to report on houseboats you could at least use some better pictures...")
+$Feedback("GreatVolunteeringQuote", "feedbackB", "It really is inspiring how many people are coming out to volunteer.")
+$Feedback("GreatHouseboatStory", "feedbackB", "Houseboats? A little silly but a much-needed moment of levity.")
+$Feedback("HouseboatStory", "feedbackB", "It seems to me there are more important things to report than houseboats...")
+$Feedback("DogRescue", "feedbackB", "Cute story about the dog, but I'm more worried about our disadvantaged citizens.")
+$Feedback("DogRescuePicture", "feedbackB", "Cute dog, but I'm more worried about our disadvantaged citizens.")
+$Feedback("GreatFloodPhotosKayak", "feedbackB", "Impressive to see the Gazette getting photos from the water!")
+$Feedback("GoodFloodPhotosKayak", "feedbackB", "Interesting perspective from the water.")
+$Feedback("GreatFloodPhotosTruck", "feedbackB", "Impressive to see the Gazette getting photos from the water!")
+$Feedback("BlurryFloodPhotosTruck", "feedbackB", "I can barely see what's going on in that picture.")
+$Feedback("FloodedMainStreet", "feedbackB", "Seeing Main Street flooded is so surreal...")
+$Feedback("LakeLevels", "feedbackB", "All this about the lake levels is elementary stuff... Tell us about the people who are struggling!")
+$Feedback("FloodCause", "feedbackB", "All this about the lake levels is elementary stuff... Tell us about the people who are struggling!")
+$Feedback("FloodScience", "feedbackB", "It's all City Hall's neglect that kept the lake levels so high...")
+$Feedback("FloodInfo", "feedbackB", "Things will get even worse than this, huh... I guess all we can do is hang on.")
+$Feedback("SandbagTroubles", "feedbackB", "Didn't realize the situation was so urgent... I hope those living in basement apartments find shelter.")
+$Feedback("SandbagLocation", "feedbackB", "What use is stockpiling sandbags at the Community Center if we can't get there??")
+$Feedback("GreatFloodQuote", "feedbackB", "I'm glad the Gazette is at least bringing up the disadvantaged people being impacted by this crisis.")
+$Feedback("FloodSafetyTips", "feedbackB", "Don't drive through water? Seems pretty obvious to me...")
+$Feedback("CheeseRescue", "feedbackB", "I must admit the cheese rescue is entertaining - good thing everyone's safe!")
+$Feedback("FirefighterRescue", "feedbackB", "I must admit the cheese rescue is entertaining - good thing everyone's safe!")
+$Feedback("VolunteerConversation", "feedbackB", "Somehow I doubt a few sandbags this late will do much to help...")
+$Feedback("SuperDetailedObservation", "feedbackB", "Glad we have reporters on the ground to let us know what it's like out there.")
+$Feedback("DetailedObservation", "feedbackB", "Glad we have reporters on the ground to let us know what it's like out there.")
+$Feedback("BasicObservation", "feedbackB", "\"A DNR worker directed volunteers?\" That's all you have to say about their efforts?")
+
+$Feedback("SandbagQuote", "feedbackC", "I'm glad I found out where to get sandbags or this shop would be cherry soup.")
+$Feedback("VolunteerInfo", "feedbackC", "Some young highschool students helped me with the sandbags at the shop")
+$Feedback("FireChiefQuote", "feedbackC", "The Fire Chief won't just talk to anyone. Impressive for a rookie. ")
+$Feedback("HouseboatPhotos", "feedbackC", "Houseboats, huh? Well now I've seen everything!")
+$Feedback("OkayHouseboatPhotos", "feedbackC", "Houseboats, huh? Well now I've seen everything!")
+$Feedback("BlurryHouseboatPhotos", "feedbackC", "Is that a houseboat or a floating block of cheese?")
+$Feedback("GreatVolunteeringQuote", "feedbackC", "So glad to see my fellow Twin Lakers coming out to volunteer!")
+$Feedback("GreatHouseboatStory", "feedbackC", "Houseboats, huh? Well now I've seen everything!")
+$Feedback("HouseboatStory", "feedbackC", "Why are they talking about houseboats? This is affecting my business!")
+$Feedback("DogRescue", "feedbackC", "I need to call all my neighbors to make sure their pups are all safe. ")
+$Feedback("DogRescuePicture", "feedbackC", "I'll probably need to get rescued next.")
+$Feedback("GreatFloodPhotosKayak", "feedbackC", "Impressive to see the Gazette getting photos from the water!")
+$Feedback("GoodFloodPhotosKayak", "feedbackC", "That photo looks like it does right outside my shop!")
+$Feedback("GreatFloodPhotosTruck", "feedbackC", "Wow, That photo looks like it does right outside my shop!")
+$Feedback("BlurryFloodPhotosTruck", "feedbackC", "Is that a truck or a floating block of cheese?")
+$Feedback("FloodedMainStreet", "feedbackC", "I am so worried about flooding in my shop. Good to know what's going on. ")
+$Feedback("LakeLevels", "feedbackC", "If the lake overflows anymore, I could be out of business!")
+$Feedback("FloodCause", "feedbackC", "Good thing we are getting to the bottom of what is causing the flooding. ")
+$Feedback("FloodScience", "feedbackC", "Makes me wonder why the lake levels would be kept so high...")
+$Feedback("FloodInfo", "feedbackC", "I keep checking the paper to see when I can expect people to come to the shop again.")
+$Feedback("SandbagTroubles", "feedbackC", "I should go volunteer to move sandbags. If only my business wasn't underwater.")
+$Feedback("SandbagLocation", "feedbackC", "I need to head over to the Community Center to get some more sandbags to protect the shop. ")
+$Feedback("GreatFloodQuote", "feedbackC", "Thanks for letting me know about people in need. We are handing out free cherry snacks at the shop!")
+$Feedback("FloodSafetyTips", "feedbackC", "I'm glad people are staying safe but what about my shop? ")
+$Feedback("CheeseRescue", "feedbackC", "I'm so glad the Gazette telling stories about how this is affecting small businesses like mine!")
+$Feedback("FirefighterRescue", "feedbackC", "I'm sure glad I didn't need to be rescued!")
+$Feedback("VolunteerConversation", "feedbackC", "I'm going to take everything off the bottom shelves at the shop just to be safe. ")
+$Feedback("SuperDetailedObservation", "feedbackC", "Wow, that rookie reporter got right in there at the site of the flood!")
+$Feedback("DetailedObservation", "feedbackC", "The rookie reporter might be okay after all.")
+$Feedback("BasicObservation", "feedbackC", "This sounds like it was written by a rookie.")
+
+$Feedback("SandbagQuote", "feedbackD", "These sandbags give me some hope that we'll get through this!")
+$Feedback("VolunteerInfo", "feedbackD", "Good to hear about how we can help!")
+$Feedback("FireChiefQuote", "feedbackD", "Hearing from the fire chief is always reassuring!")
+$Feedback("HouseboatPhotos", "feedbackD", "I guess the houseboat owners are one demographic getting by just fine!")
+$Feedback("OkayHouseboatPhotos", "feedbackD", "I guess the houseboat owners are one demographic getting by just fine!")
+$Feedback("BlurryHouseboatPhotos", "feedbackD", "Seems like houseboat owners are the least of our worries...")
+$Feedback("GreatVolunteeringQuote", "feedbackD", "The efforts of our volunteers are really a beam of sunshine in these hard times!")
+$Feedback("GreatHouseboatStory", "feedbackD", "I'm starting to come around to these houseboats!")
+$Feedback("HouseboatStory", "feedbackD", "Seems like houseboat owners are the least of our worries...")
+$Feedback("DogRescue", "feedbackD", "I'm sure my friends at the vet are glad that dog is safe!")
+$Feedback("DogRescuePicture", "feedbackD", "I'm sure my friends at the vet are glad that dog is safe!")
+$Feedback("GreatFloodPhotosKayak", "feedbackD", "Wow, impressive photos from that kayak! Really gives a sense of what people are going through.")
+$Feedback("GoodFloodPhotosKayak", "feedbackD", "Impressive photos from that kayak!")
+$Feedback("GreatFloodPhotosTruck", "feedbackD", "Those photos from the truck really give a sense of what people are going through!")
+$Feedback("BlurryFloodPhotosTruck", "feedbackD", "The flooding there looks bad... or maybe the camera is just bad.")
+$Feedback("FloodedMainStreet", "feedbackD", "Seeing photos like this will help us know where to avoid!")
+$Feedback("LakeLevels", "feedbackD", "Who knew the lake levels could affect us so much!")
+$Feedback("FloodCause", "feedbackD", "Maybe knowing what caused this will help us avoid future floods!")
+$Feedback("FloodScience", "feedbackD", "I wonder who wants to keep the lake levels high anyway...?")
+$Feedback("FloodInfo", "feedbackD", "The forecast may be grim, but it will help us prepare!")
+$Feedback("SandbagTroubles", "feedbackD", "Good to know that there are many different ways to help prepare and prevent any further damage!")
+$Feedback("SandbagLocation", "feedbackD", "The community center isn't too far... maybe I can volunteer after my shift!")
+$Feedback("GreatFloodQuote", "feedbackD", "Always remembe that the less fortunate will be impacted more heavily by any crisis like this.")
+$Feedback("FloodSafetyTips", "feedbackD", "These flood safety tips will help us mitigate this crisis!")
+$Feedback("CheeseRescue", "feedbackD", "If we can keep our cheese safe, I'm sure we can keep our people safe too!")
+$Feedback("FirefighterRescue", "feedbackD", "If we can keep our cheese safe, I'm sure we can keep our people safe too!")
+$Feedback("VolunteerConversation", "feedbackD", "Another thing we can do to prepare!")
+$Feedback("SuperDetailedObservation", "feedbackD", "Inspiring report from the dam site! I know we'll get through this.")
+$Feedback("DetailedObservation", "feedbackD", "Informative report from the dam site! I know we'll get through this.")
+$Feedback("BasicObservation", "feedbackD", "Didn't get much from this.. Still feeling pretty overwhelmed.")
+
+
+
+$call ImpactFeedback()
+$call EditorFeedback()
+
+$call EndFeedback()
+{/img}
 $call NextLevel()

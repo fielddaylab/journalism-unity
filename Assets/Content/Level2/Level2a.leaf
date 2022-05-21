@@ -1474,11 +1474,11 @@ $call BeginFeedback()
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryScore() == "good"
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Stellar work Rookie! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of useful info.
         {@person}   Maybe you've got a Pulitzer Prize in your future.
-    $elseif StoryAlignment() >= 0.4
+    $elseif StoryAlignment() >= 0.3
         {@person}   Nice work, Rookie! Your quotes and photos are top notch.
         {@person}   Admittedly, we could've used a little more useful info... 
         {@person}   But this should still help a lot of people. 
@@ -1488,11 +1488,11 @@ $if StoryScore() == "good"
         {@person}   Make sure to check my notes next time. It's all in there.  
     $endif
 $elseif StoryScore() == "medium"
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Nice work getting the right info out there!
-        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
+        {@person}   These story segments could use some quality control, 
         {@person}   But still, a solid story. Twin Lakes is lucky to have you.
-    $elseif StoryAlignment() >= 0.4
+    $elseif StoryAlignment() >= 0.3
         {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
         {@person}   This should be enough to help a lot of people.  
         {@person}   Next time, make sure to check my notes. You veered off topic a little. 
@@ -1502,11 +1502,11 @@ $elseif StoryScore() == "medium"
         {@person}   Still. Not bad for your first natural disaster. 
     $endif
 $else
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Nice work, Rookie. You got a lot of useful information out there! 
         {@person}   This story should help a lot of people... 
-        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
-    $elseif StoryAlignment() >= 0.4
+        {@person}   Though I gotta admit, some of this info is pretty low-quality.
+    $elseif StoryAlignment() >= 0.3
         {@person}   Nice work, Rookie. Your story construction is pretty solid!
         {@person}   Your quality control could definitely use some work. 
         {@person}   Still. Not bad for your first natural disaster. 
@@ -1537,9 +1537,6 @@ $Feedback("PoliceSafetyQuote", "feedbackA", "I don't even know what I'm looking 
 
 $call ImpactFeedback()
 $call EditorFeedback()
-{img Anim/Editor.jpeg}
-{@person}   ...{auto}
-{@person}   Yeah our readers are a chatty bunch.
 
 $call EndFeedback()
 {/img}
