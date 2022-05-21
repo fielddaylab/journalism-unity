@@ -225,7 +225,7 @@ $call ActivateStory()
 {@phone}People need to know what caused the flood. 
 
 $ContinueChoice({@me} Um... I'm not really a science writer.)
-$goto AssignmentScienceStory; 
+$goto AssignmentScienceStory
 
 // Original Name: Help with the clean up
 :: HelpWithTheCleanUp
