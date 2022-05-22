@@ -55,12 +55,20 @@ namespace Journalism {
             stats.CanPublish = stats.ScrapCount > 0;
 
             if (attributeCount > 0 && targetCount > 0) {
+                //0.33 - 0.4 = 0.07
+                //0.33 - 0.3 = 0.03
+                //0.33 - 0.3 = 0.03 = 0.13: good score
+                //0.33 - 0.6 = 0.27 
+                //0.33 - 0.2 = 0.13
+                //0.33 - 0.2 = 0.13 = 0.54: bad score
                 float factRatioDiff = (float) stats.FactCount / attributeCount - (float) config.FactWeight / targetCount;
                 float colorRatioDiff = (float) stats.ColorCount / attributeCount - (float) config.ColorWeight / targetCount;
                 float usefulRatioDiff = (float) stats.UsefulCount / attributeCount - (float) config.UsefulWeight / targetCount;
 
                 float totalDiff = Math.Abs(factRatioDiff) + Math.Abs(colorRatioDiff) + Math.Abs(usefulRatioDiff);
                 stats.Alignment = 0.8f - totalDiff;
+                //~0.3 bad
+                //~0.6 good
             }
 
             int missing = config.Slots.Length - stats.ScrapCount;

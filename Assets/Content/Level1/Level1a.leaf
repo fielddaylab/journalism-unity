@@ -315,6 +315,7 @@ $call BeginTutorial()
     $call OpenWindow(Notes)
     $call Wait(0.4)
     {@person}   Your quotes, photos, and other snippets will show up here. 
+    {@person}   You'll want to fill in every slot, so keep an eye out for scoops.
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
     {@person}   I put your assignment in the "Editor's Notes" tab. 
@@ -325,12 +326,12 @@ $call BeginTutorial()
     $call PointTo(TutorialDescription, -24, 0)
     {@person}  Pay attention to the story breakdown. 
     $call PointTo(TutorialPlayerAttributes, -24, 0)
-    {@person}   You want your story...
+    {@person}  You want your story...
     $call PointTo(TutorialTargetAttributes, -24, 0)
-    {@person}   To line up with this.
+    {@person}  To line up with this.
     $call PointTo(TutorialQuality, -24, 0)
     {@person}  Oh, and try to get high-quality snippets.
-    {@person} A blurry photo is better than nothing, but we have high standards here. 
+    {@person}  A blurry photo is better than nothing, but we have high standards here. 
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
@@ -714,12 +715,12 @@ $call BeginFeedback()
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryScore() == "good"
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Stellar work Rookie! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of useful info.
         {@person}   Maybe you've got a Pulitzer Prize in your future.
-    $elseif StoryAlignment() >= 0.4
-        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+    $elseif StoryAlignment() >= 0.3
+        {@person}   Nice work, Rookie! This info is top-notch quality.
         {@person}   Admittedly, we could've used a little more useful info... 
         {@person}   But this should still help a lot of people. 
     $else
@@ -728,12 +729,12 @@ $if StoryScore() == "good"
         {@person}   Make sure to check my notes next time. It's all in there.  
     $endif
 $elseif StoryScore() == "medium"
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Nice work getting the right info out there!
-        {@person}   Your reporting could use some quality control. Maybe a quick proofread.
+        {@person}   We would like to see even more quality info...
         {@person}   But still, a solid story. Twin Lakes is lucky to have you.
-    $elseif StoryAlignment() >= 0.4
-        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+    $elseif StoryAlignment() >= 0.3
+        {@person}   Hmm... not bad, Rookie! Some decent-quality info in there.
         {@person}   This should be enough to help a lot of people.  
         {@person}   Next time, make sure to check my notes. You veered off topic a little. 
     $else
@@ -742,44 +743,117 @@ $elseif StoryScore() == "medium"
         {@person}   Still. Not bad for your first natural disaster. 
     $endif
 $else
-    $if StoryAlignment() >= 0.6
+    $if StoryAlignment() >= 0.5
         {@person}   Nice work, Rookie. You got a lot of useful information out there! 
         {@person}   This story should help a lot of people... 
-        {@person}   Though I gotta admit, I have no idea what that photo is supposed to be. 
-    $elseif StoryAlignment() >= 0.4
+        {@person}   Though I gotta admit, we could use some higher-quality info here.
+    $elseif StoryAlignment() >= 0.3
         {@person}   Nice work, Rookie. Your story construction is pretty solid!
         {@person}   Your quality control could definitely use some work. 
         {@person}   Still. Not bad for your first natural disaster. 
     $else
         {@person}   Well.... this could be worse. Sort of.  
-        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@person}   We needed more high-quality info here. Make sure to check my notes next time. 
         {@person}   This was your first natural disaster, so I'll let it slide. 
     $endif
 $endif
 
-$Feedback("HospitalDucks", "feedbackA", "Aww, poor ducks...")
-$Feedback("FriendlyShopkeeper", "feedbackB", "Oh no, those poor croissants")
-$Feedback("RudeShopkeeper", "feedbackC", "What did you say to the baker to make them so rude?")
-$Feedback("AbandonedCherrymobile", "feedbackD", "Noooo not the cherrymobile!")
-$Feedback("BlurryCars", "feedbackA", "You really need to upgrade your camera")
-$Feedback("FloodMap", "feedbackB", "The flooding really is everywhere, huh...")
-$Feedback("WeatherStats", "feedbackC", "Holy %^#@ that's a lot of rain!")
-$Feedback("GoodDNR", "feedbackD", "The WORST flood???")
-$Feedback("RehearsedDNR", "feedbackA", "Now I know not to drive through floodwaters!")
-$Feedback("DNRData", "feedbackB", "7 percent? 7 PERCENT?! ...I don't know what to make of that.")
-$Feedback("FloodBackground", "feedbackC", "Why didn't we do anything to prepare?")
-$Feedback("CityHallShock", "feedbackD", "Staying at home, thanks!")
-$Feedback("CityHallAnnoyance", "feedbackA", "Guess I'll check the city website...")
-$Feedback("LibraryLot", "feedbackB", "That is... a picture of some kind?")
-$Feedback("ScientistQuotes", "feedbackC", "There goes Rainn E. Daye... hey wait isn't that name kinda on the nose?")
-$Feedback("PoliceStory", "feedbackD", "Thank goodness the first responders got there in time!")
-$Feedback("PoliceSafetyQuote", "feedbackA", "I don't even know what I'm looking at with this photo.")
+// $Feedback("HospitalDucks", "feedbackA", "Aww, poor ducks...")
+// $Feedback("FriendlyShopkeeper", "feedbackB", "Oh no, those poor croissants")
+// $Feedback("RudeShopkeeper", "feedbackC", "What did you say to the baker to make them so rude?")
+// $Feedback("AbandonedCherrymobile", "feedbackD", "Noooo not the cherrymobile!")
+// $Feedback("BlurryCars", "feedbackA", "You really need to upgrade your camera")
+// $Feedback("FloodMap", "feedbackB", "The flooding really is everywhere, huh...")
+// $Feedback("WeatherStats", "feedbackC", "Holy %^#@ that's a lot of rain!")
+// $Feedback("GoodDNR", "feedbackD", "The WORST flood???")
+// $Feedback("RehearsedDNR", "feedbackA", "Now I know not to drive through floodwaters!")
+// $Feedback("DNRData", "feedbackB", "7 percent? 7 PERCENT?! ...I don't know what to make of that.")
+// $Feedback("FloodBackground", "feedbackC", "Why didn't we do anything to prepare?")
+// $Feedback("CityHallShock", "feedbackD", "Staying at home, thanks!")
+// $Feedback("CityHallAnnoyance", "feedbackA", "Guess I'll check the city website...")
+// $Feedback("LibraryLot", "feedbackB", "That is... a picture of some kind?")
+// $Feedback("ScientistQuotes", "feedbackC", "There goes Rainn E. Daye... hey wait isn't that name kinda on the nose?")
+// $Feedback("PoliceStory", "feedbackD", "Thank goodness the first responders got there in time!")
+// $Feedback("PoliceSafetyQuote", "feedbackA", "I don't even know what I'm looking at with this photo.")
+
+$Feedback("HospitalDucks", "feedbackA", "Those sweet duckies! Maybe I'll bring them extra bread this time!")
+$Feedback("FriendlyShopkeeper", "feedbackA", "I love that bakery! Maybe I'll see if I can go help.")
+$Feedback("RudeShopkeeper", "feedbackA", "Unfortunate that our local businesses are struggling so much...")
+$Feedback("AbandonedCherrymobile", "feedbackA", "So sad to see a symbol of our town brought low...")
+$Feedback("BlurryCars", "feedbackA", "Those are cars? I can hardly make them out!")
+$Feedback("FloodMap", "feedbackA", "This fancy flood map will be a huge help!")
+$Feedback("WeatherStats", "feedbackA", "Oh goodness! I haven't seen so much rainfall in all my years!")
+$Feedback("GoodDNR", "feedbackA", "So nice to see our local DNR providing such crucial information!")
+$Feedback("RehearsedDNR", "feedbackA", "\"Stay tuned for updates?\" I had hoped this would be the update!!")
+$Feedback("DNRData", "feedbackA", "I don't understand those numbers but they seem bad!")
+$Feedback("FloodBackground", "feedbackA", "Such a shame nobody did anything about the flood risk for years!")
+$Feedback("CityHallShock", "feedbackA", "That city hall quote is terrifying! I hope everyone is safe.")
+$Feedback("CityHallAnnoyance", "feedbackA", "\"Check the website for updates?\" I had hoped this would be the update!!")
+$Feedback("LibraryLot", "feedbackA", "Oh heavens! I suppose I won't be making my usual library trip!")
+$Feedback("ScientistQuotes", "feedbackA", "Glad to see the Gazette talking with local experts!")
+$Feedback("PoliceStory", "feedbackA", "I'm glad that driver is okay... Another reminder to stay off the flooded roads!")
+
+$Feedback("GrainyPicture", "feedbackA", "What even is in that picture? I can hardly see it, even with my glasses!")
+
+$Feedback("HospitalDucks", "feedbackB", "People are suffering and you choose to focus on... the ducks??")
+$Feedback("FriendlyShopkeeper", "feedbackB", "Glad to see the Gazette interviewing people actually affected by this crisis.")
+$Feedback("RudeShopkeeper", "feedbackB", "Of course this city would neglect its local shops... ")
+$Feedback("AbandonedCherrymobile", "feedbackB", "I remember seeing that Cherrymobile when I was a kid!")
+$Feedback("BlurryCars", "feedbackB", "I expect better photography from you guys.")
+$Feedback("FloodMap", "feedbackB", "That flood map is cool, but anyone can find it online.")
+$Feedback("WeatherStats", "feedbackB", "They always put rainfall in inches... how much rain is even in an inch??")
+$Feedback("GoodDNR", "feedbackB", "At least the DNR knows what they're doing around here.")
+$Feedback("RehearsedDNR", "feedbackB", "Not even the DNR knows what's going on...")
+$Feedback("DNRData", "feedbackB", "Finally some hard facts in this paper!")
+$Feedback("FloodBackground", "feedbackB", "City Hall knew this was coming and still did nothing to prepare?")
+$Feedback("CityHallShock", "feedbackB", "Even City Hall is caught off guard... Scary stuff.")
+$Feedback("CityHallAnnoyance", "feedbackB", "City Hall unavailable even in this crisis?? ")
+$Feedback("LibraryLot", "feedbackB", "You should get better pictures for such an important story...")
+$Feedback("ScientistQuotes", "feedbackB", "I'm glad you at least talked with some experts.")
+$Feedback("PoliceStory", "feedbackB", "Always nice to hear some good news in these difficult times.")
+$Feedback("PoliceSafetyQuote", "feedbackB", "That advice just seems like common sense to me...")
+$Feedback("GrainyPicture", "feedbackB", "I think I could take better pictures than that with my phone...")
+
+$Feedback("HospitalDucks", "feedbackC", "Those sweet duckies! Maybe I'll bring them extra bread this time!")
+$Feedback("FriendlyShopkeeper", "feedbackC", "Glad that the Gazette is paying attention to how this is affecting businesses like mine. ")
+$Feedback("RudeShopkeeper", "feedbackC", "Why didn't she come interview me? My shop is a mess over here. ")
+$Feedback("AbandonedCherrymobile", "feedbackC", "I'll need to bring up a funding campaign for the Cherrymobile at the next town meeting.")
+$Feedback("BlurryCars", "feedbackC", "The Gazette should invest in better camera equipment. ")
+$Feedback("FloodMap", "feedbackC", "I'm keeping an eye on that flood map. ")
+$Feedback("WeatherStats", "feedbackC", "This rain has me worried... What about my basement stockroom??")
+$Feedback("GoodDNR", "feedbackC", "We need a DBR to help too. \"Department of Business Resources.\"")
+$Feedback("RehearsedDNR", "feedbackC", "Not impressed by this \"DNR.\" How about a \"DBR\" for BUSINESS resources?? ")
+$Feedback("DNRData", "feedbackC", "Oh boy! Those numbers from the DNR look pretty dour. ")
+$Feedback("FloodBackground", "feedbackC", "Our businesses need the town to take this flood more seriously.")
+$Feedback("CityHallShock", "feedbackC", "Is City Hall even paying attention? Good thing that new reporter is. ")
+$Feedback("CityHallAnnoyance", "feedbackC", "That reporter doesn't seem to know anyone at City Hall.")
+$Feedback("LibraryLot", "feedbackC", "If people can't go to the Library, will they think the businesses are closed? Oh no.")
+$Feedback("ScientistQuotes", "feedbackC", "I'm glad you at least talked with some experts.")
+$Feedback("PoliceStory", "feedbackC", "I hope the roads will open soon so business picks up. ")
+$Feedback("PoliceSafetyQuote", "feedbackC", "If people stay off the roads too long, I'll be out of business.")
+$Feedback("GrainyPicture", "feedbackC", "The Gazette should invest in better camera equipment. ")
+
+$Feedback("HospitalDucks", "feedbackD", "I saw those ducks on my commute today! Things are rough but we're managing.")
+$Feedback("FriendlyShopkeeper", "feedbackD", "All my nurse friends love that bakery!")
+$Feedback("RudeShopkeeper", "feedbackD", "This rookie better get her act together or she won't be around long.")
+$Feedback("AbandonedCherrymobile", "feedbackD", "I see the Cherrymobile come by the hospital all the time! Shame to see it stuck.")
+$Feedback("BlurryCars", "feedbackD", "Those are cars? I can hardly make them out!")
+$Feedback("FloodMap", "feedbackD", "That flood map should help me commute safely!")
+$Feedback("WeatherStats", "feedbackD", "Oh no... Those stats seem bad. Good to know what to expect though!")
+$Feedback("GoodDNR", "feedbackD", "My cousin works over at the DNR! Good to see they're helping out.")
+$Feedback("RehearsedDNR", "feedbackD", "I can see how the DNR is stretched thin... Things are pretty rough at the hospital too.")
+$Feedback("DNRData", "feedbackD", "That data should help us prepare for whatever comes next!")
+$Feedback("FloodBackground", "feedbackD", "Hopefully this background will help us prevent this from happening again!")
+$Feedback("CityHallShock", "feedbackD", "Hopefully this will be a rude awakening for City Hall, some things ought to change.")
+$Feedback("CityHallAnnoyance", "feedbackD", "Pretty scary that even City Hall seems caught off guard...")
+$Feedback("LibraryLot", "feedbackD", "Oh, the library is flooded? That photo is pretty hard to make out")
+$Feedback("ScientistQuotes", "feedbackD", "It's like we say in medicine... An ounce of prevention is worth a pound of cure!")
+$Feedback("PoliceStory", "feedbackD", "One safe driver is another we don't have to see here in the hospital!")
+$Feedback("PoliceSafetyQuote", "feedbackD", "Turning around definitely seems preferable to drowning!")
+$Feedback("GrainyPicture", "feedbackD", "Is it just me or is that picture too grainy to see?")
 
 $call ImpactFeedback()
 $call EditorFeedback()
-{img Anim/Editor.jpeg}
-{@person}   ...{auto}
-{@person}   Yeah our readers are a chatty bunch.
 
 $call EndFeedback()
 {/img}
