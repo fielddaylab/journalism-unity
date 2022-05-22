@@ -26,11 +26,12 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: People want to know what happened. Give 'em facts.
+    EditorBrief: People want to know why this happened. Give 'em plenty of facts.
+      Plus some color to tell them why they should care, and one or two useful tidbits.
     FactWeight: 2
     ColorWeight: 1
     UsefulWeight: 1
-    FinalHeadline: The Why Behind the Twin Lakes Flood
+    FinalHeadline: How a Summer Storm Became a 100-Year Flood
   StoryScraps: {fileID: -4270002856181823206, guid: 7cced83b472c88b4db34af015325e684,
     type: 3}
   Audio: {fileID: 0}
