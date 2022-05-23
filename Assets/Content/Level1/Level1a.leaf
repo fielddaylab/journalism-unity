@@ -177,6 +177,7 @@ $ActionChoice(Send message)
 
 $ContinueChoice({@me} Thanks. I'll keep those in mind.)
 
+$call $call AdjustStats(Social + 1)
 $call GiveSnippet(HospitalDucks)
 $choice OffToWork; Off to work
 

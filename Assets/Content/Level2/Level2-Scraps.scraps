@@ -19,6 +19,7 @@ A clean graph of flood probability.
 @quality Bad
 @attr Facts
 Twin Lakes watershed rainfall data shows something significant, probably. 
+
 // Original Name: Confusing graphic
 :: ConfusingGraphic
 @type Graph
@@ -341,16 +342,12 @@ Snippet text unimplemented.
 :: Governor-Impact
 @type Quote
 @quality Great
+@attr Facts, Color
 "I declared a State of Emergency as soon as I found out what was happening. We need to make sure Twin Lakes gets the help it needs."
 
 // Original Name: Mayor - Response
 :: GovernorComments
 @type Quote
 @quality Great
+@attr Facts, Color
 "The people of Twin Lakes are incredibly resilient," said the Governor. "Plus, I can always count on them for a good pun." 
-
-// Original Name: Mayor - Policies
-:: Mayor-Policies
-@type Quote
-@quality Great
-Snippet text unimplemented.
