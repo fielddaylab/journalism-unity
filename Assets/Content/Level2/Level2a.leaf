@@ -390,13 +390,17 @@ $if HasTime(0.25)
     <b>Location: DNR Headquarters</b>
     Your story is due in {timeLeft}.
 
-    $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
-    $HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
+    $if !Visited(KnockOnTheNearestOfficeDoor)
+        $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
+    $endif
+    $if !Visited(ReadTheBulletinBoardInTheHallway)
+        $HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
+    $endif
     $HubChoice(RunIntoTheMayorInHallway, "Head out", 0.25)
 
 
     $if Visited(JenkinssComputer)
-    $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
+        $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
     $endif
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
@@ -490,7 +494,7 @@ $else
 You must not come across as especially well-informed.
 At least a simple quote is better than nothing.  
 
-$call GiveSnippet(WynneBasicFloodBackground))
+$call GiveSnippet(WynneBasicFloodBackground)
 $endif
 
 $choice PhoneContacts; Phone Contacts
@@ -591,9 +595,14 @@ Mayor Johnson is calling to have the lake levels lowered! Hear more at this week
 {@article}New location: Department of Limnology
 
 $call GiveSnippet(LakeLevelBackground)
-
-$choice KnockOnTheNearestOfficeDoor; Knock on the nearest office door
-$choice LookForYourDNRContactWynneD.Storme; Look for your DNR Contact, Wynne D. Storme
+$if !Visited(KnockOnTheNearestOfficeDoor)
+    $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
+$endif
+$if Visited(JenkinssComputer)
+$if !Visited(LookForYourDNRContactWynneD.Storme)
+    $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
+$endif
+$endif
 
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheMayorInHallway
@@ -656,7 +665,9 @@ $endif
 
 
 $choice RunIntoTheMayorInHallway; Look for someone else to talk to
-$choice ReadTheBulletinBoardInTheHallway; Read the bulletin board in the hallway
+$if !Visited(ReadTheBulletinBoardInTheHallway)
+    $HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
+$endif
 
 // Original Name: Look for someone to interview
 :: LookForSomeoneToInterview
