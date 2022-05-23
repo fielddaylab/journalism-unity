@@ -75,6 +75,7 @@ $choice AnswerPhone; Answer phone
 // Original Name: Go outside and help your neighbors
 :: GoOutsideAndHelpYourNeighbors
 {bg BG/HouseExterior.jpg}
+{clear-text}
 The street is covered in puddles and debris. 
 
 
@@ -306,6 +307,8 @@ $endif
 $if HasTime(0.25)
 Your story is due in {timeLeft}.
 
+{map UI/MapPlaceholder.png}
+
 $HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5, "Downtown")
 $HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5, "DNR")
 $HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5, "")
@@ -528,11 +531,11 @@ $call AdjustStats(Endurance + 1)
 
 {img Anim/enml-escapedchicken.jpg}
 Yes--there! A stray chicken!
-{/img}
 
 $HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
 $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 
+{/img}
 // Original Name: Main Street Flood Recovery
 :: MainStreetFloodRecovery
 $call SetLocation("Downtown")
@@ -549,8 +552,8 @@ You duck under the barricade and take a look around.
 $endif
 
 $if HasTime(0.5)
-$HubChoice(MainStreetGalleryOwner, " Talk to the gallery owner airing out his artwork", 0)
-$HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!! (REALLY!)'' sign in the window", 0)
+$HubChoice(MainStreetGalleryOwner, " Talk to the gallery owner airing out his artwork", -1)
+$HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!! (REALLY!)'' sign in the window", -1)
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 
 $choice ScienceStoryMap; Do something else
@@ -1117,28 +1120,28 @@ $endif
 :: HelpHimCarryFurnitureOutside
 
 $if StatCheck(Endurance, 4)
-The gallery owner looks impressed as you help him carry out a sofa, table, and several easels.
+    The gallery owner looks impressed as you help him carry out a sofa, table, and several easels.
 
-{@person}Are you a weightlifter? 
+    {@person}Are you a weightlifter? 
 
+    $set local:_localOr = false
+    $if Visited(HelpHer) 
+        $set local:_localOr = true
+    $elseif  Visited(FollowTheChicken)
 
-$set local:_localOr = false
-$if Visited(HelpHer) 
-$set local:_localOr = true
-$elseif  Visited(FollowTheChicken)
+        $set local:_localOr = true
+    $endif
 
-$set local:_localOr = true
-$endif
-$if local:_localOr
-{@me}Nah, I just spend a lot of time chasing after chickens.
-$else
-{@me}Not exactly. But I do lug a ton of heavy gear around town. 
-$endif
+    $if local:_localOr
+        {@me}Nah, I just spend a lot of time chasing after chickens.
+    $else
+        {@me}Not exactly. But I do lug a ton of heavy gear around town. 
+    $endif
 
-He's so thankful for your help that he agrees to a quick interview.
+    He's so thankful for your help that he agrees to a quick interview.
 
-$HubChoice(InterviewGalleryOwner, "{@me} Great. Let's get started!", 0.5)
-$choice MainStreetFloodRecovery; Actually, I better be going. 
+    $HubChoice(InterviewGalleryOwner, "{@me} Great. Let's get started!", 0.5)
+    $choice MainStreetFloodRecovery; Actually, I better be going. 
 $else
 You try to help him lift a sofa.
 No luck.

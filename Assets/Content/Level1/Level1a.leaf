@@ -123,7 +123,6 @@ $choice OffToWork; Off to work
 
 // Original Name: Dig through the fridge for something nourishing
 :: DigThroughTheFridgeForSomethingNourishing
-@tags Endurance
 {clear-text}
 {bg BG/HouseExteriorRainy.jpg}
 You've been eating ramen and take-out all week.
@@ -215,7 +214,6 @@ $choice ImInAHurryTheresNoNeedToBringTheBike; You're in a hurry, there's no need
 
 // Original Name: Chase chickens
 :: ChaseChickens
-@tags Trust, Endurance
 You run around after the chickens and only get pecked twice.
 Maureen is beside herself with gratitude. 
 {@person}Oh, thank you so much! 

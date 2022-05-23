@@ -425,7 +425,7 @@ $choice Crackers; Grab a few saltine crackers.
 {clear-text}
 $call SetLocation("Upper Lake Dam")
 {/map}
-{bg BG/UpperLakeDam.jpg}
+{bg BG/UpperLakeDamHouseboat.jpeg}
 $if FirstVisit()
 <b>Location: the Upper Lake Dam</b>
 Volunteers are stacking sandbags, with a DNR worker leading the effort. 
@@ -502,6 +502,7 @@ $goto STORYEVALUATION
 // Original Name: Talk to volunteer # 1
 :: TalkToVolunteer1
 {clear-text}
+{/map}
 $if StatCheck(Trust, 3)
 The volunteer is thrilled when you ask to interview him. 
 
@@ -526,6 +527,7 @@ $choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Talk to volunteer # 2
 :: TalkToVolunteer2
+{/map}
 You approach a volunteer just as she's packing up.
 
 {@person}Sorry, can't talk, gotta go sample the bacterial contamination in the epilimnion of Upper Lake. 
@@ -540,7 +542,7 @@ $endif
 
 // Original Name: Interview the DNR worker
 :: InterviewTheDNRWorker
-
+{/map}
 $if StatCheck(Social, 3)
 The DNR worker seems to recognize you.
 
@@ -565,6 +567,7 @@ $endif
 
 // Original Name: Talk to the houseboat lady
 :: TalkToTheHouseboatLady
+{/map}
 {bg BG/UpperLakeDamBoat.jpg}
 The houseboat lady is thrilled to see the press has taken an interest.
 
@@ -576,7 +579,7 @@ $choice WhatsTheDealWithTheHouseboat; What's the deal with the houseboat?
 
 // Original Name: Take photos of the flood site
 :: TakePhotosOfTheFloodSite
-
+{/map}
 $if StatCheck(Tech, 3)
 Back in New York, you'd have a professional photographer to help you.
 
@@ -666,7 +669,6 @@ $HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5,
 $HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5, "Cherry Festival")
 
 $HubChoice(ArriveAtFloodSite, "Head back to the flood site", 0.5, "Upper Lake Dam")
-{map UI/MapPlaceholder.png}
 $else
 Time's up, Rookie. Time to put your story together!
 $choice CompileYourStory; Compile your story
