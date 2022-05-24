@@ -628,16 +628,16 @@ $call AdjustStats(Tech + 1)
 $call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2
-Oh no... your camera battery is dead!
+Oh no... your nice camera's battery is dead!
 Nearby, a bystander is snapping away with a fancy DSLR. 
 Couldn't hurt to ask... 
 
-{@me}Excuse me. Would you mind if I borrowed your camera. 
+{@me}Excuse me. Would you mind if I borrowed your camera? 
 {@person}Are you serious??
 {@person}I don't even know you, kid. Use your phone or something. 
 
 You adjust your phone settings and snap a picture.
-A little shaky, but better than nothing. 
+A little shaky - certainly not to par with your DSLR - but better than nothing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(OkayHouseboatPhotos)

@@ -536,8 +536,13 @@ $call AdjustStats(Endurance + 1)
 {img Anim/enml-escapedchicken.jpg}
 Yes--there! A stray chicken!
 
+$if HasTime(0.5)
 $HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
 $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
+$else
+But there's no time to chase it - your story is due!
+    $choice TimeToAssembleTheScienceStory; Assemble the science story
+$endif
 
 {/img}
 // Original Name: Main Street Flood Recovery
@@ -556,11 +561,11 @@ You duck under the barricade and take a look around.
 $endif
 
 $if HasTime(0.5)
-$HubChoice(MainStreetGalleryOwner, " Talk to the gallery owner airing out his artwork", -1)
+$HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
 $HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!! (REALLY!)'' sign in the window", -1)
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
+$choice ScienceStoryMap; Leave Main Street
 
-$choice ScienceStoryMap; Do something else
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
@@ -594,15 +599,20 @@ Mayor Johnson is calling to have the lake levels lowered! Hear more at this week
 </b>
 {@article}New location: Department of Limnology
 
-$call GiveSnippet(LakeLevelBackground)
-$if !Visited(KnockOnTheNearestOfficeDoor)
-    $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
+$if HasTime(0.25)
+    $call GiveSnippet(LakeLevelBackground)
+    $if !Visited(KnockOnTheNearestOfficeDoor)
+        $HubChoice(KnockOnTheNearestOfficeDoor, "Knock on the nearest office door", 0.5)
+    $endif
+    $if Visited(JenkinssComputer)
+        $if !Visited(LookForYourDNRContactWynneD.Storme)
+            $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
+        $endif
+    $endif
+$else
+    $choice TimeToAssembleTheScienceStory; Time to assemble the science story!
 $endif
-$if Visited(JenkinssComputer)
-$if !Visited(LookForYourDNRContactWynneD.Storme)
-    $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
-$endif
-$endif
+
 
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheMayorInHallway
@@ -748,6 +758,7 @@ The gallery owner is hanging soggy art prints on a clothesline, grumbling under 
 $choice AskToInterviewHim; Ask to interview him
 $choice AskIfHeNeedsHelp; Ask if he needs help
 $HubChoice(TellHimYoureABigFanOfHisWork, "Tell him you're a big fan of his work", 0.25)
+$choice MainStreetFloodRecovery; Leave the gallery
 
 // Original Name: Main Street Cafe
 :: MainStreetCafe
@@ -945,7 +956,7 @@ $ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
 
 <i>New Contact: Mayor's Personal Number</i>
 
-$choice PhoneCallMayorsPersonalNumber; Call the Mayor
+$HubChoice(PhoneCallMayorsPersonalNumber, "Call the Mayor", 0.25)
 $choice MainStreetFloodRecovery; Keep biking toward Main Street
 
 $choice ScienceStoryMap; Go somewhere else
@@ -966,9 +977,10 @@ $choice MainStreetFloodRecovery; Leave him alone. There must be someone else you
 {@person}And all I had for breakfast was tic tacs and oyster crackers. 
 {@person}Would <i>you</i> say I need help?"
 
-$choice OfferHimSomeFood; Offer him some food
+$HubChoice(OfferHimSomeFood, "Offer him some food", 0)
 $HubChoice(HelpHimCarryFurnitureOutside, "Help him carry furniture outside", 0.25)
-$choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
+$HubChoice(TellHimYoureABigFanOfHisWork, "Tell him you're a big fan of his work", 0)
+$choice MainStreetFloodRecovery; Leave the gallery
 
 // Original Name: Tell him you're a big fan of his work
 :: TellHimYoureABigFanOfHisWork
@@ -983,7 +995,7 @@ He looks more cheerful now.
 He's so excited you've heard of his work that he agrees to an interview. 
 
 $HubChoice(InterviewGalleryOwner, "{@me} Okay, let's get started!", 0.5)
-$choice MainStreetFloodRecovery; Actually, I better go. 
+$HubChoice(MainStreetFloodRecovery, "{@me} Actually, I'd better go.", 0)
 $endif
 
 $if !StatCheck(Social, 3)
@@ -1010,8 +1022,8 @@ Her face falls.
 $endif
 
 
-$HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.25)
-$choice MainStreetFloodRecovery; Actually, never mind. I gotta go. 
+$HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.5)
+$HubChoice(MainStreetFloodRecovery, "Actually, never mind. I gotta go.", 0)
 
 // Original Name: Order the daily special
 :: OrderTheDailySpecial
@@ -1115,7 +1127,7 @@ You give him a locally-made protein bar and a bottle of water.
 
 {@person}Thanks! I guess I could do a quick interview, while you're here.
 
-$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", .5)
+$HubChoice(InterviewGalleryOwner, "{@me} Well, let's get started then...", 0.5)
 $choice MainStreetFloodRecovery; ...actually, I gotta get going!
 $else
 You dig through your bag for something to offer him, but come up empty.
