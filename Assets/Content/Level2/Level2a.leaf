@@ -1432,7 +1432,7 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 {@person}Hate to say it, but sandbags aren't going to be enough.
 {@person}We need better policies if we want the town to survive.
 
-@call GiveSnippet (DNRPreventFromHappeningAgain)
+$call GiveSnippet (DNRPreventFromHappeningAgain)
 
 $choice WhatKindOfPolicies; What kind of policies?
 

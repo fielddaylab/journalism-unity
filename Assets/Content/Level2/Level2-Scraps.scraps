@@ -252,14 +252,14 @@ Snippet text unimplemented.
 @type Photo
 @quality Great
 @attr Color
-@image Anim/limnology-docks.jpg
+@image BG/Limnology.jpg
 
 // Original Name: Marsh loss
 :: MarshLoss
 @type Quote
 @quality Great
 Snippet text unimplemented.
-M
+
 // Original Name: Marsh pollution
 :: MarshPollution
 @type Observation
