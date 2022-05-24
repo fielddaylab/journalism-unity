@@ -609,10 +609,10 @@ $if HasTime(0.25)
             $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)
         $endif
     $endif
+    $choice ScienceStoryMap; Leave the DNR
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story!
 $endif
-
 
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheMayorInHallway
