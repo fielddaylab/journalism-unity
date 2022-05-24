@@ -366,7 +366,7 @@ $goto STORYEVALUATION
 {clear-text}
 {/map}
 $call SetLocation("Downtown")
-{bg BG/FirstStDowntownCleanup.jpg}
+{bg BG/TownTransitional.jpg}
 You pedal through town, weaving around abandoned cars and piles of sandbags.
 $call AdjustStats(Endurance + 1)
 
@@ -544,7 +544,7 @@ $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 :: MainStreetFloodRecovery
 $call SetLocation("Downtown")
 $if FirstVisit()
-
+{bg BG/FirstStDowntownCleanup.jpg}
 Your story is due in {timeLeft}.
 
 Main Street is cordoned off. 

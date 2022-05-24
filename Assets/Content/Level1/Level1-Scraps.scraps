@@ -154,23 +154,20 @@ Snippet body not implemented.
 @type Photo
 @quality Great
 @attr Color
-@image Anim/twin-lakes-dam.jpg
-Snippet text unimplemented.
+@image BG/UpperLakeDam.jpeg
 
 // Original Name: Okay houseboat photos
 :: OkayHouseboatPhotos
 @type Photo
 @quality Good
 @attr Color
-@image Anim/twin-lakes-dam-good.png
-Snippet text unimplemented.
+@image Anim/UpperLakeDamBlurry.jpeg
 
 // Original Name: Blurry houseboat photos
 :: BlurryHouseboatPhotos
 @type Photo
 @quality Bad
-@image Anim/twin-lakes-dam-blurry.png
-Snippet text unimplemented.
+@image Anim/UpperLakeDamBad.jpeg
 
 // Original Name: Great volunteering quote
 :: GreatVolunteeringQuote

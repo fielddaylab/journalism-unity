@@ -425,7 +425,7 @@ $choice Crackers; Grab a few saltine crackers.
 {clear-text}
 $call SetLocation("Upper Lake Dam")
 {/map}
-{bg BG/UpperLakeDamHouseboat.jpeg}
+{bg BG/UpperLakeDam.jpeg}
 $if FirstVisit()
 <b>Location: the Upper Lake Dam</b>
 Volunteers are stacking sandbags, with a DNR worker leading the effort. 
@@ -568,7 +568,7 @@ $endif
 // Original Name: Talk to the houseboat lady
 :: TalkToTheHouseboatLady
 {/map}
-{bg BG/UpperLakeDamBoat.jpg}
+{bg BG/Houseboat.png}
 The houseboat lady is thrilled to see the press has taken an interest.
 
 {anim rumble}{@person} Houseboat, stay afloat!
