@@ -313,7 +313,6 @@ $if HasTime(0.25)
     $HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5, "DNR")
     $HubChoice(GatherFloodingInfoFromAcademicPapers, "Get online and read academic papers about flooding", 0.5, "")
 
-
     $set local:_localOr = false
     $if Visited(ThanksPlusUniversityContact) 
         $set local:_localOr = true
@@ -338,6 +337,8 @@ $endif
 {/map}
 Phone Contacts:
 
+$choice ScienceStoryMap; Put away your phone
+
 $HubChoice(PhoneCallDNRHeadquarters, "Main DNR Number", 0.5)
 
 $if Visited(JenkinssComputer)
@@ -349,8 +350,6 @@ $HubChoice(PhoneCallCityHall, "City Hall Contact", 0.5)
 $if Visited(AskAroundForItsOwner)
     $HubChoice(PhoneCallMayorsPersonalNumber, "Mayor's Personal Number", 0.5)
 $endif
-
-$choice ScienceStoryMap; Put away your phone
 
 // Original Name: Time to assemble the science story...
 :: TimeToAssembleTheScienceStory
@@ -560,10 +559,11 @@ You duck under the barricade and take a look around.
 $endif
 
 $if HasTime(0.5)
+
+$choice ScienceStoryMap; Leave Main Street
 $HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
 $HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!! (REALLY!)'' sign in the window", -1)
 $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
-$choice ScienceStoryMap; Leave Main Street
 
 $else
 $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
