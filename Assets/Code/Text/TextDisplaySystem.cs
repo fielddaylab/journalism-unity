@@ -250,7 +250,7 @@ namespace Journalism {
                 }
 
                 yield return DisplayCustomMessage(m_OverLayer, psb.ToString(), "msg");
-                yield return 0.1f;
+                yield return 0.8f; //time to display stat change before dismissing
                 yield return m_OverLayer.ClearLines();
 
                 Player.WriteVariable(HeaderUI.Var_StatsEnabled, true);
