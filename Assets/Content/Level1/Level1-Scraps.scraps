@@ -242,6 +242,7 @@ Snippet text unimplemented.
 :: BlurryFloodPhotosTruck
 @type Photo
 @quality Bad
+@attr Color
 @image Anim/downtown-flooding-truck-blurry.png
 Snippet text unimplemented.
 
@@ -249,8 +250,8 @@ Snippet text unimplemented.
 :: FloodedMainStreet
 @type Photo
 @quality Great
+@attr Color
 @image Anim/flooded-main-st.png
-Snippet text unimplemented.
 
 // Original Name: Lake levels
 :: LakeLevels
