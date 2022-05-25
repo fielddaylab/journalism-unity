@@ -179,23 +179,20 @@ $choice AnswerPhone; Answer phone
 :: DunkOnTheHaters
 
 $if StatCheck(Tech, 3)
-You quote-resquawk some of the haters' replies with a sick own and ratio them <i>real</i> good. 
+    You quote-resquawk some of the haters' replies with a sick own and ratio them <i>real</i> good. 
 
-The clicks on your article keep going up, plus a few extra followers too!
+    The clicks on your article keep going up, plus a few extra followers too!
 
-$call AdjustStats(Social + 1)
-// shudder style
-{anim rumble} RRRRING.
-$choice AnswerPhone; Answer phone
-$else
-In a bit of a tizzy, you squawk out some ill-advised hot takes.
+    $call AdjustStats(Social + 1)
+    // shudder style
+    {anim rumble} RRRRING.
+    $choice AnswerPhone; Answer phone
+    $else
+    In a bit of a tizzy, you squawk out some ill-advised hot takes.
 
-Within five minutes, you've dropped a not-insignificant portion of your followers. Whoops.
+    Within five minutes, you've dropped a not-insignificant portion of your followers. Whoops.
 
-$call AdjustStats(Trust - 2)
-// shudder style
-{anim rumble} RRRRING.
-$choice AnswerPhone; Answer phone
+    $call AdjustStats(Trust - 2)
 $endif
 
 // shudder style
@@ -1112,7 +1109,9 @@ $choice ScienceStoryMap; Actually... I'm running low on time. I better run.
 {@person}Twin Lakes is super vulnerable to flooding. We're got water on two sides! 
 {@person}That, plus the higher lake levels... it was a disaster waiting to happen.
 
-$choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
+$if !Visited(AskWhatPeopleCanDoToHelp)
+    $choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
+$endif
 $choice AskIfSheHasGraphicsYouCanUse; Ask if she has graphics you can use
 
 // Original Name: Offer him some food
@@ -1276,7 +1275,9 @@ She pulls up a graph on her phone.
 
 $call GiveSnippet(RainfallStats)
 
-$choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
+$if !Visited(AskWhatPeopleCanDoToHelp)
+    $choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
+$endif
 $choice DepartmentOfLimnology; Thank her for her help
 
 // Original Name: "How has the flood affected your business?"
@@ -1464,7 +1465,9 @@ $choice DepartmentOfLimnology; Head back outside
 
 $call GiveSnippet(PoliciesToPreventFlooding)
 
-$choice AskIfSheHasGraphicsYouCanUse; Ask if she has graphics you can use
+$if !Visited(AskIfSheHasGraphicsYouCanUse)
+    $choice AskIfSheHasGraphicsYouCanUse; Ask if she has graphics you can use
+$endif
 $choice DepartmentOfLimnology; Thank her and decide what to do next 
 
 // Original Name: "Why are the lakes being kept so high?"
