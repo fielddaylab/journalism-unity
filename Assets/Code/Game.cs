@@ -49,6 +49,7 @@ namespace Journalism {
         private void Start() {
             m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                 m_ScriptSystem.StartLevel();
+                AnalyticsService.FBGameStart();
             });
         }
 
