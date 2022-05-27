@@ -11,6 +11,7 @@ using BeauRoutine;
 using BeauUtil.Extensions;
 using Journalism.UI;
 using EasyAssetStreaming;
+using JournalismAnalytics;
 
 namespace Journalism {
 
@@ -49,7 +50,7 @@ namespace Journalism {
         private void Start() {
             m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                 m_ScriptSystem.StartLevel();
-                AnalyticsService.FBGameStart();
+                AnalyticsService.LogGameStarted();
             });
         }
 

@@ -5,7 +5,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace Journalism
+namespace JournalismAnalytics
 {
     public static class AnalyticsService
     {
@@ -13,11 +13,11 @@ namespace Journalism
         #region Firebase JS Functions
 
         [DllImport("__Internal")]
-        public static extern void FBGameStart();
+        private static extern void FBGameStart();
 
         #endregion // Firebase JS Functions
 
-        private static void LogGameStarted()
+        public static void LogGameStarted()
         {
             #if FIREBASE
                 FBGameStart();
