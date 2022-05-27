@@ -46,13 +46,12 @@ namespace JournalismAnalytics
                 FBBeginStory(level_id, snippits_available);
         }
 
-        [DllImport("__Internal")] private static extern void FBLevelComplete(int level_id);
+        [DllImport("__Internal")] private static extern void FBLevelComplete(int level_id, int[] snippits_used, float alignment_score, int quality_score);
         public static void LogLevelComplete(int level_id, int[] snippits_used, float alignment_score, int quality_score)
         {
             Debug.Log("[Firebase] Level Completed! Level_ID: " + level_id + ", snippits used: " + snippits_used + ", alignment score: " + alignment_score + ", quality score: " + quality_score);
-            #if FIREBASE
+            if (IsFirebase())
                 FBLevelComplete(level_id, snippits_used, alignment_score, quality_score);
-            #endif
         }
 
 
