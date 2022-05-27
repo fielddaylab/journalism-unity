@@ -25,12 +25,12 @@ public class AnalyticsEventPasser : MonoBehaviour
         AnalyticsService.LogCloseStory();
     }
 
-    public void NotesOpened()
+    public void EditorNotesOpened()
     {
         AnalyticsService.LogViewEditorNotes();
     }
 
-    public void NotesClosed()
+    public void EditorNotesClosed()
     {
         AnalyticsService.LogCloseEditorNotes();
     }

@@ -4,11 +4,11 @@ mergeInto(LibraryManager.library,
   {
     analytics.logEvent("Game Start", {});
   },
-
   FBLevelBegin: function(int level_id)
   {
         analytics.logEvent("level_begin", {level_id});
   },
+  
   FBBeginStory: function(int level_id, int[] snippits_available)
   {
         analytics.logEvent("begin_story", {level_id, snippits_available});
@@ -17,7 +17,6 @@ mergeInto(LibraryManager.library,
   {
         analytics.logEvent("level_complete", {level_id, snippits_used, alignment_score, quality_score});
   },
-
   FBChooseNode: function(int node_id)
   {
         analytics.logEvent("choose_node", {node_id});
@@ -58,7 +57,6 @@ mergeInto(LibraryManager.library,
   {
         analytics.logEvent("delete_snippit_from_story", {snippit_id, story_slot});
   },
-
   FBDisplayNode: function(int node_id)
   {
         analytics.logEvent("display_node", {node_id});
