@@ -438,7 +438,10 @@ namespace Journalism {
                 Log.Msg("[Player] New story scrap group '{0}' - clearing story inventory", def.StoryScraps.name);
             }
 
-            if (def.LevelIndex != s_Current.LevelIndex) {
+            if (def.LevelIndex != s_Current.LevelIndex) 
+            {
+                //JournalismAnalytics.AnalyticsService.LogLevelComplete();
+
                 Array.Clear(s_Current.AllocatedScraps, 0, s_Current.AllocatedScraps.Length);
                 s_Current.LevelIndex = def.LevelIndex;
                 s_Current.CheckpointId = default;
@@ -447,6 +450,8 @@ namespace Journalism {
                 UISystem.SetStoryEnabled(false);
                 Log.Msg("[Player] New level index {0} - clearing story and checkpoints", def.LevelIndex);
                 Game.Save.SaveCheckpoint(wasActive);
+
+                JournalismAnalytics.AnalyticsService.LogLevelBegin(s_Current.LevelIndex);
             }
 
             s_Stats = default;
