@@ -870,7 +870,9 @@ The scientist looks grateful.
 
 {@person}Thanks, kid! Just make sure not to drink from that bottle later. This floodwater is nasty stuff."
 
+$choice ScienceStoryMap; Glad I could help! Gotta go now.
 $HubChoice(InterviewScientist, "Can I ask you a few questions, while I'm here?", 0.25)
+
 
 // Original Name: Grab coffee for the Limnology Department
 :: GrabCoffeeForTheLimnologyDepartment
