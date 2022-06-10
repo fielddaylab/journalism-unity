@@ -111,14 +111,14 @@ namespace Journalism.UI
             MapMarker sampleMarker = m_markerContainerPrefab.GetComponent<MapMarkerContainer>().Markers[0];
             PlayerMarker samplePlayerMarker = m_markerContainerPrefab.GetComponent<MapMarkerContainer>().PlayerMarker;
             Vector2 markerDims = new Vector2(sampleMarker.Root.rect.width, sampleMarker.Root.rect.height);
-            //Vector2 bannerPos = new Vector2(samplePlayerMarker.BannerRect.localPosition.x, samplePlayerMarker.BannerRect.localPosition.y);
+            Vector2 bannerPos = new Vector2(samplePlayerMarker.BannerRect.localPosition.x, samplePlayerMarker.BannerRect.localPosition.y);
 
             //Rect baseMapRect = mapTex.GetComponent<RectTransform>().rect;
             //new Vector2(baseMapRect.width, baseMapRect.height);
             Vector2 mapDims = REF_MAP_DIMS;
 
             m_markerScale = new Vector2(markerDims.x / mapDims.x, markerDims.y / mapDims.y);
-            //m_bannerScale = new Vector2(bannerPos.x / mapDims.x, bannerPos.y / mapDims.y);
+            m_bannerScale = new Vector2(bannerPos.x / mapDims.x, bannerPos.y / mapDims.y);
 
             m_markerScaling = new MarkerScaling(
                 markerDims.x / mapDims.x,
@@ -167,9 +167,9 @@ namespace Journalism.UI
             // set PlayerMarker location banner text and position
             MapLocationDef.MapLocation playerLoc = MapLocations.GetMapLocation(Player.Location());
             container.PlayerMarker.LocationIDText.SetText(playerLoc.Name);
-            //container.PlayerMarker.BannerRect.localPosition = new Vector2(m_bannerScale.x * mapDims.x, m_bannerScale.y * mapDims.y);
 
             playerMarkerRect.sizeDelta = new Vector2(m_markerScale.x * mapDims.x, m_markerScale.y * mapDims.y);
+            container.PlayerMarker.BannerRect.localPosition = new Vector2(m_bannerScale.x * mapDims.x, m_bannerScale.y * mapDims.y);
             playerMarkerRect.localPosition = FitCoords(playerLoc.NormalizedCoords, mapRect);
 
             Log.Msg("[Map Window Loader] Placed Player marker");

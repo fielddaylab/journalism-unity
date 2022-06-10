@@ -488,6 +488,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2792054313184945847, guid: a463191c978fd574ca44aab8ffda8bf3,
         type: 3}
       propertyPath: m_LocalScale.x
