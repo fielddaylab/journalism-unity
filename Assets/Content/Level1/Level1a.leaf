@@ -388,6 +388,9 @@ Your good camera and zoom lens is enough to get a clear shot!
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
+
+This is a high-quality picture... Including this in my story is sure to earn me some brownie points!
+
 $else
 You snap a few phone pictures, thinking wistfully of your camera and zoom lens, buried somewhere in your apartment.  
 At least blurry cars in blurry water is better than nothing. 
@@ -479,6 +482,7 @@ $if StatCheck(Social, 2)
     Luckily, you've had some practice helping stressed-out neighbors lately.  
     He vents his frustrations about the flood, and you end up with a great quote!
     $call GiveSnippet(GoodDNR)
+    My editor goes wild for high-quality quotes like these!
 $else
     The DNR worker sounds stressed out--and your out-of-towner vibe isn't helping.
     {@person}Sorry, but who are you? Are you even from here??  
@@ -500,6 +504,7 @@ $if Visited(JenkinssComputer)
         {@phone}I can tell you've done your research.
         {@phone}Here's some more data for your story. 
         $call GiveSnippet(DNRData)
+        This looks like some high-quality data. Including this in the story should make it even better!
     $else
         {@me}Yikes. A flood that lasts 100 years??? 
         Wynne laughs. Apparently you got somethign wrong there. 
@@ -541,6 +546,8 @@ $if Visited(HelpHer)
 
     $call GiveSnippet(PoliceSafetyQuote)
     $call GiveSnippet(PoliceStory)
+    
+    That story really ought to resonate with our readers! My editor would want me to include it.
 $else
     The officer coughs awkwardly.
     {@phone} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
@@ -577,6 +584,8 @@ $if StatCheck(Social, 2)
 
     $call GiveSnippet(FloodBackground)
     $call GiveSnippet(CityHallShock)
+
+    What a great quote... I'm sure my editor would want me to include it!
 $else
     Your city hall contact doesn't seem thrilled to hear from you.
     Come to think of it, calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
@@ -651,6 +660,9 @@ You find a treasure trove of quotes from local scientists!
 You also dig up Jenkins's old DNR contact: Wynne D. Storme. 
 
 $call GiveSnippet(ScientistQuotes)
+
+There are some hidden gems in these old quotes...
+This type of quality should work great in my story!
 $else
 Jenkins's computer looks like it's from the stone age. Or at least the 90's. 
 
