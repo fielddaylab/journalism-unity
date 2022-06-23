@@ -5,6 +5,33 @@
 @attr Facts
 Extreme rainfall events in the Twin Lakes watershed have increased by 10% in the last decade.
 
+// Original Name: Limnology docks
+:: LimnologyDocks
+@type Photo
+@quality Great
+@attr Color
+@image BG/Limnology.jpg
+
+:: MayorLakeLevelsQuote
+@type Quote
+@quality Great
+@attr Color, Facts
+Mayor Barry Zingerman is pushing to lower the lake levels. “There won’t be any town left if this flooding keeps up!” 
+
+// Original Name: Governor - impact
+:: Governor-Impact
+@type Quote
+@quality Great
+@attr Facts, Color
+"I declared a State of Emergency as soon as I found out what was happening. We need to make sure Twin Lakes gets the help it needs."
+
+// Original Name: Mayor - Response
+:: GovernorComments
+@type Quote
+@quality Great
+@attr Facts, Color
+"The people of Twin Lakes are incredibly resilient," said the Governor. "Plus, I can always count on them for a good pun." 
+
 // Original Name: Flood probability
 :: FloodProbability
 @type Graph
@@ -215,144 +242,286 @@ The city could change things with new policies: funding for storm drains, rain g
 /// 2b starts here?
 ///
 
-
-// Original Name: Flooded neighborhood
-:: FloodedNeighborhood
-@type Photo
-@quality Great
-insert picture of flooded neighborhood!
-
-// Original Name: Importance of wetlands
-:: ImportanceOfWetlands
+// Original Name: Increased Flooding Sugar Marsh 
+:: IncreasedFloodingSugarMarsh
 @type Quote
 @quality Good
-Snippet text unimplemented
+@attr Facts
 
-// Original Name: Flood vulnerability
-:: FloodVulnerability
-@type Fact
+// Original Name: Librarian Quote
+:: LibrarianQuote
+@type Quote
 @quality Good
-Snippet text unimplemented
+@attr Color
 
-// Original Name: Wetland policy
+// Original Name: Serious Wetlands
+:: SeriousWetlands
+@type Quote
+@quality Good
+@attr Facts
+
+// Original Name: Wetlands Related to Flooding
+:: WetlandsRelatedToFlooding
+@type Quote
+@quality Good
+@attr Facts
+
+// Original Name: Wetland Definition
+:: WetlandDefinition
+@type Quote
+@quality Bad
+@attr Facts
+
+// Original Name: ConnectedWatershed
+:: ConnectedWatershed
+@type Quote
+@quality Good
+@attr Facts
+
+// Original Name: What Happened to Wetlands 
+:: WhatHappenedToWetlands
+@type Quote
+@quality Good
+@attr Facts
+
+// Original Name: Wetland Policy 
 :: WetlandPolicy
 @type Quote
 @quality Good
-Snippet text unimplemented
+@attr Facts
 
-// Original Name: Vital importance of wetlands
-:: VitalImportanceOfWetlands
+// Original Name: Wetland Town Hall Meeting
+:: WetlandTownHallMeeting
 @type Quote
-@quality Great
-Snippet text unimplemented
+@quality Good
+@attr Facts 
 
-// Original Name: Annoyed limnologists
-:: AnnoyedLimnologists
+// Original Name: Awful Spark Project
+:: AwfulSparkProject
 @type Quote
-@quality Bad
-Snippet text unimplemented.
+@quality Good
+@attr Color
 
-// Original Name: Limnology docks
-:: LimnologyDocks
+// Original Name: Playground Initiative Quote
+:: PlaygroundInitiativeQuote
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: Replace Marsh With Low Income Apartments
+:: ReplaceMarshWithLowIncomeApartments
+@type Quote
+@quality Good
+@attr Facts 
+
+// Original Name: Sugar Marsh Replaced With Library
+:: SugarMarshReplacedWithLibrary
+@type Quote
+@quality Good
+@attr Facts
+
+// Original Name: New Development Puts Twin Lakes On The Map
+:: NewDevelopmentPutsTwinLakesOnTheMap
+@type Quote
+@quality Good
+@attr Color
+
+// Original Name: NY Built on Swamp
+:: NewYorkBuiltOnSwamp
+@type Quote
+@quality Good
+@attr Color
+
+// Original Name: PerfectPlaceForApartments
+:: PerfectPlaceForApartments
+@type Quote
+@quality Good
+@attr Color
+
+// Original Name: MayorSupportOfNewDevelopment
+:: MayorSupportOfNewDevelopment
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: MayorOtherOptionsToPreventFlooding
+:: MayorOtherOptionsToPreventFlooding
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: MayorOtherWildlifeAreas
+:: MayorOtherWildlifeAreas
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: MayorFloodInsurance
+:: MayorFloodInsurance
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: MayorCondescendingAnswerFinances
+:: MayorCondescendingAnswerFinances
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: MayorCondescendingAnswerLimnology
+:: MayorCondescendingAnswerLimnology
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: QuickMayorWetlandsQuote
+:: QuickMayorWetlandsQuote
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: SparkProjectDonationInfo
+:: SparkProjectDonationInfo
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: SparkProjectBulletinBoard
+:: SparkProjectBulletinBoard
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: GreatMarshPhoto-Crane
+:: GreatMarshPhoto-Crane
+@type Photo
+@quality Good
+@attr Color
+
+// Original Name: GoodMarshPhoto-Volunteers
+:: GoodMarshPhoto-Volunteers
+@type Photo
+@quality Good
+@attr Color
+
+// Original Name: BadMarshPhoto-Scenery
+:: BadMarshPhoto-Scenery
+@type Photo
+@quality Good
+@attr Color
+
+// Original Name: Volunteer-ImportanceOfWetlands
+:: Volunteer-ImportanceOfWetlands
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: SnakeAnecdote
+:: SnakeAnecdote
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: GreatSnakePhoto
+:: GreatSnakePhoto
 @type Photo
 @quality Great
 @attr Color
-@image BG/Limnology.jpg
 
-// Original Name: Marsh loss
+// Original Name: RushedLimnologist
+:: RushedLimnologist
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: MarshLoss
 :: MarshLoss
 @type Quote
-@quality Great
-Snippet text unimplemented.
+@quality Good
+@attr Facts, Color
 
-// Original Name: Marsh pollution
+// Original Name: MarshPollution
 :: MarshPollution
-@type Observation
-@quality Great
-Snippet text unimplemented
+@type Quote
+@quality Good
+@attr Facts, Color
 
-// Original Name: Wetlands and rainfall
+// Original Name: WetlandsAndRainfall
 :: WetlandsAndRainfall
-@type Graph
+@type Quote
 @quality Good
-Limnology graphs of wetland rainfall.
+@attr Facts, Color
 
-// Original Name: Wetlands and flooding
+// Original Name: WetlandsAndFlooding
 :: WetlandsAndFlooding
-@type Fact
-@quality Good
-Snippet text unimplemented.
-
-// Original Name: Wetlands and flooding background
-:: WetlandsAndFloodingBackground
-@type Fact
-@quality Great
-Snippet text unimplemented
-
-// Original Name: Wetland loss confirmation
-:: WetlandLossConfirmation
-@type Fact
-@quality Great
-Snippet text unimplemented.
-
-// Original Name: Wetland loss stats
-:: WetlandLossStats
-@type Graph
-@quality Good
-Snippet text unimplemented
-
-// Original Name: New development
-:: NewDevelopment
 @type Quote
 @quality Good
-Snippet text unimplemented.
+@attr Facts, Color
 
-// Original Name: Business wetlands counterpoint
-:: BusinessWetlandsCounterpoint
-@type Quote
-@quality Good
-Double-click this passage to edit it.
-
-:: MayorLakeLevelsQuote
-@type Quote
-@quality Great
-@attr Color, Facts
-Mayor Barry Zingerman is pushing to lower the lake levels. “There won’t be any town left if this flooding keeps up!” 
-
-// Original Name: Shoreline damage
-:: ShorelineDamage
+// Original Name: LimnologyWetlandStoryPhoto
+:: LimnologyWetlandStoryPhoto
 @type Photo
-@quality Great
-Photos of shoreline damage and flooding
+@quality Good
+@attr Color
 
-// Original Name: Watershed connections
-:: WatershedConnections
-@type Quote
-@quality Great
-Snippet text unimplemented
+// Original Name: WetlandsAndFloodingGraph
+:: WetlandsAndFloodingGraph
+@type Photo
+@quality Good
+@attr Facts
 
-// Original Name: Empty land
-:: EmptyLand
+// Original Name: WetlandLossConfirmation
+:: WetlandLossConfirmation
 @type Quote
 @quality Good
-Snippet text unimplemented.
+@attr Facts, Color
 
-// Original Name: Annoyed business
+// Original Name: Limnology-RemovedWetlandProtections
+:: Limnology-RemovedWetlandProtections
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: Limnology-NoProtectionsInPlace
+:: Limnology-NoProtectionsInPlace
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: LimnologyConcerned
+:: LimnologyConcerned
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: BusinessDreamComeTrue
+:: BusinessDreamComeTrue
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: BusinessVoteTomorrow
+:: BusinessVoteTomorrow
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: NewMarshAppleValley
+:: NewMarshAppleValley
+@type Quote
+@quality Good
+@attr Facts, Color
+
+// Original Name: AnnoyedBusiness
 :: AnnoyedBusiness
 @type Quote
 @quality Good
-Snippet text unimplemented.
-
-// Original Name: Governor - impact
-:: Governor-Impact
-@type Quote
-@quality Great
 @attr Facts, Color
-"I declared a State of Emergency as soon as I found out what was happening. We need to make sure Twin Lakes gets the help it needs."
 
-// Original Name: Mayor - Response
-:: GovernorComments
-@type Quote
-@quality Great
-@attr Facts, Color
-"The people of Twin Lakes are incredibly resilient," said the Governor. "Plus, I can always count on them for a good pun." 
+
+
+
+
+
+
+

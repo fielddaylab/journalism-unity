@@ -237,11 +237,11 @@ $choice TalkToCRANEDirector; Talk to Birdie
 
 // Original Name: Talk to CRANE Director
 :: TalkToCRANEDirector
-{@person}I'm glad you're here. This is deadly serious.
+{@person}I'm glad you're here. This is serious.
 {@person}This flood was just the beginning. More rain is sure to come soon.
 {@person}If we don't preserve our wetlands, Twin Lakes won't survive!
 
-$call GiveSnippet(DeadlySeriousWetlands)
+$call GiveSnippet(SeriousWetlands)
 $choice HowIsThatRelatedToTheFlooding; How are wetlands related to the flood? 
 
 // Original Name: "How is that related to the flooding?"
@@ -448,7 +448,6 @@ Almost immediately, your phone starts chiming with Squawker notifications.
 {@phone}Go back to the big city you came from!!!
 Uh oh. This interview is tanked. And so is your reputation.
 
-$call GiveSnippet(SquawkerCanceledAnecdote)
 $call AdjustStats(Trust - 2)
 
 //Original Name: ApologizeForInsultingHer
@@ -614,7 +613,7 @@ $choice MayorLimnology; Have you talked with the Limnology Department about thei
 {@person}Now if you'll excuse me, I oughta get back to work. 
 
 Well, that wasn't condescending at all... 
-$call GiveSnippet(MayorCondescendingAnswer)
+$call GiveSnippet(MayorCondescendingAnswerFinances)
 
 $choice DecideWhatToDoNext; Plan your next move 
 
@@ -629,7 +628,7 @@ $choice DecideWhatToDoNext; Plan your next move
 
 Well, that wasn't condescending at all... 
 
-$call GiveSnippet(MayorCondescendingAnswer)
+$call GiveSnippet(MayorCondescendingAnswerLimnology)
 $choice DecideWhatToDoNext; Plan your next move 
 
 //Go to City Hall
@@ -748,7 +747,7 @@ A woman smiles at you.
 {@person}But I'd really better get back to work. 
 
 Hmm. Well, this explains a lot. 
-$call GiveSnippet(SparkProjectDonationQuote)
+$call GiveSnippet(SparkProjectDonationInfo)
 
 $choice DecideWhatToDoNext; Leave City Hall and plan your next move 
 
@@ -826,6 +825,7 @@ $choice InPersonMayorLimnology; Have you talked with the Limnology Department ab
 
 Well, that wasn't condescending at all... 
 
+$call GiveSnippet(MayorCondescendingAnswerFinances)
 $HubChoice(ExploreCityHall, "Look around City Hall for someone else to talk to", 0.25)
 $choice DecideWhatToDoNext; Leave City Hall and plan your next move 
 
@@ -841,6 +841,7 @@ $choice DecideWhatToDoNext; Leave City Hall and plan your next move
 
 Well, that wasn't condescending at all... 
 
+$call GiveSnippet(MayorCondescendingAnswerLimnology)
 $HubChoice(ExploreCityHall, "Look around City Hall for someone else to talk to", 0.25)
 $choice DecideWhatToDoNext; Leave City Hall and plan your next move 
 
@@ -1202,7 +1203,7 @@ $choice DecideWhatToDoNext; Head out and plan your next move
 // Original Name: Ask her to confirm CRANE's information
 :: AskHerToConfirmCRANEsInformation
 She looks over your notes.
-{@person}Hmmm. Just one slight change here.
+{@person}Hmmm. Looks good. Just one slight change here.
 {@person}Twin Lakes has lost 70% of our wetlands, not 90%.
 {@person}Though that figure goes up if you count the surrounding counties. 
 {@me}Oh, thanks! 
@@ -1213,7 +1214,7 @@ She sends you a link to a long, complicated academic paper about wetlands and fl
 $if StatCheck(Research, 6)
 Thanks to your bookish tendencies, you should be able to knock this out by lunchtime.
 
-$call GiveSnippet(WetlandsAndFloodingBackground)
+$call GiveSnippet(WetlandsAndFloodingGraph)
 $call GiveSnippet(WetlandLossConfirmation)
 $else
 Just the thought of reading this makes you want to crawl into a hole somewhere.
