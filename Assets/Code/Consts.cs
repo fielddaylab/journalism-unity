@@ -25,6 +25,7 @@ namespace Journalism {
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments
         static public readonly StringHash32 ChoiceOptionsUpdating = "save:options-updating"; // StringHash32[] locIds
         static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated";
+        static public readonly StringHash32 ChoicesClearing = "save:choices-clearing";
         static public readonly StringHash32 ChoiceCompleted = "save:choice-completed";
     }
 }

@@ -346,9 +346,10 @@ namespace Journalism {
                         Text.Root.AnchorPosTo(Text.RootBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y),
                         AltColumn?.RectTransform.AnchorPosTo(m_AltColumnBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y).DelayBy(0.03f)
                     );
-                    
+
                     yield return GameText.AnimateLocations(Choices);
                     yield return GameText.WaitForChoice(Choices, inChoice);
+                    Game.Events.Dispatch(GameEvents.ChoicesClearing);
                     yield return GameText.AnimateVanish(Choices);
                     GameText.ClearChoices(Choices);
 

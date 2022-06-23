@@ -374,6 +374,7 @@ $else
     Maybe you could quote this, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
+    You may be a little out of shape... And you social skills could use some work.
 $endif
 
 $choice ArriveAtWork; Arrive at work.
@@ -388,12 +389,17 @@ Your good camera and zoom lens is enough to get a clear shot!
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
+
+This is a high-quality picture... Including this in my story is sure to earn me some brownie points!
+
 $else
 You snap a few phone pictures, thinking wistfully of your camera and zoom lens, buried somewhere in your apartment.  
 At least blurry cars in blurry water is better than nothing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
+Maybe this would be better if you were more tech-savvy...
+
 $endif
 
 
@@ -479,11 +485,14 @@ $if StatCheck(Social, 2)
     Luckily, you've had some practice helping stressed-out neighbors lately.  
     He vents his frustrations about the flood, and you end up with a great quote!
     $call GiveSnippet(GoodDNR)
+    My editor goes wild for high-quality quotes like these!
 $else
     The DNR worker sounds stressed out--and your out-of-towner vibe isn't helping.
     {@person}Sorry, but who are you? Are you even from here??  
     {@person}I'll give you our official statement, but then I need to run. 
     $call GiveSnippet(RehearsedDNR)
+
+    That could have gone better... Maybe you ought to be more social.
 $endif
 
 
@@ -500,11 +509,14 @@ $if Visited(JenkinssComputer)
         {@phone}I can tell you've done your research.
         {@phone}Here's some more data for your story. 
         $call GiveSnippet(DNRData)
+        This looks like some high-quality data. Including this in the story should make it even better!
     $else
         {@me}Yikes. A flood that lasts 100 years??? 
-        Wynne laughs. Apparently you got somethign wrong there. 
+        Wynne laughs. Apparently you got something wrong there. 
         {@phone}You didn't do much research, did you, Rookie?
         {@phone}I don't have time to teach you the basics today. But feel free to call again later. 
+
+        Yikes... Maybe next time, you should brush up on research beforehand.
     $endif
 
 $endif
@@ -541,6 +553,8 @@ $if Visited(HelpHer)
 
     $call GiveSnippet(PoliceSafetyQuote)
     $call GiveSnippet(PoliceStory)
+    
+    That story really ought to resonate with our readers! My editor would want me to include it.
 $else
     The officer coughs awkwardly.
     {@phone} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
@@ -577,6 +591,8 @@ $if StatCheck(Social, 2)
 
     $call GiveSnippet(FloodBackground)
     $call GiveSnippet(CityHallShock)
+
+    What a great quote... I'm sure my editor would want me to include it!
 $else
     Your city hall contact doesn't seem thrilled to hear from you.
     Come to think of it, calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
@@ -584,6 +600,8 @@ $else
     {@phone} You can check our website later.
 
     $call GiveSnippet(CityHallAnnoyance)
+
+    That didn't go too well... Maybe you need to brush up on your social skills.
 $endif
 
 
@@ -604,6 +622,8 @@ $if StatCheck(Research, 2)
     $call GiveSnippet(LibraryLot)
 $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
+    Maybe with a little more research you could look more in-depth...
+    But not today.
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
     $if HasTime(0.25)
@@ -651,10 +671,15 @@ You find a treasure trove of quotes from local scientists!
 You also dig up Jenkins's old DNR contact: Wynne D. Storme. 
 
 $call GiveSnippet(ScientistQuotes)
+
+There are some hidden gems in these old quotes...
+This type of quality should work great in my story!
 $else
 Jenkins's computer looks like it's from the stone age. Or at least the 90's. 
 
 You don't even know how to turn it on.
+
+Maybe if you were a little more tech-savvy you could crack it.
 
 But at least you find a post-it note on his desk: 
 {@article}Wynne D. Storme, flooding expert @ DNR
@@ -677,7 +702,7 @@ $else
     $if StatCheck(Tech, 3)
         You've been waiting your whole life for this moment.
         You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Gazette website (which you singlehandedly created).  
-        {@person}yikes. ok. i get the point. 
+        {@phone}yikes, ok. i get the point. you can use it.
 
         $call GiveSnippet(LibraryLot)
     $else

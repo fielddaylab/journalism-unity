@@ -58,6 +58,7 @@ namespace Journalism {
                 .Register(GameEvents.StoryEvalImpact, OnFeedbackSwapToImpact, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
                 .Register(GameEvents.ChoiceOptionsUpdated, OnChoiceOptionsUpdated, this)
+                .Register(GameEvents.ChoicesClearing, OnChoicesClearing, this)
                 .Register(GameEvents.TutorialBegin, OnTutorialBegin, this)
                 .Register(GameEvents.TutorialEnd, OnTutorialEnd, this);
 
@@ -270,6 +271,10 @@ namespace Journalism {
             }
         }
 
+        private void OnChoicesClearing() {
+            MapMarkerLoader.ClearMarkerContainer(m_BaseLayer.AltColumn.gameObject);
+        }
+
         #endregion // Events
 
         #region Columns
@@ -322,7 +327,6 @@ namespace Journalism {
 
             m_Map.Texture.Unload();
             m_Map.Texture.Path = string.Empty;
-            MapMarkerLoader.ClearMarkerContainer(m_BaseLayer.AltColumn.gameObject);
             m_Map.gameObject.SetActive(false);
         }
 
