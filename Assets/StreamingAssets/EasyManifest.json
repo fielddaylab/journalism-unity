@@ -1,7 +1,7 @@
 {
     "Assets": {
-        "__buildInfo.txt": {
-            "Type": "Unknown"
+        "Ambience/rain-inside.mp3": {
+            "Type": "Audio"
         },
         "Anim/BossPhone5.png": {
             "Type": "Texture",
@@ -9,6 +9,70 @@
                 "Width": 335,
                 "Height": 335,
                 "Alpha": true
+            }
+        },
+        "Anim/dog-rescue.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1500,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-flooding-kayak-blurry.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1500,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-flooding-kayak-good.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1046,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-flooding-kayak.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1500,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-flooding-truck-blurry.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 778,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-flooding-truck.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 778,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-recovery-blurry.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2464,
+                "Height": 3024,
+                "Alpha": false
+            }
+        },
+        "Anim/downtown-recovery.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2464,
+                "Height": 3024,
+                "Alpha": false
             }
         },
         "Anim/Editor.jpeg": {
@@ -124,19 +188,91 @@
                 "Alpha": false
             }
         },
-        "BG/Apartments.png": {
+        "Anim/flood-confusing-graphic.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 999,
-                "Height": 660,
-                "Alpha": true
+                "Width": 3584,
+                "Height": 2048,
+                "Alpha": false
             }
         },
-        "BG/BedroomMorning.jpg": {
+        "Anim/flood-probability.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1024,
-                "Height": 698,
+                "Width": 3584,
+                "Height": 2048,
+                "Alpha": false
+            }
+        },
+        "Anim/flooded-main-st.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1036,
+                "Height": 644,
+                "Alpha": false
+            }
+        },
+        "Anim/HouseExterior.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
+                "Alpha": false
+            }
+        },
+        "Anim/inspiring-downtown-recovery.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 4032,
+                "Height": 3024,
+                "Alpha": false
+            }
+        },
+        "Anim/limnology-docks.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 3044,
+                "Height": 2073,
+                "Alpha": false
+            }
+        },
+        "Anim/rainfall-stats.png": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 3584,
+                "Height": 2048,
+                "Alpha": false
+            }
+        },
+        "Anim/UpperLakeDamBad.jpeg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
+                "Alpha": false
+            }
+        },
+        "Anim/UpperLakeDamBlurry.jpeg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
+                "Alpha": false
+            }
+        },
+        "BG/Bedroom2Temp.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1627,
+                "Height": 1144,
+                "Alpha": false
+            }
+        },
+        "BG/BedroomMorning.jpeg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
                 "Alpha": false
             }
         },
@@ -188,11 +324,27 @@
                 "Alpha": false
             }
         },
-        "BG/FloodedLiminologyDept.jpg": {
+        "BG/Houseboat.png": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1024,
-                "Height": 697,
+                "Width": 1130,
+                "Height": 724,
+                "Alpha": false
+            }
+        },
+        "BG/HouseExterior.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
+                "Alpha": false
+            }
+        },
+        "BG/HouseExteriorRainy.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
                 "Alpha": false
             }
         },
@@ -201,6 +353,14 @@
             "Texture": {
                 "Width": 1024,
                 "Height": 693,
+                "Alpha": false
+            }
+        },
+        "BG/Limnology.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 1200,
+                "Height": 760,
                 "Alpha": false
             }
         },
@@ -220,19 +380,11 @@
                 "Alpha": false
             }
         },
-        "BG/Newsroom-Story1.jpg": {
+        "BG/Newsroom-Front.jpeg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1024,
-                "Height": 768,
-                "Alpha": false
-            }
-        },
-        "BG/Newsroom-Story2.jpg": {
-            "Type": "Texture",
-            "Texture": {
-                "Width": 1024,
-                "Height": 768,
+                "Width": 2084,
+                "Height": 1320,
                 "Alpha": false
             }
         },
@@ -241,6 +393,14 @@
             "Texture": {
                 "Width": 1024,
                 "Height": 660,
+                "Alpha": false
+            }
+        },
+        "BG/rainyGazette.jpg": {
+            "Type": "Texture",
+            "Texture": {
+                "Width": 2084,
+                "Height": 1320,
                 "Alpha": false
             }
         },
@@ -292,19 +452,19 @@
                 "Alpha": false
             }
         },
-        "BG/UpperLakeDam.jpg": {
+        "BG/TownTransitional.jpg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1006,
-                "Height": 768,
+                "Width": 2084,
+                "Height": 1320,
                 "Alpha": false
             }
         },
-        "BG/UpperLakeDamBoat.jpg": {
+        "BG/UpperLakeDam.jpeg": {
             "Type": "Texture",
             "Texture": {
-                "Width": 1024,
-                "Height": 614,
+                "Width": 2084,
+                "Height": 1320,
                 "Alpha": false
             }
         },
