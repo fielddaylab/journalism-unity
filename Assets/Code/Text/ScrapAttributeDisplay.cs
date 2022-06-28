@@ -20,6 +20,8 @@ namespace Journalism {
         public GameObject DividerA;
         public GameObject DividerB;
 
+        public CanvasGroup AttributeGroup;
+
         #endregion // Inspector
     }
 }

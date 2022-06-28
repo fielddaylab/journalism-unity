@@ -883,6 +883,7 @@ GameObject:
   - component: {fileID: 744511382577756207}
   - component: {fileID: 6972429406586147546}
   - component: {fileID: 3724571012211219075}
+  - component: {fileID: 5163195800910213488}
   m_Layer: 5
   m_Name: AttributeBreakdown
   m_TagString: Untagged
@@ -934,6 +935,7 @@ MonoBehaviour:
   Empty: {fileID: 6313092622365717266}
   DividerA: {fileID: 2555957076106247671}
   DividerB: {fileID: 7515974832588478934}
+  AttributeGroup: {fileID: 5163195800910213488}
 --- !u!114 &5279638024668010121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,6 +1006,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!225 &5163195800910213488
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7222941470023804966}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7287400270882566308
 GameObject:
   m_ObjectHideFlags: 0

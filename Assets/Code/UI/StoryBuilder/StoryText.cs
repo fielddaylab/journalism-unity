@@ -17,6 +17,12 @@ namespace Journalism.UI {
             slot.Data = data;
             slot.Animation.Stop();
             GameText.PopulateStoryScrap(slot.Snippet, data, Assets.Style("snippet-in-story"));
+
+            // Display updated state vs. target goals
+            IEnumerator tutorial = UISystem.SimpleTutorial("TargetInfoPopUp");
+            if (tutorial != null) {
+                Game.Scripting.Interrupt(tutorial);
+            }
         }
 
         static public void EmptySlot(StoryBuilderSlot slot) {

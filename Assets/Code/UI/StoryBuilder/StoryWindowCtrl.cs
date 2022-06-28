@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using BeauUtil.UI;
 using BeauUtil.Variants;
+using Leaf;
 
 namespace Journalism.UI {
     [RequireComponent(typeof(HeaderWindow))]
@@ -44,6 +45,10 @@ namespace Journalism.UI {
         [SerializeField] private StoryAttributeDisplay m_Distributions = null;
         [SerializeField] private StoryQualityDisplay m_CurrentQuality = null;
 
+        [Header("TargetInfoPopUp")]
+        [SerializeField] private HeaderWindow m_TargetInfoPopUpGroup = null;
+        [SerializeField] private StoryAttributeDisplay m_TargetInfoPopUpDistribution = null;
+
         #endregion // Inspector
 
         [NonSerialized] private List<StoryScrapDisplay> m_Scraps = new List<StoryScrapDisplay>();
@@ -53,6 +58,7 @@ namespace Journalism.UI {
         [NonSerialized] private StoryScrapDisplay m_SelectedScrap = null;
         [NonSerialized] private HeaderWindow m_Window;
         [NonSerialized] private Routine m_EditorNotesAnim;
+        [NonSerialized] private Routine m_TargetInfoPopUpAnim;
         [NonSerialized] private bool m_PublishMode;
         [NonSerialized] private StoryStats m_CachedStats;
 
@@ -206,20 +212,6 @@ namespace Journalism.UI {
             }
         }
 
-        /*
-        private void OnSlotClick(StoryBuilderSlot slot) {
-            if (!CanAccept(slot, m_SelectedScrap)) {
-                return;
-            }
-
-            if (SetSlot(slot, m_SelectedScrap.Data.Id)) {
-                slot.Animation.Replace(this, FlashAnimation(slot.Flash));
-                SetSelectedScrap(null);
-                Game.Audio.PlayOneShot("NotebookInsert");
-            }
-        }
-        */
-
         private void OnSlotDeleteClick(StoryBuilderSlot slot) {
             if (ClearSlot(slot)) {
                 slot.Animation.Replace(this, FlashAnimation(slot.Flash));
@@ -288,11 +280,22 @@ namespace Journalism.UI {
                 scrap.Toggle.interactable = false;
             }
             if (m_PublishMode) {
-                RefreshStats();
-                m_PublishButton.interactable = m_CachedStats.CanPublish;
+                RefreshTargetInfo();
             }
 
             return true;
+        }
+
+        private void RefreshTargetInfo() {
+            // save previous distribution
+            StoryStats prevStats = m_CachedStats;
+
+            // save current distribution
+            RefreshStats();
+            m_PublishButton.interactable = m_CachedStats.CanPublish;
+
+            // display transition from prev to curr distribution
+            m_TargetInfoPopUpAnim.Replace(this, AnimateTargetInfoOn(prevStats)).TryManuallyUpdate(0);
         }
 
         private bool ClearSlot(StoryBuilderSlot slot) {
@@ -413,6 +416,53 @@ namespace Journalism.UI {
             m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = true;
             m_Window.CanvasGroup.blocksRaycasts = true;
             m_Window.CloseButton.gameObject.SetActive(!m_PublishMode);
+        }
+
+        private IEnumerator AnimateTargetInfoOn(StoryStats prevStats) {
+            m_TargetInfoPopUpGroup.gameObject.SetActive(true);
+            m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = false;
+
+            // display previous distribution
+            GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats);
+            yield return m_TargetInfoPopUpGroup.Root.AnchorPosTo(320, 0.4f, Axis.Y).Ease(Curve.Smooth);
+
+            yield return 0.6f;
+
+            yield return AnimateTargetInfoUpdate(prevStats);
+        }
+
+        private IEnumerator AnimateTargetInfoUpdate(StoryStats prevStats) {
+            // PREVIOUS
+
+            // fade in if prev stats are empty
+            if (prevStats.ScrapCount == 0) {
+                yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, 0f);
+                GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, m_CachedStats);
+                yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(1f, .4f);
+
+                yield return 2.1f;
+            }
+            // fade out if curr stats are empty
+            else if (m_CachedStats.ScrapCount == 0) {
+                yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, .4f);
+                GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, m_CachedStats);
+
+                yield return 2.1f;
+            }
+            else {
+                GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, m_CachedStats);
+
+                yield return 2.5f;
+            }
+
+            yield return AnimateTargetInfoOff();
+        }
+
+        private IEnumerator AnimateTargetInfoOff() {
+            yield return m_TargetInfoPopUpGroup.Root.AnchorPosTo(450, 0.4f, Axis.Y).Ease(Curve.Smooth);
+
+            m_TargetInfoPopUpGroup.gameObject.SetActive(false);
+            m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = true;
         }
 
         #endregion // Animations

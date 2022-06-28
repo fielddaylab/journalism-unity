@@ -268,12 +268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd19343bb69cdab4e908f2b07c47e560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UnityEvents: {fileID: 0}
   m_Header: {fileID: 933798194502064958}
   m_HeaderWindow: {fileID: 4546681564206897443}
   m_HeaderUnderFader: {fileID: 5170645652709589393}
   m_SolidBGFader: {fileID: 4434273674109619804}
   m_GameOver: {fileID: 0}
   m_CheckpointNotification: {fileID: 1855332827055970963}
+  m_TutorialArrow: {fileID: 0}
 --- !u!114 &8092266074066116799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,28 +666,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 79831714349829902, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 79831714349829902, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 79831714349829902, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 79831714349829902, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.41774765
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 79831714349829902, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 79831714349829902, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.1645047
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 215035349033305391, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
@@ -817,6 +824,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Notes
       objectReference: {fileID: 0}
+    - target: {fileID: 226502030343694215, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 305093066687254503, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1089,28 +1101,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1457321563713460113, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457321563713460113, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1457321563713460113, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 1457321563713460113, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.41774765
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 1457321563713460113, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 1457321563713460113, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.1645047
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 1576482556433984008, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
@@ -2144,28 +2161,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5767224890690925908, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767224890690925908, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5767224890690925908, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 5767224890690925908, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.41774765
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 5767224890690925908, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 5767224890690925908, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.1645047
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 5921573921586568571, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
@@ -2319,28 +2341,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6578923642335423738, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578923642335423738, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6578923642335423738, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6578923642335423738, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.41774765
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6578923642335423738, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6578923642335423738, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.1645047
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6729353635233678432, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
@@ -2404,28 +2431,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6865617899950206031, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865617899950206031, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6865617899950206031, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6865617899950206031, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.41774765
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6865617899950206031, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6865617899950206031, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.1645047
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 6955431576779461112, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
@@ -2549,28 +2581,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7537707650004669385, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7537707650004669385, guid: 8445d4b92260acb4ba377facbd687504,
+        type: 3}
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7537707650004669385, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 7537707650004669385, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.41774765
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 7537707650004669385, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 7537707650004669385, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.1645047
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 7660363854992840163, guid: 8445d4b92260acb4ba377facbd687504,
         type: 3}

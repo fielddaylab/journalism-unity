@@ -899,6 +899,13 @@ namespace Journalism {
             PopulateStoryAttributeDistribution(display, stats.FactCount, stats.ColorCount, stats.UsefulCount);
         }
 
+        /// <summary>
+        /// For animating between two distributions
+        /// </summary>
+        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, StoryStats prevStats, StoryStats newStats) {
+            PopulateStoryAttributeDistributionAnim(display, prevStats.FactCount, prevStats.ColorCount, prevStats.UsefulCount, newStats.FactCount, newStats.ColorCount, newStats.UsefulCount);
+        }
+
         static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, int factCount, int colorCount, int usefulCount) {
             int typeCount = 0;
             if (factCount > 0) {
@@ -931,6 +938,40 @@ namespace Journalism {
 
             CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), factRatio);
             CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), factRatio + colorRatio);
+        }
+
+        static public void PopulateStoryAttributeDistributionAnim(ScrapAttributeDisplay display, int prevFactCount, int prevColorCount, int prevUsefulCount, int newFactCount, int newColorCount, int newUsefulCount) {
+            int newTypeCount = 0;
+            if (newFactCount > 0) {
+                newTypeCount++;
+            }
+            if (newColorCount > 0) {
+                newTypeCount++;
+            }
+            if (newUsefulCount > 0) {
+                newTypeCount++;
+            }
+
+            int totalNewCount = newFactCount + newColorCount + newUsefulCount;
+
+            float newFactRatio = totalNewCount == 0 ? 0 : (float)newFactCount / totalNewCount;
+            float newColorRatio = totalNewCount == 0 ? 0 : (float)newColorCount / totalNewCount;
+            float newUsefulRatio = totalNewCount == 0 ? 0 : (float)newUsefulCount / totalNewCount;
+
+            display.Facts.SetActive(newFactRatio > 0);
+            display.Color.SetActive(newColorCount > 0);
+            display.Useful.SetActive(newUsefulRatio > 0);
+            display.Empty.SetActive(totalNewCount == 0);
+
+            CanvasUtility.SetAnchorsX(display.Facts.RectTransform(), 0, newFactRatio);
+            CanvasUtility.SetAnchorsX(display.Color.RectTransform(), newFactRatio, newFactRatio + newColorRatio);
+            CanvasUtility.SetAnchorsX(display.Useful.RectTransform(), newFactRatio + newColorRatio, 1);
+
+            display.DividerA.SetActive(newTypeCount > 1);
+            display.DividerB.SetActive(newTypeCount > 2);
+
+            CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), newFactRatio);
+            CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), newFactRatio + newColorRatio);
         }
 
         static public void PopulateScrapQuality(ScrapQualityDisplay display, StoryScrapQuality quality) {
