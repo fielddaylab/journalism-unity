@@ -4,6 +4,8 @@ using BeauUtil;
 using TMPro;
 using BeauRoutine;
 using BeauPools;
+using BeauUtil.UI;
+using System;
 
 namespace Journalism {
     public sealed class TextChoiceGroup : MonoBehaviour {
@@ -25,6 +27,7 @@ namespace Journalism {
         public TextChoice DefaultBackButton = null;
         public Sprite DefaultNextIcon = null;
         public Color DefaultNextIconColor = Color.black;
+        public PointerListener FullscreenClickRegion = null;
 
         [Header("Grid")]
         public RectTransform GridRoot;
@@ -45,5 +48,12 @@ namespace Journalism {
         #endregion // Inspector
 
         public RingBuffer<ChoiceState> Choices = new RingBuffer<ChoiceState>();
+        [NonSerialized] public bool WasFullscreenClicked;
+
+        private void Awake() {
+            if (FullscreenClickRegion) {
+                FullscreenClickRegion.onClick.AddListener((_) => WasFullscreenClicked = true);
+            }
+        }
     }
 }

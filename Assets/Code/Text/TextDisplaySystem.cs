@@ -223,7 +223,7 @@ namespace Journalism {
             }
 
             Player.WriteVariable(HeaderUI.Var_NotesEnabled, true);
-            yield return GameText.WaitForDefaultNext(m_BaseLayer.Choices, Assets.DefaultStyle);
+            yield return GameText.WaitForDefaultNext(m_BaseLayer.Choices, Assets.DefaultStyle, TextAnchor.MiddleCenter, false);
         }
 
         private void OnStatsUpdated(int[] adjustments) {
