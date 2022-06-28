@@ -18,7 +18,7 @@
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
-    $choice _null; {@action} $text \
+    $choice #null; {@action} $text \
     $choose continue
 #macro GameOver(text) \
     $call GameOver() \

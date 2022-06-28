@@ -138,9 +138,9 @@ namespace Journalism {
             }
         }
 
-        public override LeafThreadHandle Run(ScriptNode node, ILeafActor actor = null, VariantTable locals = null, string name = null) {
+        public override LeafThreadHandle Run(ScriptNode node, ILeafActor actor = null, VariantTable locals = null, string name = null, bool _ = true) {
             m_CurrentThread.Kill();
-            return m_CurrentThread = base.Run(node, actor, locals, name);
+            return m_CurrentThread = base.Run(node, actor, locals, name, _);
         }
 
         public override IEnumerator ShowOptions(LeafThreadState<ScriptNode> inThreadState, LeafChoice inChoice) {
@@ -154,6 +154,11 @@ namespace Journalism {
         #endregion // Run
 
         #region Prediction
+
+        public ScriptNode PeekNode() {
+            var thread = m_CurrentThread.GetThread<LeafThreadState<ScriptNode>>();
+            return thread.PeekNode();
+        }
 
         public bool PredictChoice() {
             return LeafRuntime.PredictChoice(m_CurrentThread.GetThread());

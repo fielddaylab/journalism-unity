@@ -1,18 +1,10 @@
 using UnityEngine;
-using Leaf.Defaults;
-using Leaf;
-using Leaf.Runtime;
-using System.Collections;
-using BeauUtil.Tags;
-using BeauUtil;
 using BeauUtil.Debugger;
-using BeauUtil.Variants;
-using BeauRoutine;
-using System;
 using BeauData;
+using EasyBugReporter;
 
 namespace Journalism {
-    public sealed class SaveSystem : MonoBehaviour {
+    public sealed class SaveSystem : MonoBehaviour, IDumpSource {
         private PlayerData m_CurrentData;
 
         // TODO: Actual saving system
@@ -48,6 +40,40 @@ namespace Journalism {
             m_CurrentData = data;
             Game.Scripting.DeclareData(data);
             Game.Events.Queue(GameEvents.SaveDeclared, data);
+        }
+
+        bool IDumpSource.Dump(IDumpWriter dump) {
+            dump.Header("Stats");
+            for(int stat = 0; stat < Stats.Count; stat++) {
+                StatId id = (StatId) stat;
+                dump.KeyValue(Stats.Name(id), Player.Stat(id));
+            }
+
+            dump.Header("Story Inventory");
+            foreach(var scrap in Player.Data.StoryScrapInventory) {
+                dump.Text(scrap.ToDebugString());
+            }
+
+            dump.Header("Time");
+            dump.KeyValue("Time Remaining", Player.TimeRemaining());
+            dump.Header("Location");
+            dump.KeyValue("Location Id", Player.Location().ToDebugString());
+
+            dump.Header("Custom Vars (Global)");
+            foreach(var value in Player.Data.GlobalTable) {
+                dump.Text(value.ToDebugString());
+            }
+
+            dump.Header("Custom Vars (UI)");
+            foreach(var value in Player.Data.UITable) {
+                dump.Text(value.ToDebugString());
+            }
+
+            dump.Header("Visited Nodes");
+            foreach(var node in Player.Data.VisitedNodeIds) {
+                dump.Text(node.ToDebugString());
+            }
+            return true;
         }
     }
 }

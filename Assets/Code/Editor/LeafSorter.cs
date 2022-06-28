@@ -232,7 +232,7 @@ namespace Journalism {
             {
                 EditorUtility.DisplayProgressBar("Analyzing all node ids", "Reading Leaf File", 0);
                 HashSet<StringHash32> sourceNodeIds = new HashSet<StringHash32>();
-                var script = BlockParser.Parse("src", File.ReadAllText(TwineConversion.LeafFilePath), BlockParsingRules.Default, Script.Parser);
+                var script = BlockParser.Parse(File.OpenRead(TwineConversion.LeafFilePath), BlockParsingRules.Default, Script.Parser);
                 foreach(var node in script) {
                     sourceNodeIds.Add(node.Id());
                 }
@@ -266,7 +266,7 @@ namespace Journalism {
             where TBlock : class, IDataBlock
             where TPackage : class, IDataBlockPackage<TBlock>
         {
-            var data = BlockParser.Parse("data", File.ReadAllText(filePath), BlockParsingRules.Default, parser);
+            var data = BlockParser.Parse(File.OpenRead(filePath), BlockParsingRules.Default, parser);
             if (data != null) {
                 foreach(var node in data) {
                     ids.Remove(getId(node));

@@ -11,9 +11,10 @@ using BeauRoutine;
 using System;
 using UnityEngine.Scripting;
 using Journalism.UI;
+using EasyBugReporter;
 
 namespace Journalism {
-    public sealed class ScriptSystem : MonoBehaviour {
+    public sealed class ScriptSystem : MonoBehaviour, IDumpSource {
 
         #region Inspector
 
@@ -287,5 +288,12 @@ namespace Journalism {
         }
 
         #endregion // Leaf
+
+        bool IDumpSource.Dump(IDumpWriter writer) {
+            writer.Header("Leaf State");
+            writer.KeyValue("Current Level", m_CurrentLevel?.name);
+            writer.KeyValue("Current Node", m_Integration.PeekNode()?.Id().ToDebugString());
+            return true;
+        }
     }
 }
