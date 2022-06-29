@@ -440,7 +440,7 @@ namespace Journalism.UI {
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, 0f);
 
                 m_RedistributionAnim.Replace(this,
-                    GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0.4f))
+                    GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0f))
                     .TryManuallyUpdate(0);
                 
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(1f, .4f);
