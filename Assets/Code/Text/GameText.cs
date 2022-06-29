@@ -902,8 +902,8 @@ namespace Journalism {
         /// <summary>
         /// For animating between two distributions
         /// </summary>
-        static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, StoryStats prevStats, StoryStats newStats) {
-            PopulateStoryAttributeDistributionAnim(display, prevStats.FactCount, prevStats.ColorCount, prevStats.UsefulCount, newStats.FactCount, newStats.ColorCount, newStats.UsefulCount);
+        static public IEnumerator PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, StoryStats prevStats, StoryStats newStats, float inTime) {
+            yield return PopulateStoryAttributeDistributionAnim(display, prevStats.FactCount, prevStats.ColorCount, prevStats.UsefulCount, newStats.FactCount, newStats.ColorCount, newStats.UsefulCount, inTime);
         }
 
         static public void PopulateStoryAttributeDistribution(ScrapAttributeDisplay display, int factCount, int colorCount, int usefulCount) {
@@ -925,7 +925,7 @@ namespace Journalism {
             float usefulRatio = totalCount == 0 ? 0 : (float) usefulCount / totalCount;
 
             display.Facts.SetActive(factRatio > 0);
-            display.Color.SetActive(colorCount > 0);
+            display.Color.SetActive(colorRatio > 0);
             display.Useful.SetActive(usefulRatio > 0);
             display.Empty.SetActive(totalCount == 0);
 
@@ -936,11 +936,27 @@ namespace Journalism {
             display.DividerA.SetActive(typeCount > 1);
             display.DividerB.SetActive(typeCount > 2);
 
-            CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), factRatio);
+            if (factRatio > 0) {
+                CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), factRatio);
+            }
+            else {
+                CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), colorRatio);
+            }
             CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), factRatio + colorRatio);
         }
 
-        static public void PopulateStoryAttributeDistributionAnim(ScrapAttributeDisplay display, int prevFactCount, int prevColorCount, int prevUsefulCount, int newFactCount, int newColorCount, int newUsefulCount) {
+        static public IEnumerator PopulateStoryAttributeDistributionAnim(ScrapAttributeDisplay display, int prevFactCount, int prevColorCount, int prevUsefulCount, int newFactCount, int newColorCount, int newUsefulCount, float inTime) {
+            #region Previous
+
+            int totalPrevCount = prevFactCount + prevColorCount + prevUsefulCount;
+
+            float prevFactRatio = totalPrevCount == 0 ? 0 : (float)prevFactCount / totalPrevCount;
+            float prevColorRatio = totalPrevCount == 0 ? 0 : (float)prevColorCount / totalPrevCount;
+
+            #endregion // Previous
+
+            #region New
+
             int newTypeCount = 0;
             if (newFactCount > 0) {
                 newTypeCount++;
@@ -958,20 +974,61 @@ namespace Journalism {
             float newColorRatio = totalNewCount == 0 ? 0 : (float)newColorCount / totalNewCount;
             float newUsefulRatio = totalNewCount == 0 ? 0 : (float)newUsefulCount / totalNewCount;
 
+            #endregion // New
+
             display.Facts.SetActive(newFactRatio > 0);
-            display.Color.SetActive(newColorCount > 0);
+            display.Color.SetActive(newColorRatio > 0);
             display.Useful.SetActive(newUsefulRatio > 0);
             display.Empty.SetActive(totalNewCount == 0);
-
-            CanvasUtility.SetAnchorsX(display.Facts.RectTransform(), 0, newFactRatio);
-            CanvasUtility.SetAnchorsX(display.Color.RectTransform(), newFactRatio, newFactRatio + newColorRatio);
-            CanvasUtility.SetAnchorsX(display.Useful.RectTransform(), newFactRatio + newColorRatio, 1);
 
             display.DividerA.SetActive(newTypeCount > 1);
             display.DividerB.SetActive(newTypeCount > 2);
 
-            CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), newFactRatio);
-            CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), newFactRatio + newColorRatio);
+            float factStep = (newFactRatio - prevFactRatio) / inTime;
+            float colorStep = (newColorRatio - prevColorRatio) / inTime;
+
+            float stepFactRatio = prevFactRatio;
+            float stepColorRatio = prevColorRatio;
+
+            bool factComplete = (factStep < 0 && stepFactRatio <= newFactRatio) || (factStep >= 0 && stepFactRatio >= newFactRatio);
+            bool colorComplete = (colorStep < 0 && stepColorRatio <= newColorRatio) || (colorStep >= 0 && stepColorRatio >= newColorRatio);
+
+            while (!factComplete || !colorComplete) {
+                // Resize Fact
+                if (!factComplete) {
+                    stepFactRatio += factStep * Routine.DeltaTime;
+
+                    // if has reached final bounds
+                    if ((factStep < 0 && stepFactRatio <= newFactRatio) || (factStep >= 0 && stepFactRatio >= newFactRatio)) {
+                        factComplete = true;
+                        stepFactRatio = newFactRatio;
+                    }
+                }
+                // Resize Color
+                if (!colorComplete) {
+                    stepColorRatio += colorStep * Routine.DeltaTime;
+
+                    // if has reached final bounds
+                    if (colorComplete = (colorStep < 0 && stepColorRatio <= newColorRatio) || (colorStep >= 0 && stepColorRatio >= newColorRatio)) {
+                        colorComplete = true;
+                        stepColorRatio = newColorRatio;
+                    }
+                }
+
+                CanvasUtility.SetAnchorsX(display.Facts.RectTransform(), 0, stepFactRatio);
+                CanvasUtility.SetAnchorsX(display.Color.RectTransform(), stepFactRatio, stepFactRatio + stepColorRatio);
+                CanvasUtility.SetAnchorsX(display.Useful.RectTransform(), stepFactRatio + stepColorRatio, 1);
+
+                if (newFactRatio > 0) {
+                    CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), stepFactRatio);
+                }
+                else {
+                    CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), stepColorRatio);
+                }
+                CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), stepFactRatio + stepColorRatio);
+
+                yield return null;
+            }             
         }
 
         static public void PopulateScrapQuality(ScrapQualityDisplay display, StoryScrapQuality quality) {

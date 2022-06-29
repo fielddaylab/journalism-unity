@@ -59,6 +59,7 @@ namespace Journalism.UI {
         [NonSerialized] private HeaderWindow m_Window;
         [NonSerialized] private Routine m_EditorNotesAnim;
         [NonSerialized] private Routine m_TargetInfoPopUpAnim;
+        [NonSerialized] private Routine m_RedistributionAnim;
         [NonSerialized] private bool m_PublishMode;
         [NonSerialized] private StoryStats m_CachedStats;
 
@@ -437,7 +438,11 @@ namespace Journalism.UI {
             // fade in if prev stats are empty
             if (prevStats.ScrapCount == 0) {
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, 0f);
-                GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, m_CachedStats);
+
+                m_RedistributionAnim.Replace(this,
+                    GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0.4f))
+                    .TryManuallyUpdate(0);
+                
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(1f, .4f);
 
                 yield return 2.1f;
@@ -445,12 +450,17 @@ namespace Journalism.UI {
             // fade out if curr stats are empty
             else if (m_CachedStats.ScrapCount == 0) {
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, .4f);
-                GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, m_CachedStats);
+
+                m_RedistributionAnim.Replace(this,
+                    GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0.4f))
+                    .TryManuallyUpdate(0);
 
                 yield return 2.1f;
             }
             else {
-                GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, m_CachedStats);
+                m_RedistributionAnim.Replace(this,
+                    GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0.4f))
+                    .TryManuallyUpdate(0);
 
                 yield return 2.5f;
             }
