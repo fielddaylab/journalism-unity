@@ -422,6 +422,7 @@ namespace Journalism.UI {
         private IEnumerator AnimateTargetInfoOn(StoryStats prevStats) {
             m_TargetInfoPopUpGroup.gameObject.SetActive(true);
             m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = false;
+            GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Target, Assets.CurrentLevel.Story);
 
             // display previous distribution
             GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats);
