@@ -988,14 +988,32 @@ namespace Journalism {
             display.DividerA.SetActive(newTypeCount > 1);
             display.DividerB.SetActive(newTypeCount > 2);
 
-            float factStep = (newFactRatio - prevFactRatio) / inTime;
+            if (Mathf.Approximately(inTime, 0f)) {
+                // no transition necessary
+
+                CanvasUtility.SetAnchorsX(display.Facts.RectTransform(), 0, newFactRatio);
+                CanvasUtility.SetAnchorsX(display.Color.RectTransform(), newFactRatio, newFactRatio + newColorRatio);
+                CanvasUtility.SetAnchorsX(display.Useful.RectTransform(), newFactRatio + newColorRatio, 1);
+
+                if (newFactRatio > 0) {
+                    CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), newFactRatio);
+                }
+                else {
+                    CanvasUtility.SetAnchorX(display.DividerA.RectTransform(), newColorRatio);
+                }
+                CanvasUtility.SetAnchorX(display.DividerB.RectTransform(), newFactRatio + newColorRatio);
+
+                yield break;
+            }
+
+            float factStep =  (newFactRatio - prevFactRatio) / inTime;
             float colorStep = (newColorRatio - prevColorRatio) / inTime;
 
             float stepFactRatio = prevFactRatio;
             float stepColorRatio = prevColorRatio;
 
-            bool factComplete = (factStep < 0 && stepFactRatio <= newFactRatio) || (factStep >= 0 && stepFactRatio >= newFactRatio);
-            bool colorComplete = (colorStep < 0 && stepColorRatio <= newColorRatio) || (colorStep >= 0 && stepColorRatio >= newColorRatio);
+            bool factComplete = factStep == 0 ? true : (factStep < 0 && stepFactRatio <= newFactRatio) || (factStep >= 0 && stepFactRatio >= newFactRatio);
+            bool colorComplete = colorStep == 0 ? true : (colorStep < 0 && stepColorRatio <= newColorRatio) || (colorStep >= 0 && stepColorRatio >= newColorRatio);
 
             while (!factComplete || !colorComplete) {
                 // Resize Fact
