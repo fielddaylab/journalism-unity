@@ -10,6 +10,7 @@ using BeauRoutine;
 using BeauPools;
 using System;
 using Journalism.UI;
+using BeauUtil.UI;
 
 namespace Journalism {
     public sealed class TextDisplayLayer : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
@@ -269,7 +270,7 @@ namespace Journalism {
             if (m_AutoContinue >= 0) {
                 yield return m_AutoContinue;
             } else {
-                yield return GameText.WaitForDefaultNext(Choices, Assets.Style("action"), GetDefaultChoiceAnchor());
+                yield return GameText.WaitForDefaultNext(Choices, Assets.Style("action"), GetDefaultChoiceAnchor(), true);
             }
         }
 
@@ -392,6 +393,14 @@ namespace Journalism {
                     return TextAnchor.MiddleCenter;
                 }
             }
+        }
+
+        private bool? GetAllowFullscreenInput() {
+            if (m_RequireInputForPlayerText) {
+                return false;
+            }
+
+            return null;
         }
 
         #endregion // IChoiceDisplayer

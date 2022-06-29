@@ -11,6 +11,9 @@ using BeauUtil.Tags;
 using Leaf;
 using BeauUtil.Variants;
 using Journalism.UI;
+using BeauUtil.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace Journalism {
     static public class GameText {
@@ -776,13 +779,13 @@ namespace Journalism {
 
         #region Defaults
 
-        static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter, bool? overrideAllowFullScreen = null) {
+        static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter, bool allowFullscreenInput = true) {
             PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, 0, true);
             CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, overrideAllowFullScreen.GetValueOrDefault(true), -0.1f, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices, choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, -0.1f, allowFullscreenInput, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
@@ -791,7 +794,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, false, 0.4f, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices, choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, 0.4f, false, choices.VanishAnimParams);
         }
 
         static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
@@ -803,12 +806,13 @@ namespace Journalism {
             future.Complete(choices.DefaultNextButton.Selected);
         }
 
-        static public IEnumerator WaitForButtonOrSkip(TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, bool allowClickAnywhere, float holdDelay, TweenSettings vanishAnimParams) {
+        static public IEnumerator WaitForButtonOrSkip(TextChoiceGroup choices, TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, float holdDelay, bool allowFullscreenInput, TweenSettings vanishAnimParams) {
             using(Routine fadeIn = fade.FadeTo(1, newAnimParams.Time / 2).Play()) {
                 fade.blocksRaycasts = true;
                 button.Selected = false;
+                choices.WasFullscreenClicked = false;
                 float spaceDelay = newAnimParams.Time + holdDelay;
-                while(!button.Selected && !(spaceDelay <= 0 && Input.GetKey(KeyCode.Space)) && !(allowClickAnywhere && Input.GetMouseButtonDown(0) && !Game.UI.Header.AnyOpen())) {
+                while(!button.Selected && !(allowFullscreenInput && choices.WasFullscreenClicked) && !(spaceDelay <= 0 && Input.GetKey(KeyCode.Space))) {
                     yield return null;
                     if (spaceDelay > 0) {
                         spaceDelay -= Time.deltaTime;

@@ -215,11 +215,11 @@ namespace BeauUtil.Extensions {
         /// Struct for holding a method and its binding.
         /// </summary>
         private struct Handler {
-            private UnityEngine.Object m_Binding;
+            private int m_BindingInstanceId;
             private CastableAction<TArg> m_Action;
 
             public Handler(CastableAction<TArg> action, UnityEngine.Object binding) {
-                m_Binding = binding;
+                m_BindingInstanceId = !ReferenceEquals(binding, null) ? binding.GetInstanceID() : 0;
                 m_Action = action;
             }
 
@@ -228,7 +228,7 @@ namespace BeauUtil.Extensions {
             }
 
             public bool MatchesBinding(UnityEngine.Object binding) {
-                return m_Binding.IsReferenceEquals(binding);
+                return !ReferenceEquals(binding, null) ? m_BindingInstanceId == binding.GetInstanceID() : m_BindingInstanceId == 0;
             }
 
             public bool MatchesAction(Action action) {

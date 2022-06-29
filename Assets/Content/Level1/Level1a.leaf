@@ -18,7 +18,7 @@
 #macro ContinueChoice(text) \
     {force-input} $text
 #macro ActionChoice(text) \
-    $choice _null; {@action} $text \
+    $choice #null; {@action} $text \
     $choose continue
 #macro GameOver(text) \
     $call GameOver() \
@@ -96,7 +96,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
 {clear-text}
-{bg BG/HouseExteriorRainy.jpg}
+{bg BG/HouseExtRainV2.mp4}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
 You help her find batteries for her flashlight and put out some food for her cats. 
@@ -113,7 +113,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 {clear-text}
-{bg BG/HouseExteriorRainy.jpg}
+{bg BG/HouseExtRainV2.mp4}
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
 Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
@@ -124,7 +124,7 @@ $choice OffToWork; Off to work
 // Original Name: Dig through the fridge for something nourishing
 :: DigThroughTheFridgeForSomethingNourishing
 {clear-text}
-{bg BG/HouseExteriorRainy.jpg}
+{bg BG/HouseExtRainV2.mp4}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and pack up some cherry granola for later. 
@@ -134,7 +134,7 @@ $choice OffToWork; Off to work
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 {clear-text}
-{bg BG/HouseExteriorRainy.jpg}
+{bg BG/HouseExtRainV2.mp4}
 You scroll through posts on Squawker.
 
 {img Photo/HospitalDucks.jpg}
@@ -195,7 +195,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-{img Anim/enml-escapedchicken.jpg}
+{img Anim/Chicken3.mp4}
 Maureen's chickens wake you up at an ungodly hour every. single. day. 
 But on the other hand, they are pretty cute. 
 
@@ -286,7 +286,7 @@ $choice ArriveAtWork; Rush to work
 {layout Left}
 {/img}
 $call SetLocation("Newsroom")
-{bg BG/rainyGazette.jpg}
+{bg BG/GazetteExtRainV2.mp4}
 $call Ambience(Ambience/rain-inside.mp3)
 
 Your editor greets you at the door.

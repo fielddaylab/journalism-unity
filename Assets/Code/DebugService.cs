@@ -11,6 +11,7 @@ using BeauUtil;
 using BeauUtil.Debugger;
 using BeauUtil.Services;
 using EasyAssetStreaming;
+using EasyBugReporter;
 using Journalism.UI;
 using TMPro;
 using UnityEngine;
@@ -45,6 +46,8 @@ namespace Journalism {
         [NonSerialized] private bool m_VisibilityWhenDebugMenuOpened;
         [NonSerialized] private uint m_LastKnownStreamingCount;
         [NonSerialized] private long m_LastKnownStreamingMem;
+        
+        private DumpSourceCollection m_ContextReporters;
 
         private void Start() {
             s_Instance = this;
@@ -82,6 +85,14 @@ namespace Journalism {
             #else
             SetMinimalLayer(true);
             #endif // PREVIEW
+
+            m_ContextReporters = new DumpSourceCollection();
+            m_ContextReporters.Add(new ScreenshotContext());
+            m_ContextReporters.Add(new UnityContext());
+            m_ContextReporters.Add(new LogContext());
+            m_ContextReporters.Add(new SystemInfoContext());
+
+            m_ContextReporters.Initialize();
         }
 
         private void LateUpdate() {
@@ -121,6 +132,10 @@ namespace Journalism {
                 } else if (Input.GetKeyDown(KeyCode.Alpha0)) {
                     SetTimescale(1);
                 }
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F9) && Input.GetKey(KeyCode.LeftControl)) {
+                BugReporter.DumpContext(m_ContextReporters);
             }
         }
 

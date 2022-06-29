@@ -22,7 +22,7 @@ namespace Journalism {
         [Header("Transitions")]
         [SerializeField] private float m_DefaultCrossfadeDuration = 0.5f;
         [SerializeField] private ColorGroup m_FullScreenSolid = null;
-    
+
         #endregion // Inspector
 
         [NonSerialized] private StreamingQuadTexture m_CurrentBackgroundTexture = null;
