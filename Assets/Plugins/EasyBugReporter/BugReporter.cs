@@ -254,7 +254,7 @@ namespace EasyBugReporter {
 
         static private DumpFlags GetPlatformFlags(DumpFlags flags) {
             #if UNITY_WEBGL && !UNITY_EDITOR
-            flags |= GatherContextFlags.InMemory;
+            flags |= DumpFlags.InMemory;
             #endif // UNITY_WEBGL
             return flags;
         }
