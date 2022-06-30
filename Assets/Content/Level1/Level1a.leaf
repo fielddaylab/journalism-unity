@@ -374,7 +374,7 @@ $else
     Maybe you could quote this, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
-    You may be a little out of shape... And you social skills could use some work.
+    You may be a little low on  <color="purple">endurance</color>... And your <color="purple">social</color> skills could use some work.
 $endif
 
 $choice ArriveAtWork; Arrive at work.
@@ -384,7 +384,7 @@ $choice ArriveAtWork; Arrive at work.
 {clear-text}
 
 $if StatCheck(Tech, 2)
-Good thing you thought to grab all this tech gear. 
+Good thing you thought to grab all this <color="purple">tech</color> gear! 
 Your good camera and zoom lens is enough to get a clear shot!
 
 $call SFX(PhotoSnap)
@@ -398,7 +398,7 @@ At least blurry cars in blurry water is better than nothing.
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
-Maybe this would be better if you were more tech-savvy...
+Maybe this would be better if you were more <color="purple">tech</color>-savvy...
 
 $endif
 
@@ -492,7 +492,7 @@ $else
     {@person}I'll give you our official statement, but then I need to run. 
     $call GiveSnippet(RehearsedDNR)
 
-    That could have gone better... Maybe you ought to be more social.
+    Sheesh... maybe you ought to be more <color="purple">social</color>.
 $endif
 
 
@@ -516,7 +516,7 @@ $if Visited(JenkinssComputer)
         {@phone}You didn't do much research, did you, Rookie?
         {@phone}I don't have time to teach you the basics today. But feel free to call again later. 
 
-        Yikes... Maybe next time, you should brush up on research beforehand.
+        Yikes... Maybe next time, you should brush up on <color="purple">research</color> beforehand.
     $endif
 
 $endif
@@ -601,7 +601,8 @@ $else
 
     $call GiveSnippet(CityHallAnnoyance)
 
-    That didn't go too well... Maybe you need to brush up on your social skills.
+    That didn't go too well... 
+    ...maybe you need to brush up on your <color="purple">social</color> skills.
 $endif
 
 
@@ -622,7 +623,7 @@ $if StatCheck(Research, 2)
     $call GiveSnippet(LibraryLot)
 $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
-    Maybe with a little more research you could look more in-depth...
+    Maybe with a little more <color="purple">research</color> you could look more in-depth...
     But not today.
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
@@ -679,7 +680,7 @@ Jenkins's computer looks like it's from the stone age. Or at least the 90's.
 
 You don't even know how to turn it on.
 
-Maybe if you were a little more tech-savvy you could crack it.
+Maybe if you were a little more <color="purple">tech</color>-savvy you could crack it.
 
 But at least you find a post-it note on his desk: 
 {@article}Wynne D. Storme, flooding expert @ DNR
@@ -708,6 +709,9 @@ $else
     $else
         You don't have time for this. You log off and snap a picture of the flooded parking lot outside the newsroom. 
         Kinda boring, but it's better than nothing. Probably.
+
+        Maybe you could have navigated that better if you knew more about <color="purple">tech</color>... 
+        ...or earned people's <color="purple">trust</color>.
 
         $call SFX(PhotoSnap)
         $call GiveSnippet(GrainyPicture)
