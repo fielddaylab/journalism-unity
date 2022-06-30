@@ -247,281 +247,324 @@ The city could change things with new policies: funding for storm drains, rain g
 @type Quote
 @quality Good
 @attr Facts
+According to weather reports from the time, flash flooding increased sharply after a community center was built atop Sugar Marsh.
 
 // Original Name: Librarian Quote
 :: LibrarianQuote
 @type Quote
 @quality Good
-@attr Color
+@attr Facts, Color
+"Sugar Marsh used to be right where we're standing," says one local librarian. "Sometimes I wonder if they could've built it somewhere else."
 
 // Original Name: Serious Wetlands
 :: SeriousWetlands
 @type Quote
 @quality Good
-@attr Facts
+@attr Facts, Color
+"This is serious,"  says local conservation advocate Birdie Vance. "If we don't preserve our wetlands, Twin Lakes won't survive!"
 
 // Original Name: Wetlands Related to Flooding
 :: WetlandsRelatedToFlooding
 @type Quote
 @quality Good
 @attr Facts
+Conservationists say the wetlands soak up water like a sponge, preventing flash floods. But now 90% of those wetlands are gone.
 
 // Original Name: Wetland Definition
 :: WetlandDefinition
 @type Quote
 @quality Bad
 @attr Facts
+"Wetlands are areas where water covers the soil, for at least part of the year."
 
 // Original Name: ConnectedWatershed
 :: ConnectedWatershed
 @type Quote
 @quality Good
 @attr Facts
+CRANE director Birdie Vance says the wetlands are just as important as the lakes. "The whole watershed is connected: every part has its role."
 
 // Original Name: What Happened to Wetlands 
 :: WhatHappenedToWetlands
 @type Quote
 @quality Good
 @attr Facts
+Wetlands in the Twin Lakes area have been shrinking to make way for parking lots and apartment complexes.
 
 // Original Name: Wetland Policy 
 :: WetlandPolicy
-@type Quote
-@quality Good
-@attr Facts
+@type Fact
+@quality Great
+@attr Facts, Useful
+City Hall is holding a vote tomorrow concerning the development of Cherry Creek Marsh wetlands.
 
 // Original Name: Wetland Town Hall Meeting
 :: WetlandTownHallMeeting
 @type Quote
 @quality Good
-@attr Facts 
+@attr Facts, Useful
+Conservationists have gone unheard in City Hall meetings concerning wetland development. The final vote occurs tomorrow.
 
 // Original Name: Awful Spark Project
 :: AwfulSparkProject
 @type Quote
 @quality Good
 @attr Color
+CRANE, a local conservation organization, opposes the Spark Project. "They would literally pave over paradise to build a bagel shop."
 
 // Original Name: Playground Initiative Quote
 :: PlaygroundInitiativeQuote
-@type Quote
+@type Fact
 @quality Good
 @attr Facts, Color
+The Spark Project is planning to fund the development of new playgrounds in every neighborhood of Twin Lakes.
 
 // Original Name: Replace Marsh With Low Income Apartments
 :: ReplaceMarshWithLowIncomeApartments
 @type Quote
 @quality Good
 @attr Facts 
+The Spark Project has proposed to build low-income apartments on the site of Cherry Creek Marsh.
 
 // Original Name: Sugar Marsh Replaced With Library
 :: SugarMarshReplacedWithLibrary
 @type Quote
 @quality Good
 @attr Facts
+Years ago, Sugar Marsh was paved over to make room for the library.
 
 // Original Name: New Development Puts Twin Lakes On The Map
 :: NewDevelopmentPutsTwinLakesOnTheMap
 @type Quote
 @quality Good
 @attr Color
+The Spark Project is pushing for development of the Cherry Creek marsh area. Leader Nancy Gilcrest says this will put Twin Lakes on the map.
 
 // Original Name: NY Built on Swamp
 :: NewYorkBuiltOnSwamp
 @type Quote
 @quality Good
 @attr Color
+Though the Spark Project plans to develop on a swamp, leader Nancy Gilcrest is quick to mention New York City's similar history.
 
 // Original Name: PerfectPlaceForApartments
 :: PerfectPlaceForApartments
 @type Quote
-@quality Good
+@quality Bad
 @attr Color
+Nancy Gilcrest, head of the Spark Project, chose to develop on Cherry Creek Marsh for its secluded location.
+
+:: NoFloodPlan
+@type Fact
+@quality Great
+@attr Color, Facts
+Spark Project representative Nancy Gilcrest appears to have no flood plan for the new development, should weather events continue to worsen.
 
 // Original Name: MayorSupportOfNewDevelopment
 :: MayorSupportOfNewDevelopment
 @type Quote
 @quality Good
 @attr Facts, Color
+"I support the new development because I love seeing this town grow," says Mayor Zingerman.
 
 // Original Name: MayorOtherOptionsToPreventFlooding
 :: MayorOtherOptionsToPreventFlooding
 @type Quote
 @quality Good
 @attr Facts, Color
+Mayor Barry Zingerman acknowledges the role of wetlands, but favors engineered solutions.
 
 // Original Name: MayorOtherWildlifeAreas
 :: MayorOtherWildlifeAreas
 @type Quote
 @quality Good
 @attr Facts, Color
+Twin Lakes Mayor isn't concerned about the loss of marsh wildlife, citing the forested areas outside of town.
 
 // Original Name: MayorFloodInsurance
 :: MayorFloodInsurance
 @type Quote
-@quality Good
+@quality Great
 @attr Facts, Color
+Mayor Zingerman dismissed concerns about flooding in new developments, suggesting "the renters can buy flood insurance."
 
 // Original Name: MayorCondescendingAnswerFinances
 :: MayorCondescendingAnswerFinances
 @type Quote
 @quality Good
 @attr Facts, Color
+Mayor Zingerman has disclosed that the Spark Project donated to his mayoral campaign, but claims "it has nothing to do with the Cherry Creek Marsh project."
 
 // Original Name: MayorCondescendingAnswerLimnology
 :: MayorCondescendingAnswerLimnology
 @type Quote
-@quality Good
-@attr Facts, Color
+@quality Great
+@attr Color
+The mayor is not aware of flooding research conducted by Twin Lakes University's Limnology Department. "I'm too busy to research every issue and educate the public."
 
 // Original Name: QuickMayorWetlandsQuote
 :: QuickMayorWetlandsQuote
 @type Quote
 @quality Good
 @attr Facts, Color
+The mayor is more focused on the flood capacity of lakes than wetlands, saying "My understanding is that lakes are the most crucial part of flood prevention."
 
 // Original Name: SparkProjectDonationInfo
 :: SparkProjectDonationInfo
-@type Quote
+@type Fact
 @quality Good
 @attr Facts, Color
+Mayor Barry Zingerman met with Spark Project leadership for a luncheon today, discussing their donation to city public works programs.
 
 // Original Name: SparkProjectBulletinBoard
 :: SparkProjectBulletinBoard
-@type Quote
-@quality Good
+@type Fact
+@quality Bad
 @attr Facts, Color
+According to a bulletin board in City Hall, the Spark Project made a donation to Twin Lakes public works.
 
 // Original Name: GreatMarshPhoto-Crane
 :: GreatMarshPhoto-Crane
 @type Photo
-@quality Good
+@quality Great
 @attr Color
+//TODO: Insert marsh photo here
 
 // Original Name: GoodMarshPhoto-Volunteers
 :: GoodMarshPhoto-Volunteers
 @type Photo
 @quality Good
 @attr Color
+//TODO: Insert marsh volunteer photo here
 
 // Original Name: BadMarshPhoto-Scenery
 :: BadMarshPhoto-Scenery
 @type Photo
 @quality Good
 @attr Color
+//TODO: Insert bad marsh photo here
 
 // Original Name: Volunteer-ImportanceOfWetlands
 :: Volunteer-ImportanceOfWetlands
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Color
+Cherry Creek Marsh is important to local volunteer Seth McPhee. "My kids love exploring here. It's part of what makes Twin Lakes so magical."
 
 // Original Name: SnakeAnecdote
 :: SnakeAnecdote
 @type Quote
 @quality Good
 @attr Facts, Color
+Volunteers at Cherry Creek Marsh navigate snakes and poison ivy to preserve and replant native species.
 
 // Original Name: GreatSnakePhoto
 :: GreatSnakePhoto
 @type Photo
 @quality Great
 @attr Color
+//TODO: add picture of a snake next to a volunteer
 
 // Original Name: RushedLimnologist
 :: RushedLimnologist
 @type Quote
-@quality Good
+@quality Bad
 @attr Facts, Color
+Local limnologists say paving over the Cherry Creek Marsh would harm rainwater absorption and increase flooding.
 
 // Original Name: MarshLoss
 :: MarshLoss
-@type Quote
+@type Fact
 @quality Good
 @attr Facts, Color
+Local volunteer Seth McPhee laments the loss of marshland west of Twin Lakes. "It's a golf course now, 28 holes, and not a speck of wildlife."
 
 // Original Name: MarshPollution
 :: MarshPollution
 @type Quote
 @quality Good
 @attr Facts, Color
+According to local volunteer Seth McPhee, the storm has washed "lawn chemicals, trash, and debris" into Cherry Creek Marsh.
 
 // Original Name: WetlandsAndRainfall
 :: WetlandsAndRainfall
-@type Quote
+@type Fact
 @quality Good
-@attr Facts, Color
+@attr Facts
+The Limnology Department website is clear: "We can't control rainfall, but by preserving our marshland we can mitigate its worst effects."
 
 // Original Name: WetlandsAndFlooding
 :: WetlandsAndFlooding
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Facts
+Twin Lakes University's Department of Limnology has tracked an increase in flood events alongside a decrease in native marshland.
 
 // Original Name: LimnologyWetlandStoryPhoto
 :: LimnologyWetlandStoryPhoto
 @type Photo
 @quality Good
 @attr Color
+//TODO: add photo
 
 // Original Name: WetlandsAndFloodingGraph
 :: WetlandsAndFloodingGraph
-@type Photo
+@type Graph
 @quality Good
 @attr Facts
+//TODO: add graph
 
 // Original Name: WetlandLossConfirmation
 :: WetlandLossConfirmation
 @type Quote
 @quality Good
 @attr Facts, Color
+Twin Lakes' foremost wetlands ecologists have confirmed that 70% of our local wetlands have disappeared.
 
 // Original Name: Limnology-RemovedWetlandProtections
 :: Limnology-RemovedWetlandProtections
 @type Quote
-@quality Good
+@quality Great
 @attr Facts, Color
+A few years ago, City Hall voted to loosen regulations on wetland development: but local ecologists say the city has yet to produce a satisfactory replacement.
 
 // Original Name: Limnology-NoProtectionsInPlace
 :: Limnology-NoProtectionsInPlace
 @type Quote
 @quality Good
 @attr Facts, Color
+Old environmental regulations were choking out Twin Lakes' vital agriculture - but now the city is left with no protections at all.
 
 // Original Name: LimnologyConcerned
 :: LimnologyConcerned
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Facts, Useful
+Local limnologist Valerie Dean is "very concerned" about the fate of Cherry Creek Marsh. She has petitioned the mayor's office to stop development.
 
 // Original Name: BusinessDreamComeTrue
 :: BusinessDreamComeTrue
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Color
+One member of the Spark Project development initative says that it's been effective in bringing new businesses to Twin Lakes. "It's been a dream come true for so many people."
 
-// Original Name: BusinessVoteTomorrow
-:: BusinessVoteTomorrow
+:: BusinessGrowingOrDying
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Color
+Members of the Spark Project are intent on growing Twin Lakes. "Either a town is growing, or it's dying."
 
 // Original Name: NewMarshAppleValley
 :: NewMarshAppleValley
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Facts
+The Spark Project is seeking to create a man-made marsh in Apple Valley to offset the impact of disrupting Cherry Creek Marsh.
 
 // Original Name: AnnoyedBusiness
 :: AnnoyedBusiness
 @type Quote
-@quality Good
-@attr Facts, Color
-
-
-
-
-
-
-
-
+@quality Great
+@attr Color
+A Spark Project representative declined to comment on the effectiveness of the Apple Valley plan in preventing floods in Twin Lakes.
