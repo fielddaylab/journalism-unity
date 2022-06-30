@@ -169,6 +169,17 @@ namespace Journalism {
                 Game.Events.Dispatch(GameEvents.StatsUpdated, adjustments);
             }
         }
+        
+        [LeafMember("CityScore"), Preserve]
+        static private int LeafGetCityScore() {
+            return s_Current.CityScore;
+        }
+
+        [LeafMember("AdjustCityScore"), Preserve]
+        static private void LeafAdjustCityScore(int change) {
+            s_Current.CityScore += change;
+            Log.Msg("City score changed by {0}, new value {1}", change, s_Current.CityScore);
+        }
 
         static private readonly char[] AdjustOperators = new char[] {
             '=', '-', '+'

@@ -749,7 +749,26 @@ $if StoryHasPicture() == false
     {@person}   Make sure you get one next time, rookie.
     {@person}   Other than that...
 $endif
-$if StoryScore() == "good"
+
+///CITY SCORE ADJUSTMENT
+//Alignment-based city score adjustment
+$if StoryAlignment() >= 0.5
+    //good: +1 city score
+    $call AdjustCityScore(+1)
+$elseif StoryAlignment() < 0.3
+    //bad: -1 city score
+    $call AdjustCityScore(-1)
+$endif //medium: no change
+
+//Quality-based city score adjustment
+$if StoryScore() == "good" //3+ net quality
+    $call AdjustCityScore(+1)
+$elseif StoryScore() == "bad" //<1 net quality
+    $call AdjustCityScore(-1)
+$endif //1 or 2: no change
+
+
+$if StoryScore() == "good" //3+ net quality
     $if StoryAlignment() >= 0.5
         {@person}   Stellar work, Rookie! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of useful info.
@@ -761,9 +780,9 @@ $if StoryScore() == "good"
     $else
         {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
         {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
-        {@person}   Make sure to check my notes next time. It's all in there.  
+        {@person}   Make sure to check my notes next time. It's all in there. 
     $endif
-$elseif StoryScore() == "medium"
+$elseif StoryScore() == "medium" //1 or 2 net quality
     $if StoryAlignment() >= 0.5
         {@person}   Nice work getting the right info out there!
         {@person}   We would like to see even more quality info...
@@ -771,13 +790,13 @@ $elseif StoryScore() == "medium"
     $elseif StoryAlignment() >= 0.3
         {@person}   Hmm... not bad, Rookie! Some decent-quality info in there.
         {@person}   This should be enough to help a lot of people.  
-        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+        {@person}   Next time, make sure to check my notes. You veered off topic a little.
     $else
         {@person}   Nice work, Rookie. Your reporting is pretty solid. 
         {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
         {@person}   Still. Not bad for your first natural disaster. 
     $endif
-$else
+$else //<1 net quality
     $if StoryAlignment() >= 0.5
         {@person}   Nice work, Rookie. You got a lot of useful information out there! 
         {@person}   This story should help a lot of people... 
@@ -789,9 +808,10 @@ $else
     $else
         {@person}   Well.... this could be worse. Sort of.  
         {@person}   We needed more high-quality info here. Make sure to check my notes next time. 
-        {@person}   This was your first natural disaster, so I'll let it slide. 
+        {@person}   This was your first natural disaster, so I'll let it slide.
     $endif
 $endif
+
 
 // $Feedback("HospitalDucks", "feedbackA", "Aww, poor ducks...")
 // $Feedback("FriendlyShopkeeper", "feedbackB", "Oh no, those poor croissants")

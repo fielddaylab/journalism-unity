@@ -1502,6 +1502,32 @@ $call BeginFeedback()
 {img Anim/Editor.jpeg}
 {@person} Alright, let's see how you did...
 {story-stats}
+$if StoryHasPicture() == false
+    {@person}   First off, I thought I told you to include a picture?
+    {@person}   This will make for a lower quality story...
+    {@person}   Make sure you get one next time, rookie.
+    {@person}   Other than that...
+$endif
+
+
+///CITY SCORE ADJUSTMENT
+//Alignment-based city score adjustment
+$if StoryAlignment() >= 0.5
+    //good: +1 city score
+    $call AdjustCityScore(+1)
+$elseif StoryAlignment() < 0.3
+    //bad: -1 city score
+    $call AdjustCityScore(-1)
+$endif //medium: no change
+
+//Quality-based city score adjustment
+$if StoryScore() == "good" //3+ net quality
+    $call AdjustCityScore(+1)
+$elseif StoryScore() == "bad" //<1 net quality
+    $call AdjustCityScore(-1)
+$endif //1 or 2: no change
+
+
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.5
         {@person}   Stellar work Rookie! I can tell you put your heart into this.

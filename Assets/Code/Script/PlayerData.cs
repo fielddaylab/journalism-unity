@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace Journalism {
     public class PlayerData : ISerializedObject, ISerializedVersion {
         public int[] StatValues = new int[Stats.Count];
-
         public VariantTable GlobalTable = new VariantTable();
         public VariantTable UITable = new VariantTable("ui");
         public HashSet<StringHash32> VisitedNodeIds = new HashSet<StringHash32>();
@@ -19,6 +18,7 @@ namespace Journalism {
         public StringHash32 CheckpointId = null;
         public StringHash32 LocationId = null;
         public uint TimeRemaining;
+        public int CityScore;
 
         public void SetDefaults() {
             for(int i = 0; i < StatValues.Length; i++) {
@@ -48,6 +48,7 @@ namespace Journalism {
             serializer.UInt32Proxy("checkpointId", ref CheckpointId);
             serializer.UInt32Proxy("locationId", ref LocationId);
             serializer.Serialize("timeRemaining", ref TimeRemaining);
+            serializer.Serialize("cityScore", ref CityScore);
         }
 
         #endregion // ISerializedObject
