@@ -575,7 +575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Root: {fileID: 3319456804573798803}
-  Local: {fileID: 3319456804573798803}
+  Offset: {fileID: 0}
+  Inner: {fileID: 0}
   Group: {fileID: 7832661044376501248}
   BackgroundColor:
   - {fileID: 3037343872289806085}
@@ -590,10 +591,13 @@ MonoBehaviour:
   PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
+  MaxSize: {fileID: 0}
   Layout: {fileID: 3319456804573798805}
   TailHeight: 16
   Text: {fileID: 3319456803949372074}
+  CharacterHeader: {fileID: 0}
   Icon: {fileID: 0}
+  MarkerIcon: {fileID: 0}
 --- !u!114 &4507121683936925807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,8 +668,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1825051806797482806}
-  Toggle: {fileID: 1569889370344359738}
+  Toggle: {fileID: 0}
+  TextureGroup: {fileID: 0}
   Texture: {fileID: 0}
+  Attributes: {fileID: 0}
+  Quality: {fileID: 0}
+  Masks: {fileID: 0}
+  ImageOnly: {fileID: 0}
 --- !u!114 &1569889370344359738
 MonoBehaviour:
   m_ObjectHideFlags: 0

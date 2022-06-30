@@ -714,6 +714,7 @@ MonoBehaviour:
   PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
+  MaxSize: {fileID: 0}
   Layout: {fileID: 7944310246741501884}
   TailHeight: 16
   Text: {fileID: 3319456803949372074}
