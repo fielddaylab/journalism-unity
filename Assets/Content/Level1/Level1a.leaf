@@ -313,24 +313,25 @@ $call ActivateStory()
 $call BeginTutorial()
     $call OpenWindow(Notes)
     $call Wait(0.4)
-    {@person}   Your quotes, photos, and other snippets will show up here. 
-    {@person}   You'll want to fill in every slot, so keep an eye out for scoops.
+    {@person} Your quotes, photos, and other snippets will show up here. 
+    {@person} You'll want to fill in every slot, so keep an eye out for scoops.
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
-    {@person}   I put your assignment in the "Editor's Notes" tab. 
+    {@person} I put your assignment in the "Editor's Notes" tab. 
     $call ClickOn(EditorNotes)
     $call ClearPointer()
     {clear-text}
     $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
-    {@person}  Pay attention to the story breakdown. 
+    {@person} Pay attention to the story breakdown. 
     $call PointTo(TutorialPlayerAttributes, -24, 0)
-    {@person}  You want your story...
+    {@person} You want your story...
     $call PointTo(TutorialTargetAttributes, -24, 0)
-    {@person}  To line up with this.
+    {@person} To line up with this.
     $call PointTo(TutorialQuality, -24, 0)
-    {@person}  Oh, and try to get high-quality snippets.
-    {@person}  A blurry photo is better than nothing, but we have high standards here. 
+    {@person} Oh, and try to get high-quality snippets.
+    {@person} Be sure to include at least one photo, or your story's overall quality will suffer.
+    {@person} A blurry photo is better than nothing, but we have high standards here. 
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
@@ -742,9 +743,15 @@ $call BeginFeedback()
 {img Anim/Editor.jpeg}
 {@person} Alright, let's see how you did...
 {story-stats}
+$if StoryHasPicture() == false
+    {@person}   First off, I thought I told you to include a picture?
+    {@person}   This will make for a lower quality story...
+    {@person}   Make sure you get one next time, rookie.
+    {@person}   Other than that...
+$endif
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.5
-        {@person}   Stellar work Rookie! I can tell you put your heart into this.
+        {@person}   Stellar work, Rookie! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of useful info.
         {@person}   Maybe you've got a Pulitzer Prize in your future.
     $elseif StoryAlignment() >= 0.3

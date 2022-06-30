@@ -5,6 +5,7 @@ namespace Journalism {
         public int QualityAdd;
         public int QualitySubtract;
         public int TotalQuality;
+        public bool StoryHasPicture;
         public StoryScore Score;
 
         public int ScrapCount;
@@ -18,6 +19,7 @@ namespace Journalism {
         static public StoryStats FromPlayerData(PlayerData data, StoryConfig config) {
             StoryStats stats = default;
 
+            bool hasPicture = false;
             int attributeCount = 0;
             int targetCount = config.FactWeight + config.ColorWeight + config.UsefulWeight;
             foreach(var scrapId in data.AllocatedScraps) {
@@ -37,6 +39,11 @@ namespace Journalism {
                         }
                     }
 
+                    //if the first image is included, set hasPicture to true
+                    if (!hasPicture && scrapData.IsPicture()){
+                        hasPicture = true;
+                    }
+
                     if ((scrapData.Attributes & StoryScrapAttribute.Facts) != 0) {
                         stats.FactCount++;
                         attributeCount++;
@@ -50,6 +57,14 @@ namespace Journalism {
                         attributeCount++;
                     }
                 }
+            }
+            //add negative quality tag if the story had no picture. 
+            if (!hasPicture){
+                stats.StoryHasPicture = false;
+                stats.QualitySubtract++;
+                stats.TotalQuality--;
+            } else {
+                stats.StoryHasPicture = true;
             }
 
             stats.CanPublish = stats.ScrapCount > 0;

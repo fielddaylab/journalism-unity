@@ -413,6 +413,11 @@ namespace Journalism {
             return s_Stats.QualitySubtract;
         }
 
+        [LeafMember("StoryHasPicture"), Preserve]
+        static private bool LeafStoryHasPicture() {
+            return s_Stats.StoryHasPicture;
+        }
+
         #endregion // Inventory
 
         #region Script

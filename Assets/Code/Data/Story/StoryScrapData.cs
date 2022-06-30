@@ -28,6 +28,13 @@ namespace Journalism {
                     return false;
             }
         }
+
+        //hopefully this isn't redundant with ShouldContainImage
+        public bool IsPicture(){
+            if (this.Type == StoryScrapType.Picture || this.Type == StoryScrapType.Graph || this.Type == StoryScrapType.Photo){
+                return true;
+            } else return false;
+        }
     }
 
     /// <summary>
