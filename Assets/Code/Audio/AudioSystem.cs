@@ -139,6 +139,9 @@ namespace Journalism {
 
         [LeafMember("SFX"), UnityEngine.Scripting.Preserve]
         static private IEnumerator LeafPlayOneShot(StringHash32 id, WaitMode wait = WaitMode.Forget) {
+            if (DebugService.AutoTesting) {
+                return null;
+            }
             float duration = Game.Audio.PlayOneShot(id);
             if (wait == WaitMode.Wait) {
                 return Routine.Yield(duration);
@@ -149,21 +152,33 @@ namespace Journalism {
 
         [LeafMember("Music"), UnityEngine.Scripting.Preserve]
         static private void LeafSetMusic(string url, float volume = 1) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.Audio.SetMusic(url, volume);
         }
 
         [LeafMember("StopMusic"), UnityEngine.Scripting.Preserve]
         static private void LeafStopMusic() {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.Audio.SetMusic(null, 1);
         }
 
         [LeafMember("Ambience"), UnityEngine.Scripting.Preserve]
         static private void LeafSetAmbience(string url, float volume = 1) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.Audio.SetAmbience(url, volume);
         }
 
         [LeafMember("StopAmbience"), UnityEngine.Scripting.Preserve]
         static private void LeafStopAmbience() {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.Audio.SetAmbience(null, 1);
         }
 

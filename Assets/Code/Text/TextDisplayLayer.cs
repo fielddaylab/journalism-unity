@@ -280,7 +280,7 @@ namespace Journalism {
 
         public IEnumerator ShowChoice(LeafChoice inChoice, LeafThreadState inThread, ILeafPlugin inPlugin) {
             using(PooledList<LeafChoice.Option> fullOptions = PooledList<LeafChoice.Option>.Create()) {
-                fullOptions.AddRange(inChoice.AvailableOptions(ChoicePredicate));
+                fullOptions.AddRange(inChoice.AvailableOptions(ScriptSystem.ChoicePredicate));
                 bool hasTime = false;
                 foreach(var option in fullOptions) {
                     if (inChoice.HasCustomData(option.TargetId, GameText.ChoiceData.Time)) {
@@ -362,20 +362,6 @@ namespace Journalism {
                 }
             }
         }
-
-        static public readonly LeafChoice.OptionPredicate ChoicePredicate = (choice, option) => {
-            float timeCost = Mathf.Max(0, choice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat());
-            if (!Player.HasTime(timeCost)) {
-                return false;
-            }
-
-            bool once = choice.HasCustomData(option.Index, GameText.ChoiceData.Once);
-            if (once && Player.Visited(option.TargetId.AsStringHash())) {
-                return false;
-            }
-
-            return true;
-        };
 
         private TextAnchor GetDefaultChoiceAnchor() {
             if (!m_AlignDefaultChoiceButtonToText) {

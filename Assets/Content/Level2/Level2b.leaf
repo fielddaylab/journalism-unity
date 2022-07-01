@@ -19,6 +19,13 @@
 #macro ActionChoice(text) \
     $choice #null; {@action} $text \
     $choose continue
+#macro FallbackChoice(nodeId, text) \
+    $choice $nodeId, !HasChoices(); $text
+#macro CheckTime(nodeId, text?) \
+    $if !HasTime(0.25) \
+        $text \
+        $goto $nodeId \
+    $endif
 #macro GameOver(text) \
     $call GameOver() \
     $text \
@@ -713,6 +720,7 @@ You gesture awkwardly at the ketchup-spatter on his dress shoes.
 {@person}Welp. Thanks, kid. That's life, I suppose. 
 {@person}One question. I need to get cleaned up.
 $HubChoice(QuickMayorInterview, "Do you support the proposed plans to pave over Cherry Creek Marsh?", 0.25)
+$endif
 
 //OriginalName: Quick Mayor Interview
 :: QuickMayorInterview
@@ -1123,6 +1131,7 @@ The researcher has been out here all morning--she's a little too hangry for a lo
 
 $HubChoice(GoPickUpDonutsAndCoffee, "Bike a few blocks to pick up donuts and coffee", 0.25)
 $HubChoice(AskForAStatement, "Ask for a quick statement on the wetlands", 0.25)
+$endif
 
 //Original Name: Ask for a Statement
 ::AskForAStatement
@@ -1136,7 +1145,6 @@ $call GiveSnippet(RushedLimnologist)
 $choice AskHerToConfirmCRANEsInformation; Ask her to confirm Birdie's data 
 $HubChoice(CheckLimnologyDepartmentWebsite, "Use the Limnology Department website to fact check Birdie's information", 0.25)
 $choice DecideWhatToDoNext; Leave the Limnology Department 
-$endif
 
 // Original Name: Ask why he's out here volunteering
 :: AskWhyHesOutHereVolunteering
@@ -1292,8 +1300,8 @@ $choice AskAboutThePlanToBuildOverCherryCreekMarsh; Is it true that you're plann
 
 $call GiveSnippet(BusinessGrowingOrDying)
 
-$choice AskHimWhyHePushedToGetRidOfWetlandProtections
-$choice AskAboutThePlanToBuildOverCherryCreekMarsh
+$choice AskHimWhyHePushedToGetRidOfWetlandProtections; Ask him why he pushed to get rid of wetland protections
+$choice AskAboutThePlanToBuildOverCherryCreekMarsh; Ask about the plan to build cherry creek marsh
 
 // Original Name: Ask about the plan to build over Cherry Creek Marsh 
 :: AskAboutThePlanToBuildOverCherryCreekMarsh

@@ -3,6 +3,7 @@
 #endif
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using BeauPools;
@@ -13,6 +14,7 @@ using BeauUtil.Services;
 using EasyAssetStreaming;
 using EasyBugReporter;
 using Journalism.UI;
+using Leaf.Runtime;
 using TMPro;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -26,6 +28,24 @@ namespace Journalism {
         [ServiceReference, UnityEngine.Scripting.Preserve] static private DebugService s_Instance;
 
         static private DMInfo s_RootMenu;
+
+        #if UNITY_EDITOR
+
+        /*
+            NOTE(Autumn): Okay so this really isn't the best way of handling a sort of auto-tester
+            Adding a bunch of "if (DebugService.AutoTesting)" calls in the game code is pretty gross
+            But it turns out running a leaf script while the game isn't running is rather tricky
+            So this is the hack we've got for the moment. Sorry :(
+        */
+        static public bool AutoTesting {
+            get { return s_Instance.m_AutoTesting; }
+        }
+
+        #else
+
+        public const bool AutoTesting = false;
+
+        #endif // UNITY_EDITOR
 
         #endregion // Static
 
@@ -46,6 +66,9 @@ namespace Journalism {
         [NonSerialized] private bool m_VisibilityWhenDebugMenuOpened;
         [NonSerialized] private uint m_LastKnownStreamingCount;
         [NonSerialized] private long m_LastKnownStreamingMem;
+        [NonSerialized] private bool m_AutoTesting;
+        [NonSerialized] private bool m_AutoTestErrorFlag;
+        [NonSerialized] private Routine m_AutoTestRoutine;
         
         private DumpSourceCollection m_ContextReporters;
 
@@ -80,6 +103,13 @@ namespace Journalism {
             s_RootMenu.AddToggle("Toggle Toolbar", () => UISystem.GetHeaderEnabled(), (b) => UISystem.SetHeaderEnabled(b));
             s_RootMenu.AddToggle("Toggle Story Visible", () => UISystem.GetStoryEnabled(), (b) => UISystem.SetStoryEnabled(b));
 
+            #if UNITY_EDITOR
+
+            s_RootMenu.AddDivider();
+            s_RootMenu.AddButton("Auto Test", StartAutoTest, () => !m_AutoTesting);
+
+            #endif // UNITY_EDITOR
+
             #if !UNITY_EDITOR
             SetMinimalLayer(false);
             #else
@@ -93,6 +123,15 @@ namespace Journalism {
             m_ContextReporters.Add(new SystemInfoContext());
 
             m_ContextReporters.Initialize();
+
+            Game.Scripting.OnScriptError += (LeafEvalContext errorContext) => {
+                m_AutoTestErrorFlag = true;
+            };
+            Game.Scripting.OnThreadStopped += () => {
+                if (m_AutoTesting) {
+                    m_AutoTestErrorFlag = true;
+                }
+            };
         }
 
         private void LateUpdate() {
@@ -220,6 +259,45 @@ namespace Journalism {
             Game.Scripting.SkipTo("STORYEVALUATION");
         }
 
+        #if UNITY_EDITOR
+
+        private void StartAutoTest() {
+            m_AutoTesting = true;
+            m_AutoTestRoutine.Replace(this, AutoTestRoutine());
+            SetMinimalLayer(false);
+        }
+
+        private IEnumerator AutoTestRoutine() {
+            try {
+                Log.Msg("[DebugService] Beginning auto-testing...");
+                m_AutoTesting = true;
+                Time.timeScale = 100;
+                m_AutoTestErrorFlag = false;
+                int count = 500;
+                while(count-- > 0) {
+                    m_AutoTestErrorFlag = false;
+                    Log.Msg("[DebugService] New auto-test starting");
+                    Game.Save.NewSaveData();
+                    var load = Game.Scripting.LoadLevel(0, true);
+                    yield return load;
+                    yield return null;
+                    Game.Scripting.StartLevel();
+                    while(!m_AutoTestErrorFlag) {
+                        yield return null;
+                    }
+                    BugReporter.DumpContext(m_ContextReporters, BugReporter.DumpFlags.Silent);
+                    while(BugReporter.IsDumping()) {
+                        yield return null;
+                    }
+                }
+            } finally {
+                m_AutoTesting = false;
+                Time.timeScale = 1;
+            }
+        }
+
+        #endif // UNITY_EDITOR
+
         #region Pausing
 
         private void Pause() {
@@ -254,6 +332,8 @@ namespace Journalism {
         }
 
         #else
+
+        public const bool AutoTesting = false;
 
         private void Start() {
             Destroy(gameObject);

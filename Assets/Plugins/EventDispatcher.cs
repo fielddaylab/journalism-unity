@@ -235,7 +235,7 @@ namespace BeauUtil.Extensions {
                 return m_Action.Equals(action);
             }
 
-            public bool MatchesAction(Action<object> action) {
+            public bool MatchesAction(Action<TArg> action) {
                 return m_Action.Equals(action);
             }
 
@@ -265,7 +265,7 @@ namespace BeauUtil.Extensions {
         /// <summary>
         /// Registers an event handler, optionally bound to a given object.
         /// </summary>
-        public EventDispatcher<TArg> Register(StringHash32 eventId, Action<object> inActionWithContext, UnityEngine.Object binding = null) {
+        public EventDispatcher<TArg> Register(StringHash32 eventId, Action<TArg> inActionWithContext, UnityEngine.Object binding = null) {
             HandlerBlock block = GetBlock(eventId, true);
             block.Add(inActionWithContext, binding);
             return this;
@@ -299,7 +299,7 @@ namespace BeauUtil.Extensions {
         /// <summary>
         /// Deregisters an event handler.
         /// </summary>
-        public EventDispatcher<TArg> Deregister(StringHash32 eventId, Action<object> action) {
+        public EventDispatcher<TArg> Deregister(StringHash32 eventId, Action<TArg> action) {
             HandlerBlock block;
             if (m_Handlers.TryGetValue(eventId, out block)) {
                 block.Remove(action);

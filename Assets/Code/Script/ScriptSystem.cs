@@ -29,6 +29,9 @@ namespace Journalism {
         [NonSerialized] private LevelDef m_CurrentLevel;
         [NonSerialized] private bool m_FirstVisit;
 
+        public event Action<LeafEvalContext> OnScriptError; 
+        public event Action OnThreadStopped;
+
         private void Awake() {
             m_Resolver = new CustomVariantResolver();
 
@@ -36,6 +39,16 @@ namespace Journalism {
 
             m_Integration = new LeafIntegration(this, m_Resolver);
             m_Integration.ConfigureDisplay(m_TextDisplay, m_TextDisplay);
+
+            m_Integration.RuntimeConfig.OnMethodCallError += (LeafEvalContext inContext, MethodCall inMethodCall, object inTarget) => {
+                OnScriptError?.Invoke(inContext);
+            };
+            m_Integration.RuntimeConfig.OnNodeLookupError += (LeafEvalContext inContext, StringHash32 inId, StringHash32 inLocalNodeId) => {
+                OnScriptError?.Invoke(inContext);
+            };
+            m_Integration.HandleThreadEnd += () => {
+                OnThreadStopped?.Invoke();
+            };
 
             CustomTagParserConfig parserConfig = new CustomTagParserConfig();
             TagStringEventHandler eventHandler = new TagStringEventHandler();
@@ -59,7 +72,9 @@ namespace Journalism {
                 Game.Save.SaveCheckpoint();
             }
             
-            yield return m_TextDisplay.CurrentLayer.HandleNodeStart(node, thread);
+            if (!DebugService.AutoTesting) {
+                yield return m_TextDisplay.CurrentLayer.HandleNodeStart(node, thread);
+            }
 
             m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
         }
@@ -98,6 +113,10 @@ namespace Journalism {
         /// Displays the story the player made.
         /// </summary>
         public IEnumerator DisplayNewspaper() {
+            if (DebugService.AutoTesting) {
+                yield break;
+            }
+
             yield return m_TextDisplay.DisplayNewspaper();
         }
 
@@ -218,6 +237,10 @@ namespace Journalism {
         [LeafMember("GameOver"), Preserve]
         static private IEnumerator GameOver() {
             Game.Events.Queue(GameEvents.GameOver);
+            if (DebugService.AutoTesting) {
+                yield break;
+            }
+            
             yield return Game.Scripting.ClearAllVisuals();
             Game.Scripting.OverrideDisplay(Game.UI.GameOver);
             yield return Game.UI.GameOver.Show();
@@ -225,8 +248,13 @@ namespace Journalism {
 
         [LeafMember("GameOverRestart"), Preserve]
         static private IEnumerator GameOverChoice([BindThread] LeafThreadState thread) {
-            Future<bool> choice = Game.UI.GameOver.DisplayChoices();
-            yield return choice;
+            Future<bool> choice;
+            if (DebugService.AutoTesting) {
+                choice = Future.Completed<bool>(true);
+            } else {
+                choice = Game.UI.GameOver.DisplayChoices();
+                yield return choice;
+            }
 
             thread.Kill();
             
@@ -287,7 +315,26 @@ namespace Journalism {
             Game.UI.PopInputMask();
         }
 
+        [LeafMember("HasChoices"), Preserve]
+        static private bool HasChoices([BindThread] LeafThreadState thread) {
+            return thread.AvailableOptionCount(ScriptSystem.ChoicePredicate) > 0;
+        }
+
         #endregion // Leaf
+
+        static public readonly LeafChoice.OptionPredicate ChoicePredicate = (choice, option) => {
+            float timeCost = Mathf.Max(0, choice.GetCustomData(option.Index, GameText.ChoiceData.Time).AsFloat());
+            if (!Player.HasTime(timeCost)) {
+                return false;
+            }
+
+            bool once = choice.HasCustomData(option.Index, GameText.ChoiceData.Once);
+            if (once && Player.Visited(option.TargetId.AsStringHash())) {
+                return false;
+            }
+
+            return true;
+        };
 
         bool IDumpSource.Dump(IDumpWriter writer) {
             writer.Header("Leaf State");

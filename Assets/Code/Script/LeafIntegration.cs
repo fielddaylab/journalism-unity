@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using BeauRoutine;
 using BeauUtil;
 using BeauUtil.Debugger;
@@ -19,6 +21,7 @@ namespace Journalism {
         private LeafThreadHandle m_CurrentThread;
         private Routine m_ScriptLoader;
         private TagString m_TempTagString = new TagString();
+        private StringHash32 m_LastKnownNodeId;
 
         public LeafIntegration(MonoBehaviour inHost, CustomVariantResolver inResolver, IMethodCache inCache = null)
             : base(inHost, inResolver)
@@ -28,6 +31,7 @@ namespace Journalism {
 
         public HandleNodeDelegate HandleNodeEnter;
         public HandleNodeDelegate HandleNodeExit;
+        public Action HandleThreadEnd;
 
         #region Loading
 
@@ -81,7 +85,7 @@ namespace Journalism {
         #region Starting
 
         public void StartFromBeginning() {
-            Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
+            Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded (current script {0})", m_CurrentScript);
             m_CurrentScript.TryGetNode(m_CurrentScript.StartNodeId(), out ScriptNode start);
             Game.Events.Dispatch(GameEvents.LevelStarted);
             Run(start);
@@ -123,6 +127,9 @@ namespace Journalism {
                 inThreadState.Interrupt();
             }
 
+            m_LastKnownNodeId = inNode.Id();
+            Log.Msg("[LeafIntegration] Entering node {0}...", inNode.Id());
+
             IEnumerator process = HandleNodeEnter?.Invoke(inNode, inThreadState);
             if (process != null) {
                 inThreadState.Interrupt(process);
@@ -138,18 +145,52 @@ namespace Journalism {
             }
         }
 
+        public override void OnEnd(LeafThreadState<ScriptNode> inThreadState) {
+            base.OnEnd(inThreadState);
+            if (!m_LastKnownNodeId.ToDebugString().EndsWith("Feedback")) {
+                Log.Warn("Thread finished in script {0}, node {1}", m_CurrentScript.Name(), m_LastKnownNodeId);
+            }
+            HandleThreadEnd?.Invoke();
+        }
+
         public override LeafThreadHandle Run(ScriptNode node, ILeafActor actor = null, VariantTable locals = null, string name = null, bool _ = true) {
             m_CurrentThread.Kill();
             return m_CurrentThread = base.Run(node, actor, locals, name, _);
         }
 
         public override IEnumerator ShowOptions(LeafThreadState<ScriptNode> inThreadState, LeafChoice inChoice) {
-            yield return base.ShowOptions(inThreadState, inChoice);
+            if (DebugService.AutoTesting) {
+                List<LeafChoice.Option> options = new List<LeafChoice.Option>(inChoice.AvailableOptions(ScriptSystem.ChoicePredicate));
+                if (options.Count > 6) {
+                    options.RemoveRange(6, options.Count - 6);
+                }
+                if (options.Count == 0) {
+                    Log.Error("No options remaining at {0} (time remaining {1})", inThreadState.PeekNode().Id(), Player.TimeRemaining());
+                } else {
+                    inChoice.Choose(RNG.Instance.Next(0, options.Count));
+                }
+            } else {
+                yield return base.ShowOptions(inThreadState, inChoice);
+            }
             float chosenTime = inChoice.GetCustomData(inChoice.ChosenIndex(), GameText.ChoiceData.Time).AsFloat();
             if (chosenTime > 0) {
                 Player.DecreaseTime(chosenTime);
             }
         }
+
+        #if UNITY_EDITOR
+
+        public override IEnumerator RunLine(LeafThreadState<ScriptNode> inThreadState, StringSlice inLine) {
+            #if UNITY_EDITOR
+            if (DebugService.AutoTesting) {
+                return null;
+            }
+            #endif // UNITY_EDITOR
+
+            return base.RunLine(inThreadState, inLine);
+        }
+
+        #endif // UNITY_EDITOR)
 
         #endregion // Run
 
@@ -157,7 +198,7 @@ namespace Journalism {
 
         public ScriptNode PeekNode() {
             var thread = m_CurrentThread.GetThread<LeafThreadState<ScriptNode>>();
-            return thread.PeekNode();
+            return thread?.PeekNode();
         }
 
         public bool PredictChoice() {

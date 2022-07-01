@@ -176,6 +176,27 @@ namespace Journalism.UI {
         }
 
         private void OnRequirePublish() {
+            if (DebugService.AutoTesting) {
+                List<StoryScrapData> scraps = new List<StoryScrapData>();
+                foreach(var scrapId in Player.StoryScraps) {
+                    scraps.Add(Assets.Scrap(scrapId));
+                }
+                RNG.Instance.Shuffle(scraps);
+                for(int i = 0; i < Assets.CurrentLevel.Story.Slots.Length; i++) {
+                    var slot = Assets.CurrentLevel.Story.Slots[i];
+                    StoryScrapType mask = slot.Type == StorySlotType.Any ? StoryScrapType.AnyMask : StoryScrapType.ImageMask;
+                    for(int j = 0; j < scraps.Count; j++) {
+                        var data = scraps[j];
+                        if ((data.Type & mask) != 0) {
+                            Player.Data.AllocatedScraps[i] = data.Id;
+                            scraps.FastRemoveAt(j);
+                            break;
+                        }
+                    }
+                }
+                Routine.StartDelay(() => Game.Events.Queue(GameEvents.StoryPublished), 0.1f);
+                return;
+            }
             m_Header.FindButton("Notes").Button.isOn = true;
         }
 
@@ -287,11 +308,17 @@ namespace Journalism.UI {
 
         [LeafMember("OpenWindow"), Preserve]
         static public void OpenWindow(StringHash32 id) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.UI.m_Header.FindButton(id).Button.isOn = true;
         }
 
         [LeafMember("CloseWindow"), Preserve]
         static private IEnumerator CloseWindow(StringHash32 id = default) {
+            if (DebugService.AutoTesting) {
+                yield break;
+            }
             if (id.IsEmpty) {
                 Game.UI.Header.ToggleGroup.SetAllTogglesOff();
             } else {
@@ -307,16 +334,25 @@ namespace Journalism.UI {
 
         [LeafMember("ClickOn"), Preserve]
         static private void ClickElement(StringHash32 id) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.UI.ForceClick(id);
         }
 
         [LeafMember("PointTo"), Preserve]
         static private void PointTo(StringHash32 id, float offsetX = 0, float offsetY = 16) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.UI.PointTo(id, new Vector2(offsetX, offsetY));
         }
 
         [LeafMember("ClearPointer"), Preserve]
         static private void LeafClearPointer() {
+            if (DebugService.AutoTesting) {
+                return;
+            }
             Game.UI.ClearPointer();
         }
 

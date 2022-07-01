@@ -160,6 +160,10 @@ namespace Journalism {
                 return;
             }
 
+            if (DebugService.AutoTesting) {
+                return;
+            }
+
             Game.Scripting.Interrupt(DisplayNewStoryScrap(scrapId));
         }
 
@@ -171,6 +175,10 @@ namespace Journalism {
         }
 
         private void OnFeedbackSwapToImpact() {
+            if (DebugService.AutoTesting) {
+                return;
+            }
+
             m_OverlayAnim.Stop();
             Game.Scripting.Interrupt(DisplayImpact());
         }
@@ -203,6 +211,10 @@ namespace Journalism {
         }
 
         private IEnumerator DisplayNewStoryScrap(StringHash32 scrapId) {
+            if (DebugService.AutoTesting) {
+                yield break;
+            }
+
             StoryScrapData data = Assets.Scrap(scrapId);
 
             // TODO: Localization
@@ -227,6 +239,10 @@ namespace Journalism {
         }
 
         private void OnStatsUpdated(int[] adjustments) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
+
             Game.Scripting.Interrupt(DisplayStatsAdjusted(adjustments));
         }
 

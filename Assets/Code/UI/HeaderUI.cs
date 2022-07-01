@@ -126,6 +126,10 @@ namespace Journalism.UI {
         }
 
         private void OnStatsUpdated(int[] adjusted) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
+
             bool hasAdd = false, hasSubtract = false;
             for(int i = 0; i < Stats.Count; i++) {
                 if (adjusted[i] > 0) {
@@ -159,6 +163,10 @@ namespace Journalism.UI {
             m_TimeButton.Button.interactable = args.Units > 0;
 
             ClockIncrements.Populate(TimeClock, (int) args.Units);
+
+            if (DebugService.AutoTesting) {
+                return;
+            }
 
             if (args.Delta < 0 && Root.IsShowing()) {
                 TimeEffect.gameObject.SetActive(true);

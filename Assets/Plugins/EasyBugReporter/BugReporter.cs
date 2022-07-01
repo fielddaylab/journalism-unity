@@ -150,7 +150,9 @@ namespace EasyBugReporter {
                     DumpResult result = EndWriting(ref item);
                     item.Collection.Unfreeze();
                     item.OnCompleted?.Invoke(result);
-                    PresentReport(result);
+                    if ((item.Flags & DumpFlags.Silent) == 0) {
+                        PresentReport(result);
+                    }
                     s_WorkQueue.Dequeue();
                 }
             }
@@ -209,8 +211,8 @@ namespace EasyBugReporter {
         /// <summary>
         /// Dumps context in its default format (HTML) and attempts to display it to the user.
         /// </summary>
-        static public void DumpContext(DumpSourceCollection collection) {
-            DumpContext(collection, DefaultHtmlWriter, null, 0, DumpFormat.Html, null);
+        static public void DumpContext(DumpSourceCollection collection, DumpFlags flags = 0) {
+            DumpContext(collection, DefaultHtmlWriter, null, flags, DumpFormat.Html, null);
         }
 
         static internal void DumpContext(DumpSourceCollection collection, IDumpWriter writer, string title, DumpFlags flags, DumpFormat format, Action<DumpResult> onCompleted) {
@@ -259,6 +261,10 @@ namespace EasyBugReporter {
             return flags;
         }
 
+        static public bool IsDumping() {
+            return s_WorkQueue.Count > 0;
+        }
+
         #endregion // Setup
 
         /// <summary>
@@ -267,6 +273,7 @@ namespace EasyBugReporter {
         [Flags]
         public enum DumpFlags {
             InMemory = 0x01,
+            Silent = 0x02
         }
 
         /// <summary>

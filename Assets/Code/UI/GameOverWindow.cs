@@ -94,6 +94,11 @@ namespace Journalism.UI {
         }
 
         private IEnumerator DisplayChoices_Routine(Future<bool> future) {
+            if (DebugService.AutoTesting) {
+                future.Complete(true);
+                yield break;
+            }
+            
             yield return AnimatedElement.Show(m_Prompt, 0.2f);
             yield return 0.2f;
             yield return GameText.WaitForYesNoChoice(m_Choices, future, "Continue", "Quit", Assets.Style(GameText.Characters.Action));

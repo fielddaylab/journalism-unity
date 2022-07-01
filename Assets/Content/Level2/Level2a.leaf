@@ -22,6 +22,13 @@
 #macro ActionChoice(text) \
     $choice #null; {@action} $text \
     $choose continue
+#macro FallbackChoice(nodeId, text) \
+    $choice $nodeId, !HasChoices(); $text
+#macro CheckTime(nodeId, text?) \
+    $if !HasTime(0.25) \
+        $text \
+        $goto $nodeId \
+    $endif
 #macro GameOver(text) \
     $call GameOver() \
     $text \
@@ -1709,4 +1716,4 @@ $call EndFeedback()
 //TODO: Remove once 2b is more fleshed out.
 {@msg}  You are finished!
 {@msg}  You are now free to close your browser.
-//$call NextLevel()
+$call NextLevel()
