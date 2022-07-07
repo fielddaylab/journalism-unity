@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using BeauUtil;
 using BeauUtil.Debugger;
+using FDLocalization;
 using UnityEngine;
 
 namespace Journalism
@@ -15,6 +16,7 @@ namespace Journalism
         {
             [HideInInspector] public StringHash32 Id;
             public string Name;
+            public LocId NameId;
             public Vector2 NormalizedCoords;
 
             public MapLocation(StringHash32 id, string name, Vector2 coords) {

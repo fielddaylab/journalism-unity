@@ -119,7 +119,7 @@ namespace EasyAssetStreaming {
             }
 
             static private void OnVideoPrepareCompleted(StreamingAssetId id, string pathOrUrl, AssetMeta meta, VideoPlayer player) {
-                RenderTexture texture = (RenderTexture) player.texture;
+                var texture = player.texture;
                 meta.Status = AssetStatus.Loaded;
                 RecomputeMemorySize(ref Textures.MemoryUsage, meta, texture);
                 UnityEngine.Debug.LogFormat("[Streaming] ...finished loading (async) '{0}'", id);
@@ -155,8 +155,7 @@ namespace EasyAssetStreaming {
                     var player = s_UpdateHookGO.AddComponent<VideoPlayer>();
                     player.renderMode = VideoRenderMode.APIOnly;
                     player.playOnAwake = false;
-                    player.waitForFirstFrame = true;
-                    player.skipOnDrop = true;
+                    player.skipOnDrop = false;
                     player.isLooping = true;
                     player.audioOutputMode = VideoAudioOutputMode.None;
                     player.prepareCompleted += HandleVideoPrepareFinished;

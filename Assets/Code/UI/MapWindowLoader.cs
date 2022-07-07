@@ -166,7 +166,7 @@ namespace Journalism.UI
             // Set player location
             // set PlayerMarker location banner text and position
             MapLocationDef.MapLocation playerLoc = MapLocations.GetMapLocation(Player.Location());
-            container.PlayerMarker.LocationIDText.SetText(playerLoc.Name);
+            container.PlayerMarker.LocationIDText.SetText(playerLoc.NameId);
 
             playerMarkerRect.sizeDelta = new Vector2(m_markerScale.x * mapDims.x, m_markerScale.y * mapDims.y);
             container.PlayerMarker.BannerRect.localPosition = new Vector2(m_bannerScale.x * mapDims.x, m_bannerScale.y * mapDims.y);

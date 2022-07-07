@@ -16,32 +16,56 @@ MonoBehaviour:
   - Id:
       m_HashValue: 742923569
     Name: Apartment
+    NameId:
+      m_Source: Map.Apartment
+      m_HashValue: 153230505
     NormalizedCoords: {x: -0.35550547, y: 0.176}
   - Id:
       m_HashValue: 1779176013
     Name: Newsroom
+    NameId:
+      m_Source: Map.Newsroom
+      m_HashValue: 2340295445
     NormalizedCoords: {x: 0.22135246, y: -0.158}
   - Id:
       m_HashValue: 2656043832
     Name: Cherry Festival
+    NameId:
+      m_Source: Map.CherryFestival
+      m_HashValue: 1004817520
     NormalizedCoords: {x: 0.15511441, y: -0.0625}
   - Id:
       m_HashValue: 2339622852
     Name: Upper Lake Dam
+    NameId:
+      m_Source: Map.UpperLakeDam
+      m_HashValue: 34686522
     NormalizedCoords: {x: 0.048909947, y: 0.008333334}
   - Id:
       m_HashValue: 1950899829
     Name: Downtown
+    NameId:
+      m_Source: Map.Downtown
+      m_HashValue: 2786338461
     NormalizedCoords: {x: 0.32140824, y: -0.2875}
   - Id:
       m_HashValue: 3599652654
     Name: Deli Lot
+    NameId:
+      m_Source: Map.DeliLot
+      m_HashValue: 3241171956
     NormalizedCoords: {x: 0.3, y: -0.29791668}
   - Id:
       m_HashValue: 3189094543
     Name: Limnology
+    NameId:
+      m_Source: Map.Limnology
+      m_HashValue: 2126927527
     NormalizedCoords: {x: 0.21240892, y: -0.039583333}
   - Id:
       m_HashValue: 1612737391
     Name: DNR
+    NameId:
+      m_Source: Map.DNR
+      m_HashValue: 4268924343
     NormalizedCoords: {x: 0.15790926, y: 0.16041666}
