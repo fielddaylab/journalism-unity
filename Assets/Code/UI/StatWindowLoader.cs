@@ -29,7 +29,7 @@ namespace Journalism.UI {
 
                     line.Name.SetText(Stats.Name(id));
                     line.Rank.SetText(Stats.RankLabel(id, val));
-                    line.Rank.color = color;
+                    line.Rank.Graphic.color = color;
 
                     float angle = Mathf.Deg2Rad * (AngleOffset + 360f / StatOrder.Length * i);
                     float dist = Mathf.Lerp(MinRadius, MaxRadius, (float) val / Stats.MaxValue);

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using BeauRoutine;
 using BeauUtil.UI;
+using FDLocalization;
 
 namespace Journalism.UI {
     public sealed class StoryBuilderSlot : MonoBehaviour {
@@ -18,7 +19,7 @@ namespace Journalism.UI {
         public GameObject EmptyGroup;
         public ColorGroup EmptyColor;
         public Image EmptyIcon;
-        public TMP_Text EmptyLabel;
+        public LocText EmptyLabel;
         public PointerListener Click;
         public GameObject AvailableHighlight;
         public GameObject HoverHighlight;

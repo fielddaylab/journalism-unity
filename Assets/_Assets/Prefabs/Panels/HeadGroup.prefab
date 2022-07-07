@@ -1338,6 +1338,16 @@ PrefabInstance:
       propertyPath: Id.m_HashValue
       value: 3756319748
       objectReference: {fileID: 0}
+    - target: {fileID: 5799889800460057149, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_DefaultId.m_Source
+      value: Header.Time
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799889800460057149, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_DefaultId.m_HashValue
+      value: 1312667435
+      objectReference: {fileID: 0}
     - target: {fileID: 6193018130487395298, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
       propertyPath: m_Visible
@@ -1582,6 +1592,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Id.m_HashValue
       value: 267393898
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799889800460057149, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_DefaultId.m_Source
+      value: Header.Notes
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799889800460057149, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_DefaultId.m_HashValue
+      value: 459746111
       objectReference: {fileID: 0}
     - target: {fileID: 6777147068596989909, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}
@@ -1947,6 +1967,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Id.m_HashValue
       value: 1151856721
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799889800460057149, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_DefaultId.m_Source
+      value: Header.Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799889800460057149, guid: 00dc24918d461984fb122c0b0286af33,
+        type: 3}
+      propertyPath: m_DefaultId.m_HashValue
+      value: 2578554612
       objectReference: {fileID: 0}
     - target: {fileID: 6777147068596989909, guid: 00dc24918d461984fb122c0b0286af33,
         type: 3}

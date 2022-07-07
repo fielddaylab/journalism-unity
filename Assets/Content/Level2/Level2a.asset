@@ -15,6 +15,9 @@ MonoBehaviour:
   Script: {fileID: -1942890987711236906, guid: a942cbb2cc93bd240b646835c63c28b0, type: 3}
   Story:
     HeadlineType: Science Story
+    HeadlineTypeId:
+      m_Source: Level.2a.HeadlineType
+      m_HashValue: 3768765030
     Slots:
     - Type: 1
       Wide: 1
@@ -28,10 +31,16 @@ MonoBehaviour:
       Wide: 0
     EditorBrief: People want to know why this happened. Give 'em plenty of facts.
       Plus some color to tell them why they should care, and one or two useful tidbits.
+    EditorBriefId:
+      m_Source: Level.2a.Brief
+      m_HashValue: 3859953730
     FactWeight: 2
     ColorWeight: 1
     UsefulWeight: 1
     FinalHeadline: How a Summer Storm Became a 100-Year Flood
+    FinalHeadlineId:
+      m_Source: Level.2a.Headline
+      m_HashValue: 3863323254
   StoryScraps: {fileID: -4270002856181823206, guid: 7cced83b472c88b4db34af015325e684,
     type: 3}
   Audio: {fileID: 0}

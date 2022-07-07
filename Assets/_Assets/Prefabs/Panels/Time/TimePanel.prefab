@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 1120145201709948031}
   - component: {fileID: 1295101781679509719}
   - component: {fileID: 4562966547857321495}
+  - component: {fileID: 6060269648782013491}
   m_Layer: 5
   m_Name: HourLabel
   m_TagString: Untagged
@@ -471,7 +472,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 8
   m_fontSizeMax: 32
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -507,6 +508,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6060269648782013491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4815462926969687312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 4562966547857321495}
+  m_DefaultId:
+    m_Source: Label.Hours.Short
+    m_HashValue: 795021276
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &6249198429171482420
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +537,7 @@ GameObject:
   - component: {fileID: 6249198429171482421}
   - component: {fileID: 6249198429171482427}
   - component: {fileID: 6249198429171482426}
+  - component: {fileID: 3279920641429246457}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -641,6 +661,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3279920641429246457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249198429171482420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 6249198429171482426}
+  m_DefaultId:
+    m_Source: Window.Time.StoryDeadline
+    m_HashValue: 60584099
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &6249198429488353927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1167,7 @@ GameObject:
   - component: {fileID: 7066162576679542000}
   - component: {fileID: 7487535989416202644}
   - component: {fileID: 3351274156556665898}
+  - component: {fileID: 271847760077113024}
   m_Layer: 5
   m_Name: MinLabel
   m_TagString: Untagged
@@ -1216,7 +1255,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 8
   m_fontSizeMax: 32
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1252,6 +1291,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &271847760077113024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560809744545269472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 3351274156556665898}
+  m_DefaultId:
+    m_Source: Label.Minutes.Short
+    m_HashValue: 3399727422
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &8100033594004518756
 GameObject:
   m_ObjectHideFlags: 0

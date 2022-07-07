@@ -14,6 +14,7 @@ using Journalism.UI;
 using BeauUtil.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using FDLocalization;
 
 namespace Journalism {
     static public class GameText {
@@ -65,6 +66,13 @@ namespace Journalism {
             }
 
             LayoutLine(line);
+        }
+
+        /// <summary>
+        /// Populates the contents of a given text line.
+        /// </summary>
+        static public void PopulateTextLine(TextLine line, LocId locId, Sprite icon, Color iconColor, TextStyles.StyleData style, float maxWidth = 0, bool stripQuotes = false) {
+            PopulateTextLine(line, Loc.Get(locId), icon, iconColor, style, maxWidth, stripQuotes);
         }
 
         static public void LayoutLine(TextLine line) {
@@ -628,7 +636,7 @@ namespace Journalism {
 
             if (line.MarkerIcon != null) {
                 if (choiceMarker != null) {
-                    line.Text.margin = new Vector4(28f, 0, 0, 0);
+                    line.Text.Graphic.margin = new Vector4(28f, 0, 0, 0);
                     line.MarkerIcon.gameObject.SetActive(true);
                     choice.Marker.gameObject.SetActive(true);
                     choice.Marker.sprite = choiceMarker.Image.sprite;
@@ -647,7 +655,7 @@ namespace Journalism {
                 else {
                     line.MarkerIcon.gameObject.SetActive(false);
                     line.MarkerIcon.sprite = null;
-                    line.Text.margin = new Vector4(0, 0, 0, 0);
+                    line.Text.Graphic.margin = new Vector4(0, 0, 0, 0);
                 }
             }
 
@@ -858,7 +866,7 @@ namespace Journalism {
                 display.TextureGroup.SetActive(true);
             } else {
                 display.TextureGroup.SetActive(false);
-                display.Line.Text.SetText(data.Content);
+                display.Line.Text.SetText(Loc.Get((LocId) data.Id, data.Content));
                 display.Line.Text.gameObject.SetActive(true);
                 SetTextLineBackground(display.Line, true);
             }
@@ -1129,6 +1137,7 @@ namespace Journalism {
             LeafUtils.ConfigureDefaultHandlers(handler, integration);
 
             config.AddReplace("timeLeft", () => FormatTime(Player.Data.TimeRemaining, false));
+            config.AddReplace("stat-name", "<b><color=purple>").CloseWith("</color></b>");
 
             config.AddEvent("bg", Events.Background).WithStringData().CloseWith(Events.BackgroundFadeOut);
             config.AddEvent("anim", Events.Anim).WithStringData();

@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using BeauUtil;
 using BeauRoutine;
+using FDLocalization;
 
 namespace Journalism.UI {
     public sealed class StorySlotLayout : MonoBehaviour {
 
-        public TMP_Text StoryType;
+        public LocText StoryType;
 
         [Header("Slots")]
         public StoryBuilderSlot[] Slots;

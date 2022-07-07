@@ -290,7 +290,7 @@ MonoBehaviour:
   MaxSize: {fileID: 9019479986259184805}
   Layout: {fileID: 6103029026025727545}
   TailHeight: 16
-  Text: {fileID: 468769718010146141}
+  Text: {fileID: 2945181466078320377}
   CharacterHeader: {fileID: 0}
   Icon: {fileID: 4174921025481320418}
   MarkerIcon: {fileID: 6025144781850365269}
@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 9019479986259184805}
   - component: {fileID: 1299602120044942503}
   - component: {fileID: 4187792434166999173}
+  - component: {fileID: 2945181466078320377}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -980,6 +981,24 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2945181466078320377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435958874971295864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 468769718010146141}
+  m_DefaultId:
+    m_Source: 
+    m_HashValue: 0
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &7245568064785065954
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ namespace Journalism.UI {
         Toolbar = 0x02,
         OverStory = 0x08,
         GameOver = 0x10,
+        Menus = 0x20,
+        System = 0x40,
 
         [Hidden] AllStory = Story | OverStory,
         [Hidden] All = AllStory | Toolbar | GameOver

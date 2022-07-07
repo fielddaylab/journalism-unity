@@ -10,6 +10,7 @@ using System.Collections;
 using BeauUtil.UI;
 using BeauUtil.Variants;
 using Leaf;
+using FDLocalization;
 
 namespace Journalism.UI {
     [RequireComponent(typeof(HeaderWindow))]
@@ -41,7 +42,7 @@ namespace Journalism.UI {
         [SerializeField] private Button m_EditorNotesButton = null;
         [SerializeField] private Button m_EditorNotesBackButton = null;
         [SerializeField] private ActiveGroup m_EditorNotesGroup = null;
-        [SerializeField] private TMP_Text m_EditorNotesText = null;
+        [SerializeField] private LocText m_EditorNotesText = null;
         [SerializeField] private StoryAttributeDisplay m_Distributions = null;
         [SerializeField] private StoryQualityDisplay m_CurrentQuality = null;
 
@@ -144,7 +145,7 @@ namespace Journalism.UI {
                 if (Ref.Replace(ref m_LastKnownLevelIdx, Player.Data.LevelIndex)) {
                     StoryText.LayoutSlots(m_SlotLayout, Assets.CurrentLevel.Story);
                     GameText.PopulateStoryAttributeDistribution(m_Distributions.Target, Assets.CurrentLevel.Story);
-                    m_EditorNotesText.SetText(Assets.CurrentLevel.Story.EditorBrief);
+                    m_EditorNotesText.SetText(Assets.CurrentLevel.Story.EditorBriefId);
                     yield return null;
                 }
 

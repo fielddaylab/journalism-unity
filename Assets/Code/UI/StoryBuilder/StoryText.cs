@@ -7,6 +7,7 @@ using BeauUtil;
 using BeauRoutine;
 using BeauPools;
 using System.Collections;
+using FDLocalization;
 
 namespace Journalism.UI {
     static public class StoryText {
@@ -33,14 +34,14 @@ namespace Journalism.UI {
             switch(data.Type) {
                 case StorySlotType.Picture: {
                     slot.EmptyIcon.gameObject.SetActive(true);
-                    slot.EmptyLabel.text = "Picture Lead"; // TODO: Real text?
+                    slot.EmptyLabel.SetText(TextConsts.Slot_Empty_Picture);
                     slot.Filter = StoryScrapType.ImageMask;
                     break;
                 }
 
                 default: {
                     slot.EmptyIcon.gameObject.SetActive(false);
-                    slot.EmptyLabel.text = "Snippet";
+                    slot.EmptyLabel.SetText(TextConsts.Slot_Empty_Any);
                     slot.Filter = StoryScrapType.AnyMask;
                     break;
                 }
@@ -83,7 +84,7 @@ namespace Journalism.UI {
                 layout.Slots[layoutIdx].gameObject.SetActive(false);
             }
 
-            layout.StoryType.SetText(configuration.HeadlineType);
+            layout.StoryType.SetText(configuration.HeadlineTypeId);
         }
 
         static public void LayoutNewspaper(NewspaperLayout layout, StoryConfig config, PlayerData data) {
@@ -124,7 +125,7 @@ namespace Journalism.UI {
                 layout.Slots[layoutIdx].gameObject.SetActive(false);
             }
 
-            layout.Headline.SetText(config.FinalHeadline);
+            layout.Headline.SetText(config.FinalHeadlineId);
         }
 
         static public void CullFeedback(RingBuffer<ImpactLayout.Item> items, int max) {

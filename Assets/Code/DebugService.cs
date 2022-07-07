@@ -241,10 +241,10 @@ namespace Journalism {
 
         static private void RegisterAdjustStat(DMInfo menu, StatId statId) {
             var info = Stats.Info(statId);
-            menu.AddButton(info.Name + " + 1", () => {
+            menu.AddButton(info.Id.ToString() + " + 1", () => {
                 Player.SetStat(statId, Player.Stat(statId) + 1);
             }, () => Player.Stat(statId) < Stats.MaxValue);
-            menu.AddButton(info.Name + " - 1", () => {
+            menu.AddButton(info.Id.ToString() + " - 1", () => {
                 Player.SetStat(statId, Player.Stat(statId) - 1);
             }, () => Player.Stat(statId) > 0);
         }

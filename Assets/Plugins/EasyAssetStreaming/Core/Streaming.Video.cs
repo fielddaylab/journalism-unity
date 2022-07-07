@@ -75,6 +75,7 @@ namespace EasyAssetStreaming {
                 VideoPlayer player = AllocPlayer();
                 PlayerReverseMap[player.GetInstanceID()] = id;
                 string url = ResolvePathToURL(pathOrUrl);
+                player.source = VideoSource.Url;
                 player.url = url;
                 s_LoadState.Queue.Enqueue(id);
                 EnsureTick();
@@ -154,8 +155,10 @@ namespace EasyAssetStreaming {
                     var player = s_UpdateHookGO.AddComponent<VideoPlayer>();
                     player.renderMode = VideoRenderMode.APIOnly;
                     player.playOnAwake = false;
+                    player.waitForFirstFrame = true;
                     player.skipOnDrop = true;
                     player.isLooping = true;
+                    player.audioOutputMode = VideoAudioOutputMode.None;
                     player.prepareCompleted += HandleVideoPrepareFinished;
                     player.errorReceived += HandleVideoError;
                     return player;

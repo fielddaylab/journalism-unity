@@ -11,6 +11,7 @@ using EasyAssetStreaming;
 using BeauPools;
 using System;
 using Journalism.UI;
+using FDLocalization;
 
 namespace Journalism {
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
@@ -169,7 +170,7 @@ namespace Journalism {
 
         private void OnFeedbackBegin() {
             m_FeedbackOverlay.RectTransform.SetAnchorPos(m_FeedbackOverlayEditorY, Axis.Y);
-            AnimatedElement.SwapText(m_FeedbackOverlay, "Editor:");
+            AnimatedElement.SwapText(m_FeedbackOverlay, Loc.Get(TextConsts.StoryReview_Editor));
             m_OverlayAnim.Replace(this, AnimatedElement.Show(m_FeedbackOverlay, 0.2f, null));
             m_ImpactLayout.Clear();
         }
@@ -186,7 +187,7 @@ namespace Journalism {
         private void OnFeedbackSwapToEditor() {
             m_OverlayAnim.Replace(this, Routine.Combine(
                 m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayEditorY, 0.5f, Axis.Y).Ease(Curve.Smooth),
-                AnimatedElement.SwapText(m_FeedbackOverlay, "Editor:", 0.5f)
+                AnimatedElement.SwapText(m_FeedbackOverlay, Loc.Get(TextConsts.StoryReview_Editor), 0.5f)
             ));
         }
 
@@ -218,7 +219,7 @@ namespace Journalism {
             StoryScrapData data = Assets.Scrap(scrapId);
 
             // TODO: Localization
-            yield return DisplayCustomMessage(m_BaseLayer, "New Story Snippet", "msg");
+            yield return DisplayCustomMessage(m_BaseLayer, Loc.Get(TextConsts.Message_NewSnippet), "msg");
             yield return 0.1f;
 
             if (data != null) {
@@ -257,7 +258,7 @@ namespace Journalism {
                         if (psb.Builder.Length > 0) {
                             psb.Builder.Append(" ");
                         }
-                        string name = Stats.Name((StatId) i);
+                        string name = Loc.Get(Stats.Name((StatId) i));
                         if (adjust > 0) {
                             psb.Builder.Append("<b>").Append(name).Append("</b>").Append('+', adjust);
                         } else {
@@ -395,7 +396,7 @@ namespace Journalism {
             }
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 1;
-            yield return GameText.WaitForPlayerNext(m_CurrentLayer.Choices, "Talk to Editor", Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
+            yield return GameText.WaitForPlayerNext(m_CurrentLayer.Choices, Loc.Get(TextConsts.TalkToEditor), Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_FinishedStoryLayout.gameObject.SetActive(false);
         }
@@ -418,7 +419,7 @@ namespace Journalism {
 
             m_OverlayAnim.Replace(this, Routine.Combine(
                 m_FeedbackOverlay.RectTransform.AnchorPosTo(m_FeedbackOverlayImpactY, 0.5f, Axis.Y).Ease(Curve.Smooth),
-                AnimatedElement.SwapText(m_FeedbackOverlay, "Story Impact:", 0.5f)
+                AnimatedElement.SwapText(m_FeedbackOverlay, Loc.Get(TextConsts.StoryReview_Impact), 0.5f)
             ));
 
             yield return m_ImpactLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);

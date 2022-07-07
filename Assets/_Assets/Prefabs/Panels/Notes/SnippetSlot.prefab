@@ -886,7 +886,7 @@ MonoBehaviour:
   EmptyGroup: {fileID: 35634394475845665}
   EmptyColor: {fileID: 7410936714108836488}
   EmptyIcon: {fileID: 7674286959610261543}
-  EmptyLabel: {fileID: 5534539370818609082}
+  EmptyLabel: {fileID: 3638710587954170146}
   Click: {fileID: 5146754988041570003}
   AvailableHighlight: {fileID: 3637633475117429342}
   HoverHighlight: {fileID: 520114236067065636}
@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 2661781020353498911}
   - component: {fileID: 5534539370818609082}
   - component: {fileID: 3980398427432374089}
+  - component: {fileID: 3638710587954170146}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -1072,6 +1073,24 @@ MonoBehaviour:
     AdditionalProperties: []
   m_EnableRaycastLayer: 0
   m_DisableRaycastLayer: 2
+--- !u!114 &3638710587954170146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4011284756401570738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 5534539370818609082}
+  m_DefaultId:
+    m_Source: 
+    m_HashValue: 0
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &6431356729768828236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,6 +1498,7 @@ GameObject:
   - component: {fileID: 8637255043039378976}
   - component: {fileID: 2338729423886322056}
   - component: {fileID: 7250509830481568335}
+  - component: {fileID: 3104547089732457798}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1670,6 +1690,24 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!114 &3104547089732457798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637255043039378980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 8637255043039378982}
+  m_DefaultId:
+    m_Source: 
+    m_HashValue: 0
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &8637255043677469183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,10 +1921,13 @@ MonoBehaviour:
   PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
+  MaxSize: {fileID: 0}
   Layout: {fileID: 4031699987282934576}
   TailHeight: 16
-  Text: {fileID: 8637255043039378982}
+  Text: {fileID: 3104547089732457798}
+  CharacterHeader: {fileID: 0}
   Icon: {fileID: 0}
+  MarkerIcon: {fileID: 0}
 --- !u!114 &7439989025654605027
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,8 +32,11 @@ namespace Journalism.UI {
         [SerializeField] private CanvasGroup m_HeaderUnderFader = null;
         [SerializeField] private CanvasGroup m_SolidBGFader = null;
         [SerializeField] private GameOverWindow m_GameOver = null;
-        [SerializeField] private AnimatedElement m_CheckpointNotification = null;
         [SerializeField] private TutorialArrow m_TutorialArrow = null;
+        [SerializeField] private AnimatedElement m_CheckpointNotification = null;
+        [SerializeField] private float m_CheckpointNotificationOffscreenPos = -300;
+        [SerializeField] private float m_CheckpointNotificationOnscreenPos = -8;
+        [SerializeField] private TweenSettings m_CheckpointNotificationAnim = new TweenSettings(0.3f);
 
         #endregion // Inspector
 
@@ -66,6 +69,7 @@ namespace Journalism.UI {
             m_HeaderUnderFader.alpha = 0;
 
             AnimatedElement.Hide(m_CheckpointNotification);
+            m_CheckpointNotification.RectTransform.SetAnchorPos(m_CheckpointNotificationOffscreenPos, Axis.X);
 
             m_HeaderWindow.OnShowEvent.AddListener(OnHeaderShow);
             m_HeaderWindow.OnHideEvent.AddListener(OnHeaderHide);
@@ -139,13 +143,17 @@ namespace Journalism.UI {
         }
 
         private void OnCheckpointSaved() {
+            Game.Audio.PlayOneShot("Checkpoint");
             m_CheckpointNotification.Animation.Replace(this, CheckpointAnim());
         }
 
         private IEnumerator CheckpointAnim() {
-            yield return AnimatedElement.Show(m_CheckpointNotification, 0.5f);
+            m_CheckpointNotification.RectTransform.SetAnchorPos(m_CheckpointNotificationOffscreenPos, Axis.X);
+            AnimatedElement.Show(m_CheckpointNotification);
+            yield return m_CheckpointNotification.RectTransform.AnchorPosTo(m_CheckpointNotificationOnscreenPos, m_CheckpointNotificationAnim, Axis.X);
             yield return 2;
-            yield return AnimatedElement.Hide(m_CheckpointNotification, 0.5f);
+            yield return m_CheckpointNotification.RectTransform.AnchorPosTo(m_CheckpointNotificationOffscreenPos, m_CheckpointNotificationAnim, Axis.X);
+            AnimatedElement.Hide(m_CheckpointNotification);
         }
 
         private void OnHeaderHide(BasePanel.TransitionType type) {

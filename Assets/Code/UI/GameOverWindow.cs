@@ -11,6 +11,7 @@ using Leaf.Defaults;
 using Leaf;
 using Leaf.Runtime;
 using BeauUtil.Tags;
+using FDLocalization;
 
 namespace Journalism.UI {
     public sealed class GameOverWindow : BasePanel, ITextDisplayer {
@@ -101,7 +102,7 @@ namespace Journalism.UI {
             
             yield return AnimatedElement.Show(m_Prompt, 0.2f);
             yield return 0.2f;
-            yield return GameText.WaitForYesNoChoice(m_Choices, future, "Continue", "Quit", Assets.Style(GameText.Characters.Action));
+            yield return GameText.WaitForYesNoChoice(m_Choices, future, Loc.Get(TextConsts.GameOver_Continue), Loc.Get(TextConsts.GameOver_Quit), Assets.Style(GameText.Characters.Action));
         }
 
         #region Leaf

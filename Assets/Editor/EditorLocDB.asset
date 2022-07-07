@@ -1,0 +1,330 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f21de6414672241b33d993b0053e04, type: 3}
+  m_Name: EditorLocDB
+  m_EditorClassIdentifier: 
+  m_DefaultLanguage:
+    m_Value: 0
+  m_FileRecords:
+  - Name: level
+    Asset: {fileID: -4270002856181823206, guid: f0d2a6d4335d7b545bf608ad84a23d7d,
+      type: 3}
+    AssetPath: Assets/Content/Strings/level.strg
+    Records:
+    - Id: Level.1a.Headline
+      Content: Widespread flooding in Twin Lakes
+      Exposed: 0
+    - Id: Level.1a.Brief
+      Content: We need a breaking news announcement! Make sure people know what to
+        do to stay safe. Include lots of useful, actionable information! We also
+        need basic facts about the flood, plus a photo or quote for color.
+      Exposed: 0
+    - Id: Level.1a.HeadlineType
+      Content: Breaking News
+      Exposed: 0
+    - Id: Level.1b.HeadlineType
+      Content: Human Interest
+      Exposed: 0
+    - Id: Level.1b.Brief
+      Content: For this story, we need a lot of color. Get people's attention and
+        get some local flood stories out there! Plus, throw in some useful info and
+        facts about what's happening.
+      Exposed: 0
+    - Id: Level.1b.Headline
+      Content: Twin Lakes Battles Rising Water
+      Exposed: 0
+    - Id: Level.2a.HeadlineType
+      Content: Science Story
+      Exposed: 0
+    - Id: Level.2a.Brief
+      Content: People want to know why this happened. Give 'em plenty of facts. Plus
+        some color to tell them why they should care, and one or two useful tidbits.
+      Exposed: 0
+    - Id: Level.2a.Headline
+      Content: How a Summer Storm Became a 100-Year Flood
+      Exposed: 0
+    Headers:
+    - Path: Level
+      RecordStart: 0
+    BasePath: Level
+    Dirty: 0
+  - Name: main
+    Asset: {fileID: -4270002856181823206, guid: 716563e30c9bf434da81dbaacee31abd,
+      type: 3}
+    AssetPath: Assets/Content/Strings/main.strg
+    Records:
+    - Id: Message.NewSnippet
+      Content: New Story Snippet
+      Exposed: 0
+    - Id: TalkToEditor
+      Content: Talk to Editor
+      Exposed: 0
+    - Id: GameOver.Continue
+      Content: Continue
+      Exposed: 0
+    - Id: GameOver.Quit
+      Content: Quit
+      Exposed: 0
+    - Id: Slot.Empty.Picture
+      Content: Picture Lead
+      Exposed: 0
+    - Id: Slot.Empty.Any
+      Content: Snippet
+      Exposed: 0
+    - Id: GameOver.Prompt
+      Content: Continue from last checkpoint?
+      Exposed: 0
+    - Id: Header.Stats
+      Content: stats
+      Exposed: 0
+    - Id: Header.Map
+      Content: map
+      Exposed: 0
+    - Id: Header.Notes
+      Content: notes
+      Exposed: 0
+    - Id: Header.Time
+      Content: time
+      Exposed: 0
+    - Id: Window.Stats
+      Content: Stats
+      Exposed: 0
+    - Id: Window.Notes.YourStory
+      Content: Your Story
+      Exposed: 0
+    - Id: Window.Notes.Target
+      Content: Target
+      Exposed: 0
+    - Id: Window.Notes.StoryType
+      Content: 'Story Type:'
+      Exposed: 0
+    - Id: Window.Notes.EditorButton
+      Content: 'Editor
+
+        Notes'
+      Exposed: 0
+    - Id: Window.Notes.EditorHeader
+      Content: 'Editor Notes:'
+      Exposed: 0
+    - Id: Label.Color
+      Content: Color
+      Exposed: 0
+    - Id: Label.Useful
+      Content: Useful
+      Exposed: 0
+    - Id: Label.Facts
+      Content: Facts
+      Exposed: 0
+    - Id: Label.StoryBreakdown
+      Content: 'Story Breakdown:'
+      Exposed: 0
+    - Id: Label.StoryQuality
+      Content: 'Story Quality:'
+      Exposed: 0
+    - Id: Label.StoryImpact
+      Content: 'Story Impact:'
+      Exposed: 0
+    - Id: Quality.Good
+      Content: Quality
+      Exposed: 0
+    - Id: Quality.Bad
+      Content: Lousy
+      Exposed: 0
+    - Id: Label.Hours.Short
+      Content: HRS
+      Exposed: 0
+    - Id: Label.Minutes.Short
+      Content: MINS
+      Exposed: 0
+    - Id: Window.Time.StoryDeadline
+      Content: 'Time Until Story Deadline:'
+      Exposed: 0
+    - Id: CheckpointSaved
+      Content: Checkpoint Saved
+      Exposed: 0
+    - Id: Newspaper.Byline
+      Content: by Avatar Playername
+      Exposed: 0
+    - Id: StoryReview.Editor
+      Content: 'Editor:'
+      Exposed: 0
+    - Id: StoryReview.Impact
+      Content: 'Impact:'
+      Exposed: 0
+    - Id: Label.Location
+      Content: 'location:'
+      Exposed: 0
+    - Id: Map.Apartment
+      Content: Apartment
+      Exposed: 0
+    - Id: Map.Newsroom
+      Content: Newsroom
+      Exposed: 0
+    - Id: Map.DNR
+      Content: DNR
+      Exposed: 0
+    - Id: Map.Limnology
+      Content: Limnology
+      Exposed: 0
+    - Id: Map.DeliLot
+      Content: Deli Lot
+      Exposed: 0
+    - Id: Map.Downtown
+      Content: Downtown
+      Exposed: 0
+    - Id: Map.UpperLakeDam
+      Content: Upper Lake Dam
+      Exposed: 0
+    - Id: Map.CherryFestival
+      Content: Cherry Festival
+      Exposed: 0
+    Headers: []
+    BasePath: 
+    Dirty: 0
+  - Name: stats
+    Asset: {fileID: -4270002856181823206, guid: e1277c9a295376443a847a46b8b4df26,
+      type: 3}
+    AssetPath: Assets/Content/Strings/stats.strg
+    Records:
+    - Id: Stats.Research
+      Content: Research
+      Exposed: 0
+    - Id: Stats.Research.Rank0
+      Content: Unaware
+      Exposed: 0
+    - Id: Stats.Research.Rank1
+      Content: Myopic
+      Exposed: 0
+    - Id: Stats.Research.Rank2
+      Content: Curious
+      Exposed: 0
+    - Id: Stats.Research.Rank3
+      Content: Bookworm
+      Exposed: 0
+    - Id: Stats.Research.Rank4
+      Content: Wonk
+      Exposed: 0
+    - Id: Stats.Research.Rank5
+      Content: Professor
+      Exposed: 0
+    - Id: Stats.Resourceful
+      Content: Resourcefulness
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank0
+      Content: Forgetful
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank5
+      Content: Cherry Scout
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank4
+      Content: Geared Up
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank3
+      Content: Prepared
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank2
+      Content: Distracted
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank1
+      Content: Inattentive
+      Exposed: 0
+    - Id: Stats.Endurance
+      Content: Endurance
+      Exposed: 0
+    - Id: Stats.Endurance.Rank0
+      Content: Out of Shape
+      Exposed: 0
+    - Id: Stats.Endurance.Rank5
+      Content: Olympian
+      Exposed: 0
+    - Id: Stats.Endurance.Rank4
+      Content: Athlete
+      Exposed: 0
+    - Id: Stats.Endurance.Rank3
+      Content: Fit
+      Exposed: 0
+    - Id: Stats.Endurance.Rank2
+      Content: Sleepy
+      Exposed: 0
+    - Id: Stats.Endurance.Rank1
+      Content: Couch Potato
+      Exposed: 0
+    - Id: Stats.Tech
+      Content: Tech
+      Exposed: 0
+    - Id: Stats.Tech.Rank0
+      Content: Luddite
+      Exposed: 0
+    - Id: Stats.Tech.Rank5
+      Content: Cyber Punk
+      Exposed: 0
+    - Id: Stats.Tech.Rank4
+      Content: Techie
+      Exposed: 0
+    - Id: Stats.Tech.Rank3
+      Content: Geek
+      Exposed: 0
+    - Id: Stats.Tech.Rank2
+      Content: Dabbler
+      Exposed: 0
+    - Id: Stats.Tech.Rank1
+      Content: Newbie
+      Exposed: 0
+    - Id: Stats.Social
+      Content: Social
+      Exposed: 0
+    - Id: Stats.Social.Rank0
+      Content: Recluse
+      Exposed: 0
+    - Id: Stats.Social.Rank5
+      Content: Social Butterfly
+      Exposed: 0
+    - Id: Stats.Social.Rank4
+      Content: Social Caterpillar
+      Exposed: 0
+    - Id: Stats.Social.Rank3
+      Content: Amiable
+      Exposed: 0
+    - Id: Stats.Social.Rank2
+      Content: Reserved
+      Exposed: 0
+    - Id: Stats.Social.Rank1
+      Content: Shy
+      Exposed: 0
+    - Id: Stats.Trust
+      Content: Trust
+      Exposed: 0
+    - Id: Stats.Trust.Rank0
+      Content: Cryptid
+      Exposed: 0
+    - Id: Stats.Trust.Rank1
+      Content: Unknown
+      Exposed: 0
+    - Id: Stats.Trust.Rank2
+      Content: Average
+      Exposed: 0
+    - Id: Stats.Trust.Rank3
+      Content: Reputable
+      Exposed: 0
+    - Id: Stats.Trust.Rank4
+      Content: Esteemed
+      Exposed: 0
+    - Id: Stats.Trust.Rank5
+      Content: Community Pillar
+      Exposed: 0
+    Headers:
+    - Path: Stats
+      RecordStart: 0
+    BasePath: Stats
+    Dirty: 0
+  m_LastExportClassName: TextConsts
+  m_LastExportPath: Assets/Content/TextConsts.cs

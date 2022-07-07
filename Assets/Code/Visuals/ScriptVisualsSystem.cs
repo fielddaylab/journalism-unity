@@ -66,13 +66,7 @@ namespace Journalism {
             LeafEvalContext eval = LeafEvalContext.FromObject(context);
             string path = args[0].ToString();
 
-            if (m_CurrentBackgroundTexture != null && m_CurrentBackgroundTexture.Path == path && m_CurrentBackgroundTexture.Alpha > 0) {
-                yield break;
-            }
-
-            yield return PrepareNextBackground(path);
-            yield return CrossFade(m_CurrentBackgroundTexture, m_QueuedBackgroundTexture, 0.3f);
-            CompletedSwap();
+            return FadeInBackground(path);
         }
 
         private IEnumerator HandleBackgroundFadeOut(TagEventData eventData, object context) {
@@ -100,6 +94,16 @@ namespace Journalism {
             m_BackgroundTextureB.Alpha = 0;
             m_FullScreenSolid.Hide();
             m_FullScreenTransition.Stop();
+        }
+
+        public IEnumerator FadeInBackground(string path) {
+            if (m_CurrentBackgroundTexture != null && m_CurrentBackgroundTexture.Path == path && m_CurrentBackgroundTexture.Alpha > 0) {
+                yield break;
+            }
+
+            yield return PrepareNextBackground(path);
+            yield return CrossFade(m_CurrentBackgroundTexture, m_QueuedBackgroundTexture, 0.3f);
+            CompletedSwap();
         }
 
         public IEnumerator FadeOutBackgrounds() {

@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using BeauUtil.Debugger;
+using FDLocalization;
 using UnityEngine;
 
 namespace Journalism {
@@ -10,9 +11,9 @@ namespace Journalism {
         public class Stat {
             public StatId Id;
             
-            [Header("Text")] // TODO: Localize these!!
-            public string Name;
-            public string[] RankNames;
+            [Header("Text")]
+            public LocId NameId;
+            public LocId[] RankNameIds;
 
             [Header("Image")]
             public Sprite Icon;
@@ -35,7 +36,7 @@ namespace Journalism {
                 if (!m_Processed) {
                     Array.Sort(m_Stats, (a, b) => a.Id.CompareTo(b.Id));
                     foreach(var stat in m_Stats) {
-                        stat.RankInterval = (ushort) (m_MaxValue / (stat.RankNames.Length - 1));
+                        stat.RankInterval = (ushort) (m_MaxValue / (stat.RankNameIds.Length - 1));
                     }
                     m_Processed = true;
                 }
@@ -149,20 +150,20 @@ namespace Journalism {
         /// <summary>
         /// Retrieves the name of the stat with the given stat id.
         /// </summary>
-        static public string Name(StatId statId) {
-            return Info(statId).Name;
+        static public LocId Name(StatId statId) {
+            return Info(statId).NameId;
         }
 
         /// <summary>
         /// Returns the label for the given stat with the given stat value.
         /// </summary>
-        static public string RankLabel(StatId statId, ushort statValue) {
+        static public LocId RankLabel(StatId statId, ushort statValue) {
             var stat = Info(statId);
             int rankIndex = statValue / stat.RankInterval;
-            if (rankIndex > stat.RankNames.Length - 1) {
-                rankIndex = stat.RankNames.Length - 1;
+            if (rankIndex > stat.RankNameIds.Length - 1) {
+                rankIndex = stat.RankNameIds.Length - 1;
             }
-            return stat.RankNames[rankIndex];
+            return stat.RankNameIds[rankIndex];
         }
     }
 }

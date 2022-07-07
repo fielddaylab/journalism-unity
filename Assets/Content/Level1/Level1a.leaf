@@ -43,13 +43,19 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+// Resources
+
+#const BG_Bedroom = "BG/BedroomMorning.jpeg"
+#const BG_HouseExterior = "BG/HouseExtRainV2.mp4"
+#const BG_OfficeExterior = "BG/GazetteExtRainV2.mp4"
+
 # start START
 
 // Original Name: START
 :: START
 $ActionChoice(Wake up)
 $call SetLocation("Apartment")
-{bg BG/BedroomMorning.jpeg}
+{bg $BG_Bedroom}
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
 Twin Lakes. Day 11. 
@@ -103,7 +109,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
 {clear-text}
-{bg BG/HouseExtRainV2.mp4}
+{bg $BG_HouseExterior}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
 You help her find batteries for her flashlight and put out some food for her cats. 
@@ -120,7 +126,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 {clear-text}
-{bg BG/HouseExtRainV2.mp4}
+{bg $BG_HouseExterior}
 {img Anim/enml-phoneaccessories.jpg}
 You pack up your camera gear and phone charger. 
 Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
@@ -131,7 +137,7 @@ $choice OffToWork; Off to work
 // Original Name: Dig through the fridge for something nourishing
 :: DigThroughTheFridgeForSomethingNourishing
 {clear-text}
-{bg BG/HouseExtRainV2.mp4}
+{bg $BG_HouseExterior}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
 You eat a cherry muffin and pack up some cherry granola for later. 
@@ -141,7 +147,7 @@ $choice OffToWork; Off to work
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 {clear-text}
-{bg BG/HouseExtRainV2.mp4}
+{bg $BG_HouseExterior}
 You scroll through posts on Squawker.
 
 {img Photo/HospitalDucks.jpg}
@@ -293,7 +299,7 @@ $choice ArriveAtWork; Rush to work
 {layout Left}
 {/img}
 $call SetLocation("Newsroom")
-{bg BG/GazetteExtRainV2.mp4}
+{bg $BG_OfficeExterior}
 $call Ambience(Ambience/rain-inside.mp3)
 
 Your editor greets you at the door.
@@ -382,7 +388,7 @@ $else
     Maybe you could quote this, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
-    You may be a little low on  <color="purple">endurance</color>... And your <color="purple">social</color> skills could use some work.
+    You may be a little low on  {stat-name}endurance{/stat-name}... And your {stat-name}social{/stat-name} skills could use some work.
 $endif
 
 $choice ArriveAtWork; Arrive at work.
@@ -392,7 +398,7 @@ $choice ArriveAtWork; Arrive at work.
 {clear-text}
 
 $if StatCheck(Tech, 2)
-Good thing you thought to grab all this <color="purple">tech</color> gear! 
+Good thing you thought to grab all this {stat-name}tech{/stat-name} gear! 
 Your good camera and zoom lens is enough to get a clear shot!
 
 $call SFX(PhotoSnap)
@@ -406,7 +412,7 @@ At least blurry cars in blurry water is better than nothing.
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
-Maybe this would be better if you were more <color="purple">tech</color>-savvy...
+Maybe this would be better if you were more {stat-name}tech{/stat-name}-savvy...
 
 $endif
 
@@ -417,7 +423,7 @@ $choice ArriveAtWork; Arrive at work.
 :: BreakingNewsStory
 @checkpoint
 {clear-text}
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {/img}
 $if FirstVisit()
@@ -457,7 +463,7 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 // Original Name: Office 1 - Weather
 :: Office1-Weather
 {clear-text}
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {/map}
 You check the forecast and stumble upon an amazing resource: a live flood map! 
@@ -472,7 +478,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Coworker
 :: Office1-Coworker
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {clear-text}
 {/map}
@@ -485,7 +491,7 @@ $choice JenkinssComputer; Track down Jenkins's computer.
 // Original Name: Office 1 - DNR
 :: Office1-DNR
 {clear-text}
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {/map}
 $if StatCheck(Social, 2)
@@ -500,7 +506,7 @@ $else
     {@person}I'll give you our official statement, but then I need to run. 
     $call GiveSnippet(RehearsedDNR)
 
-    Sheesh... maybe you ought to be more <color="purple">social</color>.
+    Sheesh... maybe you ought to be more {stat-name}social{/stat-name}.
 $endif
 
 
@@ -524,7 +530,7 @@ $if Visited(JenkinssComputer)
         {@phone}You didn't do much research, did you, Rookie?
         {@phone}I don't have time to teach you the basics today. But feel free to call again later. 
 
-        Yikes... Maybe next time, you should brush up on <color="purple">research</color> beforehand.
+        Yikes... Maybe next time, you should brush up on {stat-name}research{/stat-name} beforehand.
     $endif
 
 $endif
@@ -533,7 +539,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - Police
 :: Office1-Police
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {clear-text}
 {/map}
@@ -578,7 +584,7 @@ $goto Office1-Clock
 
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {clear-text}
 {/map}
@@ -610,7 +616,7 @@ $else
     $call GiveSnippet(CityHallAnnoyance)
 
     That didn't go too well... 
-    ...maybe you need to brush up on your <color="purple">social</color> skills.
+    ...maybe you need to brush up on your {stat-name}social{/stat-name} skills.
 $endif
 
 
@@ -619,7 +625,7 @@ $goto Office1-Clock
 // Original Name: Office 1 - Social Media
 :: Office1-SocialMedia
 {clear-text}
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {/map}
 
@@ -631,7 +637,7 @@ $if StatCheck(Research, 2)
     $call GiveSnippet(LibraryLot)
 $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
-    Maybe with a little more <color="purple">research</color> you could look more in-depth...
+    Maybe with a little more {stat-name}research{/stat-name} you could look more in-depth...
     But not today.
     There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
     
@@ -646,7 +652,7 @@ $goto Office1-Clock
 
 // Original Name: N/a
 :: AnswerThePhoneContinue
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 $call DecreaseTime(0.5)
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
@@ -658,7 +664,7 @@ $choice BreakingNewsStory; Return to your desk
 
 // Original Name: Office 1 - Clock
 :: Office1-Clock
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 $if !HasTime(0.5)
     $choice YouHaveJustEnoughTimeToCompileTheStoryNow; You have just enough time to compile the story now.
@@ -688,7 +694,7 @@ Jenkins's computer looks like it's from the stone age. Or at least the 90's.
 
 You don't even know how to turn it on.
 
-Maybe if you were a little more <color="purple">tech</color>-savvy you could crack it.
+Maybe if you were a little more {stat-name}tech{/stat-name}-savvy you could crack it.
 
 But at least you find a post-it note on his desk: 
 {@article}Wynne D. Storme, flooding expert @ DNR
@@ -698,7 +704,7 @@ $goto Office1-Clock
 
 // Original Name: Message CherryCharlie07
 :: MessageCherryCharlie07
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 
 $if StatCheck(Trust, 2)
@@ -718,8 +724,8 @@ $else
         You don't have time for this. You log off and snap a picture of the flooded parking lot outside the newsroom. 
         Kinda boring, but it's better than nothing. Probably.
 
-        Maybe you could have navigated that better if you knew more about <color="purple">tech</color>... 
-        ...or earned people's <color="purple">trust</color>.
+        Maybe you could have navigated that better if you knew more about {stat-name}tech{/stat-name}... 
+        ...or earned people's {stat-name}trust{/stat-name}.
 
         $call SFX(PhotoSnap)
         $call GiveSnippet(GrainyPicture)
@@ -730,7 +736,7 @@ $goto Office1-Clock
 
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
-{bg BG/rainyGazette.jpg}
+{bg $BG_OfficeExterior}
 {layout Left}
 {clear-text}
 {/img}

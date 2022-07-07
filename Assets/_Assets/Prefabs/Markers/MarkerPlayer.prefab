@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 852019052019667976}
   - component: {fileID: 4069736844642248677}
   - component: {fileID: 1594300693501235664}
+  - component: {fileID: 6106753938564393426}
   m_Layer: 5
   m_Name: LocationID
   m_TagString: Untagged
@@ -172,6 +173,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6106753938564393426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341066683226744047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 1594300693501235664}
+  m_DefaultId:
+    m_Source: 
+    m_HashValue: 0
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &1981457766476510988
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +245,7 @@ MonoBehaviour:
   TextRect: {fileID: 0}
   NumText: {fileID: 0}
   Image: {fileID: 6841662036654005910}
-  LocationIDText: {fileID: 1594300693501235664}
+  LocationIDText: {fileID: 6106753938564393426}
   BannerRect: {fileID: 349578693728095680}
 --- !u!1 &2070594378502268289
 GameObject:
@@ -239,6 +258,7 @@ GameObject:
   - component: {fileID: 151561505551139249}
   - component: {fileID: 6874177187397528820}
   - component: {fileID: 3569993263304332659}
+  - component: {fileID: 4630952960425073583}
   m_Layer: 5
   m_Name: Location
   m_TagString: Untagged
@@ -292,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'location: '
+  m_text: 'location:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e38c5ba7d23b62f4282674caa5419f99, type: 2}
   m_sharedMaterial: {fileID: 8874601541012333017, guid: e38c5ba7d23b62f4282674caa5419f99,
@@ -362,6 +382,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4630952960425073583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070594378502268289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 3569993263304332659}
+  m_DefaultId:
+    m_Source: Label.Location
+    m_HashValue: 3328954258
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &3609397895522962087
 GameObject:
   m_ObjectHideFlags: 0

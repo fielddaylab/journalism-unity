@@ -12,6 +12,7 @@ using System;
 using UnityEngine.Scripting;
 using Journalism.UI;
 using EasyBugReporter;
+using FDLocalization;
 
 namespace Journalism {
     public sealed class ScriptSystem : MonoBehaviour, IDumpSource {
@@ -20,6 +21,7 @@ namespace Journalism {
 
         [SerializeField] private TextDisplaySystem m_TextDisplay = null;
         [SerializeField] private ScriptVisualsSystem m_Visuals = null;
+        [SerializeField] private LanguageId m_DefaultLanguage = default;
 
         #endregion // Inspector
 
@@ -28,8 +30,9 @@ namespace Journalism {
 
         [NonSerialized] private LevelDef m_CurrentLevel;
         [NonSerialized] private bool m_FirstVisit;
+        private LocDB m_LocDB;
 
-        public event Action<LeafEvalContext> OnScriptError; 
+        public event Action<LeafEvalContext> OnScriptError;
         public event Action OnThreadStopped;
 
         private void Awake() {
@@ -60,6 +63,10 @@ namespace Journalism {
 
             m_TextDisplay.HookIntegration(m_Integration);
 
+            m_LocDB = new LocDB(m_DefaultLanguage);
+            m_LocDB.SetAsCurrentModule();
+            m_LocDB.UseParser(m_Integration.Parser);
+
             Game.Events.Register(GameEvents.LevelStarted, OnLevelStarted, this)
                 .Register(GameEvents.LevelLoading, OnLevelLoading, this);
 
@@ -67,13 +74,13 @@ namespace Journalism {
         }
 
         private IEnumerator HandleNodeEnter(ScriptNode node, LeafThreadState thread) {
+            if (!DebugService.AutoTesting) {
+                yield return m_TextDisplay.CurrentLayer.HandleNodeStart(node, thread);
+            }
+
             if (node.HasFlags(ScriptNodeFlags.Checkpoint) && !Player.Data.VisitedNodeIds.Contains(node.Id())) {
                 Player.Data.CheckpointId = node.CheckpointId();
                 Game.Save.SaveCheckpoint();
-            }
-            
-            if (!DebugService.AutoTesting) {
-                yield return m_TextDisplay.CurrentLayer.HandleNodeStart(node, thread);
             }
 
             m_FirstVisit = Player.Data.VisitedNodeIds.Add(node.Id());
@@ -127,6 +134,14 @@ namespace Journalism {
             m_Resolver.SetDefaultTable(data.GlobalTable);
             m_Resolver.SetTable(data.UITable);
             Player.DeclareData(data, m_Resolver);
+        }
+
+        public void LoadLocalization(LocFileGroup group) {
+            m_LocDB.BeginLoading(group.Language);
+            foreach(var file in group.Files) {
+                m_LocDB.LoadFile(file);
+            }
+            m_LocDB.EndLoading();
         }
 
         #endregion // Data

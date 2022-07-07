@@ -14,64 +14,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Stats:
   - Id: 0
-    Name: Research
-    RankNames:
-    - Unaware
-    - Myopic
-    - Curious
-    - Bookworm
-    - Wonk
-    - Professor
+    NameId:
+      m_Source: Stats.Research
+      m_HashValue: 753514531
+    RankNameIds:
+    - m_Source: Stats.Research.Rank0
+      m_HashValue: 3977916255
+    - m_Source: Stats.Research.Rank1
+      m_HashValue: 3961138636
+    - m_Source: Stats.Research.Rank2
+      m_HashValue: 4011471493
+    - m_Source: Stats.Research.Rank3
+      m_HashValue: 3994693874
+    - m_Source: Stats.Research.Rank4
+      m_HashValue: 3910805779
+    - m_Source: Stats.Research.Rank5
+      m_HashValue: 3894028160
     Icon: {fileID: 0}
   - Id: 1
-    Name: Resourcefulness
-    RankNames:
-    - Forgetful
-    - Inattentive
-    - Distracted
-    - Prepared
-    - Geared Up
-    - Cherry Scout
+    NameId:
+      m_Source: Stats.Resourceful
+      m_HashValue: 236864721
+    RankNameIds:
+    - m_Source: Stats.Resourceful.Rank0
+      m_HashValue: 3476395693
+    - m_Source: Stats.Resourceful.Rank1
+      m_HashValue: 3459618074
+    - m_Source: Stats.Resourceful.Rank2
+      m_HashValue: 3442840455
+    - m_Source: Stats.Resourceful.Rank3
+      m_HashValue: 3426062836
+    - m_Source: Stats.Resourceful.Rank4
+      m_HashValue: 3409285217
+    - m_Source: Stats.Resourceful.Rank5
+      m_HashValue: 3392507598
     Icon: {fileID: 0}
   - Id: 2
-    Name: Endurance
-    RankNames:
-    - Out of Shape
-    - Couch Potato
-    - Sleepy
-    - Fit
-    - Athlete
-    - Olympian
+    NameId:
+      m_Source: Stats.Endurance
+      m_HashValue: 1936809051
+    RankNameIds:
+    - m_Source: Stats.Endurance.Rank0
+      m_HashValue: 3807300423
+    - m_Source: Stats.Endurance.Rank1
+      m_HashValue: 3790522804
+    - m_Source: Stats.Endurance.Rank2
+      m_HashValue: 3840855661
+    - m_Source: Stats.Endurance.Rank3
+      m_HashValue: 3824078042
+    - m_Source: Stats.Endurance.Rank4
+      m_HashValue: 3740189947
+    - m_Source: Stats.Endurance.Rank5
+      m_HashValue: 3723412328
     Icon: {fileID: 0}
   - Id: 3
-    Name: Tech
-    RankNames:
-    - Luddite
-    - Newbie
-    - Dabbler
-    - Geek
-    - Techie
-    - Cyber Punk
+    NameId:
+      m_Source: Stats.Tech
+      m_HashValue: 4199518594
+    RankNameIds:
+    - m_Source: Stats.Tech.Rank0
+      m_HashValue: 1623690494
+    - m_Source: Stats.Tech.Rank1
+      m_HashValue: 1640468113
+    - m_Source: Stats.Tech.Rank2
+      m_HashValue: 1590135256
+    - m_Source: Stats.Tech.Rank3
+      m_HashValue: 1606912875
+    - m_Source: Stats.Tech.Rank4
+      m_HashValue: 1690800970
+    - m_Source: Stats.Tech.Rank5
+      m_HashValue: 1707578589
     Icon: {fileID: 0}
   - Id: 4
-    Name: Social
-    RankNames:
-    - Recluse
-    - Shy
-    - Reserved
-    - Amiable
-    - Social Caterpillar
-    - Social Butterfly
+    NameId:
+      m_Source: Stats.Social
+      m_HashValue: 562630653
+    RankNameIds:
+    - m_Source: Stats.Social.Rank0
+      m_HashValue: 894951833
+    - m_Source: Stats.Social.Rank1
+      m_HashValue: 878174214
+    - m_Source: Stats.Social.Rank2
+      m_HashValue: 861396595
+    - m_Source: Stats.Social.Rank3
+      m_HashValue: 844618976
+    - m_Source: Stats.Social.Rank4
+      m_HashValue: 962062309
+    - m_Source: Stats.Social.Rank5
+      m_HashValue: 945284690
     Icon: {fileID: 0}
   - Id: 5
-    Name: Trust
-    RankNames:
-    - Cryptid
-    - Unknown
-    - Average
-    - Reputable
-    - Esteemed
-    - Community Pillar
+    NameId:
+      m_Source: Stats.Trust
+      m_HashValue: 2455265380
+    RankNameIds:
+    - m_Source: Stats.Trust.Rank0
+      m_HashValue: 1370556824
+    - m_Source: Stats.Trust.Rank1
+      m_HashValue: 1387334443
+    - m_Source: Stats.Trust.Rank2
+      m_HashValue: 1404112062
+    - m_Source: Stats.Trust.Rank3
+      m_HashValue: 1420889681
+    - m_Source: Stats.Trust.Rank4
+      m_HashValue: 1437667300
+    - m_Source: Stats.Trust.Rank5
+      m_HashValue: 1454444919
     Icon: {fileID: 0}
   m_MaxValue: 10
   m_StatColors:

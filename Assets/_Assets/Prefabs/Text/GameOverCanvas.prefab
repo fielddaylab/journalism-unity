@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 716470144056609372}
   - component: {fileID: 3376327711477193025}
   - component: {fileID: 3354348303722479455}
+  - component: {fileID: 1810627006218244025}
   m_Layer: 5
   m_Name: ContinuePrompt
   m_TagString: Untagged
@@ -404,6 +405,24 @@ MonoBehaviour:
   Text: {fileID: 3376327711477193025}
   Colors: {fileID: 0}
   Streaming: {fileID: 0}
+--- !u!114 &1810627006218244025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537818589715410066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 3376327711477193025}
+  m_DefaultId:
+    m_Source: GameOver.Prompt
+    m_HashValue: 2301372247
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &2439538860303800536
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +621,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Raycaster: {fileID: 2439538860523810115}
-  Group: {fileID: 0}
   Type: 16
 --- !u!1 &6397977110112641461
 GameObject:
@@ -660,6 +678,7 @@ MonoBehaviour:
   DefaultBackButton: {fileID: 8235225366202711337}
   DefaultNextIcon: {fileID: 0}
   DefaultNextIconColor: {r: 0, g: 0, b: 0, a: 1}
+  FullscreenClickRegion: {fileID: 0}
   GridRoot: {fileID: 0}
   GridGroup: {fileID: 0}
   RowSpacing: 128

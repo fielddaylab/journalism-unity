@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4547861315461473027}
   - component: {fileID: 2384525228767171944}
   - component: {fileID: 82842950754322535}
+  - component: {fileID: 8539705536901269083}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Story Breakdown:'
+  m_text: StoryBreakdown
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9895db3754f201a4abab5cf09ef5a04e, type: 2}
   m_sharedMaterial: {fileID: 2429051772391944707, guid: 9895db3754f201a4abab5cf09ef5a04e,
@@ -134,6 +135,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8539705536901269083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440829473595965041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 82842950754322535}
+  m_DefaultId:
+    m_Source: Label.StoryBreakdown
+    m_HashValue: 3325580773
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &4069962121013153027
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +164,7 @@ GameObject:
   - component: {fileID: 1509950677184039349}
   - component: {fileID: 5071369836540794974}
   - component: {fileID: 8828420273098463968}
+  - component: {fileID: 494229095813782532}
   m_Layer: 5
   m_Name: Target
   m_TagString: Untagged
@@ -268,6 +288,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &494229095813782532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069962121013153027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 8828420273098463968}
+  m_DefaultId:
+    m_Source: Window.Notes.Target
+    m_HashValue: 3635787345
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &6226854054361488955
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,10 +373,13 @@ MonoBehaviour:
   PatternMask: {fileID: 0}
   Tail: {fileID: 0}
   InnerTail: {fileID: 0}
+  MaxSize: {fileID: 0}
   Layout: {fileID: 0}
   TailHeight: 0
   Text: {fileID: 0}
+  CharacterHeader: {fileID: 0}
   Icon: {fileID: 0}
+  MarkerIcon: {fileID: 0}
 --- !u!225 &9212711161653255683
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -451,6 +492,7 @@ GameObject:
   - component: {fileID: 2654832963331944931}
   - component: {fileID: 7611990313637513273}
   - component: {fileID: 3224007494768389921}
+  - component: {fileID: 15125240918104882}
   m_Layer: 5
   m_Name: YourStory
   m_TagString: Untagged
@@ -574,6 +616,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &15125240918104882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013161324861515156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 3224007494768389921}
+  m_DefaultId:
+    m_Source: Window.Notes.YourStory
+    m_HashValue: 3919575704
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1001 &6589842669416148769
 PrefabInstance:
   m_ObjectHideFlags: 0

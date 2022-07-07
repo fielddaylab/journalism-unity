@@ -15,6 +15,9 @@ MonoBehaviour:
   Script: {fileID: -1942890987711236906, guid: 50f6f2469b89a60418181a359df5b99b, type: 3}
   Story:
     HeadlineType: Human Interest
+    HeadlineTypeId:
+      m_Source: Level.1b.HeadlineType
+      m_HashValue: 4239975752
     Slots:
     - Type: 1
       Wide: 1
@@ -26,11 +29,19 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: For this story, we need a lot of color. Get people's attention and get some local flood stories out there! Plus, throw in some useful info and facts about what's happening. 
+    EditorBrief: For this story, we need a lot of color. Get people's attention and
+      get some local flood stories out there! Plus, throw in some useful info and
+      facts about what's happening.
+    EditorBriefId:
+      m_Source: Level.1b.Brief
+      m_HashValue: 4082821624
     FactWeight: 2
     ColorWeight: 4
     UsefulWeight: 1
-    FinalHeadline: Twin Lakes Battles Rising Water 
+    FinalHeadline: Twin Lakes Battles Rising Water
+    FinalHeadlineId:
+      m_Source: Level.1b.Headline
+      m_HashValue: 1033353920
   StoryScraps: {fileID: -4270002856181823206, guid: c5776326615b0334e823a13fcc5565b8,
     type: 3}
   Audio: {fileID: 0}

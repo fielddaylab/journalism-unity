@@ -6,6 +6,7 @@ using BeauUtil;
 using BeauUtil.Debugger;
 using BeauUtil.Tags;
 using BeauUtil.Variants;
+using FDLocalization;
 using Leaf;
 using Leaf.Defaults;
 using Leaf.Runtime;
@@ -32,6 +33,10 @@ namespace Journalism {
         public HandleNodeDelegate HandleNodeEnter;
         public HandleNodeDelegate HandleNodeExit;
         public Action HandleThreadEnd;
+
+        public TagStringParser Parser {
+            get { return m_TagParser; }
+        }
 
         #region Loading
 
@@ -176,6 +181,10 @@ namespace Journalism {
             if (chosenTime > 0) {
                 Player.DecreaseTime(chosenTime);
             }
+        }
+
+        public override bool TryLookupLine(StringHash32 inLineCode, LeafNode inLocalNode, out string outLine) {
+            return Loc.TryDirect((LocId) inLineCode, out outLine);
         }
 
         #if UNITY_EDITOR

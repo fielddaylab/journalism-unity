@@ -1,9 +1,10 @@
 using UnityEngine;
 using TMPro;
+using FDLocalization;
 
 namespace Journalism.UI {
     public sealed class StatLine : MonoBehaviour {
-        public TMP_Text Name;
-        public TMP_Text Rank;
+        public LocText Name;
+        public LocText Rank;
     }
 }

@@ -11,6 +11,7 @@ using BeauRoutine;
 using BeauUtil.Extensions;
 using Journalism.UI;
 using EasyAssetStreaming;
+using FDLocalization;
 
 namespace Journalism {
 
@@ -23,6 +24,7 @@ namespace Journalism {
         [SerializeField] private StatsDef m_Stats = null;
         [SerializeField] private MapLocationDef m_MapLocationDef;
         [SerializeField] private LevelDef[] m_LevelDefs = null;
+        [SerializeField] private LocFileGroup m_DefaultLoc = null;
         
         [Header("Controllers")]
         [SerializeField] private AudioSystem m_AudioSystem = null;
@@ -47,6 +49,8 @@ namespace Journalism {
         }
 
         private void Start() {
+            m_ScriptSystem.LoadLocalization(m_DefaultLoc);
+            
             m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                 m_ScriptSystem.StartLevel();
             });

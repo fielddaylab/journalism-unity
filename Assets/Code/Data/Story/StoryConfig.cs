@@ -4,6 +4,7 @@ using BeauUtil;
 using BeauUtil.Blocks;
 using BeauUtil.Debugger;
 using BeauUtil.Tags;
+using FDLocalization;
 using Leaf;
 using UnityEngine;
 using UnityEngine.Scripting;
@@ -11,11 +12,12 @@ using UnityEngine.Scripting;
 namespace Journalism {
     [Serializable]
     public class StoryConfig {
-        public string HeadlineType;
+        public LocId HeadlineTypeId;
+        
         public StorySlot[] Slots;
 
         [Header("Editor")]
-        [Multiline] public string EditorBrief;
+        public LocId EditorBriefId;
 
         [Header("Distribution")]
         [Range(0, 10)] public int FactWeight = 1;
@@ -23,6 +25,6 @@ namespace Journalism {
         [Range(0, 10)] public int UsefulWeight = 1;
 
         [Header("Final")]
-        public string FinalHeadline;
+        public LocId FinalHeadlineId;
     }
 }

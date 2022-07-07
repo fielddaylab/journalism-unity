@@ -6,6 +6,7 @@ using System;
 using BeauPools;
 using EasyAssetStreaming;
 using BeauUtil.UI;
+using FDLocalization;
 
 namespace Journalism {
     
@@ -25,7 +26,7 @@ namespace Journalism {
         [Header("Animation")]
         [Required] public RectTransform Root;
         [Required] public RectTransform Offset;
-        [Required] public RectTransform Inner;
+        public RectTransform Inner;
         [Required] public CanvasGroup Group;
 
         [Header("Configuration")]
@@ -43,8 +44,8 @@ namespace Journalism {
         [ShowIfField("Tail")] public float TailHeight;
 
         [Header("Contents")]
-        public TMP_Text Text;
-        public TMP_Text CharacterHeader;
+        public LocText Text;
+        public LocText CharacterHeader;
         public Image Icon; // Radial
         public Image MarkerIcon; // Marker
 

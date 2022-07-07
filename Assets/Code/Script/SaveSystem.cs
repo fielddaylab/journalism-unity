@@ -46,7 +46,7 @@ namespace Journalism {
             dump.Header("Stats");
             for(int stat = 0; stat < Stats.Count; stat++) {
                 StatId id = (StatId) stat;
-                dump.KeyValue(Stats.Name(id), Player.Stat(id));
+                dump.KeyValue(Stats.Info(id).Id.ToString(), Player.Stat(id));
             }
 
             dump.Header("Story Inventory");

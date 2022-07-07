@@ -1,0 +1,29 @@
+{
+    "name": "FDLocalization.Editor",
+    "references": [
+        "BeauUtil",
+        "BeauUtil.Parse",
+        "BeauUtil.Editor",
+        "FDLocalization",
+        "Leaf",
+        "Leaf.Editor",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.beauprime.leaf",
+            "expression": "0.0.1",
+            "define": "USING_LEAF"
+        }
+    ],
+    "noEngineReferences": false
+}

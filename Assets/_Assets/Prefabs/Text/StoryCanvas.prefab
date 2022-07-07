@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 7571297265643975796}
   - component: {fileID: 4110648465751287187}
   - component: {fileID: 7045705424671652953}
+  - component: {fileID: 3027554416867904020}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -518,6 +519,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3027554416867904020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434503365711746262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 7045705424671652953}
+  m_DefaultId:
+    m_Source: StoryReview.Editor
+    m_HashValue: 2848093605
+  m_Prefix: 
+  m_Postfix: 
 --- !u!1 &8484837215350890548
 GameObject:
   m_ObjectHideFlags: 0

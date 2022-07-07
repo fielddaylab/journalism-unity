@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 6777147069905870207}
   - component: {fileID: 6777147069905870206}
   - component: {fileID: 2199211419406777662}
+  - component: {fileID: 5799889800460057149}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -439,3 +440,21 @@ MonoBehaviour:
     AdditionalProperties: []
   m_EnableRaycastLayer: 0
   m_DisableRaycastLayer: 2
+--- !u!114 &5799889800460057149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6777147069905870200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf50cfe882405449ada898f26f98d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graphic: {fileID: 6777147069905870206}
+  m_DefaultId:
+    m_Source: Header.Stats
+    m_HashValue: 3457003017
+  m_Prefix: 
+  m_Postfix: 
