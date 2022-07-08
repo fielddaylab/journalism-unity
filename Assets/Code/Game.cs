@@ -49,6 +49,7 @@ namespace Journalism {
         }
 
         private void Start() {
+            m_SaveSystem.NewLocalSave();
             m_ScriptSystem.LoadLocalization(m_DefaultLoc);
             
             m_ScriptSystem.LoadLevel(0).OnComplete(() => {
