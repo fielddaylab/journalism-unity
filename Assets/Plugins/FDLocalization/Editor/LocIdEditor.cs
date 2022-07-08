@@ -25,10 +25,12 @@ namespace FDLocalization.Editor {
         [NonSerialized] static private GUIStyle s_FoundIconStyle;
         [NonSerialized] static private GUIStyle s_OverwriteIconStyle;
         [NonSerialized] static private GUIStyle s_MissingIconStyle;
+        [NonSerialized] static private GUIStyle s_HintIconStyle;
 
         [NonSerialized] static private GUIContent s_MissingContent;
         [NonSerialized] static private GUIContent s_ValidContent;
         [NonSerialized] static private GUIContent s_OverwriteContent;
+        [NonSerialized] static private GUIContent s_HintContent;
 
         [NonSerialized] static private GUIStyle s_SearchBoxStyle;
         [NonSerialized] static private GUIStyle s_TextAreaStyle;
@@ -61,6 +63,12 @@ namespace FDLocalization.Editor {
                 s_MissingIconStyle.alignment = TextAnchor.MiddleCenter;
             }
 
+            if (s_HintIconStyle == null) {
+                s_HintIconStyle = new GUIStyle(EditorStyles.miniButton);
+                s_HintIconStyle.normal.textColor = Color.cyan;
+                s_HintIconStyle.alignment = TextAnchor.MiddleCenter;
+            }
+
             if (s_SearchBoxStyle == null) {
                 s_SearchBoxStyle = new GUIStyle(EditorStyles.helpBox);
                 s_SearchBoxStyle.normal.background = Texture2D.whiteTexture;
@@ -74,6 +82,13 @@ namespace FDLocalization.Editor {
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             InitializeStyles();
+
+            LocIdHintAttribute hint;
+            if (property.serializedObject.isEditingMultipleObjects) {
+                hint = null;
+            } else {
+                hint =  Reflect.GetAttribute<LocIdHintAttribute>(fieldInfo);
+            }
 
             Rect firstLine = position;
             firstLine.height = EditorGUIUtility.singleLineHeight;
@@ -141,19 +156,32 @@ namespace FDLocalization.Editor {
                 if (!string.IsNullOrEmpty(key)) {
                     state.Text = EditorGUI.TextArea(textBox, state.Text, s_TextAreaStyle);
                 }
-                RenderSearchAndStatus(stringProp, hashProp, statusRect, searchResultsBox, key, foundContent, state, bFound, bSelected, oldCurrent);
+                RenderSearchAndStatus(property, stringProp, hashProp, statusRect, searchResultsBox, key, foundContent, state, hint, bFound, bSelected, oldCurrent);
             }
 
             UnityEditor.EditorGUI.EndProperty();
         }
 
-        private void RenderSearchAndStatus(SerializedProperty stringProp, SerializedProperty hashProp, Rect statusPosition, Rect searchPosition, string key, string originalText, PropState state, bool found, bool selected, Event evt) {
+        private void RenderSearchAndStatus(SerializedProperty parentProp, SerializedProperty stringProp, SerializedProperty hashProp, Rect statusPosition, Rect searchPosition, string key, string originalText, PropState state, LocIdHintAttribute hint, bool found, bool selected, Event evt) {
             if (stringProp.hasMultipleDifferentValues) {
                 EditorGUI.LabelField(statusPosition, "---", s_NullIconStyle);
                 return;
             }
             if (string.IsNullOrEmpty(key)) {
-                EditorGUI.LabelField(statusPosition, "Null", s_NullIconStyle);
+                if (hint != null) {
+                    var hintContent = s_HintContent ?? (s_HintContent = new GUIContent("Suggest?"));
+                    if (GUI.Button(statusPosition, hintContent, s_HintIconStyle)) {
+                        string hintKey = hint.GetHint(fieldInfo, parentProp.FindOwner(), parentProp.serializedObject.targetObject);
+                        if (!string.IsNullOrEmpty(hintKey)) {
+                            state.LastKnownKey = hintKey;
+                            stringProp.stringValue = hintKey;
+                            hashProp.longValue = new StringHash32(hintKey).HashValue;
+                            state.Overwrite = true;
+                        }
+                    }
+                } else {
+                    EditorGUI.LabelField(statusPosition, "Null", s_NullIconStyle);
+                }
                 return;
             }
 

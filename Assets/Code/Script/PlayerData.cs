@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 namespace Journalism {
     public class PlayerData : ISerializedObject, ISerializedVersion {
+        public long LastSavedTimestamp;
+        
         public int[] StatValues = new int[Stats.Count];
         public VariantTable GlobalTable = new VariantTable();
         public VariantTable UITable = new VariantTable("ui");
@@ -34,6 +36,7 @@ namespace Journalism {
         }
 
         public void Serialize(Serializer serializer) {
+            serializer.Serialize("timestamp", ref LastSavedTimestamp);
             serializer.Array("stats", ref StatValues);
 
             serializer.Object("globalVars", ref GlobalTable);

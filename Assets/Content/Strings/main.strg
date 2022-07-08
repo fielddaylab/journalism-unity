@@ -19,70 +19,6 @@ Snippet
 :: GameOver.Prompt
 Continue from last checkpoint?
 
-:: Header.Stats
-stats
-
-:: Header.Map
-map
-
-:: Header.Notes
-notes
-
-:: Header.Time
-time
-
-:: Window.Stats
-Stats
-
-:: Window.Notes.YourStory
-Your Story
-
-:: Window.Notes.Target
-Target
-
-:: Window.Notes.StoryType
-Story Type:
-
-:: Window.Notes.EditorButton
-Editor
-Notes
-
-:: Window.Notes.EditorHeader
-Editor Notes:
-
-:: Label.Color
-Color
-
-:: Label.Useful
-Useful
-
-:: Label.Facts
-Facts
-
-:: Label.StoryBreakdown
-Story Breakdown:
-
-:: Label.StoryQuality
-Story Quality:
-
-:: Label.StoryImpact
-Story Impact:
-
-:: Quality.Good
-Quality
-
-:: Quality.Bad
-Lousy
-
-:: Label.Hours.Short
-HRS
-
-:: Label.Minutes.Short
-MINS
-
-:: Window.Time.StoryDeadline
-Time Until Story Deadline:
-
 :: CheckpointSaved
 Checkpoint Saved
 
@@ -95,30 +31,126 @@ Editor:
 :: StoryReview.Impact
 Impact:
 
-:: Label.Location
+# basePath Header
+
+:: Stats
+stats
+
+:: Map
+map
+
+:: Notes
+notes
+
+:: Time
+time
+
+# basePath Window
+
+:: Stats
+Stats
+
+:: Notes.YourStory
+Your Story
+
+:: Notes.Target
+Target
+
+:: Notes.StoryType
+Story Type:
+
+:: Notes.EditorButton
+Editor
+Notes
+
+:: Notes.EditorHeader
+Editor Notes:
+
+:: Time.StoryDeadline
+Time Until Story Deadline:
+
+# basePath Label
+
+:: Color
+Color
+
+:: Useful
+Useful
+
+:: Facts
+Facts
+
+:: StoryBreakdown
+Story Breakdown:
+
+:: StoryQuality
+Story Quality:
+
+:: StoryImpact
+Story Impact:
+
+:: Hours.Short
+HRS
+
+:: Minutes.Short
+MINS
+
+:: Quality.Good
+Quality
+
+:: Quality.Bad
+Lousy
+
+:: Location
 location:
 
-:: Map.Apartment
+:: Loading
+Loading...
+
+# basePath Map
+
+:: Apartment
 Apartment
 
-:: Map.Newsroom
+:: Newsroom
 Newsroom
 
-:: Map.DNR
+:: DNR
 DNR
 
-:: Map.Limnology
+:: Limnology
 Limnology
 
-:: Map.DeliLot
+:: DeliLot
 Deli Lot
 
-:: Map.Downtown
+:: Downtown
 Downtown
 
-:: Map.UpperLakeDam
+:: UpperLakeDam
 Upper Lake Dam
 
-:: Map.CherryFestival
+:: CherryFestival
 Cherry Festival
+
+# basePath Title
+
+:: NewGame
+New Game
+
+:: ContinueGame
+Resume
+
+:: Options
+Options
+
+:: NewGame.Header
+New Game
+
+:: PlayerCode
+Player Code
+
+:: PlayerCodePrompt
+Enter your
+Player Code
 

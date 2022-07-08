@@ -83,6 +83,18 @@ MonoBehaviour:
     - Id: GameOver.Prompt
       Content: Continue from last checkpoint?
       Exposed: 0
+    - Id: CheckpointSaved
+      Content: Checkpoint Saved
+      Exposed: 0
+    - Id: Newspaper.Byline
+      Content: by Avatar Playername
+      Exposed: 0
+    - Id: StoryReview.Editor
+      Content: 'Editor:'
+      Exposed: 0
+    - Id: StoryReview.Impact
+      Content: 'Impact:'
+      Exposed: 0
     - Id: Header.Stats
       Content: stats
       Exposed: 0
@@ -115,6 +127,9 @@ MonoBehaviour:
     - Id: Window.Notes.EditorHeader
       Content: 'Editor Notes:'
       Exposed: 0
+    - Id: Window.Time.StoryDeadline
+      Content: 'Time Until Story Deadline:'
+      Exposed: 0
     - Id: Label.Color
       Content: Color
       Exposed: 0
@@ -133,35 +148,23 @@ MonoBehaviour:
     - Id: Label.StoryImpact
       Content: 'Story Impact:'
       Exposed: 0
-    - Id: Quality.Good
-      Content: Quality
-      Exposed: 0
-    - Id: Quality.Bad
-      Content: Lousy
-      Exposed: 0
     - Id: Label.Hours.Short
       Content: HRS
       Exposed: 0
     - Id: Label.Minutes.Short
       Content: MINS
       Exposed: 0
-    - Id: Window.Time.StoryDeadline
-      Content: 'Time Until Story Deadline:'
+    - Id: Label.Quality.Good
+      Content: Quality
       Exposed: 0
-    - Id: CheckpointSaved
-      Content: Checkpoint Saved
-      Exposed: 0
-    - Id: Newspaper.Byline
-      Content: by Avatar Playername
-      Exposed: 0
-    - Id: StoryReview.Editor
-      Content: 'Editor:'
-      Exposed: 0
-    - Id: StoryReview.Impact
-      Content: 'Impact:'
+    - Id: Label.Quality.Bad
+      Content: Lousy
       Exposed: 0
     - Id: Label.Location
       Content: 'location:'
+      Exposed: 0
+    - Id: Label.Loading
+      Content: Loading...
       Exposed: 0
     - Id: Map.Apartment
       Content: Apartment
@@ -187,8 +190,38 @@ MonoBehaviour:
     - Id: Map.CherryFestival
       Content: Cherry Festival
       Exposed: 0
-    Headers: []
-    BasePath: 
+    - Id: Title.NewGame
+      Content: New Game
+      Exposed: 0
+    - Id: Title.ContinueGame
+      Content: Resume
+      Exposed: 0
+    - Id: Title.Options
+      Content: Options
+      Exposed: 0
+    - Id: Title.NewGame.Header
+      Content: New Game
+      Exposed: 0
+    - Id: Title.PlayerCode
+      Content: Player Code
+      Exposed: 0
+    - Id: Title.PlayerCodePrompt
+      Content: 'Enter your
+
+        Player Code'
+      Exposed: 0
+    Headers:
+    - Path: Header
+      RecordStart: 11
+    - Path: Window
+      RecordStart: 15
+    - Path: Label
+      RecordStart: 22
+    - Path: Map
+      RecordStart: 34
+    - Path: Title
+      RecordStart: 42
+    BasePath: Title
     Dirty: 0
   - Name: stats
     Asset: {fileID: -4270002856181823206, guid: e1277c9a295376443a847a46b8b4df26,

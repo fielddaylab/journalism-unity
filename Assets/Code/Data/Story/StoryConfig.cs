@@ -12,12 +12,12 @@ using UnityEngine.Scripting;
 namespace Journalism {
     [Serializable]
     public class StoryConfig {
-        public LocId HeadlineTypeId;
+        [LevelLocHint("HeadlineType")] public LocId HeadlineTypeId;
         
         public StorySlot[] Slots;
 
         [Header("Editor")]
-        public LocId EditorBriefId;
+        [LevelLocHint("Brief")] public LocId EditorBriefId;
 
         [Header("Distribution")]
         [Range(0, 10)] public int FactWeight = 1;
@@ -25,6 +25,6 @@ namespace Journalism {
         [Range(0, 10)] public int UsefulWeight = 1;
 
         [Header("Final")]
-        public LocId FinalHeadlineId;
+        [LevelLocHint("Headline")] public LocId FinalHeadlineId;
     }
 }

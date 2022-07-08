@@ -8,7 +8,9 @@
 
 using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 using BeauUtil;
 using UnityEngine;
 
@@ -138,5 +140,52 @@ namespace FDLocalization {
         }
 
         #endregion // Operators
+    }
+
+    /// <summary>
+    /// Attribute marking a hint as to an appropriate localization key.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
+    [Conditional("UNITY_EDITOR")]
+    public abstract class LocIdHintAttribute : Attribute {
+        public abstract string GetHint(FieldInfo field, object parent, UnityEngine.Object owner);
+    }
+
+    /// <summary>
+    /// Attribute marking a localization key hint based on the asset name.
+    /// </summary>
+    public class AssetNameLocHintAttribute : LocIdHintAttribute {
+        public string RemovePrefix = null;
+        public string BasePath = null;
+        public string Append = null;
+
+        public AssetNameLocHintAttribute(string basePath, string elementName) {
+            BasePath = basePath;
+            Append = elementName;
+        }
+
+        public override string GetHint(FieldInfo field, object parent, UnityEngine.Object owner) {
+            StringBuilder builder = new StringBuilder(owner.name);
+
+            if (RemovePrefix != null) {
+                if (builder.AttemptMatch(0, RemovePrefix, false)) {
+                    builder.Remove(0, RemovePrefix.Length);
+                }
+            }
+            if (BasePath != null) {
+                if (!BasePath.EndsWith(".")) {
+                    builder.Insert(0, '.');
+                }
+                builder.Insert(0, BasePath);
+            }
+            if (Append != null) {
+                if (builder[builder.Length - 1] != '.') {
+                    builder.Append('.');
+                }
+                builder.Append(Append);
+            }
+
+            return builder.Flush();
+        }
     }
 }

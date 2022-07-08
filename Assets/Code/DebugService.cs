@@ -277,7 +277,7 @@ namespace Journalism {
                 while(count-- > 0) {
                     m_AutoTestErrorFlag = false;
                     Log.Msg("[DebugService] New auto-test starting");
-                    Game.Save.NewSaveData();
+                    Game.Save.NewLocalSave();
                     var load = Game.Scripting.LoadLevel(0, true);
                     yield return load;
                     yield return null;
