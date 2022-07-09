@@ -9,6 +9,8 @@ using System.Collections;
 namespace Journalism {
     public sealed class SaveSystem : MonoBehaviour, IDumpSource {
 
+        [SerializeField] private string m_ServerAddress = null;
+
         private const string LastUserNameKey = "settings/last-known-profile";
 
         [SerializeField] private float m_SaveRetryDelay = 10f;
@@ -21,6 +23,8 @@ namespace Journalism {
 
         private void Start() {
             m_CurrentData = new PlayerData();
+
+            OGD.Core.Configure(m_ServerAddress, "JOURNALISM");
         }
 
         public bool IsServerSave() {
@@ -114,7 +118,7 @@ namespace Journalism {
 
             string binarySave = Serializer.Write(m_CurrentData, OutputOptions.None, Serializer.Format.Binary);
 
-            m_SaveOperation.Cancel();
+            m_SaveOperation?.Cancel();
             return m_SaveOperation = Future.CreateLinked<bool, string, string>(ServerWriteRoutine, m_UserCode, binarySave, this);
         }
 

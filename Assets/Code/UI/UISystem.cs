@@ -32,6 +32,7 @@ namespace Journalism.UI {
         [SerializeField] private CanvasGroup m_HeaderUnderFader = null;
         [SerializeField] private CanvasGroup m_SolidBGFader = null;
         [SerializeField] private GameOverWindow m_GameOver = null;
+        [SerializeField] private TitleWindow m_Title = null;
         [SerializeField] private TutorialArrow m_TutorialArrow = null;
         [SerializeField] private AnimatedElement m_CheckpointNotification = null;
         [SerializeField] private float m_CheckpointNotificationOffscreenPos = -300;
@@ -63,7 +64,8 @@ namespace Journalism.UI {
                 .Register(GameEvents.EditorNotesClose, OnNoLongerNeedSolidBG, this)
                 .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG)
                 .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this)
-                .Register(GameEvents.LevelCheckpoint, OnCheckpointSaved, this);
+                .Register(GameEvents.LevelCheckpoint, OnCheckpointSaved, this)
+                .Register(GameEvents.LoadTitleScreen, OnTitleScreenLoad, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
@@ -117,6 +119,7 @@ namespace Journalism.UI {
             AnimatedElement.Hide(m_CheckpointNotification);
             m_CheckpointNotification.Animation.Stop();
             m_TutorialArrow.Hide(true);
+            m_Title.Hide();
 
             m_InputStack.Clear();
             m_InputMask = DefaultInputMask;
@@ -206,6 +209,10 @@ namespace Journalism.UI {
                 return;
             }
             m_Header.FindButton("Notes").Button.isOn = true;
+        }
+
+        private void OnTitleScreenLoad() {
+            m_Title.Show();
         }
 
         #endregion // Handlers

@@ -46,15 +46,15 @@ namespace Journalism {
 
             Streaming.TextureMemoryBudget = 16 * 1024 * 1024;
             Streaming.AudioMemoryBudget = 16 * 1024 * 1024;
+
+            Game.Events.Register<string>(GameEvents.TryContinueGame, OnTryContinueGame, this)
+                .Register(GameEvents.TryNewGame, OnTryNewGame, this);
         }
 
         private void Start() {
-            m_SaveSystem.NewLocalSave();
             m_ScriptSystem.LoadLocalization(m_DefaultLoc);
-            
-            m_ScriptSystem.LoadLevel(0).OnComplete(() => {
-                m_ScriptSystem.StartLevel();
-            });
+
+            Game.Events.Dispatch(GameEvents.LoadTitleScreen);
         }
 
         private void LateUpdate() {
@@ -95,5 +95,78 @@ namespace Journalism {
         static public SaveSystem Save {
             get { return Game.I?.m_SaveSystem; }
         }
+
+        #region New Game
+
+        private void OnTryNewGame() {
+
+            // TODO: Pause input
+
+            Debug.Log("new game attempted...");
+            OGD.Player.NewId(OnNewNameSuccess, OnNewNameFail);
+        }
+
+        private void OnNewNameSuccess(string inName) {
+            Debug.Log("new name succeeded...");
+
+            Game.Events.Dispatch(GameEvents.NewNameGenerated, inName);
+
+            Routine.Start(this, NewGame(inName));
+        }
+
+        private IEnumerator NewGame(string inName) {
+
+            Future<bool> newSave = m_SaveSystem.NewServerSave(inName);
+            yield return newSave;
+
+            if (!newSave.IsComplete()) {
+                Debug.Log("Save Error");
+                // TODO: Resume Input
+            }
+            else {
+                Debug.Log("Successful Name: " + inName);
+                //m_SaveSystem.NewLocalSave();
+
+                m_ScriptSystem.LoadLevel(0).OnComplete(() => {
+                    m_ScriptSystem.StartLevel();
+
+                    // TODO: Resume Input
+                });
+            }
+
+        }
+
+        private void OnNewNameFail(OGD.Core.Error error) {
+            Log.Error("[Game] Generating new player id failed: {0}", error.Msg);
+            //Services.Input.ResumeAll();
+        }
+
+        #endregion // New Game
+
+        #region Continue Game
+
+        private void OnTryContinueGame(string userCode) {
+            // TODO: Pause Input
+
+            m_SaveSystem.ReadServerSave(userCode)
+                .OnComplete(OnContinueGameSuccess)
+                .OnFail(OnContinueGameFail);
+        }
+
+        private void OnContinueGameSuccess(PlayerData data) {
+            m_ScriptSystem.LoadLevel(Player.Data.LevelIndex).OnComplete(() => {
+                m_ScriptSystem.StartLevel();
+
+                // TODO: Resume Input
+            });
+        }
+
+        private void OnContinueGameFail() {
+            Debug.Log("Continue failed");
+
+            // TODO: Resume Input
+        }
+
+        #endregion // Continue Game
     }
 }
