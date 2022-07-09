@@ -91,7 +91,9 @@ namespace Journalism {
                 if (localFuture.IsComplete()) {
                     Log.Msg("[DataService] Profile name '{0}' declared to server", userCode);
                 } else {
-                    Log.Warn("[DataService] Failed to declare profile name to server: {0}", localFuture.GetFailure());
+                    string warnMsg = "[DataService] Failed to declare profile name to server: " + localFuture.GetFailure();
+                    Log.Warn(warnMsg);
+                    Game.Events.Dispatch(GameEvents.TitleErrorReceived, warnMsg);
                     future.Fail(localFuture.GetFailure());
                     yield break;
                 }
@@ -111,8 +113,10 @@ namespace Journalism {
                     Log.Msg("[SaveSystem] Saved to server!");
                     DeclareSave(newData, userCode);
                     future.Complete(true);
-                } else { 
-                    Log.Warn("[SaveSystem] Server save failed.");
+                } else {
+                    string warnMsg = "[SaveSystem] Server save failed.";
+                    Log.Warn(warnMsg);
+                    Game.Events.Dispatch(GameEvents.TitleErrorReceived, warnMsg);
                     future.Fail(localFuture.GetFailure());
                 }
             }
@@ -141,8 +145,10 @@ namespace Journalism {
                         Log.Msg("[SaveSystem] Saved to server!");
                         SetLastKnownSave(userCode);
                         saved = true;
-                    } else { 
-                        Log.Warn("[SaveSystem] Server save failed! Trying again in {0} seconds...", m_SaveRetryDelay);
+                    } else {
+                        string warnMsg = "[SaveSystem] Server save failed! Trying again in " + m_SaveRetryDelay + " seconds...";
+                        Log.Warn(warnMsg);
+                        Game.Events.Dispatch(GameEvents.TitleErrorReceived, warnMsg);
                         yield return m_SaveRetryDelay;
                     }
                 }
@@ -172,7 +178,9 @@ namespace Journalism {
                     DeclareSave(deserialized, userCode);
                     data.Complete(deserialized);
                 } else {
-                    Log.Warn("[SaveSystem] Failed to find profile on server: {0}", localFuture.GetFailure());
+                    string warnMsg = "[SaveSystem] Failed to find profile on server: " + localFuture.GetFailure();
+                    Log.Warn(warnMsg);
+                    Game.Events.Dispatch(GameEvents.TitleErrorReceived, warnMsg);
                     data.Fail(localFuture.GetFailure());
                 }
             }

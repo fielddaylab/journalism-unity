@@ -1,4 +1,6 @@
-﻿using BeauRoutine.Extensions;
+﻿using BeauRoutine;
+using BeauRoutine.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,7 +31,12 @@ namespace Journalism.UI
         [SerializeField] private TMP_InputField m_ContinueNameText;
         [SerializeField] private Button m_ContinuePlayButton;
         [SerializeField] private TMP_InputField m_ContinueInputField;
-        
+
+        [Space(10)]
+        [SerializeField] private CanvasGroup m_ErrorPanel;
+        [SerializeField] private TMP_Text m_ErrorText;
+        [NonSerialized] private Routine m_ErrorAnim;
+
 
         #endregion //  Inspector
 
@@ -51,7 +58,8 @@ namespace Journalism.UI
             m_HubPage.SetActive(true);
 
             Game.Events.Register<string>(GameEvents.NewNameGenerated, OnNewNameGenerated, this)
-                .Register<string>(GameEvents.ContinueNameRetrieved, OnContinueNameRetrieved, this);
+                .Register<string>(GameEvents.ContinueNameRetrieved, OnContinueNameRetrieved, this)
+                .Register<string>(GameEvents.TitleErrorReceived, OnTitleErrorReceived, this);
         }
 
         #endregion // Unity Callbacks
@@ -112,6 +120,26 @@ namespace Journalism.UI
             m_ContinuePlayButton.interactable = true;
         }
 
+        private void OnTitleErrorReceived(string errorMsg) {
+            m_ErrorAnim.Replace(this, AnimateShowError(errorMsg)).TryManuallyUpdate(0);
+        }
+
         #endregion // Handlers
+
+        #region Animation
+
+        private IEnumerator AnimateShowError(string errorMsg) {
+            m_ErrorPanel.alpha = 0;
+            m_ErrorText.text = errorMsg;
+            m_ErrorPanel.gameObject.SetActive(true);
+            yield return m_ErrorPanel.FadeTo(1f, 0.5f);
+
+            yield return 8f;
+
+            yield return m_ErrorPanel.FadeTo(0f, 0.5f);
+            m_ErrorPanel.gameObject.SetActive(false);
+        }
+
+        #endregion // Animation
     }
 }

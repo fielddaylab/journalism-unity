@@ -101,7 +101,6 @@ namespace Journalism {
         #region New Game
 
         private void OnTryNewName() {
-
             // TODO: Pause input
 
             OGD.Player.NewId(OnNewNameSuccess, OnNewNameFail);

@@ -28,6 +28,7 @@ namespace Journalism {
         static public readonly StringHash32 ChoicesClearing = "save:choices-clearing";
         static public readonly StringHash32 ChoiceCompleted = "save:choice-completed";
         static public readonly StringHash32 LoadTitleScreen = "title:loading";
+        static public readonly StringHash32 TitleErrorReceived = "title:error";
         static public readonly StringHash32 TryNewName = "title:new-name";
         static public readonly StringHash32 TryNewGame = "title:new-game";
         static public readonly StringHash32 NewNameGenerated = "title:new-name-generated";
