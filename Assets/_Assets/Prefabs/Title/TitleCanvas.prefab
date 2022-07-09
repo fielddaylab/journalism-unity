@@ -392,6 +392,7 @@ MonoBehaviour:
   m_NewPlayButton: {fileID: 1570692978067409689}
   m_ContinuePage: {fileID: 1675070262627142240}
   m_ContinueBackButton: {fileID: 1190795472613548143}
+  m_ContinueNameText: {fileID: 635544283485749419}
   m_ContinuePlayButton: {fileID: 5111118631854582181}
   m_ContinueInputField: {fileID: 635544283485749419}
 --- !u!1 &2468241475389419320
@@ -583,10 +584,10 @@ RectTransform:
   m_Father: {fileID: 2439538860303800537}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1024, y: 660}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1694079747115357406
 CanvasRenderer:
@@ -603,7 +604,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2995688041186958001}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -618,10 +619,10 @@ MonoBehaviour:
   m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: NaN
+    y: NaN
+    width: NaN
+    height: NaN
 --- !u!114 &6300134375621768322
 MonoBehaviour:
   m_ObjectHideFlags: 0

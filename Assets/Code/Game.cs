@@ -47,8 +47,10 @@ namespace Journalism {
             Streaming.TextureMemoryBudget = 16 * 1024 * 1024;
             Streaming.AudioMemoryBudget = 16 * 1024 * 1024;
 
-            Game.Events.Register<string>(GameEvents.TryContinueGame, OnTryContinueGame, this)
-                .Register(GameEvents.TryNewGame, OnTryNewGame, this);
+            Game.Events.Register(GameEvents.TryContinueName, OnTryContinueName, this)
+                .Register<string>(GameEvents.TryContinueGame, OnTryContinueGame, this)
+                .Register(GameEvents.TryNewName, OnTryNewName, this)
+                .Register<string>(GameEvents.TryNewGame, OnTryNewGame, this);
         }
 
         private void Start() {
@@ -98,19 +100,23 @@ namespace Journalism {
 
         #region New Game
 
-        private void OnTryNewGame() {
+        private void OnTryNewName() {
 
             // TODO: Pause input
 
-            Debug.Log("new game attempted...");
             OGD.Player.NewId(OnNewNameSuccess, OnNewNameFail);
         }
 
         private void OnNewNameSuccess(string inName) {
-            Debug.Log("new name succeeded...");
-
             Game.Events.Dispatch(GameEvents.NewNameGenerated, inName);
+        }
 
+        private void OnNewNameFail(OGD.Core.Error error) {
+            Log.Error("[Game] Generating new player id failed: {0}", error.Msg);
+            //Services.Input.ResumeAll();
+        }
+
+        private void OnTryNewGame(string inName) {
             Routine.Start(this, NewGame(inName));
         }
 
@@ -120,13 +126,9 @@ namespace Journalism {
             yield return newSave;
 
             if (!newSave.IsComplete()) {
-                Debug.Log("Save Error");
                 // TODO: Resume Input
             }
             else {
-                Debug.Log("Successful Name: " + inName);
-                //m_SaveSystem.NewLocalSave();
-
                 m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                     m_ScriptSystem.StartLevel();
 
@@ -136,21 +138,18 @@ namespace Journalism {
 
         }
 
-        private void OnNewNameFail(OGD.Core.Error error) {
-            Log.Error("[Game] Generating new player id failed: {0}", error.Msg);
-            //Services.Input.ResumeAll();
-        }
-
         #endregion // New Game
 
         #region Continue Game
 
-        private void OnTryContinueGame(string userCode) {
+        private void OnTryContinueName() {
             // TODO: Pause Input
 
-            m_SaveSystem.ReadServerSave(userCode)
-                .OnComplete(OnContinueGameSuccess)
-                .OnFail(OnContinueGameFail);
+            string lastKnownName = m_SaveSystem.LastProfileName();
+
+            if (!lastKnownName.Equals(string.Empty)) {
+                Game.Events.Dispatch(GameEvents.ContinueNameRetrieved, lastKnownName);
+            }
         }
 
         private void OnContinueGameSuccess(PlayerData data) {
@@ -162,9 +161,15 @@ namespace Journalism {
         }
 
         private void OnContinueGameFail() {
-            Debug.Log("Continue failed");
-
             // TODO: Resume Input
+        }
+
+        private void OnTryContinueGame(string userCode) {
+            // TODO: Pause Input
+
+            m_SaveSystem.ReadServerSave(userCode)
+                .OnComplete(OnContinueGameSuccess)
+                .OnFail(OnContinueGameFail);
         }
 
         #endregion // Continue Game

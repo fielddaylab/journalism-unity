@@ -19,12 +19,18 @@ namespace Journalism {
         [NonSerialized] private string m_UserCode;
         [NonSerialized] private string m_CheckpointData;
 
+        [NonSerialized] private string m_LastKnownProfile;
+
         private Future<bool> m_SaveOperation;
+
+        public string LastProfileName() { return m_LastKnownProfile; }
 
         private void Start() {
             m_CurrentData = new PlayerData();
 
             OGD.Core.Configure(m_ServerAddress, "JOURNALISM");
+
+            m_LastKnownProfile = PlayerPrefs.GetString(LastUserNameKey, string.Empty);
         }
 
         public bool IsServerSave() {
@@ -62,6 +68,7 @@ namespace Journalism {
         private void DeclareSave(PlayerData data, string userCode) {
             m_CurrentData = data;
             m_UserCode = userCode;
+            SetLastKnownSave(userCode);
             Game.Scripting.DeclareData(data);
             Game.Events.Queue(GameEvents.SaveDeclared, data);
         }
@@ -132,6 +139,7 @@ namespace Journalism {
 
                     if (localFuture.IsComplete()) {
                         Log.Msg("[SaveSystem] Saved to server!");
+                        SetLastKnownSave(userCode);
                         saved = true;
                     } else { 
                         Log.Warn("[SaveSystem] Server save failed! Trying again in {0} seconds...", m_SaveRetryDelay);
@@ -168,6 +176,13 @@ namespace Journalism {
                     data.Fail(localFuture.GetFailure());
                 }
             }
+        }
+
+        private void SetLastKnownSave(string userCode) {
+            m_LastKnownProfile = userCode;
+            Log.Msg("[DataService] Profile name {0} set as last known name", m_LastKnownProfile);
+            PlayerPrefs.SetString(LastUserNameKey, m_LastKnownProfile ?? string.Empty);
+            PlayerPrefs.Save();
         }
 
         #endregion // Save

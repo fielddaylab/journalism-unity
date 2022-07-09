@@ -26,6 +26,7 @@ namespace Journalism.UI
         [Space(10)]
         [SerializeField] private GameObject m_ContinuePage;
         [SerializeField] private Button m_ContinueBackButton;
+        [SerializeField] private TMP_InputField m_ContinueNameText;
         [SerializeField] private Button m_ContinuePlayButton;
         [SerializeField] private TMP_InputField m_ContinueInputField;
         
@@ -49,7 +50,8 @@ namespace Journalism.UI
 
             m_HubPage.SetActive(true);
 
-            Game.Events.Register<string>(GameEvents.NewNameGenerated, OnNewNameGenerated, this);
+            Game.Events.Register<string>(GameEvents.NewNameGenerated, OnNewNameGenerated, this)
+                .Register<string>(GameEvents.ContinueNameRetrieved, OnContinueNameRetrieved, this);
         }
 
         #endregion // Unity Callbacks
@@ -57,15 +59,21 @@ namespace Journalism.UI
         #region Handlers
 
         private void OnHubPlayButtonClicked() {
+            m_NewPlayButton.interactable = false;
             m_NewPage.SetActive(true);
 
             m_HubPage.SetActive(false);
+
+            Game.Events.Dispatch(GameEvents.TryNewName);
         }
 
         private void OnHubContinueButtonClicked() {
+            m_ContinuePlayButton.interactable = false;
             m_ContinuePage.SetActive(true);
 
             m_HubPage.SetActive(false);
+
+            Game.Events.Dispatch(GameEvents.TryContinueName);
         }
 
         private void OnHubOptionsButtonClicked() {
@@ -79,7 +87,7 @@ namespace Journalism.UI
         }
 
         private void OnNewPlayButtonClicked() {
-            Game.Events.Dispatch(GameEvents.TryNewGame);
+            Game.Events.Dispatch(GameEvents.TryNewGame, m_NewNameText.text);
         }
 
         private void OnContinueBackButtonClicked() {
@@ -94,6 +102,14 @@ namespace Journalism.UI
 
         private void OnNewNameGenerated(string inName) {
             m_NewNameText.text = inName;
+
+            m_NewPlayButton.interactable = true;
+        }
+
+        private void OnContinueNameRetrieved(string inName) {
+            m_ContinueNameText.text = inName;
+
+            m_ContinuePlayButton.interactable = true;
         }
 
         #endregion // Handlers
