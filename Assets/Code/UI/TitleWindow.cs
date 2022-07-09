@@ -76,7 +76,6 @@ namespace Journalism.UI
         }
 
         private void OnHubContinueButtonClicked() {
-            m_ContinuePlayButton.interactable = false;
             m_ContinuePage.SetActive(true);
 
             m_HubPage.SetActive(false);
