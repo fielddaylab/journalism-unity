@@ -49,6 +49,23 @@
 #const BG_HouseExterior = "BG/HouseExtRainV2.mp4"
 #const BG_OfficeExterior = "BG/GazetteExtRainV2.mp4"
 
+
+//Checks:
+//Tech: 3
+//Endurance: 1
+//Social: 3
+//Trust: 1
+//Research: 2
+//Resourceful: 0
+
+//Awards:
+//Tech: 1
+//Endurance: 3
+//Social: 6
+//Trust: 5
+//Research: 1
+//Resourceful: 4 
+
 # start START
 
 // Original Name: START
@@ -154,14 +171,14 @@ You scroll through posts on Squawker.
 {img Photo/HospitalDucks.jpg}
 {@article}Stranded at work @ the hospital. Ducks are swimming through the parking lot!
 {@article}5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
-{/img} 
 
 $choice MessageNurse; See if the hospital employee will let you use his photo.
-$choice ReadFloodingArticle; Read click-bait article and brush up on your survival skills.
+$choice ReadFloodingArticle; Read the click-bait article and brush up on your survival skills.
 
 // Original Name: Off to work
 :: OffToWork
 {clear-text}
+{/img}
 {img Anim/enml-waterrushing.jpg}
 $call Ambience(Ambience/rain-inside.mp3)
 Outside, your neighbor, Maureen, is running around in a panic.
@@ -176,13 +193,13 @@ $choice RushToWork; There's no time, I've got to get to work!
 :: MessageNurse
 {clear-text}
 {@me}Hi, can I ask if you took this photo?
-{@person}Yep! Literally happening right now. Crazy, right? 
+{@phone}Yep! Literally happening right now. Crazy, right? 
 {@me}I'm a reporter at the Gazette. 
 {@me}Would you be okay with us using this photo and crediting you? 
 
 $ActionChoice(Send message)
-{@person}Ooh, yeah! Go right ahead!
-{@person}I could even give you some headline suggestions!
+{@phone}Ooh, yeah! Go right ahead!
+{@phone}I could even give you some headline suggestions!
 {@me}Oh, um...
 // sway text
 {@phone}{anim sway}Fowl weather at the quack of dawn!
@@ -196,7 +213,7 @@ $choice OffToWork; Off to work
 
 // Original Name: Read flooding article.
 :: ReadFloodingArticle
-@tags Egghead
+{/img} 
 {clear-text}
 {auto}You open the article and learn about flood safety:
 {@article} Move to higher ground and stay off the roads! 
@@ -297,12 +314,11 @@ $choice ArriveAtWork; Rush to work
 // Original Name: Arrive at work.
 :: ArriveAtWork
 {clear-text}
-{layout Left}
 {/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 $call Ambience(Ambience/rain-inside.mp3)
-
+{layout Left}
 Your editor greets you at the door.
 
 $if Visited(HelpHer)
@@ -425,8 +441,8 @@ $choice ArriveAtWork; Arrive at work.
 @checkpoint
 {bg $BG_OfficeExterior}
 {clear-text}
-{layout Left}
 {/img}
+{layout Left}
 $if FirstVisit()
 Get to work on your breaking news story!
     $set DNRnumber = false
@@ -437,12 +453,21 @@ $if FirstVisit()
     $HubChoice(AnswerThePhone, "Answer the phone", -1)
 $endif
 
-$HubChoice(Office1-Weather, "Check the weather online", 0.25, "")
+$HubChoice(Office1-Online, "Check for material online ", 0.25, "")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "")
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for expert advice", 0.5, "")
 $HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.5, "")
 $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situation", 0.5, "")
-$HubChoice(Office1-SocialMedia, "Check Squawker for photos to add to your story", 0.25, "")
+
+:: Office1-Online
+{clear-text}
+You return to your desk, only to find it commandeered by rain buckets.
+Sigh.
+Stepping between puddles, you eventually find an unoccupied (and dry) corner.
+You hunker down with your laptop and search for updates on the flood.
+
+$OnceChoice(Office1-SocialMedia, "Look for photos on Squawker")
+$OnceChoice(Office1-Weather, "Check out the live flood map")
 
 // Original Name: Answer the phone
 :: AnswerThePhone
@@ -465,8 +490,8 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 :: Office1-Weather
 {clear-text}
 {bg $BG_OfficeExterior}
-{layout Left}
 {/map}
+{layout Left}
 You check the forecast and stumble upon an amazing resource: a live flood map! 
 You grab the link and write up a quick blurb on how to use it. 
 Sure, it seems obvious, but this is Twin Lakes. 
@@ -480,9 +505,9 @@ $goto Office1-Clock
 // Original Name: Office 1 - Coworker
 :: Office1-Coworker
 {bg $BG_OfficeExterior}
-{layout Left}
 {clear-text}
 {/map}
+{layout Left}
 You ask your editor if the newsroom has any records of past flood stories.
 {@person}Hmmm. Jenkins was working on something about climate change before he retired.
 {@person}Feel free to look through his files... if you can find them. 
@@ -493,8 +518,8 @@ $choice JenkinssComputer; Track down Jenkins's computer.
 :: Office1-DNR
 {clear-text}
 {bg $BG_OfficeExterior}
-{layout Left}
 {/map}
+{layout Left}
 $if StatCheck(Social, 2)
     The DNR worker sounds stressed out.
     Luckily, you've had some practice helping stressed-out neighbors lately.  
@@ -541,9 +566,9 @@ $goto Office1-Clock
 // Original Name: Office 1 - Police
 :: Office1-Police
 {bg $BG_OfficeExterior}
-{layout Left}
 {clear-text}
 {/map}
+{layout Left}
 The police spokesman seems suspicious of your credentials.
 {@phone}{auto} I've never heard of you.
 {@phone} Who did you say you work for?
@@ -586,10 +611,9 @@ $goto Office1-Clock
 // Original Name: Office 1 - City Hall
 :: Office1-CityHall
 {bg $BG_OfficeExterior}
-{layout Left}
 {clear-text}
 {/map}
-
+{layout Left}
 $if StatCheck(Social, 2)
     {img Anim/enml-coffeedonuts.jpg}
     Your City Hall contact is thrilled to hear from you. 
@@ -627,8 +651,8 @@ $goto Office1-Clock
 :: Office1-SocialMedia
 {clear-text}
 {bg $BG_OfficeExterior}
-{layout Left}
 {/map}
+{layout Left}
 
 $if StatCheck(Research, 2)
     Thanks to your bookish tendencies, you find a lead.
@@ -738,9 +762,9 @@ $goto Office1-Clock
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
 {bg $BG_OfficeExterior}
-{layout Left}
 {clear-text}
 {/img}
+{layout Left}
 It's been a hectic morning, but you think you might be able to piece together a halfway decent story.
 $set storyType = "Breaking News"
 $set snippetLimit = 4
