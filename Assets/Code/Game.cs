@@ -101,7 +101,8 @@ namespace Journalism {
         #region New Game
 
         private void OnTryNewName() {
-            // TODO: Pause input
+            // Pause input
+            Game.UI.PushInputMask(InputLayerFlags.Menus);
 
             OGD.Player.NewId(OnNewNameSuccess, OnNewNameFail);
         }
@@ -112,7 +113,9 @@ namespace Journalism {
 
         private void OnNewNameFail(OGD.Core.Error error) {
             Log.Error("[Game] Generating new player id failed: {0}", error.Msg);
-            //Services.Input.ResumeAll();
+
+            // Resume Input
+            Game.UI.PushInputMask(InputLayerFlags.OverStory);
         }
 
         private void OnTryNewGame(string inName) {
@@ -125,13 +128,12 @@ namespace Journalism {
             yield return newSave;
 
             if (!newSave.IsComplete()) {
-                // TODO: Resume Input
+                // Resume Input
+                Game.UI.PushInputMask(InputLayerFlags.OverStory);
             }
             else {
                 m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                     m_ScriptSystem.StartLevel();
-
-                    // TODO: Resume Input
                 });
             }
 
@@ -142,7 +144,8 @@ namespace Journalism {
         #region Continue Game
 
         private void OnTryContinueName() {
-            // TODO: Pause Input
+            // Pause Input
+            Game.UI.PushInputMask(InputLayerFlags.Menus);
 
             string lastKnownName = m_SaveSystem.LastProfileName();
 
@@ -152,19 +155,24 @@ namespace Journalism {
         }
 
         private void OnContinueGameSuccess(PlayerData data) {
-            m_ScriptSystem.LoadLevel(Player.Data.LevelIndex).OnComplete(() => {
+            int levelIndex = Player.Data.LevelIndex;
+            if (levelIndex < 0) {
+                Log.Warn("Previous player level data was not saved correctly. Should be a non-negative value. Starting at Level 1.");
+                levelIndex = 0;
+            }
+            m_ScriptSystem.LoadLevel(levelIndex).OnComplete(() => {
                 m_ScriptSystem.StartLevel();
-
-                // TODO: Resume Input
             });
         }
 
         private void OnContinueGameFail() {
-            // TODO: Resume Input
+            // Resume Input
+            Game.UI.PushInputMask(InputLayerFlags.OverStory);
         }
 
         private void OnTryContinueGame(string userCode) {
             // TODO: Pause Input
+            Game.UI.PushInputMask(InputLayerFlags.Menus);
 
             m_SaveSystem.ReadServerSave(userCode)
                 .OnComplete(OnContinueGameSuccess)

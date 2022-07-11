@@ -111,12 +111,18 @@ namespace Journalism.UI
             m_NewNameText.text = inName;
 
             m_NewPlayButton.interactable = true;
+
+            // Resume Input
+            Game.UI.PushInputMask(InputLayerFlags.OverStory);
         }
 
         private void OnContinueNameRetrieved(string inName) {
             m_ContinueNameText.text = inName;
 
             m_ContinuePlayButton.interactable = true;
+
+            // Resume Input
+            Game.UI.PushInputMask(InputLayerFlags.OverStory);
         }
 
         private void OnTitleErrorReceived(string errorMsg) {
