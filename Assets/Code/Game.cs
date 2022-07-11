@@ -152,6 +152,10 @@ namespace Journalism {
             if (!lastKnownName.Equals(string.Empty)) {
                 Game.Events.Dispatch(GameEvents.ContinueNameRetrieved, lastKnownName);
             }
+            else {
+                // Resume IInput
+                Game.UI.PushInputMask(InputLayerFlags.OverStory);
+            }
         }
 
         private void OnContinueGameSuccess(PlayerData data) {
