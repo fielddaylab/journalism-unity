@@ -117,11 +117,13 @@ namespace Journalism.UI
         }
 
         private void OnContinueNameRetrieved(string inName) {
-            m_ContinueNameText.text = inName;
+            if (!inName.Equals(string.Empty)) {
+                m_ContinueNameText.text = inName;
+            }
 
             m_ContinuePlayButton.interactable = true;
 
-            // Resume Input
+            // Resume IInput
             Game.UI.PushInputMask(InputLayerFlags.OverStory);
         }
 

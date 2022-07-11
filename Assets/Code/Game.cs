@@ -149,13 +149,7 @@ namespace Journalism {
 
             string lastKnownName = m_SaveSystem.LastProfileName();
 
-            if (!lastKnownName.Equals(string.Empty)) {
-                Game.Events.Dispatch(GameEvents.ContinueNameRetrieved, lastKnownName);
-            }
-            else {
-                // Resume IInput
-                Game.UI.PushInputMask(InputLayerFlags.OverStory);
-            }
+            Game.Events.Dispatch(GameEvents.ContinueNameRetrieved, lastKnownName);
         }
 
         private void OnContinueGameSuccess(PlayerData data) {
