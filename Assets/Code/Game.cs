@@ -159,7 +159,7 @@ namespace Journalism {
                 levelIndex = 0;
             }
             m_ScriptSystem.LoadLevel(levelIndex).OnComplete(() => {
-                m_ScriptSystem.StartLevel();
+                m_ScriptSystem.StartFromCheckpoint(data);
             });
         }
 

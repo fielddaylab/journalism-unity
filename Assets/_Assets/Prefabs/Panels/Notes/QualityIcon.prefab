@@ -149,8 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Graphic: {fileID: 3202469217950564353}
   m_DefaultId:
-    m_Source: Quality.Good
-    m_HashValue: 835156893
+    m_Source: Label.Quality.Good
+    m_HashValue: 123051105
   m_Prefix: 
   m_Postfix: 
 --- !u!1 &4068284323673804957
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Graphic: {fileID: 3610537459084031877}
   m_DefaultId:
-    m_Source: Quality.Bad
-    m_HashValue: 4257320091
+    m_Source: Label.Quality.Bad
+    m_HashValue: 3413406207
   m_Prefix: 
   m_Postfix: 

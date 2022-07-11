@@ -965,7 +965,7 @@ PrefabInstance:
     - target: {fileID: 2246310314327622205, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2246310314327622205, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
@@ -975,22 +975,22 @@ PrefabInstance:
     - target: {fileID: 2246310314327622205, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_UVRect.x
-      value: 0
+      value: 0.054216802
       objectReference: {fileID: 0}
     - target: {fileID: 2246310314327622205, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_UVRect.y
-      value: 0.018053204
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2246310314327622205, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 1
+      value: 0.8915664
       objectReference: {fileID: 0}
     - target: {fileID: 2246310314327622205, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.9638936
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2330957998472605438, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
@@ -1893,7 +1893,7 @@ MonoBehaviour:
   m_BackgroundOpaqueMaterial: {fileID: 2100000, guid: 3f88a0b8998f0394b87e9e578d404b00,
     type: 2}
   m_BackgroundTransparencyMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000,
-    type: 3}
+    type: 0}
   m_DefaultCrossfadeDuration: 0.5
   m_FullScreenSolid: {fileID: 400653667}
 --- !u!114 &1644786069 stripped
@@ -7546,12 +7546,12 @@ PrefabInstance:
     - target: {fileID: 2120971121499175717, guid: 2104d85d490871f46984558b1f28b4ba,
         type: 3}
       propertyPath: m_UVRect.width
-      value: 2.12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2120971121499175717, guid: 2104d85d490871f46984558b1f28b4ba,
         type: 3}
       propertyPath: m_UVRect.height
-      value: 0.32114998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2190528748760144169, guid: 2104d85d490871f46984558b1f28b4ba,
         type: 3}
