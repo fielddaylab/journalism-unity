@@ -69,3 +69,31 @@ MonoBehaviour:
       m_Source: Map.DNR
       m_HashValue: 4268924343
     NormalizedCoords: {x: 0.15790926, y: 0.16041666}
+  - Id:
+      m_HashValue: 203775816
+    Name: OperaHouse
+    NameId:
+      m_Source: Map.OperaHouse
+      m_HashValue: 1820917216
+    NormalizedCoords: {x: -0.0058691935, y: -0.15958333}
+  - Id:
+      m_HashValue: 2701779949
+    Name: CityHall
+    NameId:
+      m_Source: Map.CityHall
+      m_HashValue: 3958838693
+    NormalizedCoords: {x: 0.21171021, y: -0.27604166}
+  - Id:
+      m_HashValue: 2067068616
+    Name: CherryCreek
+    NameId:
+      m_Source: Map.CherryCreek
+      m_HashValue: 2679053776
+    NormalizedCoords: {x: -0.016769126, y: 0.2975}
+  - Id:
+      m_HashValue: 2824020592
+    Name: Library
+    NameId:
+      m_Source: Map.Library
+      m_HashValue: 1341187192
+    NormalizedCoords: {x: 0.066238046, y: 0.13791665}
