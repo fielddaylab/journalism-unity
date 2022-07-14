@@ -4,6 +4,7 @@
 // Creator: Twine
 
 # start ScienceStory2Wetlands
+$call SetLocation("Apartment")
 
 // Original Name: Science Story 2: Wetlands
 :: ScienceStory2Wetlands
@@ -21,8 +22,12 @@ $OnceChoice(CheckSquawkerMessages, "Check Squawker")
 
 According to her profile, she runs a conservation group called CRANE.
 
+//quick: +trust
 $OnceChoice(RespondToHerMessage, "Respond to her message")
-$OnceChoice(ReadUpOnCRANE, "Read up on CRANE")
+//snack: +endurance
+$OnceChoice(TakeASnackBreak, "Take a snack break to recharge")
+//read: +research
+$OnceChoice(ReadUpOnCRANE, "Read up on CRANE online")
 $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone else")
 
 // Original Name: Respond to her message
@@ -30,24 +35,50 @@ $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone 
 @tags Trust
 {@me}{auto}I'm interested. Can you tell me more?
 
-$call AdjustStats(Trust + 1)
-
 Birdie responds almost instantly.
 
-{@phone}About time!
+$if Visited(TakeASnackBreak)
+{@phone}About time.
+$if Visited(ReadUpOnCRANE)
+{@phone}About time.
+$else
+{@phone}Hey, thanks for the quick response!
+$call AdjustStats(Trust + 1)
+$endif
 {@phone}Wetland destruction is a huge part of what caused the flood. 
 {@phone}And now the Cherry Creek Marsh is slated to be destroyed! 
 
 $choice AgreeToMeetWithHerInTheMorning; Agree to meet with her tomorrow
 $choice CheckInWithYourEditor; Check with your editor
 
+::TakeASnackBreak
+You pop open the fridge and have a look.
+To say you're tired of cherries would be an understatement.
+You grab a slightly overripe banana instead.
+Flopping into bed, you eat around the bruises and contemplate your ceiling for a moment.
+...
+That stain kinda looks like a cherry.
+Darn it.
+At least you feel a bit more refreshed.
+$call AdjustStats(Endurance + 1)
+
+$OnceChoice(RespondToHerMessage, "Respond to Birdie's message")
+$OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone else")
+
 // Original Name: Read up on CRANE
 :: ReadUpOnCRANE
 @tags Bookworm, Techie
+You scroll past about a dozen blog posts complaining about CRANE.
+{@article}CRANE? More like CRYIN!
+{@article}CRANE is once again screeching about city developments...
+{@article}CRANE ought to become endangered!
+
+But eventually you arrive at their own website.
+
 {@article}We are CRANE: Conservation, Rewilding, And Nature Exploration. 
 {@article}Our mission: to protect local wetlands, reseed native plants, and share the wonder of wetlands!
 
-$call AdjustStats(Research + 1, Tech + 1)
+$call AdjustStats(Research + 1)
 
 $OnceChoice(RespondToHerMessage, "Respond to Birdie's message")
 $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone else")
@@ -100,6 +131,7 @@ $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
 {@phone}Yep. Come clean out your desk.
 {@phone}You're officially demoted to coffee and mail room duty.
 
+//TODO: Replace with a better game over message
 $GameOver("Apparently, this is a journalistic way of saying \"you're fired.\"")
 
 // Original Name: "Tomorrow morning, 8 a.m."
@@ -110,8 +142,8 @@ You wake up bright and early. Again.
 You have time to do one thing before heading to Snakebite Trail. 
 
 $OnceChoice(GatherSupplies, "Gather tech supplies and hiking gear")
-$OnceChoice(MeetSomeOtherReportersForCoffee, "Meet Khalisa and Ben for breakfast and coffee")
-$OnceChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research local wetlands")
+$LocationChoice(MeetSomeOtherReportersForCoffee, "Meet Khalisa and Ben for breakfast and coffee", "Downtown")
+$LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research local wetlands", "Library")
 
 // Original Name: Bike to the library and research local wetlands
 :: DoSomeResearchOnLocalWetlands
@@ -120,32 +152,62 @@ You hop on your bike and pedal to the Twin Lakes library.
 $call AdjustStats(Endurance + 1)
 
 $if StatCheck(Research, 4)
-With your impeccable resaerch skills, you dig up old articles in the archives. 
+    With your impeccable research skills, you dig up old articles in the archive section. 
 
-{@article}August, 1979: A great day for Twin Lakes as a new community center is built on Sugar Marsh!
+    {@article}August, 1979: A great day for Twin Lakes as a new community center is built on Sugar Marsh!
 
-{@article}July, 1982: Flash flooding in Twin Lakes has increased by 30% in the past 2 years.    
+    {@article}July, 1982: Flash flooding in Twin Lakes has increased by 30% in the past 2 years.    
 
-Hmmm. It could be a coincidence, but the timing here seems suspicious.  
+    Hmmm. It could be a coincidence, but the timing here seems suspicious...
 
-$call AdjustStats(Research + 1)
-$call GiveSnippet(IncreasedFloodingSugarMarsh)
-$choice HeadToCherryCreekMarsh; Head to Cherry Creek Marsh
+    You're a bit startled by a librarian's timid approach.
+    {@person} Um, hi! We don't usually get many people back here.
+    {@person} You must be from the paper.
+    {@person} I was gonna ask if you needed help but, uh...
+    She gestures nervously at your stack of research.
+    {@me} Oh yeah, it's just in Universal Decimal, right?
+    She blushes and starts to turn.
+    {@person}{anim sway}ITISSOCOOLTHATYOUKNOWTHATOKAYBYE.
+
+    $call AdjustStats(Trust + 1)
+    $call GiveSnippet(IncreasedFloodingSugarMarsh)
+
+$elseif StatCheck(Tech, 4)
+    Inside, you spot a bulky CRT kiosk.
+    It's one of the beigest things you've ever seen.
+    Finally your internet deep-dive on microfiche machines has paid off.
+
+    {@article}August, 1979: A great day for Twin Lakes as a new community center is built on Sugar Marsh!
+
+    {@article}July, 1982: Flash flooding in Twin Lakes has increased by 30% in the past 2 years.    
+
+    Hmmm. It could be a coincidence, but the timing here seems suspicious...
+
+    You're a bit startled by a librarian's timid approach.
+    {@person} Um, hi! We don't get a lot of people using these.
+    {@person} You must be from the paper.
+    {@person} I was gonna ask if you needed help but, uh...
+    She gestures nervously at your stack of microfiche cards.
+    {@me} Oh yeah, it's just in Universal Decimal, right?
+    She blushes and starts to turn.
+    {@person}{anim sway}ITISSOCOOLTHATYOUKNOWTHATOKAYBYE.
 
 $else 
-The librarian notices you looking helpless.
-{@person}Hi there! Need some help?
-{@me}Oh... yeah, that would be great!
-She pulls some articles about local wetlands and flooding...
-And shares her own thoughts on the matter. 
-{@person}Sugar Marsh used to be right where we're standing.
-{@person}The library is so important for our community...
-{@person}But sometimes I wonder if they could've built it somewhere else. 
+    The librarian notices you looking helpless.
+    {@person}Hi there! Need some help?
+    You feel your face flush for a moment.
+    {@me}Oh... um, yeah, that would be great!
+    She pulls some articles about local wetlands and flooding...
+    And shares her own thoughts on the matter. 
+    {@person}Sugar Marsh used to be right where we're standing.
+    {@person}The library is so important for our community...
+    {@person}But sometimes I wonder if they could've built it somewhere else. 
 
-$call GiveSnippet(LibrarianQuote)
-$call GiveSnippet(IncreasedFloodingSugarMarsh)
-$choice HeadToCherryCreekMarsh; Head to Cherry Creek Marsh
+    $call GiveSnippet(LibrarianQuote)
+    $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $endif
+
+$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
 
 // Original Name: Gather supplies
 :: GatherSupplies
@@ -161,7 +223,7 @@ You stuff your bag with pepper spray, protein bars, a compass, an air horn, and 
 Oh, and bug spray, of course. 
 
 $call AdjustStats(Resourceful + 1, Research + 1)
-$choice HeadToCherryCreekMarsh; Head to the marsh
+$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
 
 // Original Name: Meet some other reporters for coffee
 :: MeetSomeOtherReportersForCoffee
@@ -196,7 +258,7 @@ She gives you coffee and quiche, free of charge.
 $endif
 
 $call AdjustStats(Endurance + 1)
-$OnceChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh")
+$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
@@ -326,10 +388,10 @@ $if HasTime(0.5)
     You have {timeLeft} remaining to submit this story.
 
     $HubChoice(TakePhotosOfTheMarsh, "Take photos of the marsh", 0.25)
-    $HubChoice(TalkToVolunteerHeadingOutOntoTheTrail, "Talk to a volunteer heading out onto the trail", 0.25)
+    $HubChoice(TalkToVolunteerHeadingOutOntoTheTrail, "Talk to a volunteer heading out onto the trail", 0.5)
     $HubChoice(TalkToVolunteerWithBagFullOfSeedPackets, "Talk to a volunteer with bag full of seed packets", 0.25)
-    $HubChoice(ReturnToTheDepartmentOfLimnology, "Visit the Department of Limnology", 0.5)
-    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting", 0.5)
+    $HubChoice(ReturnToTheDepartmentOfLimnology, "Visit the Department of Limnology", 0.5, "Limnology")
+    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting", 0.5, "Opera House")
 $else
     $goto WetlandsStoryConstruction
 $endif
@@ -515,13 +577,13 @@ $choice DecideWhatToDoNext; Leave the opera house
 
 //Original Name: Decide where to go next
 :: DecideWhatToDoNext
-$HubChoice(ReturnToTheDepartmentOfLimnology, "Go to the Department of Limnology", 0.25)
-$HubChoice(GoToCityHall, "Go to City Hall and try to track down the mayor", 0.5)
+$HubChoice(ReturnToTheDepartmentOfLimnology, "Go to the Department of Limnology", 0.25, "Limnology")
+$HubChoice(GoToCityHall, "Go to City Hall and try to track down the mayor", 0.5, "City Hall")
 $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite)
-$HubChoice(CallTheMayor, "Call the mayor's personal number", 0.25)
+    $HubChoice(CallTheMayor, "Call the mayor's personal number", 0.25)
 $endif
-$HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting at the opera house", 0.25)
-$choice CallTheSparkProject; Track down a phone number for the Spark Project 
+$HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting at the opera house", 0.25, "Opera House")
+$HubChoice(CallTheSparkProject, "Track down a phone number for the Spark Project", 0.25)
 
 //Original Name: Call the Mayor
 :: CallTheMayor
@@ -610,7 +672,7 @@ $choice DecideWhatToDoNext; Plan your next move
 {@phone}Get the facts out there, let the chips--or votes--fall where they may. 
 {@phone}Good luck, kiddo! I'm rootin' for ya. 
 
-Kiddo??
+Kiddo?? What is that supposed to mean...
 
 $call GiveSnippet(MayorCondescendingAnswerLimnology)
 $choice DecideWhatToDoNext; Plan your next move 
@@ -850,6 +912,7 @@ $endif
 // Original Name: Take photos of the marsh
 :: TakePhotosOfTheMarsh
 
+//TODO: maybe replace with Resourceful - too busy swatting mosquitos to take a good picture?
 $if StatCheck(Tech, 5)
 You take a photo of a sandhill crane in the distance, surrounded by debris. 
 
