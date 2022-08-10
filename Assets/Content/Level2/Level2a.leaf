@@ -1670,8 +1670,4 @@ $call EditorFeedback()
 
 $call EndFeedback()
 {/img}
-
-//TODO: Remove once 2b is more fleshed out.
-{@msg}  You are finished!
-{@msg}  You are now free to close your browser.
 $call NextLevel()

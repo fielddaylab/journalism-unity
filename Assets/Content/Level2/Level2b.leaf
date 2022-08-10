@@ -321,7 +321,7 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 
 $call GiveSnippet(WhatHappenedToWetlands)
 $OnceChoice(AreTherePoliciesToProtectWetlands,"Are there any policies to protect wetlands?")
-$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, Have you brought up this issue at Town Hall meetings?)
+$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this issue at Town Hall meetings?")
 
 // Original Name: "Are there policies to protect wetlands?"
 :: AreTherePoliciesToProtectWetlands
@@ -672,7 +672,7 @@ $choice DecideWhatToDoNext; Plan your next move
 {@phone}Get the facts out there, let the chips--or votes--fall where they may. 
 {@phone}Good luck, kiddo! I'm rootin' for ya. 
 
-Kiddo?? What is that supposed to mean...
+Kiddo?? What exactly is that supposed to mean...
 
 $call GiveSnippet(MayorCondescendingAnswerLimnology)
 $choice DecideWhatToDoNext; Plan your next move 
@@ -1396,5 +1396,220 @@ $choice DecideWhatToDoNext; Decide what to do next
 $choice WetlandsStoryConstruction; Wetlands Story Construction
 
 :: STORYEVALUATION
-{@msg}  Story builder sequence here
+$call RunPublish()
+$goto StoryFeedback
+
+:: StoryFeedback
+$call BeginFeedback()
+{/bg}
+{img Anim/Editor.jpeg}
+{@person} Alright, let's see how you did...
+{story-stats}
+$if StoryHasPicture() == false
+    {@person}   First off, I thought I told you to include a picture?
+    {@person}   This will make for a lower quality story...
+    {@person}   Make sure you get one next time, rookie.
+    {@person}   Other than that...
+$endif
+
+
+///CITY SCORE ADJUSTMENT
+//Alignment-based city score adjustment
+$if StoryAlignment() >= 0.5
+    //good: +1 city score
+    $call AdjustCityScore(+1)
+$elseif StoryAlignment() < 0.3
+    //bad: -1 city score
+    $call AdjustCityScore(-1)
+$endif //medium: no change
+
+//Quality-based city score adjustment
+$if StoryScore() == "good" //3+ net quality
+    $call AdjustCityScore(+1)
+$elseif StoryScore() == "bad" //<1 net quality
+    $call AdjustCityScore(-1)
+$endif //1 or 2: no change
+
+
+$if StoryScore() == "good"
+    $if StoryAlignment() >= 0.5
+        {@person}   Stellar work Rookie! I can tell you put your heart into this.
+        {@person}   Solid story construction and lots of useful info.
+        {@person}   Maybe you've got a Pulitzer Prize in your future.
+    $elseif StoryAlignment() >= 0.3
+        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@person}   Admittedly, we could've used a little more useful info... 
+        {@person}   But this should still help a lot of people. 
+    $else
+        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@person}   Make sure to check my notes next time. It's all in there.  
+    $endif
+$elseif StoryScore() == "medium"
+    $if StoryAlignment() >= 0.5
+        {@person}   Nice work getting the right info out there!
+        {@person}   These story segments could use some quality control, 
+        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+    $elseif StoryAlignment() >= 0.3
+        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@person}   This should be enough to help a lot of people.  
+        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+    $else
+        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@person}   Still. Not bad for your first natural disaster. 
+    $endif
+$else
+    $if StoryAlignment() >= 0.5
+        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   This story should help a lot of people... 
+        {@person}   Though I gotta admit, some of this info is pretty low-quality.
+    $elseif StoryAlignment() >= 0.3
+        {@person}   Nice work, Rookie. Your story construction is pretty solid!
+        {@person}   Your quality control could definitely use some work. 
+        {@person}   Still. Not bad for your first natural disaster. 
+    $else
+        {@person}   Well.... this could be worse. Sort of.  
+        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@person}   This was your first natural disaster, so I'll let it slide. 
+    $endif
+$endif
+
+$Feedback("ScienceOfFlooding", "feedbackA", "10% increase sounds about right... Scary stuff!")
+$Feedback("FloodProbability", "feedbackA", "Worrying trend in that graph... But we'll get through it!")
+$Feedback("FloodMumboJumbo", "feedbackA", "I can't make heads or tails of that graph!")
+$Feedback("ConfusingGraphic", "feedbackA", "I can't make heads or tails of that graph!")
+$Feedback("DNRLessPlacesForWater", "feedbackA", "I had no idea wetlands were so important for preventing floods!")
+$Feedback("DNRFinancialDamage", "feedbackA", "50 million sure seems like a lot! But I'm sure we Twin Lakers can get everything back in order!")
+$Feedback("DNRPreventFromHappeningAgain", "feedbackA", "Hear, hear! Sandbags did always seem like a temporary solution.")
+$Feedback("DNRRainfallInfo", "feedbackA", "Boy howdy, since 1957! I suppose this really is the storm of a lifetime.")
+$Feedback("BasicFloodBackground", "feedbackA", "Worst flood we've ever seen... Scary stuff!")
+$Feedback("BasicFloodPrevention", "feedbackA", "We definitely need to fight for more policy changes! Volunteering with sandbags can only do so much.")
+$Feedback("WynneBasicFloodBackground", "feedbackA", "Oh yes, I remember some of our other floods over the years... But none like this!")
+$Feedback("DetailedFloodBackground", "feedbackA", "I wonder why the city would keep the lake levels so high?")
+$Feedback("FloodsAndClimateChange", "feedbackA", "10% increase sounds about right... Scary stuff!")
+$Feedback("CauseOfFlood", "feedbackA", "30% of our wetlands gone?? Somebody ought to stop those developers!")
+$Feedback("LakeLevelBackground", "feedbackA", "Lowering lake levels seems apt! I wonder where they'll put all that water?")
+$Feedback("InspiringDowntownRecovery", "feedbackA", "Truly inspiring photo of downtown! We'll get through this, Twin Lakers!")
+$Feedback("WhatCausedTheFlood", "feedbackA", "Climate change strikes again...")
+$Feedback("LimnologyFloodPrevention", "feedbackA", "Prevention would be expensive... but worth it to prevent this from happening again!")
+$Feedback("EngineeredSolutions", "feedbackA", "Rain gardens! I'll have to look into that...")
+$Feedback("LimnologyLakeLevels", "feedbackA", "Why would the city use the dam to keep lake levels high? Seems like a bad idea to me!")
+$Feedback("DowntownRecovery", "feedbackA", "Good work helping downtown, everybody!")
+$Feedback("BlurryDowntownRecovery", "feedbackA", "This photo is downtown? It looks more like... a smudge.")
+$Feedback("ArtBusinessImpact", "feedbackA", "Sad story about that art gallery... Maybe I'll go visit and make a donation!")
+$Feedback("QuoteHeartAndSoul", "feedbackA", "Small business truly is our heart and soul! I'll tell everyone to shop local and help recovery.")
+$Feedback("InTroubleQuote", "feedbackA", "I'll be sure to shop local and help our small businesses!")
+$Feedback("BasicCityHallInfo", "feedbackA", "Working to mitigate damage? Of course they are! Some specifics would be better.")
+$Feedback("DNRCauseOfFlood", "feedbackA", "I wonder how we could give the water more places to go?")
+$Feedback("DNRHighLakeLevels", "feedbackA", "Lowering lake levels, huh? Sounds like a plan!")
+$Feedback("ImpactOfFlood", "feedbackA", "Dire stuff... Hopefully we can keep this from happening again!")
+$Feedback("RainfallStats", "feedbackA", "Interesting stats about rainfall! ")
+$Feedback("PoliciesToPreventFlooding", "feedbackA", "I like the sound of those policies... City Hall ought to step in and do their part!")
+
+$Feedback("ScienceOfFlooding", "feedbackB", "10% increase... sounds like climate change in action.")
+$Feedback("FloodProbability", "feedbackB", "That flood probability graph is useful. Good to see our chances.")
+$Feedback("FloodMumboJumbo", "feedbackB", "What exactly is this graph supposed to mean?")
+$Feedback("ConfusingGraphic", "feedbackB", "What exactly is this graph supposed to mean?")
+$Feedback("DNRLessPlacesForWater", "feedbackB", "Sad to hear that the wetlands are being destroyed. We need to work together to stop this.")
+$Feedback("DNRFinancialDamage", "feedbackB", "Harrowing numbers. It will take a group effort to repair all these damages.")
+$Feedback("DNRPreventFromHappeningAgain", "feedbackB", "Sandbags always were a temporary solution. It's time we worked for permanent change!")
+$Feedback("DNRRainfallInfo", "feedbackB", "Those rainfall numbers are harrowing... We ought to be doing more about this.")
+$Feedback("BasicFloodBackground", "feedbackB", "It is telling that we count the damages in dollars instead of lives...")
+$Feedback("BasicFloodPrevention", "feedbackB", "The question remains, will the city actually commit to these policy changes?")
+$Feedback("WynneBasicFloodBackground", "feedbackB", "More severe storms? Sounds like yet another symptom of climate change...")
+$Feedback("DetailedFloodBackground", "feedbackB", "The history of flooding really sheds some light on our situation. City Hall should be ready for this.")
+$Feedback("FloodsAndClimateChange", "feedbackB", "10% increase... sounds like climate change in action.")
+$Feedback("CauseOfFlood", "feedbackB", "More environmental destruction for the sake of 'progress...' depressing, but not surprising.")
+$Feedback("LakeLevelBackground", "feedbackB", "Lowering lake levels is temporary... What about the people keeping them high in the first place?")
+$Feedback("InspiringDowntownRecovery", "feedbackB", "It's pretty inspiring to see people getting out there and making a difference.!")
+$Feedback("WhatCausedTheFlood", "feedbackB", "More reasons to take action against climate change... Hopefully now it's undeniable.")
+$Feedback("LimnologyFloodPrevention", "feedbackB", "Of course the expense of these efforts would be the first thing on the city council's mind...")
+$Feedback("EngineeredSolutions", "feedbackB", "The question remains, will the city actually commit to these policy changes?")
+$Feedback("LimnologyLakeLevels", "feedbackB", "Not surprising that the city would be misusing the dam to alter water levels.")
+$Feedback("DowntownRecovery", "feedbackB", "At least some people are taking action around here.")
+$Feedback("BlurryDowntownRecovery", "feedbackB", "Hard to make out much of anything in that downtown picture.")
+$Feedback("ArtBusinessImpact", "feedbackB", "Truly sad to see how our local artists were affected by all this chaos.")
+$Feedback("QuoteHeartAndSoul", "feedbackB", "It's true, right now all we can do is keep doing our best and hoping those in power will help.")
+$Feedback("InTroubleQuote", "feedbackB", "Let's hope that City Hall does something to help our struggling local businesses.")
+$Feedback("BasicCityHallInfo", "feedbackB", "City Hall could be doing a lot more to help us in these times.")
+$Feedback("DNRCauseOfFlood", "feedbackB", "Rainfall may be the cause of the flood, but the cause of the damage is inadequate preparation...")
+$Feedback("DNRHighLakeLevels", "feedbackB", "Of course, money takes precedence over our safety yet again...")
+$Feedback("ImpactOfFlood", "feedbackB", "Once again the poorest in our community are made to suffer the most.")
+$Feedback("RainfallStats", "feedbackB", "Good to see some hard data about rainfall.")
+$Feedback("PoliciesToPreventFlooding", "feedbackB", "I'm glad that the Gazette is advocating for concrete changes in policy.")
+
+$Feedback("ScienceOfFlooding", "feedbackC", "Ten percent in ten years!! I can't imagine how much lost profit that accounts for!")
+$Feedback("FloodProbability", "feedbackC", "Good graph, it's important to predict risk!")
+$Feedback("FloodMumboJumbo", "feedbackC", "I've seen my fair share of graphs and this one makes no sense.")
+$Feedback("ConfusingGraphic", "feedbackC", "I've seen my fair share of graphs and this one makes no sense.")
+$Feedback("DNRLessPlacesForWater", "feedbackC", "Sounds like expanding into those wetlands is hurting us in the long run!")
+$Feedback("DNRFinancialDamage", "feedbackC", "50 million in damages! Plus, think of all the lost revenue....")
+$Feedback("DNRPreventFromHappeningAgain", "feedbackC", "City Hall needs policies to protect us business owners!")
+$Feedback("DNRRainfallInfo", "feedbackC", "Since 1957, huh? Just goes to show we need help now more than ever!")
+$Feedback("BasicFloodBackground", "feedbackC", "Millions of dollars in damages! Plus think of all the lost revenue...")
+$Feedback("BasicFloodPrevention", "feedbackC", "City Hall needs policies to protect us business owners!")
+$Feedback("WynneBasicFloodBackground", "feedbackC", "The worst flood ever! City Hall needs to come out and support us business owners!")
+$Feedback("DetailedFloodBackground", "feedbackC", "I had no idea City Hall had raised the water levels! What can we do about this?")
+$Feedback("FloodsAndClimateChange", "feedbackC", "A 10% increase!? Imagine how much damage that could cause in the long run!")
+$Feedback("CauseOfFlood", "feedbackC", "I'm all for developing our city, but if it comes at the cost of these disasters... Is it worth it?")
+$Feedback("LakeLevelBackground", "feedbackC", "It's good to see the mayor taking action in all this!")
+$Feedback("InspiringDowntownRecovery", "feedbackC", "Seeing people work for recovery makes me want to go out and help!")
+$Feedback("WhatCausedTheFlood", "feedbackC", "Sounds like this 'climate change' thing could be bad for business...")
+$Feedback("LimnologyFloodPrevention", "feedbackC", "Solutions may be expensive, but sometimes you need to invest in the future!")
+$Feedback("EngineeredSolutions", "feedbackC", "Rain gardens, huh? We could always use some more greenery around here.")
+$Feedback("LimnologyLakeLevels", "feedbackC", "Five feet higher! I suppose that would mean more waterfront property... But is it worth it?")
+$Feedback("DowntownRecovery", "feedbackC", "Good to see people volunteering in our most important business sector downtown!")
+$Feedback("BlurryDowntownRecovery", "feedbackC", "...Is that a picture of downtown? It's hard to see much of anything!")
+$Feedback("ArtBusinessImpact", "feedbackC", "My heart goes out to my fellow business owners affected by this disaster... We'll get through this!")
+$Feedback("QuoteHeartAndSoul", "feedbackC", "Business truly is the heart and soul of Twin Lakes!")
+$Feedback("InTroubleQuote", "feedbackC", "I'm glad the Gazette is highlighting the danger of lost profits as well as damage.")
+$Feedback("BasicCityHallInfo", "feedbackC", "Seems like City Hall could do a lot more than evacuate us! Where are the policy changes?")
+$Feedback("DNRCauseOfFlood", "feedbackC", "I wonder how we could give the water more places to go?")
+$Feedback("DNRHighLakeLevels", "feedbackC", "Lowering lakes would decrease revenue? Maybe we should consider a different solution...")
+$Feedback("ImpactOfFlood", "feedbackC", "It's true, if Twin Lakes loses us business owners there will be nothing left!")
+$Feedback("RainfallStats", "feedbackC", "These rainfall stats ought to help us prepare for the future!")
+$Feedback("PoliciesToPreventFlooding", "feedbackC", "There's only so much we can do as individuals, better city policy is the real answer!")
+
+$Feedback("ScienceOfFlooding", "feedbackD", "10% increase in rainfall is worrying... What will floods look like if this continues?")
+$Feedback("FloodProbability", "feedbackD", "Scary to see that flood probability climbing up and up...")
+$Feedback("FloodMumboJumbo", "feedbackD", "I can't even begin to understand this graph.")
+$Feedback("ConfusingGraphic", "feedbackD", "I can't even begin to understand this graph.")
+$Feedback("DNRLessPlacesForWater", "feedbackD", "Sounds like we ought to do something to soak up that rainwater!")
+$Feedback("DNRFinancialDamage", "feedbackD", "50 million in damages, not to mention all the injuries we've seen here at the hospital...")
+$Feedback("DNRPreventFromHappeningAgain", "feedbackD", "Certainly makes more sense to prevent these floods than deal with the damages!")
+$Feedback("DNRRainfallInfo", "feedbackD", "Sounds like this really was the storm of a lifetime...")
+$Feedback("BasicFloodBackground", "feedbackD", "Millions in damages, not to mention all the injuries we've seen here at the hospital...")
+$Feedback("BasicFloodPrevention", "feedbackD", "Certainly makes more sense to prevent these floods than deal with the damages!")
+$Feedback("WynneBasicFloodBackground", "feedbackD", "Sounds like this really was the storm of a lifetime...")
+$Feedback("DetailedFloodBackground", "feedbackD", "If the city keeps the lake levels high, surely we can lower them, right?")
+$Feedback("FloodsAndClimateChange", "feedbackD", "10% increase in rainfall is worrying... What will floods look like if this continues?")
+$Feedback("CauseOfFlood", "feedbackD", "30% of our wetlands gone, just like that? We need to do something to stop this!")
+$Feedback("LakeLevelBackground", "feedbackD", "Lowering lake levels seems like a simple enough solution!")
+$Feedback("InspiringDowntownRecovery", "feedbackD", "Truly inspirational to see everyone working together! We'll get through this, Twin Lakes!")
+$Feedback("WhatCausedTheFlood", "feedbackD", "Another consequence of climate change... How much can we really do?")
+$Feedback("LimnologyFloodPrevention", "feedbackD", "Why on earth would they be keeping the water levels higher during a flood?")
+$Feedback("EngineeredSolutions", "feedbackD", "Flood walls and rain gardens sound like great interventions!")
+$Feedback("LimnologyLakeLevels", "feedbackD", "Why on earth would they be keeping the water levels higher during a flood?")
+$Feedback("DowntownRecovery", "feedbackD", "Much love for all the volunteers working hard downtown!")
+$Feedback("BlurryDowntownRecovery", "feedbackD", "That picture of downtown is so blurry. it's a little distracting!")
+$Feedback("ArtBusinessImpact", "feedbackD", "I know that artist! Maybe I'll stop by and buy a few prints.")
+$Feedback("QuoteHeartAndSoul", "feedbackD", "I'll be sure to get out and support our local businesses as they recover!")
+$Feedback("InTroubleQuote", "feedbackD", "I can't imagine what was lost from missing the Cherry Festival...")
+$Feedback("BasicCityHallInfo", "feedbackD", "I had hoped City Hall would have more to say during this crisis...")
+$Feedback("DNRCauseOfFlood", "feedbackD", "I guess we just need to give that water more places to go!")
+$Feedback("DNRHighLakeLevels", "feedbackD", "Lowering the lake levels may cost more in the short term, but it will prevent more crises like this!")
+$Feedback("ImpactOfFlood", "feedbackD", "The people with money will move while everyone else is forced to endure the storms? That's awful!")
+$Feedback("RainfallStats", "feedbackD", "It always helps to have more data!")
+$Feedback("PoliciesToPreventFlooding", "feedbackD", "City policies sound like the best solution to this! We need to make sure it doesn't happen again.")
+
+$call ImpactFeedback()
+$call EditorFeedback()
+
+$call EndFeedback()
+{/img}
+
+//TODO: Remove once 2b is more fleshed out.
+{@msg}  You are finished!
+{@msg}  You are now free to close your browser.
 $call NextLevel()

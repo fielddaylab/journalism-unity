@@ -239,7 +239,7 @@ Snippet text unimplemented.
 The city could change things with new policies: funding for storm drains, rain gardens, lower lake levels, and wetland protection.
 
 ///
-/// 2b starts here?
+/// 2b starts here
 ///
 
 // Original Name: Increased Flooding Sugar Marsh 
@@ -254,7 +254,7 @@ According to weather reports from the time, flash flooding increased sharply aft
 @type Quote
 @quality Good
 @attr Facts, Color
-"Sugar Marsh used to be right where we're standing," says one local librarian. "Sometimes I wonder if they could've built it somewhere else."
+"Sugar Marsh used to be right where we're standing," says one local librarian. "Sometimes I wonder if they could've built the library somewhere else."
 
 // Original Name: Serious Wetlands
 :: SeriousWetlands
@@ -354,6 +354,7 @@ Though the Spark Project plans to develop on a swamp, leader Nancy Gilcrest is q
 @attr Color
 Nancy Gilcrest, head of the Spark Project, chose to develop on Cherry Creek Marsh for its secluded location.
 
+//No Flood Plan
 :: NoFloodPlan
 @type Fact
 @quality Great
@@ -428,7 +429,7 @@ According to a bulletin board in City Hall, the Spark Project made a donation to
 @type Photo
 @quality Great
 @attr Color
-//TODO: Insert marsh photo here
+//TODO: Insert crane photo here
 
 // Original Name: GoodMarshPhoto-Volunteers
 :: GoodMarshPhoto-Volunteers
@@ -549,6 +550,7 @@ Local limnologist Valerie Dean is "very concerned" about the fate of Cherry Cree
 @attr Color
 One member of the Spark Project development initative says that it's been effective in bringing new businesses to Twin Lakes. "It's been a dream come true for so many people."
 
+// Business Growing or Dying
 :: BusinessGrowingOrDying
 @type Quote
 @quality Good
