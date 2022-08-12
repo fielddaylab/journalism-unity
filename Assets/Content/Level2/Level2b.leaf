@@ -285,6 +285,8 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 
 $call GiveSnippet(WetlandsRelatedToFlooding)
 
+Hmm... That's a bold claim. I'd better get that verified somewhere.
+
 $OnceChoice(WhatDoYouMeanByWetlands, "Can you tell me what you mean by \"wetlands?\"")
 $OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
 $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands around here?")
@@ -558,6 +560,7 @@ She looks shrewdly at you.
 {@person}Wow. Look at the time. I really better be going.
 She didn't even try to sound convincing. 
 On the bright side, you've ruffled some feathers. That must be some kind of reporting badge of honor. 
+No flood plan to speak of... That's quite the scoop.
 
 $call GiveSnippet(NoFloodPlan)
 
@@ -643,6 +646,7 @@ $OnceChoice(MayorLimnology, "Have you talked with the Limnology Department about
 {@phone}No offense, kiddo, but you're a brand-new reporter. Not an economics expert. 
 {@phone}I'm sure they've got a plan for all of this. 
 Talk about evasive...
+The mayor recommends flood insurance instead of an action plan... Sounds like quite the scoop.
 
 $call GiveSnippet(MayorFloodInsurance)
 

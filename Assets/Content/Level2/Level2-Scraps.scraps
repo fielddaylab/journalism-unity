@@ -263,12 +263,13 @@ According to weather reports from the time, flash flooding increased sharply aft
 @attr Facts, Color
 "This is serious,"  says local conservation advocate Birdie Vance. "If we don't preserve our wetlands, Twin Lakes won't survive!"
 
+//Making this one Bad because it's unverified?
 // Original Name: Wetlands Related to Flooding
 :: WetlandsRelatedToFlooding
 @type Quote
-@quality Good
+@quality Bad
 @attr Facts
-Conservationists say the wetlands soak up water like a sponge, preventing flash floods. But now 90% of those wetlands are gone.
+Conservationists say the wetlands soak up water like a sponge, preventing flash floods. But they claim 90% of those wetlands are gone.
 
 // Original Name: Wetland Definition
 :: WetlandDefinition
@@ -280,7 +281,7 @@ Conservationists say the wetlands soak up water like a sponge, preventing flash 
 // Original Name: ConnectedWatershed
 :: ConnectedWatershed
 @type Quote
-@quality Good
+@quality Good 
 @attr Facts
 CRANE director Birdie Vance says the wetlands are just as important as the lakes. "The whole watershed is connected: every part has its role."
 
@@ -359,7 +360,7 @@ Nancy Gilcrest, head of the Spark Project, chose to develop on Cherry Creek Mars
 @type Fact
 @quality Great
 @attr Color, Facts
-Spark Project representative Nancy Gilcrest appears to have no flood plan for the new development, should weather events continue to worsen.
+Spark Project representative Nancy Gilcrest declined to provide a flood plan for the new development, should weather events continue to worsen.
 
 // Original Name: MayorSupportOfNewDevelopment
 :: MayorSupportOfNewDevelopment
