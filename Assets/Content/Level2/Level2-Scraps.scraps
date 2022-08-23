@@ -442,7 +442,7 @@ According to a bulletin board in City Hall, the Spark Project made a donation to
 // Original Name: BadMarshPhoto-Scenery
 :: BadMarshPhoto-Scenery
 @type Photo
-@quality Good
+@quality Bad
 @attr Color
 //TODO: Insert bad marsh photo here
 
@@ -519,7 +519,7 @@ Twin Lakes University's Department of Limnology has tracked an increase in flood
 // Original Name: WetlandLossConfirmation
 :: WetlandLossConfirmation
 @type Quote
-@quality Good
+@quality Great
 @attr Facts, Color
 Twin Lakes' foremost wetlands ecologists have confirmed that 70% of our local wetlands have disappeared.
 
