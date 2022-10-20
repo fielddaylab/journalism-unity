@@ -19,8 +19,6 @@ Here at the Twin Lakes Emergency Meeting, the mood is decidedly anxious.
 {@phone} This is my home. I'm not leaving!
 {@phone} I don't want random evacuees camped out in my neighborhood!
 {@person}  Aw, cheer up, folks. We'll get through this together. We're #TwinLakesStrong! 
-{@phone}  But really... where will we go, Mr. Mayor?? 
-{@person}  Well, about that!
 {@person}  My emergency response team is settin' up a shelter at the high school!
 {@person}  It's a great shelter. Real cozy. You'll love it. 
 {@phone}  What if the dam bursts??
@@ -67,26 +65,33 @@ $elseif StatCheck (Social, 5)
 {@person} I guess I could spare a minute or two for a social butterfly like you.
       $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
 $else 
-{@person}  I can't play favorites, Missy/ Call and make an appointment if you want to talk. 
-Great. Because an interview 3 weeks from now, after half the town is destroyed, is gonna be SO helpful.
+{@person}  I can't play favorites, Missy. Make an appointment if you want to talk. 
+Great. Because an interview 3 weeks from now is gonna be SO helpful.
 
 $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
 $HubChoice(HeadStraightToShelter, "Head to the flood shelter", 0.25, "")
 $choice RemindTheMayor; Tell the Mayor that you've got some dirt on him--maybe he'll be more willing to talk 
-$HubChoice(OfferToGrabHimCoffee, "Offer to grab him coffee--it'll take time, but it might be worth it", 0.25, "")
+$HubChoice(OfferToGrabHimCoffee, "Offer to grab him coffee--it'll take some time, but it might score you an interview", 0.25, "")
 $endif
 
 // Offer to grab him coffee
 :: OfferToGrabHimCoffee
-{@me} I was about to head to the Goldfish Cafe. What if I pick you up a drink? 
-{@me} Their cappuccinos are to die for.
+{@me} I was about to head to the Goldfish Cafe. Can I grab you a cappuccino? 
 {@person} Hmmm. I'm more of a cherry spice latte man myself.
 {@me} Done!
-You hurry down the street and order the mayor's heavily sweetened, $7 drink.
+You hurry down the street and order the mayor's heavily sweetened $7 drink.
 When you get back, he takes a sip and sighs happily.
 {@person} Ah. That's a <i>darn</i> fine cup of coffee.
 {@person} What do you want to know, kid? 
+$call AdjustStats(Social + 1)
 $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
+$choice DeclineInterviewWithMayor; Actually, never mind. Enjoy the drink, though! 
+
+// Decline interview with Mayor
+:: DeclineInterviewWithMayor
+{clear-text}
+$choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
+$HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "")
 
 //Remind the Mayor
 ::RemindTheMayor
@@ -525,7 +530,7 @@ $choice FloodShelterChoices; Decide what to do next.
 {@person} Probably cherry cornbread delivered in a horse and buggy, at this rate. 
 
 $HubChoice(OfferToHelpCarryInFood, "Offer to help carry the food inside.", 0.25, "")
-$HubChoice(UseYourSocialSkills, "Use your social skills to put her at ease.", 0.25 "")
+$HubChoice(UseYourSocialSkills, "Use your social skills to put her at ease.", 0.25, "")
 
 // Offer to help carry the food inside
 :: OfferToHelpCarryInFood
@@ -932,7 +937,7 @@ And 27 minutes waiting in line behind doomsday-flood preppers.
 Maaaaybe you should've kept an eye on the clock. 
 $call GiveSnippet(GroceryStorePhoto)
 $call GiveSnippet(DescriptionOfGroceryStoreChaos)
-$call AdjustStat(Trust + 2)
+$call AdjustStats(Trust + 2)
 $call AdjustStats(Resourceful + 1)
 $Hubchoice(ApartmentsHub, "Return to senior citizen apartments", 0.5, "")
 
