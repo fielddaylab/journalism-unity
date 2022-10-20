@@ -515,6 +515,7 @@ $choice FloodShelterChoices; Wish him well and find someone else to talk to.
 {@person} Though I doubt it. 
 {@article} Strudel Senior Apartments, 1502 Sugar Grove 
 $call GiveSnippet(KickedOutOfApartments)
+$set ApartmentAddress = true
 
 $choice FloodShelterChoices; Decide what to do next. 
 
@@ -711,7 +712,7 @@ $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0
 $choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the clipboard 
 $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "")
-//Below choice should only appear if you visited "TellMeWhatHappened" and got address 
+//if $set ApartmentAddress = true , below choice appears 
 $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building to check things out", 0.25, "")
 $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert at local college 
 
@@ -740,8 +741,8 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 :: WhyDoesntShelterAllowPets
 {@me} Do you know why the shelter doesn't allow pets? 
 {@person} I know it sounds harsh, but it's a safety issue.
-{@person} Pets can be dangerous for people with asthma, allergies, or compromised immune systems. 
-{@person} Plus, animals tend to get agitated during disasters. And humans, for that matter. 
+{@person} Pets can be dangerous for people with asthma or allergies.
+{@person} Plus, animals tend to get agitated during disasters.  
 $call GiveSnippet(WhyArentPetsAllowedQuote)
 
 $choice PetFriendlyShelter; What would it take to set up a pet-friendly shelter?
@@ -762,10 +763,12 @@ $choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to eva
 :: HowCanTheCityHelpOut
 {@person} Well... it would be great if people could take in pets that need help.
 {@person} But that won't be enough to help everyone.
-{@person} And there's no financial aid for people who want to pay for a kennel or a motel room. 
+{person} I have some clients who have been kicked out of their apartment building due to the flood.
+{@person} I'm not sure where they're going to go. 
 {@me} Well, my story comes out today. Maybe something will change.
 {@person} Thanks, El. I'm glad you're getting the word out. 
 $call GiveSnippet(HowCanCityHelpPetOwners)
+$set ApartmentAddress = true
 
 $choice NextStepAfterVetMeeting; End Interview 
 
@@ -784,8 +787,11 @@ $choice BoardingAnimalsIsExpensive; Doesn't boarding animals at a kennel cost a 
 :: BoardingAnimalsIsExpensive
 {@person} I’m afraid so.
 {@person} I'm worried a lot of people will stay home with their pets during the storm.
+{@person} And I have some clients who have been kicked out of their apartment building due to the flood.
+{@person} I'm not sure where they're going to go. 
 {@me} Well, my story comes out today. Maybe the town will be able to help.
 {@person} Thanks, El. I'm glad you're getting the word out. 
+$set ApartmentAddress = true
 $call GiveSnippet(WorriedPeopleWillStayHome)
 
 $choice NextStepAfterVetMeeting; End Interview 
@@ -795,16 +801,85 @@ $choice NextStepAfterVetMeeting; End Interview
 //Background: Main Street bookstore, cheese shop, cafe, etc
 $choice ReturnToTheShelter; Return to the flood shelter
 $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
-$HubChoice( )
+$HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments", 0.25, "")
 
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
+$if FirstVisit()
 Wow. What a mess.
 It’s been two weeks since the flood, and this place is still in shambles. 
+$endif
 
 $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
 $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
 $HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
+$HubChoice(TryToInterviewElectricalWorker), "Ask electrical worker why people aren't allowed back inside", 0.25, "")
+
+//InterviewElectricalWorker
+:: TryToInterviewElectricalWorker
+You try to catch the electrical worker on his way back inside.
+{@person} Sorry, kid. Super busy. No time to talk.
+$if StatCheck(Resourceful, 5) 
+      {@me} What about a quick lunch break?
+      {@me} I brought some of my neighbor's famous cherry granola. 
+      You show him the jar, complete with your neighbor's handmade label. 
+      {@person} Whoa... you mean Jim's cherry-chocolate granola? 
+      {@person} That stuff is legendary! Sure, kid. I'll take a five minute break. 
+      $choice InterviewElectrician; Interview electrician 
+$if StatCheck(Endurance, 5)
+      {@me} Can I come inside with you? I won't get in the way. 
+      {@person} Well... okay, but make sure you can keep up.
+      You hurry in after him.
+      Inside, you can see some of the damage--mold and soggy carpets, Out-Of-Order elevators, and flickering lights.
+      {@me} Wow. What a mess. 
+      {@person} The fire alarm system is still down, too.
+      {@me} When do you think it will be safe for people to move back in?
+      {@person} Well... normally I'd say a few days. 
+      {@person} But with that new storm moving in, I really couldn't tell ya.
+      $call GiveSnippet(DescriptionOfApartmentInterior)
+      $call GiveSnippet(PhotosOfApartmentInterior)
+      $call GiveSnippet(BriefElectricianQuote)
+      $choice GoToSeniorCitizenApartments; Thank him for the interview. 
+$else 
+      You dig in your bag for something to offer him... but find only lip balm, tangled cords, and granola crumbs.
+      {@me} Um... can I come inside with you? I won't slow you down.
+      {@person} I doubt that, kid.
+      You try to keep up, but this guy must be a marathon runner... by the time you get inside, he's already gone. 
+      You do manage to snag a few photos, though: flickering lights, an out-of-order elevator, and moldy carpets.
+      Obviously this place isn't even close to being safe yet. 
+      $call GiveSnippet(DescriptionOfApartmentInterior) 
+      $call GiveSnippet(PhotosOfApartmentInterior)
+      $choice GoToSeniorCitizenApartments; Cut your losses. 
+
+// Interview electrician
+:: InterviewElectrician 
+{@me} Can you tell me why everyone has been asked to leave their apartments? 
+{@person} Well, the biggest issue is that the elevators and fire alarms are out of order.
+{@person} Plus, we've got soggy carpet and mold in the floors. 
+{@person} That's unhealthy for anybody, but especially older folks. 
+
+$choice WhenWillPeopleBeAllowedBackInside; The management hasn't been keeping people informed. Do you know when residents will be allowed back inside?  
+$if StatCheck(Social, 5)
+      $choice WhyHasItTakenSoLongToRepair; I know you're probably very busy. Is that why it's taken so long to fix this place up? 
+$else 
+      $choice WhyHasItTakenSoLongRudeVersion; Why is it taking so long to get this place fixed up? It's been more than two weeks!
+$endif
+
+// When will people be allowed back inside?
+:: WhenWillPeopleBeAllowedBackInside
+{@person} Normally, I'd say it'll be ready by the weekend.
+{@person} But with that new storm on its way, I'm worried that these people will have to wait a lot longer. 
+
+// Why has it taken so long to repair? 
+:: WhyHasItTakenSoLongToRepair
+
+// Why has it taken so long to repair rude version 
+:: WhyHasItTakenSoLongRudeVersion
+{@person} Excuse me? It sounds like you're blaming me, kid.
+{@person} Thanks for the granola and everything, but I better get back to work.
+{@person} Since you find my work so <i>unacceptable</i> and everything. 
+Oops. Maybe you should've brushed up on your social skills. 
+$choice GoToSeniorCitizenApartments; Decide what to do next. 
 
 // Talk to a woman sitting on a bench, a quail snuggled on her lap
 :: TalkToWomanOnBench
@@ -858,7 +933,7 @@ $HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let yo
 $HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
 $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
 $choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks )
-$choice ApartmentsHub; Thank the lady and get back to work. You're on a deadline here. 
+$choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
 
 // Try to convince the building manager to let you go inside for Queenie's food 
 ::SeeIfYouCanGetInside
@@ -939,7 +1014,7 @@ $call GiveSnippet(GroceryStorePhoto)
 $call GiveSnippet(DescriptionOfGroceryStoreChaos)
 $call AdjustStats(Trust + 2)
 $call AdjustStats(Resourceful + 1)
-$Hubchoice(ApartmentsHub, "Return to senior citizen apartments", 0.5, "")
+$Hubchoice(GoToSeniorCitizenApartments, "Return to senior citizen apartments", 0.5, "")
 
 // Check your bag for quail-appropriate snacks 
 :: CheckYourBagForQuailSnacks
@@ -956,16 +1031,7 @@ $Hubchoice(ApartmentsHub, "Return to senior citizen apartments", 0.5, "")
       {@person} Her name is Queenie. And thanks anyway, Dear, but she only eats complex carbs. 
       Well, at least you tried.
       $endif 
-$choice ApartmentsHub; Thank her for the interview. 
-
-// Thank the lady and get back to work
-:: ApartmentsHub
-{clear-text}
-What do you want to do next? 
-$HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.5, "")
-$HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the outside of the building", 0.25)
-$choice NextStepAtApartments; Leave apartments and decide what to do next 
-$HubChoice(SneakInTheBack, "Sneak in the back of the building, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
+$choice GoToSeniorCitizenApartments; Thank her for the interview. 
 
 // Leave apartments
 :: NextStepAtApartments
@@ -975,7 +1041,7 @@ Time is ticking. What do you want to do next?
 $HubChoice(ReturnToTheShelter, "Return to the flood shelter at the high school", 0.25, "")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
 $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
-$choice ApartmentsHub; Actually, I'll stay here and keep looking around. 
+$choice GoToSeniorCitizenApartments; Actually, I'll stay here and keep looking around. 
 
 // LEFT OFF HERE Talk to the building manager (if you can unglue her from her phone)
 :: TalkToBuildingManager
@@ -1001,7 +1067,7 @@ This interview is over.
 But at least you got a dramatic quote out of it. 
 $call GiveSnippet(AngryLandlordQuote)
 
-$choice ApartmentsHub; Decide what to do next. 
+$choice GoToSeniorCitizenApartments; Decide what to do next. 
 
 // Original Name: Tell her you understand she's in a difficult spot and you want to know how the city can help.
 :: UnderstandShesInADifficultSpot
@@ -1051,7 +1117,7 @@ $choice FakeSympathyForTheLandlord; I'm sorry to hear that. Sounds like it's bee
 {@person} Nah. I'd just call my cop friend Gary. He's right around the corner. 
 Yikes. You better get out of this lady's hair. 
 
-$choice ApartmentsHub; Decide what to do next... and keep a low profile. 
+$choice GoToSeniorCitizenApartments; Decide what to do next... and keep a low profile. 
 
 // Original Name: Fake sympathy for the landlord
 :: FakeSympathyForTheLandlord
@@ -1060,7 +1126,7 @@ $choice ApartmentsHub; Decide what to do next... and keep a low profile.
 {@person} You'll make me look good in your story, right? 
 {@me} Um.... I'll do my best. 
 
-$choice ApartmentsHub; Decide what to do next. 
+$choice GoToSeniorCitizenApartments; Decide what to do next. 
 
 // Take photos of the scene
 :: TakePhotosOfTheApartmentBuildingExterior
@@ -1073,7 +1139,7 @@ $else
       You're still not the most tech-savvy reporter in the world--the details come out a little blurry. 
       $call GiveSnippet(BadApartmentExteriorPhoto)
 
-$choice ApartmentsHub; Decide what to do next  
+$choice GoToSeniorCitizenApartments; Decide what to do next  
 
 // Call disability rights expert at local college
 :: CallDisabilityRightsExpertAtLocalCollege
@@ -1127,10 +1193,10 @@ $choice DoneWithPhoneCall; Decide what to do next.
 Okay, El. Time is ticking. Where to next?
 $HubChoice(ReturnToTheShelter, "Return to the flood shelter at the high school", 0.25, "")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
-//if you haven't been to GoToSeniorCitizenApartments at all yet, the choice below appears 
+//If $set ApartmentAddress = true, the below text appears 
 $HubChoice(GoToSeniorCitizenApartments, "Head to the senior citizens apartment building", 0.25, "")
 //if you have already visited GoToSeniorCitizenApartments once but want to return there, the choice below appears
-$HubChoice(ApartmentsHub, "Return to senior citizen apartments", 0.25, "")
+$HubChoice(GoToSeniorCitizenApartments, "Return to senior citizen apartments", 0.25, "")
 
 // Do you know anything about the flood shelter?
 :: DoYouKnowAnythingAboutTheShelter
