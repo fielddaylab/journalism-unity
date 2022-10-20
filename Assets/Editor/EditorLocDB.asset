@@ -197,7 +197,7 @@ MonoBehaviour:
       Content: City Hall
       Exposed: 0
     - Id: Map.CherryCreek
-      Content: ' Cherry Creek Marsh'
+      Content: Cherry Creek Marsh
       Exposed: 0
     - Id: Map.Library
       Content: Library
@@ -371,5 +371,5 @@ MonoBehaviour:
       RecordStart: 0
     BasePath: Stats
     Dirty: 0
-  m_LastExportClassName: TextConsts
-  m_LastExportPath: Assets/Content/TextConsts.cs
+  m_LastExportClassName: 
+  m_LastExportPath: 

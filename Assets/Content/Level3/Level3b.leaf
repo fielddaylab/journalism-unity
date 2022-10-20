@@ -396,17 +396,7 @@ The live flood map--showing ACTUAL flooding--shows Royal Hazel covered in water.
 
 $choice AskTheCityWorkerIfTheFloodRiskMapsHaveBeenUpdatedRecently; Ask the city worker if the flood risk maps have been updated recently.
 
-// Original Name: "Where did you live before? What happened to it?"
-:: WhereDidYouLiveBeforeWhatHappenedToIt
-"I was happy as a clam at Picnic Place Apartments, over in the Marmalade neighborhood," he says. "It's a nice place for seniors. But we've all been kicked out of there for weeks now."
 
-$choice TheBuildingKickedEveryoneOutWhy; The building kicked everyone out?? Why?
-
-// Original Name: Talk to an elderly woman sitting on a park bench, holding a pet bird on her lap.
-:: TalkToAnElderlyWomanSittingOnAParkBenchHoldingAPetBirdOnHerLap
-The woman is happy to chat with you. "I've been waiting so long," she says. "I'm bored out of my mind!"
-
-$choice AskWhatShesWaitingFor; Ask what she's waiting for.
 
 // Original Name: Talk to an older couple near the entrance, who look anxious to get inside.
 :: TalkToAnOlderCoupleNearTheEntranceWhoLookAnxiousToGetInside
@@ -416,14 +406,6 @@ Just as you approach, the old couple is about to be led inside by a building emp
 
 $choice AskIfTheydLikeAnExtraSetOfHands; Ask if they'd like an extra set of hands.
 
-// Original Name: Talk to the building manager.
-:: TalkToTheBuildingManager
-The building's manager--at least, you assume that's who she is--looks annoyed when she sees you.
-
-"I've got enough going on here," she says. "No press."
-
-$choice TellHerYoureWritingThisStoryAnyway--SheMightAsWellGetHerTwoCentsIn; Tell her you're writing this story anyway--she might as well get her two cents in.
-$choice TellHerYouUnderstandShesInADifficultSpotAndYouWantToKnowHowTheCityCanHelp; Tell her you understand she's in a difficult spot and you want to know how the city can help.
 
 // Original Name: Talk to the electrical worker.
 :: TalkToTheElectricalWorker
@@ -452,12 +434,6 @@ $choice AskTheCityWorkerIfTheFloodRiskMapsHaveBeenUpdatedRecently; Ask the city 
 $choice WhereHaveYouBeenLiving; Where have you been living?
 $choice HaveTheBuildingOwnersDoneAnythingToHelpYou; Have the building owners done anything to help you?
 
-// Original Name: Ask what she's waiting for.
-:: AskWhatShesWaitingFor
-"The building owners said they would decide today if we're allowed to move back in," she says. "I live on the first floor, so I feel like I've got a good chance."
-
-$choice CanYouTellMeAboutWhyYouHadToLeaveYourApartment; Can you tell me about why you had to leave your apartment?
-$choice HowLongHasItBeenSinceYouHadToLeave; How long has it been since you had to leave?
 
 // Original Name: Ask if they'd like an extra set of hands.
 :: AskIfTheydLikeAnExtraSetOfHands
@@ -474,23 +450,7 @@ Her husband looks doubtful about inviting a stranger inside his home, but the wo
 $choice FollowThemInside; Follow them inside.
 $endif
 
-// Original Name: Tell her you're writing this story anyway--she might as well get her two cents in.
-:: TellHerYoureWritingThisStoryAnyway--SheMightAsWellGetHerTwoCentsIn
-If she was mad before, she's furious now.
 
-"Fine," she says. "Here's my official statement: I've been trying to get the building repaired for weeks. I'm losing money with each day the residents don't pay their rent. All these sweet old grandmas and grandpas keep acting like I'm Cruella DeVille. And I just read at the Gazette that there's ANOTHER flood on its way and the same thing's gonna happen all over again. So forgive me if I seem tense."
-
-Whoa. That was... something. 
-
-$choice TellHerYouUnderstandShesInADifficultSpotAndYouWantToKnowHowTheCityCanHelp; Empathize with how incredibly frustrating all of that sounds.
-$choice TellHerIfSheDoesntWantToBeTreatedLikeAMonsterSheProbablyShouldntActLikeOne; Tell her if she doesn't want to be treated like a monster, she probably shouldn't act like one.
-
-// Original Name: Tell her you understand she's in a difficult spot and you want to know how the city can help.
-:: TellHerYouUnderstandShesInADifficultSpotAndYouWantToKnowHowTheCityCanHelp
-The woman's face softens. "You have no idea," she says. "I've been waiting weeks to get this place repaired. I have no idea when the residents will be allowed back inside."
-
-$choice HaveYouDoneAnythingToHelpTheResidents; Have you done anything to help the residents?
-$choice CanYouTellMeWhyItsTakingSoLong; Can you tell me why it's taking so long?
 
 // Original Name: "Can you tell me what you're working on?"
 :: CanYouTellMeWhatYoureWorkingOn
@@ -553,29 +513,6 @@ You snap a few pictures, then help the couple carry out some of their belongings
 
 <i>Get apartment building photos</i>
 
-$choice SeniorCitizenAptHub; Plan your next step.
-
-// Original Name: Tell her if she doesn't want to be treated like a monster, she probably shouldn't act like one.
-:: TellHerIfSheDoesntWantToBeTreatedLikeAMonsterSheProbablyShouldntActLikeOne
-The woman's eyes flash. "Get off my property," she says. "Now. This is harassment. You're lucky I haven't already called security."
-
-// Original Name: "Have you done anything to help the residents?"
-:: HaveYouDoneAnythingToHelpTheResidents
-"Of course I have," she says. "What did they tell you?"
-
-"Just that the situation has been... challenging."
-
-"We gave them $300," she says. "It was the most we could offer. We told them they could stop paying rent for as long as this goes on. We paid for taxi rides to hotels. What more do these people want from me?"
-
-$choice CanYouTellMeWhyItsTakingSoLong; Can you tell me why it's taking so long to get people moved back in?
-$choice Was300TheMostYouCouldOfferThatsNotMuchComparedToTheCostOfHotels; Was $300 the most you could offer? That's not much, compared to the cost of hotels.
-
-// Original Name: "Can you tell me why it's taking so long?"
-:: CanYouTellMeWhyItsTakingSoLong
-"I don't know all the technical stuff," she says. "But the fire marshal said it's not safe. And they've been so busy with other damaged properties--I guess it's taking a while to get to us."
-
-$choice HaveYouDoneAnythingToHelpTheResidents; Have you done anything to help the residents?
-$choice HowWouldYouRespondToResidentsWhoSayThatYouHaventBeenKeepingThemInformed; How would you respond to residents who say that you haven't been keeping them informed?
 
 // Original Name: Call building inspector
 :: CallBuildingInspector
@@ -640,27 +577,7 @@ $choice AskForTheAddressOfHisApartmentBuilding; Ask for the address of his apart
 :: DidYouTellThePeopleHereAtTheShelterWhatsGoingOn
 "Yep," he says. "They said they can't break the no pets rule, but if I can get rid of Bruno here, I'm welcome to stay. I tried pretendin' he was an emotional support dog, but they didn't buy it."
 
-$choice AskForTheAddressOfHisApartmentBuilding; Ask for the address of his apartment building.
-
-// Original Name: "How were you rescued?"
-:: HowWereYouRescued
-"Firefighters came and gathered us into rescue vehicles and boats," she said. "There was no time to grab anything. I haven't been allowed back inside since then. I'm running out of food for poor Quigley, here."
-
-$choice WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation; What do you think about how your building has handled the situation?
-
-// Original Name: "Where have you been staying?"
-:: WhereHaveYouBeenStaying
-"I moved in with my daughter and her family," she says. "I've heard the city opened a shelter at the high school, but what would I do with Quigley? And besides, I have arthritis in my back. Those little cots are impossible for me."
-
-$choice WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation; What do you think about how your building has handled the situation?
-
-// Original Name: "What do you think about how your building has handled the situation?"
-:: WhatDoYouThinkAboutHowYourBuildingHasHandledTheSituation
-Her cheerful face darkens like the clouds overhead. "Dreadful," she says. "Terrible. Shameful."
-
-Wow.... for a sweet old lady, that was a quick 180.
-
-$choice CanYouTellMeMoreAboutThat; Can you tell me more about that?
+$choice AskForTheAddressOfHisApartmentBuilding; Ask for the address
 
 // Original Name: Senior Citizen Apt Hub
 :: SeniorCitizenAptHub

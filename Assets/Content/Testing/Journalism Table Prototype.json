@@ -2848,7 +2848,7 @@
       }
     },
     {
-      "text": "The woman looks surprised. \"Oh, you're a reporter? You should talk to my brother! He'll know all the details.\"\n\nShe scribbles down her brother's contact info: //Barry Zingerman, 555-1678//\n\n(link-reveal:\"\\\"Barry Zingerman? You mean.... the mayor of Twin Lakes?\\\"\")[\n\n\"Oh, you've heard of him? Give him a call. Tell him you rescued his niece's pet. I'm sure he'd love to chat.\"\n\n//Get Mayor's Contact Info//\n\n[[Open Phone Contacts->Phone Contacts]]\n[[Keep biking toward Main Street->Main Street Flood Recovery]]\n\n\n[[Science Story Map]]]",
+      "text": "The woman looks surprised. \"Oh, you're a reporter? You should talk to my brother! He'll know all the details.\"\n\nShe scribbles down her brother's contact info: //Barry Smuckers, 555-1678//\n\n(link-reveal:\"\\\"Barry Smuckers? You mean.... the mayor of Twin Lakes?\\\"\")[\n\n\"Oh, you've heard of him? Give him a call. Tell him you rescued his niece's pet. I'm sure he'd love to chat.\"\n\n//Get Mayor's Contact Info//\n\n[[Open Phone Contacts->Phone Contacts]]\n[[Keep biking toward Main Street->Main Street Flood Recovery]]\n\n\n[[Science Story Map]]]",
       "links": [
         {
           "name": "Open Phone Contacts",

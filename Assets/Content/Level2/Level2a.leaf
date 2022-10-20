@@ -556,7 +556,7 @@ FLYER:
 * Prevent shoreline erosion \
 * Stop flooding \
 * Prepare for extreme weather \
-Mayor Zingerman is calling to have the lake levels lowered! Hear more at this week's Town Hall meeting. \
+Mayor Smuckers is calling to have the lake levels lowered! Hear more at this week's Town Hall meeting. \
 </b>
 {@article}New location: Department of Limnology
 
@@ -906,10 +906,10 @@ $choice MainStreetFloodRecovery; Arrive at Main Street
 The woman looks surprised. 
 {@person}You're a reporter? You should talk to my brother! He'll know all the details.
 
-She scribbles down her brother's contact info: <i>Barry Zingerman, 555-1678</i>
+She scribbles down her brother's contact info: <i>Barry Smuckers, 555-1678</i>
 
 
-$ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
+$ContinueChoice({@me} Barry Smuckers? You mean.... the mayor of Twin Lakes?)
 
 
 {@person}Oh, you've heard of him? 
