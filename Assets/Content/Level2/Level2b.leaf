@@ -4,10 +4,10 @@
 // Creator: Twine
 
 # start ScienceStory2Wetlands
-$call SetLocation("Apartment")
 
 // Original Name: Science Story 2: Wetlands
 :: ScienceStory2Wetlands
+$call SetLocation("Apartment")
 You finally get home, exhausted from your first day on the science beat.
 
 Then your Squawker notification chimes.
@@ -39,7 +39,7 @@ Birdie responds almost instantly.
 
 $if Visited(TakeASnackBreak)
 {@phone}About time.
-$if Visited(ReadUpOnCRANE)
+$elseif Visited(ReadUpOnCRANE)
 {@phone}About time.
 $else
 {@phone}Hey, thanks for the quick response!
@@ -1095,7 +1095,7 @@ $if StatCheck(Endurance, 5)
 He's a brisk walker, but you've been working on your endurance.
 You keep up easily. 
 
-$OnceChoice(AskWhyHesOutHereVolunteering; Ask why he's out here volunteering)
+$OnceChoice(AskWhyHesOutHereVolunteering, "Ask why he's out here volunteering")
 $elseif StatCheck(Resourceful, 5)
 Your hiking boots and bug spray give you the edge you need to keep up!
 
