@@ -3,13 +3,18 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+#const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
+#const BG_UpperLakeDam = "BG/UpperLakeDam.mp4"
+#const BG_HouseBoat = "BG/Houseboat.png"
+#const BG_CherryFestFlood = "BG/MainStCherryFestFlood.mp4"
+
 # start Story2Intro
 
 // Original Name: Story 2 Intro
 :: Story2Intro
 $call SetHeaderEnabled(true)
 $call SetLocation("Newsroom")
-{bg BG/rainyGazette.jpg}
+{bg BG_OfficeExterior}
 {layout Left}
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
@@ -29,7 +34,7 @@ $choice GetReadyCheckpoint; I'm on it.
 
 :: GetReadyCheckpoint
 @checkpoint
-{bg BG/rainyGazette.jpg}
+{bg BG_OfficeExterior}
 $goto GetReady
 
 // Original Name: Get Ready
@@ -218,7 +223,7 @@ $choice GetReadyPart2; Head back to your desk
 @checkpoint
 {clear-text}
 {layout Left}
-{bg BG/rainyGazette.jpg}
+{bg BG_OfficeExterior}
 $call SetTimeRemaining(0)
 
 $if hasBike == true
@@ -393,7 +398,7 @@ $choice Crackers; Grab a few saltine crackers.
 {clear-text}
 $call SetLocation("Upper Lake Dam")
 {/map}
-{bg BG/UpperLakeDam.jpeg}
+{bg BG_UpperLakeDam}
 $if FirstVisit()
 <b>Location: the Upper Lake Dam</b>
 Volunteers are stacking sandbags, with a DNR worker leading the effort. 
@@ -536,7 +541,7 @@ $endif
 // Original Name: Talk to the houseboat lady
 :: TalkToTheHouseboatLady
 {/map}
-{bg BG/Houseboat.png}
+{bg BG_HouseBoat}
 The houseboat lady is thrilled to see the press has taken an interest.
 
 {anim rumble}{@person} Houseboat, stay afloat!
@@ -628,7 +633,7 @@ $choice ArriveAtFloodSite; Back to the dam
 {clear-text}
 {/map}
 $call SetLocation("Cherry Festival")
-{bg BG/MainStCherryFestFlood.jpg}
+{bg BG_CherryFestFlood}
 <b>Location: the Main Street Cherry Festival</b>
 
 $if HasTime(0.5)
