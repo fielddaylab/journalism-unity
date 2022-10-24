@@ -109,7 +109,7 @@ But hey, it's for a good cause. Sort of.
 {@person} The prize: free cherry jam for life. 
 Uh oh. Maaaaybe you should've thought this through.
 
-YOU'RE FIRED! GAME OVER
+$GameOver("YOU'RE FIRED! GAME OVER")
 
 //Interview Mayor
 :: InterviewMayorAboutEmergencyShelter
@@ -339,7 +339,7 @@ $choice WhatIf; What if the shelter at the high school doesn't have enough space
 {@person} And I deserve to feel safe walking my dog at night! 
 
 $choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
-$choice WhatWouldYouSayToDisplacedPeople; What about the people who need to evacuate their homes?
+$choice WhatWouldYouSayToPeople; What about the people who need to evacuate their homes?
 
 // Walking Dog
 :: WalkingDog
@@ -642,8 +642,12 @@ $choice WhatIssuesHaveYouNoticed; What issues have you noticed?
 {@me} Oh... long story. 
 
 $choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
-$choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
-$choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$if !Visited(HowCanTheCommunityHelpOut)
+      $choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
+$endif
+$if !Visited(WhyArentPetsAllowed)
+      $choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$endif
 $choice EndShelterCoordinatorInterview; End Interview 
 
 // How can the city make the shelter more accessible?
@@ -653,8 +657,12 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} For now, I'm trying to get portable ramps, better cots, and braille signs brought in.
 
 $choice DoYouHaveAnyResourcesAboutAccessibleShelters; Do you have any resources I could look at?
-$choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
-$choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$if !Visited(HowCanTheCommunityHelpOut)
+      $choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
+$endif
+$if !Visited(WhyArentPetsAllowed)
+      $choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$endif
 $choice EndShelterCoordinatorInterview; End Interview 
 
 // Do you have any resources I can look at?
@@ -665,8 +673,12 @@ $call GiveSnippet(AccessibilityStandardsResource)
 {@person} This little town needs to keep up, or it's gonna get washed right off the map. 
 
 $choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
-$choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
-$choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$if !Visited(HowCanTheCommunityHelpOut)
+      $choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
+$endif
+$if !Visited(WhyArentPetsAllowed)
+      $choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$endif
 $choice EndShelterCoordinatorInterview; End Interview 
 
 // Is there anything that the people of Twin Lakes can do to help out?
@@ -675,8 +687,12 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} And if people let friends and family stay with them, that would free up more space here.
 
 $choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
-$choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
-$choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$if !Visited(HowCanTheCommunityHelpOut)
+      $choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
+$endif
+$if !Visited(WhyArentPetsAllowed)
+      $choice WhyArentPetsAllowed; Why aren't pets allowed in the shelter? 
+$endif
 $choice EndShelterCoordinatorInterview; End Interview 
 
 // Why aren't pets allowed? 
@@ -983,7 +999,7 @@ $endif
       $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
 $if !Visited(MeetWithLocalVet)
       $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
-$endif 
+$endif
 //Could add a "submit your story" button for if the player has run out of options of things to do 
 
 
@@ -1020,7 +1036,7 @@ You try to run, but a police officer blocks your path.
 {@person} Look, I don't have time for nonsense. I'm gonna have to take you down to the station. 
 Ugh. At least you've got a healthy snack for the drive downtown. 
 
-GAME OVER 
+$GameOver("GAME OVER")
 
 // Offer to take the lady to the fancy grocery store and buy some seeds 
 :: OfferToTakeHerToTheStore
@@ -1159,9 +1175,8 @@ $else
       You ask permission from the people nearby, and then snap some pictures of the building. 
       You're still not the most tech-savvy reporter in the world--the details come out a little blurry. 
       $call GiveSnippet(BadApartmentExteriorPhoto)
-
-$choice GoToSeniorCitizenApartments; Decide what to do next  
 $endif 
+$choice GoToSeniorCitizenApartments; Decide what to do next  
 
 // Call disability rights expert at local college
 :: CallDisabilityRightsExpertAtLocalCollege
@@ -1192,6 +1207,7 @@ $endif
 $choice DoYouKnowAnythingAboutTheShelter; Is it true that the flood shelter doesn't meet accessibility standards? 
 
 // Tell her you have tons of disabled friends 
+:: TellHerYouHaveTonsOfDisabledFriends
 {@me} Seriously, you can trust me!
 {@me} One of my best friends from back home used a wheelchair! 
 Instantly, you wish you could take it back. Too late. 
