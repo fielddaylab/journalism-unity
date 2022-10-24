@@ -3,6 +3,11 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+#const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
+#const BG_EvacShelter = "BG/EvacShelter.jpeg"
+#const BG_SandbagStation = "BG/SandbagStation.mp4"
+#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.jpeg"
+
 # start Level3Story2
 
 // Original Name: Level 3, Story 2
@@ -54,7 +59,7 @@ $choice HeadToSophiasCafeForBreakfast; Head to Sophia's Cafe for breakfast.
 // Original Name: Go for a run at Cherry Creek Marsh.
 :: GoForARunAtCherryCreekMarsh
 You could use a nice burst of endorphins. You grab your running shoes and drive to your favorite trailhead.
-{bg BG/CherryCreekMarsh2.jpg}
+{bg BG_CherryCreekMarsh}
 
 Some of the trails are still muddy, but you know which areas to avoid. As you round a curve, you see Birdie gazing up into the treetops through binoculars.
 
@@ -177,7 +182,7 @@ $choice CheckOutTheSandbaggingStation; Check out the sandbagging station.
 
 // Original Name: Go inside the shelter.
 :: GoInsideTheShelter
-{bg BG/EvacShelter.jpg}
+{bg BG_EvacShelter}
 The high school gym is full of cots, folding chairs, and blankets, with a handful of Twin Lakesians scattered around. 
 
 You notice an elderly man holding tight to his dog's leash, arguing with the intake volunteer.
@@ -189,7 +194,7 @@ $choice AskToInterviewTheShelterCoordinator; Ask to interview the shelter coordi
 
 // Original Name: Check out the sandbagging station.
 :: CheckOutTheSandbaggingStation
-{bg BG/SandbagStation.jpg}
+{bg BG_SandbagStation}
 At the sandbagging station, people from the neighborhood are just beginning to show up and scoop sand into sandbags.
 
 The DNR official recognizes you from the city dam, three weeks ago.
@@ -581,7 +586,7 @@ $choice AskForTheAddressOfHisApartmentBuilding; Ask for the address
 
 // Original Name: Senior Citizen Apt Hub
 :: SeniorCitizenAptHub
-{bg BG/SeniorCitizenApts.jpg}
+{bg BG_SeniorCitizenApts}
 $choice TalkToAnElderlyWomanSittingOnAParkBenchHoldingAPetBirdOnHerLap; Talk to an elderly woman sitting on a park bench, holding a pet bird on her lap.
 $choice TalkToAnOlderCoupleNearTheEntranceWhoLookAnxiousToGetInside; Talk to an older couple near the entrance, who look anxious to get inside. 
 $choice TalkToTheBuildingManager; Talk to the building manager.

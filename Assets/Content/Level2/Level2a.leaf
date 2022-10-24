@@ -3,13 +3,21 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+#const BG_Bedroom = "BG/Bedroom2.mp4"
+#const BG_HouseExt = "BG/HouseExt.mp4"
+#const BG_TownTransitional = "BG/TownTransitional.mp4"
+#const BG_DNRSite = "BG/DNRSite.mp4"
+#const BG_Limnology = "BG/Limnology.jpg"
+#const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
+
+
 # start Level2Story3TheScienceStory
 
 // Original Name: Level 2, Story 3: The Science Story
 :: Level2Story3TheScienceStory
 $call SetLocation("Apartment")
 $ActionChoice(The next morning...)
-{bg BG/Bedroom2Temp.jpg}
+{bg BG_Bedroom}
 $call SetHeaderEnabled(true)
 $call StopAmbience()
 It's an eerily quiet morning in Twin Lakes. 
@@ -39,7 +47,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Go outside and help your neighbors
 :: GoOutsideAndHelpYourNeighbors
-{bg BG/HouseExterior.jpg}
+{bg BG_HouseExt}
 {clear-text}
 The street is covered in puddles and debris. 
 
@@ -232,7 +240,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Make an excuse and rush back inside
 :: MakeAnExcuseAndRushBackInside
-{bg BG/Bedroom2Temp.jpg}
+{bg BG_Bedroom}
 Ahh. Back in the blissful silence of your apartment. 
 $call AdjustStats(Social - 1)
 
@@ -326,7 +334,7 @@ $goto STORYEVALUATION
 {clear-text}
 {/map}
 $call SetLocation("Downtown")
-{bg BG/TownTransitional.jpg}
+{bg BG_TownTransitional}
 You pedal through town, weaving around abandoned cars and piles of sandbags.
 $call AdjustStats(Endurance + 1)
 
@@ -342,7 +350,7 @@ $choice MainStreetFloodRecovery; Head straight to Main Street
 
 // Original Name: DNR Map
 :: DNRMap
-{bg BG/DNRSite.jpg}
+{bg BG_DNRSite}
 {/map}
 $call SetLocation("DNR")
 
@@ -394,7 +402,7 @@ $choice ScienceStoryMap; Do something else
 :: DepartmentOfLimnology
 $call SetLocation("Limnology")
 {/map}
-{bg BG/Limnology.jpg}
+{bg BG_Limnology}
 $if FirstVisit()
     You arrive at the Department of Limnology.
     The dock is covered in murky, greenish water. 
@@ -509,7 +517,7 @@ $endif
 :: MainStreetFloodRecovery
 $call SetLocation("Downtown")
 $if FirstVisit()
-{bg BG/FirstStDowntownCleanup.jpg}
+{bg BG_FirstStDowntownCleanup}
 Your story is due in {timeLeft}.
 
 Main Street is cordoned off. 
