@@ -6,7 +6,10 @@
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
 #const BG_EvacShelter = "BG/EvacShelter.jpeg"
 #const BG_SandbagStation = "BG/SandbagStation.mp4"
-#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.jpeg"
+#const BG_HouseExt = "BG/HouseExt.mp4"
+#const BG_TownTransitional = "BG/TownTransitional.mp4"
+#const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
+
 
 # start Level3Story2
 
@@ -19,7 +22,7 @@ Email Notification:
 {@article} Phone interiew, 2 P.M. today. 
 {@article} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
-//bacground: if possible, the player's house exterior, but without the chicken/rain layers
+{bg BG_HouseExt}
 Welcome to Twin Lakes: the calm before the storm. 
 The rain is due to hit tomorrow night...
 Which means you have a little time to catch your breath.
@@ -81,7 +84,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
-//Background: main street with Bookish storefront, but without the man hanging art prints 
+{bg BG_FirstStDowntownCleanup}
 {clear-text}
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Herald yet. 
@@ -91,7 +94,7 @@ $choice GoInsideBookish; Go inside the bookstore
 
 // Go inside Bookish
 :: GoInsideBookish
-//Bookstore interior 
+{bg BG/Bookshop.jpeg}
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
 {@person} Oh dear. Not you again!
@@ -243,6 +246,7 @@ $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations",
 
 // Go to sandbagging station
 :: GoToSandbaggingStation
+{bg BG_SandbagStation}
 $if FirstVisit
 Volunteers and people from the neighborhood hurry to fill sandbags.
 You recognize Misty, the DNR worker you met at Twin Lakes Dam. 
@@ -252,6 +256,9 @@ $choice InterviewDNRWorkerAtSandbagFillingStation; Ask to interview Misty, the D
 $choice InterviewSandbagFillingVolunteer; Talk to volunteer filling sandbags 
 $choice InterviewLocalFromTheNeighborhood; Talk to man loading sandbags into his pickup truck 
 $choice AskPermissionToTakePhoto; Ask permission to take a photo 
+$if RoyalHazelLocation = true
+    $choice HeadToRoyalHazelNeighborhood; Head to Royal Hazel Neighborhood 
+$endif 
 
 // Interview DNR Worker
 :: InterviewDNRWorkerAtSandbagFillingStation
@@ -400,7 +407,7 @@ $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerne
 {@person} If you want to cover this issue, I'd start with the Royal Hazel Neighborhood.
 {@person} They were hit hard by the flood last time. 
 {@article} Get location: Royal Hazel Neighborhood, Twin Lakes 
-//set location: Royal Hazel Neighborhood to true 
+$set RoyalHazelLocation = true 
 $choice ThankMistyForHerHelp; Thank her for her help 
 
 // Thanks for your help, Misty!
@@ -412,6 +419,9 @@ $choice ThankMistyForHerHelp; Thank her for her help
 $choice InterviewSandbagFillingVolunteer; Talk to volunteer filling sandbags 
 $choice InterviewLocalFromTheNeighborhood; Talk to man loading sandbags into his pickup truck 
 $choice AskPermissionToTakePhoto; Ask permission to take a photo 
+$if RoyalHazelLocation = true 
+    $choice HeadToRoyalHazelNeighborhood; Head to Royal Hazel Neighborhood 
+$endif 
 
 //Ask to take photo
 :: AskPermissionToTakePhoto
@@ -447,6 +457,7 @@ $else
     {@person} Gotta get her these sandbags... since the city isn't doin' anything to help her.
     {@me} Thanks. I appreciate the tip. 
     Get location: Royal Hazel neighborhood
+    $set RoyalHazelLocation = true 
     $choice GoToSandbaggingStation; Decide what to do next 
 $endif 
 
@@ -614,11 +625,13 @@ $choice GoToSandbaggingStation; Plan your next move
 $choice GoToSandbaggingStation; Decide what to do next 
 
 // Go to Royal Hazel neighborhood
+:: HeadToRoyalHazelNeighborhood
 $HubChoice(RideYourBikeRoyalHazel, "Ride your bike and stop to take photos along the way", 0.5, "")
 $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
+{bg BG_TownTransitional}
 
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris from the last flood has been cleared away. 
@@ -675,6 +688,7 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neigh
 
 // Drive 
 :: Drive
+{bg BG_TownTransitional}
 You drive through the historic, higher-income neighborhoods, heading south. 
 The debris from the last flood has already been cleared away. 
 There's even a girl selling lemonade, though her sign is too far away to read. 
@@ -694,6 +708,14 @@ $choice TalkToWomanStackingSandbags; Talk to woman stacking sandbags
 $choice TalkToMenCarryingCouchOutside; Talk to men carrying a couch outside 
 $choice AskToTakePhotos; Take some photos 
 $choice TextKhalisaForAdvice; Text Khalisa for advice 
+
+// AskToTakePhotos
+:: AskToTakePhotos
+You ask the people outside if you can take a photo...
+But they just give you a weird look and keep working.
+Some pictures of houses will have to do.
+$call GiveSnippet(BadRoyalHazelPhoto)
+$choice ArriveAtRoyalHazelNeighborhood; Decide what to do next 
 
 // Knock on a few doors
 :: KnockOnAFewDoors
@@ -842,7 +864,7 @@ $choice InterviewEsme; Go inside and interview her
 // Interview 
 :: InterviewEsme
 Inside, the house smells musty and there's clutter piled on the floor
-{@person} Please pardon the mess. I've had to clear out the basement.
+{@person} Ignore the mess. I had to clear out the basement.
 {@person} Everything is still soggy down there. 
 {@person} What do you want to know?
 
@@ -931,7 +953,7 @@ $choice CanYouTalkAboutWhyThatsAProblem; Can you talk about why that's such a bi
 :: HowWereYouAbleToGetSandbagsForYourHome
 {@person} I've been working at it literally all day.
 {@person} I'm lucky that I have a car--lots of folks out here don't.
-{@person} I think I've taken maybe... oh, 20 trips back and forth? My back is killing me. 
+{@person} I think I've taken maybe... oh, 20 trips back and forth?  
 {@person} I also stacked up sandbags for my neighbor, too, as you can see. 
 {@person} Since the first flood, she hasn't even wanted to come outside. 
 
@@ -970,25 +992,25 @@ $choice ThankLiz; Thank her for her time
 // Thank Liz
 :: ThankLiz
 {@person} Happy to help, El. 
-{@person} And Khalisa, I'm so happy you stopped by!
-{@person} I'll could make some coffee, if you two want to come in...
-{@person} Nah, I'd better get back to work. Good luck with the story, El!
-
+{@person} Feel free to grab a photo, if you need one for your story.
+{@person} And stay safe out there! The sky's lookin' dark. 
+$call GiveSnippet(GreatRoyalHazelPhoto)
 $choice EndingTransition; Decide what to do next 
 
 //Ending Transition
 :: EndingTransition
+{bg }
 It's starting to rain. Drops hit the street all around you.
 You're about to look for someone else to talk to when your phone buzzes.
 {@phone} El, I've got another lead for you.
 {@phone} My contact at the Limnology Department suggesed talking to a local expert on flooding and equity.
-{@phone} Her name's Dr. Warner... sounds like her home address isn't on file.
+{@phone} Her name's Dr. Nora Warner... sounds like her home address isn't on file.
 {@phone} But my contact said she was helping out near the dam today.
-$choice LookForDrNoreenWarner; Got it! i'll take a look.
+$choice LookForDrNoraWarner; Head toward the dam and look for Dr. Warner 
 
-// LookForDrNoreenwarner
-:: LookForDrNoreenWarner
-You make your way toward the dam.
+// LookForDrNoraWarner
+:: LookForDrNoraWarner
+{bg BG_TownTransitional}
 Sandbags are stacked up everywhere, and no one is outside. 
 You're starting to get a bad feeling about the rain, which is getting heavier.
 $choice KeepSearchingForDrWarner; Knock at a few doors 
@@ -1027,6 +1049,7 @@ $choice DryOffAndLookAround; Dry off and look around
 
 // Dry off and look around
 :: DryOffAndLookAround
+// Add background: inside the quilter's house! 
 {@person} That was close! I'm so glad Kitty and I happened to be looking outside.
 Whoa. It's Nora, the Houseboat Lady!
 {@me} What are you doing here?? 

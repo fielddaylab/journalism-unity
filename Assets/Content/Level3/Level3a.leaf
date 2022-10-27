@@ -5,6 +5,7 @@
 
 #const BG_TownMeeting = "BG/TownMeeting.jpeg"
 #const BG_EvacShelter = "BG/EvacShelter.jpeg"
+#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.jpeg"
 
 # start Level3Intro
 
@@ -16,7 +17,7 @@ Email Notification:
 {@article} If you're interested, have your editor send over a letter of recommendation. 
 {@article} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
-{bg BG/TownMeeting.jpg}
+{bg BG/TownMeeting.jpeg}
 One week later.
 The Smoke City Herald is still waiting for you to drive out for an interview...
 But you've been too busy to call them back. 
@@ -40,7 +41,7 @@ $call GiveSnippet(BasicInfoFromEmergencyMeeting)
 {@me} Sounds like the newsroom might get more flooding.
 {@person} Don't worry about that, El. 
 {@person} I need you to do some digging into that flood shelter. 
-{@person} Look for issues. People who are being ignored. 
+{@person} Look for issues that people need to know about. 
 {@me} Got it. 
 {@me} And, um... about that letter of recommendation I asked you for....
 {@person} Don't worry, kid. I'm working on it.
@@ -742,7 +743,7 @@ $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert 
 
 // Head downtown to talk to the local vet, Fox Sculder
 :: MeetWithLocalVet
-//Background: Main Street bookstore, cheese shop, cafe, etc
+{bg BG_TownTransitional}
 The local vet meets you downtown on his lunch break. 
 You can tell he has his hands full--there are several animals crawling, slithering, and/or climbing on him at any given point.
 {@me} Thank you for meeting with me, Mr. Smulder. 
@@ -829,6 +830,7 @@ $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments",
 
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
+{bg BG_SeniorCitizenApts}
 
 $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
 $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
