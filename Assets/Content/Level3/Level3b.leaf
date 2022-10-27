@@ -3,6 +3,11 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+#const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
+#const BG_EvacShelter = "BG/EvacShelter.jpeg"
+#const BG_SandbagStation = "BG/SandbagStation.mp4"
+#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.jpeg"
+
 # start Level3Story2
 
 // Original Name: Level 3, Story 2
@@ -234,13 +239,7 @@ $choice DoYouKnowOfAnyResources; Do you know of any resources that could help me
 {@me} Thanks for your help! 
 
 $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "")
-$HubChoice(SkimThroughTheBook, "Skim through the book", 0.5, "")
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
-$HubChoice(HelpCleanUp, "Help clean up the bookshop", 0.25, "")
-
-// Skim through the book
-
-// Help clean up the bookshop 
 
 // Go to sandbagging station
 :: GoToSandbaggingStation

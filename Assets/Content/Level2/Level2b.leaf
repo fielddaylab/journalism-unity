@@ -3,11 +3,16 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+#const BG_CherryCreekMarsh = "CherryCreekMarsh.mp4"
+#const BG_OperaHouseInt = "RestoredOperaHouseInt.mp4"
+#const BG_FloodedLimnology = "BG/Limnology.jpg"
+#const BG_LowIncomeSt = "BG/LowIncomeSt.jpeg"
+
 # start ScienceStory2Wetlands
-$call SetLocation("Apartment")
 
 // Original Name: Science Story 2: Wetlands
 :: ScienceStory2Wetlands
+$call SetLocation("Apartment")
 You finally get home, exhausted from your first day on the science beat.
 
 Then your Squawker notification chimes.
@@ -39,7 +44,7 @@ Birdie responds almost instantly.
 
 $if Visited(TakeASnackBreak)
 {@phone}About time.
-$if Visited(ReadUpOnCRANE)
+$elseif Visited(ReadUpOnCRANE)
 {@phone}About time.
 $else
 {@phone}Hey, thanks for the quick response!
@@ -262,7 +267,7 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
-{bg BG/CherryCreekMarsh2.jpg}
+{bg BG_CherryCreekMarsh}
 Birdie, the aptly-named director of CRANE, is waiting for you at the trailhead. 
 Plus a few volunteers, and about a thousand mosquitoes. 
 
@@ -380,7 +385,7 @@ $choice MarshMap; Got it. Thanks.
 
 // Original Name: Marsh Map
 :: MarshMap
-{bg BG/CherryCreekMarsh2.jpg}
+{bg BG_CherryCreekMarsh}
 
 $if FirstVisit()
 $call SetTimeRemaining(2.5)
@@ -400,7 +405,8 @@ $endif
 
 // Original Name: Go to the Spark Project meeting
 :: SparkProjectMeeting
-Location: The Twin Lakes Opera House
+{bg BG_OperaHouseInt}
+<b>Location: The Twin Lakes Opera House</b>
 The sign on the door:
 {@article}The historic Twin Lakes Opera House!
 {@article}Restored thanks to a generous donation by the Spark Project 
@@ -1015,7 +1021,7 @@ $endif
 
 // Original Name: Return to the Department of Limnology
 :: ReturnToTheDepartmentOfLimnology
-{bg BG/FloodedLiminologyDept.jpg}
+{bg BG_FloodedLimnology} // Does this exist?
 $if FirstVisit()
 <b>Location: Department of Limnology</b>
 
@@ -1095,7 +1101,7 @@ $if StatCheck(Endurance, 5)
 He's a brisk walker, but you've been working on your endurance.
 You keep up easily. 
 
-$OnceChoice(AskWhyHesOutHereVolunteering; Ask why he's out here volunteering)
+$OnceChoice(AskWhyHesOutHereVolunteering, "Ask why he's out here volunteering")
 $elseif StatCheck(Resourceful, 5)
 Your hiking boots and bug spray give you the edge you need to keep up!
 

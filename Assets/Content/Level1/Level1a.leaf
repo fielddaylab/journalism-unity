@@ -5,9 +5,9 @@
 
 // Resources
 
-#const BG_Bedroom = "BG/BedroomMorning.jpeg"
-#const BG_HouseExterior = "BG/HouseExtRainV2.mp4"
-#const BG_OfficeExterior = "BG/GazetteExtRainV2.mp4"
+#const BG_Bedroom = "BG/BedroomMorning.mp4"
+#const BG_HouseExterior = "BG/HouseExt.mp4"
+#const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
 
 
 //Checks:
