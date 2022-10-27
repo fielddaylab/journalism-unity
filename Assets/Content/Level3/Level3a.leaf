@@ -7,6 +7,12 @@
 
 // Original Name: Level 3 Intro
 :: Level3Intro
+Email Notification:
+{@article} El, we've been keeping up with your work in Twin Lakes!
+{@article} Very impressive. There might be a place for you at the Smoke City Herald after all.
+{@article} If you're interested, have your editor send over a letter of recommendation. 
+{@article} -Gabby White, Senior Editor, Smoke City Herald 
+{clear-text}
 {bg BG/TownMeeting.jpg}
 One week later.
 The Smoke City Herald is still waiting for you to drive out for an interview...
@@ -1193,7 +1199,7 @@ $choice DoYouKnowAnythingAboutTheShelter; Is it true that the flood shelter does
 
 // Tell her you have tons of disabled friends 
 {@me} Seriously, you can trust me!
-{@me} One of my best friends from back home used a wheelchair! 
+{@me} One of my best friends from college uses a wheelchair! 
 Instantly, you wish you could take it back. Too late. 
 The woman is silent for a moment. Then... 
 {@person} Sorry. I'd love to be your token disabled voice, but I need to go watch paint dry.
@@ -1205,8 +1211,10 @@ $choice CallBackToApologize; Call back to apologize.
 //Call back to apologize.
 :: CallBackToApologize
 This time, the call goes straight to voicemail.
+{@me} Hi Ms. Rhodes, about what I said... 
+{@me} It was stupid. I'm really sorry. 
+You might not be able to quote her in your story...
 But at least you can apologize. 
-Whether or not you can quote her in your story, you still don't want to act like a jerk. 
 $call AdjustStats(Trust + 1)
 $choice DoneWithPhoneCall; Decide what to do next. 
 
