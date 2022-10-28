@@ -22,7 +22,7 @@ Email Notification:
 {@article} Phone interiew, 2 P.M. today. 
 {@article} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
-{bg BG_HouseExt}
+{bg $BG_HouseExt}
 Welcome to Twin Lakes: the calm before the storm. 
 The rain is due to hit tomorrow night...
 Which means you have a little time to catch your breath.
@@ -49,7 +49,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Go for a jog at Cherry Creek Marsh
 :: GoForAJogAtCherryCreekMarsh
-{bg BG/CherryCreekMarsh2.jpg}
+{bg $BG/CherryCreekMarsh2.jpg}
 {clear-text}
 You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.
@@ -84,7 +84,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
-{bg BG_FirstStDowntownCleanup}
+{bg $BG_FirstStDowntownCleanup}
 {clear-text}
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Herald yet. 
@@ -94,7 +94,7 @@ $choice GoInsideBookish; Go inside the bookstore
 
 // Go inside Bookish
 :: GoInsideBookish
-{bg BG/Bookshop.jpeg}
+{bg $BG/Bookshop.jpeg}
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
 {@person} Oh dear. Not you again!
@@ -246,7 +246,7 @@ $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations",
 
 // Go to sandbagging station
 :: GoToSandbaggingStation
-{bg BG_SandbagStation}
+{bg $BG_SandbagStation}
 $if FirstVisit
 Volunteers and people from the neighborhood hurry to fill sandbags.
 You recognize Misty, the DNR worker you met at Twin Lakes Dam. 
@@ -631,7 +631,7 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
-{bg BG_TownTransitional}
+{bg $BG_TownTransitional}
 
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris from the last flood has been cleared away. 
@@ -688,7 +688,7 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neigh
 
 // Drive 
 :: Drive
-{bg BG_TownTransitional}
+{bg $BG_TownTransitional}
 You drive through the historic, higher-income neighborhoods, heading south. 
 The debris from the last flood has already been cleared away. 
 There's even a girl selling lemonade, though her sign is too far away to read. 
@@ -1010,7 +1010,7 @@ $choice LookForDrNoraWarner; Head toward the dam and look for Dr. Warner
 
 // LookForDrNoraWarner
 :: LookForDrNoraWarner
-{bg BG_TownTransitional}
+{bg $BG_TownTransitional}
 Sandbags are stacked up everywhere, and no one is outside. 
 You're starting to get a bad feeling about the rain, which is getting heavier.
 $choice KeepSearchingForDrWarner; Knock at a few doors 

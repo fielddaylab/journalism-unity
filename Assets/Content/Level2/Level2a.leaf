@@ -17,7 +17,7 @@
 :: Level2Story3TheScienceStory
 $call SetLocation("Apartment")
 $ActionChoice(The next morning...)
-{bg BG_Bedroom}
+{bg $BG_Bedroom}
 $call SetHeaderEnabled(true)
 $call StopAmbience()
 It's an eerily quiet morning in Twin Lakes. 
@@ -47,7 +47,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Go outside and help your neighbors
 :: GoOutsideAndHelpYourNeighbors
-{bg BG_HouseExt}
+{bg $BG_HouseExt}
 {clear-text}
 The street is covered in puddles and debris. 
 
@@ -240,7 +240,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Make an excuse and rush back inside
 :: MakeAnExcuseAndRushBackInside
-{bg BG_Bedroom}
+{bg $BG_Bedroom}
 Ahh. Back in the blissful silence of your apartment. 
 $call AdjustStats(Social - 1)
 
@@ -334,7 +334,7 @@ $goto STORYEVALUATION
 {clear-text}
 {/map}
 $call SetLocation("Downtown")
-{bg BG_TownTransitional}
+{bg $BG_TownTransitional}
 You pedal through town, weaving around abandoned cars and piles of sandbags.
 $call AdjustStats(Endurance + 1)
 
@@ -350,7 +350,7 @@ $choice MainStreetFloodRecovery; Head straight to Main Street
 
 // Original Name: DNR Map
 :: DNRMap
-{bg BG_DNRSite}
+{bg $BG_DNRSite}
 {/map}
 $call SetLocation("DNR")
 
@@ -402,7 +402,7 @@ $choice ScienceStoryMap; Do something else
 :: DepartmentOfLimnology
 $call SetLocation("Limnology")
 {/map}
-{bg BG_Limnology}
+{bg $BG_Limnology}
 $if FirstVisit()
     You arrive at the Department of Limnology.
     The dock is covered in murky, greenish water. 
@@ -517,7 +517,7 @@ $endif
 :: MainStreetFloodRecovery
 $call SetLocation("Downtown")
 $if FirstVisit()
-{bg BG_FirstStDowntownCleanup}
+{bg $BG_FirstStDowntownCleanup}
 Your story is due in {timeLeft}.
 
 Main Street is cordoned off. 

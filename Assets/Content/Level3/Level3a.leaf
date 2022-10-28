@@ -17,7 +17,7 @@ Email Notification:
 {@article} If you're interested, have your editor send over a letter of recommendation. 
 {@article} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
-{bg BG/TownMeeting.jpeg}
+{bg $BG/TownMeeting.jpeg}
 One week later.
 The Smoke City Herald is still waiting for you to drive out for an interview...
 But you've been too busy to call them back. 
@@ -462,7 +462,7 @@ $choice HeadStraightToShelter; Head straight to the emergency shelter
 
 // Original Name: Head to the evacuation shelter.
 :: HeadStraightToShelter
-{bg BG_EvacShelter}  
+{bg $BG_EvacShelter}  
 {clear-text}
 
 $choice TalkToManWithDog; Comfort the dog owner and ask for an interview
@@ -743,7 +743,7 @@ $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert 
 
 // Head downtown to talk to the local vet, Fox Sculder
 :: MeetWithLocalVet
-{bg BG_TownTransitional}
+{bg $BG_TownTransitional}
 The local vet meets you downtown on his lunch break. 
 You can tell he has his hands full--there are several animals crawling, slithering, and/or climbing on him at any given point.
 {@me} Thank you for meeting with me, Mr. Smulder. 
@@ -830,7 +830,7 @@ $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments",
 
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
-{bg BG_SeniorCitizenApts}
+{bg $BG_SeniorCitizenApts}
 
 $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
 $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")

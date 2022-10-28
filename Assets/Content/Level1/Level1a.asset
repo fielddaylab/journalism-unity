@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Script: {fileID: -1942890987711236906, guid: 623072a7901267849b2862cfcb12bd60, type: 3}
   Story:
-    HeadlineType: Breaking News
     HeadlineTypeId:
       m_Source: Level.1a.HeadlineType
       m_HashValue: 2958974879
@@ -29,16 +28,12 @@ MonoBehaviour:
       Wide: 0
     - Type: 0
       Wide: 0
-    EditorBrief: We need a breaking news announcement! Make sure people know what
-      to do to stay safe. Include lots of useful, actionable information! We also
-      need basic facts about the flood, plus a photo or quote for color.
     EditorBriefId:
       m_Source: Level.1a.Brief
       m_HashValue: 942520745
     FactWeight: 1
     ColorWeight: 1
     UsefulWeight: 1
-    FinalHeadline: Widespread flooding in Twin Lakes
     FinalHeadlineId:
       m_Source: Level.1a.Headline
       m_HashValue: 2008444647

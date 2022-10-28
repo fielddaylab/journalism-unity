@@ -267,7 +267,7 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
-{bg BG_CherryCreekMarsh}
+{bg $BG_CherryCreekMarsh}
 Birdie, the aptly-named director of CRANE, is waiting for you at the trailhead. 
 Plus a few volunteers, and about a thousand mosquitoes. 
 
@@ -385,7 +385,7 @@ $choice MarshMap; Got it. Thanks.
 
 // Original Name: Marsh Map
 :: MarshMap
-{bg BG_CherryCreekMarsh}
+{bg $BG_CherryCreekMarsh}
 
 $if FirstVisit()
 $call SetTimeRemaining(2.5)
@@ -405,7 +405,7 @@ $endif
 
 // Original Name: Go to the Spark Project meeting
 :: SparkProjectMeeting
-{bg BG_OperaHouseInt}
+{bg $BG_OperaHouseInt}
 <b>Location: The Twin Lakes Opera House</b>
 The sign on the door:
 {@article}The historic Twin Lakes Opera House!
@@ -1021,7 +1021,7 @@ $endif
 
 // Original Name: Return to the Department of Limnology
 :: ReturnToTheDepartmentOfLimnology
-{bg BG_FloodedLimnology} // Does this exist?
+{bg $BG_FloodedLimnology} // Does this exist?
 $if FirstVisit()
 <b>Location: Department of Limnology</b>
 
