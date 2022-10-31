@@ -19,7 +19,9 @@ namespace Journalism
                 return;
             }
 
-            isOn = !isOn;
+            if (interactable) {
+                isOn = !isOn;
+            }
         }
 
         /// <summary>
