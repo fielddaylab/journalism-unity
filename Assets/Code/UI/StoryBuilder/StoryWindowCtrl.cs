@@ -281,9 +281,7 @@ namespace Journalism.UI {
             if (scrap) {
                 scrap.Toggle.interactable = false;
             }
-            if (m_PublishMode) {
-                RefreshTargetInfo();
-            }
+            RefreshTargetInfo();
 
             return true;
         }
