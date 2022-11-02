@@ -3,6 +3,7 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
+#const BG_Bedroom = "BG/Bedroom2.mp4"
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
 #const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
 #const BG_FloodedLimnology = "BG/Limnology.jpg"
@@ -12,6 +13,7 @@
 
 // Original Name: Science Story 2: Wetlands
 :: ScienceStory2Wetlands
+{bg $BG_Bedroom}
 $call SetLocation("Apartment")
 You finally get home, exhausted from your first day on the science beat.
 
