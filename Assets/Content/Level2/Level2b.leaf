@@ -369,7 +369,7 @@ But this doesn't seem like the best time to bring this up.
 {@person}But there's so much work to do here.  
 
 $call GiveSnippet(AwfulSparkProject)
-$OnceChoice(CallYourEditorAboutWetlandStor, "Thank her and call your editor")
+$OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor")
 
 // Original Name: Call your editor
 :: CallYourEditorAboutWetlandStory
