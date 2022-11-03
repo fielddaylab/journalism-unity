@@ -23,7 +23,7 @@ Email Notification:
 {@article} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
 {bg $BG_HouseExt}
-Welcome to Twin Lakes: the calm before the storm. 
+Twin Lakes: the calm before the storm. 
 The rain is due to hit tomorrow night...
 Which means you have a little time to catch your breath.
 {@phone} Hey El! Want to meet up at Bookish before work?
@@ -65,7 +65,6 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 :: ReplenishYourBagWithFoodAndSupplies
 {clear-text}
 You hurry around your apartment, stuffing things into your bag. 
-Extra charger, collapsible umbrella, protein bars, dog treats. 
 You've finally unpacked all your boxes...
 Though you still have no idea where anything is. 
 
@@ -121,7 +120,7 @@ $choice CallYourEditor; Call your editor
 //Text your editor back 
 ::CallYourEditor
 {clear-text}
-Dantiel picks up on the first ring.
+Dionne picks up on the first ring.
 {@me} Just saw the news. What do you need me to do?
 {@phone} Khalisa's got breaking news covered. 
 {@phone} I want you to head to the central sandbag filling station.
@@ -427,12 +426,10 @@ $endif
 :: AskPermissionToTakePhoto
 $if StatCheck(Trust, 5)
 To your surprise, everyone is happy to let you snap a photo of them working!
-You get a great shot of the filling station. This will be perfect for your story!
 $call GiveSnippet(GreatFillingStationPhoto)
 $else 
 Seems like some of these folks still don't trust you.
 You manage to snag a great photo... but two of the workers ask for their faces to be blurred out.
-Not the perfect photo, but at least it's something. 
 $call GiveSnippet(BlurredFacesFillingStationPhoto)
 $endif 
 $choice GoToSandbaggingStation; Decide what to do next 
@@ -757,11 +754,11 @@ Before you can say anything else, her neighbors notice you.
 {@person} Is this kid bothering you, Angie?
 Uh oh. Looks like you just made things worse. 
 $choice ArriveAtRoyalHazelNeighborhood; Apologize and make a hasty retreat 
-$choice TellThemToTalkToYou; Double down and try to convince them to talk 
+$choice TellThemToTalkToYou; Double dow  n and try to convince them to talk 
 
 // Double down
 You keep pushing them to talk to you...
-Until your phone buzzes. Dantiel.
+Until your phone buzzes. Dionne.
 {@phone} El. I just got a tip that a reporter is harassing people in Royal Hazel.
 {@phone} PLEASE tell me that's not you.
 {@me} Um.... 
@@ -913,7 +910,7 @@ $choice EndingTransition; Thank her for her help
 // Khalisa shows up!
 :: TeamUpWithKhalisa
 As soon as Khalisa shows up, you can literally feel the vibe shift.
-The lady stacking up sandbags comes over to say hello. 
+The woman stacking up sandbags comes over to say hello. 
 {@person} K! So happy to see you. The paper still treating you okay? 
 {@phone} Oh, yeah. I love it!
 {@phone} Liz, this is my friend El. Brand new reporter. And also a good friend of mine.
@@ -924,6 +921,7 @@ The lady stacking up sandbags comes over to say hello.
 $HubChoice(InterviewLiz, "Interview Liz", 0.25, "")
 
 // Interview Liz
+:: InterviewLiz 
 {@me} My editor got a tip that Royal Hazel isn't getting enough help.
 {@me} What do you think about that? 
 {@person} Well, I don't know who called in that tip, but they're right. 
@@ -1055,7 +1053,7 @@ Whoa. It's Nora, the Houseboat Lady!
 {@me} What are you doing here?? 
 {@person} I could ask you the same thing, Dear. 
 {@person} Were you here looking for me? 
-{@me} No, sorry. I was looking for an expert named Nora--
+{@me} No, sorry. I was looking for an expert named Dr. Nora Warner--
 That's when you make the connection. Holy cherry-glazed donuts.
 
 $choice InterviewTheFloodingExpert; Interview the flooding expert, Dr. Nora Warner 
