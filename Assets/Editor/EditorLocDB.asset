@@ -234,6 +234,9 @@ MonoBehaviour:
     - Id: Char.Phone
       Content: Phone
       Exposed: 0
+    - Id: Char.Article
+      Content: Article
+      Exposed: 0
     Headers:
     - Path: Header
       RecordStart: 11
