@@ -4,10 +4,12 @@
 // Creator: Twine
 
 #const BG_Bedroom = "BG/Bedroom2.mp4"
+#const BG_Library = "BG/Library.jpeg"
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
 #const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
 #const BG_FloodedLimnology = "BG/Limnology.jpg"
 #const BG_LowIncomeSt = "BG/LowIncomeSt.jpeg"
+#const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 
 # start ScienceStory2Wetlands
 
@@ -156,6 +158,9 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 :: DoSomeResearchOnLocalWetlands
 You hop on your bike and pedal to the Twin Lakes library.
 
+$call SetLocation("Library")
+{bg $BG_Library}
+
 $call AdjustStats(Endurance + 1)
 
 $if StatCheck(Research, 4)
@@ -236,6 +241,10 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 :: MeetSomeOtherReportersForCoffee
 @tags Social, Trust
 
+$call SetLocation("Downtown)
+
+{bg $BG_FirstStDowntownCleanup}
+
 $if Visited(AskAroundForItsOwner)
 When you arrive, Ben is eager to hear about the Great Chicken Rescue. 
 {@person}I heard you saved the mayor's chicken from drowning!!
@@ -270,6 +279,9 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
 {clear-text}
+
+$call SetLocation("CherryCreek")
+
 {bg $BG_CherryCreekMarsh}
 Birdie, the aptly-named director of CRANE, is waiting for you at the trailhead. 
 Plus a few volunteers, and about a thousand mosquitoes. 
@@ -409,6 +421,7 @@ $endif
 // Original Name: Go to the Spark Project meeting
 :: SparkProjectMeeting
 {bg $BG_OperaHouseInt}
+$call SetLocation("OperaHouse")
 <b>Location: The Twin Lakes Opera House</b>
 The sign on the door:
 {@article}The historic Twin Lakes Opera House!
@@ -1034,7 +1047,8 @@ $endif
 
 // Original Name: Return to the Department of Limnology
 :: ReturnToTheDepartmentOfLimnology
-{bg $BG_FloodedLimnology} // Does this exist?
+{bg $BG_FloodedLimnology}
+$call SetLocation("Limnology")
 $if FirstVisit()
 <b>Location: Department of Limnology</b>
 
