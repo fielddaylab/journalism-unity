@@ -439,7 +439,7 @@ The Spark Project leader smiles at you.
 {@person}The flood recovery volunteers? Our new playground initiatve? 
 
 $OnceChoice(BusinessIsDestroyingTheWetlands, "I'm writing about how business is destroying all of our wetlands.")
-$OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in an interview. I wanted to get your perspective.")
+$OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in an interview about Cherry Creek Marsh I wanted to get your perspective.")
 $OnceChoice(PlaygroundInitiative, "Actually, I'd love to hear about the playground initiative. What's that about?")
 
 //Original Name: Playground initiative 
@@ -455,6 +455,17 @@ $call GiveSnippet(PlaygroundInitiativeQuote)
 $OnceChoice(CherryCreekMarshPlan, "What about your plan for Cherry Creek Marsh? Do you think that will help the town, too?")
 $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the town's last natural wetland. Doesn't sound too helpful to me.")
 
+// Original Name: Spark Project came up in an interview
+:: YourNameCameUpInAnInterview
+{@person} I'm glad you asked!
+{@person}We plan to pave over parts of the marsh and build low-income apartments.  
+{@person}Affordable, peaceful. 
+{@person}It'll make space for people who want to move to our beautiful town, but can't afford it. 
+
+$call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
+
+$OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands will cause more flooding throughout the town?")
+
 //OriginalName: What about your plan for the Cherry Creek Marsh? 
 :: CherryCreekMarshPlan
 {@person}Of course it'll help!
@@ -465,7 +476,6 @@ $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the tow
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
 $OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands will cause more flooding throughout the town?")
-$OnceChoice(ApartmentFloodRisk, "Won't apartments built on a wetland end up... you know... flooding?")
 
 //Original Name: BusinessIsDestroyingTheWetlands
 :: BusinessIsDestroyingTheWetlands
@@ -522,7 +532,7 @@ She shrugs.
 $call GiveSnippet(NewDevelopmentPutsTwinLakesOnTheMap)
 
 $OnceChoice(WhatAboutTheFloodRisk, "Did you know that wetland destruction can cause flooding?")
-$OnceChoice(WhatIsTheCurrentPlanForTheCherryCreekMarsh, "What is your business plan for Cherry Creek Marsh?")
+$OnceChoice(PlanForCherryCreekMarsh, "What is your business plan for Cherry Creek Marsh?")
 $OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population growth is worth destroying local wildlife?")
 
 //Original Name: What about the flood risk?
