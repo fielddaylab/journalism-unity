@@ -3,8 +3,9 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
-#const BG_CherryCreekMarsh = "CherryCreekMarsh.mp4"
-#const BG_OperaHouseInt = "RestoredOperaHouseInt.mp4"
+#const BG_Bedroom = "BG/Bedroom2.mp4"
+#const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
+#const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
 #const BG_FloodedLimnology = "BG/Limnology.jpg"
 #const BG_LowIncomeSt = "BG/LowIncomeSt.jpeg"
 
@@ -12,6 +13,7 @@
 
 // Original Name: Science Story 2: Wetlands
 :: ScienceStory2Wetlands
+{bg $BG_Bedroom}
 $call SetLocation("Apartment")
 You finally get home, exhausted from your first day on the science beat.
 
@@ -267,6 +269,7 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
+{clear-text}
 {bg $BG_CherryCreekMarsh}
 Birdie, the aptly-named director of CRANE, is waiting for you at the trailhead. 
 Plus a few volunteers, and about a thousand mosquitoes. 
@@ -369,7 +372,7 @@ But this doesn't seem like the best time to bring this up.
 {@person}But there's so much work to do here.  
 
 $call GiveSnippet(AwfulSparkProject)
-$OnceChoice(CallYourEditorAboutWetlandStor, "Thank her and call your editor")
+$OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor")
 
 // Original Name: Call your editor
 :: CallYourEditorAboutWetlandStory

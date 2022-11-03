@@ -308,9 +308,11 @@ namespace Journalism.UI {
                     scrap.Toggle.interactable = true;
                 }
                 if (m_PublishMode) {
+                    RefreshTargetInfo();
                     RefreshStats();
                     m_PublishButton.interactable = m_CachedStats.CanPublish;
                 }
+
                 return true;
             }
 
@@ -420,7 +422,7 @@ namespace Journalism.UI {
 
         private IEnumerator AnimateTargetInfoOn(StoryStats prevStats) {
             m_TargetInfoPopUpGroup.gameObject.SetActive(true);
-            m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = false;
+            //m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = false;
             GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Target, Assets.CurrentLevel.Story);
 
             // display previous distribution
@@ -472,7 +474,7 @@ namespace Journalism.UI {
             yield return m_TargetInfoPopUpGroup.Root.AnchorPosTo(450, 0.4f, Axis.Y).Ease(Curve.Smooth);
 
             m_TargetInfoPopUpGroup.gameObject.SetActive(false);
-            m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = true;
+            //m_ListInput.blocksRaycasts = m_StoryInput.blocksRaycasts = true;
         }
 
         #endregion // Animations
