@@ -140,7 +140,7 @@ Opera House
 City Hall
 
 :: CherryCreek
- Cherry Creek Marsh
+Cherry Creek Marsh
 
 :: Library
 Library
@@ -165,4 +165,18 @@ Player Code
 :: PlayerCodePrompt
 Enter your
 Player Code
+
+# basePath Char
+
+:: Me
+You
+
+:: Person
+Person
+
+:: Editor
+Editor Person
+
+:: Phone
+Phone
 

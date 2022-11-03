@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b32ece053fd304783883f5cd1de3ad, type: 3}
+  m_Name: TextChars
+  m_EditorClassIdentifier: 
+  m_DefaultChar:
+    Id:
+      m_Source: default
+      m_HashValue: 2470140894
+    Name:
+      m_Source: 
+      m_HashValue: 0
+  m_Chars:
+  - Id:
+      m_Source: me
+      m_HashValue: 1747856039
+    Name:
+      m_Source: Char.Me
+      m_HashValue: 2855252971
+  - Id:
+      m_Source: editor
+      m_HashValue: 1544389240
+    Name:
+      m_Source: Char.Editor
+      m_HashValue: 1840370652
+  - Id:
+      m_Source: person
+      m_HashValue: 3549934208
+    Name:
+      m_Source: Char.Person
+      m_HashValue: 974737980
+  - Id:
+      m_Source: phone
+      m_HashValue: 2000032175
+    Name:
+      m_Source: Char.Phone
+      m_HashValue: 978246691

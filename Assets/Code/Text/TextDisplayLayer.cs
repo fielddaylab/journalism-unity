@@ -90,12 +90,19 @@ namespace Journalism {
             StringHash32 characterId = evtData.GetStringHash();
             // TODO: Some indirection? Character -> Style as opposed to Character == Style?
             SetStyle(characterId);
+            SetChar(characterId);
         }
 
         private void SetStyle(StringHash32 styleId) {
             var style = Assets.Style(styleId);
             Assert.NotNull(m_QueuedLine, "Cannot set style without any text accompaniment");
             GameText.SetTextLineStyle(m_QueuedLine, style);
+        }
+
+        private void SetChar(StringHash32 charId) {
+            var charData = Assets.Char(charId);
+            Assert.NotNull(m_QueuedLine, "Cannot set character without any text accompaniment");
+            GameText.SetTextLineChar(m_QueuedLine, charData);
         }
 
         private void HandleAnim(TagEventData evtData, object context) {
@@ -230,7 +237,7 @@ namespace Journalism {
             if (inString.RichText.Length > 0) {
                 m_QueuedLine = GameText.AllocLine(Text, Pools);
                 StringHash32 characterId = GameText.FindCharacter(inString);
-                GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, Assets.Style(characterId), Text.MaxTextWidth);
+                GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, Assets.Style(characterId), Assets.Char(characterId), Text.MaxTextWidth);
                 GameText.AlignTextLine(m_QueuedLine, GameText.ComputeDesiredAlignment(m_QueuedLine, Text));
                 GameText.AdjustComputedLocations(Text, 1);
             }

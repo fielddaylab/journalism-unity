@@ -183,7 +183,7 @@ namespace Journalism.UI {
                 var item = layout.Items[i];
                 pin.Root.gameObject.SetActive(true);
                 pin.Line.gameObject.SetActive(true);
-                GameText.PopulateTextLine(pin.Line, item.RichText, null, default, Assets.Style(item.Style));
+                GameText.PopulateTextLine(pin.Line, item.RichText, null, default, Assets.Style(item.Style), null);
                 GameText.AlignTextLine(pin.Line, pin.Alignment);
 
                 switch(pin.Alignment) {

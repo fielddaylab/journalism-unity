@@ -145,13 +145,13 @@ namespace Journalism.UI {
                     if (hasAdd) {
                         Game.Audio.PlayOneShot("StatIncrease");
                         if (hasSubtract) {
-                            GameText.PopulateTextLine(StatsEffect, "<b>+ -</b>", null, default, Assets.Style("stat-increase-decrease"));
+                            GameText.PopulateTextLine(StatsEffect, "<b>+ -</b>", null, default, Assets.Style("stat-increase-decrease"), null);
                         } else {
-                            GameText.PopulateTextLine(StatsEffect, "<b>+</b>", null, default, Assets.Style("stat-increase"));
+                            GameText.PopulateTextLine(StatsEffect, "<b>+</b>", null, default, Assets.Style("stat-increase"), null);
                         }
                     } else if (hasSubtract) {
                         Game.Audio.PlayOneShot("StatDecrease");
-                        GameText.PopulateTextLine(StatsEffect, "<b>-</b>", null, default, Assets.Style("stat-decrease"));
+                        GameText.PopulateTextLine(StatsEffect, "<b>-</b>", null, default, Assets.Style("stat-decrease"), null);
                     }
                     GameText.PrepareTextLine(StatsEffect, 2);
                     m_StatsEffectAnim.Replace(this, GameText.AnimateTextLineEffect(StatsEffect, new Vector2(0, 15), 0.3f, 2));
@@ -170,7 +170,7 @@ namespace Journalism.UI {
 
             if (args.Delta < 0 && Root.IsShowing()) {
                 TimeEffect.gameObject.SetActive(true);
-                GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"));
+                GameText.PopulateTextLine(TimeEffect, "-" + GameText.FormatTime((uint) -args.Delta, true), null, default, Assets.Style("time-decrease"), null);
                 GameText.PrepareTextLine(TimeEffect, 2);
                 m_TimeEffectAnim.Replace(this, GameText.AnimateTextLineEffect(TimeEffect, new Vector2(0, 15), 0.3f, 2));
                 Game.Audio.PlayOneShot("ClockTick");

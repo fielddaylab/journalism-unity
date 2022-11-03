@@ -46,12 +46,14 @@ namespace Journalism {
         [Header("Contents")]
         public LocText Text;
         public LocText CharacterHeader;
+        public Image HeaderBG;
         public Image Icon; // Radial
         public Image MarkerIcon; // Marker
 
         #endregion // Inspector
 
         [NonSerialized] public TextStyles.StyleData CurrentStyle;
+        [NonSerialized] public TextChars.CharData CurrentChar;
         [NonSerialized] public TextAlignment CurrentAlignment;
     }
 }

@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Styles: {fileID: 11400000, guid: 533ea3383763ef848b13390e009eafa0, type: 2}
+  m_Chars: {fileID: 11400000, guid: 564ae0f0ce10e9040b3c18f7d3b55da6, type: 2}
   m_Stats: {fileID: 11400000, guid: 2ddce71665de3e340bad9657a6cee8b8, type: 2}
   m_MapLocationDef: {fileID: 11400000, guid: ad719474e92ed384da55e9aed570254e, type: 2}
   m_LevelDefs:
@@ -343,6 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dea24c546e72bd45854b72f8ffdf113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ServerAddress: 
+  m_SaveRetryDelay: 10
 --- !u!1 &8242933497971727063
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,12 +5,17 @@ namespace Journalism {
     static public class Assets {
 
         static private TextStyles s_TextStyles;
+        static private TextChars s_TextChars;
         static private LevelDef[] s_AllLevels;
 
         static private LevelDef s_CurrentLevel;
 
         static internal void DeclareStyles(TextStyles styles) {
             s_TextStyles = styles;
+        }
+
+        static internal void DeclareChars(TextChars chars) {
+            s_TextChars = chars;
         }
 
         static internal void DeclareLevelList(LevelDef[] levels) {
@@ -32,6 +37,10 @@ namespace Journalism {
 
         static public TextStyles.StyleData Style(StringHash32 id) {
             return s_TextStyles.Style(id);
+        }
+
+        static public TextChars.CharData Char(StringHash32 id) {
+            return s_TextChars.Char(id);
         }
 
         #endregion // Styles

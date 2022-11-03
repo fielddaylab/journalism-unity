@@ -222,6 +222,18 @@ MonoBehaviour:
 
         Player Code'
       Exposed: 0
+    - Id: Char.Me
+      Content: You
+      Exposed: 0
+    - Id: Char.Person
+      Content: Person
+      Exposed: 0
+    - Id: Char.Editor
+      Content: Editor Person
+      Exposed: 0
+    - Id: Char.Phone
+      Content: Phone
+      Exposed: 0
     Headers:
     - Path: Header
       RecordStart: 11
@@ -233,7 +245,9 @@ MonoBehaviour:
       RecordStart: 34
     - Path: Title
       RecordStart: 46
-    BasePath: Title
+    - Path: Char
+      RecordStart: 52
+    BasePath: Char
     Dirty: 0
   - Name: stats
     Asset: {fileID: -4270002856181823206, guid: e1277c9a295376443a847a46b8b4df26,

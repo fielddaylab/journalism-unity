@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Root: {fileID: 4747825516198467232}
   ListRoot: {fileID: 4747825516198467232}
-  Spacing: 8
+  Spacing: 35
   MaxLines: 10
   RotationRange: 1
   DialogInset: 24
@@ -67,6 +67,7 @@ MonoBehaviour:
   TextScrollDelay: 0.005
   TextVanishDelay: 0.06
   VanishAnimDistance: 80
+  MaxTextWidth: 400
 --- !u!225 &4747825516198467238
 CanvasGroup:
   m_ObjectHideFlags: 0

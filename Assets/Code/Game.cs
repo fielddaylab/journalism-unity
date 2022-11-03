@@ -21,6 +21,7 @@ namespace Journalism {
 
         [Header("Assets")]
         [SerializeField] private TextStyles m_Styles = null;
+        [SerializeField] private TextChars m_Chars = null;
         [SerializeField] private StatsDef m_Stats = null;
         [SerializeField] private MapLocationDef m_MapLocationDef;
         [SerializeField] private LevelDef[] m_LevelDefs = null;
@@ -40,6 +41,7 @@ namespace Journalism {
             base.Awake();
 
             Assets.DeclareStyles(m_Styles);
+            Assets.DeclareChars(m_Chars);
             Assets.DeclareLevelList(m_LevelDefs);
             Stats.Import(m_Stats);
             MapLocations.Import(m_MapLocationDef);

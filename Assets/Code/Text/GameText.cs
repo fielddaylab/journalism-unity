@@ -31,11 +31,25 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given text line.
         /// </summary>
-        static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style, float maxWidth = 0, bool stripQuotes = false) {
+        static public void PopulateTextLine(TextLine line, StringSlice textString, Sprite icon, Color iconColor, TextStyles.StyleData style, TextChars.CharData charData, float maxWidth = 0, bool stripQuotes = false) {
             Assert.True(line.gameObject.activeInHierarchy, "TextLine must be active before calling PopulateTextLine");
 
             if (stripQuotes) {
                 textString = StripQuotes(textString);
+            }
+
+            if (charData != null && !charData.Name.Equals("")) {
+                if (line.CharacterHeader != null) {
+                    line.CharacterHeader.SetText(Loc.Get(charData.Name));
+                    line.CharacterHeader.gameObject.SetActive(true);
+                    line.HeaderBG.gameObject.SetActive(true);
+                }
+            }
+            else {
+                if (line.CharacterHeader != null) {
+                    line.CharacterHeader.gameObject.SetActive(false);
+                    line.HeaderBG.gameObject.SetActive(false);
+                }
             }
 
             if (!textString.IsEmpty) {
@@ -71,8 +85,8 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given text line.
         /// </summary>
-        static public void PopulateTextLine(TextLine line, LocId locId, Sprite icon, Color iconColor, TextStyles.StyleData style, float maxWidth = 0, bool stripQuotes = false) {
-            PopulateTextLine(line, Loc.Get(locId), icon, iconColor, style, maxWidth, stripQuotes);
+        static public void PopulateTextLine(TextLine line, LocId locId, Sprite icon, Color iconColor, TextStyles.StyleData style, TextChars.CharData charData, float maxWidth = 0, bool stripQuotes = false) {
+            PopulateTextLine(line, Loc.Get(locId), icon, iconColor, style, charData, maxWidth, stripQuotes);
         }
 
         static public void LayoutLine(TextLine line) {
@@ -118,6 +132,14 @@ namespace Journalism {
             }
 
             SetTailMode(line, style.Tail);
+        }
+
+        static public void SetTextLineChar(TextLine line, TextChars.CharData charData) {
+            if (line.CurrentChar == charData) {
+                return;
+            }
+
+            line.CurrentChar = charData;
         }
 
         static public void SetTextLineBackground(TextLine line, bool active) {
@@ -788,7 +810,7 @@ namespace Journalism {
         #region Defaults
 
         static public IEnumerator WaitForDefaultNext(TextChoiceGroup choices, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter, bool allowFullscreenInput = true) {
-            PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, 0, true);
+            PopulateTextLine(choices.DefaultNextButton.Line, null, choices.DefaultNextIcon, choices.DefaultNextIconColor, style, null, 0, true);
             CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
@@ -797,7 +819,7 @@ namespace Journalism {
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
-            PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style, 0, true);
+            PopulateTextLine(choices.DefaultNextButton.Line, text, null, default, style, null, 0, true);
             CanvasUtility.SetAnchor(choices.DefaultNextButton.Line.Root, anchor);
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
@@ -806,8 +828,8 @@ namespace Journalism {
         }
 
         static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
-            PopulateTextLine(choices.DefaultNextButton.Line, yesText, null, default, yesStyle, 0, true);
-            PopulateTextLine(choices.DefaultBackButton.Line, noText, null, default, yesStyle ?? noStyle, 0, true);
+            PopulateTextLine(choices.DefaultNextButton.Line, yesText, null, default, yesStyle, null, 0, true);
+            PopulateTextLine(choices.DefaultBackButton.Line, noText, null, default, yesStyle ?? noStyle, null, 0, true);
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             choices.DefaultBackButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
             yield return WaitForButtons(choices.DefaultNextButton, choices.DefaultBackButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, choices.VanishAnimParams);
