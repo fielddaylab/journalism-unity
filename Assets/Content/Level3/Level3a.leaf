@@ -48,7 +48,7 @@ $call GiveSnippet(BasicInfoFromEmergencyMeeting)
 {@me} But... I mean, with all that's going on, I understand if you're too busy--
 {@person} I know how much this means to you, El. I'll find the time.
 {@person} For now, get to work.
-{@me} Thanks, Dantiel. You can count on me. 
+{@me} Thanks, Dionne. You can count on me. 
 
 $choice AcceptStory; Accept Story Assignment
 
@@ -160,7 +160,7 @@ $choice WhyWasntTheCityMorePrepared; Why wasn't Twin Lakes better prepared for t
 {@person} The people of Twin Lakes take care of each other. We'll be just fine. 
 $call GiveSnippet(MayorQuotePeopleTakeCareOfEachOther)
 
-$choice WhatCanBeDone; What about people who don't have transportation to the shelter? 
+$choice WhatAboutPeopleWithoutTransportation; What about people who don't have transportation to the shelter? 
 
 // What would you say to people who don't want to leave their homes? 
 :: DontWantToLeaveTheirHomes
@@ -495,9 +495,25 @@ $choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the
 {@person} Sorry, kid. I'm tired and mad and I don't wanna talk about it. 
 
 $choice CheckYourBagForSomethingToOfferHim; Check your bag for something to offer him.
-$choice ReassureHimThatHeCanTrustYou; Reassure him that he can trust you. 
-$choice OfferToCarryHisBag; Offer to carry his bag for him--poor guy's got his hands full 
-$choice UseYourSocialConnections; Use your social connections to find some common ground 
+$choice UseYourSocialConnections; Use your social connections to find some comm"on ground 
+$HubChoice(OfferToBuyHimBreakfast, "Offer to buy him breakfast and coffee", 0.25, "")
+
+// Use your social connections to find some common ground
+:: UseYourSocialConnections
+As soon as you mention Fred Finkler, he cheers up.
+{@person} You know Fred? Great fella, isn't he? 
+{@person} He's always dropping off vases full of zinnias at my apartment building. 
+{@person} Really brightens up the place. Wish I was back there now... 
+
+$HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
+
+// Offer to buy him breakfast and coffee 
+:: OfferToBuyHimBreakfast
+Poor guy hasn't eaten all day.
+You run down the street and grab him a breakfast sandwich.
+It takes some time, but it was worth it--he looks much happier and willing to talk! 
+
+$HubChoice(TellMeWhatHappened, "Interview the man about his troubles.", 0.25, "")
 
 // Check your bag for something to offer him.
 :: CheckYourBagForSomethingToOfferHim
@@ -576,7 +592,7 @@ She laughs.
 {@person}Finally, somebody who gets it!
 {@person} You know... I could probably answer a few questions. 
 
-$HubChoice(ShelterCoordinatorInterview, "Interview Shelter Coordinator", 0.25, "")
+$HubChoice(DoYouHaveAnyConcernsAboutTheShelter, "Do you have any concerns about the shelter?", 0.25, "")
 
 $else 
 You try to empathize. 
@@ -836,6 +852,7 @@ $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snug
 $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
 $HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
 $HubChoice(TryToInterviewElectricalWorker, "Ask electrical worker why people aren't allowed back inside", 0.25, "")
+$choice NextStepAtApartments; Go somewhere else 
 
 //InterviewElectricalWorker
 :: TryToInterviewElectricalWorker
@@ -947,7 +964,7 @@ $choice DoYouKnowWhenYoullBeAllowedBackIn; Do you know when you'll be allowed to
 $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? 
 
 // Do you know why it's taking so long for people to be let back inside?
-:: DoYouKnowWhyItsTakingSoLong
+:: DoYouKnowWhenYoullBeAllowedBackIn
 {@person} Haven't the foggiest.
 {@person} I came out here today to demand some answers. 
 {@person} The building manager isn't answering my calls! 
@@ -1021,6 +1038,16 @@ $endif
 
 $choice GoInsideApartmentBuilding; Head into the apartment building with your camera 
 
+// Go inside apartment building with your camera
+:: GoInsideApartmentBuilding
+The apartment isn't hard to find.
+You snap a few pictures of the building's interior.
+Then you grab the sunflower seeds and bring them back out, to Queenie's delight. 
+
+$call GiveSnippet(InsideApartmentBuildingPhoto)
+
+$choice GoToSeniorCitizenApartments; Decide what to do next 
+
 // There's a lady over there who really wants to get her quail's snacks
 :: LadyNeedsHerStuff
 {@person} I already told that lady, she needs to wait her turn.
@@ -1028,7 +1055,7 @@ $choice GoInsideApartmentBuilding; Head into the apartment building with your ca
 Yikes. You want to argue, but you can tell she's made up her mind. 
 
 $choice SneakInTheBack; Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.
-$choice AdmitDefeat; Admit defeat. (And warn the quail-owner not to let Queenie out of her sight.)
+$choice GoToSeniorCitizenApartments; Admit defeat. (And warn the quail-owner not to let Queenie out of her sight.)
 
 // Sneak in the back
 :: SneakInTheBack
@@ -1260,11 +1287,10 @@ $endif
 $call GiveSnippet(SchoolIsntAccessibleTownIsShrinking)
 
 $choice RequirementsForAccessibleShelter; Do you have recommendations for how to create an accessible shelter? 
-$choice WhatDoYouThinkNeedsToChangeAroundHere; What do you think needs to change around here? 
 
 // Do you have recommendations
 :: RequirementsForAccessibleShelter
-{@person} Just to name a few changes... we need ramps, automated entrances, wide enough doorways, braille signs, drinking fountains that don't stick out into the hallway...
+{@person} For starters, the building needs ramps, automated entrances, wide enough doorways, braille signs, drinking fountains that don't stick out into the hallway...
 {@me} What about the disabled kids that go to school there?? They have to deal with a terrible building all year round? 
 {@person} Exactly. It's awful.
 {@person} Hopefully your story will bring some attention to the issue. 
@@ -1276,7 +1302,7 @@ $choice IsThereAnythingTheCityCanDoRightNow; Is there anything the city can do i
 :: IsThereAnythingTheCityCanDoRightNow
 {@person} Well... these are more like band-aids than real solutions.
 {@person} But it could help to use traffic cones to block hazards and bring in portable ramps.
-{@person} And more volunteers would help. 
+{@person} And more volunteers would be good. 
 $call GiveSnippet(ShortTermShelterSolutions)
 {@me} I'll get the story out there. Hopefully people will pressure the Mayor to make some changes. 
 {@person} Ha. Good luck with that, El. 
