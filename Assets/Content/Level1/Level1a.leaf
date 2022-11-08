@@ -87,6 +87,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 :: CheckOnYourUpstairsNeighborWhoHatesThunderstorms
 @tags Social, Trust
 {clear-text}
+{layout Right}
 {bg $BG_HouseExterior}
 Your neighbor, Jeanie, is grateful you stopped by. 
 
@@ -115,6 +116,7 @@ $choice OffToWork; Off to work
 // Original Name: Dig through the fridge for something nourishing
 :: DigThroughTheFridgeForSomethingNourishing
 {clear-text}
+{layout Right}
 {bg $BG_HouseExterior}
 You've been eating ramen and take-out all week.
 Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
@@ -125,6 +127,7 @@ $choice OffToWork; Off to work
 // Original Name: Check social media for posts and photos about the storm
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 {clear-text}
+{layout Right}
 {bg $BG_HouseExterior}
 You scroll through posts on Squawker.
 
@@ -264,6 +267,7 @@ $choice TakeSomePhotos; Take some photos
 :: HitTheRoad
 {clear-text}
 {/img}
+{layout Right}
 Turns out the flood is a little more serious than you thought. 
 The town's famous Cherrymobile is abandoned in high water.
 Birds are pecking at pastries that have drifted out of a local bakery. 

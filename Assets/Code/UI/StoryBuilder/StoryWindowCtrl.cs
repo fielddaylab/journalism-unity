@@ -12,9 +12,11 @@ using BeauUtil.Variants;
 using Leaf;
 using FDLocalization;
 
-namespace Journalism.UI {
+namespace Journalism.UI
+{
     [RequireComponent(typeof(HeaderWindow))]
-    public sealed class StoryWindowCtrl : MonoBehaviour {
+    public sealed class StoryWindowCtrl : MonoBehaviour
+    {
         #region Inspector
 
         [SerializeField] private TextPools m_Pools = null;
@@ -84,8 +86,8 @@ namespace Journalism.UI {
                 m_Window.Root.SetAnchorPos(0, Axis.X);
                 m_EditorNotesGroup.SetActive(false);
             };
-        
-            foreach(var obj in m_SlotLayout.Slots) {
+
+            foreach (var obj in m_SlotLayout.Slots) {
                 StoryBuilderSlot cachedSlot = obj;
                 obj.RemoveButton.onClick.AddListener(() => OnSlotDeleteClick(cachedSlot));
                 obj.Click.onPointerEnter.AddListener((p) => OnSlotHoverEnter(cachedSlot));
@@ -124,7 +126,7 @@ namespace Journalism.UI {
 
             StoryScrapDisplay.SelectDelegate onSelectChanged = OnScrapSelected;
 
-            foreach(var scrapId in Player.StoryScraps) {
+            foreach (var scrapId in Player.StoryScraps) {
                 var scrapData = Assets.Scrap(scrapId);
                 if (scrapData != null) {
                     var display = GameText.AllocScrap(scrapData, m_Pools);
@@ -149,16 +151,18 @@ namespace Journalism.UI {
                     yield return null;
                 }
 
-                for(int i = 0; i < allocated.Length; i++) {
+                for (int i = 0; i < allocated.Length; i++) {
                     StringHash32 allocatedId = allocated[i];
                     if (allocatedId.IsEmpty) {
                         StoryText.EmptySlot(m_SlotLayout.ActiveSlots[i]);
-                    } else {
+                    }
+                    else {
                         StoryText.FillSlot(m_SlotLayout.ActiveSlots[i], Assets.Scrap(allocatedId));
                     }
                     yield return null;
                 }
-            } else {
+            }
+            else {
                 m_StoryGroup.SetActive(false);
                 m_NoStoryGroup.SetActive(true);
             }
@@ -180,7 +184,8 @@ namespace Journalism.UI {
             if (!state && m_SelectedScrap == display) {
                 SetSelectedScrap(null);
                 Game.Audio.PlayOneShot("NotebookDrop");
-            } else {
+            }
+            else {
                 SetSelectedScrap(display);
                 Game.Audio.PlayOneShot("NotebookLift");
             }
@@ -269,7 +274,7 @@ namespace Journalism.UI {
             if (id.IsEmpty) {
                 return ClearSlot(slot);
             }
-            
+
             if (slot.Data != null && slot.Data.Id == id) {
                 return false;
             }
@@ -307,11 +312,9 @@ namespace Journalism.UI {
                 if (scrap) {
                     scrap.Toggle.interactable = true;
                 }
-                if (m_PublishMode) {
-                    RefreshTargetInfo();
-                    RefreshStats();
-                    m_PublishButton.interactable = m_CachedStats.CanPublish;
-                }
+                RefreshTargetInfo();
+                RefreshStats();
+                m_PublishButton.interactable = m_CachedStats.CanPublish;
 
                 return true;
             }
@@ -343,19 +346,20 @@ namespace Journalism.UI {
             m_ListScroll.verticalScrollbar.enabled = !display;
 
             if (display) {
-                foreach(var slot in m_SlotLayout.ActiveSlots) {
+                foreach (var slot in m_SlotLayout.ActiveSlots) {
                     bool canAccept = CanAccept(slot, display);
                     slot.AvailableHighlight.SetActive(canAccept);
                     slot.Group.alpha = canAccept ? 1 : 0.5f;
                     slot.EmptyColor.Color = canAccept ? m_AvailableSlotColor : m_DefaultSlotColor;
                 }
-            
+
                 display.Line.Root.SetParent(m_SelectedParent);
                 display.Line.Root.SetAsLastSibling();
                 display.Animation.Replace(this, HoverScrap(display));
                 m_SelectedScrap.Toggle.SetIsOnWithoutNotify(true);
-            } else {
-                foreach(var slot in m_SlotLayout.ActiveSlots) {
+            }
+            else {
+                foreach (var slot in m_SlotLayout.ActiveSlots) {
                     slot.Group.alpha = 1;
                     slot.AvailableHighlight.SetActive(false);
                     slot.HoverHighlight.SetActive(false);
@@ -365,7 +369,7 @@ namespace Journalism.UI {
         }
 
         private StoryScrapDisplay FindScrapWithId(StringHash32 id) {
-            foreach(var scrap in m_Scraps) {
+            foreach (var scrap in m_Scraps) {
                 if (scrap.Data.Id == id) {
                     return scrap;
                 }
@@ -395,7 +399,7 @@ namespace Journalism.UI {
         }
 
         static private IEnumerator HoverScrap(StoryScrapDisplay display) {
-            while(true) {
+            while (true) {
                 yield return display.Line.Inner.AnchorPosTo(8, 0.6f, Axis.Y).Ease(Curve.Smooth);
                 yield return display.Line.Inner.AnchorPosTo(0, 0.6f, Axis.Y).Ease(Curve.Smooth);
             }
@@ -444,7 +448,7 @@ namespace Journalism.UI {
                 m_RedistributionAnim.Replace(this,
                     GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0f))
                     .TryManuallyUpdate(0);
-                
+
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(1f, .4f);
 
                 yield return 2.1f;
