@@ -18,19 +18,19 @@ $call SetLocation("Newsroom")
 {layout Left}
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
-Your first breaking news update is in the books. 
-You're about to grab some coffee when your editor finds you.
-{@person}You said you wanted more excitement, right?
-{@me}Um.... I guess so...
+{@me} What's next, Dionne? Anything else I can do? 
+{@person} Well... I do need to get a reporter out there on the ground.
+{@person} Or, um... the water. Flood. Whatever.
+{@person} You think you've got what it takes, El?
+{@me} Yes!! 
+This is the break you've been waiting for.
+One natural disaster might not be quite enough to get you in at the Smoke City Herald...
+But it's better than reporting on local possom families and unique varieties of cherry jam.   
 $call ActivateStory()
-{@person}Good. I need you to get out there and report on what's happening.
-{@me}You mean... now?
-{@person}Take 45 minutes to get ready.
-{@person}Then head downtown.  
-Ugh. After this crazy morning, you'd rather go home and sleep for days.
-But this is why you're here. Impress your boss. Build your portfolio.
-And someday, land your dream reporting job--far away from here. 
-$choice GetReadyCheckpoint; I'm on it. 
+{@person} Okay, El. 
+{@person} Take 45 minutes to get ready. Make sure you've got all the gear you need.
+{@person} Then head to the dam and find out what's happening.
+$choice GetReadyCheckpoint; Got it. 
 
 :: GetReadyCheckpoint
 @checkpoint
@@ -50,27 +50,28 @@ $endif
 
 You have {timeLeft} to prepare to head out into the flood.
 
-
 $if !StatCheck(Tech, 2) , !StatCheck(Resourceful, 2)
-First things first. You need more tech and rain gear.
+First things first. You need more {stat-name}tech{/stat-name} supplies.
+And you'll need rain gear if you want to be {stat-name}resourceful{/stat-name} enough to make it downtown.
 
 $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
 $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
 $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
 $elseif !StatCheck(Resourceful, 2)
-It's a mess out there. You'll need some rain gear before you leave. 
+It's a mess out there. 
+You'll need some rain gear if you want to be {stat-name}resourceful{/stat-name} enough to handle this.
 
 $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
 $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $elseif !StatCheck(Tech, 2)
-You still need some tech gear before you head out.
+You still need to level up your {stat-name}tech{/stat-name}, or your phone will die before you even make it downtown.
 
 $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
 $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
 $elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
-You've got all the tech and gear you need! 
+You've got all the gear you need! 
 
 $choice GetReadyPart2; Prepare to brave the storm
 $endif
@@ -79,37 +80,33 @@ $endif
 :: BorrowCharger
 {layout Left}
 {clear-text}
-One of the copyeditors, Ben, is away from his desk.
+Looks like Ben, the copyeditor, left his phone charger sitting out in the open.
+Small town people... so trusting.
 
-He left his phone charging, right out in the open.
-
-$choice SwipeHisCharger; Swipe his charger
-$choice UnplugHisPhoneAndChargeYours; Unplug his phone and charge yours
-$choice GetReady; Forget it. I'll find another way.
+$choice SwipeHisCharger; Swipe Ben's charger and take it with you 
+$choice UnplugHisPhoneAndChargeYours; Unplug his phone and charge yours for a few minutes
+$choice GetReady; This feels too sketchy. I'll find another way.
 
 // Original Name: Swipe his charger
 :: SwipeHisCharger
 {layout Left}
-You grab his charger and tuck it into your pocket.
-
-His phone is already at 92% battery. It'll be fine.
-
+You tuck Ben's charger into your pocket and walk away, trying to whistle. 
+Ben's phone was already at 92% power. It'll be fine.
 At least, you think it will be, until your editor calls you into her office. 
 
-{@person} Look on the bright side, Rookie.{auto}
+{@person} Did you seriously just steal your coworker's charger?
+{@me} Oh... uh... "steal" is such a strong word.
+{@person} Well, look on the bright side, El. 
 {@person} Now you'll have a fully charged phone for your job hunt!
-
 $GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
 
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
 @tags Techie
 {layout Left}
-You unplug Ben's phone, plug in yours, and try to look innocent. 
-
+You plug your phone into Ben's charger and try to look innocent.
 When you hear him coming, you grab your phone and run for it. 
-
-40% battery should be good enough. 
+60% battery should be good enough. Hopefully. 
 
 $call AdjustStats(Tech + 2, Trust - 1)
 
@@ -127,20 +124,21 @@ $endif
 {layout Left}
 {clear-text}
 $if FirstVisit()
-By now, the newsroom is buzzing with activity.
-Ben and Sudha are rushing around, making phone calls. 
-Outside, Khalisa is struggling to push her car out of floodwater. 
+The newsroom is starting to fill up now--with people and water.
+Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
+Out front, Khalisa is struggling to push her car out of the flooded street. 
 $endif
 
 $if TimeRemaining()
     $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
     $HubChoice(Breakroom, "Search the break room for snacks", .25)
+    $HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
     $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
 
 $elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
     $choice HeadOut; Enough stalling. Time to go.
 $else
-    You return to the office one last time and check the clock.
+    You check the clock.
     $choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
 $endif
 
@@ -150,16 +148,13 @@ $endif
 {layout Left}
 $if Visited(BorrowTech)
 Your coworkers take pity on you and lend you stuff. Again. 
-
-Ben even lets you borrow his tricked-out jellyfish-themed umbrella. 
-
+Ben lets you borrow his tricked-out jellyfish-themed umbrella. 
 You'll just need to swing by the Lost and Found later for your dignity. 
 
 $call AdjustStats(Resourceful + 2, Social - 1, Trust - 1)
 $else
-Ben, one of the copyeditors, lends you his rain boots and a light-up jellyfish umbrella. 
-
-{@person} I worked hard on that thing{auto}.
+Ben, one of the copyeditors, reluctantly lends you his light-up jellyfish umbrella. 
+{@person} I worked hard on that thing, El{auto}.
 {@person} You better not harm a single tentacle.
 
 $call AdjustStats(Tech + 2, Social - 1)
@@ -177,20 +172,16 @@ $endif
 {layout Left}
 
 $if Visited(BorrowGear)
-You have a feeling you're starting to get a reputation around here.
-
-Unfortunately, not the reputation you were going for. 
-
-Your coworkers give you the tech you need, but people have started hiding under their desks or pretending to be on the phone when you walk toward them. 
+Uh oh. You're starting to get a reputation around here. 
+Your coworkers give you the tech you need, but people have started hiding under their desks when you walk toward them. 
 
 $call AdjustStats(Tech + 2, Social - 1, Trust - 1)
 $else
-You wander around the newsroom, searching for a spare charger. 
-
-Your editor overhears your plight and lets you borrow hers--but she's not thrilled about it. 
-
-{@person}Reporting 101, Rookie. 
-{@person}Don't forget your tech gear in the middle of a natural disaster.
+{@editor} You looking for something, El?
+{@me} Oh... uh, you don't have an extra phone charger, do you?
+{@editor} Here. Take mine.
+{@editor} Just make sure to bring your own next time. 
+{@editor}I need to know I can trust you to be prepared.
 
 $call AdjustStats(Tech + 2, Trust - 1)
 $endif
@@ -208,12 +199,8 @@ $endif
 :: LostAndFound
 @tags Resourceful, Techie
 {layout Left}
-Wow... it looks like they haven't cleaned out the Lost and Found in a while. 
-
-You dig through a mountain of old T-shirts and moldy snacks. 
-
-Then--score! A phone charger and a raincoat!
-
+Yikes. The Lost and Found should come with a biohazard warning. 
+But you've got what you need: a phone charger and a raincoat!
 $call AdjustStats(Resourceful + 1, Tech + 1)
 
 $choice GetReadyPart2; Head back to your desk
@@ -238,43 +225,37 @@ $endif
 
 // Original Name: Eject: Wasted too much time
 :: EjectWastedTooMuchTime
-You're about to head out into the storm when your editor strolls by.
-
-{@person} Want to put on some coffee?
-{@person} We're almost out.
-
+You're about to head out into the storm when Dionne stops by your desk. 
+{@person} Can you put on a pot of coffee, El? We're almost out. 
 
 $ContinueChoice({@me} But... shouldn't I head downtown?)
 
 
 {@person}Too late. I saw you were still wasting time here, so I gave the story to Khalisa.
 
-$GameOver("You lost the scoop, Rookie. Better luck next time.")
+$GameOver("You lost the scoop. Better luck next time.")
 
 // Original Name: Help Khalisa
 :: HelpKhalisa
 {clear-text}
-Khalisa's car is stuck in a deep puddle. 
-She looks dejected. 
-{@person}Ugh. My dad is never gonna let me live this down. 
-{@me}Your dad?
-{@person}Oh, he used to be the fire chief. Retired last year. 
+{@person} Ugh. My dad used to be the local fire chief. He's never gonna let me live this down. 
 {@person}I swear, if I hear "turn around, don't drown" one more time...
+{@me} Come on. I bet we can get your car out of there.
+$choice TryToRescueHerCar; 
 
+:: TryToRescueHerCar
 $if StatCheck(Endurance, 2)
-Luckily, Khalisa drives a tiny compact car. 
-Together, you manage to push her car to dry ground!
+Luckily, you've been building up your {stat-name}Endurance{/stat-name} lately. 
+You manage to push Khalisa's little compact car to dry ground!
 $else
 You wish you could help, but at this point, you're mostly running on coffee and self-doubt. 
-You push with all your strength and move her car about half an inch. 
+You push with all your strength and move Khalisa's car about half an inch. 
 $endif
 
-
-
 $if StatCheck(Endurance, 2)
-{@person}Wow. You're stronger than you look. Thanks, Rookie! 
+{@person} Wow, you're stronger than you look. Thanks, El!
 $else
-{@person}Aw, it's okay, Rookie. I appreciate the effort. 
+{@person}Aw, it's okay, El. I appreciate the effort. 
 $endif
 
 
@@ -285,23 +266,16 @@ $choice GetReadyPart2; Head back inside
 // Original Name: Breakroom
 :: Breakroom
 {clear-text}
-Rain drips from the ceiling into recycle bins. 
+Ugh. There's nothing more depressing than soggy donuts and a coffee pot full of rainwater. 
 
-A box of soggy donuts languishes pitifully on the counter. 
-
-$choice MakeAFreshPotOfCoffeeForTheNewsroom; Make a fresh pot of coffee for the newsroom
-$choice SearchForSnacksToBoostYourStrength; Search for snacks to boost your strength
+$choice MakeAFreshPotOfCoffeeForTheNewsroom; Make a fresh pot of coffee for the newsroom and boost your {stat-name}social{/stat-name} cred around here 
+$choice SearchForSnacksToBoostYourStrength; Search for healthy snacks to build up your {stat-name}endurance{/stat-name}
 
 // Original Name: Bike
 :: Bike
 @tags Endurance
-The roads are covered in water. 
-
-Luckily, the bike path seems to have fared better! 
-
-You stick to higher ground, weave around flooded areas, and make it downtown in record time.
-
-Plus, you snag a great photo along the way. 
+Whew, so glad you brought your bike! These streets are a mess. 
+You weave around the flooded areas, and even snag a high-quality photo on the way. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
@@ -313,19 +287,20 @@ $choice ArriveAtFloodSite; Arrive at flood site
 :: Drive
 $call SetLocation("Newsroom")
 $if StatCheck(Research, 2)
-All your research has paid off! 
-
-You use the city's interactive map to avoid the worst flood zones. 
-
-The trip takes longer than usual, but at least you're not stranded.
+Thank goodness you're so good at doing {stat-name}research{/stat-name} on the fly!
+You use the flood map to dodge all the worst flooded streets.
+The drive takes longer than usual, but at least you're not stranded. 
+$elseif StatCheck(Tech, 2)
+Phew, your {stat-check}tech{/stat-check} skills are paying off!
+You use the online flood map to chart a safe course.
+The drive takes longer than usual, but at least you're not stranded. 
 
 $choice ArriveAtFloodSite; Arrive at flood site
 $else
-You head out into the storm, wipers on full blast.
-
-If you'd done more research, maybe you'd know which streets to avoid, but now it's too late. 
-
-The road ahead is totally covered in water!
+Uh oh. Turns out flood maps aren't super helpful if you haven't bothered getting to know the local streets yet.
+And does red mean flooding, or is it yellow...?
+If you were more {stat-name}tech{/stat-name} or {stat-name}research{/stat-name} savvy, you might know...
+But that's not helpful right now. Water is rising all around you!
 
 $LocationChoice(FindHigherGround, "Find higher ground and pull over ASAP", "Deli Lot")
 $LocationChoice(FloorIt, "Try to drive through", "Upper Lake Dam")
@@ -336,62 +311,57 @@ $endif
 // Original Name: Listen to the police scanner
 :: ListenToThePoliceScanner
 @tags Egghead
-There's no such thing as too much research.
-
+There's no such thing as too much {stat-name}research{/stat-name}.
 Wellll....ok, maybe there is, but you're not about to go out in a 100-year-flood unprepared. 
-
-You check in with your coworker, Sudha, whose job includes police-scanner monitoring.
-
-{@person}{auto}Parts of Main Street have basically turned into a river. 
+{@me} Sudha, you're monitoring the polcie scanner, right? Any updates?
+{@person} Yeah, but it's not good news.
+{@person} Main Street is flooding fast and people are stranded. 
 {@person}Half of the Cherry Festival tents have been swept away! 
 
-You scribble down the details in your trusty notebook. 
-
-Add snippet here: info, color 
+$call GiveSnippet(PoliceScannerInfo)
+$call AdjustStats(Research + 1)
+$choice GetReadyPart2; Decide what to do next 
 
 // Original Name: Track down an expert to help you
 :: TrackDownAnExpertToHelpYou
-You ask around for leads on an expert informant, but you come up dry.
+You call the fire department to see if someone can help you get downtown safely...
+But it sounds like they've got their hands full. 
 
 $if !Visited(HelpKhalisa)
-Khalisa might know someone. Too bad she's still bailing out her flooded car.
+Khalisa might know someone. Too bad she's still dealing with her flooded car.
 
 $choice HeadOut; Find another way
 $elseif Visited(Yogurt)
 Khalisa might know someone, but she's eating a soggy donut, grumbling about somebody stealing her yogurt. 
-
 Now might not be the best time to bother her. 
 
 $choice HeadOut; Find another way
 $elseif Visited(HelpKhalisa)
 Then Khalisa swings by your desk.
-{@person}You need help getting downtown, Rookie? I bet my dad could help.  
-{@person}He's a little...opinionated...sometimes, but he's the best in the business. 
+{@person}You need help getting downtown, El? I bet my dad could help.  
+{@person} He's a little chatty sometimes, but he's the best in the biz. 
 
-$choice WaitOutside; Call Khalisa's dad for help
-$choice HeadOut; Find your own way--you'd rather not wait around
+$choice WaitOutside; Call Khalisa's dad, the retired fire chief
+$choice HeadOut; Find your own way--you'd rather not waste time waiting 
 $endif
 
 // Original Name: Make a fresh pot of coffee for the newsroom
 :: MakeAFreshPotOfCoffeeForTheNewsroom
 @tags Social, Endurance
-You brew some cherry-infused Twin Lakes coffee. Locally made. 
-
-Soon all your coworkers are gathered around, trading flood stories.
-
-The coffee tastes like fruit-flavored mud, but at least it's caffeinated. 
+You brew some cherry-infused Twin Lakes coffee.  
+Soon all your coworkers are gathered around, trading stories. 
+The coffee tastes like fruit-flavored mud... but it does give you a much-needed energy boost!
 
 $call AdjustStats(Social + 1, Endurance + 1)
 $choice GetReadyPart2; Head back to your desk
 
 // Original Name: Search for snacks to boost your strength
 :: SearchForSnacksToBoostYourStrength
-You find some organic, protein-infused yogurt in the fridge, labeled K. Jones.
-
+You find some organic, protein-infused yogurt, labeled "K. Jones"
 Also, some extra saltine crackers and packets of ketchup stuffed in a drawer.
 
-$choice Yogurt; Eat the yogurt for a boost of energy.
-$choice Crackers; Grab a few saltine crackers.
+$choice Yogurt; Sneak a yogurt cup for a boost of endurance. K. Jones won't even notice. 
+$choice Crackers; Grab a few saltine crackers. It's not worth making enemies for a little yogurt. 
 
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
@@ -400,19 +370,17 @@ $call SetLocation("Upper Lake Dam")
 {/map}
 {bg $BG_UpperLakeDam}
 $if FirstVisit()
-<b>Location: the Upper Lake Dam</b>
-Volunteers are stacking sandbags, with a DNR worker leading the effort. 
-A houseboat floats on the river nearby.
+<b>Location: the Upper Lake Dam</b>.
     $call SetTimeRemaining(2)
 $endif
 
 $if HasTime(0.5)
 $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, "Upper Lake Dam")
 $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "Upper Lake Dam")
-$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker", 0.5, "Upper Lake Dam")
-$HubChoice(TalkToTheHouseboatLady, "Climb up onto \"Nora's Ark\"", 0.5, "Upper Lake Dam")
+$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "Upper Lake Dam")
+$HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "Upper Lake Dam")
 $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "Upper Lake Dam")
-$HubChoice(CherryFestivalMap, "Walk down the street to the Cherry Festival", 0.25, "Cherry Festival")
+$HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "Cherry Festival")
 {map UI/MapPlaceholder.png}
 $else
 That leaves just enough time to compile your story!
@@ -427,28 +395,24 @@ $endif
 :: FindHigherGround
 {/map}
 $call SetLocation("Deli Parking Lot")
-You swerve into a parking lot, just in time. 
+You swerve into a parking lot, just in time!
 
 $choice LookAroundForSomethingUseful; Look around for something useful
 
 // Original Name: Floor it
 :: FloorIt
 {/map}
-You floor it and hope for the best. 
-
 Your car splashes along valiantly for a few seconds, then sputters and dies.  
+Oh no... now what??? 
+Floodwater rushes past. Minnows and bluegills are jumping around you. 
 
-Floodwater rushing past, minnows and bluegills jumping around you. 
-
-$choice SwimForIt; Swim for it
-$choice WaitForRescue; Climb out on top of the car and wait for rescue
+$choice SwimForIt; Get out of your car and swim for it
+$choice WaitForRescue; Climb on top of the car and wait for rescue
 
 // Original Name: Yogurt
 :: Yogurt
 @tags Endurance
 You swipe a yogurt cup. Mmm. Sweet, protein-rich goodness.
-
-K. Jones won't even notice. Probably.
 
 $call AdjustStats(Endurance + 2, Trust - 1)
 $choice GetReadyPart2; Head back to your desk
@@ -456,10 +420,8 @@ $choice GetReadyPart2; Head back to your desk
 // Original Name: Crackers
 :: Crackers
 @tags Endurance
-You nibble on a few crackers.
-
-They're not exactly nourishing, but it's better than stealing an innocent coworker's yogurt. 
-
+You nibble on a few saltine crackers.
+They're not exactly nourishing, but it's better than stealing an innocent coworker's snacks.
 
 $call AdjustStats(Endurance + 1)
 
@@ -477,38 +439,35 @@ $goto STORYEVALUATION
 {clear-text}
 {/map}
 $if StatCheck(Trust, 3)
-The volunteer is thrilled when you ask to interview him. 
-
-Looks like your attempts at being a Good Neighbor™ are starting to pay off!
-
-{@person}I've heard of you! So glad Twin Lakes found a reporter who people can trust. 
-
+{@person} Oh, I've heard of you!
+{@person} So glad Twin Lakes snagged a reporter we can {stat-name}trust{/stat-name}. 
 He tells you how he became a volunteer and where people can find sandbags.
-
+Plus, his deepest fears and a story about the time he stole a jar of paper clips from his office.
+$call GiveSnippet(SandbagQuote)
+$call GiveSnippet(VolunteerInfo)
+$elseif StatCheck(Social, 3)
+{@person} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!
+{@person} Me too. My family can never get me to shut up.  
+He tells you how he became a volunteer and where people can find sandbags.
 Plus, his favorite color and the names of his three German Shepherds.
-
 $call GiveSnippet(SandbagQuote)
 $call GiveSnippet(VolunteerInfo)
 $else
-You ask for an interview, but the volunteer doesn't seem to trust you. 
+You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you. 
 
 $choice OfferToShareSomeFoodWithHim; Offer to share some food with him
 $choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record
+$choice ArriveAtFloodSite; Find someone else to talk to 
 $endif
-
-$choice ArriveAtFloodSite; Back to the dam
 
 // Original Name: Talk to volunteer # 2
 :: TalkToVolunteer2
 {/map}
-You approach a volunteer just as she's packing up.
-
-{@person}Sorry, can't talk, gotta go sample the bacterial contamination in the epilimnion of Upper Lake. 
-
-You have a feeling she thinks all the science lingo will get rid of you. 
+{@me} Do you have a minute to talk?
+{@person} Sorry, I'm working. Gotta go sample the bacterial contamination in the epilimnion of Upper Lake. 
 
 $if StatCheck(Research, 3)
-$choice BookwormAnswer; Interesting. Are you worried the flooding will contribute to toxic algae growth?
+$choice BookwormAnswer; Interesting. Are you worried the flooding will contribute to toxic algae?
 $else
 $choice Non-BookwormAnswer; Um....epi-whatium?
 $endif
@@ -517,22 +476,15 @@ $endif
 :: InterviewTheDNRWorker
 {/map}
 $if StatCheck(Social, 3)
-The DNR worker seems to recognize you.
-
-{@person}You work for the Gazette, right? I've heard of you!
-{@person}Sounds like you've been making a lot of friends around here.
+{@person} You the new reporter, right? I've heard you've been making a lot of friends around here!
 {@person}Would you like an update on the situation? 
 
 $choice DamInterviewDNRWorker; Oh... yeah, that would be great!
 $endif
 
 $if !StatCheck(Social, 3)
-The DNR worker looks relieved to see you. Then she notices you're a reporter, not a volunteer.
-
 {@person}Sorry, kid. We're literally swamped here. 
 {@person}Help or get out of the way.
-
-Huh. So much for Midwest Nice. 
 
 $choice HelpMoveSomeSandbags; Help move some sandbags.
 $choice ArriveAtFloodSite; Talk to someone else.
@@ -542,10 +494,10 @@ $endif
 :: TalkToTheHouseboatLady
 {/map}
 {bg $BG_HouseBoat}
-The houseboat lady is thrilled to see the press has taken an interest.
-
-{anim rumble}{@person} Houseboat, stay afloat!
-she chants, holding up a picket sign. 
+{@person} Houseboat, stay afloat! Houseboat, stay afloat!
+{@me} Excuse me... Ms. Houseboat Lady... do you have a minute to talk? 
+{@person} Oh, certainy, Dear. Call me Nora.
+{@person} What do you need to know?
 
 $choice CanYouTellMeHowTheFloodHasAffectedYou; Can you tell me how the flood has affected you?
 $choice WhatsTheDealWithTheHouseboat; What's the deal with the houseboat?
@@ -554,73 +506,42 @@ $choice WhatsTheDealWithTheHouseboat; What's the deal with the houseboat?
 :: TakePhotosOfTheFloodSite
 {/map}
 $if StatCheck(Tech, 3)
-Back in New York, you'd have a professional photographer to help you.
-
-Out here, you're on your own. 
-
-Luckily, you came prepared!
-
-You use your tech gear to snag an amazing shot.  
+At the Smoke City Herald, you'd have a pro photographer to help you...
+But here in cherryland, you're on your own. 
+Luckily, your tech gear is advanced enough to get you a high-quality shot!
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(HouseboatPhotos)
 $endif
 
 $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
-The wind and rain make it tricky to get a good shot. 
-
-Then you notice a sturdy-looking tree near the dam.
-
-The perfect vantage point!
-
-Thanks to your energy-boosting breakfast, you make it easily to the top. 
+You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
+The wind and rain make it tricky to get a good shot...
+But then you notice a nearby tree. The perfect vantage point! 
+Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top. 
 
 $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Resourceful, 3)
-Your gear isn't fancy.
-
-Luckily, Twin Lakes has taught you how to make do with what you've got. 
-
-You rig up a tripod with a broken branch, a shoelace, and a hair scrunchie. 
-
-$call SFX(PhotoSnap)
-$call GiveSnippet(HouseboatPhotos)
-$elseif Stat(Tech) == 2 , StatCheck(Social, 3)
-Oh no... your camera battery is dead!
-
-You're about to give up when when you hear a voice from behind you.
-
-{@person}I brought a camera from home. Want to borrow it? 
-One of the volunteers!
-{@me}Wow, that would be great! Are you sure?
-{@person}Of course. 
-{@person}I can tell you're out here trying to help the town.
-{@person}Just glad I can pitch in. 
-
-$call AdjustStats(Tech + 1)
-$call SFX(PhotoSnap)
-$call GiveSnippet(HouseboatPhotos)
-$elseif Stat(Tech) == 2
-Oh no... your nice camera's battery is dead!
-Nearby, a bystander is snapping away with a fancy DSLR. 
-Couldn't hurt to ask... 
-
-{@me}Excuse me. Would you mind if I borrowed your camera? 
-{@person}Are you serious??
-{@person}I don't even know you, kid. Use your phone or something. 
-
-You adjust your phone settings and snap a picture.
-A little shaky - certainly not to par with your DSLR - but better than nothing. 
+The Twin Lakes Gazette doesn't have big-city resources like fancy gear and pro photographers. 
+Good thing you're {stat-name}resourceful{/stat-name}. 
+You rig up a tripod with a broken branch, a shoelace, and a scrunchie. 
+This photo isn't perfect, but it's not bad, either. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(OkayHouseboatPhotos)
-$endif
+$elseif Stat(Tech) == 2 , StatCheck(Social, 3)
+Oh no... your camera battery is dead!
+You ask around for help, and your {stat-name}social{/stat-name} graces pay off.
+{@person} You seem like a sweet kid. Go ahead and borrow my camera!
 
-
-$if Stat(Tech) == 1
-The conditions are terrible and your camera is dead.
-You wish you knew how to adjust your phone settings for a better picture...
-At least this is better than nothing. Probably. 
+$call AdjustStats(Tech + 1)
+$call SFX(PhotoSnap)
+$call GiveSnippet(OkayHouseboatPhotos)
+$elseif Stat(Tech) == 2
+Oh no... your camera battery is dead!
+You use your phone to snap a few grainy shots.
+You've never really gotten the hang of taking photos in the dark, in the rain...
+But at least a low-quality photo is better than nothing. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryHouseboatPhotos)
@@ -641,7 +562,7 @@ $HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25,
 $HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5, "Cherry Festival")
 $HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5, "Cherry Festival")
 
-$HubChoice(ArriveAtFloodSite, "Head back to the flood site", 0.5, "Upper Lake Dam")
+$HubChoice(ArriveAtFloodSite, "Head back to the dam", 0.5, "Upper Lake Dam")
 $else
 Time's up, Rookie. Time to put your story together!
 $choice CompileYourStory; Compile your story
@@ -649,180 +570,146 @@ $endif
 
 // Original Name: Look around for something useful
 :: LookAroundForSomethingUseful
-You scan your surroundings: 
--A deli with a <color="red">Come On In!</color> sign flashing. 
--Another stranded car with kayaks strapped to the roof 
+Nearby, there's a deli with a <color="red">Come On In!</color> sign flashing...
+And a stranded car with two kayaks strapped to the roof. 
 
 $choice AskToBorrowAKayak; Ask to borrow a kayak from the stranded driver
 $choice UseDeliWifi; Go into the deli and ask for help 
 
 // Original Name: Swim for it
 :: SwimForIt
-The rushing water comes up to your knees.
-
-At first you think you might make it!
+The rushing water only comes up to your knees.
+You're going to make it!!
+Until... 
 
 // sway style
-{anim sway} Then the current sweeps you off your feet.
+{anim sway} The current sweeps you off your feet.
 
-$choice EjectJustKeepSwimming; Just keep swimming...
+$choice EjectJustKeepSwimming; Ahhh! Help!!
 
 // Original Name: Wait for rescue
 :: WaitForRescue
 You sit on your car roof, contemplating the meaning of life.
+{@person}Hey, kid! You need a lift? 
+{@me} Yes!! Thank you so much.
+$choice HitchARideWithRetiredFirefighter; Hitch a ride
 
-Finally, a retired firefighter swings by in a flood rescue vehicle! 
-
-$if !StatCheck(Social, 3)
-He's happy to drive you downtown... but less inclined to give an interview. 
-
-{@person} Sorry, no time for chit chat.
-{@person} I've got a pint of cherry ice cream melting in the back.
-
-You wish you could change his mind, but you're not exactly known for your social graces. 
-
-$choice ArriveAtFloodSite; Arrive at flood site
-$endif
-
+// Hitch a ride
+:: HitchARideWithRetiredFirefighter
+You hitch a ride with the retired firefighter...
+Who also happens to be Khalisa's dad. 
 
 $if StatCheck(Social, 3)
-You have a great conversation as he drives you downtown. 
-Turns out he's Khalisa's dad, the retired fire chief!
-{@person}I was the fire chief around here for twenty years. I've never seen a storm like this. 
+{@person} Khalisa told me you're a real {stat-name}social{/stat-name} butterfly!
+{@person} So glad she's got a coworker her own age to hang out with. 
+He gives you some high-quality quotes, and even lets you share his pint of cherry chip ice cream.
 
 $call GiveSnippet(FireChiefQuote)
+$call AdjustStats(Endurance + 1)
 
-$choice ArriveAtFloodSite; Arrive at flood site
+$elseif StatCheck(Trust, 3)
+{@person} Khalisa told me all about you! She says you're as {stat-name}trustworthy{/stat-name} as they come.
+He gives you some high-quality quotes, and even lets you share his pint of cherry chip ice cream.
+
+$call GiveSnippet(FireChiefQuote)
+$call AdjustStats(Endurance + 1)
+
+$else 
+{@me} Hey, Mr. Jones... would you be willing to do a quick interview? 
+{@person} Sorry, kid. No time for {stat-name}socializing{/stat-name}.
+{@person} I've got a pint of cherry chip ice cream melting in the back.
 $endif
+$choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Wait outside
 :: WaitOutside
-The former fire chief shows up in a tricked-out flood rescue vehicle. 
-
+Khalisa's dad shows up in a tricked-out flood rescue vehicle. 
 {@person} Rigged this baby up in my spare time!
+{@person} Khalisa says I need to get a hobby. But have you seen that little coffee bean of a car she drives?
+{@person} It's a miracle she hasn't gotten stranded yet!
 
-$choice TakePhotosOnTheWay; Take photos on the way
-$choice AskForAnInterview; Ask for an interview
+$choice TakePhotosOnTheWay; Take photos on the ride downtown 
+$choice AskForAnInterview; Ask the retired fire chief for an interview
 
 // Original Name: Offer to share some food with him
 :: OfferToShareSomeFoodWithHim
 
 $if StatCheck(Resourceful, 4)
-You unwrap your sandwich and give the volunteer half.
-
-It's a little soggy, but he still seems grateful.
-
-He tells you about how he started volunteering. 
-
-{@person}People can sign up at the Twin Lakes Community Center. 
-{@person}They've got plenty of sandbags, but not enough people to fill them!
-
+{@me} Here. I grabbed a sandwich on the way here...
+{@me} Sorry it's a little soggy. 
+{@person} Hey, thanks, kid!
+While he eats, he tells you how volunteers can get signed up. 
 $call GiveSnippet(GreatVolunteeringQuote)
 $call GiveSnippet(VolunteerInfo)
+This high-quality quote will be great for your story! 
+$choice ArriveAtFloodSite; Decide what to do next 
 $endif
 
 $if !StatCheck(Resourceful, 4)
-You dig through your backpack and find half a protein bar.
-
-{@me}Um...do you want this?
-
-{@person}Nah. I better get back to work.
-
-$choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record
-$endif
-
-
+You dig through your backpack and find a half-eaten protein bar.
+{@me} Uh... sorry. Looks like I don't have much.
+{@person} Oh, no worries, kid. I better get back to work anyway. 
 $choice ArriveAtFloodSite; Find someone else to talk to 
+$endif
 
 // Original Name: Ask if he'll talk off the record
 :: AskIfHellTalkOffTheRecord
 
 $if !StatCheck(Trust, 3)
-He still doesn't seem convinced. 
-
+{@person} Well... okay, fine. 
 {@person}Please don't put my name in your article, okay?
-
-He tells you that he did flood training at the community center.
-
-People can sign up there and help fill sandbags. 
-
+He tells you how people can sign up to volunteer.
 You reeeeally wish you could quote him, but it's better than nothing.
 
 $call GiveSnippet(VolunteerInfo)
-$endif
-
-
-$if StatCheck(Trust, 3)
-Something about talking with you seems to put his mind at ease.
-
-He gives you tons of great info about volunteering! 
-
-{@person}People can sign up at the Twin Lakes Community Center. 
-{@person}They've got plenty of sandbags, but not enough people to fill them!
-
-$call GiveSnippet(GreatVolunteeringQuote)
-$call GiveSnippet(VolunteerInfo)
-$endif
-
-
 $choice ArriveAtFloodSite; Decide what to do next 
+$endif
+
 
 // Original Name: Record your observations
 :: RecordYourObservations
 
 $if StatCheck(Tech, 3)
-You use your voice-recording app to rattle off what you're seeing.
-Those little details tell a story.
-Hopefully, they'll also help to hook your readers. 
+Good thing you brought the right {stat-name}tech{/stat-name}!
+You use your voice memo app to record what you're seeing. 
+Hopefully, these little details will help hook your readers. 
 
 $call GiveSnippet(SuperDetailedObservation)
 $elseif StatCheck(Resourceful, 3)
-Normally you'd take notes on your phone, but your battery power is at 10%.  
-
-Luckily, you came prepared! You whip out your notebook and record your observations, writing to the glow of your light-up umbrella. 
-
-Hopefully these details will catch your readers' attention. 
+Ugh. You don't have the {stat-name}tech{/stat-name} you need to record a voice memo.
+Your phone battery is only at 10%. 
+Luckily, you were {stat-name}resourceful{/stat-name} enough to bring your notebook!
+You write down all the details you can. Hopefully this will help catch your readers' attention. 
 
 $call GiveSnippet(DetailedObservation)
 $elseif StatCheck(Social, 4)
-Uh oh. Your phone battery is at 10%.
-
-Thankfully, one of the volunteers is willing to lend you a wire-free charger!
-
-You chat with them while your phone charges, and even end up with a quote for your story.
+Uh oh. You would use your {stat-name}tech{/stat-name} to record a voice memo of observations...
+But your phone battery is at 10%.
+Luckily, one of the volunteers has heard of you from {stat-name}social{/stat-name} media!
+He lends you his wireless charger, and you end up with a great quote. 
 
 $call GiveSnippet(DetailedObservation)
 $call GiveSnippet(VolunteerConversation)
 $else
-Your phone battery is alarmingly low.
-
-You switch to airplane mode to save power and take a few frantic notes.
-
+Uh oh. You don't have the {stat-name}tech{/stat-name} tech to record a voice memo. Your phone is almost dead!
+You take a few frantic notes on a napkin in your bag.
 It's not exactly prize-winning prose, but it's better than nothing.
 
 $call GiveSnippet(BasicObservation)
 $endif
-
-
 $choice ArriveAtFloodSite; Figure out your next move 
 
 // Original Name: Bookworm answer
 :: BookwormAnswer
-She looks surprised. 
-
-{@person}Are you a limnologist, too?
-
-{@me}I'm a reporter, but I'm also an avid reader.
-
-{@person}Hmm. I guess I can answer a few questions, but then I need to run.
+{@person}Oh! Are you a limnologist, too?
+{@me}I'm a reporter, but I'm also a total bookworm.
+{@person} Well, obviously you did your research. I'd be happy to answer a question or two. 
 
 $choice InterviewHer; Interview her
 
 // Original Name: Non-bookworm answer
 :: Non-BookwormAnswer
-She shakes her head. 
-
-{@person}Sorry, it's a lake science thing. You wouldn't understand.
+{@person}Sorry, it's a lake {stat-name}research{/stat-name} thing. You wouldn't understand.
 
 $choice ArriveAtFloodSite; Find someone else to talk to 
 
@@ -837,20 +724,15 @@ $choice HowDidTheCityLetThisHappen; How did the city let this happen?
 
 $if StatCheck(Endurance, 3)
 You grab some sandbags and start stacking. Easy, peasy. 
-
-The DNR worker looks impressed. 
-{@person}Thanks. I guess I can answer a few questions, since you're here.
+{@person}Wow. Thanks, El! I guess I can answer a few questions, since you're here.
 
 $choice DamInterviewDNRWorker; Interview DNR Worker
 $endif
 
 $if !StatCheck(Endurance, 3)
-You try to lift a sandbag, which goes about as well as you'd expect for someone who woke up at 4 a.m. and had saltine crackers for breakfast. 
-
-To the DNR worker's credit, she only laughs a little.
-
-{@person}Don't worry. I can barely lift those myself.
-
+You try to lift a sandbag, which goes about as well as you'd expect for someone who woke up at 5 a.m. and had saltine crackers for breakfast. 
+The DNR worker is sympathetic. 
+{@person}Don't worry, El. I can barely lift those myself.
 She agrees to answer one question. 
 
 $choice WhenWillTheSituationBeUnderControl; When will the situation be under control?
@@ -860,34 +742,30 @@ $endif
 
 // Original Name: "Can you tell me how the flood has affected you?"
 :: CanYouTellMeHowTheFloodHasAffectedYou
-{@person}The flood has been lovely. Though all those volunteers would probably be happier on a houseboat.
-
+{@person} The flood hasn't bothered me at all. I've got my trusty houseboat!
+{@me} You're right in the middle of the action here. Can you tell me what you saw? 
 $if StatCheck(Trust, 3)
-The houseboat lady seems to trust you.
-
-She tells you all about what she saw when the flood started, and she even offers to let you pet her cats. 
+{@person} Certainly, Dear. I can tell you're {stat-name}trustworthy{/stat-name}!
+{@person} I'll even let you pet my cats, while you're here!
 
 $call GiveSnippet(GreatHouseboatStory)
 $choice ArriveAtFloodSite; Decide what to do next 
 
 $elseif StatCheck(Research, 3)
-
+{@person} Don't you want to ask more about houseboats?
+{@person} You seem like someone who likes to do {stat-name}research{/stat-name}!
 {@me}Um... I'm not sure a world full of houseboats is a sustainable solution to climate change.  
-
 The houseboat lady pats your arm kindly. 
-
 {@person}Don't worry, Dear. You'll come around. 
-{@person}My cats and I are purrrrfectly happy here. Pun very much intended.
+{@person}My cats and I are purrrrfectly happy here.
 
 $call GiveSnippet(HouseboatStory)
 
 $choice ArriveAtFloodSite; Find someone else to talk to 
 $else
-You ask her about the flooding.
-
-{@person}It's not just about flooding.
-{@person}Houseboats are great in winter, too!
-{@person}If geese can migrate south, why not us? 
+{@person} Well, I did notice some flooding, I suppose.
+{@person} Luckily houseboats are neutrally buoyant, like all seaworthy vessels!
+{@person} I've got a bed, a small kitchen, and a nice little collection of my dear friend's quilts!
 
 $ContinueChoice({@me} Yeah, that's great. So about the flooding...)
 {@person}Let me put it this way. My houseboat can do literally anything your house can do. Plus, float!
@@ -902,19 +780,15 @@ $endif
 {@person}I've been telling everyone for years. Houseboats are the future! 
 {@person}Off the grid, more fun than tiny homes, and literally flood proof!
 {@person}I remember when I was a little girl...
-
 Uh oh. This could go on for hours. 
 
 $if StatCheck(Social, 3)
-Fortunately, you have the social know-how to gracefully exit the conversation.
-
-{@person}Float on by any time. You know where to find me!
-
+Good thing you have the {stat-name}social{/stat-name} know-how to gracefully exit the conversation.
+{@person}Float on by any time, Dear. You know where to find me!
 $call GiveSnippet(HouseboatStory)
 $choice ArriveAtFloodSite; Make a graceful exit   
 $else
 You try to escape, but you can't get a single word in.
-
 The plus side: now you know more about houseboats than literally anyone else you've ever met. 
 
 $call GiveSnippet(HouseboatStory)
@@ -925,69 +799,56 @@ $endif
 // Original Name: Go inside specialty cheese shop
 :: GoInsideSpecialtyCheeseShop
 {/map}
-The street is flooded, but you manage to wade up onto the sidewalk and go inside. 
+Inside the cheese shop, the owner is gathering up his wares in a panic.
+{@person} If I could just get these wheels of brie and gouda to the second floor!
+{@person} What are you doing, just standing there? Help me? 
+You're about to ask for an interview when you get a text from Sudha.
+{@person} El--evacuation order for Main St. Water rising fast. GET OUT NOW!
 
-The panicked shop owner is carrying armfuls of fancy cheese up to the second floor. 
-
-You're about to interview him when you get a text from Sudha at the newsroom:
-
-<i>Police scanner update: water rising fast on Main Street. Evacuation order. GET OUT OF THERE!!</i>
 
 $choice TellTheShopOwnerToLeaveTheCheeseAndRun; Tell the shop owner to leave the cheese and run!
 
 // Original Name: Take photos of the street
 :: TakePhotosOfTheStreet
 {/map}
-You get some amazing photos of water rushing down Main Street. 
-
-It looks like a disaster movie. 
-
-All that's missing is the seedy-underbelly side plot and the rival-turned-love interest. 
-
-Still, the day isn't over yet...
+You get some amazing, high-quality photos!  
+It looks like a disaster movie--all that's missing is the seedy-underbelly side plot and the rival-turned-love interest. 
+Still, the day isn't over yet. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(FloodedMainStreet)
 
-$choice CherryFestivalMap; Do something else
+$choice CherryFestivalMap; Decide what to do next 
 
 // Original Name: Follow the sirens
 :: FollowTheSirens
 {/map}
-You turn the corner and find a rescue in progress!
-
-A pickup truck is stuck in a ditch, water rushing all around it.
-
-Firefighters pull the driver and his dog out of the car, just in time!
+A rescue in progress! 
+You watch as firefighters rescue a man and his dog from a stranded car. 
+This high-quality anecdote will definitely get your story in front of more readers! 
 
 $call GiveSnippet(DogRescue)
 $call SFX(PhotoSnap)
 $call GiveSnippet(DogRescuePicture)
 
-$choice CherryFestivalMap; Do something else
+$choice CherryFestivalMap; Decide what to do next 
 
 // Original Name: Ask to borrow a kayak
 :: AskToBorrowAKayak
 
 $if StatCheck(Trust, 4)
-The driver is happy to lend you their kayak. 
-
-{@person}You seem trustworthy. 
+{@person} Of course you can borrow a kayak! I can tell you're {stat-name}trustworthy{/stat-check}.
 {@person}By the way, I loved your piece about the possum family living behind the school.
 {@person}I had no idea possums were so amazing!! 
-
-You remember writing that story, the day after you moved here: Playing Possum at Twin Lakes High School. 
-
-You'd considered cleaning out your desk then and there. 
-
+You remember writing that story, the day after you moved here: <i>Playing Possum at Twin Lakes High School</i>. 
+You'd almost given up your reporting career right then and there. 
 {@me}Oh! Um... thanks! Glad you enjoyed it. 
 
 $choice StartPaddling; Start paddling
 $else
 The driver looks reluctant.
-
 {@person}You expect me to just <i>give</i> you my kayak? 
-{@person}I don't even know you. Are you sure you're a real reporter? 
+{@person}I don't even know you. How can I {stat-name}trust{/stat-name} you'll give it back?  
 
 $choice MakeATradeToEarnTheirTrust; Make a trade to earn their trust
 $choice UseDeliWifi; Head into the deli and find another way
@@ -998,37 +859,31 @@ $endif
 @tags Bookworm, Resourceful
 
 $if StatCheck(Social, 3)
-Inside, the deli owner is happy to help you plan a safer route. 
-Seems your social cred is going up a little. 
+The deli owner helps you plan a safer route.
+Seems your {stat-name}social{/stat-name} cred is going up a little. 
 {@person}So... you're heading <i>toward</i> downtown??
 {@person}You know it's flooded, right? The Gazette just posted a breaking news update! 
-{@me}Yeah. I heard. 
-
-He gives you a free sandwich wrapped in paper and tells you to be careful out there.
+{@me}Uh, yeah. I heard. 
+{@person} Here. Have a free sandwich for the road. Be careful out there, kid. 
 $call AdjustStats(Research + 1, Resourceful + 1)
 $else
-Inside, you check the flood map.
+Inside, you check the flood map on your phone.
 You could use the deli owner's help, but he's too busy giving you the side-eye.
-You still don't have the best reputation around here. 
+You're not the best at navigating {stat-name}social{/stat-name} situations.  
 {@person}Buy something if you wanna stick around, kid. 
 {@person}This place is for paying customers only. 
 $call AdjustStats(Research + 1)
 $endif
-
-
-$choice ArriveAtFloodSite; Arrive at flood site
+$choice ArriveAtFloodSite; Arrive at the Twin Lakes dam 
 
 // Original Name: Eject: Just keep swimming...
 :: EjectJustKeepSwimming
-You end up washed into the high school football field...
-
+The flood washes you straight to the school football field...
 Now a small lake. 
-
-The good news: you're alive!
-
+The good news: you're alive!!! 
 The bad news: you lost your shoes, ruined all your tech, and spend all day sitting on the bleachers, waiting to be rescued. 
 
-$GameOver("You needed to be rescued.")
+$GameOver("You needed to be rescued. Better luck next time.")
 
 // Original Name: Take photos on the way
 :: TakePhotosOnTheWay
@@ -1221,8 +1076,8 @@ $endif
 
 // Original Name: Ask how the flood has affected his family.
 :: AskHowTheFloodHasAffectedHisFamily
-{@person}We're doing okay. Our house is on high ground, and we've got plenty of sandbags. 
-{@person}Other folks aren't so lucky. Not sure how downtown is gonna come back from this. 
+{@person}My wife and I have flood insurance and our house is on high ground, so we'll be okay.
+{@person} Other folks aren't so lucky. I'm not sure how downtown is gonna recover. 
 
 $call GiveSnippet(GreatFloodQuote)
 
@@ -1230,10 +1085,9 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Ask for flood safety tips.
 :: AskForFloodSafetyTips
-He gives you some great tips.
-
-{@person}Don't try to drive through water if you can't see the bottom. 
-{@person}You might end up getting lucky, but it's not worth the risk.
+{@person} Well, there's the obvious: don't drive through floodwater!
+{@person} Well... unless you've got a rescue vechicle like mine.
+{@person} And don't wade or swim in floodwater. It's usually full of bacteria.
 
 $call GiveSnippet(GreatFloodQuote)
 $call GiveSnippet(FloodSafetyTips)
@@ -1243,10 +1097,10 @@ $choice ArriveAtFloodSite; Arrive at flood site
 // Original Name: Ask what caused the flood.
 :: AskWhatCausedTheFlood
 He gives you a funny look. 
-
-{@person}I'm gonna go out on a limb here and say that it was the rain.
-
-Well, he's got a point there. Mayyyybe that wasn't the best question to ask. 
+{@person}What <i>caused</i>the flood?
+{@person} I'm gonna go out on a limb here and say that it was the rain.
+He's got a point there. Mayyyybe you could've phrased that question a little better. 
+$call GiveSnippet(BadFloodCauseQuote)
 
 $choice ArriveAtFloodSite; Arrive at flood site
 
@@ -1255,35 +1109,72 @@ $choice ArriveAtFloodSite; Arrive at flood site
 @tags Resourceful
 This is stupid and dangerous, but you can't leave this guy alone. 
 $call DecreaseTime(0.5)
-You grab armfuls of fancy local cheese. You're almost done when water rushes past you. 
+You help him carry armfuls of cheese up to the second floor of the shop. 
+You're heading back down the stairs for more when suddenly...
+{@person} Ahhh! Help me!
+Water is filling the shop--and the shopkeeper is right in the middle of it!
 
-The flood is inside, and rising fast! You race up to the second floor, pulling the shopkeeper with you. 
+$choice ThrowHimAFlotationDevice; Throw him a rope 
+$choice RunDownToSaveHim; Run down into the rising water to save him! 
 
-You're soaked and you lost most of your gear, but you saved the shopkeeper and got a great anecdote. 
-
-Plus, the shop owner has offered you free cheese for life! 
-
+:: ThrowHimAFlotationDevice
+Thinking fast, you pull down the Cherry Festival banner from above the stairs.
+He grabs on, and you pull him up and out of the rushing water!
+{@person}Oh, thank you!
+Good thing you're becmoming so {stat-name}resourceful{/stat-name}.
+Otherwise, who knows what would've happened to this innocent cheese merchant!
 $call GiveSnippet(CheeseRescue)
-$call AdjustStats(Resourceful - 2)
+$call AdjustStats(Resourceful + 1)
 $call AdjustStats(Trust + 2)
+Ooh, this is a high-quality anecdote. And you only had to almost die to get it! 
+$choice ArriveAtFloodSite; Flag down a rescuer and return to the dam  
 
+:: RunDownToSaveHim
+$if StatCheck(Endurance, 4)
+    Luckily you've been building up your {stat-name}endurance{/stat-name}! 
+    You grab the dazed shopkeeper and pull him to the stairs, where you wait for rescue.
+    Most of your gear has been washed right out of your pockets...
+    But you probably saved this poor guy's life. 
+    Plus, you've got a high-quality anecdote for your story... and free cheese for life!
+$call GiveSnippet(CheeseRescue)
+$call AdjustStats(Trust + 2)
+$call AdjustStats(Tech - 1)
+$call AdjustStats(Resourceful - 1)
 $choice ArriveAtFloodSite; Get rescued and head back to the dam 
+$else 
+    Oh no!! This water is a lot deeper than you thought.
+    You don't have the {stat-name}endurance{/stat-name} to keep swimming!
+    {@me} Ah! Help!!
+    {@person} Holy Swiss cheese!! We're doomed!
+    $choice TryToKeepSwimming; Get swept up in the flood 
+$endif 
+
+:: TryToKeepSwimming
+    Phew, thank goodness.
+    You wake up warm and dry in bed. It was all just a dream!
+    Then you notice where you are:
+    A room at the Twin Lakes Medical Center, with a card and a wheel of fancy cheese on the table.
+    {@article} Dear Ms. Benjamin, thank you so much for risking your life for my little shop! I hope that broken ankle heals up <i>gouda</i>.
+    Ugh. You're out of commission... but at least you've got free cheese for life. 
+    GAME OVER. 
 
 // Original Name: Show him the photos you took outside, to help him understand this dire situation.
 :: ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation
-You try to make him understand.
-
-{@me}Look. This is what Main Street looks like right now.
+{@me}Look. Do you see these pictures??
+{@me} The street will be underwater any minute. 
 {@me}We need to get out of here, or your parmesan will be parme<i>gone</i>!
 $call DecreaseTime(0.3333333)
 The pun finally seems to get through to him. 
 You run for the door, but it's too late. Water is rushing inside!
+$choice FlagDownAFirefighter 
 
-Luckily, a firefighter sees you waving her down. 
+:: FlagDownAFirefighter
+Luckily, the firefighter sees you waving and hurries to rescue you! 
+You've lost some of your gear, but at least you saved the shopkeeper...
+Plus, you got an amazing anecdote out of this mess. 
 
-You've lost some of your gear, but at least you saved the shopkeeper--and got an amazing anecdote out of this mess. 
-
-$call AdjustStats(Resourceful - 2)
+$call AdjustStats(Resourceful - 1)
+$call AdjustStats(Tech - 1)
 $call AdjustStats(Trust + 2)
 $call GiveSnippet(FirefighterRescue)
 
@@ -1291,7 +1182,6 @@ $choice ArriveAtFloodSite; Head back to the dam
 
 // Original Name: Evacuate--you aren't willing to die over cheese!
 :: Evacuate--YouArentWillingToDieOverCheese
-You make a mad dash from the flooded store.
 {@me}Sorry, I <i>gouda</i> go! 
 $call DecreaseTime(0.1666667)
 Outside, a firefighter helps you reach higher ground.
@@ -1303,38 +1193,30 @@ $choice ArriveAtFloodSite; Head back to the dam
 // Original Name: Stop to take photos
 :: StopToTakePhotos
 
-$if !StatCheck(Tech, 2)
-You float in the street and snap some photos.
-As expected, they turn out awful. 
-You're already wishing you had those lenses back.
+$if StatCheck(Tech, 3)
+You use your tech gear to take an amazing photo!
+Your editor is gonna love this one. Definitely worth putting in your story. 
 
 $call SFX(PhotoSnap)
-$call GiveSnippet(BlurryFloodPhotosKayak)
-
-
+$call GiveSnippet(GreatFloodPhotosKayak)
 $choice ArriveAtFloodSite; Arrive at flood site
-$endif
 
-
-$if Stat(Tech) == 2
-You can't find the right lens for these conditions. 
-Luckily, you're right in the middle of the action, so the photos still turn out pretty good!
+$if Stat(Tech, 2)
+You can't find the right lens for these conditions...
+But you still have enough basic {stat-name}tech{/stat-name} to get a decent shot!
+Maybe not a prize-winning photo, but it should be enough to get your readers' attention. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GoodFloodPhotosKayak)
 
 $choice ArriveAtFloodSite; Arrive at flood site
-$endif
-
-$if StatCheck(Tech, 3)
-
-You use your tech gear to take some photos.
-You do miss working with a whole team of photographers back in New York...
-But you have to admit, these snaps turned out amazing. 
+$else 
+You float in the street and snap some photos.
+As expected, they turn out awful. 
+You <i>really</i> need to get your hands on some better {stat-name}tech{/stat-name}. 
 
 $call SFX(PhotoSnap)
-$call GiveSnippet(GreatFloodPhotosKayak)
-
+$call GiveSnippet(BlurryFloodPhotosKayak)
 $choice ArriveAtFloodSite; Arrive at flood site
 $endif
 
@@ -1346,12 +1228,12 @@ $goto StoryFeedback
 $call BeginFeedback()
 {/bg}
 {img Anim/Editor.jpeg}
-{@person} Alright, let's see how you did...
+{@person} Okay, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
-    {@person}   First off, I thought I told you to include a picture?
-    {@person}   This will make for a lower quality story...
-    {@person}   Make sure you get one next time, rookie.
+    {@person}   Hmmm. No picture. 
+    {@person}   This will bring down your story's impact, El. 
+    {@person}   Most readers need visuals to grab thier attention. 
     {@person}   Other than that...
 $endif
 
@@ -1375,16 +1257,16 @@ $endif //1 or 2: no change
 
 $if StoryScore() == "good" //3+ net quality
     $if StoryAlignment() >= 0.5
-        {@person}   Amazing work today, Rookie!
+        {@person}   Amazing work today, El!
         {@person}   You stuck to the assignment and gathered high-quality quotes and photos. 
         {@person}   So many people read your story that it broke the server!
         {@person}   Now if only I had any clue how to get the website back online... 
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work out there, Rookie. This is some high-quality stuff!
+        {@person}   Nice work out there, El. This is some high-quality stuff!
         {@person}   You could've stuck a little more closely to my notes.
         {@person}   But still a solid story. We're already getting tons of engagement online!
     $else
-        {@person}   Your reporting is top-notch, Rookie! 
+        {@person}   Your reporting is top-notch, El! 
         {@person}   Although... your story construction didn't quite match what I asked for.  
         {@person}   Make sure to stick to the assignment to hook more readers... and hopefully help more people.
     $endif

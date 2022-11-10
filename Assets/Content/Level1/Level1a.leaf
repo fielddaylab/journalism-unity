@@ -35,10 +35,9 @@ $call SetLocation("Apartment")
 {bg $BG_Bedroom}
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
-Twin Lakes. Day 11. 
+Welcome to Twin Lakes, day 11. 
 The Cherry Capitol of the Midwest. 
-Your friends in New York were SO JEALOUS you snagged a reporting job straight out of college.
-Even if it's in a tiny, isolated, cherry-obsessed town. 
+Your friends back in New York were SO JEALOUS you snagged a reporting job straight out of college.
 Lucky you. 
 
 $choice CheckYourPhone; Check your phone.
@@ -47,24 +46,27 @@ $choice CheckYourPhone; Check your phone.
 :: CheckYourPhone
 {clear-text}
 {img Anim/enml-buzzingphone.jpg}
-5 missed calls from your editor.
-Probably checking up on your puff piece about the Cherry Festival. 
+Five missed calls from your editor.
+Probably checking up on your puff piece about the Cherry Festival.
 
-$choice CallYourEditor; Call back.
+
+$choice CallYourEditor; Call back. 
 
 // Original Name: Call your editor.
 :: CallYourEditor
 {clear-text}
 // rumble text style
-{anim rumble}{@phone} FINALLY!
-{@phone} Where have you been??
-{@me}Um... sleeping. It's 6:30 A.M.
-{@phone}Seriously, you slept through all that thunder??
-{@me}What thunder? 
-{@phone}It's been raining all night. Downtown is flooding!
-{@phone} I need you to get to the newsroom, ASAP.
+{anim rumble}{@phone} FINALLY! Where have you been??
+{@me} Um... sleeping. It's 5 in the morning.
+{@phone} El, it's been raining all night. Downtown is flooding!
+{@me} What?? You're joking, right?
+{@phone} Do I sound like I'm joking, kid?
+{@me} Um... no, ma'am.
+{@phone} You've been begging me for a serious story.
+{@phone} So... here's your chance. 
+{@phone} Get to the newsroom, ASAP. We need to get the word out. 
 
-$choice OnMyWay; {@me} On my way.
+$choice OnMyWay; {@me} "On my way."
 
 // Original Name: "On my way."
 :: OnMyWay
@@ -73,12 +75,14 @@ $choice OnMyWay; {@me} On my way.
 {clear-text}
 {/img}
 $call SetHeaderEnabled(true)
-You're in a one-year contract with the Twin Lakes Gazette.
-One year, and you'll be on to bigger and better things.
-But for now, you need to prove yourself.
-You have time to do one thing before you head to the newsroom. 
+You've got a reporting gig. You should be grateful. 
+But you can't stop thinking about that email from your dream job: the Smoke City Herald. 
+{@article} We don't hire rookies, Ms. Benjamin. Get some real experience. Find an editor who's willing to vouch for you. Then we'll talk.
+So... here you are, in a three-month contract with the Twin Lakes Gazette.
+Three months, and you'll be on to bigger and better things.
+You have time to do one thing before heading to the newsroom. 
 
-$choice CheckOnYourUpstairsNeighborWhoHatesThunderstorms; Check on your upstairs neighbor, who hates thunderstorms
+$choice CheckOnYourUpstairsNeighborWhoHatesThunderstorms; Check on your apartment neighbor, who hates thunderstorms
 $choice RoundUpYourTechAndRainGear; Round up your tech and rain gear
 $choice DigThroughTheFridgeForSomethingNourishing; Dig through the fridge for something nourishing
 $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for posts and photos about the storm
@@ -89,14 +93,10 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
-Your neighbor, Jeanie, is grateful you stopped by. 
-
-You help her find batteries for her flashlight and put out some food for her cats. 
-
-In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries.
+You help your neighbor find a flashlight and put out some food for her cats.
+In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries tiny cherries.
 {@person}{auto} I made this just for you, Dear!  
-
-{@me} Thanks! It's...really something.
+{@me} Thanks. It's...really something.
 
 $call AdjustStats(Trust + 1, Social + 1)
 $choice OffToWork; Off to work
@@ -107,9 +107,9 @@ $choice OffToWork; Off to work
 {clear-text}
 {bg $BG_HouseExterior}
 {img Anim/enml-phoneaccessories.jpg}
-You pack up your camera gear and phone charger. 
-Your raincoat is missing, but you manage to dig up a trash bag and your old swim goggles!
-Not exactly stylish, but at least you'll stay dry.   
+You haven't finished unpacking yet--you don't plan to live here very long, anyway. 
+Unfortunately, this makes it <i>slightly<i> tricky to find your rain gear. 
+Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
 $call AdjustStats(Tech + 1, Resourceful + 1)
 $choice OffToWork; Off to work
 
@@ -118,9 +118,9 @@ $choice OffToWork; Off to work
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
-You've been eating ramen and take-out all week.
-Luckily, your fridge is full of cherry-themed gifts from your alarmingly friendly neighbors.
-You eat a cherry muffin and pack up some cherry granola for later. 
+Your kitchen is full of food from your aggressively-friendly neighbors.
+Cherry muffins, cherry granola, cherry summer sausage.
+It's slightly over-the-top, but at least you won't go hungry. 
 $call AdjustStats(Endurance + 1, Resourceful + 1)
 $choice OffToWork; Off to work
 
@@ -129,11 +129,12 @@ $choice OffToWork; Off to work
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
-You scroll through posts on Squawker.
+You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
 
 {img Photo/HospitalDucks.jpg}
-{@article}Stranded at work @ the hospital. Ducks are swimming through the parking lot!
-{@article}5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
+{@article} Check it out. Ducks are swimming through the hospital parking lot!!
+
+{@article} Sponsored Article: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
 
 $choice MessageNurse; See if the hospital employee will let you use his photo.
 $choice ReadFloodingArticle; Read the click-bait article and brush up on your survival skills.
@@ -144,10 +145,9 @@ $choice ReadFloodingArticle; Read the click-bait article and brush up on your su
 {/img}
 {img Anim/enml-waterrushing.jpg}
 $call Ambience(Ambience/rain-inside.mp3)
-Outside, your neighbor, Maureen, is running around in a panic.
-Her backyard chickens have escaped their coop. 
+Your neighbor, Maureen, is running around after her backyard chickens.
 {@person}{anim rumble}Help! They're everywhere!! 
-It might be nice to help her. She did bring you a cherry strudel the other day.
+It might be nice to help out. She did bring you a cherry strudel the other day.
 
 $choice HelpHer; Help her and earn her trust 
 $choice RushToWork; There's no time, I've got to get to work!
@@ -155,18 +155,16 @@ $choice RushToWork; There's no time, I've got to get to work!
 // Original Name: Message Nurse
 :: MessageNurse
 {clear-text}
-{@me}Hi, can I ask if you took this photo?
-{@phone}Yep! Literally happening right now. Crazy, right? 
-{@me}I'm a reporter at the Gazette. 
-{@me}Would you be okay with us using this photo and crediting you? 
+{@me}Hey - this is a great photo!
+{@me} I'm a reporter at the Gazette. 
+{@me} Would it be okay if I use this photo and credit you? 
 
 $ActionChoice(Send message)
 {@phone}Ooh, yeah! Go right ahead!
-{@phone}I could even give you some headline suggestions!
-{@me}Oh, um...
+{@phone} I can even give you some headline suggestions! 
 // sway text
-{@phone}{anim sway}Fowl weather at the quack of dawn!
-{@phone}{anim sway}Storm expected to rack up large bill.
+{@phone}{anim sway}<i>Fowl</i> weather at the <i>quack</i> of dawn!
+{@phone}{anim sway}Storm expected to rack up large <i>bill</i>.
 
 $ContinueChoice({@me} Thanks. I'll keep those in mind.)
 
@@ -178,10 +176,9 @@ $choice OffToWork; Off to work
 :: ReadFloodingArticle
 {/img} 
 {clear-text}
-{auto}You open the article and learn about flood safety:
-{@article} Move to higher ground and stay off the roads! 
+{@article} The most important flood safety tip: Stay off the roads! 
 {@article}The #1 cause of death during flash flooding is trying to drive through it. 
-{@me}Well... that's promising.
+Well... that's promising.
 
 $call AdjustStats(Research + 1)
 $choice OffToWork; Head to work
@@ -190,8 +187,7 @@ $choice OffToWork; Head to work
 :: HelpHer
 {clear-text}
 {img Anim/Chicken3.mp4}
-Maureen's chickens wake you up at an ungodly hour every. single. day. 
-But on the other hand, they are pretty cute. 
+{@person} Hurry! We can't let them get swept away!
 
 $choice ChaseChickens; Chase after the chickens
 $choice LureChickens; Lure them with food
@@ -200,17 +196,16 @@ $choice LureChickens; Lure them with food
 :: RushToWork
 {clear-text}
 You make up an excuse and hurry to your car.
-Your neighbor can get her own coop in a group!
+Your neighbor can get her own coop in a group.
 {/img}
 
 $choice LoadYourBikeItCouldBeUsefulLater; Load your bike, it could be useful later.
-$choice ImInAHurryTheresNoNeedToBringTheBike; You're in a hurry, there's no need to bring the bike!
+$choice ImInAHurryTheresNoNeedToBringTheBike; Forget the bike--you're in a hurry!
 
 // Original Name: Chase chickens
 :: ChaseChickens
 You run around after the chickens and only get pecked twice.
-Maureen is beside herself with gratitude. 
-{@person}Oh, thank you so much! 
+{@person}Oh, thank you so much!  
 {@me}No big deal. Happy to help. 
 You head to your car, plucking feathers out of your hair. 
 
@@ -220,8 +215,7 @@ $choice HitTheRoad; Hit the road
 // Original Name: Lure chickens
 :: LureChickens
 @tags Trust, Resourceful
-You make a trail of cherry granola and the chickens come running!
-Maureen is beside herself with gratitude. 
+You make a trail of cherry granola and the chickens come running. 
 {@person}Oh, thank you so much!
 {@me}No big deal. Happy to help. 
 The good news: the chickens are safe now.
@@ -244,35 +238,38 @@ $choice DriveWithBike; Drive to the newsroom
 :: DriveWithBike
 {clear-text}
 {img Anim/enml-stuckcar.png}
-Wow. The streets are looking worse than you thought. 
-You don't have time to interview anyone--you spent too long loading up your bike.
-But you should have time to snag a quick photo!
+Wow. This flood might be more serious than you thought.
+You don't have time to stop for any interviews--you took too long loading up your bike.
+But you should have time to snag a photo or two!
 
 $choice TakeSomePhotos; Take some photos
 
 // Original Name: I'm in a hurry, there's no need to bring the bike!
 :: ImInAHurryTheresNoNeedToBringTheBike
-You drive toward the newsroom, windshield wipers on full blast. 
+Wow. It's awful out here. 
 
 $ActionChoice(Stop to look around.)
-A baker is piling up sacks of flour in front of her shop.
+Cars are stranded everywhere--including the famous Twin Lakes Cherrymobile!
+A baker is stacking bags of flour in front of her shop. 
 
-Cars are abandoned--including the famous Twin Lakes Cherrymobile!
 {img Anim/enml-stuckcar.png}
 
-$choice HelpTheBaker; Help the baker
-$choice TakeSomePhotos; Take some photos
+$choice HelpTheBaker; Talk to the baker   
+$choice TakeSomePhotos; Take a photo of the stranded Cherrymobile 
 
 // Original Name: Hit the road
 :: HitTheRoad
 {clear-text}
 {/img}
 {layout Right}
-Turns out the flood is a little more serious than you thought. 
-The town's famous Cherrymobile is abandoned in high water.
-Birds are pecking at pastries that have drifted out of a local bakery. 
-{img Anim/enml-textmessage.jpg}
-You wish you could snag some photos, but your editor is texting you. No time to stop.
+Wow... it's awful out here.
+{img Anim/enml-stuckcar.png}
+Pastries are floating down the street, and cars are stranded...
+Including the famous Twin Lakes Cherrymobile!
+You wish you could snag some photos, but your editor is texting you.
+{@person} El, where are you?? 
+{@person} We need to get this story out, ASAP. 
+
 $choice ArriveAtWork; Rush to work 
 
 // Original Name: Arrive at work.
@@ -283,7 +280,6 @@ $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 $call Ambience(Ambience/rain-inside.mp3)
 {layout Left}
-Your editor greets you at the door.
 
 $if Visited(HelpHer)
     {@person} I'm not even gonna ask why you're covered in feathers.
@@ -295,8 +291,7 @@ $else
 $endif
 
 $ContinueChoice({@me} Where is everybody??)
-{@person}Ben and Sudha are still trying to get here. 
-{@person}Khalisa is bailing out her flooded basement. 
+{@person}Ben and Sudha are stranded, and Khalisa's bailing out her flooded basement.
 {@person}Right now, you're my lead reporter.
 
 $ContinueChoice({@me} How can I help?)
@@ -307,8 +302,8 @@ $call ActivateStory()
 $call BeginTutorial()
     $call OpenWindow(Notes)
     $call Wait(0.4)
-    {@person} Your quotes, photos, and other snippets will show up here. 
-    {@person} You'll want to fill in every slot, so keep an eye out for scoops.
+    {@person} All the info you gather will show up here.  
+    {@person} You'll need to fill each slot with quotes, photos, or other story snippets. 
     {layout Left}
     $call PointTo(TutorialEditorNotes, 0, -12)
     {@person} I put your assignment in the "Editor's Notes" tab. 
@@ -317,15 +312,14 @@ $call BeginTutorial()
     {clear-text}
     $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
-    {@person} Pay attention to the story breakdown. 
+    {@person} Be thoughtful about the snippets you choose.   
     $call PointTo(TutorialPlayerAttributes, -24, 0)
-    {@person} You want your story...
+    {@person} You want your story's content...
     $call PointTo(TutorialTargetAttributes, -24, 0)
-    {@person} To line up with this.
+    {@person} To line up with the story breakdown here. 
     $call PointTo(TutorialQuality, -24, 0)
     {@person} Oh, and try to get high-quality snippets.
-    {@person} Be sure to include at least one photo, or your story's overall quality will suffer.
-    {@person} A blurry photo is better than nothing, but we have high standards here. 
+    {@person} A blurry photo or a bad quote is better than nothing, but we have high standards here. 
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
@@ -343,33 +337,28 @@ $choice BreakingNewsStory; {@me} On it.
 
 $if StatCheck(Endurance, 2)
     You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
-    The baker is stacking up bags of pastry flour. 
-    You're not sure if this will actually protect her shop or just turn into Play Doh, but you help anyway.
-    {@person} I don't know where to get sandbags. 
-    {@person} It all happened so fast!
-
+    {@me} Hey. Do you need some help?
+    {@person} Ugh. Is it that obvious? 
+    She's happy to answer your questions while you stack up bags of flour...
+    And she even gives you a cherry croissant for the road!
+    $call AdjustStats(Social + 1, Resourceful + 1)
     $call GiveSnippet(FriendlyShopkeeper)
 $elseif StatCheck(Social, 2)
     You rush over, your heart going out to the struggling shopkeep.
-    She's stacking up bags of flour.
-    {@person} I know sandbags work better, but I don't know where to find them.
-    {@person} It all happened so fast!
-    Talking to you seems to cheer her up. 
-    She agrees to let you quote her for your story, and she gives you a chocolate croissant for the road! 
-
-    $call AdjustStats(Social + 1, Endurance + 1, Trust + 1)
+    You're too tired to lift more than a few bags of flour...
+    But the baker seems thrilled to have the chance to vent. 
+    She agrees to let you quote her, and even gives you a cherry croissant for the road!
+    $call AdjustStats(Social + 1, Resourceful + 1) 
     $call GiveSnippet(FriendlyShopkeeper)
 $else
-    The baker is stacking up bags of flour to stop the floodwater.
-    Unfortunately, you're too tired to think of something comforting to say. 
-    {@me} Um... I think you're supposed to use sandbags. Flour might not work.
-    The baker seems exasperated.  
-    {@person}I think YOU'RE supposed to mind your own business. And feel free to quote me.
+    You hurry over to the baker, but you don't have the {stat-name}endurance{/stat-name} to help much...
+    And you haven't exactly been working on your {stat-name}social skills{/stat-name} lately.  
+    {@me} Um... I think most people use sandbags. Flour might not work. 
+    {@person} Oh, gee. You think? Thank you, oh-so-brilliant big city reporter, for pointing that out to me. 
     You ask for an interview, but the baker is, to put it mildly, not interested. 
     Maybe you could quote this, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
-    You may be a little low on  {stat-name}endurance{/stat-name}... And your {stat-name}social{/stat-name} skills could use some work.
 $endif
 
 $choice ArriveAtWork; Arrive at work.
@@ -379,22 +368,18 @@ $choice ArriveAtWork; Arrive at work.
 {clear-text}
 
 $if StatCheck(Tech, 2)
-Good thing you thought to grab all this {stat-name}tech{/stat-name} gear! 
-Your good camera and zoom lens is enough to get a clear shot!
-
+Good thing you thought to grab all this {stat-name}tech{/stat-name} gear.
+The conditions are awful, but you use your tripod and rain-sleeve to get a high-quality shot.
+This photo will definitely give your story a boost!
 $call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
 
-This is a high-quality picture... Including this in my story is sure to earn me some brownie points!
-
 $else
-You snap a few phone pictures, thinking wistfully of your camera and zoom lens, buried somewhere in your apartment.  
-At least blurry cars in blurry water is better than nothing. 
-
+You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in yoru apartment.
+Your editor is not a fan of low-quality photos.
+Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
-Maybe this would be better if you were more {stat-name}tech{/stat-name}-savvy...
-
 $endif
 
 
@@ -417,7 +402,7 @@ $if FirstVisit()
     $HubChoice(AnswerThePhone, "Answer the phone", -1)
 $endif
 
-$HubChoice(Office1-Online, "Check for material online ", 0.25, "")
+$HubChoice(Office1-Online, "Get online and look for useful material", 0.25, "")
 $HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "")
 $HubChoice(Office1-DNR, "Call the Department of Natural Resources for expert advice", 0.5, "")
 $HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.5, "")
@@ -425,13 +410,12 @@ $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situa
 
 :: Office1-Online
 {clear-text}
-You return to your desk, only to find it commandeered by rain buckets.
+You head to your desk, only to find it covered in rain buckets.
 Sigh.
 Stepping between puddles, you eventually find an unoccupied (and dry) corner.
-You hunker down with your laptop and search for updates on the flood.
 
 $OnceChoice(Office1-SocialMedia, "Look for photos on Squawker")
-$OnceChoice(Office1-Weather, "Check out the live flood map")
+$OnceChoice(Office1-Weather, "Check the local weather website")
 
 // Original Name: Answer the phone
 :: AnswerThePhone
@@ -441,9 +425,8 @@ $OnceChoice(Office1-Weather, "Check out the live flood map")
 {@me} Hello?
 {@phone} Hiya!! This is Fred Finkler.
 {@phone} You might remember me from the Town Hall meetings.
-
 Oh gosh. You remember Fred Finkler, alright.
-This guy is singlehandedly responsible for the Town Hall meeting going 45 minutes over time.
+This guy is singlehandedly responsible for last week's Town Hall meeting going 45 minutes over time.
 
 $call DecreaseTime(0.25)
 
@@ -456,10 +439,9 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 {bg $BG_OfficeExterior}
 {/map}
 {layout Left}
-You check the forecast and stumble upon an amazing resource: a live flood map! 
+Ooh, here's a great resource for your story: a live flood map! 
 You grab the link and write up a quick blurb on how to use it. 
-Sure, it seems obvious, but this is Twin Lakes. 
-Half of these people are probably still using paper maps in their glove compartments. 
+Sure, it seems obvious, but this is Twin Lakes. Half of these people are still using flip phones. 
 
 $call GiveSnippet(FloodMap)
 $call GiveSnippet(WeatherStats)
@@ -472,11 +454,10 @@ $goto Office1-Clock
 {clear-text}
 {/map}
 {layout Left}
-You ask your editor if the newsroom has any records of past flood stories.
-{@person}Hmmm. Jenkins was working on something about climate change before he retired.
-{@person}Feel free to look through his files... if you can find them. 
+The guy you replaced, Jenkins Something-or-Other, wrote a science story on extreme weather before he retired.
+He probably has some old filess you could use!
 
-$choice JenkinssComputer; Track down Jenkins's computer.
+$choice JenkinssComputer; Track down Jenkins's old computer.
 
 // Original Name: Office 1 - DNR
 :: Office1-DNR
@@ -486,41 +467,36 @@ $choice JenkinssComputer; Track down Jenkins's computer.
 {layout Left}
 $if StatCheck(Social, 2)
     The DNR worker sounds stressed out.
-    Luckily, you've had some practice helping stressed-out neighbors lately.  
-    He vents his frustrations about the flood, and you end up with a great quote!
+    Luckily, you've had some practice with helping stressed-out neighbors lately.  
+    He vents his frustrations about the flood.
     $call GiveSnippet(GoodDNR)
-    My editor goes wild for high-quality quotes like these!
+    A high-quality quote like thise will definitely give your story a boost!
 $else
-    The DNR worker sounds stressed out--and your out-of-towner vibe isn't helping.
+    The DNR worker sounds stressed out, and your out-of-towner vibe isn't helping.
     {@person}Sorry, but who are you? Are you even from here??  
     {@person}I'll give you our official statement, but then I need to run. 
     $call GiveSnippet(RehearsedDNR)
-
-    Sheesh... maybe you ought to be more {stat-name}social{/stat-name}.
+    Yikes. Looks like you might need to be more {stat-name}social{/stat-name}. 
 $endif
 
 
 $if Visited(JenkinssComputer)
     $ActionChoice(Try Jenkins's DNR Contact)
-    Wynne answers on the first ring. 
-    She's eager to tell you all about the science.  
-    {@phone} Scientists have been warning about a disaster like this for years. 
-    {@phone} What we're seeing right now is a 100-year flood.  
+    {@phone} Oh, I'm so glad you called! 
+    {@phone} Scientists at the college have been warning about a disaster like this for years. 
+    {@phone} They're calling it a 100-year-flood. 
 
     $if StatCheck(Research, 2)
-        You remember that term from your research: a flood that only happens once a century.
-        Wynne is impressed by your book smarts.
-        {@phone}I can tell you've done your research.
-        {@phone}Here's some more data for your story. 
+        {@me} I've read that term somewhere... a flood that only happens every 100 years, right 
+        {@phone} Yep. I can tell you've done your {stat-name}research{/stat-name}.
+        {@phone}Here's some more data for your story. Kinda complicated, but I'm sure you can figure it out. 
         $call GiveSnippet(DNRData)
-        This looks like some high-quality data. Including this in the story should make it even better!
+        This looks like high-quality data from a reliable source--exactly what your editor is looking for.
     $else
         {@me}Yikes. A flood that lasts 100 years??? 
         Wynne laughs. Apparently you got something wrong there. 
-        {@phone}You didn't do much research, did you, Rookie?
-        {@phone}I don't have time to teach you the basics today. But feel free to call again later. 
-
-        Yikes... Maybe next time, you should brush up on {stat-name}research{/stat-name} beforehand.
+        {@phone}You didn't do much {stat-name}research{/stat-name}, did you, kid?
+        {@phone}I don't have time to teach you the basics today. But good luck with your article. 
     $endif
 
 $endif
@@ -544,29 +520,18 @@ The police spokesman seems suspicious of your credentials.
 $if Visited(HelpHer)
     The officer is suddenly more cheerful.
     {@phone} Oh, I've heard of you! Didn't you help rescue Maureen's chickens this morning?
-
-    You're shocked that he knows about this.
-    {@me} Yeah, uh, that was me.
-
-    You ask him for advice on how people can stay safe. 
-
-    He gives you tons of great info, including a story about a local man whose car got swept into a ditch! 
-
-    {@phone} Water was rising fast. Rescuers saved him and his dog just in time.
-    {@phone} Remember: Turn around, don't drown!
-
+    {@auto} {@phone} I'm glad our new reporter is looking out for her neighbors.
+    He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
     $call GiveSnippet(PoliceSafetyQuote)
     $call GiveSnippet(PoliceStory)
-    
-    That story really ought to resonate with our readers! My editor would want me to include it.
+    This story has all the drama people are looking for. Definitely a high-quality snippet for your article!
 $else
     The officer coughs awkwardly.
     {@phone} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
     {@phone} She said you almost ran over her chickens this morning.
-    {@me} I wouldn't say 'ran over,' exactly...
-    He gives you a few basic quotes about safety.
+    {@me} I wouldn't say 'ran over,' exactly.
+    {@phone} Well. I can give you some safety info, but then I'd better go. 
     {@phone} And just a tip... I don't know what it's like in New York, but around here, we help our neighbors.   
-    Huh. So much for Midwest nice. 
     $call GiveSnippet(PoliceSafetyQuote)
 $endif
 
@@ -580,32 +545,28 @@ $goto Office1-Clock
 {layout Left}
 $if StatCheck(Social, 2)
     {img Anim/enml-coffeedonuts.jpg}
-    Your City Hall contact is thrilled to hear from you. 
-    {@phone} Everyone is still talking about those cherry donuts you brought from Sophia's last time!
+    {@phone} El, it's great to hear from you!
+    {@phone} Everybody here is still talking about those cherry donuts you brought from Sophia's last time. 
     $if Visited(HelpTheBaker)
-        {@phone}I heard you helped shore up her bakery this morning. Nice work!!     
+        {@phone}I heard you helped rescue her bakery this morning. Nice work!!     
     $else
-        {@phone}Poor Sophia. Did you hear about all the pastries that got washed away this morning? What a tragedy.
+        {@phone}Poor Sophia. Did you hear her bakery flooded this morning? What a tragedy.
     $endif
-    She tells you that the flood started near the dam.
+    {@me} Can you tell me more about the flood?
+    {@phone} Well, so far we know the situation is worst near the Twin Lakes Dam. 
     {@phone} Volunteers are stacking sandbags, while emergency workers deal with rescues and evacuations.
-    {@phone} I wish I could say nobody saw this coming.
-    {@phone} But Twin Lakes has been on the verge of a flood like this for years.
+    {@phone} I wish I could say nobody saw this coming, but Twin Lakes has been on the verge of a flood like this for years.
 
     $call GiveSnippet(FloodBackground)
     $call GiveSnippet(CityHallShock)
-
-    What a great quote... I'm sure my editor would want me to include it!
+    This is a great quote. It should be high-quality enough to boost your story score!
 $else
-    Your city hall contact doesn't seem thrilled to hear from you.
+    Your Town Hall contact doesn't sound thrilled to hear from you.
     Come to think of it, calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
-    {@phone}{auto} We're pretty busy here.
-    {@phone} You can check our website later.
-
+    {@phone}{auto} We're pretty busy here, Ms. Benjamin.
+    {@phone} Just check the city website. It's all there. 
     $call GiveSnippet(CityHallAnnoyance)
-
-    That didn't go too well... 
-    ...maybe you need to brush up on your {stat-name}social{/stat-name} skills.
+    Ugh. Looks like you need to keep working on your {stat-name}social{/stat-name} cred. 
 $endif
 
 
@@ -619,17 +580,19 @@ $goto Office1-Clock
 {layout Left}
 
 $if StatCheck(Research, 2)
-    Thanks to your bookish tendencies, you find a lead.
-    A friend from book club is livestreaming from outside the library!
-    You message her, and she sends you some amazing photos. 
-
+    Thanks to your obsession with local {stat-name}research{/stat-name}, you find a lead. 
+    Your librarian friend is livestreaming the flood!
+    {@me} Hey Madi, are you safe out there? 
+    {@person} Yes, we're all okay! 
+    {@person} Here, I'll send you a few photos! My phone's not the best, though. 
     $call GiveSnippet(LibraryLot)
+    Lower-quality photos like this probably won't help your story reach more people...
+    But as your editor puts it, a bad photo is better than nothing. 
 $else
     You get on Squawker and check the #TwinLakesFlood hashtag.
-    Maybe with a little more {stat-name}research{/stat-name} you could look more in-depth...
-    But not today.
-    There are no super impressive shots, but plenty of dark, grainy pictures of flooded streets.
-    
+    Maybe someday you'll get better at this kind of {stat-name}research{/stat-name}...
+    But for now, all you can find are some dark, grainy shots. 
+
     $if HasTime(0.25)
         $HubChoice(MessageCherryCharlie07, "Message CherryCharlie07 for permission to use their photo", 0.25)
     $else
@@ -645,10 +608,9 @@ $goto Office1-Clock
 {layout Left}
 $call DecreaseTime(0.5)
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
-
 You don't get any information for your story, but he seems grateful to you for listening.
 
-$call AdjustStats(Trust + 1, Social + 1)
+$call AdjustStats(Trust + 1)
 $choice BreakingNewsStory; Return to your desk
 
 // Original Name: Office 1 - Clock
@@ -666,27 +628,20 @@ $endif
 {img Anim/enml-oldcomputer.jpg}
 
 $if StatCheck(Tech, 2)
-Jenkins's computer is basically an antique.
-
-Luckily, you love old 90's tech and manage to log on without much trouble. 
-
-You find a treasure trove of quotes from local scientists!
-
-You also dig up Jenkins's old DNR contact: Wynne D. Storme. 
+Thanks to your {stat-name}tech skills{/stat-name}, you get logged on easily!
+Jenkins's computer includes data and quotes from local scientists. 
+You also dig up his contact at the DNR:
+{@article}Wynne D. Storme, flood management expert 
 
 $call GiveSnippet(ScientistQuotes)
-
-There are some hidden gems in these old quotes...
-This type of quality should work great in my story!
+Looks like Jenkins knew what he was doing--these quote are seriously high quality. 
 $else
 Jenkins's computer looks like it's from the stone age. Or at least the 90's. 
-
 You don't even know how to turn it on.
-
 Maybe if you were a little more {stat-name}tech{/stat-name}-savvy you could crack it.
 
-But at least you find a post-it note on his desk: 
-{@article}Wynne D. Storme, flooding expert @ DNR
+You do manage to find a podt-it note with his DNR contact: 
+{@article}Wynne D. Storme, flood management expert
 $endif
 
 $goto Office1-Clock
@@ -697,28 +652,17 @@ $goto Office1-Clock
 {layout Left}
 
 $if StatCheck(Trust, 2)
-    {@phone}oh yeah, i recognize your username from some of the stories you've Squawked out! go right ahead 😊
+    {@phone}oh yeah, i recognize your username from some of the stories you've Squawked out! 
+    {@phone} you seem trustworthy. go right ahead and use my photo! 😊
 
     $call GiveSnippet(LibraryLot)
 $else
-    {@person}the twin lakes gazette?? that sounds fake. how do i know you're a real reporter?
-
-    $if StatCheck(Tech, 3)
+    {@person}the twin lakes gazette?? that sounds fake. how do i know i can trust you? 
         You've been waiting your whole life for this moment.
         You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Gazette website (which you singlehandedly created).  
-        {@phone}yikes, ok. i get the point. you can use it.
-
+        {@phone}yikes, ok. you've convinced me! go ahead and use the photo. 
+        {@phone} but... please don't contact me again. 
         $call GiveSnippet(LibraryLot)
-    $else
-        You don't have time for this. You log off and snap a picture of the flooded parking lot outside the newsroom. 
-        Kinda boring, but it's better than nothing. Probably.
-
-        Maybe you could have navigated that better if you knew more about {stat-name}tech{/stat-name}... 
-        ...or earned people's {stat-name}trust{/stat-name}.
-
-        $call SFX(PhotoSnap)
-        $call GiveSnippet(GrainyPicture)
-    $endif
 $endif
 
 $goto Office1-Clock
@@ -746,9 +690,9 @@ $call BeginFeedback()
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
-    {@person}   First off, I thought I told you to include a picture?
-    {@person}   This will make for a lower quality story...
-    {@person}   Make sure you get one next time, rookie.
+    {@person}   I thought I told you to include a picture, Benjamin. 
+    {@person}   This will bring down your overall story score. 
+    {@person}   Photos and other visuals help us hook readers. Don't forget next time. 
     {@person}   Other than that...
 $endif
 
@@ -782,35 +726,35 @@ $if StoryScore() == "good" //3+ net quality
     $else
         {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
         {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
-        {@person}   Make sure to check my notes next time. It's all in there. 
+        {@person}   Make sure to keep an eye on the story breakdown next time. 
     $endif
 $elseif StoryScore() == "medium" //1 or 2 net quality
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work getting the right info out there!
-        {@person}   We would like to see even more quality info...
-        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+        {@person}   Nice work matching up with that story breakdown!
+        {@person}   I'd like to see even more high-quality info...
+        {@person}   But still, a solid story. This should help a lot of people.  
     $elseif StoryAlignment() >= 0.3
-        {@person}   Hmm... not bad, Rookie! Some decent-quality info in there.
+        {@person}   Not bad, Rookie! Not perfect, but definitely not bad.  
         {@person}   This should be enough to help a lot of people.  
-        {@person}   Next time, make sure to check my notes. You veered off topic a little.
+        {@person}   Next time, make sure to check my notes. 
     $else
-        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
-        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@person}   Hmmm... not too bad, El. You gathered some useful, quality information here.   
+        {@person}   Next time, keep an eye on the story breakdown.   
         {@person}   Still. Not bad for your first natural disaster. 
     $endif
 $else //<1 net quality
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   Nice work, El. You got a lot of useful information out there! 
         {@person}   This story should help a lot of people... 
-        {@person}   Though I gotta admit, we could use some higher-quality info here.
+        {@person}   Though I gotta admit, we could use some higher-quality snippets.
     $elseif StoryAlignment() >= 0.3
         {@person}   Nice work, Rookie. Your story construction is pretty solid!
         {@person}   Your quality control could definitely use some work. 
         {@person}   Still. Not bad for your first natural disaster. 
     $else
         {@person}   Well.... this could be worse. Sort of.  
-        {@person}   We needed more high-quality info here. Make sure to check my notes next time. 
-        {@person}   This was your first natural disaster, so I'll let it slide.
+        {@person}   We needed more high-quality snippets here. And a closer match with the story breakdown.
+        {@person}   But this was your first natural disaster, so I'll let it slide.
     $endif
 $endif
 

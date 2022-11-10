@@ -302,6 +302,13 @@ There are free sandbags the Twin Lakes community center—-but people need to ma
 @attr Color
 My family is doing okay, but lots of other folks aren't so lucky. Not sure how downtown is gonna come back from this. 
 
+// Original Name: Great flood quote
+:: BadFloodCauseQuote
+@type Quote
+@quality Poor
+@attr Color
+The flood was caused by the rain. Obviously. 
+
 // Original Name: Flood safety tips
 :: FloodSafetyTips
 @type Fact
