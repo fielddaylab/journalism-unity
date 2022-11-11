@@ -25,9 +25,9 @@ $OnceChoice(CheckSquawkerMessages, "Check Squawker")
 
 // Original Name: Check Squawker messages
 :: CheckSquawkerMessages
-{@phone}Hi, my name is Birdie. I saw your article. 
-{@phone}Decent story, but you hardly even mentioned the wetlands!
-{@phone}Can we meet?
+{@birdie}Hi, my name is Birdie. I saw your article. 
+{@birdie}Decent story, but you hardly even mentioned the wetlands!
+{@birdie}Can we meet?
 
 According to her profile, she runs a conservation group called CRANE.
 
@@ -44,15 +44,15 @@ $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone 
 @tags Trust
 {@me}{auto}I'm interested. Can you tell me more?
 $if Visited(TakeASnackBreak)
-{@phone}About time.
+{@birdie}About time.
 $elseif Visited(ReadUpOnCRANE)
-{@phone}About time.
+{@birdie}About time.
 $else
-{@phone}Hey, thanks for the quick response!
+{@birdie}Oh, thanks for the quick response!
 $call AdjustStats(Trust + 1)
 $endif
-{@phone}Wetland destruction is a huge part of what caused the flood. 
-{@phone}And now the Cherry Creek Marsh is slated to be destroyed! 
+{@birdie}Wetland destruction is a huge part of what caused the flood. 
+{@birdie}And now the Cherry Creek Marsh is slated to be destroyed! 
 
 $choice AgreeToMeetWithHerInTheMorning; Agree to meet with her tomorrow
 $choice CheckInWithYourEditor; Check with your editor
@@ -106,9 +106,9 @@ $choice ReadYourEditorsMessage; Read messages
 
 // Original Name: Agree to meet with her in the morning.
 :: AgreeToMeetWithHerInTheMorning
-{@phone}Wonderful! Meet me at the Snakebite Trailhead.
+{@birdie}Wonderful! Meet me at the Snakebite Trailhead.
 {@me}Um... I don't really feel good about the name "Snakebite Trail"....
-{@phone}Oh, don't worry, dear. There are only two venomous species around here.
+{@birdie}Oh, don't worry, dear. There are only two venomous species around here.
 Oh. How comforting. 
 
 $choice TomorrowMorning8A.M; Tomorrow morning, 8 a.m.
@@ -117,20 +117,20 @@ $choice TomorrowMorning8A.M; Tomorrow morning, 8 a.m.
 :: CheckInWithYourEditor
 Your editor is intrigued.
 
-{@phone}Strange... Cherry Creek Marsh hasn't come up much in Town Hall meetings.
+{@dionne}Strange... Cherry Creek Marsh hasn't come up much in Town Hall meetings.
 {@me}Then it must not be important, right?
-{@phone}That's what you need to find out. 
+{@dionne}That's what you need to find out. 
 
 $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
 
 // Original Name: Read your editor's message
 :: ReadYourEditorsMessage
-{@phone}Is it true you blocked the director of CRANE on Squawker?
-{@phone}And made fun of her name???  
-{@phone}There's a story here, El. Where are you??  
+{@dionne}Is it true you blocked the director of CRANE on Squawker?
+{@dionne}And made fun of her name???  
+{@dionne}There's a story here, El. Where are you??  
 {@me}I'm here. Sorry!! I'll message her now. 
-{@phone}You're too late. Khalisa's got this one.
-{@phone}And just a tip for you, rookie: try not to insult your sources. 
+{@dionne}You're too late. Khalisa's got this one.
+{@dionne}And just a tip for you, rookie: try not to insult your sources. 
 
 //TODO: Replace with a better game over message
 $GameOver("You lost the scoop. Better luck next time."")
@@ -172,12 +172,12 @@ $elseif StatCheck(Tech, 4)
 
 $else 
     The librarian notices you looking helpless.
-    {@person}Hi there! Need some help?
+    {@librarian}Oh, hey, El! Need some help?
      {@me}Oh... yeah, that would be great!
-   {@person} Here. Some articles on all the wetlands this town has paved over.  
-   {@person}Sugar Marsh used to be right where we're standing.
-    {@person}The library is so important for our community...
-    {@person}But I wish they could've built it somewhere else. 
+   {@librarian} Here. Some articles on all the wetlands this town has paved over.  
+   {@librarian}Sugar Marsh used to be right where we're standing.
+    {librarian}The library is so important for our community...
+    {librarian}But I wish they could've built it somewhere else. 
 
     $call GiveSnippet(LibrarianQuote)
     $call GiveSnippet(IncreasedFloodingSugarMarsh)
@@ -190,9 +190,9 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 @tags Resourceful
 You call Khalisa for advice. 
 {@me}Hey.... what are the marshes around here like?
-{@phone}Oh, they're beautiful! Lots of wildlife.  
-{@phone}Cranes, deer, turtles, tons of snakes. I even saw a coyote once!
-{@phone}Cool, huh?
+{@khalisa}Oh, they're beautiful! Lots of wildlife.  
+{@khalisa}Cranes, deer, turtles, tons of snakes. I even saw a coyote once!
+{@khalisa}Cool, huh?
 {@me}.....Mmmhm. 
 You stuff your bag with pepper spray, protein bars, a compass, an air horn, and a roll of duct tape, in case you get lost and need to build a shelter from twigs and prairie grass. 
 Oh, and bug spray, of course. 
@@ -210,23 +210,24 @@ $call SetLocation("Downtown)
 
 $if Visited(AskAroundForItsOwner)
 When you arrive, Ben is eager to hear about the Great Chicken Rescue. 
-{@person}I heard you saved the mayor's chicken from drowning!!
-{@person}Is it true you swam to the bottom of the lake to save the eggs?
+{@ben}I heard you saved the mayor's chicken from drowning!!
+{@ben}Is it true you swam to the bottom of the lake to rescue the eggs?
 {@me}Um... not even a little bit.
+Ben doesn't seem to hear you. Maybe this is how small-town legends get started. 
 
 $call AdjustStats(Trust + 1)
 $elseif Visited(MainStreetCafe)
 You meet Khalisa and Ben at the Goldfish Cafe. 
 The cafe owner is delighted to see you again. 
-{@person}I loved your article! Thanks to you, I've had lots of volunteers offering to help me. 
-{@person}Here's a quiche and some coffee for you and your friends, free of charge. 
+{@cafeowner}I loved your article! Thanks to you, I've had lots of volunteers offering to help me. 
+{@cafeowner}Here's a quiche and some coffee for you and your friends, free of charge. 
 $call AdjustStats(Trust + 1)
 $else
 You meet Khalisa and Ben at the Goldfish Cafe.
 The owner is delighted to meet you. 
-{@person}You're El Benjamin? I read your story about the flood!
-{@person} I can tell you really care about this town.
-{@person} Here's a quiche and some coffee, free of charge. 
+{@cafeowner}You're El Benjamin, right? I read your story about the flood!
+{@cafeowner} I can tell you really care about this town.
+{@cafeowner} Here's a quiche and some coffee, free of charge!
 
 $endif
 
@@ -247,18 +248,18 @@ $OnceChoice(TalkToCRANEDirector, "Talk to Birdie")
 
 // Original Name: Talk to CRANE Director
 :: TalkToCRANEDirector
-{@person}I'm glad you're here. This situation is urgent.
-{@person} More rain is sure to come soon.
-{@person}If we don't protect our wetlands, Twin Lakes won't survive!
+{@birdie}I'm glad you're here. This situation is urgent.
+{@birdie} More rain is sure to come soon.
+{@birdie}If we don't protect our wetlands, Twin Lakes won't survive!
 
 $call GiveSnippet(SeriousWetlands)
 $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the flood?")
 
 // Original Name: "How is that related to the flooding?"
 :: HowIsThatRelatedToTheFlooding
-{@person}When it rains, wetlands soak up water like a sponge and help prevent flooding.
-{@person}But 90% of our original wetlands are gone.
-{@person}Cherry Creek Marsh is the only one we've got left.
+{@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
+{@birdie}But 90% of our original wetlands are gone.
+{@birdie}Cherry Creek Marsh is the only one we've got left.
 
 $call GiveSnippet(WetlandsRelatedToFlooding)
 
@@ -271,9 +272,8 @@ $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the othe
 // Original Name: "Can you tell me what you mean by "wetlands?""
 :: WhatDoYouMeanByWetlands
 She seems irked that you don't know this already.
-{@person}Are you really the same person who wrote that science story yesterday??
-{@person}Wetlands are areas where water covers the soil, for at least part of the year. 
-{@person}Like Cherry Creek Marsh here. 
+{@birdie}Well, isn't it obvious? Wetlands are areas where water covers the soil for at least part of the year. 
+{@birdie}Literally "wet land." Like Cherry Creek Marsh here. 
 
 $call GiveSnippet(WetlandDefinition)
 $call AdjustStats(Trust - 1)
@@ -284,9 +284,9 @@ $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all of Twin 
 // Original Name: "Why are the wetlands so important?"
 :: WhatAboutTheLakes
 
-{@person}The lakes are important, too. 
-{@person}But everyone talks about the lakes. They forget about the wetlands.
-{@person}The whole watershed is connected. Every part has its role. 
+{@birdie}The lakes are important, too. 
+{@birdie}But everyone talks about the lakes. They forget about the wetlands.
+{@birdie}The whole watershed is connected. Every part has its role. 
 
 $call GiveSnippet(ConnectedWatershed)
 
@@ -295,8 +295,8 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 
 // Original Name: "What happened to the wetlands in Twin Lakes?"
 :: WhatHappenedToTheWetlandsInTwinLakes
-{@person}Shops. Parking lots. Apartment complexes.
-{@person}The town keeps growing, and our wetlands keep shrinking. 
+{@birdie}Shops. Parking lots. Apartment complexes.
+{@birdie}The town keeps growing, and our wetlands keep shrinking. 
 
 $call GiveSnippet(WhatHappenedToWetlands)
 $OnceChoice(AreTherePoliciesToProtectWetlands,"Are there any policies to protect wetlands?")
@@ -304,9 +304,9 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 
 // Original Name: "Are there policies to protect wetlands?"
 :: AreTherePoliciesToProtectWetlands
-{@person}There are some regulations... but not enough. 
-{@person}The final vote to decide the fate of Cherry Creek Marsh happens tomorrow. 
-{@person}That's why I need you to get the word out. 
+{@birdie}There are some regulations... but not enough. 
+{@birdie}The final vote to decide the fate of Cherry Creek Marsh happens tomorrow. 
+{@birdie}That's why I need you to get the word out. 
 
 Wow... tomorrow?? Guess the pressure is on. 
 
@@ -315,10 +315,10 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 
 //Have you brought up this issue at Town Hall meetings? 
 :: HaveYouBroughtThisUpAtTownHallMeetings
-{@person}I've tried. No one listens. 
-{@person}The mayor always moves on to the next topic so quickly! 
-{@person}The final vote happens tomorrow. 
-{@person}That's why I need your help.
+{@birdie}I've tried. No one listens. 
+{@birdie}The mayor always moves on to the next topic so quickly! 
+{@birdie}The final vote happens tomorrow. 
+{@birdie}That's why I need your help.
 
 Wow... tomorrow?? Guess the pressure is on. 
 
@@ -328,30 +328,30 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 
 // Original Name: "Do you have sources for all this information?"
 :: DoYouHaveSourcesForAllThisInformation
-{@person}This data comes straight from the Limnology Department website.
-{@person}Of course, the Spark Project doesn't care about data. 
+{@birdie}This data comes straight from the Limnology Department website.
+{@birdie}Of course, the Spark Project doesn't care about data. 
 {@me}What's the Spark Project?  
-{@person}A local business expansion group. They're awful. 
-{@person}They would literally pave over paradise to build a bagel shop. 
+{@birdie}A local business expansion group. They're awful. 
+{@birdie}They would literally pave over paradise to build a bagel shop. 
 You have to admit, Twin Lakes's bagel scene is sorely lacking. 
 But this doesn't seem like the best time to bring this up. 
 {@me}Do you know where I can find the Spark Project?
-{@person}They have a meeting this morning, in the old opera house. 
-{@person}I wish I could go protest...
-{@person}But there's so much work to do here.  
+{@birdie}They have a meeting this morning, in the old opera house. 
+{@birdie}I wish I could go protest...
+{@birdie}But there's so much work to do here.  
 
 $call GiveSnippet(AwfulSparkProject)
-$OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor")
+$OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor with an update")
 
 // Original Name: Call your editor
 :: CallYourEditorAboutWetlandStory
-{@phone} What do you think, El? 
+{@dionne} What do you think, El? 
 {@me} I think there's a story here. 
 {@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
-{@phone}Then we need to fast-track this story.
-{@phone}I'll give you 2.5 hours. 
-{@phone} Remember, this is a controversial topic--we don't want to miss anything. 
-{@phone}Make sure to check your sources!
+{@dionne}Then we need to fast-track this story.
+{@dionne}I'll give you 2.5 hours. 
+{@dionne} And make sure to verify your data. 
+{@dionne} This is a controversial topic. We don't want to put any false information out there. 
 
 $choice MarshMap; Got it. Thanks. 
 
@@ -380,16 +380,16 @@ $endif
 {bg $BG_OperaHouseInt}
 $call SetLocation("OperaHouse")
 <b>Location: The Twin Lakes Opera House</b>
-{@article}Welcoe to the historic Twin Lakes Opera House!
-{@article}Restored thanks to a generous donation by the Spark Project. 
+{@sign}Welcome to the historic Twin Lakes Opera House!
+{@sign}Restored thanks to a generous donation by the Spark Project. 
 
 $HubChoice(SitAndListen, "Sit in the back and listen", 0.5)
 $HubChoice(AskForAnInterview, "Ask the leader for an interview", 0.25)
 
 // Original Name: Sit in the back and listen
 :: SitAndListen
-{@person}Tourists are being scared away by the flood.
-{@person}We need to help business owners get through this!
+{@sparkleader}Tourists are being scared away by the flood.
+{@sparkleader}We need to help business owners get through this!
 People call out ideas: a Shop Local campaign, free hotel stays, volunteers to help flooded businesses with repairs.
 Hmm. So far, these people don't seem <i>totally</i> awful...
 
@@ -400,10 +400,10 @@ $HubChoice(DecideWhatToDoNext, "Look for info elsewhere", 0)
 
 //Original Name: Ask for an interview
 :: AskForAnInterview
-{@person}Sure. I love doing press!
-{@person}The name's Nancy Gilcrest.
-{@person}What are you writing about? 
-{@person}The flood recovery volunteers? Our new playground initiatve? 
+{@sparkleader}Sure. I love doing press!
+{@sparkleader}The name's Nancy Gilcrest.
+{@sparkleader}What are you writing about? 
+{@sparkleader}The flood recovery volunteers? Our new playground initiatve? 
 
 $OnceChoice(BusinessIsDestroyingTheWetlands, "I'm writing about how business is destroying all of our wetlands.")
 $OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in an interview about Cherry Creek Marsh I wanted to get your perspective.")
@@ -411,10 +411,10 @@ $OnceChoice(PlaygroundInitiative, "Actually, I'd love to hear about the playgrou
 
 //Original Name: Playground initiative 
 :: PlaygroundInitiative
-{@person}The playgrounds around here are old and rusted. 
-{@person}We want to build a new playground in every Twin Lakes neighborhood! 
+{@nancy}The playgrounds around here are old and rusted. 
+{@nancy}We want to build a new playground in every Twin Lakes neighborhood! 
 {@me}Wow. That's... actually pretty great.
-{@person}We're all about helping the town!
+{@nancy}We're all about helping the town!
 
 $call GiveSnippet(PlaygroundInitiativeQuote)
 
@@ -423,10 +423,10 @@ $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the tow
 
 // Original Name: Spark Project came up in an interview
 :: YourNameCameUpInAnInterview
-{@person} I'm glad you asked!
-{@person}We plan to pave over parts of the marsh and build low-income apartments.  
-{@person}Affordable, peaceful. 
-{@person}It'll make space for people who want to move to our beautiful town, but can't afford it. 
+{@nancy} I'm glad you asked!
+{@nancy}We plan to pave over parts of the marsh and build low-income apartments.  
+{@nancy}Affordable, peaceful. 
+{@nancy}It'll make space for people who want to move to our beautiful town, but can't afford it. 
 
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
@@ -434,10 +434,10 @@ $OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands
 
 //OriginalName: What about your plan for the Cherry Creek Marsh? 
 :: CherryCreekMarshPlan
-{@person}Of course it'll help!
-{@person}We plan to pave over parts of the marsh and build low-income apartments.  
-{@person}Affordable, peaceful. 
-{@person}It'll make space for people who want to move to our beautiful town, but can't afford it. 
+{@nancy}Of course it'll help!
+{@nancy}We plan to pave over parts of the marsh and build low-income apartments.  
+{@nancy}Affordable, peaceful. 
+{@nancy}It'll make space for people who want to move to our beautiful town, but can't afford it. 
 
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
@@ -446,11 +446,11 @@ $OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands
 //Original Name: BusinessIsDestroyingTheWetlands
 :: BusinessIsDestroyingTheWetlands
 Instantly, her smile fades. 
-{@person}So we're the bad guys in this little story of yours?
+{@nancy}So we're the bad guys in this little story of yours?
 {@me}No, that's not what I--
-{@person}Sugar Marsh was paved over before I was even born.
-{@person}It's now a library, a pool, and a community center.
-{@person}Or don't you want the children to have somewhere to play? 
+{@nancy}Sugar Marsh was paved over before I was even born.
+{@nancy}It's now a library, a pool, and a community center.
+{@nancy}Or don't you want the children to have somewhere to play? 
 
 $call GiveSnippet (SugarMarshReplacedWithLibrary)
 
@@ -460,14 +460,15 @@ $OnceChoice(RudeSparkProjectResponse, "Really? \"Think of the children?\" That's
 
 //OriginalName: Really? "Think about the children?" That's the best you've got? 
 :: RudeSparkProjectResponse
-{@person}Excuse me one moment.
+Nancy narrows her eyes. 
+{@nancy}Excuse me one moment, Dear.
 She starts typing on her phone... and that's when you realize she's been filming you this whole time. 
 {@me}Um... what are you doing? 
-{@person} You'll see.  
-Almost immediately, your phone starts chiming with Squawker notifications.
-{@phone}This so-called reporter is harrassing small business owners. It needs to stop!! 
-{@phone}Libraries? Community centers?? Find something else to get mad about. Jerk. 
-{@phone}Go back to the big city you came from!!!
+{@nancy} You'll see.  
+Your phone starts chiming with Squawker notifications.
+{@squawkermessage}This so-called reporter is harrassing small business owners. It needs to stop!! 
+{@squawkermessage}Libraries? Community centers?? Find something else to get mad about. Jerk. 
+{@squawkermessage}Go back to the big city you came from!!!
 Uh oh. This interview is tanked. And so is your reputation.
 $GameOver("On the plus side, you're the main character on Squawker today. Better luck next time.")
 
@@ -476,23 +477,23 @@ $GameOver("On the plus side, you're the main character on Squawker today. Better
 
 $if StatCheck(Trust, 4)
 She softens a little. Luckily, you've got a {stat-name}trustworthy{/stat-name} rep around here. 
-{@person}It's fine. You're new.
-{@person}You obviously don't know all the good we do for this community. 
+{@nancy}It's fine. You're new.
+{@nancy}You obviously don't know all the good we do for this community. 
 
 $OnceChoice(WhatWouldYouSayToPeopleWhoThinkWetlandsAreMoreImportant, "What would you say to people who think wetlands are more important than a community center?"")
 $OnceChoice(PlanForCherryCreekMarsh, "What is your business plan for Cherry Creek Marsh?")
 $else
-{@person} Oh, please. You expect me to {stat-name}trust{/stat-name} you? 
-{@person} We're in the middle of a meeting here. You'd better go.
+{@nancy} Oh, please. You expect me to {stat-name}trust{/stat-name} you? 
+{@nancy} We're in the middle of a meeting here. You'd better go.
 $choice DecideWhatToDoNext; Head out and plan your next move
 $endif
 
 //Original Name: What would you say to people who think wetlands are more important than a community center?
 :: WhatWouldYouSayToPeopleWhoThinkWetlandsAreMoreImportant
 She shrugs.
-{@person}I respect their opinion. 
-{@person}But they should realize that the pool they love swimming in and the shops they love to visit are all on old wetlands.
-{@person}Our town has grown by 30% in the last ten years. 
+{@nancy}I respect their opinion. 
+{@nancy}But they should realize that the pool they love swimming in and the shops they love to visit are all on old wetlands.
+{@nancy}Our town has grown by 30% in the last ten years. 
 
 $call GiveSnippet(NewDevelopmentPutsTwinLakesOnTheMap)
 
@@ -502,11 +503,11 @@ $OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population
 
 //Original Name: What about the flood risk?
 :: WhatAboutTheFloodRisk
-{@person}Sure, floods are a risk. That doesn't mean our town should stop growing. 
-{@person}Did you know that New York City was built on a swamp?
+{@nancy}Sure, floods are a risk. That doesn't mean our town should stop growing. 
+{@nancy}Did you know that New York City was built on a swamp?
 {@me}That...doesn't answer my question. 
-{@person}Well then, maybe you're not asking the right question. 
-{@person}It's been an interesting chat. Stop by any time.
+{@nancy}Well then, maybe you're not asking the right question. 
+{@nancy}It's been an interesting chat. Stop by any time.
 She's smiling, but her voice is colder than the pint of cherry chip ice cream in your freezer.
 
 $call GiveSnippet(NewYorkBuiltOnSwamp)
@@ -515,20 +516,20 @@ $choice DecideWhatToDoNext; Head out and plan your next move
 //OriginalName: Do you think population growth is worth destroying our local wildlife
 :: WhatIfTwinLakesCantSupportThatKindofGrowth
 Instantly, you can tell you've pushed her too far.
-{@person}<i>Our</i> local wildlife? You've lived here, what, two weeks? 
-{@person}You'd better go now.   
-{@person}I've got enough flooded businesses to bail out without you making things worse. 
+{@nancy}<i>Our</i> local wildlife? You've lived here, what, two weeks? 
+{@nancy}You'd better go now.   
+{@nancy}I've got enough flooded businesses to bail out without you making things worse. 
 Oof. Looks like this interview is over. 
 
 $choice DecideWhatToDoNext; Leave the opera house 
 
 //Original Name: What is the current plan for Cherry Creek Marsh?
 :: PlanForCherryCreekMarsh
-{@person}Cherry Creek is peaceful. Secluded. 
-{@person}It's perfect place to add some low-income apartments!
+{@nancy}Cherry Creek is peaceful. Secluded. 
+{@nancy}It's perfect place to add some low-income apartments!
 {@me}On... a wetland? 
-{@person}We'll pave it over. Add some walking paths. 
-{@person}We just need a City Council vote in our favor. 
+{@nancy}We'll pave it over. Add some walking paths. 
+{@nancy}We just need a City Council vote in our favor. 
 
 $call GiveSnippet(PerfectPlaceForApartments)
 
@@ -537,13 +538,12 @@ $OnceChoice(HowDoYouPlanToMitigateTheDamage, "How do you plan to make up for the
 
 //Original Name: Don't you thik that will probably.... flood?
 :: ApartmentFlooding
-{@person}Don't worry. We have an expert engineering team to figure out a flood-safe design.
-{@person}As long as rainfall amounts stay the same, the apartments should be fine. 
+{@nancy}Oh, don't worry so much. 
+{@nancy}As long as yearly rainfall stay the same, the apartments should be fine. 
 {@me}And what if rainfall events get worse? 
 She looks shrewdly at you.
-{@person}Wow. Look at the time. I really better be going.
-She didn't even try to sound convincing. 
-On the bright side, you've ruffled some feathers. That must be some kind of reporting badge of honor. 
+{@nancy}Wow. Look at the time. I really better be going.
+You've obviously ruffled some feathers here. 
 No flood plan to speak of... That's quite the scoop.
 
 $call GiveSnippet(NoFloodPlan)
@@ -552,11 +552,12 @@ $choice DecideWhatToDoNext; Leave the opera house, before they kick you out
 
 //Original Name: How do you plan to make up for the wetland destruction?
 ::HowDoYouPlanToMitigateTheDamage
-{@person}We're in talks about putting an artificial marsh out in Apple Valley!
+{@nancy}We're building an artificial marsh out in Apple Valley!
 {@me}Isn't that.... 30 miles away? 
-{@person}27, actually.
+{@nancy}27, actually.
 {@me}Can you tell me how a marsh built 27 miles away is going to prevent flooding here in Twin Lakes?
-{@person}No, I can't. Take it up with the Mayor if you're so worried. 
+{@nancy}Oh, Ms. Benjamin, don't worry so much. 
+{@nancy} This is just how things are done around here.  
 She heads back up on stage. Looks like this interview is over. 
 
 $choice DecideWhatToDoNext; Leave the opera house 
@@ -574,18 +575,18 @@ $HubChoice(CallTheSparkProject, "Track down a phone number for the Spark Project
 //Original Name: Call the Mayor
 :: CallTheMayor
 The mayor answers on the first ring.
-{@phone}Ah, hello there, Missy! How's the town's favorite chicken rescuer?
+{@mayorbarrysmuckers}Ah, hello there! How's the town's favorite chicken rescuer?
 {@me}Oh, uh... actually, I'm on a new story.
 {@me}Do you have time for an interview? 
-{@phone}Sure. Fire away!
+{@mayorbarrysmuckers}Sure. Fire away!
 
 $HubChoice(MayorCherryCreekMarshInterview, "Did you know that there are plans to pave over Cherry Creek Marsh?", 0.25)
 
 //Original Name: Mayor Cherry Creek Marsh Interview
 :: MayorCherryCreekMarshInterview
-{@phone}Of course! 
-{@phone}I support the new development because I love seeing this town grow.
-{@phone}The City Council is voting on the issue tomorrow. 
+{@mayorbarrysmuckers}Of course! 
+{@mayorbarrysmuckers}I support the new development because I love seeing this town grow.
+{@mayorbarrysmuckers}The City Council is voting on the issue tomorrow. 
 
 $call GiveSnippet(MayorSupportOfNewDevelopment)
 
@@ -595,12 +596,12 @@ $OnceChoice(MayorAffordableHousing, "Won't the apartments end up flooding? A mar
 
 //Original Name: Mayor Wetland Flood Risk
 :: MayorWetlandFloodRisk
-{@phone}Oy vey. You've been talking to Birdie, haven't you?
-{@phone}There's no need to be alarmist, Ms. Benjamin. 
-{@phone}There are plenty of other options to prevent flooding.
+{@mayorbarrysmuckers}Oy vey. You've been talking to Birdie, haven't you?
+{@mayorbarrysmuckers}There's no need to be alarmist, Ms. Benjamin. 
+{@mayorbarrysmuckers}There are plenty of other ways to prevent flooding.
 {@me}Like what? 
-{@phone}Lower lake levels. Better storm drains. Rain gardens.  
-{@phone}Under my watch, we'll make this town safer--AND help it grow.
+{@mayorbarrysmuckers}Lower lake levels. Better storm drains. Rain gardens.  
+{@mayorbarrysmuckers}Under my watch, we'll make this town safer--AND help it grow.
 
 $call GiveSnippet(MayorOtherOptionsToPreventFlooding)
 
@@ -609,11 +610,9 @@ $OnceChoice(MayorLimnology, "Have you talked with the Limnology Department about
 
 //Original Name: MayorMarshDestruction
 :: MayorMarshDestruction
-{@phone}Oy vey. You've been chatting with Birdie, haven't you?
-{@phone}Sure, the marsh is nice. Lots of wildlife. 
-{@phone}But there's plenty of nature just outside of town!
-{@phone}Go check out our many forests and hiking trails. I'm sure you'll love it.
-Wow. He's literally quoting the Twin Lakes brochure on your desk.  
+{@mayorbarrysmuckers}Oy vey. You've been chatting with Birdie, haven't you?
+{@mayorbarrysmuckers}Sure, the marsh is nice. Lots of wildlife. 
+{@mayorbarrysmuckers}But there's plenty of nature just outside of town!
 
 $call GiveSnippet(MayorOtherWildlifeAreas)
 
@@ -622,11 +621,11 @@ $OnceChoice(MayorLimnology, "Have you talked with the Limnology Department about
 
 //Original Name: MayorAffordableHousing
 :: MayorAffordableHousing
-{@phone}I'm sure the builders will do their best to prevent problems.
-{@phone}And the renters can buy flood insurance! Easy.
+{@mayorbarrysmuckers}I'm sure the builders will do their best to prevent problems.
+{@mayorbarrysmuckers}And the renters can buy flood insurance! Easy as pie.
 {@me}Is it really <i>easy</i> for low-income people to buy flood insurance?
-{@phone}No offense, kiddo, but you're a brand-new reporter. Not an economics expert. 
-{@phone}I'm sure they've got a plan for all of this. 
+{@mayorbarrysmuckers} Well, I don't know. I'm not an economics expert.   
+{@mayorbarrysmuckers} I'm sure it'll all work out fine. 
 Talk about evasive.
 The mayor recommends flood insurance instead of an action plan... Sounds like quite the scoop.
 
@@ -637,12 +636,12 @@ $OnceChoice(MayorLimnology, "Have you talked with the Limnology Department about
 
 //Original Name: MayorSparkProject 
 :: MayorSparkProject
-{@person}Oh, sure. All the time!
+{@mayorbarrysmuckers}Oh, sure. All the time!
 {@me}Do they support you? Financially, I mean?
-{@person}The Spark Project has donated to the city, and to my campaign.
-{@person}That's not a secret. And it has nothing to do with the Cherry Creek Marsh project. 
-{@person}When you get older, you'll understand how these things work. 
-{@person}Now if you'll excuse me, I oughta get back to work. 
+{@mayorbarrysmuckers}The Spark Project has donated to the city and to my campaign.
+{@mayorbarrysmuckers} That doesn't have anything to do with the Cherry Creek Marsh!
+{@mayorbarrysmuckers}When you're older, you'll understand how these things work. 
+{@mayorbarrysmuckers}Now if you'll excuse me, I oughta get back to work. 
 
 Well, that wasn't condescending at all... 
 $call GiveSnippet(MayorCondescendingAnswerFinances)
@@ -651,12 +650,10 @@ $choice DecideWhatToDoNext; Plan your next move
 
 //Original Name: 
 :: MayorLimnology
-{@phone}Well, to be frank, I'm too busy to research every issue and educate the public.
-{@phone}That's your job, isn't it?
+{@mayorbarrysmuckers}I'm the Mayor! I'm too busy to learn about every issue and educate the public.
+{@mayorbarrysmuckers}Isn't that your job?
 {@me}I guess so... 
-{@phone}Then there's no need to fret. 
-{@phone}Get the facts out there, let the chips--or votes--fall where they may. 
-{@phone}Good luck, kiddo! I'm rootin' for ya. 
+{@mayorbarrysmuckers}Well, then, good luck, kiddo! I'm rootin' for ya. 
 Kiddo?? Who does this guy think he is?
 
 $call GiveSnippet(MayorCondescendingAnswerLimnology)
@@ -668,7 +665,7 @@ Wow. You can't believe your luck!
 You're halfway to city hall when you see Mayor Smuckers on the street, unwrapping a hot dog from its foil wrapper.
 He fumbles a bit...
 And spills his little tub of ketchup all over.
-{@person}Cripes! What a day. 
+{@mayorbarrysmuckers}Cripes! What a day. 
 
 $choice HurryToCatchUp; Hurry to catch up with him 
 $HubChoice(RunIntoNearbyShop, "Run into a nearby shop for ketchup packets", 0.25)
@@ -678,17 +675,17 @@ $HubChoice(RunIntoNearbyShop, "Run into a nearby shop for ketchup packets", 0.25
 You dash down the street and into a nearby diner.
 {@me}Is it okay if I grab some ketchup packets? And napkins? 
 $if StatCheck(Trust, 5)
-The owner of the store recognizes you.
-{@person}Hey! You're that hotshot reporter, right?
+The guy at the register recognizes you.
+{@dinerworker}Hey! You're that hotshot reporter, right?
 {@me}Um... yeah, sort of. 
-{@person}Take whatever you need!
-{@person}Here's some extra fries, in case ya get hungry. 
+{@dinerworker}Take whatever you need!
+{@dinerworker}Here's some extra fries, in case ya get hungry. 
 Aww. Free French fries. Looks like Twin Lakes knows the way to your heart.  
 $else
-The owner of the store looks miffed. 
-{@person}Who are you again?
+The guy at the register looks miffed.
+{@dinerworker}Who are you again?
 {@me}A reporter. Need to score an interview. Hot dogs are involved. 
-{@person}Um, sure, I guess. Knock yourself out.
+{@dinerworker}Um, sure, I guess. Knock yourself out.
 He lets you take a few handfuls of ketchup packets, but watches suspiciously until you leave. 
 $endif
 $choice RushBackToCityHall; Hurry back to the Mayor 
@@ -701,10 +698,10 @@ The mayor is climbing the steps to the Town Hall, looking dejectedly at his ketc
 {@me}Excuse me, Mayor Smuckers?
 {@me}I have some leftover napkins from lunch. And ketchup, too.
 He blinks in surprise.
-{@person}What's the catch?
+{@mayorbarrysmuckers}What's the catch?
 {@me}No catch!
 {@me}Although... that since we're both here, you might have time for an interview...
-{@person}Ah. Go ahead, kid. Ask away. 
+{@mayorbarrysmuckers} Welp... couldn't hurt, I guess.  Go ahead, kid. Ask away. 
 $HubChoice(InPersonMayorCherryCreekMarshInterview, "Did you know that there are plans to pave over Cherry Creek Marsh?", 0.25)
 
 $else
@@ -722,28 +719,26 @@ $endif
 $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite)
 At first he looks irritated that you're even talking to him.
 Then his eyes widen.
-{@person}Ah, the famous chicken rescuer!!
-{@person}Sure. I can spare a minute. 
+{@mayorbarrysmuckers}Cripes, you're the famous chicken rescuer!!
+{@mayorbarrysmuckers}Sure thing, kid. I can spare a minute. 
 $HubChoice(InPersonMayorCherryCreekMarshInterview, "Did you know that there are plans to pave over Cherry Creek Marsh?", 0.25)
 $else
 He looks irritated.
-{@person}You're that new reporter, aren't you?
+{@mayorbarrysmuckers}You're that new reporter, aren't you?
 {@me}Uh, yes. Sorry about your...
 You gesture awkwardly at the ketchup-spatter on his dress shoes.
-{@person}Welp. Thanks, kid. That's life, I suppose. 
-{@person}One question. I need to get cleaned up.
-$HubChoice(QuickMayorInterview, "Do you support the proposed plans to pave over Cherry Creek Marsh?", 0.25)
+{@mayorbarrysmuckers}Welp. Thanks, kid. That's life, I suppose. 
+{@mayorbarrysmuckers}One question. I need to get cleaned up.
+$HubChoice(QuickMayorInterview, "Do you support the plan to pave over Cherry Creek Marsh?", 0.25)
 $endif
 
 //OriginalName: Quick Mayor Interview
 :: QuickMayorInterview
-{@person}Of course! 
-{@person}The City Council is voting on the issue tomorrow.  
-{@person}I'm hoping it passes. I love seeing this town grow.
+{@mayorbarrysmuckers}Of course! I love seeing this town grow.
 {@me}What about the flood risk of destroying the wetlands?
 {@me}Won't this cause more flooding?
-{@person} Well, how should I know? 
-{@person} You're the reporter. Isn't it your job to figure that out? 
+{@mayorbarrysmuckers} Well, how should I know? 
+{@mayorbarrysmuckers} You're the reporter. Isn't it your job to figure that out? 
 You try to ask something else, but he's already heading inside.
 
 $call GiveSnippet(QuickMayorWetlandsQuote)
@@ -765,27 +760,28 @@ $choice DecideWhatToDoNext; Head out--everyone seems busy here
 :: TalkToSomeone
 
 A woman smiles at you. 
-{@person}Yes? Do you need something?
+{@townhallworker}Yes? Do you need something?
 {@me}I'm a reporter for the Gazette. Just wondered what you're all working on.
-{@person}Oh, we're getting ready for a luncheon with the Spark Project!
-{@person}They've just made a very generous donation to the city's public works programs!
-{@person}Lovely, isn't it?  
+{@townhallworker}Oh, we're getting ready for a luncheon with the Spark Project!
+{@townhallworker}They've just made a huge donation to the city's public works programs!
+{@townhallworker}Lovely, isn't it?  
+Well... this explains a lot. Looks like the Spark Project's donation is getting them some special treatment. 
 $call GiveSnippet(SparkProjectDonationInfo)
 
 $choice DecideWhatToDoNext; Leave City Hall and plan your next move 
 
 //Original Name: Read the bulletin board
 ::ReadTheBulletinBoard
-{@article}Luncheon at 12pm, honoring the Spark Project!
+{@flier}Luncheon at 12pm, honoring the Spark Project!
 {@article}Thank you to the Spark Project for their extremely generous donation to the Twin Lakes public works programs!
 $call GiveSnippet(SparkProjectBulletinBoard)
 $choice DecideWhatToDoNext; Leave City Hall and plan your next move 
 
 //Original Name: Mayor Cherry Creek Marsh Interview
 :: InPersonMayorCherryCreekMarshInterview
-{@person}Of course! 
-{@person}I support the new development because I love seeing this town grow.
-{@person}The City Council is voting on the issue tomorrow, and I'm hoping the motion passes. 
+{@mayorbarrysmuckers}Of course! 
+{@mayorbarrysmuckers}I support the new development because I love seeing this town grow.
+{@mayorbarrysmuckers}The City Council is voting on the issue tomorrow, and I'm hoping the motion passes. 
 
 $call GiveSnippet(MayorSupportOfNewDevelopment)
 
@@ -795,12 +791,12 @@ $OnceChoice(InPersonMayorAffordableHousing, "Won't the apartments end up floodin
 
 //Original Name: Mayor Wetland Flood Risk
 :: InPersonMayorWetlandFloodRisk
-{@person}Ugh. You've been talking to Birdie, haven't you?
-{@person}Yes, the wetlands do help.
-{@person}But there are so many other options to prevent flooding!
+{@mayorbarrysmuckers}Oy. You've been talking to Birdie, haven't you?
+{@mayorbarrysmuckers}Sure, the wetlands do help.
+{@mayorbarrysmuckers}But there are so many other options to prevent flooding!
 {@me}Like what? 
-{@person}Lower lake levels. Better storm drains. Rain gardens.  
-{@person}Under my watch, we'll make this town safer--AND help it grow.
+{@mayorbarrysmuckers}Lower lake levels. Better storm drains. Rain gardens.  
+{@mayorbarrysmuckers}Birdie's makin' a fuss over nothing. 
 
 $call GiveSnippet(MayorOtherOptionsToPreventFlooding)
 
@@ -809,11 +805,9 @@ $OnceChoice(InPersonMayorLimnology, "Have you talked with the Limnology Departme
 
 //Original Name: MayorMarshDestruction
 :: InPersonMayorMarshDestruction
-{@person}Ugh. You've had a little Birdie in your ear, haven't you?
-{@person}Sure, the marsh is nice. Lots of wildlife. 
-{@person}But there's plenty of nature just outside of town!
-{@person}Go check out our many forests and hiking trails. I'm sure you'll love it.
-He literally sounds like the Twin Lake brochure sitting on your desk. 
+{@mayorbarrysmuckers}Oy. You've had a little Birdie in your ear, haven't you?
+{@mayorbarrysmuckers}Sure, the marsh is nice. Lots of wildlife. 
+{@mayorbarrysmuckers}But there's plenty of nature just outside of town!
 
 $call GiveSnippet(MayorOtherWildlifeAreas)
 
@@ -822,11 +816,11 @@ $OnceChoice(InPersonMayorLimnology, "Have you talked with the Limnology Departme
 
 //Original Name: MayorAffordableHousing
 :: InPersonMayorAffordableHousing
-{@person}I'm sure the builders will do their best to prevent problems.
-{@person}And the renters can buy flood insurance! Easy.
+{@mayorbarrysmuckers}I'm sure the builders will do their best to prevent problems.
+{@mayorbarrysmuckers}And the renters can buy flood insurance! Easy as pie.
 {@me}Is it really <i>easy</i> for low-income people to buy flood insurance?
-{@person}No offense, kiddo, but you're a brand-new reporter. Not an economics expert. 
-{@person}I'm sure they've got a plan for all of this. 
+{@mayorbarrysmuckers}No offense, kid, but you're a brand-new reporter. Not an economics expert. 
+{@mayorbarrysmuckers}I'm sure they've got a plan for all of this. 
 Wow. That wasn't evasive at all.
 
 $call GiveSnippet(MayorFloodInsurance)
@@ -836,12 +830,12 @@ $OnceChoice(InPersonMayorLimnology, "Have you talked with the Limnology Departme
 
 //Original Name: MayorSparkProject 
 :: InPersonMayorSparkProject
-{@person}Oh, sure. All the time!
+{@mayorbarrysmuckers}Oh, sure. All the time!
 {@me}Do they support you? Financially, I mean?
-{@person}The Spark Project has donated to the city, and even to my campaign.
-{@person}That's not a secret. And it has nothing to do with the Cherry Creek Marsh project. 
-{@person}When you get older, you'll understand how these things work. 
-{@person}Now if you'll excuse me, I oughta get back to work. 
+{@mayorbarrysmuckers} Well, sure. They've donated to my campaign.
+{@mayorbarrysmuckers} But that doesn't have anything to do with the Cherry Creek Marsh. 
+{@mayorbarrysmuckers}When you're older, you'll understand how these things work. 
+{@mayorbarrysmuckers}Now if you'll excuse me, I oughta get back to work. 
 
 Well, that wasn't condescending at all... 
 
@@ -851,15 +845,11 @@ $choice DecideWhatToDoNext; Leave City Hall and plan your next move
 
 //Original Name: In Person Mayor Limnology
 :: InPersonMayorLimnology
-{@phone}Well, to be frank, I'm too busy to research every issue and educate the public.
-{@phone}That's your job, isn't it?
+{@mayorbarrysmuckers}I'm the Mayor! I'm too busy to learn about every issue and educate the public.
+{@mayorbarrysmuckers}Isn't that your job?
 {@me}I guess so... 
-{@phone}Then there's no need to fret. 
-{@phone}Get the facts out there, let the chips--or votes--fall where they may. 
-{@phone}Good luck, kiddo! I'm rootin' for ya. 
-{@person}Now if you'll excuse me, I oughta get back to work. 
-
-Well, that wasn't condescending at all... 
+{@mayorbarrysmuckers}Well, then, good luck, kiddo! I'm rootin' for ya. 
+Kiddo?? Who does this guy think he is?
 
 $call GiveSnippet(MayorCondescendingAnswerLimnology)
 $HubChoice(ExploreCityHall, "Look around City Hall for someone else to talk to", 0.25)
@@ -890,16 +880,16 @@ $if StatCheck(Resourceful, 5)
 There are mosquitoes everywhere... good thing you were {stat-name}resourceful{/stat-name} enough to bring bug spray!
 You take a picture of a sandhill crane surrounded by debris. 
 Birdie looks over your shoulder in amazement. 
-{@person}Let me know if you ever decide to sell your work.
-{@person}I'd love to hang that photo in my kitchen! 
+{@birdie}Let me know if you ever decide to sell your work.
+{@birdie}I'd love to hang that photo in my kitchen! 
 Wow. A week ago you didn't even know how to switch your phone to portrait mode.
 Looks like there's something to be said for learning on the job. 
 
 $elseif StatCheck(Tech, 5)
 You take a photo of a sandhill crane in the distance, surrounded by debris. 
 Birdie looks over your shoulder in amazement. 
-{@person}Let me know if you ever decide to sell your work.
-{@person}I'd love to hang that photo in my kitchen! 
+{@birdie}Let me know if you ever decide to sell your work.
+{@birdie}I'd love to hang that photo in my kitchen! 
 Wow. A week ago you didn't even know how to switch your phone to portrait mode.
 Looks like there's something to be said for learning on the job. 
 
@@ -909,18 +899,19 @@ $elseif StatCheck(Trust, 5)
 You're too busy swatting at mosquitoes to get any long-distance nature shots... 
 But a photo of the volunteers would be great, too. 
 When you ask for permission, the nearest volunteer absolutely geeks out. 
-{@person}You're that new reporter from New York, right??
-{@person}I'm such a fan of your work! Go right ahead!
+{@wetlandvolunteer3}You're that new reporter from New York, right??
+{@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
 
 $call GiveSnippet(GoodMarshPhoto-Volunteers)
 
 $else
 You're too busy swatting mosquitoes to line up a decent shot.
 Trying to ignore the cloud of bugs, you ask the volunteers for permission to take a photo. 
-{@person}Um, no offense. But we don't trust out-of-towners.
+{@wetlandvolunteer3}Um, no offense. But we don't trust out-of-towners.
 {@me}What? I'm not an out-of-towner! 
-{@person}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
-Ugh. Well, at least the plants don't have a problem with being photographed. 
+{@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
+Ugh. Word sure gets around here.  
+At least the plants don't have a problem with being photographed. 
 
 $call GiveSnippet(BadMarshPhoto-Scenery)
 
@@ -932,7 +923,7 @@ $choice MarshMap; Decide what to do next
 :: TalkToVolunteerHeadingOutOntoTheTrail
 The volunteer is getting ready to head out onto the trail.
 {@me}Excuse me. Do you have time for an interview?
-{@person}That depends. You okay with getting your feet wet? 
+{@wetlandvolunteer1}That depends. You okay with getting your feet wet? 
 
 $HubChoice(JoinHimOnTheHike, "Join him on the trail. Hopefully your gear will be enough to keep you dry.", 0.25)
 $choice MarshMap; Find someone else to talk to. Hiking isn't exactly gonna help you meet your deadline. 
@@ -944,9 +935,9 @@ $if StatCheck(Trust, 4)
 The volunteer seems to trust you. 
 She tells you about her volunteer work: replanting native species.
 
-{@person}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
+{@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
 {@me}It is pretty nice.... though I could probably do without the snakes. 
-{@person}Well, that one by your foot seems pretty harmless. 
+{@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
 Hooooooly cherry donuts.
 You move slowly backward and snap a picture, because this seems more professional than running away screaming.
 
@@ -957,12 +948,12 @@ $choice MarshMap; Decide what to do next
 
 $elseif StatCheck(Resourceful, 5)
 The volunteer is swatting at mosquitoes, looking frustrated. 
-{@person}Can't believe I forgot my bug spray. 
+{@wetlandvolunteer2}Can't believe I forgot my bug spray. 
 {@me} Oh.. I've got some in my backpack! Here, help yurself.  
 She accepts the bug spray gratefully and tells you all about her volunteer work: replanting native species. 
-{@person}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
+{@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
 {@me}It is pretty nice.... though I could probably do without the snakes. 
-{@person}Well, that one by your foot seems pretty harmless. 
+{@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
 Hooooooly cherry donuts.
 You take a few steps backward and snap a picture, because this seems more professional than running away screaming.
 
@@ -974,8 +965,8 @@ $choice MarshMap; Decide what to do next
 $else
 Unfortunately, the volunteer isn't interested in chatting. 
 
-{@person}Sorry. I don't trust reporters.  
-{@person}Good luck, though.  
+{@wetlandvolunteer2}Sorry. I don't trust reporters.  
+{@wetlandvolunteer2}Good luck, though.  
 
 Well, at least she's honest. 
 
@@ -1010,7 +1001,7 @@ $if Visited(TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands)
 $if StatCheck(Tech, 3)
 You remember a method to set yourself as a <i>private caller</i> and even install a subtle voice changer. 
 Hopefully now they won't recognize you as that mudraking journalist from earlier.
-{@phone}Hi! How can I help you? 
+{@spark}Hi! How can I help you? 
 
 $choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on. I wanted to get your perspective."
 $else
@@ -1023,7 +1014,7 @@ $endif
 $else
 You dig up the number of the Spark Project. 
 A cheerful-sounding man answers on the first ring. 
-{@phone}How can I help you? 
+{@spark}How can I help you? 
 
 $choice TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands; "I'm writing a story about how business expansion is destroying the wetlands."
 $choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on, and I wanted to get your perspective.""
@@ -1031,16 +1022,16 @@ $endif
 
 // Original Name: Tell them their name came up in a story and you want to get their perspective.
 :: TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective
-{@phone}Well, everyone is busy at a meeting, but I can chat with you!
-{@phone} I'm a local business owner. I volunteer with the Spark Project. 
+{@spark}Well, everyone is busy at a meeting, but I can chat with you!
+{@spark} I'm a local business owner. I volunteer with the Spark Project. 
 
 $HubChoice(InterviewBusinessOrganizer, "Interview business organizer", 0.5)
 
 // Original Name: Tell them you're writing about how business is destroying the wetlands.
 :: TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands
-{@person}Oh... uh, sorry, everybody's at a meeting.
+{@spark}Oh... uh, sorry, everybody's at a meeting.
 {@me}Can you call me when the meeting is over?
-{@person}It's a really long meeting. 
+{@spark}It's a really long meeting. 
 He hangs up before you can get another word in. 
 Come to think of it, maybe you shouldn't have led with the evil-business angle.
 
@@ -1094,7 +1085,7 @@ Which happened to be blowing right toward you.
 {@me}Ahhhhhhgh! 
 When your eyes, mouth, and nose finally stop burning, you turn around and find... 
 Birdie. The lady this time, not the creature. 
-{@person}Did I just see you mace a crane???
+{@birdie}Did I just see you mace a crane???
 {@me}Um.... it was pepper spray, actualy.
 Turns out that's not only terrible for the environment, but also very illegal.
 Have fun with your 60-days mandatory community service.
@@ -1114,18 +1105,18 @@ $goto STORYEVALUATION
 $if Visited(BookwormAnswer)
 As the scientist gets closer, you recognize her:
 The lake studies volunteer from the Twin Lakes Dam!
-{@person}Hey! You're the limnology-nerd reporter, right?
-{@person}I loved your story. Great work!
+{@limexpert}Hey! You're the limnology-nerd reporter, right?
+{@limexpert}I loved your story. Great work!
 Looks like all that reading on inland aquatic ecosystems is coming in handy, after all!
 
 $HubChoice(AskHerAboutTheWetlands, "Ask her how the wetlands are related to flooding", 0.25)
 $elseif StatCheck(Resourceful, 5)
 At first, the scientist doesn't look thrilled to stop her work to chat with you.
 Then she notices the pastries you've brought from the Goldfish Cafe!
-{@person}Ooh. What are those for?
+{@limexpert}Ooh. What are those for?
 {@me}Just thought you all might be swamped out here. No pun intended. 
 {@me}Want to take a donut break and chat about the local wetlands?
-{@person}Girl, you had me at donuts. 
+{@limexpert}Girl, you had me at donuts. 
 
 $HubChoice(AskHerAboutTheWetlands, "Ask her how the wetlands are related to flooding", 0.25)
 $else
@@ -1143,10 +1134,10 @@ $HubChoice(AskHerAboutTheWetlands, "Ask her how the wetlands are related to floo
 
 //Original Name: Ask for a Statement
 ::AskForAStatement
-{@person}Sure, I can give you a brief summary. 
-{@person}The destruction of wetlands is a significant cause of local flooding. 
-{@person}Areas that used to soak up water are now paved over.
-{@person}That means more water pooling up fast in the streets or flowing downhill to the lakes. 
+{@limexpert}Sure, I can give you a brief summary. 
+{@limexpert}The destruction of wetlands is a significant cause of local flooding. 
+{@limexpert}Areas that used to soak up water are now paved over.
+{@limexpert}That means more water pooling up fast in the streets or flowing downhill to the lakes. 
 
 $call GiveSnippet(RushedLimnologist)
 
@@ -1158,11 +1149,11 @@ $choice DecideWhatToDoNext; Leave the Limnology Department
 
 // Original Name: Ask why he's out here volunteering
 :: AskWhyHesOutHereVolunteering
-{@person}The storm brought tons of urban runoff.
+{@wetlandvolunteer1}The storm brought tons of urban runoff.
 {@me}Like what?
-{@person}Lawn chemicals, trash, and debris, mostly. I'm out here cleaning what I can. 
-{@person}There used to be another marsh on the west side of town.
-{@person}It's a golf course now. 28 holes, and not a speck of wildlife.
+{@wetlandvolunteer1}Lawn chemicals, trash, and debris, mostly. I'm out here cleaning what I can. 
+{@wetlandvolunteer1}There used to be another marsh on the west side of town.
+{@wetlandvolunteer1}It's a golf course now. 28 holes, and not a speck of wildlife.
 
 $call GiveSnippet(MarshLoss)
 $call GiveSnippet(MarshPollution)
@@ -1171,13 +1162,13 @@ $choice MarshMap; Thank him for his time
 
 // Original Name: Ask her about the wetlands
 :: AskHerAboutTheWetlands
-{@person}The destruction of our wetlands are a serious cause of flooding.
+{@limexpert}The destruction of our wetlands are a serious cause of flooding.
 {@me}Can you tell me about the science?
-{@person}It's really pretty simple.
-{@person}Think about it--when you pour water on grass or soil, it gets soaked up.
-{@person}When you pour water on pavement, it pools up there...
-{@person}Or else it runs downhill.
-{@person}The city is the same way. 
+{@limexpert}It's really pretty simple.
+{@limexpert}Think about it--when you pour water on grass or soil, it gets soaked up.
+{@limexpert}When you pour water on pavement, it pools up there...
+{@limexpert}Or else it runs downhill.
+{@limexpert}The city is the same way. 
 
 $OnceChoice(AskHerIfTheWetlandsAreProtected, "Ask her if the wetlands are protected.")
 $OnceChoice(WetlandStatistics, "Ask for statistics from her research")
@@ -1194,13 +1185,15 @@ $endif
 $if local:_localOr
 You go online and search their website. It's full of peer-reviewed research and statistics!
 You gather tons of stats for your article--the percentage of lost wetlands, the percent increase in rainfall, and a quote for your story.
+Plus, you're able to verify Birdie's data!
 
 $call GiveSnippet(WetlandsAndRainfall)
 $call GiveSnippet(WetlandsAndFlooding)
 $else
 This website is absolutely impenetrable. 
 Full of confusing statistical jargon. Just the font choice makes your head hurt. 
-You don't have the {stat-name}research{/stat-name} or {stat-name}tech{/stat-name} skills to get anything useful here. 
+You don't have the {stat-name}research{/stat-name} or {stat-name}tech{/stat-name} skills to get anything new here.
+But at least you're able to double-check the data Birdie gave you earlier! 
 $endif
 
 $HubChoice(TakePhotosOfLimnologyDepartment, "Take photos for your story", 0.25)
@@ -1210,7 +1203,7 @@ $choice DecideWhatToDoNext; Leave the Limnology Department
 :: TakePhotosOfLimnologyDepartment
 The shoreline is perfect for easy, dramatic-looking photos!
 You'd still rather work with a professional photographer...
-But these shots aren't too bad. 
+But these shots aren't bad at all. 
 
 $call GiveSnippet(LimnologyWetlandStoryPhoto)
 
@@ -1220,10 +1213,10 @@ $choice DecideWhatToDoNext; Head out and plan your next move
 // Original Name: Ask her to confirm CRANE's information
 :: AskHerToConfirmCRANEsInformation
 She looks over your notes.
-{@person}Hmmm. Looks good. Just one slight change here.
-{@person}Twin Lakes has lost 70% of our wetlands, not 90%.
-{@person}Though that figure goes up if you count the surrounding counties. 
-{@person}Here's some of my research if you want to dig deeper. 
+{@limexpert}Hmmm. Looks pretty good. Just one change here.
+{limexpert}Twin Lakes has lost 70% of our wetlands, not 90%.
+{@limexpert}Though that figure goes up if you count the surrounding counties. 
+{@limexpert}Here's some of my research if you want to dig deeper. 
 She sends you a link to a long, complicated academic paper about wetlands and flooding.
 
 $if StatCheck(Research, 6)
@@ -1242,8 +1235,8 @@ $choice DecideWhatToDoNext; Thank her for her help
 
 // Original Name: Ask her if the wetlands are protected.
 :: AskHerIfTheWetlandsAreProtected
-{@person}A few years ago, the city voted to remove wetland protections that were too restrictive.
-{@person}Unfortunately, they never put new policies in place. 
+{@limexpert}A few years ago, the city voted to remove wetland protections that were too restrictive.
+{@limexpert}They never put new policies in place. 
 
 $call GiveSnippet(Limnology-RemovedWetlandProtections)
 $OnceChoice(WhatDoYouMeanTooRestrictve, "What do you mean, too restrictive?")
@@ -1252,20 +1245,20 @@ $OnceChoice(AreYouConcernedAboutCherryCreekMarsh, "Are you concerned about the p
 // Original Name: What do you mean, too restrictive? 
 :: WhatDoYouMeanTooRestrictve
 
-{@person}The old policies didn't allow developers to build on any land that held water.
-{@person}It was preventing cherry farmers from expanding their orchards.
+{@limexpert}The old policies didn't allow developers to build on any land that held water.
+{@limexpert}It was preventing cherry farmers from expanding their orchards.
 {@me}Does that mean there are NO protections in place right now? 
-{@person}Sadly, yes.
-{@person}The City Council approves projects on a case-by-case basis.
+{@limexpert}Sadly, yes. 
+{@limexpert} The City Council votes on each new project... and they usually vote yes.  
 
 $call GiveSnippet(Limnology-NoProtectionsInPlace)
 $OnceChoice(AskHerToConfirmCRANEsInformation, "Ask her to confirm Birdie's information")
 
 // Original Name: Are you concerned about the plan to pave over Cherry Creek Marsh?
 :: AreYouConcernedAboutCherryCreekMarsh
-{@person}Concerned is putting it mildly. It's a disaster. 
-{@person}I've petitioned the mayor's office to block the project and cancel the vote. 
-{@person}But I doubt he'll listen.  
+{@limexpert}Concerned is putting it mildly. It's a disaster. 
+{@limexpert}I've petitioned the mayor's office to block the project and cancel the vote. 
+{@limexpert}But I doubt he'll listen.  
 
 $call GiveSnippet(LimnologyConcerned)
 $OnceChoice(AskHerToConfirmCRANEsInformation, "Ask her to confirm Birdie's information")
@@ -1274,8 +1267,8 @@ $OnceChoice(AskHerToConfirmCRANEsInformation, "Ask her to confirm Birdie's infor
 :: WetlandStatistics
 She gives you some great stats: 
 After the Sugar Marsh was paved over in 1979, flood incidents went up by 30% in the next two years! 
-{@person}We can expect history to repeat itself. 
-{@person}Except this time, with climate change increasing our rainfall, it'll be even worse. 
+{@limexpert}We can expect history to repeat itself. 
+{@limexpert}Except this time, with climate change increasing our rainfall, it'll be even worse. 
 
 $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $OnceChoice(AskHerToConfirmCRANEsInformation, "Ask her to confirm Birdie's information")
@@ -1283,8 +1276,8 @@ $OnceChoice(AskHerToConfirmCRANEsInformation, "Ask her to confirm Birdie's infor
 // Original Name: Interview business organizer
 :: InterviewBusinessOrganizer
 He's happy to talk with you. 
-{@phone}Here at the Spark Project we've worked hard to bring new businesses to Twin Lakes!
-{@phone}It's been a dream come true for so many people. 
+{@spark}Here at the Spark Project we've worked hard to bring new businesses to Twin Lakes!
+{@spark}It's been a dream come true for so many people. 
 
 $call GiveSnippet(BusinessDreamComeTrue)
 
@@ -1293,9 +1286,9 @@ $OnceChoice(AskAboutThePlanToBuildOverCherryCreekMarsh, "Is it true that you're 
 
 // Original Name: Ask him why new businesses are so important.
 :: AskHimWhyNewBusinessesAreSoImportant
-{@phone}New businesses are what's keeping this town alive!
-{@phone}We need housing. Libraries. Shops. Hospitals.
-{@phone}Either a town is growing, or it's dying.  
+{@spark}New businesses are what's keeping this town alive!
+{@spark}We need housing. Libraries. Shops. Hospitals.
+{@spark}Either a town is growing, or it's dying.  
 
 $call GiveSnippet(BusinessGrowingOrDying)
 
@@ -1304,9 +1297,9 @@ $OnceChoice(AskAboutThePlanToBuildOverCherryCreekMarsh, "Ask about the plan to b
 
 // Original Name: Ask about the plan to build over Cherry Creek Marsh 
 :: AskAboutThePlanToBuildOverCherryCreekMarsh
-{@phone}Oh, you've heard?  
-{@phone}The vote is tomorrow!
-{@phone}If the motion succeeds, we plan to build low-income apartments that this town has needed for a long time.
+{@spark}Oh, you've heard?  
+{@spark}The vote is tomorrow!
+{@spark}If the motion succeeds, we plan to build low-income apartments that this town has needed for a long time.
 
 $call GiveSnippet(WetlandPolicy)
 
@@ -1315,12 +1308,12 @@ $OnceChoice(DoYouHaveAPlanToReduceFloodRisk, "Do you have a plan to reduce flood
 
 // Original Name: "Did you know that those low-lying areas soak up water and help prevent flooding?"
 :: DidYouKnowthatWetlandsSoakUpWaterAndPreventFlooding
-{@phone}Well, sure. But there are other ways to stop flooding, too.
-{@phone}We can't stop growing just because we're scared of a little water.
+{@spark}Well, sure. But there are other ways to stop flooding, too.
+{@spark}We can't stop growing just because we're scared of a little water.
 {@me}It wasn't just a <i>little</i> water....  
-{@phone}Aw, don't worry.
-{@phone}There are storm drains. Flood insurance. 
-{@phone}We're the good guys here. Ask anyone!
+{@spark}Aw, don't worry.
+{@spark}There are storm drains. Flood insurance. 
+{@spark}We're the good guys here. Ask anyone!
 
 You try to ask another question, but he tells you he's getting another call and hangs up.
 Looks like it's a bit of a touchy subject.
@@ -1331,17 +1324,17 @@ $choice WetlandsStoryConstruction; Wetlands Story Construction
 
 // Original Name: "Did you do anything to reduce the flood risk?"
 :: DoYouHaveAPlanToReduceFloodRisk
-{@phone}Oh, of course!
-{@phone}We'll pay to create a new man-made marsh, over in Apple Valley.
-{@phone}It'll be beautiful. Boardwalks and native plants and everything!
+{@spark}Oh, of course!
+{@spark}We'll pay to create a new man-made marsh, over in Apple Valley.
+{@spark{It'll be beautiful. Boardwalks and native plants and everything!
 
 $call GiveSnippet(NewMarshAppleValley)
 $OnceChoice(HowDoesAMarshInAppleValleyHelpUsHereInTwinLakes, "How does a marsh in Apple Valley help us here in Twin Lakes?")
 
 // Original Name: "How does a marsh in Apple Valley help us here in Twin Lakes?"
 :: HowDoesAMarshInAppleValleyHelpUsHereInTwinLakes
-{@phone}I don't know, I don't make the rules.
-{@phone}I did what the laws told me to do. Don't make me out to be the bad guy.
+{@spark}I don't know, I don't make the rules.
+{@spark} We're following the laws! Nothing shady here. 
 You try to ask more questions, but he makes an excuse and hangs up.
 
 $call GiveSnippet(AnnoyedBusiness)

@@ -229,7 +229,7 @@ MonoBehaviour:
       Content: Person
       Exposed: 0
     - Id: Char.Editor
-      Content: 'Editor, Dionne Richards '
+      Content: Editor, Dionne Richards
       Exposed: 0
     - Id: Char.Phone
       Content: Phone
@@ -238,25 +238,25 @@ MonoBehaviour:
       Content: Article
       Exposed: 0
     - Id: Char.Maureen
-      Content: 'Maureen '
+      Content: Maureen
       Exposed: 0
     - Id: Char.Jeanie
-      Content: 'Jeanie '
+      Content: Jeanie
       Exposed: 0
     - Id: Char.Localnurse
       Content: Local nurse on Squawker
       Exposed: 0
     - Id: Char.Wynnedstorme
-      Content: 'Wynne '
+      Content: Wynne
       Exposed: 0
     - Id: Char.Policespokesman
-      Content: 'Police Spokesman '
+      Content: Police Spokesman
       Exposed: 0
     - Id: Char.Townhallcontact
       Content: Town Hall Contact
       Exposed: 0
     - Id: Char.Librarian
-      Content: 'Maisy, the librarian '
+      Content: Maisy, the librarian
       Exposed: 0
     - Id: Char.Fredfinkler
       Content: Fred Finkler
@@ -265,22 +265,22 @@ MonoBehaviour:
       Content: CherryCharlie07
       Exposed: 0
     - Id: Char.Mayorbarrysmuckers
-      Content: 'Barry Smuckers, the Mayor of Twin Lakes '
+      Content: Barry Smuckers, the Mayor of Twin Lakes
       Exposed: 0
     - Id: Char.Jim
-      Content: 'Jim '
+      Content: Jim
       Exposed: 0
     - Id: Char.Dionne
       Content: Dionne Richards, Editor
       Exposed: 0
     - Id: Char.Email
-      Content: 'Email '
+      Content: Email
       Exposed: 0
     - Id: Char.Sophia
-      Content: 'Sophia '
+      Content: Sophia
       Exposed: 0
     - Id: Char.Dnrworker
-      Content: 'DNR worker '
+      Content: DNR worker
       Exposed: 0
     - Id: Char.Contact
       Content: New Contact
@@ -295,10 +295,10 @@ MonoBehaviour:
       Content: Sudha
       Exposed: 0
     - Id: Char.Dnrvolunteer
-      Content: 'DNR Volunteer '
+      Content: DNR Volunteer
       Exposed: 0
     - Id: Char.Limvolunteer
-      Content: 'Volunteer and Lake Studies Expert '
+      Content: Volunteer and Lake Studies Expert
       Exposed: 0
     - Id: Char.Nora
       Content: Nora
@@ -307,19 +307,19 @@ MonoBehaviour:
       Content: Rescuer
       Exposed: 0
     - Id: Char.Firechief
-      Content: 'Retired Fire Chief '
+      Content: Retired Fire Chief
       Exposed: 0
     - Id: Char.Cheeseshop
       Content: Cheese Shop Owner
       Exposed: 0
     - Id: Char.Driver
-      Content: 'Stranded Driver '
+      Content: Stranded Driver
       Exposed: 0
     - Id: Char.Deli
-      Content: 'Gallery Owner '
+      Content: Gallery Owner
       Exposed: 0
     - Id: Char.Neighbor
-      Content: 'Grateful Neighbor '
+      Content: Grateful Neighbor
       Exposed: 0
     - Id: Char.Squawkertroll1
       Content: Squawker Troll 1
@@ -328,10 +328,10 @@ MonoBehaviour:
       Content: Squawker Troll 2
       Exposed: 0
     - Id: Char.Dnrexpert
-      Content: 'DNR Statistics Expert '
+      Content: DNR Statistics Expert
       Exposed: 0
     - Id: Char.Governor
-      Content: 'Governor '
+      Content: Governor
       Exposed: 0
     - Id: Char.Flyer
       Content: Flyer
@@ -340,25 +340,52 @@ MonoBehaviour:
       Content: Dr. Sarah McCloud
       Exposed: 0
     - Id: Char.Businessowner
-      Content: 'Business Owner '
+      Content: Business Owner
       Exposed: 0
     - Id: Char.Mayorsister
-      Content: 'Mayor Smuckers''s Sister! '
+      Content: Mayor Smuckers's Sister!
       Exposed: 0
     - Id: Char.Lakescientist
-      Content: 'Lake Studies Scientist '
+      Content: Lake Studies Scientist
       Exposed: 0
     - Id: Char.Chickenowner
       Content: Cheerful Chicken Owner
       Exposed: 0
     - Id: Char.Cafeowner
-      Content: "Caf\xE9 Owner "
+      Content: "Caf\xE9 Owner"
       Exposed: 0
     - Id: Char.Birdie
-      Content: 'Birdie '
+      Content: Birdie
       Exposed: 0
     - Id: Char.Nancy
-      Content: 'Nancy, the business organizer '
+      Content: Nancy, the business organizer
+      Exposed: 0
+    - Id: Char.sign
+      Content: Historical Marker
+      Exposed: 0
+    - Id: Char.Wetlandvolunteer1
+      Content: Blaise Orange, Wetland Volunteer
+      Exposed: 0
+    - Id: Char.Wetlandvolunteer2
+      Content: Lilly Gardner, Wetland Volunteer
+      Exposed: 0
+    - Id: Char.Spark
+      Content: Spark Project organizer
+      Exposed: 0
+    - Id: Char.Limexpert
+      Content: Limnology Expert
+      Exposed: 0
+    - Id: Char.Sparkprojectleader
+      Content: 'Spark Project leader '
+      Exposed: 0
+    - Id: Char.Squawkermessage
+      Content: 'Squawker Post  '
+      Exposed: 0
+    - Id: Char.Dinerworker
+      Content: Diner Worker
+      Exposed: 0
+    - Id: Char.Townhallworker
+      Content: 'Town Hall  Worker '
       Exposed: 0
     Headers:
     - Path: Header
