@@ -21,9 +21,9 @@ $ActionChoice(The next morning...)
 $call SetHeaderEnabled(true)
 $call StopAmbience()
 It's an eerily quiet morning in Twin Lakes. 
-The internet is buzzing about the flood...
-Including your story, which has gone viral all across the Midwest.
-You might not love Twin Lakes... but you're glad this little town is still standing. 
+The internet is buzzing about the flood.
+Your breaking news story has gone viral all across the Midwest!
+You might not love Twin Lakes... but you're glad this little cherry-obsessed town is still standing. 
 
 $choice GatherFloodGear; Gather flood gear
 $choice GoOutsideAndHelpYourNeighbors; Go outside and help your neighbors
@@ -63,15 +63,15 @@ $endif
 $if Visited(ChaseChickens)
 Maureen is putting out feed for her cheerful brood of chickens. 
 Your other neighbor, Jim, is struggling to call his flood insurance company. 
-{@person}Gah. Blast it all. 
-{@person} The storm must've knocked out our cell service!
+{@jim}Gah. Blast it all. 
+{@jim} The storm must've knocked out our cell service!
 
 $choice HelpWithTheCleanUp; Help with the clean up
 $choice HelpJimGetHisPhoneWorking; Help Jim get his phone working
 $else
 As soon as you step outside, Maureen shoves a stack of Lost Chicken posters into your hands.
-{@person}Amelia Egghart is still missing. 
-{@person}Not that I'm blaming you, of course. 
+{@maureen}Amelia Egghart is still missing. 
+{@maureen}Not that I'm blaming you, of course. 
 
 $choice HangLostChickenPosters; Hang Lost Chicken posters
 $choice HelpWithTheCleanUp; Join the neighborhood clean-up effort
@@ -86,7 +86,7 @@ $endif
 $if Visited(HelpHer)
 You're starting to get sick of cherry pie for breakfast. 
 Then Maureen taps at the window--she's brought some fresh eggs from her bakyard coop. 
-{@person} Anything for our friendly neighborhood chicken chicken rescuer! 
+{@maureen} Anything for our friendly neighborhood chicken chicken rescuer! 
 
 $call AdjustStats(Endurance + 1, Social + 1)
 $elseif Visited(HelpHimPackUpHisWares)
@@ -95,8 +95,8 @@ In the corner of the fridge is some slightly soggy Emmentaler cheese from the gr
 $call AdjustStats(Endurance + 2)
 $else
 You're struggling to find some not-expired food when a neighbor taps at the front window.
-{@person}Hiya! You wrote that story yesterday, right? 
-{@person}Thanks to you, I got all my stuff out of the basement in time!
+{@neighbor}Hiya! You wrote that story yesterday, right? 
+{@neighbor}Thanks to you, I got all my stuff out of the basement in time!
 He offers you a homemade lemon loaf--a little off-brand for the Cherry Capitol of the Midwest, but still delicious.  
 
 $call AdjustStats(Endurance + 1, Trust + 1)
@@ -114,8 +114,8 @@ Your story has been liked and re-squawked thousands of times!
 Most people are thanking you for helping them stay safe. 
 $call AdjustStats(Social + 1)
 A few of the commenters are slightly less grateful. 
-{@person} You people are sheep. This so-called reporter made up the whole thing! 
-{@person} If there was a flood, why do my streets look fine? This is obviously fake news!! 
+{@squawkertroll1} You people are sheep. This so-called reporter made up the whole thing! 
+{@squawkertroll2} If there was a flood, why do my streets look fine? This is obviously fake news!! 
 
 $choice IgnoreTheHaters; Ignore the haters
 $choice DunkOnTheHaters; Dunk on the haters
@@ -166,10 +166,10 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Answer phone
 :: AnswerPhone
-{@phone}I've got your next assignment, El: a science story.
+{@dionne}I've got your next assignment, El: a science story.
 $call ActivateStory()
-{@phone} People are all talking about the flood, wondering how this could've happened. 
-{@phone} I want you to figure out the science behind it. 
+{@dionne} People are all talking about the flood, wondering how this could've happened. 
+{@dionne} I want you to figure out the science behind it. 
 
 $ContinueChoice({@me} Um... I'm not really a science writer.)
 $goto AssignmentScienceStory
@@ -228,17 +228,17 @@ $choice GatherFloodGear; Gather flood gear
 
 // Original Name: Assignment: Science Story
 :: AssignmentScienceStory
-{@phone} You want to get in at the Smoke City Herald, right?
+{@dionne} You want to get in at the Smoke City Herald, right?
 {@me} Well... yeah, someday. 
-{@phone} Trust me. They love science features like this.
-{@phone} I worked there for years. I should know.
+{@dionne} Trust me. They love science features like this.
+{@dionne} I worked there for years. I should know.
 {@me} Wait... seriously?? You worked at the Herald?  
-{@phone} Stay focused, El. 
-{@phone} I'd recommend starting at the DNR. They've got tons of data.  
-{@phone} Or you could also head downtown and check on the recovery effort.
+{@dionne} Stay focused, El. 
+{@dionne} I'd recommend starting at the DNR. They've got tons of data.  
+{@dionne} Or you could also head downtown and check on the recovery effort.
 {@me} Okay, yeah. But about the Herald--
-{@phone} You're on assignment now, El. Get to work.  
-{@phone} If you want a good recommendation from me, you need to earn it. 
+{@dionne} You're on assignment now, El. Get to work.  
+{@dionne} If you want a good recommendation from me, you need to earn it. 
 
 $choice ScienceStoryMap; ...Got it. Thanks, Dionne.
 
@@ -391,9 +391,9 @@ $endif
 // Original Name: Phone Call: DNR Headquarters
 :: PhoneCallDNRHeadquarters
 The DNR person sounds a little distracted, but he's willing to talk!
-{@person} I'd say this flood had two main causes: extreme rainfall, and less places for water to go. 
-{@person}This flood has already caused millions of dollars in damages.
-{@person}We need better policies to prevent this kind of disaster in the future.
+{@dnrworker} I'd say this flood had two main causes: extreme rainfall, and less places for water to go. 
+{@dnrworker}This flood has already caused millions of dollars in damages.
+{@dnrworker}We need better policies to prevent this kind of disaster in the future.
 
 You want to ask more, but he's getting another call.
 Going in person might've gotten you more info... but at least this was quicker. 
@@ -408,26 +408,26 @@ $choice ScienceStoryMap; Put away your phone and decide what to do next
 :: PhoneCallWynneD.StormeDNR
 {@person}Oh, hey, El! Nice to hear from you again. 
 $if StatCheck(Social, 5)
-    {@person} You must be super {stat-name}social{/stat-name}. I've been hearing your name everywhere!
+    {@wynnedstorme} You must be super {stat-name}social{/stat-name}. I've been hearing your name everywhere!
     {@me} Can you tell me what caused the flood? 
-    {@person} Well, Twin Lakes has a history of flooding. The city keeps the lake levels much higher than they used to.
-    {@person} Plus, climate change is bringing more extreme weather.
-    {@person} It's basically a perfect storm... no pun intended. 
+    {@wynnedstorme} Well, Twin Lakes has a history of flooding. The city keeps the lake levels much higher than they used to.
+    {@wynnedstorme} Plus, climate change is bringing more extreme weather.
+    {@wynnedstorme} It's basically a perfect storm... no pun intended. 
     $call GiveSnippet(DetailedFloodBackground)
     $call GiveSnippet(FloodsAndClimateChange)
     $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Research, 5)
-    She's excited to talk to someone who's so well-informed on floods and climate change!
-    {@person} Twin Lakes has a history of flooding. The city keeps the lake levels much higher than they used to.
-    {@person} Plus, climate change is bringing more extreme weather.
-    {@person} It's basically a perfect storm... no pun intended. 
+    She's excited to talk to someone who's so well-informed on floods and climate change.
+    {@wynnedstorme} Twin Lakes has a history of flooding. The city keeps the lake levels much higher than they used to.
+    {@wynnedstorme} Plus, climate change is bringing more extreme weather.
+    {@wynnedstorme} It's basically a perfect storm... no pun intended. 
     $call GiveSnippet(DetailedFloodBackground)
     $call GiveSnippet(FloodsAndClimateChange)
     $call GiveSnippet(CauseOfFlood)
 $else
-    {@person}Sorry, I need to stay focused on my work. 
-    {@person}But I'd be happy to give you a quick statement!
-    Ugh. Maybe you'd have more luck if you were more {stat-name}social{/stat-name}, or brushed up on your {stat-name}research skills{/stat-name}.  
+    {@wynnedstorme}Sorry, I need to stay focused on my work. 
+    {@wynnedstorme}But I'd be happy to give you a quick statement!
+    Hmm. Maybe you'd have more luck if you were more {stat-name}social{/stat-name}, or brushed up on your {stat-name}research skills{/stat-name}.  
     $call GiveSnippet(WynneBasicFloodBackground)
     This info isn't the most high quality, but at least it's something. 
 $endif
@@ -437,7 +437,7 @@ $choice ScienceStoryMap; Put away your phone and decide what to do next
 
 // Original Name: Phone Call: City Hall
 :: PhoneCallCityHall
-You call City Hall, but it's impossible to get past the receptionist. 
+You call Town Hall, but it's impossible to get past the receptionist. 
 He gives you a clearly rehearsed quote. 
 $call GiveSnippet(BasicCityHallInfo)
 
@@ -447,13 +447,13 @@ $choice ScienceStoryMap; Put away your phone
 // Original Name: Phone Call: Mayor's Personal Number
 :: PhoneCallMayorsPersonalNumber
 The mayor has already heard about how you rescued poor Omelette.
-{@phone}You're a hero, Ms. Benjamin! 
-{@phone} I don't always love reporters... but you seem like one of the friendly ones. 
+{@mayorbarrysmuckers}You're a hero, Ms. Benjamin! 
+{@mayorbarrysmuckers} I don't always love reporters... but you seem like one of the friendly ones. 
 {@me}Oh... uh, thanks. I guess. 
 {@me}Can you tell me what you think caused the flood?
-{@phone}Oh, that would be the high lake levels. No question about it.
-{@phone}I've been trying to convince our city council to vote to lower them for years.
-{@phone}There won't be any town left if this flooding keeps up!
+{@mayorbarrysmuckers}Oh, that would be the high lake levels. No question about it.
+{@mayorbarrysmuckers}I've been trying to convince our city council to vote to lower them for years.
+{@mayorbarrysmuckers}There won't be any town left if this flooding keeps up!
 
 $call GiveSnippet(MayorLakeLevelsQuote)
 $choice MainStreetFloodRecovery; Continue toward Main Street 
@@ -497,8 +497,8 @@ $endif
 // Original Name: Knock on the nearest office door
 :: KnockOnTheNearestOfficeDoor
 You find an office with a handwritten sign on the door: <i>Knock for math puns.</i>
-{@person} Oh, great, a visitor. I've been cooped up in here all day!
-{@person}Wanna hear a joke? 
+{@dnrexpert} Oh, great, a visitor. I've been cooped up in here all day!
+{@dnrexpert}Wanna hear a joke? 
 
 $choice MathJoke; Sure, why not?
 $choice NoThanks; No thanks. 
@@ -506,7 +506,7 @@ $choice NoThanks; No thanks.
 // Original Name: Read the bulletin board in the hallway
 :: ReadTheBulletinBoardInTheHallway
 {@article} Twin Lakes in danger of catastrophic flooding! Learn more from Sarah McCloud, climate resaercher at the Dept. of Limnology 
-{@article} Mayor Smuckers wants to lower the lake levels! Join the discussion at this week's Town Hall meeting. 
+{@flyer} Mayor Smuckers wants to lower the lake levels! Join the discussion at this week's Town Hall meeting. 
 Hmmm. The Department of Limnology... sounds like somewhere you might want to check out. 
 
 $if HasTime(0.25)
@@ -526,10 +526,10 @@ $endif
 
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheGovernorInHallway
-As you're leaving, you literally run into someone.
-{@person}Ope, sorry. 
+As you're leaving, you literally run into a lady who looks vaguely familiar.
+Blue pantsuit, perfect salon-blown hair, a #TwinLakesStrong pin on her lapel... 
 {@me} Whoa... you're the governor!
-{@person} Uh, yah. Obviously. 
+{@governor} Uh, yah. Obviously. 
 
 $HubChoice(InterviewGovernor, "Ask for an interview", 0.5)
 $choice ScienceStoryMap; Gotta go!
@@ -538,21 +538,21 @@ $choice ScienceStoryMap; Gotta go!
 :: LookForYourDNRContactWynneD.Storme
 
 $if !Visited(PhoneCallWynneD.StormeDNR)
-{@person}Oh, hey, El! Nice to meet you in person! 
-{@person} Just looking over some data... you probably wouldn't find it too interesting.
-{@me} Actually, data's exactly what I need. Lay it on me. 
+{@wynnedstorme}Oh, hey, El! Nice to meet you in person! 
+{@wynnedstorme} Just looking over some data... probably not the juicy reporter stuff you're looking for. 
+{@me} Actually, data's exactly what I need! I'm on the science beat. 
 
 $if StatCheck(Research, 5)
-She tells you all about local increases in rainfall, rising lake volume...
-And the shocking fact that the lake levels are being kept 5 feet higher than their natural level!
+Wynne tells you all about local increases in rainfall and rising lake volume.
+Apparently the lakes are being kept 5 feet higher than their natural level!
 It's a lot of data--good thing you're such a {stat-name}research{/stat-name} expert. 
 $call GiveSnippet(DetailedFloodBackground)
 $call GiveSnippet(FloodsAndClimateChange)
 $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Social, 5)
-She tells you all about local increases in rainfall, rising lake volume...
-And the shocking fact that the lake levels are being kept 5 feet higher than their natural level!
-All the data loses you at first... 
+Wynne tells you all about local increases in rainfall and rising lake volume.
+Apparently the lakes are being kept 5 feet higher than their natural level!
+All the data goes over your head at first... 
 But your {stat-name}social{/stat-name} skills make up for it.
 Wynne is happy to slow down and explain everything. 
 $call GiveSnippet(DetailedFloodBackground)
@@ -569,9 +569,9 @@ $call GiveSnippet(WynneBasicFloodBackground)
 $endif
 
 $else
-{@person}Oh, hey there, El!
-{@person}It's nice to finally meet you in person. 
-{@person}Can't wait to read your story!
+{@wynnedstorme}Oh, hey there, El!
+{@wynnedstorme}It's nice to finally meet you in person. 
+{@wynnedstorme}Can't wait to read your story!
 
 $call AdjustStats(Trust + 1)
 $endif
@@ -586,9 +586,10 @@ $endif
 :: LookForSomeoneToInterview
 You try to catch someone as they run by, but he's too busy to talk. 
 
-{@person}Sorry, lots of damage control to do here. 
+{@lakescientist}Sorry, lots of damage control to do here. 
 {@me}If you could just spare five minutes--
-Too late. He's already rushed back inside. 
+Too late. He's already gone back inside the flooded boathouse. 
+Now what? 
 
 $HubChoice(HelpBailOutWaterFromBoathouse, "Help bail out water from boathouse", 0.25)
 $HubChoice(GrabCoffeeForTheLimnologyDepartment, "Grab coffee for the Limnology Department", 0.5)
@@ -604,8 +605,8 @@ As you turn to leave, you bump into someone...
 
 A researcher with a nametag that says "S. McCloud." 
 
-{@person}Hey! Careful out there, kid. 
-{@person}That's toxic blue-green algae.
+{@sarah}Hey! Careful out there, kid. 
+{@sarah}That's toxic blue-green algae.
 
 $choice QuickInterviewLimnologyExpert; Ask if she has time for an interview
 $if Visited(ThanksPlusUniversityContact)
@@ -618,8 +619,8 @@ $endif
 $if Visited(HelpHer)
 You call Maureen. 
 {@me}Hey! Um, weird question... did any more of your chickens fly the coop?
-{@phone}Hmm? Nope, we're all fine here. No signs of fowl play. 
-{@phone}Thank you, though, Dear! 
+{@maureen}Hmm? Nope, we're all fine here. No signs of fowl play. 
+{@maureen}Thank you, though, Dear! 
 $call AdjustStats(Trust + 1)
 
 She hangs up, leaving you with a strange chicken staring up at you hopefully. 
@@ -628,9 +629,9 @@ $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
 $else
 {@me}Hey!! I think I found your chicken!
-{@phone}Amelia Egghart? Oh, she actually just showed up back home! 
+{@maureen}Amelia Egghart? Oh, she actually just showed up back home! 
 {@me}Wait... really??
-{@phone}I appreciate you calling, though, Dear. That means a lot. 
+{@maureen}I appreciate you calling, though, Dear. That means a lot. 
 $call AdjustStats(Trust + 1)
 
 She hangs up, leaving you with a strange chicken staring up at you hopefully. 
@@ -645,7 +646,7 @@ You wander the area, the chicken fidgeting in your arms.
 
 You're about to give up when a frazzled-looking woman rushes over to you. 
 
-{@person}Oh, you found Omelette! Thank you so much! My daughter is heartbroken.
+{@chickenowner}Oh, you found Omelette! Thank you so much! My daughter is heartbroken.
 
 $call AdjustStats(Trust + 1)
 
@@ -668,7 +669,7 @@ Inside, the owner is muttering insults at her malfunctioning laptop.
 
 Her eyes light up when she sees you.
 
-{@person}Oh, I didn't see ya there! What can I getcha?
+{@cafeowner}Oh, I didn't see ya there! What can I getcha?
 
 $choice InterviewCafeOwner; Ask to interview her
 $HubChoice(OrderTheDailySpecial, "Order the daily special", 0.25)
@@ -682,7 +683,7 @@ You get some amazing photos of Main Street!
 
 The business owners all agree to let you use pictures of them.
 
-{@person}We read your article yesterday. Glad you're here to look out for us! 
+{@businessowner}We read your article yesterday. Glad you're here to look out for the town! 
 
 $call GiveSnippet(InspiringDowntownRecovery)
 $endif
@@ -690,12 +691,11 @@ $endif
 $if StatCheck(Tech, 3) , !StatCheck(Trust, 4)
 You ask the business owners if they're okay with being photographed.  
 
-{@person}Sorry, kid. I don't trust you.  
+{@businessowner}Sorry, kid. I don't trust you.  
 {@me}What? Why not? 
-{@person}I saw your article about the Cherry Festival. 
-{@person}A "quaint distraction from the boredom of small town life," huh?
+{@businessowner}I saw your article about the Cherry Festival last week. 
+{@businessowner}A "quaint distraction from the boredom of small town life," huh?
 {@me}It.... was an op-ed.... 
-
 He ignores you and storms away. 
 At least you can still use these photos, if you crop out all the people. 
 
@@ -717,15 +717,14 @@ $choice MainStreetFloodRecovery; Keep looking around
 
 // Original Name: Math joke!
 :: MathJoke
-{@person}Ok, let's see... Did you hear the one about the law of averages? I'd tell you, but it's too <i>mean.</i> 
+{@dnrexpert}Ok, let's see... Did you hear the one about the law of averages? I'd tell you, but it's too <i>mean.</i> 
 
-He grins, waiting for a reaction. 
 $if StatCheck(Research, 4)
 You've been reading up on statistics lately--you can top that one. 
 
 {@me}Did you hear about the haunted graph? It had paranormal distribution.
 
-{@person}Ha! Not bad, kid. How can I help you? 
+{@dnrexpert}Ha! Not bad, kid. How can I help you? 
 
 $choice GoodDNRInterview; Interview DNR Worker.
 $endif
@@ -735,16 +734,16 @@ Ha! Being a techie with a back pocket full of computer jokes, you can probably t
 
 {@me}Did you hear about the computer that was full of bugs? It had a broken screen.
 
-{@person}Ha! Not bad, kid. How can I help you? 
+{@dnrexpert}Ha! Not bad, kid. How can I help you? 
 
 $choice GoodDNRInterview; Interview DNR Worker.
 $else
 The joke flies right over your head. 
 
-{@me}Uh.... good one!
+{@me}Uh.... good one. I think.
 {@me}Can I ask you some questions about the flood?
 
-{@person}Well, I don't have time for an interview. But I can give you our official statement. 
+{@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
 
 $choice DNRStatement; Get DNR Statement
 $endif
@@ -757,7 +756,7 @@ $goto MathJoke
 
 // Original Name: Interview mayor
 :: InterviewGovernor
-{@person}I'm always happy to talk to the press. Ask away. 
+{@governor}I'm always happy to talk to the press. Ask away. 
 
 This will be an amazing boost for your article, but you try to play it cool. 
 
@@ -773,9 +772,7 @@ People are working to bail out water.
 
 You grab your extra-large water bottle and join in, scooping out floodwater. 
 
-The scientist looks grateful. 
-
-{@person}Thanks, kid! Just make sure not to drink from that bottle later. This floodwater is nasty stuff."
+{@lakescientist}Thanks, kid! Just make sure not to drink from that bottle later. This floodwater is nasty stuff."
 
 $choice ScienceStoryMap; Glad I could help! Gotta go now.
 $HubChoice(InterviewScientist, "Can I ask you a few questions, while I'm here?", 0.25)
@@ -788,8 +785,8 @@ You bike to a campus coffee shop and order as many coffees as you can carry.
 
 When you get back, the scientists pause in their work, drawn to the tantalizing aroma of medium roast. 
 $call AdjustStats(Social + 1)
-
-{@person}Thanks, kid! I guess I could do a quick interview over coffee.
+{@lakescientist} Oh, thanks, kid!
+{@lakescientist} I guess I could do a quick interview over coffee.
 
 $HubChoice(InterviewScientist, "Thanks! Let's get started.", 0.25)
 $choice DepartmentOfLimnology; Actually, I better go. 
@@ -798,13 +795,9 @@ $choice DepartmentOfLimnology; Actually, I better go.
 :: QuickInterviewLimnologyExpert
 
 $if !StatCheck(Social, 4)
-{@person}Well... I guess I can chat for a minute. 
-
-She tells you about one of the main causes of the flooding: 
-Extreme weather due to climate change. 
-
-{@person}We're going to keep seeing more and more rain. 
-{@person}This town needs to make some changes if it wants to survive.
+{@sarah}Well... I guess I can chat for a minute. 
+{@sarah}Thanks to climate change, we're going to keep seeing more and more rain. 
+{@sarah}This town needs to make some changes if it wants to survive.
 
 $call GiveSnippet(BasicFloodBackground)
 
@@ -818,7 +811,7 @@ $endif
 $if StatCheck(Social, 4)
 She seems busy, but your social graces win her over. 
 
-{@person}Sure. I'd be happy to talk!
+{@sarah}Sure, why not? I'd be happy to talk. 
 
 $HubChoice(InterviewScientist, "Great, let's get started!", 0.25)
 $choice DepartmentOfLimnology; Actually, I better go. 
@@ -827,10 +820,8 @@ $endif
 // Original Name: Tell her you met her sister!
 :: TellHerYouMetHerSister
 {@me}I met your sister this morning. Her cafe is amazing!
-{@person}Awww! Did she make you her world-famous PB&J? 
-{@person}Sourdough and cherry preserves....it's the best in town.
-
-When she hears that you helped out her sister, she's happy to do an in-depth interview. 
+{@sarah}Awww! Did she make you her world-famous PB&J? 
+{@sarah}I'm glad she sent you along. I'd be happy to do an interview!
 
 $HubChoice(In-DepthInterviewLimnologyExpert, "Okay, let's get started!", 0.5)
 $choice DepartmentOfLimnology; "Actually, I better get going.
@@ -845,8 +836,7 @@ $choice MainStreetFloodRecovery; Arrive at Main Street
 
 // Original Name: "No problem. I better go, I've got a story to write.
 :: NoProblem.IBetterGoIveGotAStoryToWrite
-The woman looks surprised. 
-{@person}You're a reporter? You should talk to my brother! He'll know all the details.
+{@chickenowner}You're a reporter? You should talk to my big brother! He'll know all the details.
 
 She scribbles down her brother's contact info: <i>Barry Smuckers, 555-1678</i>
 
@@ -854,9 +844,9 @@ She scribbles down her brother's contact info: <i>Barry Smuckers, 555-1678</i>
 $ContinueChoice({@me} Barry Smuckers? You mean.... the mayor of Twin Lakes?)
 
 
-{@person}Oh, you've heard of him? 
-{@person}Give him a call. Tell him you rescued his niece's chicken! 
-{@person}I'm sure he'd be happy to chat.
+{@mayorsister}Oh, you've heard of him? 
+{@mayorsister}Give him a call. Tell him you rescued his niece's chicken! 
+{@mayorsister}I'm sure he'd be happy to chat.
 
 <i>New Contact: Mayor's Personal Number</i>
 
@@ -867,8 +857,7 @@ $choice ScienceStoryMap; Go somewhere else
 
 // Original Name: Ask to interview him
 :: AskToInterviewHim
-He doesn't even glance at you. 
-{@person}Do I look like I'm in a chatty mood? 
+{@galleryowner}Do I look like I'm in a chatty mood, kid?
 
 $choice AskIfHeNeedsHelp; Ask if he needs help
 $choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
@@ -876,10 +865,10 @@ $choice MainStreetFloodRecovery; Leave him alone. There must be someone else you
 
 // Original Name: Ask if he needs help
 :: AskIfHeNeedsHelp
-{@person}Hmm. Let's see. My gallery is totally destroyed. 
-{@person}The storm kept me up all night. 
-{@person}And all I had for breakfast was tic tacs and oyster crackers. 
-{@person}Would <i>you</i> say I need help?"
+{@galleryowner}Hmm. Let's see. My gallery is totally destroyed. 
+{@galleryowner}The storm kept me up all night. 
+{@galleryowner}And all I had for breakfast was tic tacs and oyster crackers. 
+{@galleryowner}Would <i>you</i> say I need help?"
 
 $HubChoice(OfferHimSomeFood, "Offer him some food", 0)
 $HubChoice(HelpHimCarryFurnitureOutside, "Help him carry furniture outside", 0.25)
@@ -890,24 +879,23 @@ $choice MainStreetFloodRecovery; Leave the gallery
 :: TellHimYoureABigFanOfHisWork
 
 $if StatCheck(Social, 4)
-{@person}Wait. You know my work?
+{@galleryowner} Really? You know my work?
 {@me}Yeah, I saw your art installation at the ice cream social last week! 
 {@me}I'm so sorry you got caught in the flood.
 He looks more cheerful now. 
-{@person}Well, this is my series on toxic lakewater bacteria, so it's actually sort of fitting!
-
-He's so excited you've heard of his work that he agrees to an interview. 
+{@galleryowner}Well, this is my series of paintings on toxic lakewater bacteria, so it's actually sort of fitting.
+{@galleryowner} Guess it couldn't hurt to do a quick interview... 
 
 $HubChoice(InterviewGalleryOwner, "{@me} Okay, let's get started!", 0.5)
 $HubChoice(MainStreetFloodRecovery, "{@me} Actually, I'd better go.", 0)
 $endif
 
 $if !StatCheck(Social, 3)
-{@person}Ha. Sure you are.
-{@person}Name one thing you've noticed about my paintings. 
+{@galleryowner}Ha. Sure you are.
+{@galleryowner}Name one thing you've noticed about my paintings. 
 {@me}They're very.... um.... green?
 He rolls his eyes. 
-{@person}If you'll excuse me, I've got some cleaning up to do. 
+{@galleryowner}If you'll excuse me, I've got some cleaning up to do. 
 
 $choice MainStreetFloodRecovery; Well, you tried. Better leave this guy alone.
 $endif
@@ -916,13 +904,13 @@ $endif
 :: InterviewCafeOwner
 
 $if Visited(OrderTheDailySpecial)
-{@person}Of course! 
-{@person}You're my first customer of the day. It's the least I can do. 
+{@cafeowner}Of course! 
+{@cafeowner}You're my first customer of the day. It's the least I can do. 
 $elseif Visited(HelpWithHerComputer)
-{@person}Sure! I could use a break from my computer, anyway. 
+{@cafeowner}Sure! I could use a break from my computer, anyway. 
 $else
 Her face falls. 
-{@person}Sure, I guess. It's not like I've got any customers, anyhow.
+{@cafeowner}Sure, I guess. It's not like I've got any customers, anyhow.
 $endif
 
 
@@ -932,11 +920,10 @@ $HubChoice(MainStreetFloodRecovery, "Actually, never mind. I gotta go.", 0)
 // Original Name: Order the daily special
 :: OrderTheDailySpecial
 @tags Endurance
-{@person}
 She rummages around behind the counter and comes back with a peanut butter and jelly sandwich.
-{@person}Um, sorry it's not fancy. We're a little low on inventory.
-{@me}No problem.
-You're not just being polite. It's the best PB&J you've ever tasted. 
+{@cafeowner}Um, sorry it's not fancy. We're a little low on inventory.
+{@me}No problem. 
+You're not just being polite. This is literally the best PB&J you've ever tasted. 
 
 $call AdjustStats(Endurance + 1)
 
@@ -945,12 +932,12 @@ $choice InterviewCafeOwner; Ask for a quick interview while you eat
 // Original Name: Help with her computer
 :: HelpWithHerComputer
 The cafe owner is struggling with a glitchy website that looks like it was made with Angelfire.
-{@person}Ugh. I don't know why they make this so impossible!
+{@cafeowner}Ugh. I don't know why they make this so impossible!
 
 $if StatCheck(Tech, 4)
 Your heart goes out to her.
 {@me}I'm sort of a tech geek. Mind if I help out?
-The woman looks relieved.
+{@cafeowner} Oh... if you're sure you have time! But don't go to any trouble. 
 Within a few minutes, you've gotten her set up with the forms she needs!
 
 $choice InterviewCafeOwner; Ask if she has time for an interview
@@ -958,8 +945,7 @@ $else
 Your heart goes out to her. 
 You try to help, but you're as clueless about tech stuff as she is.
 {@me}I'm so sorry. What a headache. 
-{@person}Aww, that's okay. 
-{@person}I appreciate you tryin' to help. 
+{@cafeowner}Aww, that's okay. I appreciate you tryin' to help. 
 $call AdjustStats(Trust + 1)
 $choice InterviewCafeOwner; Ask if she has time for an interview
 $endif
@@ -975,8 +961,8 @@ $choice CanYouDescribeTheImpactOfFloodingOnTwinLakes; What is the long-term impa
 :: DNRStatement
 He tells you the cause of the flooding: extreme rainfall, and less places (like rain gardens and wetlands) for water to go.  
 
-{@person}This flood has already caused millions of dollars in damages. 
-{@person}We need better policies to prevent this kind of disaster in the future.
+{@dnrexpert}This flood has already caused millions of dollars in damages. 
+{@dnrexpert}We need better policies to prevent this kind of disaster in the future.
 
 $call GiveSnippet(BasicFloodBackground)
 $call GiveSnippet(BasicFloodPrevention)
@@ -985,9 +971,8 @@ $choice DNRMap; Look elsewhere in the DNR
 
 // Original Name: "How is the state helping with flood recovery?"
 :: HowIsTheStateHelpingWithFloodRecovery
-{@person} I'm glad you asked. The state is sending supplies and financial aid...
-{@person} And I'll be keeping a close eye on the situation. 
-{@person}We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state!
+{@governor} I'm glad you asked. The state is sending supplies and financial aid.
+{@governor}We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state!
 Yikes. Didn't realize this was a campaign speech.   
 $call GiveSnippet(Governor-Impact)
 
@@ -995,42 +980,42 @@ $choice AnythingYoudLikeToSay; Is there anything you'd like to say to the people
 $choice WhatAboutPrevention; What about prevention? Do you have any plans to stop this from happening again? 
 
 :: AnythingYoudLikeToSay
-{@person} Of course! I would tell them to stay strong and keep the faith.
-{@person} This town is incredibly... ah... unique. 
-{@person} You can count on my support as you recover from this terrible tragedy.
-Hmm. Come to think of it, you probably could've asked her a more challenging questioning. 
+{@governor} Of course! I would tell them to stay strong and keep the faith.
+{@governor} This town is incredibly... ah... unique. 
+{@government} You can count on my support as you recover from this terrible tragedy.
+Hmm. Come to think of it, you probably could've asked her a more challenging question. 
 $call GiveSnippet(BlandGovernorQuote)
 
 :: WhatAboutPrevention
-{@person} Well... I mean, this is a tiny town among thousands of tiny towns.
-{@person} I don't have time to figure it all out myself. 
-{@person} But I have complete faith in your local officials!
+{@governor} Well... I mean, this is a tiny town among thousands of tiny towns.
+{@governor} I don't have time to figure it all out myself. 
+{@governor} But I have complete faith in your local officials!
 
 $choice IThoughtTheyWereTheBackbone; I thought you said tiny towns were the backbone of the state.  
 $choice WhatIfLocalOfficialsNeedMoreHelp; What if local officials can't fix this on their own?
 
 :: WhatIfLocalOfficialsNeedMoreHelp
-{@person} Don't worry. I'm sure that Mayor Smithers--
+{@governor} Don't worry. I'm sure that Mayor Smithers--
 {@me} Smuckers.
-{@person} --is more than adequate. 
+{@governor} --is more than adequate. 
 {@me} But what if he doesn't have the resources? Will the city send more aid?
-{@person} You know... I just remembered, I forgot to put change in the meter.
+{@governor} You know... I just remembered, I forgot to put change in the meter.
 {@me} We... don't have meters here.
-{@person} Sorry, kid. I really need to run. Nice chatting with you!
+{@governor} Sorry, kid. I really need to run. Nice chatting with you!
 Well... that quote isn't exactly science, but it's definitely juicy.
 $call GiveSnippet(GovernorEvasiveAnswer)
 $choice ScienceStoryMap; Head back outside 
 
 :: IThoughtTheyWereTheBackbone
-{@person} Oh, they absolutely are. The backbone and the heart!
-{@person} This town deserves all the help we can possibly provide. 
+{@governor} Oh, they absolutely are. The backbone and the heart!
+{@governor} This town deserves all the help we can possibly provide. 
 {@me} So... are we talking the National Guard, or volunteers? 
 {@me} Or just a nice photo op?  
-Her gaze turns steely. 
-{@person} I can't believe you would say that! 
-{@person} What kind of newspaper is Dionne running here? 
-{@me} Wait... you know Dionne?? 
-{@person} I think that's enough questions for today.
+Her gaze turns into a glare.  
+{@governor} I can't believe you would say that. 
+{@governor} What kind of newspaper is Dionne Richards running out here? 
+{@me} Wait... you know Dionne?? Is it true she used to work at the Smoke City Herald?
+{@governor} How should I know? Have a nice life, kid.  
 $call GiveSnippet(JuicyGovernorQuote)
 $choice ScienceStoryMap; Head back outside 
 
@@ -1042,8 +1027,8 @@ $choice ScienceStoryMap; Actually... I'm running low on time. I better run.
 
 // Original Name: In-Depth Interview: Limnology Expert
 :: In-DepthInterviewLimnologyExpert
-{@person}Twin Lakes is super vulnerable to flooding. I mean, we're right between two giant lakes.  
-{@person}That, plus the high lake levels... it was a disaster waiting to happen.
+{@sarah}Twin Lakes is super vulnerable to flooding. I mean, we're right between two giant lakes.  
+{@sarah}That, plus the high lake levels... it was a disaster waiting to happen.
 
 $if !Visited(AskWhatPeopleCanDoToHelp)
     $choice AskWhatPeopleCanDoToHelp; How can the people of Twin Lakes help stop future flooding? 
@@ -1055,14 +1040,14 @@ $choice AskIfSheHasGraphicsYouCanUse; Do you have any graphics I could use in my
 
 $if StatCheck(Resourceful, 4)
 {@me} Here you go! A cherry protein bar and a bottled water.
-{@person} Wow... you're pretty {stat-name}resourceful{/stat-name}, kid. 
-{@person} I guess I could do a quick interview. Couldn't hurt to take a break. 
+{@galleryowner} Wow... you're pretty {stat-name}resourceful{/stat-name}, kid. 
+{@galleryowner} I guess I could do a quick interview. Couldn't hurt to take a break. 
 
 $HubChoice(InterviewGalleryOwner, "Awesome, let's get started!", 0.5)
 $choice MainStreetFloodRecovery; Actually, I think I'd better get going. 
 $else
 {@me} Um... sorry. Looks like I accidentally left my snacks at home.
-{@person} Great. Super helpful. Can I get back to work now? 
+{@galleryowner} Great. Super helpful. Can I get back to work now? 
 Yikes. You better leave this guy alone.
 
 $choice MainStreetFloodRecovery; Find someone else to talk to.
@@ -1073,7 +1058,7 @@ $endif
 
 $if StatCheck(Endurance, 4)
     Thanks to your {stat-name}endurance{/stat-name}, you carry out a side table, a chair, and several easels without breaking a sweat. 
-    {@person}Wow... I gotta admit, I'm impressed. Are you a weightlifter? 
+    {@galleryowner}Wow... I gotta admit, I'm impressed. Are you a weightlifter? 
 
     $set local:_localOr = false
     $if Visited(HelpHer) 
@@ -1089,15 +1074,15 @@ $if StatCheck(Endurance, 4)
         {@me}Nah. Just a reporter with a ton of heavy gear. 
     $endif
 
-{@person} Well, since you helped me, I guess I should help you too.
-{@person} Still want that interview? 
+{@galleryowner} Well, since you helped me, I guess I should help you too.
+{@galleryowner} Still want that interview? 
 
     $HubChoice(InterviewGalleryOwner, "{@me} That would be great. Let's get started!", 0.5)
     $choice MainStreetFloodRecovery; Actually, I think I better get going. 
 $else
 Ugh... these easels are a <i>lot</i> heavier than they look.
-{@person}No offense, kid, but I've got a lot of work to do here.
-{@person}Don't you have somebody else to not help? 
+{@galleryowner}No offense, kid, but I've got a lot of work to do here.
+{@galleryowner}Don't you have somebody else to not help? 
 
 Yikes. You better leave this guy alone. 
 
@@ -1107,10 +1092,10 @@ $endif
 // Original Name: Interview Gallery Owner
 :: InterviewGalleryOwner
 He tells you this is his third year running the gallery. 
-{@person}I put all my savings into this place. I'm not sure how I'm gonna recover.
+{@galleryowner}I put all my savings into this place. I'm not sure how I'm gonna recover.
 {@me}Do you think the city should be responsible for helping business owners? 
-{@person}Well, they're the ones who let this happen.
-{@person}The least they could do is help bail us out. 
+{@galleryowner}Well, they're the ones who let this happen.
+{@galleryowner}The least they could do is help bail us out. 
 
 $call GiveSnippet(ArtBusinessImpact)
 
@@ -1150,7 +1135,7 @@ $endif
 
 // Original Name: "What was the cause of the flood?"
 :: WhatWasTheCauseOfTheFlood
-{@person}The flood was caused by a couple factors. Extreme rainfall, and less places for that water to go.
+{@dnrexpert}The flood was caused by a couple factors. Extreme rainfall, and less places for that water to go.
 
 $call GiveSnippet(DNRCauseOfFlood)
 
@@ -1159,8 +1144,8 @@ $choice WhatDoYouMeanLessPlacesForTheWaterToGo; What do you mean, less places fo
 
 // Original Name: "Can you describe the long-term impact of flooding on Twin Lakes?" "
 :: CanYouDescribeTheImpactOfFloodingOnTwinLakes
-{@person}More and more flood events will drive away the people with enough money and privilege to move.
-{@person}If we lose too many people and businesses, the town won't survive. 
+{@dnrexpert}More and more flood events will drive away the people with enough money and privilege to move.
+{@dnrexpert}If we lose too many people and businesses, the town won't survive. 
 
 $call GiveSnippet(ImpactOfFlood)
 
@@ -1169,9 +1154,9 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 
 // Original Name: "What caused the flood?"
 :: WhatCausedTheFlood
-{@person} It's a mix of climate change and high lake levels. 
-{@person} There's nowhere for all this rain to go!
-{@person}The city needs to make some big changes to keep people safe.
+{@lakescientist} It's a mix of climate change and high lake levels. 
+{@lakescientist} There's nowhere for all this rain to go!
+{@lakescientist}The city needs to make some big changes to keep people safe.
 
 $call GiveSnippet(WhatCausedTheFlood)
 
@@ -1180,9 +1165,9 @@ $choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake level
 
 // Original Name: "How can the city prevent this from happening next time?"
 :: HowCanTheCityPreventThisFromHappeningNextTime
-{@person}It'll take more than some sandbags.
-{@person}We need lower lake levels and city-wide engineering solutions. 
-{@person}The problem is, it'll be expensive. 
+{@lakescientist}It'll take more than some sandbags.
+{@lakescientist}We need lower lake levels and city-wide engineering solutions. 
+{@lakescientist}The problem is, it'll be expensive. 
 
 $call GiveSnippet(LimnologyFloodPrevention)
 
@@ -1191,16 +1176,16 @@ $choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake level
 
 // Original Name: Ask what people can do to help
 :: AskWhatPeopleCanDoToHelp
-{@person}Welllll... it's complicated.
-{@person}For now, filling sandbags and helping people find shelter is probably the best thing you could do.
-{@person}But we need long-term solutions.
+{@sarah}Welllll... it's complicated.
+{@sarah}For now, filling sandbags and helping people find shelter is probably the best thing you could do.
+{@sarah}But we need long-term solutions.
 
 $choice CanYouGiveMeSomeExamples; Can you give me some examples?
 
 // Original Name: Ask if she has graphics you can use
 :: AskIfSheHasGraphicsYouCanUse
 She pulls up a graph on her phone.
-{@person}Take a look at the trends. We're seeing an unprecedented increase in rainfall!
+{@sarah}Take a look at the trends. We're seeing an unprecedented increase in rainfall!
 
 $call GiveSnippet(RainfallStats)
 
@@ -1211,9 +1196,9 @@ $choice DepartmentOfLimnology; Thank her for her help
 
 // Original Name: "How has the flood affected your business?"
 :: HowHasTheFloodAffectedYourBusiness
-{@person}Bah. It's a complete disaster.
-{@person}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
-{@person}If this keeps up, I'm in trouble.
+{@galleryowner}Bah. It's a complete disaster.
+{@galleryowner}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
+{@galleryowner}If this keeps up, I'm in trouble.
 
 $call GiveSnippet(InTroubleQuote)
 
@@ -1244,9 +1229,9 @@ $endif
 
 // Original Name: "Are you worried about more rain coming?"
 :: AreYouWorriedAboutMoreRainComing
-{@person}Of course I am. But we gotta do our best to pick up and rebuild.
-{@person}Small business is the heart and soul of this town.
-{@person}I gotta hope it'll all work out. 
+{@galleryowner}Of course I am. But we gotta do our best to pick up and rebuild.
+{@galleryowner}Small business is the heart and soul of this town.
+{@galleryowner}I gotta hope it'll all work out. 
 
 $call GiveSnippet(QuoteHeartAndSoul)
 
@@ -1276,8 +1261,8 @@ $endif
 
 // Original Name: "How do you think it'll impact Twin Lakes if the flooding keeps up?"
 :: HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp
-{@person}People will go out of business.
-{@person}And I bet we'll get less and less summer tourists, if this keeps happening. 
+{@galleryowner}People will go out of business.
+{@galleryowner}And I bet we'll get less and less summer tourists, if this keeps happening. 
 
 
 $if !Visited(HowHasTheFloodAffectedYourBusiness)
@@ -1306,29 +1291,28 @@ $endif
 
 // Original Name: Thanks, plus university contact
 :: ThanksPlusUniversityContact
-{@person}No problem. And since you helped me out, I've got a tip for ya! 
-{@person}You oughta talk to my sister, Sarah McCloud--she's a researcher at the college. 
+{@cafeowner}No problem. And since you helped me out, I've got a tip for ya! 
+{@cafeowner}You oughta talk to my sister, Sarah McCloud--she's an expert on lakes and flooding. 
 
 She gives you the address for the Department of Limnology. 
 
-{@person}Thanks again! Stop by any time.
-{@article}New location: Department of Limnology 
+{@cafeowner}Thanks again! Stop by any time. 
 
 $choice MainStreetFloodRecovery; Return to Main Street
 $choice ScienceStoryMap; Decide where to go next  
 
 // Original Name: Thanks
 :: Thanks
-{@person}No problem. Stop by any time!
+{@cafeowner}No problem. Stop by any time!
 
 $choice MainStreetFloodRecovery; Head back out to Main Street 
 $choice ScienceStoryMap; Decide where to go next 
 
 // Original Name: "Can you give me the rainfall statistics?"
 :: CanYouGiveMeTheRainfallStatistics
-{@person}Some areas got 15 inches of rain within 24 hours.
-{@person}That's the worst rain to hit Twin Lakes since 1957! 
-{@person}Of course, back then the flooding wasn't so bad.
+{@dnrexpert}Some areas got 15 inches of rain within 24 hours.
+{@dnrexpert}That's the worst rain to hit Twin Lakes since 1957! 
+{@dnrexpert}Of course, back then the flooding wasn't so bad.
 
 $call GiveSnippet(DNRRainfallInfo)
 
@@ -1337,9 +1321,9 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 
 // Original Name: "What do you mean, less places for the water to go?"
 :: WhatDoYouMeanLessPlacesForTheWaterToGo
-{@person}The lakes are being kept extra high.
-{@person}Plus, a lot of our wetlands have been covered up by new developments. 
-{@person}There's nothing to soak up the water, so the flood keeps rising. 
+{@dnrexpert}The lakes are being kept extra high.
+{@dnrexpert}Plus, a lot of our wetlands have been covered up by new developments. 
+{@dnrexpert}There's nothing to soak up the water, so the flood keeps rising. 
 
 $call GiveSnippet(DNRLessPlacesForWater)
 
@@ -1348,8 +1332,8 @@ $choice WhyAreTheLakesBeingKeptSoHigh; Why are the lakes being kept so high?
 
 // Original Name: "How much financial damage has the flood caused?"
 :: HowMuchFinancialDamageHasTheFloodCaused
-{@person}We're estimating $50 million in damages, just to Twin Lakes.
-{@person}I'm sure it'll be much more once we look at the damage to cherry farms outside of town.
+{@dnrexpert}We're estimating $50 million in damages, just to Twin Lakes.
+{@dnrexpert}I'm sure it'll be much more once we look at the damage to cherry farms outside of town.
 
 $call GiveSnippet(DNRFinancialDamage)
 
@@ -1357,8 +1341,8 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 
 // Original Name: "How can we stop this from happening again?"
 :: HowCanWeStopThisFromHappeningAgain
-{@person}Hate to say it, but sandbags aren't going to be enough.
-{@person}We need better policies if we want the town to survive.
+{@dnrexpert}Hate to say it, but sandbags aren't going to be enough.
+{@dnrexpert}We need better policies if we want the town to survive.
 
 $call GiveSnippet(DNRPreventFromHappeningAgain)
 
@@ -1366,10 +1350,9 @@ $choice WhatKindOfPolicies; What kind of policies?
 
 // Original Name: "Tell me more about the high lake levels."
 :: TellMeMoreAboutTheHighLakeLevels
-{@person}The city is using the dam to keep Upper Lake five feet higher than its natural level.
-{@person}When it rains, where is all that water supposed to go??
-{@person}I could rant on and on about this all day. 
-{@person}But for now, I better get back to work.
+{@lakescientist}The city is using the dam to keep Upper Lake five feet higher than its natural level.
+{@lakescientist}When it rains, where is all that water supposed to go??
+{@lakescientist}I could rant about this all day... but for now, I better get back to work.
 {@me}Sure. Thanks for your help! 
 
 $call GiveSnippet(LimnologyLakeLevels)
@@ -1377,11 +1360,9 @@ $choice DepartmentOfLimnology; Head back outside
 
 // Original Name: What do you mean, engineered solutions?
 :: WhatDoYouMeanEngineeredSolutions
-He gives you some examples:
-{@person}A better storm drain system to carry rainwater away
-{@person}Flood walls to block flooding along the river
-{@person}Rain gardens designed to soak up water.
-{@person}And.... speaking of water, I better get back to work.
+{@lakescientist}A better storm drain system to carry rainwater away.
+{@lakescientist}Rain gardens designed to soak up water.
+{@lakescientist}And.... speaking of water, I better get back to work.
 {@me}No problem. Thanks for the chat!
 
 $call GiveSnippet(EngineeredSolutions)
@@ -1389,8 +1370,8 @@ $choice DepartmentOfLimnology; Head back outside
 
 // Original Name: "Can you give me some examples?"
 :: CanYouGiveMeSomeExamples
-{@person}The city needs more rain gardens, better storm drains, and lower lake levels.
-{@person}Plus, new policies to stop people from building on wetlands.
+{@sarah}The city needs more rain gardens, better storm drains, and lower lake levels.
+{@sarah}Plus, new policies to stop people from building on wetlands.
 
 $call GiveSnippet(PoliciesToPreventFlooding)
 
@@ -1401,18 +1382,16 @@ $choice DepartmentOfLimnology; Thank her and decide what to do next
 
 // Original Name: "Why are the lakes being kept so high?"
 :: WhyAreTheLakesBeingKeptSoHigh
-{@person}People want to be able to use their docks.
-{@person}Plus, tourist season depends on beaches and water sports. 
-{@person}People won't support lower lakes if they think they'll be losing money. 
+{@dnrexpert}People who live by the lake want to be able to use their docks.
+{@dnrexpert}Plus, tourist season depends on beaches and water sports. 
 
 $call GiveSnippet(DNRHighLakeLevels)
 $choice DNRMap; Thank him and decide what to do next.
 
 // Original Name: "What kind of policies?"
 :: WhatKindOfPolicies
-{@person}We need regulations to keep the lakes lower.
-{@person}Plus, new buildings should be required to include flood prevention. 
-{@person}Rain gardens, retention ponds, stuff like that. 
+{@dnrexpert}We need regulations to keep the lakes lower.
+{@dnrexpert}Plus, new buildings should be required to include flood prevention measures. 
 
 $call GiveSnippet(PoliciesToPreventFlooding)
 $choice DNRMap; Decide what to do next.
@@ -1455,11 +1434,11 @@ $endif //1 or 2: no change
 
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.5
-        {@person}   Stellar work Rookie! I can tell you put your heart into this.
+        {@person}   Stellar work, El! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of useful info.
         {@person}   Maybe you've got a Pulitzer Prize in your future.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@person}   Nice work, El! Your quotes and photos are top notch.
         {@person}   Admittedly, we could've used a little more useful info... 
         {@person}   But this should still help a lot of people. 
     $else
@@ -1473,21 +1452,21 @@ $elseif StoryScore() == "medium"
         {@person}   These story segments could use some quality control, 
         {@person}   But still, a solid story. Twin Lakes is lucky to have you.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@person}   Hmm... not bad, El! Good quotes, and decent story construction.
         {@person}   This should be enough to help a lot of people.  
         {@person}   Next time, make sure to check my notes. You veered off topic a little. 
     $else
-        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@person}   Nice work, El. Your reporting is pretty solid. 
         {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
         {@person}   Still. Not bad for your first natural disaster. 
     $endif
 $else
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@person}   Nice work, El. You got a lot of useful information out there! 
         {@person}   This story should help a lot of people... 
         {@person}   Though I gotta admit, some of this info is pretty low-quality.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work, Rookie. Your story construction is pretty solid!
+        {@person}   Nice work, El. Your story construction is pretty solid!
         {@person}   Your quality control could definitely use some work. 
         {@person}   Still. Not bad for your first natural disaster. 
     $else

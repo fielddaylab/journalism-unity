@@ -11,11 +11,11 @@
 
 // Original Name: Level 3 Intro
 :: Level3Intro
-Email Notification:
-{@article} El, we've been keeping up with your work in Twin Lakes!
-{@article} Very impressive. There might be a place for you at the Smoke City Herald after all.
-{@article} If you're interested, have your editor send over a letter of recommendation. 
-{@article} -Gabby White, Senior Editor, Smoke City Herald 
+
+{@email} El, we've been keeping up with your work in Twin Lakes!
+{@email} Very impressive. There might be a place for you at the Smoke City Herald after all.
+{@email} If you're interested, have your editor send over a letter of recommendation. 
+{@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
 {bg $BG/TownMeeting.jpeg}
 One week later.

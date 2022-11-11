@@ -50,3 +50,255 @@ MonoBehaviour:
     Name:
       m_Source: Char.Article
       m_HashValue: 1646827325
+  - Id:
+      m_Source: maureen
+      m_HashValue: 2622732552
+    Name:
+      m_Source: Char.Maureen
+      m_HashValue: 2187744412
+  - Id:
+      m_Source: jeanie
+      m_HashValue: 3855635141
+    Name:
+      m_Source: Char.Jeanie
+      m_HashValue: 715140689
+  - Id:
+      m_Source: localnurse
+      m_HashValue: 574316341
+    Name:
+      m_Source: Char.Localnurse
+      m_HashValue: 4002698009
+  - Id:
+      m_Source: wynnedstorme
+      m_HashValue: 2623326080
+    Name:
+      m_Source: Char.Wynnedstorme
+      m_HashValue: 1292444892
+  - Id:
+      m_Source: policespokesman
+      m_HashValue: 4216625654
+    Name:
+      m_Source: Char.Policespokesman
+      m_HashValue: 700483178
+  - Id:
+      m_Source: townhallcontact
+      m_HashValue: 3955785562
+    Name:
+      m_Source: Char.Townhallcontact
+      m_HashValue: 3817389190
+  - Id:
+      m_Source: librarian
+      m_HashValue: 3805599879
+    Name:
+      m_Source: Char.Librarian
+      m_HashValue: 2135214979
+  - Id:
+      m_Source: fredfinkler
+      m_HashValue: 3426817365
+    Name:
+      m_Source: Char.Fredfinkler
+      m_HashValue: 4190301161
+  - Id:
+      m_Source: jim
+      m_HashValue: 3772297667
+    Name:
+      m_Source: Char.Jim
+      m_HashValue: 515974535
+  - Id:
+      m_Source: cherrycharlie07
+      m_HashValue: 253704611
+    Name:
+      m_Source: Char.Cherrycharlie07
+      m_HashValue: 3751640031
+  - Id:
+      m_Source: mayorbarrysmuckers
+      m_HashValue: 1045361362
+    Name:
+      m_Source: Char.Mayorbarrysmuckers
+      m_HashValue: 3479606558
+  - Id:
+      m_Source: dionne
+      m_HashValue: 1251892266
+    Name:
+      m_Source: Char.Dionne
+      m_HashValue: 1632595142
+  - Id:
+      m_Source: email
+      m_HashValue: 2324124615
+    Name:
+      m_Source: Char.Email
+      m_HashValue: 1655830907
+  - Id:
+      m_Source: sophia
+      m_HashValue: 2342045697
+    Name:
+      m_Source: Char.Sophia
+      m_HashValue: 2820841389
+  - Id:
+      m_Source: dnrworker
+      m_HashValue: 2680489357
+    Name:
+      m_Source: Char.Dnrworker
+      m_HashValue: 3090858001
+  - Id:
+      m_Source: contact
+      m_HashValue: 1124317475
+    Name:
+      m_Source: Char.Contact
+      m_HashValue: 3327224031
+  - Id:
+      m_Source: ben
+      m_HashValue: 1521374890
+    Name:
+      m_Source: Char.Ben
+      m_HashValue: 2255889174
+  - Id:
+      m_Source: khalisa
+      m_HashValue: 3750228874
+    Name:
+      m_Source: Char.Khalisa
+      m_HashValue: 2750975694
+  - Id:
+      m_Source: sudha
+      m_HashValue: 158264784
+    Name:
+      m_Source: Char.Sudha
+      m_HashValue: 2746377372
+  - Id:
+      m_Source: dnrvolunteer
+      m_HashValue: 2662514567
+    Name:
+      m_Source: Char.Dnrvolunteer
+      m_HashValue: 3273395691
+  - Id:
+      m_Source: limvolunteer
+      m_HashValue: 2576521013
+    Name:
+      m_Source: Char.Limvolunteer
+      m_HashValue: 2938431433
+  - Id:
+      m_Source: nora
+      m_HashValue: 2844469115
+    Name:
+      m_Source: Char.Nora
+      m_HashValue: 2091409695
+  - Id:
+      m_Source: rescuer
+      m_HashValue: 2113706714
+    Name:
+      m_Source: Char.Rescuer
+      m_HashValue: 3486175134
+  - Id:
+      m_Source: firechief
+      m_HashValue: 2959819166
+    Name:
+      m_Source: Char.Firechief
+      m_HashValue: 3824779674
+  - Id:
+      m_Source: cheeseshop
+      m_HashValue: 1252330004
+    Name:
+      m_Source: Char.Cheeseshop
+      m_HashValue: 2977219544
+  - Id:
+      m_Source: driver
+      m_HashValue: 3847494111
+    Name:
+      m_Source: Char.Driver
+      m_HashValue: 2633350795
+  - Id:
+      m_Source: deli
+      m_HashValue: 2365243673
+    Name:
+      m_Source: Char.Deli
+      m_HashValue: 3734119877
+  - Id:
+      m_Source: neighbor
+      m_HashValue: 842111787
+    Name:
+      m_Source: Char.Neighbor
+      m_HashValue: 2188270895
+  - Id:
+      m_Source: squawkertroll1
+      m_HashValue: 3556423940
+    Name:
+      m_Source: Char.Squawkertroll1
+      m_HashValue: 2660896704
+  - Id:
+      m_Source: squawkertroll2
+      m_HashValue: 3606756797
+    Name:
+      m_Source: Char.Squawkertroll2
+      m_HashValue: 2711229561
+  - Id:
+      m_Source: 'DNR Expert '
+      m_HashValue: 1116769275
+    Name:
+      m_Source: Char.Dnrexpert
+      m_HashValue: 784795555
+  - Id:
+      m_Source: 'flyer '
+      m_HashValue: 1208022959
+    Name:
+      m_Source: Char.Flyer
+      m_HashValue: 2432200313
+  - Id:
+      m_Source: governor
+      m_HashValue: 4038636875
+    Name:
+      m_Source: Char.Governor
+      m_HashValue: 481945199
+  - Id:
+      m_Source: sarah
+      m_HashValue: 1138725320
+    Name:
+      m_Source: Char.Sarah
+      m_HashValue: 1236601684
+  - Id:
+      m_Source: businessowner
+      m_HashValue: 166074574
+    Name:
+      m_Source: Char.Businessowner
+      m_HashValue: 249320754
+  - Id:
+      m_Source: lakescientist
+      m_HashValue: 2038196944
+    Name:
+      m_Source: Char.Lakescientist
+      m_HashValue: 2324371436
+  - Id:
+      m_Source: chickenowner
+      m_HashValue: 1260849387
+    Name:
+      m_Source: Char.Chickenowner
+      m_HashValue: 2243984047
+  - Id:
+      m_Source: mayorsister
+      m_HashValue: 2216433787
+    Name:
+      m_Source: Char.Mayorsister
+      m_HashValue: 434021383
+  - Id:
+      m_Source: galleryowner
+      m_HashValue: 3212508604
+    Name:
+      m_Source: Char.Deli
+      m_HashValue: 3734119877
+  - Id:
+      m_Source: cafeowner
+      m_HashValue: 2803853983
+    Name:
+      m_Source: Char.Cafeowner
+      m_HashValue: 686526379
+  - Id:
+      m_Source: birdie
+      m_HashValue: 3247960620
+    Name:
+      m_Source: Char.Birdie
+      m_HashValue: 4009020112
+  - Id:
+      m_Source: nancy
+      m_HashValue: 1440153030
+    Name:
+      m_Source: Char.Nancy
+      m_HashValue: 1948850162
