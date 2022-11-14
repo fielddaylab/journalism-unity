@@ -38,3 +38,7 @@
 #macro DefaultFeedback(location, text) \
     $call NextFeedback("", $location) \
     $text
+#macro CheckFinalConverge() \
+    $if TimeRemaining() <= 0.5 \ // 30 minutes or less remaining
+        $goto .FinalConvergeNode \
+    $endif

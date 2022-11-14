@@ -9,6 +9,7 @@
 #const BG_HouseExt = "BG/HouseExt.mp4"
 #const BG_TownTransitional = "BG/TownTransitional.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
+#const BG_Bookshop = "BG/Library.jpeg"
 
 
 # start Level3Story2
@@ -93,7 +94,7 @@ $choice GoInsideBookish; Go inside the bookstore
 
 // Go inside Bookish
 :: GoInsideBookish
-{bg $BG/Bookshop.jpeg}
+{bg $BG_Bookshop}
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
 {@person} Oh dear. Not you again!
@@ -132,6 +133,8 @@ $choice AcceptStory; On it.
 :: AcceptStory
 
 $call SetTimeRemaining(4)
+
+$CheckFinalConverge()
 
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.5, "")
@@ -1075,7 +1078,7 @@ $choice AskNoraAboutHerResearch; Ask Nora about her research
 {@person} She was helping me pack up my quilts, trying to convince me to leave.
 {@person} But I suppose that ship has sailed. Listen to that rain out there. 
 
-$choice AskNoraAboutHerResearch
+$choice AskNoraAboutHerResearch; Ask Nora about her research
 
 // Ask Nora about her research 
 :: AskNoraAboutHerResearch
@@ -1147,6 +1150,12 @@ $choice DoYouThinkHouseboatsWork; Do you really think houseboats work as a long-
 Looks like that's it. Time to get your story out there.
 Hopefully it'll be enough.
 $choice STORYEVALUATION; Write your story. 
+
+:: FinalConvergeNode
+{clear-text}
+// Insert the final sequence here
+[This is a placeholder for the final sequence.]
+$choice STORYEVALUATION; Write your story.
 
 :: STORYEVALUATION
 {@msg}  Story builder sequence here

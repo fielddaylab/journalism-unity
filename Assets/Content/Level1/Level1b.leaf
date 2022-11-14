@@ -241,7 +241,7 @@ $GameOver("You lost the scoop. Better luck next time.")
 {@khalisa} Ugh. My dad used to be the local fire chief. He's never gonna let me live this down. 
 {@khalisa}I swear, if I hear "turn around, don't drown" one more time...
 {@me} Come on. I bet we can get your car out of there.
-$choice TryToRescueHerCar; 
+$choice TryToRescueHerCar; Try to move the car
 
 :: TryToRescueHerCar
 $if StatCheck(Endurance, 2)
@@ -1164,7 +1164,7 @@ $endif
 $call DecreaseTime(0.3333333)
 The pun finally seems to get through to him. 
 You run for the door, but it's too late. Water is rushing inside!
-$choice FlagDownAFirefighter 
+$choice FlagDownAFirefighter; Flag down a firefighter
 
 :: FlagDownAFirefighter
 Luckily, the firefighter sees you waving and hurries to rescue you! 
@@ -1199,7 +1199,7 @@ $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosKayak)
 $choice ArriveAtFloodSite; Arrive at flood site
 
-$if Stat(Tech, 2)
+$elseif Stat(Tech, 2)
 You can't find the right lens for these conditions...
 But you still have enough basic {stat-name}tech{/stat-name} to get a decent shot!
 Maybe not a prize-winning photo, but it should be enough to get your readers' attention. 

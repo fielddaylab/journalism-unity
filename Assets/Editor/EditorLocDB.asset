@@ -376,16 +376,16 @@ MonoBehaviour:
       Content: Limnology Expert
       Exposed: 0
     - Id: Char.Sparkprojectleader
-      Content: 'Spark Project leader '
+      Content: Spark Project leader
       Exposed: 0
     - Id: Char.Squawkermessage
-      Content: 'Squawker Post  '
+      Content: Squawker Post
       Exposed: 0
     - Id: Char.Dinerworker
       Content: Diner Worker
       Exposed: 0
     - Id: Char.Townhallworker
-      Content: 'Town Hall  Worker '
+      Content: Town Hall  Worker
       Exposed: 0
     Headers:
     - Path: Header
