@@ -134,8 +134,6 @@ $choice AcceptStory; On it.
 
 $call SetTimeRemaining(4)
 
-$CheckFinalConverge()
-
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.5, "")
 $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "")
@@ -1058,6 +1056,8 @@ Whoa. It's Nora, the Houseboat Lady!
 {@person} Were you here looking for me? 
 {@me} No, sorry. I was looking for an expert named Dr. Nora Warner--
 That's when you make the connection. Holy cherry-glazed donuts.
+
+$CheckFinalConverge()
 
 $choice InterviewTheFloodingExpert; Interview the flooding expert, Dr. Nora Warner 
 
