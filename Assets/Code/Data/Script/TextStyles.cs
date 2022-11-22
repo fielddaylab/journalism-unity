@@ -45,7 +45,7 @@ namespace Journalism {
             }
 
             if (!m_StyleMap.TryGetValue(styleId, out StyleData data)) {
-                Log.Error("[TextStyles] No style with id '{0}' found!", styleId);
+                Log.Msg("[TextStyles] No style with id '{0}' found!", styleId);
                 data = m_DefaultStyle;
             }
 

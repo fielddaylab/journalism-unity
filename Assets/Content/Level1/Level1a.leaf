@@ -478,9 +478,11 @@ $else
     Yikes. Looks like you might need to be more {stat-name}social{/stat-name}. 
 $endif
 
-
 $if Visited(JenkinssComputer)
     $choice TryJenkinsDNRContact; Try Jenkins's DNR Contact
+$else
+    $goto Office1-Clock
+$endif
 
 :: TryJenkinsDNRContact
     {@wynnedstorme} Oh, I'm so glad you called! 
@@ -499,8 +501,6 @@ $if Visited(JenkinssComputer)
         {@wynnedstorme}You didn't do much {stat-name}research{/stat-name}, did you, kid?
         {@wynnedstorme}I don't have time to teach you the basics. But good luck with your article. 
     $endif
-
-$endif
 
 $goto Office1-Clock
 

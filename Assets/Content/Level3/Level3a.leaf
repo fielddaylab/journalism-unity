@@ -6,6 +6,7 @@
 #const BG_TownMeeting = "BG/TownMeeting.jpeg"
 #const BG_EvacShelter = "BG/EvacShelter.jpeg"
 #const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.jpeg"
+#const BG_TownTransitional = "BG/TownTransitional.mp4"
 
 # start Level3Intro
 
@@ -17,7 +18,7 @@
 {@email} If you're interested, have your editor send over a letter of recommendation. 
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
-{bg $BG/TownMeeting.jpeg}
+{bg $BG_TownMeeting}
 One week later.
 The Smoke City Herald is still waiting for you to drive out for an interview...
 But you've been too busy to call them back. 
@@ -67,21 +68,29 @@ $HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "")
 {@person}Oh, sorry, El... I'm pretty busy here.
 {@me} Please? Just a few questions? 
 $if StatCheck(Trust, 5)
-{@person} Well.... I gotta admit, you have proven yourself to be trustworthy.
-{@person} I guess I could spare a minute or two.
-          $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor," 0.50, "")
+      {@person} Well.... I gotta admit, you have proven yourself to be trustworthy.
+      {@person} I guess I could spare a minute or two.
+      $if !HasTime(0.25)
+            Looks like you have to cut this short. You have just enough time to compile your story!
+            $choice StoryConstruction3a; Compile your story
+      $endif
+      $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor," 0.50, "")
 $elseif StatCheck (Social, 5)
-{@person} Well... I have to admit, everyone's been talking about your work lately.
-{@person} I guess I could spare a minute or two for a social butterfly like you.
+      {@person} Well... I have to admit, everyone's been talking about your work lately.
+      {@person} I guess I could spare a minute or two for a social butterfly like you.
+      $if !HasTime(0.25)
+            Looks like you have to cut this short. You have just enough time to compile your story!
+            $choice StoryConstruction3a; Compile your story
+      $endif
       $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
 $else 
-{@person}  I can't play favorites, Missy. Make an appointment if you want to talk. 
-Great. Because an interview 3 weeks from now is gonna be SO helpful.
+      {@person}  I can't play favorites, Missy. Make an appointment if you want to talk. 
+      Great. Because an interview 3 weeks from now is gonna be SO helpful.
 
-$choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
-$HubChoice(HeadStraightToShelter, "Head to the flood shelter", 0.25, "")
-$choice RemindTheMayor; Tell the Mayor that you've got some dirt on him--maybe he'll be more willing to talk 
-$HubChoice(OfferToGrabHimCoffee, "Offer to grab him coffee--it'll take some time, but it might score you an interview", 0.25, "")
+      $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
+      $HubChoice(HeadStraightToShelter, "Head to the flood shelter", 0.25, "")
+      $choice RemindTheMayor; Tell the Mayor that you've got some dirt on him--maybe he'll be more willing to talk 
+      $HubChoice(OfferToGrabHimCoffee, "Offer to grab him coffee--it'll take some time, but it might score you an interview", 0.25, "")
 $endif
 
 // Offer to grab him coffee
@@ -224,6 +233,10 @@ Fred Finkler is still here.
 Plus the lady who was worried about evacuees camping out in her neighborhood....
 And the man who said he didn't want to leave his home. 
 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
 $HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
@@ -319,6 +332,10 @@ You run for the podium, but Mayor Smuckers has already left.
 Looks like you spent too long chatting with Fred. 
 Oh well. At least you didn't have to deal with the mayor calling you "Missy" again.
 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
 $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "")
@@ -505,6 +522,10 @@ As soon as you mention Fred Finkler, he cheers up.
 {@person} He's always dropping off vases full of zinnias at my apartment building. 
 {@person} Really brightens up the place. Wish I was back there now... 
 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
 
 // Offer to buy him breakfast and coffee 
@@ -513,6 +534,10 @@ Poor guy hasn't eaten all day.
 You run down the street and grab him a breakfast sandwich.
 It takes some time, but it was worth it--he looks much happier and willing to talk! 
 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(TellMeWhatHappened, "Interview the man about his troubles.", 0.25, "")
 
 // Check your bag for something to offer him.
@@ -554,6 +579,10 @@ $choice FloodShelterChoices; Decide what to do next.
 {@person} Sorry, I'm too busy. Gotta bring in the latest food delivery.
 {@person} Probably cherry cornbread delivered in a horse and buggy, at this rate. 
 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(OfferToHelpCarryInFood, "Offer to help carry the food inside.", 0.25, "")
 $HubChoice(UseYourSocialSkills, "Use your social skills to put her at ease.", 0.25, "")
 
@@ -568,6 +597,10 @@ They weigh a ton, but you've had plenty of practice lugging gear around lately.
 {@person} Thanks. Since we're talking anyway.... what do you want to know? 
 
 $HubChoice(ShelterCoordinatorInterview, "Interview Shelter Coordinator", 0.25, "")
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 
 $else 
 {@me} I'm sure I can do it. I almost lifted a sandbag once!
@@ -585,28 +618,31 @@ $endif
 // Use your social skills and listen to her woes
 :: UseYourSocialSkills
 $if StatCheck (Social, 5)
-You try to empathize. You remember what it was like when you first moved to town. 
-{@me}I know. This place can be weird at first.
-{@me} Plus, there are cherries in literally everything.
-She laughs.
-{@person}Finally, somebody who gets it!
-{@person} You know... I could probably answer a few questions. 
+      You try to empathize. You remember what it was like when you first moved to town. 
+      {@me}I know. This place can be weird at first.
+      {@me} Plus, there are cherries in literally everything.
+      She laughs.
+      {@person}Finally, somebody who gets it!
+      {@person} You know... I could probably answer a few questions. 
 
-$HubChoice(DoYouHaveAnyConcernsAboutTheShelter, "Do you have any concerns about the shelter?", 0.25, "")
-
+      $if !HasTime(0.25)
+            Looks like you have to cut this short. You have just enough time to compile your story!
+            $choice StoryConstruction3a; Compile your story
+      $endif
+      $HubChoice(DoYouHaveAnyConcernsAboutTheShelter, "Do you have any concerns about the shelter?", 0.25, "")
 $else 
-You try to empathize. 
-Unfortunately, you haven't been socializing much lately.
-You flail for something to say and land on a joke your upstairs neighbor told you.
-{@me} Um.... what do you call three cherries playing the guitar? 
-{@me} A <i>jam</i> session. 
-She stares blankly at you. Apparently puns only work with locals. 
-{@person} Um. Okay, then. I better get back to work. 
-{@person} I'll answer one question.
+      You try to empathize. 
+      Unfortunately, you haven't been socializing much lately.
+      You flail for something to say and land on a joke your upstairs neighbor told you.
+      {@me} Um.... what do you call three cherries playing the guitar? 
+      {@me} A <i>jam</i> session. 
+      She stares blankly at you. Apparently puns only work with locals. 
+      {@person} Um. Okay, then. I better get back to work. 
+      {@person} I'll answer one question.
 
-$choice DoYouHaveAnyConcernsAboutTheShelterSimple; Do you have any concerns about the shelter? 
-$choice WhyDoesntTheShelterAllowPetsSimple; Does this shelter allow pets? 
-$choice HowCanThePeopleOfTwinLakesHelpOutSimple; How can the people of Twin Lakes help get the shelter ready? 
+      $choice DoYouHaveAnyConcernsAboutTheShelterSimple; Do you have any concerns about the shelter? 
+      $choice WhyDoesntTheShelterAllowPetsSimple; Does this shelter allow pets? 
+      $choice HowCanThePeopleOfTwinLakesHelpOutSimple; How can the people of Twin Lakes help get the shelter ready? 
 $endif 
 
 // Do you have any concerns - simple version
@@ -649,7 +685,10 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} True. But trust me, this isn't the last storm that's gonna hit this little town. 
 {@person} Now if you'll excuse me, I need to get back to work. 
 
-$choice EndShelterCoordinatorInterview; End Interview 
+$choice EndShelterCoordinatorInterview; End Interview
+
+:: ShelterCoordinatorInterview
+// TODO: implement this branch
 
 // Do you have any concerns about the shelter?
 :: DoYouHaveAnyConcernsAboutTheShelter
@@ -776,6 +815,10 @@ $else
       {@me} Oh... yeah. Chickens. I just love 'em. 
 $endif
 {@person} So, what do you need to know? 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 
 // Can you tell me why the flood shelter doesn't allow pets?
@@ -840,6 +883,10 @@ $choice NextStepAfterVetMeeting; End Interview
 //Leave vet meeting
 :: NextStepAfterVetMeeting
 //Background: Main Street bookstore, cheese shop, cafe, etc
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice (HeadStraightToShelter, "Return to the flood shelter", 0.25, "")
 $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
 $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments", 0.25, "")
@@ -1021,6 +1068,10 @@ $endif
 
 //Kicked out Of Apartments
 :: ForcedToLeaveApartments
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $if !Visited(CallDisabilityRightsExpertAtLocalCollege)
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at local college", 0.25, "")
 $endif 
@@ -1028,7 +1079,6 @@ $endif
 $if !Visited(MeetWithLocalVet)
       $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
 $endif
-//Could add a "submit your story" button for if the player has run out of options of things to do 
 
 
 // If I got some pictures of the damage inside
@@ -1089,7 +1139,13 @@ $call GiveSnippet(GroceryStorePhoto)
 $call GiveSnippet(DescriptionOfGroceryStoreChaos)
 $call AdjustStats(Trust + 2)
 $call AdjustStats(Resourceful + 1)
+
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(GoToSeniorCitizenApartments, "Return to senior citizen apartments", 0.5, "")
+
 
 // Check your bag for quail-appropriate snacks 
 :: CheckYourBagForQuailSnacks
@@ -1269,6 +1325,10 @@ $choice DoneWithPhoneCall; Decide what to do next.
 // Decide what to do after disability rights expert phone call
 :: DoneWithPhoneCall
 Okay, El. Time is ticking. Where to next?
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
 $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
 $if ApartmentAddress
@@ -1321,6 +1381,12 @@ $choice WhatDoYouMean; What do you mean?
 $call GiveSnippet(ComplicatedIssues)
 
 $choice DoneWithPhoneCall; Hang Up
+
+:: StoryConstruction3a
+//$set storyType = "Investigation"
+//$set snippetLimit = 6
+//$set destination = "TO BE CONTINUED"
+$goto STORYEVALUATION
 
 :: STORYEVALUATION
 {@msg}  Story builder sequence here
