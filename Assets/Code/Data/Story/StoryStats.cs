@@ -15,6 +15,7 @@ namespace Journalism {
         public int ColorCount;
         public int UsefulCount;
         public float Alignment;
+        public bool StoryIsFull; // whether all slots are filled
 
         static public StoryStats FromPlayerData(PlayerData data, StoryConfig config) {
             StoryStats stats = default;
@@ -89,6 +90,10 @@ namespace Journalism {
             int missing = config.Slots.Length - stats.ScrapCount;
             if (stats.ScrapCount < config.Slots.Length) {
                 stats.Alignment *= 1 - (missing * 0.15f);
+                stats.StoryIsFull = false;
+            }
+            else {
+                stats.StoryIsFull = true;
             }
 
             if (stats.TotalQuality >= 3) {

@@ -429,6 +429,11 @@ namespace Journalism {
             return s_Stats.StoryHasPicture;
         }
 
+        [LeafMember("StoryIsFull"), Preserve]
+        static private bool LeafStoryIsFull() {
+            return s_Stats.StoryIsFull;
+        }
+
         #endregion // Inventory
 
         #region Script

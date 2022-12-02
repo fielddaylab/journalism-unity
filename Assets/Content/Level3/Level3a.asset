@@ -13,6 +13,30 @@ MonoBehaviour:
   m_Name: Level3a
   m_EditorClassIdentifier: 
   Script: {fileID: -1942890987711236906, guid: d7400986e012cf544a39767c6189d484, type: 3}
+  Story:
+    HeadlineTypeId:
+      m_Source: Level.3a.HeadlineType
+      m_HashValue: 1065911069
+    Slots:
+    - Type: 1
+      Wide: 1
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    EditorBriefId:
+      m_Source: Level.3a.Brief
+      m_HashValue: 403174315
+    FactWeight: 1
+    ColorWeight: 1
+    UsefulWeight: 1
+    FinalHeadlineId:
+      m_Source: Level.3a.Headline
+      m_HashValue: 3340259541
   StoryScraps: {fileID: -4270002856181823206, guid: dcaad580eb1d0924e8fcbff726b3e5b6,
     type: 3}
   Audio: {fileID: 0}

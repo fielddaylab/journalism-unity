@@ -1231,8 +1231,26 @@ $call BeginFeedback()
 $if StoryHasPicture() == false
     {@dionne}   Hmmm. No picture. 
     {@dionne}   This will bring down your story's impact, El. 
-    {@dionne}   Most readers need visuals to grab thier attention. 
+    {@dionne}   Most readers need visuals to grab their attention. 
     {@dionne}   Other than that...
+    $if StoryIsFull() == true
+        // no more preliminary feedback
+        {@dionne}   Other than that...
+    $endif
+$endif
+$if StoryIsFull() == false
+    $if StoryHasPicture() == false
+        // player has not filled all slots AND is missing picture
+        {@dionne}   And you haven't used up all the space?
+        {@dionne}   That makes two errors, both of which are impacting the quality of your story.
+        {@dionne}   Other than that...
+    $else
+        // player has not filled all slots
+        {@dionne}   I see you have some blank spots here.
+        {@dionne}   Make sure to use all the space that's given to you.
+        {@dionne}   This is going to make people think it's a lower-quality story.
+        {@dionne}   Other than that...
+    $endif
 $endif
 
 ///CITY SCORE ADJUSTMENT

@@ -43,7 +43,7 @@ MonoBehaviour:
       Content: Twin Lakes Battles Rising Water
       Exposed: 0
     - Id: Level.2a.HeadlineType
-      Content: Science Story
+      Content: ?? Story
       Exposed: 0
     - Id: Level.2a.Brief
       Content: People want to know why this happened. Give 'em plenty of facts. Plus
@@ -51,6 +51,30 @@ MonoBehaviour:
       Exposed: 0
     - Id: Level.2a.Headline
       Content: How a Summer Storm Became a 100-Year Flood
+      Exposed: 0
+    - Id: Level.2b.Brief
+      Content: Here's my pep talk.
+      Exposed: 0
+    - Id: Level.2b.Headline
+      Content: 2b Story Headline
+      Exposed: 0
+    - Id: Level.3a.Headline
+      Content: 3a Story Headline
+      Exposed: 0
+    - Id: Level.3b.Headline
+      Content: 3b Story Headline
+      Exposed: 0
+    - Id: Level.3a.HeadlineType
+      Content: ?? Story
+      Exposed: 0
+    - Id: Level.3a.Brief
+      Content: This is my pep talk.
+      Exposed: 0
+    - Id: Level.3b.HeadlineType
+      Content: ?? Story
+      Exposed: 0
+    - Id: Level.3b.Brief
+      Content: This is my pep talk.
       Exposed: 0
     Headers:
     - Path: Level

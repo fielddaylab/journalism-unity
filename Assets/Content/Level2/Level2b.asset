@@ -15,18 +15,28 @@ MonoBehaviour:
   Script: {fileID: -1942890987711236906, guid: 8679e9873f5f2244ca473b8eda3266f9, type: 3}
   Story:
     HeadlineTypeId:
-      m_Source: 
-      m_HashValue: 0
-    Slots: []
+      m_Source: Level.2a.HeadlineType
+      m_HashValue: 3768765030
+    Slots:
+    - Type: 1
+      Wide: 1
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
+    - Type: 0
+      Wide: 0
     EditorBriefId:
-      m_Source: 
-      m_HashValue: 0
+      m_Source: Level.2b.Brief
+      m_HashValue: 713144463
     FactWeight: 1
     ColorWeight: 1
     UsefulWeight: 1
     FinalHeadlineId:
-      m_Source: 
-      m_HashValue: 0
+      m_Source: Level.2b.Headline
+      m_HashValue: 2810496505
   StoryScraps: {fileID: -4270002856181823206, guid: 7cced83b472c88b4db34af015325e684,
     type: 3}
   Audio: {fileID: 0}

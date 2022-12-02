@@ -323,8 +323,8 @@ $else
     From down a side street, you hear a soft clucking. Amelia Egghart???
 $endif
 
-$HubChoice(FollowTheChicken, "Follow the chicken", 0.25)
 $choice MainStreetFloodRecovery; Head straight to Main Street
+$HubChoice(FollowTheChicken, "Follow the chicken", 0.25)
 
 // Original Name: DNR Map
 :: DNRMap
@@ -342,7 +342,7 @@ $if HasTime(0.25)
     $if !Visited(ReadTheBulletinBoardInTheHallway)
         $HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
     $endif
-    $HubChoice(RunIntoTheMayorInHallway, "Head toward the exit", 0.25)
+    $HubChoice(RunIntoTheGovernorInHallway, "Head toward the exit", 0.25)
 
 
     $if Visited(JenkinssComputer)
@@ -467,14 +467,14 @@ $call AdjustStats(Endurance + 1)
 Yes--there! The lost chicken!
 
 $if HasTime(0.5)
-$HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
-$HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
+    $HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
+    $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $else
-Uh oh. There's no time to chase it - your story is due!
-    $choice TimeToAssembleTheScienceStory; Assemble the science story
+    Uh oh. There's no time to chase it - your story is due!
+        $choice TimeToAssembleTheScienceStory; Assemble the science story
 $endif
-
 {/img}
+
 // Original Name: Main Street Flood Recovery
 :: MainStreetFloodRecovery
 $call SetLocation("Downtown")
@@ -617,27 +617,27 @@ $endif
 :: CallYourNeighborAndSeeIfItsHers
 
 $if Visited(HelpHer)
-You call Maureen. 
-{@me}Hey! Um, weird question... did any more of your chickens fly the coop?
-{@maureen}Hmm? Nope, we're all fine here. No signs of fowl play. 
-{@maureen}Thank you, though, Dear! 
-$call AdjustStats(Trust + 1)
+    You call Maureen. 
+    {@me}Hey! Um, weird question... did any more of your chickens fly the coop?
+    {@maureen}Hmm? Nope, we're all fine here. No signs of fowl play. 
+    {@maureen}Thank you, though, Dear! 
+    $call AdjustStats(Trust + 1)
 
-She hangs up, leaving you with a strange chicken staring up at you hopefully. 
+    She hangs up, leaving you with a strange chicken staring up at you hopefully. 
 
-$HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
-$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+    $choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+    $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $else
-{@me}Hey!! I think I found your chicken!
-{@maureen}Amelia Egghart? Oh, she actually just showed up back home! 
-{@me}Wait... really??
-{@maureen}I appreciate you calling, though, Dear. That means a lot. 
-$call AdjustStats(Trust + 1)
+    {@me}Hey!! I think I found your chicken!
+    {@maureen}Amelia Egghart? Oh, she actually just showed up back home! 
+    {@me}Wait... really??
+    {@maureen}I appreciate you calling, though, Dear. That means a lot. 
+    $call AdjustStats(Trust + 1)
 
-She hangs up, leaving you with a strange chicken staring up at you hopefully. 
+    She hangs up, leaving you with a strange chicken staring up at you hopefully. 
 
-$HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
-$choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+    $choice LeaveTheChickenToFendForItself; Leave the chicken to fend for itself
+    $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $endif
 
 // Original Name: Ask around for its owner
@@ -985,6 +985,7 @@ $choice WhatAboutPrevention; What about prevention? Do you have any plans to sto
 {@government} You can count on my support as you recover from this terrible tragedy.
 Hmm. Come to think of it, you probably could've asked her a more challenging question. 
 $call GiveSnippet(BlandGovernorQuote)
+$choice ScienceStoryMap; Head back outside
 
 :: WhatAboutPrevention
 {@governor} Well... I mean, this is a tiny town among thousands of tiny towns.
@@ -1404,13 +1405,30 @@ $goto StoryFeedback
 $call BeginFeedback()
 {/bg}
 {img Anim/Editor.jpeg}
-{@person} Alright, let's see how you did...
+{@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
-    {@person}   First off, I thought I told you to include a picture?
-    {@person}   This will make for a lower quality story...
-    {@person}   Make sure you get one next time, rookie.
-    {@person}   Other than that...
+    {@dionne}   First off, I thought I told you to include a picture?
+    {@dionne}   This will make for a lower quality story...
+    {@dionne}   Make sure you get one next time, rookie.
+    $if StoryIsFull() == true
+        // no more preliminary feedback
+        {@dionne}   Other than that...
+    $endif
+$endif
+$if StoryIsFull() == false
+    $if StoryHasPicture() == false
+        // player has not filled all slots AND is missing picture
+        {@dionne}   And you haven't used up all the space?
+        {@dionne}   That makes two errors, both of which are impacting the quality of your story.
+        {@dionne}   Other than that...
+    $else
+        // player has not filled all slots
+        {@dionne}   I see you have some blank spots here.
+        {@dionne}   Make sure to use all the space that's given to you.
+        {@dionne}   This is going to make people think it's a lower-quality story.
+        {@dionne}   Other than that...
+    $endif
 $endif
 
 
