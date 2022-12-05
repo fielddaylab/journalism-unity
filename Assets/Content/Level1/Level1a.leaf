@@ -30,7 +30,11 @@
 
 // Original Name: START
 :: START
+{img Anim/1a/Newspaper.png}
+New reporter hired at Twin Lakes Gazette!
+El Benjamin just moved to town from the big city and we’re thrilled to have her here.
 $ActionChoice(Wake up)
+{/img}
 $call SetLocation("Apartment")
 {bg $BG_Bedroom}
 $call Music(Music/rainy day in cherry town.mp3)
@@ -45,7 +49,7 @@ $choice CheckYourPhone; Check your phone.
 // Original Name: Check your phone.
 :: CheckYourPhone
 {clear-text}
-{img Anim/enml-buzzingphone.jpg}
+{img Anim/1a/MissedCalls.png}
 Five missed calls from your editor, Dionne.
 Probably checking up on your puff piece about the Cherry Festival.
 
@@ -54,6 +58,7 @@ $choice CallYourEditor; Call back.
 
 // Original Name: Call your editor.
 :: CallYourEditor
+{/img}
 {clear-text}
 // rumble text style
 {anim rumble}{@dionne} FINALLY! Where have you been??
@@ -73,14 +78,15 @@ $choice OnMyWay; {@me} "On my way."
 @checkpoint
 {bg $BG_Bedroom}
 {clear-text}
-{/img}
 $call SetHeaderEnabled(true)
 This is it. Your chance to prove yourself.
 You can't stop thinking about that email from your dream job: the Smoke City Herald. 
 {@email} We don't hire reporters fresh out of school, Ms. Benjamin. 
 {@email} Get some real experience. Find an editor who's willing to vouch for you. Then we'll talk.
+{img Anim/1a/Countdown.png}
 So... here you are, in a three-month contract with the Twin Lakes Gazette.
 Three months, and you'll be on to bigger and better things.
+{/img}
 You have time to do one thing before heading to the newsroom. 
 
 $choice CheckOnYourUpstairsNeighborWhoHatesThunderstorms; Check on your apartment neighbor, who hates thunderstorms
@@ -94,6 +100,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
+{img Anim/1a/UpstairsCat.png}
 You help your neighbor find a flashlight and put out some food for her cats.
 In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries tiny cherries.
 {@jeanie}{auto} I made this just for you, Dear!  
