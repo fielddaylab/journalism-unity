@@ -100,8 +100,10 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
-{img Anim/1a/UpstairsCat.png}
+//{img Anim/1a/UpstairsCat.gif} TODO: get mp4 file of gif
 You help your neighbor find a flashlight and put out some food for her cats.
+//{/img}
+{img Anim/1a/CherryHat.png}
 In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries tiny cherries.
 {@jeanie}{auto} I made this just for you, Dear!  
 {@me} Thanks. It's...really something.
@@ -114,7 +116,7 @@ $choice OffToWork; Off to work
 @tags Techie, Resourceful
 {clear-text}
 {bg $BG_HouseExterior}
-{img Anim/enml-phoneaccessories.jpg}
+// {img Anim/1a/CollectGear.gif} TODO: get mp4 file of gif
 You haven't finished unpacking yet--you don't plan to live here very long, anyway. 
 Unfortunately, this makes it <i>slightly<i> tricky to find your rain gear. 
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
@@ -126,6 +128,7 @@ $choice OffToWork; Off to work
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
+{img Anim/1a/CherryMuffin.png}
 Your kitchen is full of food from your aggressively-friendly neighbors.
 Cherry muffins, cherry granola, cherry summer sausage.
 It's slightly over-the-top, but at least you won't go hungry. 
@@ -138,8 +141,7 @@ $choice OffToWork; Off to work
 {layout Right}
 {bg $BG_HouseExterior}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
-
-{img Photo/HospitalDucks.jpg}
+// {img Anim/Duck.gif} TODO: get mp4 file of gif
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
 {@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
 
@@ -193,7 +195,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-{img Anim/Chicken3.mp4}
+// {img Anim/1a/FlappingChicken.gif} // TODO: get mp4 file of gif
 {@maureen} Hurry! We can't let them get swept away!
 
 $choice ChaseChickens; Chase after the chickens
@@ -212,8 +214,9 @@ $choice ImInAHurryTheresNoNeedToBringTheBike; Forget the bike--you're in a hurry
 // Original Name: Chase chickens
 :: ChaseChickens
 You run around after the chickens and only get pecked twice.
-{@maureen}Oh, thank you so much!  
-{@me}No big deal. Happy to help. 
+{@maureen}Oh, thank you so much!
+{@me}No big deal. Happy to help.
+{img Anim/1a/Feathers.png}
 You head to your car, plucking feathers out of your hair. 
 
 $call AdjustStats(Trust + 1, Endurance + 1, Social + 1)
@@ -234,6 +237,7 @@ $choice HitTheRoad; Hit the road
 // Original Name: Load your bike, it could be useful later.
 :: LoadYourBikeItCouldBeUsefulLater
 @tags Resourceful
+{img Anim/1a/Bike.png}
 You squeeze your bike into the trunk of your car. 
 The hatch doesn't shut all the way, but it's nothing a bungee cord can't fix.
 {@msg} You can use your bike later
@@ -256,9 +260,10 @@ $choice TakeSomePhotos; Take some photos
 Wow. It's awful out here. 
 
 $ActionChoice(Stop to look around.)
+{img Anim/1a/CherryMobile.png}
 Cars are stranded everywhere--including the famous Twin Lakes Cherrymobile!
-A baker is stacking bags of flour in front of her shop. 
-
+{/img}
+A baker is stacking bags of flour in front of her shop.
 {img Anim/enml-stuckcar.png}
 
 $choice HelpTheBaker; Talk to the baker   
@@ -270,10 +275,12 @@ $choice TakeSomePhotos; Take a photo of the stranded Cherrymobile
 {/img}
 {layout Right}
 Wow... it's awful out here.
-{img Anim/enml-stuckcar.png}
+// {img Anim/enml-stuckcar.png}
 Pastries are floating down the street, and cars are stranded...
+{img Anim/1a/CherryMobile.png}
 Including the famous Twin Lakes Cherrymobile!
 You wish you could snag some photos, but your editor is texting you.
+{/img}
 {@dionne} El, where are you?? 
 {@dionne} We need to get this story out, ASAP. 
 
@@ -342,6 +349,7 @@ $choice BreakingNewsStory; {@me} Thanks, Dionne. I'm on it.
 // Original Name: Help the baker
 :: HelpTheBaker
 
+{img Anim/1a/Floursack.png}
 $if StatCheck(Endurance, 2)
     You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
     {@me} Hey. Do you need some help?
@@ -405,6 +413,7 @@ $endif
 
 $if FirstVisit()
     {anim rumble} RRRRING.
+    {img Anim/1a/Phone.png}
     $HubChoice(AnswerThePhone, "Answer the phone", -1)
 $endif
 
@@ -416,6 +425,7 @@ $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situa
 
 :: Office1-Online
 {clear-text}
+// TODO: get image for water dripping into rain buckets
 You head to your desk, only to find it covered in rain buckets.
 Sigh.
 Stepping between puddles, you eventually find an unoccupied (and dry) corner.
@@ -445,9 +455,11 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 {bg $BG_OfficeExterior}
 {/map}
 {layout Left}
+{img Anim/1a/Map.png}
 Ooh, here's a great resource for your story: a live flood map! 
 You grab the link and write up a quick blurb on how to use it. 
-Sure, it seems obvious, but this is Twin Lakes. Half of these people are still using flip phones. 
+Sure, it seems obvious, but this is Twin Lakes. Half of these people are still using flip phones.
+{/img}
 
 $call GiveSnippet(FloodMap)
 $call GiveSnippet(WeatherStats)
@@ -471,6 +483,7 @@ $choice JenkinssComputer; Track down Jenkins's old computer.
 {bg $BG_OfficeExterior}
 {/map}
 {layout Left}
+{img Anim/1a/DNRWorker.png}
 $if StatCheck(Social, 2)
     The DNR worker sounds stressed out.
     Luckily, you've had some practice comforting stressed-out neighbors lately.  
@@ -484,6 +497,7 @@ $else
     $call GiveSnippet(RehearsedDNR)
     Yikes. Looks like you might need to be more {stat-name}social{/stat-name}. 
 $endif
+{/img}
 
 $if Visited(JenkinssComputer)
     $choice TryJenkinsDNRContact; Try Jenkins's DNR Contact
@@ -526,6 +540,7 @@ $goto Office1-Clock
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
+    // {img Anim/1a/HappyChicken.gif} TODO: get mp4 file of gif
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
@@ -535,6 +550,7 @@ $else
     The officer coughs awkwardly.
     {@policespokesman} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
     {@policespokesman} She said you almost ran over her chickens this morning.
+    // {img Anim/1a/UpsetChicken.gif} TODO: get mp4 file of gif
     {@me} I wouldn't say 'ran over,' exactly.
     {@policespokesman} I can give you some safety tips, but then I'd better go. 
     {@policespokesman} I don't know what it's like in New York, but around here, we help our neighbors.   
@@ -550,7 +566,7 @@ $goto Office1-Clock
 {/map}
 {layout Left}
 $if StatCheck(Social, 2)
-    {img Anim/enml-coffeedonuts.jpg}
+    {img Anim/1a/Donuts.png}
     {@townhallcontact} El, it's great to hear from you!
     {@townhallcontact} Everybody here is still talking about those cherry donuts you brought from Sophia's last time. 
     $if Visited(HelpTheBaker)
@@ -612,6 +628,7 @@ $goto Office1-Clock
 {bg $BG_OfficeExterior}
 {layout Left}
 $call DecreaseTime(0.5)
+{img Anim/1a/UpsetCat.png}
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
 You don't get any information for your story, but he seems grateful to you for listening.
 
@@ -630,7 +647,7 @@ $endif
 
 // Original Name: Jenkins's Computer
 :: JenkinssComputer
-{img Anim/enml-oldcomputer.jpg}
+{img Anim/1a/Computer.png}
 
 $if StatCheck(Tech, 2)
 Thanks to your {stat-name}tech skills{/stat-name}, you get logged on easily!
