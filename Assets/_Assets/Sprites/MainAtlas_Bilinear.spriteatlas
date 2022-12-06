@@ -73,6 +73,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 49665413db1e1d84cb59245271b435cf, type: 3}
   - {fileID: 21300000, guid: a4bb5ff349a448c44a99e13478f70e43, type: 3}
   - {fileID: 21300000, guid: 863d051417f2ff7429b1a919f8062be7, type: 3}
+  - {fileID: 21300000, guid: c84281f42d83cfd4b87ba1cf0caad0ba, type: 3}
   - {fileID: 21300000, guid: 37aa0725f4b8eb745ba74318f7407627, type: 3}
   - {fileID: 21300000, guid: 5cbefe55274d8a8438fc349e4c6d3ef3, type: 3}
   - {fileID: 21300000, guid: 21ceae85738130d4daf8c0fceb15a51c, type: 3}
@@ -108,6 +109,7 @@ SpriteAtlas:
   - Stats
   - Notes
   - CircleGradient0
+  - notebook
   - Picture
   - question-icon
   - RoundedRect100-gradientEdge

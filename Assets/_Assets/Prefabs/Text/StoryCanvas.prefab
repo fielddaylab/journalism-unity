@@ -243,7 +243,7 @@ MonoBehaviour:
   m_FeedbackOverlayImpactY: -75
   m_Image: {fileID: 5984301267353175230}
   m_Map: {fileID: 6099053193840227183}
-  m_DefaultImageDims: {x: 320, y: 320}
+  m_DefaultImageDims: {x: 320, y: 415}
   m_DefaultMapDims: {x: 366, y: 245}
 --- !u!114 &7003111796427796825
 MonoBehaviour:
