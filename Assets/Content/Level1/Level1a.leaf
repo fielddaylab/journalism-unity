@@ -100,9 +100,9 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 {clear-text}
 {layout Right}
 {bg $BG_HouseExterior}
-//{img Anim/1a/UpstairsCat.gif} TODO: get mp4 file of gif
+{img Anim/1a/UpstairsCat.png}
 You help your neighbor find a flashlight and put out some food for her cats.
-//{/img}
+{/img}
 {img Anim/1a/CherryHat.png}
 In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries tiny cherries.
 {@jeanie}{auto} I made this just for you, Dear!  
@@ -116,7 +116,7 @@ $choice OffToWork; Off to work
 @tags Techie, Resourceful
 {clear-text}
 {bg $BG_HouseExterior}
-// {img Anim/1a/CollectGear.gif} TODO: get mp4 file of gif
+{img Anim/1a/CollectGear.mp4}
 You haven't finished unpacking yet--you don't plan to live here very long, anyway. 
 Unfortunately, this makes it <i>slightly<i> tricky to find your rain gear. 
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
@@ -141,7 +141,7 @@ $choice OffToWork; Off to work
 {layout Right}
 {bg $BG_HouseExterior}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
-// {img Anim/Duck.gif} TODO: get mp4 file of gif
+{img Anim/Duck.mp4}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
 {@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
 
@@ -195,7 +195,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-// {img Anim/1a/FlappingChicken.gif} // TODO: get mp4 file of gif
+{img Anim/1a/FlappingChicken.mp4}
 {@maureen} Hurry! We can't let them get swept away!
 
 $choice ChaseChickens; Chase after the chickens
@@ -425,7 +425,7 @@ $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situa
 
 :: Office1-Online
 {clear-text}
-// TODO: get image for water dripping into rain buckets
+{img Anim/1a/OfficeDesk.png}
 You head to your desk, only to find it covered in rain buckets.
 Sigh.
 Stepping between puddles, you eventually find an unoccupied (and dry) corner.
@@ -540,7 +540,7 @@ $goto Office1-Clock
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
-    // {img Anim/1a/HappyChicken.gif} TODO: get mp4 file of gif
+    {img Anim/1a/HappyChicken.mp4}
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
@@ -550,7 +550,7 @@ $else
     The officer coughs awkwardly.
     {@policespokesman} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
     {@policespokesman} She said you almost ran over her chickens this morning.
-    // {img Anim/1a/UpsetChicken.gif} TODO: get mp4 file of gif
+    {img Anim/1a/UpsetChicken.mp4}
     {@me} I wouldn't say 'ran over,' exactly.
     {@policespokesman} I can give you some safety tips, but then I'd better go. 
     {@policespokesman} I don't know what it's like in New York, but around here, we help our neighbors.   

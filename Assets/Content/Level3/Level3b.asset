@@ -31,8 +31,8 @@ MonoBehaviour:
     EditorBriefId:
       m_Source: Level.3b.Brief
       m_HashValue: 4255572926
-    FactWeight: 1
-    ColorWeight: 1
+    FactWeight: 2
+    ColorWeight: 2
     UsefulWeight: 1
     FinalHeadlineId:
       m_Source: Level.3b.Headline
