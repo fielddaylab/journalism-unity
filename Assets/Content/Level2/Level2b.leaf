@@ -345,6 +345,7 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 
 // Original Name: Call your editor
 :: CallYourEditorAboutWetlandStory
+@checkpoint
 {@dionne} What do you think, El? 
 {@me} I think there's a story here. 
 {@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
@@ -1125,7 +1126,7 @@ $endif
 You aim your keychain pepper spray and fire!
 Unfortunately, you didn't take into account the wind direction...
 Which happened to be blowing right toward you.  
-{@me}Ahhhhhhgh! 
+{@me}Ahhhhhhgh!
 When your eyes, mouth, and nose finally stop burning, you turn around and find... 
 Birdie. The lady this time, not the creature. 
 {@birdie}Did I just see you mace a crane???
@@ -1419,7 +1420,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/Editor.jpeg}
+{img Anim/EditorB.png}
 {@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false

@@ -152,7 +152,6 @@ $choice ReadFloodingArticle; Read the click-bait article and brush up on your su
 :: OffToWork
 {clear-text}
 {/img}
-{img Anim/enml-waterrushing.jpg}
 $call Ambience(Ambience/rain-inside.mp3)
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
@@ -195,7 +194,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-{img Anim/1a/FlappingChicken.mp4}
+{img Anim/1a/FlappingChicken_VP8.webm}
 {@maureen} Hurry! We can't let them get swept away!
 
 $choice ChaseChickens; Chase after the chickens
@@ -708,7 +707,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/Editor.jpeg}
+{img Anim/EditorB.png}
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false

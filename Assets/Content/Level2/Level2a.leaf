@@ -166,6 +166,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Answer phone
 :: AnswerPhone
+@checkpoint
 {@dionne}I've got your next assignment, El: a science story.
 $call ActivateStory()
 {@dionne} People are all talking about the flood, wondering how this could've happened. 
@@ -1404,7 +1405,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/Editor.jpeg}
+{img Anim/EditorB.png}
 {@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false

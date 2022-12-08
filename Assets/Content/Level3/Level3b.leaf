@@ -120,6 +120,7 @@ $choice CallYourEditor; Call your editor
 
 //Text your editor back 
 ::CallYourEditor
+@checkpoint
 {clear-text}
 Dionne picks up on the first ring.
 {@me} Just saw the news. What do you need me to do?
@@ -1165,7 +1166,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/Editor.jpeg}
+{img Anim/EditorB.png}
 {@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
