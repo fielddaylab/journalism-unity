@@ -158,7 +158,7 @@ $choice InYourOwnWords; I'll make sure to check. But can you tell me in your own
 $choice IsItTrue; Is it true that some people haven't been able to sandbag their properties? 
 
 // Is it true
-:: IsItTrueMayor
+:: IsItTrue
 {@person} Well, I'm not sure if that's true--I've been a tad busy, as you can imagine.
 {@person} But there are three sandbag filling stations throughout the city.
 {@person} Anyone who needs sandbags can go and get them!
@@ -995,98 +995,169 @@ $choice ThankLiz; Thank her for her time
 {@person} Feel free to grab a photo, if you need one for your story.
 {@person} And stay safe out there! The sky's lookin' dark. 
 $call GiveSnippet(GreatRoyalHazelPhoto)
-$choice EndingTransition; Decide what to do next 
+$choice FinalConvergeNode; Decide what to do next 
 
-//Ending Transition
-:: EndingTransition
-{bg }
-It's starting to rain. Drops hit the street all around you.
-You're about to look for someone else to talk to when your phone buzzes.
-{@phone} El, I've got another lead for you.
-{@phone} My contact at the Limnology Department suggesed talking to a local expert on flooding and equity.
-{@phone} Her name's Dr. Nora Warner... sounds like her home address isn't on file.
-{@phone} But my contact said she was helping out near the dam today.
-$choice LookForDrNoraWarner; Head toward the dam and look for Dr. Warner 
+:: FinalConvergeNode
+{clear-text}
+{bg } //TODO: add different backgrounds here depending on where you're coming from 
+Suddenly, your phone buzzes.
+Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 
-// LookForDrNoraWarner
-:: LookForDrNoraWarner
-{bg $BG_TownTransitional}
-Sandbags are stacked up everywhere, and no one is outside. 
-You're starting to get a bad feeling about the rain, which is getting heavier.
-$choice KeepSearchingForDrWarner; Knock at a few doors 
+$choice FindAPrivatePlaceToTakeTheCall; Find a private place to take the call 
 
-// Ask a local
-:: KeepSearchingForDrWarner
-Uh oh. No answer... probably because everyone has evacuated. 
-This rain is picking up fast.
-$if Visited(RideYourBikeRoyalHazel)
-    You hurry toward where you parked your bike...
-    But as you get closer, water starts to pool up around you.
-    The current almost sweeps you off your feet. 
+:: FindAPrivatePlaceToTakeTheCall
+You hurry to a nearby street corner, away from people.
+{@me} Hi, this is El Benjamin. 
+{@person} El, so glad we could finally talk!
+{@person} Your reporting is so impressive... especially for a new reporter.
+{@person} So, why do you want to come work with us at the Smoke City Herald? 
+You're trying to pay attention. Really, you are.
+But you can't help but notice the raindrops spotting the pavement around you.
+And the sky is looking awfully dark...
+{@person} Ahem. El, are you there? 
+{@person} Can you tell me why you're interested in working for us? 
+
+$choice IWantToWriteImportantStories; I want to write important stories that make a difference.  
+$choice IWantToMakeANameForMyself; I want to make a name for myself. 
+
+:: IWantToWriteImportantStories
+{@person} That's wonderful, El. 
+{@person} Although, since you're new, I'd probably start you on the entertainment beat...
+{@person} Music events, C-list celebrities, things like that.
+{@person} You might even get to cover urban wildlife! For instance, our growing population of short-tailed possoms. 
+{@person} You could handle that, right, El? 
+{@me} Oh... yeah. I think so. 
+You try to listen to her next question, but your phone is buzzing again.
+
+$choice ReadTextFromDionne; Read text 
+
+:: IWantToMakeANameForMyself
+{@person} Well, working here will definitely help with that.
+{@person} People from all over the country read the Smoke City Herald.
+{@person} The Twin Lakes Gazette comes out with amazing stories, but I doubt many people read it.
+{@person} I mean, except for the people who live there.
+{@me} Yeah. Our local readers are pretty devoted. 
+You try to listen to her next question, but your phone is buzzing again.
+
+$choice ReadTextFromDionne; Read text 
+
+::ReadTextFromDionne
+{@dionne} El, I just got a tip on one more expert source. 
+{@dionne} Her name's Dr. Nora Warner. No address on file, but she was supposed to be helping people evacuate today. 
+{@dionne} You getting this, El? 
+
+$choice TellDionneYoureBusy
+$choice TellTheInterviewYoullCallBack
+
+:: TellDionneYoureBusy
+The rain is coming down harder. This interview could {i}definitely{/i} be going better. 
+{@person} El, are you still there? 
+{@me} Yes, sorry--my editor was texting me.
+{@person} Oh, Dionne! She spoke very highly of you.
+$if Visited(IWantToMakeANameForMyself)
+    {@person} Sounds like you've already made a name for yourself in Twin Lakes.
+    {@person} I bet they'll be sorry to see you go. 
 $else 
-    You hurry toward where you parked your car...
-    But as you get closer, water starts to pool up around you.
-    The current almost sweeps you off your feet. 
+    {@person} Sounds like you've already made a big impact in Twin Lakes. 
+    {@person} I bet they'll miss you when you're gone. 
 $endif
-    You're not going to make it! 
-$choice FindShelter; Search for shelter
+{@me} Yeah... I guess so. 
+You realize you hate the thought of leaving this town... 
+But you might not end up getting the chance.
+The rain is coming harder.
+All around you, water is starting to rise.  
 
-// Search for shelter
-:: FindShelter
-Through the downpour, you hear a voice calling out from one of the old houses nearby.
-{@person} El, over here! Quick! 
+$choice TheWaterRises; Look for shelter 
 
-$choice RunTowardTheVoice; Run toward the voice
-$choice TryToReachYourCar; Try to reach your car 
+:: TellTheInterviewYoullCallBack
+The rain is coming down harder, but you still might have a chance at finding Dionne's expert source. 
+{@person} You'll... call back later? El, we're right in the middle of a job interview!
+{@me} I'm sorry. I'm on a deadline, and the storm is coming. 
+{@me} And I'm not even sure if this job is right for me.
+You probably shouldn't have said that...
+But the lady on the phone just laughs.
+{@person} I spent the first five years of my career in a tiny town, too.
+{@person} Except they had an Apple Fair, not a Cherry Festival.  
+{@person} Those quirky little towns can really grow on you, huh? 
+You realize she's right...
+But before you can answer, you realize that you're in trouble. 
+The rain is coming harder.
+All around you, water is starting to rise. 
+
+$choice TheWaterRises; Look for shelter 
+
+:: TheWaterRises
+You knock at a few doors--locked, windows boarded up.
+Everybody's already evacuated.
+Water is pooling up all around you.
+You're not going to make it! 
+$choice CallForHelp; Call for help 
+
+// Call for help 
+:: CallForHelp
+{@me} Help! Is anyone out here?? 
+{@person} El, this way! Quick! 
+
+$choice RunTowardTheVoice; Run toward the mysterious voice
+$choice TryToClimbATree; Try to climb a tree nearby 
+
+// Try to reach your car
+:: TryToClimbATree
+You almost make it...
+And then the flood knocks you off your feet!
+{@me} AHHH! Help!!
+Something lands near you: a red and white flotation device. 
+{@person} Grab on. I'll pull you in!
+Soon you find yourself on the porch of an old house nearby.
+{@person} Come inside, dear! Before the water rises! 
+$choice GoInsideTheHouse; Go inside and dry off 
 
 // Run toward the voice
 :: RunTowardTheVoice
 You splash through knee-deep water and up the front steps.
-An old lady in a floppy hat pulls you inside. 
-{@person} Come on in, El. Hurry!
+A lady, her face hidden under a floppy hat, pulls up onto her porch just in time.
+{@person} Come inside, El. Hurry!
 
-$choice DryOffAndLookAround; Dry off and look around
+$choice GoInsideTheHouse; Go inside and dry off 
 
 // Dry off and look around
-:: DryOffAndLookAround
+:: GoInsideTheHouse
 // Add background: inside the quilter's house! 
-{@person} That was close! I'm so glad Kitty and I happened to be looking outside.
-Whoa. It's Nora, the Houseboat Lady!
-{@me} What are you doing here?? 
-{@person} I could ask you the same thing, Dear. 
-{@person} Were you here looking for me? 
-{@me} No, sorry. I was looking for an expert named Dr. Nora Warner--
-That's when you make the connection. Holy cherry-glazed donuts.
-
-$CheckFinalConverge()
+{@me} Thank you! That was a close one.
+{@person} Happy to help, Dear. I'm just glad Willa and I happened to be looking outside.
+Whoa. Your rescuer is Nora, the Houseboat Lady!
+{@me} What are you doing here, Houseboat La——um, I mean, Nora?
+{@person} Just helping out my dear friend here. 
+{@person} Were you looking for me, El? 
+{@me} No, sorry. I'm looking for an expert named Dr. Nora Warner——
+That's when you realize. Holy cherry-glazed donuts.
 
 $choice InterviewTheFloodingExpert; Interview the flooding expert, Dr. Nora Warner 
 
 // Interview the flooding expert
 :: InterviewTheFloodingExpert
-{@me} Dr. Warner, can you tell me what you're doing out here?
+{@me} Dr. Warner... can you tell me what you're doing out here?
 {@me} What happened to your houseboat?
-{@person} Oh please, call me Nora, Dear.
+{@person} Oh please, call me Nora.
 {@person} My houseboat is just fine, of course! You know how amazing houseboats are. 
 {@person} I was here checking on my friend, Willa.
 
-$choice AskWillaAboutTheFlood; Ask Willa if she plans to evacuate 
+$choice AskWillaAboutTheFlood; Ask Willa why she didn't evacuate 
 $choice AskNoraAboutHerResearch; Ask Nora about her research 
 
 // Ask Willa about her quiltwork 
 :: AskWillaAboutTheFlood
-{@person} That's why Nora's here. 
-{@person} She was helping me pack up my quilts, trying to convince me to leave.
-{@person} But I suppose that ship has sailed. Listen to that rain out there. 
+{@person} I was hoping to get to the shelter, but I didn't have anyone to help me. 
+{@person} That's why Nora's here. She was helping me pack up my quilts.
+{@person} But I suppose that ship has sailed. It's raining cats and chickens out there. 
 
 $choice AskNoraAboutHerResearch; Ask Nora about her research
 
 // Ask Nora about her research 
 :: AskNoraAboutHerResearch
-{@me} Nora, can you tell me about your research? 
-{@person} Certainly, Dear. I studied climate change and public policy at Twin Lakes College.
+{@me} Nora, can you tell me about your work? 
+{@person} Certainly, Dear. I studied climate change and public policy at the college.
 {@person} My research has been all about equity during flood disasters.
-{@person} I literally wrote the book on it!
 
 $choice WhatMadeYouWantToStudyFlooding; What made you want to study flood disasters? 
 
@@ -1094,31 +1165,30 @@ $choice WhatMadeYouWantToStudyFlooding; What made you want to study flood disast
 :: WhatMadeYouWantToStudyFlooding
 {@person} Oh, you haven't heard? I could've sworn I told you this story....
 Oops. If she did, you probably weren't paying attention.
-{@me} I'm sorry, Nora. Could you tell me again?
-{@person} Well, 10 years ago, I used to live in a nice little house along the river.
+{@me} Um, sorry. Can you tell me again?
+{@person} Well. 10 years ago, I used to live in a nice little house along the river.
 {@person} It was like a dream come true! 
-{@person} Then a flood hit. In one day, I lost everything. 
-{@person} I study flood disasters because I want to help others who are going through the same thing.
+{@person} Then a flood hit. In one day, I lost everything.
+{@person} No one was around to help me. But hopefully, my work will help other people. 
 
-$choice HowDidYouEndUpInAHouseboat; How did you end up on your houseboat? 
+$choice HowDidYouEndUpInAHouseboat; How did you end up living on a houseboat? 
 $choice WhyHasntAnyoneMentionedIt; Why hasn't anyone mentioned that the town flooded ten years ago? 
 
 // How did you end up on your houseboat? 
 :: HowDidYouEndUpInAHouseboat
-{@person} From my research, I knew that climate change would bring more flooding...
-{@person} And this town seemed determined not to change. 
+{@person} From my research, I knew that climate change would bring more flooding.
+{@person} Twin Lakes certaintly hasn't done much to prevent it. 
 {@person} Then I discovered houseboats. They literally can't flood!  
 {@person} Just wish more people would get on board.... no pun intended. 
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepare better for the next flood? 
-$choice DoYouReallyThinkHouseboats; Do you really think houseboats work as a long-term solution? 
 
 // Why hasn't anyone mentioned it? 
 :: WhyHasntAnyoneMentionedIt
 {@person} Well, that flood wasn't like this one. Only a few areas were affected.
-{@person} All of us along the river had ruined furniture and basements full of mold.
-{@person} Some, like me, got foreclosed on and ended up losing our homes.
+{@person} But everyone along the river was hit hard. 
+{@person} Some of us ended up losing our homes.
 {@person} But the town forgot. Life goes on.
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
@@ -1126,36 +1196,41 @@ $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepar
 
 // What do you think people should know about floods and equity?
 :: WhatDoYouThinkPeopleShouldKnow
-{@person} Well, people love to say we're all in this together.
+{@person} Well, people like to say we're all in this together.
 {@person} But really, disasters hit some people much harder.
-{@person} Disabled and elderly people, low-income households, people of color...
-{@person} Unless the town puts better policies in place to help these groups, Twin Lakes will fall apart at the seams.
+{@person} Disabled and elderly people, BIPOC communities, low-income households... 
+{@person} Unless the town puts policies in place to help these groups, Twin Lakes will fall apart at the seams.
+
+$choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepare better for the next flood?  
+$choice DoYouThinkHouseboatsWork; Do you really think houseboats work as a long-term solution? 
 
 // How can Twin Lakes prepare better for the next flood? 
 :: HowDoYouThinkTwinLakesCanDoBetterNextTime
-{@person} We need to learn from this disaster and not just forget about it.
-{@person} Prepare to set up sandbag filling stations in every neighborhood.
-{@person} Enlist more volunteers. Update those flood maps. 
-{@person} And get people the financial aid they need to get through this!
+{@person} The city needs to prepare to set up sandbag filling stations in every neighborhood.
+{@person} Enlist more volunteers. Update the flood maps. 
+{@person} And give financial aid to low-income households, so they can rebuild. 
+{@person} The national government offers some aid, too, but people need time and support so that they can learn how to apply for it. 
+
 $choice DoYouThinkHouseboatsWork; Do you really think houseboats work as a long-term solution? 
+$choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 
 // Do you really think houseboats work as a long-term solution?
 :: DoYouThinkHouseboatsWork
-{@person} Of course! Houseboats are the future! 
-{@person} I mean... I suppose they aren't the most practical for large families.
-{@person} Or renters who are living paycheck to paycheck.
-{@person} Or anyone who prefers to live on solid ground.
+{@person} Of course! People already use them in waterfront areas all over the world. 
+{@person} I mean... I suppose floating houses aren't the most practical for everyone. 
+{@person} And most of Twin Lakes might still end up being washed away. 
 {@person} But honestly, I'm not sure what else to do. I couldn't deal with the pain of losing another home.
-{@person} Houseboat, stay afloat! 
 
-Looks like that's it. Time to get your story out there.
-Hopefully it'll be enough.
-$choice STORYEVALUATION; Write your story. 
+You're about to ask another question when your phone buzzes.
+{@dionne} You okay, El??
+{@dionne} What's the situation out there?
+{@me} I'm ok. Found Dr. Warner.
+{@dionne} Great. It's press time. 
+{@dionne} This flood is already attracting national attention.
+{@dionne} We need to get our voice out there. 
+Looks like that's it. Time to get your story out to the people of Twin Lakes.
+It won't be perfect... but hopefully it'll be enough.
 
-:: FinalConvergeNode
-{clear-text}
-// Insert the final sequence here
-[This is a placeholder for the final sequence.]
 $choice STORYEVALUATION; Write your story.
 
 

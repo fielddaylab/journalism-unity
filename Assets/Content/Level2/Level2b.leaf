@@ -1361,8 +1361,7 @@ $OnceChoice(AskAboutThePlanToBuildOverCherryCreekMarsh, "Is it true that you're 
 
 $call GiveSnippet(BusinessGrowingOrDying)
 
-$OnceChoice(AskHimWhyHePushedToGetRidOfWetlandProtections, "Ask him why he pushed to get rid of wetland protections")
-$OnceChoice(AskAboutThePlanToBuildOverCherryCreekMarsh, "Ask about the plan to build cherry creek marsh")
+$OnceChoice(AskAboutThePlanToBuildOverCherryCreekMarsh, "Ask about the plan to build over Cherry Creek Marsh")
 
 // Original Name: Ask about the plan to build over Cherry Creek Marsh 
 :: AskAboutThePlanToBuildOverCherryCreekMarsh
@@ -1374,9 +1373,6 @@ $call GiveSnippet(WetlandPolicy)
 
 $OnceChoice(DidYouKnowthatWetlandsSoakUpWaterAndPreventFlooding, "Did you know that wetlands soak up water and prevent flooding?")
 $OnceChoice(DoYouHaveAPlanToReduceFloodRisk, "Do you have a plan to reduce flood risk?")
-
-:: AskHimWhyHePushedToGetRidOfWetlandProtections
-// TODO: implement this branch
 
 // Original Name: "Did you know that those low-lying areas soak up water and help prevent flooding?"
 :: DidYouKnowthatWetlandsSoakUpWaterAndPreventFlooding

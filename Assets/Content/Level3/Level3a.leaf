@@ -686,11 +686,8 @@ $choice EndShelterCoordinatorInterview; End Interview
 
 $choice EndShelterCoordinatorInterview; End Interview
 
-:: ShelterCoordinatorInterview
-// TODO: implement this branch
-
 // Do you have any concerns about the shelter?
-:: DoYouHaveAnyConcernsAboutTheShelter
+:: ShelterCoordinatorInterview
 {@person} I don't even know where to start.
 {@person} We don't have enough space, supplies, or volunteers. 
 {@person} And this shelter isn't going to work for everyone who's gonna need it.
