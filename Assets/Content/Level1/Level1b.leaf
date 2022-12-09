@@ -130,7 +130,7 @@ $if FirstVisit()
 {img Anim/1b/CatchingWater.png}
 The newsroom is starting to fill up now--with people and water.
 Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
-{img Anim/1b/SpinningTire.mp4}
+{img Anim/1b/SpinningTire.webm}
 Out front, Khalisa is struggling to push her car out of the flooded street. 
 {/img}
 $endif
@@ -304,7 +304,7 @@ Thank goodness you're so good at doing {stat-name}research{/stat-name} on the fl
 You use the flood map to dodge all the worst flooded streets.
 The drive takes longer than usual, but at least you're not stranded. 
 $elseif StatCheck(Tech, 2)
-Phew, your {stat-check}tech{/stat-check} skills are paying off!
+Phew, your {stat-name}tech{/stat-name} skills are paying off!
 You use the online flood map to chart a safe course.
 The drive takes longer than usual, but at least you're not stranded. 
 
@@ -517,7 +517,7 @@ $endif
 :: TalkToTheHouseboatLady
 {/map}
 {bg $BG_HouseBoat}
-{img Anim/1b/Megaphone.mp4}
+{img Anim/1b/Megaphone.webm}
 {@nora} Houseboat, stay afloat! Houseboat, stay afloat!
 {@me} Excuse me... Ms. Houseboat Lady... do you have a minute to talk? 
 {/img}
@@ -1277,7 +1277,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/EditorB.png}
+{portrait Anim/EditorB.png}
 {@dionne} Okay, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false

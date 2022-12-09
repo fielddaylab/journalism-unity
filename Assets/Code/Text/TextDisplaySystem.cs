@@ -33,12 +33,17 @@ namespace Journalism {
         [SerializeField] private float m_FeedbackOverlayImpactY = -75f;
 
         [Header("Image Contents")]
+        [SerializeField] private AnimatedElement m_ImageLayout = null;
         [SerializeField] private ImageColumn m_Image = null;
+        [SerializeField] private Image m_ImageBG = null;
         [SerializeField] private ImageColumn m_Map = null;
         [SerializeField] private Image m_Border = null;
+        [SerializeField] private Sprite m_ImageBGSprite = null;
+        [SerializeField] private Sprite m_PortraitBGSprite = null;
 
         [Header("Default Dimensions")]
-        [SerializeField] private Vector2 m_DefaultImageDims = new Vector2(320, 320);
+        [SerializeField] private Vector2 m_DefaultImageDims = new Vector2(400, 400);
+        [SerializeField] private Vector2 m_DefaultPortraitDims = new Vector2(320, 320);
         [SerializeField] private Vector2 m_DefaultMapDims = new Vector2(366, 245);
 
         #endregion // Inspector
@@ -86,6 +91,8 @@ namespace Journalism {
             handlers
                 .Register(GameText.Events.Image, HandleImage)
                 .Register(GameText.Events.ClearImage, HandleImageOrMapClear)
+                .Register(GameText.Events.Portrait, HandlePortrait)
+                .Register(GameText.Events.ClearPortrait, HandleImageOrMapClear)
                 .Register(GameText.Events.DisplayStoryStats, HandleStoryStats)
                 .Register(GameText.Events.Map, HandleMap)
                 .Register(GameText.Events.ClearMap, HandleImageOrMapClear);
@@ -96,7 +103,19 @@ namespace Journalism {
 
         private IEnumerator HandleImage(TagEventData evtData, object context) {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultImageDims);
+            this.m_ImageBG.rectTransform.SetSizeDelta(m_DefaultImageDims);
+            this.m_ImageLayout.RectTransform.SetPosition(0, Axis.Y, Space.Self);
             this.m_Border.gameObject.SetActive(false); // disable border
+            this.m_ImageBG.sprite = m_ImageBGSprite;
+
+            yield return HandleImageOrMap(evtData, context);
+        }
+
+        private IEnumerator HandlePortrait(TagEventData evtData, object context) {
+            this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultPortraitDims);
+            this.m_ImageBG.rectTransform.SetSizeDelta(m_DefaultPortraitDims);
+            this.m_Border.gameObject.SetActive(true); // enable border
+            this.m_ImageBG.sprite = m_PortraitBGSprite;
 
             yield return HandleImageOrMap(evtData, context);
         }
@@ -316,7 +335,7 @@ namespace Journalism {
                 RectTransform mapTexRect = m_Map.Texture.GetComponent<RectTransform>();
                 mapTexRect.sizeDelta =
                     new Vector2(mapTexRect.rect.width * dimsRatio.x, mapTexRect.rect.width * dimsRatio.y);
-            } else if (evtData.Type == GameText.Events.Image) {
+            } else if (evtData.Type == GameText.Events.Image || evtData.Type == GameText.Events.Portrait) {
                 m_Map.gameObject.SetActive(false);
                 m_Image.gameObject.SetActive(true);
 
@@ -331,7 +350,7 @@ namespace Journalism {
         private TextDisplayLayer.DesiredColumnState CheckColumnLoad(TagEventData evtData, StringSlice path) {
             if (evtData.Type == GameText.Events.Map && m_Map.Texture.Path != path) {
                 return path.IsEmpty ? TextDisplayLayer.DesiredColumnState.Unload : TextDisplayLayer.DesiredColumnState.Reload;
-            } else if (evtData.Type == GameText.Events.Image && m_Image.Texture.Path != path) {
+            } else if ((evtData.Type == GameText.Events.Image || evtData.Type == GameText.Events.Portrait) && m_Image.Texture.Path != path) {
                 return path.IsEmpty ? TextDisplayLayer.DesiredColumnState.Unload : TextDisplayLayer.DesiredColumnState.Reload;
             } else {
                 return TextDisplayLayer.DesiredColumnState.NoChange;

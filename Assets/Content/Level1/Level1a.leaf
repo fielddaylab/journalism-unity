@@ -39,6 +39,7 @@ $call SetLocation("Apartment")
 {bg $BG_Bedroom}
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
+{layout Right}
 Welcome to Twin Lakes, day 11. 
 The Cherry Capitol of the Midwest. 
 Your friends back in New York were SO JEALOUS you snagged a reporting job straight out of college.
@@ -116,7 +117,7 @@ $choice OffToWork; Off to work
 @tags Techie, Resourceful
 {clear-text}
 {bg $BG_HouseExterior}
-{img Anim/1a/CollectGear.mp4}
+{img Anim/1a/CollectGear.webm}
 You haven't finished unpacking yet--you don't plan to live here very long, anyway. 
 Unfortunately, this makes it <i>slightly<i> tricky to find your rain gear. 
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
@@ -141,7 +142,7 @@ $choice OffToWork; Off to work
 {layout Right}
 {bg $BG_HouseExterior}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
-{img Anim/1a/Duck.mp4}
+{img Anim/1a/Duck.webm}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
 {@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
 
@@ -153,6 +154,7 @@ $choice ReadFloodingArticle; Read the click-bait article and brush up on your su
 {clear-text}
 {/img}
 $call Ambience(Ambience/rain-inside.mp3)
+{layout Right}
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
 It might be nice to help out. She did bring you a cherry strudel the other day.
@@ -194,7 +196,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-{img Anim/1a/FlappingChicken_VP8.webm}
+{img Anim/1a/FlappingChicken.webm}
 {@maureen} Hurry! We can't let them get swept away!
 
 $choice ChaseChickens; Chase after the chickens
@@ -412,7 +414,6 @@ $endif
 
 $if FirstVisit()
     {anim rumble} RRRRING.
-    {img Anim/1a/Phone.png}
     $HubChoice(AnswerThePhone, "Answer the phone", -1)
 $endif
 
@@ -437,6 +438,7 @@ $OnceChoice(Office1-Weather, "Check the local weather website")
 @tags Trust, Social
 {clear-text}
 {/map}
+{img Anim/1a/Phone.png}
 {@me} Hello?
 {@fredfinkler} Hiya!! This is Fred Finkler.
 {@fredfinkler} You might remember me from the Town Hall meetings.
@@ -539,7 +541,7 @@ $goto Office1-Clock
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
-    {img Anim/1a/HappyChicken.mp4}
+    {img Anim/1a/HappyChicken.webm}
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
@@ -549,7 +551,7 @@ $else
     The officer coughs awkwardly.
     {@policespokesman} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
     {@policespokesman} She said you almost ran over her chickens this morning.
-    {img Anim/1a/UpsetChicken.mp4}
+    {img Anim/1a/UpsetChicken.webm}
     {@me} I wouldn't say 'ran over,' exactly.
     {@policespokesman} I can give you some safety tips, but then I'd better go. 
     {@policespokesman} I don't know what it's like in New York, but around here, we help our neighbors.   
@@ -707,7 +709,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/EditorB.png}
+{portrait Anim/EditorB.png}
 {@person} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false

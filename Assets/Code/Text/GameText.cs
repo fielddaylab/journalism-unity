@@ -1118,8 +1118,10 @@ namespace Journalism {
             static public readonly StringHash32 Layout = "layout";
             static public readonly StringHash32 Anim = "animation";
             static public readonly StringHash32 Image = "image";
+            static public readonly StringHash32 Portrait = "portrait";
             static public readonly StringHash32 Map = "map";
             static public readonly StringHash32 ClearImage = "clear-image";
+            static public readonly StringHash32 ClearPortrait = "clear-portrait";
             static public readonly StringHash32 ClearMap = "clear-map";
             static public readonly StringHash32 ClearText = "clear-text";
             static public readonly StringHash32 BackgroundFadeOut = "background-fadeout";
@@ -1166,6 +1168,7 @@ namespace Journalism {
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
+            config.AddEvent("portrait", Events.Portrait).WithStringData().CloseWith(Events.ClearPortrait);
             config.AddEvent("layout", Events.Layout).WithStringData().CloseWith(Events.Layout);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
             config.AddEvent("map", Events.Map).WithStringData().CloseWith(Events.ClearMap);

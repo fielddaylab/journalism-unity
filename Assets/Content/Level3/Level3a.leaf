@@ -1395,7 +1395,7 @@ $goto StoryFeedback
 :: StoryFeedback
 $call BeginFeedback()
 {/bg}
-{img Anim/EditorB.png}
+{portrait Anim/EditorB.png}
 {@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
