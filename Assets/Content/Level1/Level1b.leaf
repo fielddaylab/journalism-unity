@@ -51,29 +51,29 @@ $endif
 You have {timeLeft} to prepare to head out into the flood.
 
 $if !StatCheck(Tech, 2) , !StatCheck(Resourceful, 2)
-First things first. You need more {stat-name}tech{/stat-name} supplies.
-And you'll need rain gear if you want to be {stat-name}resourceful{/stat-name} enough to make it downtown.
+    First things first. You need more {stat-name}tech{/stat-name} supplies.
+    And you'll need rain gear if you want to be {stat-name}resourceful{/stat-name} enough to make it downtown.
 
-$HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
-$HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
-$HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
-$HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
+    $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
+    $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
+    $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
+    $HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
 $elseif !StatCheck(Resourceful, 2)
-It's a mess out there. 
-You'll need some rain gear if you want to be {stat-name}resourceful{/stat-name} enough to handle this.
+    It's a mess out there. 
+    You'll need some rain gear if you want to be {stat-name}resourceful{/stat-name} enough to handle this.
 
-$HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
-$HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
+    $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
+    $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $elseif !StatCheck(Tech, 2)
-You still need to level up your {stat-name}tech{/stat-name}, or your phone will die before you even make it downtown.
+    You still need to level up your {stat-name}tech{/stat-name}, or your phone will die before you even make it downtown.
 
-$HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
-$HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
-$HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
+    $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
+    $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
+    $HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
 $elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
-You've got all the gear you need! 
+    You've got all the gear you need! 
 
-$choice GetReadyPart2; Prepare to brave the storm
+    $choice GetReadyPart2; Prepare to brave the storm
 $endif
 
 // Original Name: "Borrow" charger
@@ -130,20 +130,18 @@ $if FirstVisit()
 {img Anim/1b/CatchingWater.png}
 The newsroom is starting to fill up now--with people and water.
 Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
-{/img}
 {img Anim/1b/SpinningTire.mp4}
 Out front, Khalisa is struggling to push her car out of the flooded street. 
 {/img}
 $endif
 
-$if TimeRemaining()
+$if TimeRemaining() >= 0.25
     $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
     $HubChoice(Breakroom, "Search the break room for snacks", .25)
     $HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
     $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
-
-$elseif StatCheck(Tech, 2) , StatCheck(Resourceful, 2)
-    $choice HeadOut; Enough stalling. Time to go.
+// $elseif StatCheck(Tech, 2), StatCheck(Resourceful, 2)
+//     $choice HeadOut; Enough stalling. Time to go.
 $else
     You check the clock.
     $choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
@@ -170,9 +168,9 @@ $call AdjustStats(Tech + 2, Social - 1)
 $endif
 
 $if StatCheck(Resourceful, 2) , StatCheck(Tech, 2)
-$choice GetReadyPart2; Head back to your desk
+    $choice GetReadyPart2; Head back to your desk
 $else
-$choice GetReady; Head back to your desk
+    $choice GetReady; Head back to your desk
 $endif
 
 // Original Name: Borrow tech

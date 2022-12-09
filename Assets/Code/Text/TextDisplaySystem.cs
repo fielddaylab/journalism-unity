@@ -12,6 +12,7 @@ using BeauPools;
 using System;
 using Journalism.UI;
 using FDLocalization;
+using UnityEngine.UI;
 
 namespace Journalism {
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
@@ -34,6 +35,7 @@ namespace Journalism {
         [Header("Image Contents")]
         [SerializeField] private ImageColumn m_Image = null;
         [SerializeField] private ImageColumn m_Map = null;
+        [SerializeField] private Image m_Border = null;
 
         [Header("Default Dimensions")]
         [SerializeField] private Vector2 m_DefaultImageDims = new Vector2(320, 320);
@@ -93,16 +95,15 @@ namespace Journalism {
         }
 
         private IEnumerator HandleImage(TagEventData evtData, object context) {
-            // TODO: define the image size as const
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultImageDims);
+            this.m_Border.gameObject.SetActive(false); // disable border
 
             yield return HandleImageOrMap(evtData, context);
         }
 
         private IEnumerator HandleMap(TagEventData evtData, object context) {
-            // TODO: define the map size as const
-
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultMapDims);
+            this.m_Border.gameObject.SetActive(true); // enable border
 
             yield return HandleImageOrMap(evtData, context);
         }

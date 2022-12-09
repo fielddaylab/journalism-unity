@@ -10498,6 +10498,11 @@ PrefabInstance:
       propertyPath: m_UVRect.height
       value: NaN
       objectReference: {fileID: 0}
+    - target: {fileID: 8936734539403169370, guid: 2104d85d490871f46984558b1f28b4ba,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.4000015
+      objectReference: {fileID: 0}
     - target: {fileID: 8982252850507009856, guid: 2104d85d490871f46984558b1f28b4ba,
         type: 3}
       propertyPath: m_AnchorMax.y

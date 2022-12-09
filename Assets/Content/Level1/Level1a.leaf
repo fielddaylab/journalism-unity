@@ -141,7 +141,7 @@ $choice OffToWork; Off to work
 {layout Right}
 {bg $BG_HouseExterior}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
-{img Anim/Duck.mp4}
+{img Anim/1a/Duck.mp4}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
 {@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
 
@@ -715,7 +715,28 @@ $if StoryHasPicture() == false
     {@person}   This will bring down your overall story score. 
     {@person}   Photos and other visuals help us hook readers. Don't forget next time. 
     {@person}   Other than that...
+    $if StoryIsFull() == true
+        // no more preliminary feedback
+        {@dionne}   Other than that...
+    $endif
 $endif
+$if StoryIsFull() == false
+    $if StoryHasPicture() == false
+        // player has not filled all slots AND is missing picture
+        {@dionne}   And you haven't used up all the space?
+        {@dionne}   That makes two errors, both of which are impacting the quality of your story.
+        {@dionne}   Other than that...
+    $else
+        // player has not filled all slots
+        {@dionne}   I see you have some blank spots here.
+        {@dionne}   Make sure to use all the space that's given to you.
+        {@dionne}   This is going to make people think it's a lower-quality story.
+        {@dionne}   Other than that...
+    $endif
+$endif
+
+
+
 
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment

@@ -54,6 +54,7 @@ $choice AcceptStory; Accept Story Assignment
 
 //Accept Story Assignment
 :: AcceptStory 
+@checkpoint
 $call SetTimeRemaining(4)
 
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
@@ -825,8 +826,8 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 {@person} Plus, animals tend to get agitated during disasters.  
 $call GiveSnippet(WhyArentPetsAllowedQuote)
 
-$choice PetFriendlyShelter; What would it take to set up a pet-friendly shelter?
-$choice WhereShouldPetOwnersGo; Where should pet-owners go if they need to evacuate? 
+$OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
+$OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
 
 // What would it take to set up a pet-friendly shelter?
 :: PetFriendlyShelter
@@ -836,8 +837,8 @@ $choice WhereShouldPetOwnersGo; Where should pet-owners go if they need to evacu
 {@person} Hindsight is 20/20, huh?  
 $call GiveSnippet(PetFriendlyShelterRequirements)
 
-$choice WhereShouldPetOwnersGo; Where should pet-owners go if they need to evacuate? 
 $choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
+$OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
 
 // How can the city help pet owners? 
 :: HowCanTheCityHelpOut
@@ -860,8 +861,9 @@ $choice NextStepAfterVetMeeting; End Interview
 {@Person} Or even driving outside of Twin Lakes to look for kennels and pet daycares.
 $call GiveSnippet(WhereShouldPetOwnersGo)
 
-$choice PetFriendlyShelter; What would it take to set up a pet-friendly shelter?
 $choice BoardingAnimalsIsExpensive; Doesn't boarding animals at a kennel cost a lot?
+$OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
+
 
 // Doesn't boarding animals at a kennel cost a lot?
 :: BoardingAnimalsIsExpensive
@@ -993,8 +995,8 @@ Poor lady. She reminds you of your neighbor Jeannie...
 Except with a quail curled up on her lap instead of a cat. 
 $call GiveSnippet(ApartmentContext)
 
-$choice WhereHaveYouBeenStaying; Where have you been staying?
-$choice DoYouKnowWhenYoullBeAllowedBackIn; Do you know when you'll be allowed to move back in? 
+$OnceChoice(WhereHaveYouBeenStaying, "Where have you been staying?")
+$OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?")
 
 // Where have you been staying in the meantime?
 :: WhereHaveYouBeenStaying
@@ -1003,8 +1005,8 @@ $choice DoYouKnowWhenYoullBeAllowedBackIn; Do you know when you'll be allowed to
 {@person} I just want to be home. 
 $call GiveSnippet(SadApartmentColorQuote)
 
-$choice DoYouKnowWhenYoullBeAllowedBackIn; Do you know when you'll be allowed to move back in? 
 $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? 
+$OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?")
 
 // Do you know why it's taking so long for people to be let back inside?
 :: DoYouKnowWhenYoullBeAllowedBackIn
@@ -1015,8 +1017,8 @@ $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help?
 {@person} Well, they said they're busy. I'd hate to be rude.
 $call GiveSnippet(ApartmentNotReturningCalls)
 
-$choice WhereHaveYouBeenStaying; Where have you been living in the meantime?
 $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? 
+$OnceChoice(WhereHaveYouBeenStaying, "Where have you been living in the meantime?")
 
 // Is there anything I can do to help?
 :: IsThereAnythingICanDoToHelp
@@ -1028,7 +1030,7 @@ The quail on her lap curls up and coos sadly.
 $HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
 $HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
 $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
-$choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks )
+$choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks)
 $choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
 
 // Try to convince the building manager to let you go inside for Queenie's food 
@@ -1324,6 +1326,10 @@ Okay, El. Time is ticking. Where to next?
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
+$elseif Visited(HeadStraightToShelter), Visited(MeetWithLocalVet), Visited(GoToSeniorCitizenApartments)
+      // player has exhausted all options
+      Looks like you have to cut this short. You have just enough time to compile your story!
+      $choice StoryConstruction3a; Compile your story
 $endif
 $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
