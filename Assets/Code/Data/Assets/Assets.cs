@@ -35,6 +35,10 @@ namespace Journalism {
             get { return s_TextStyles.Default(); }
         }
 
+        static public TextStyles.StyleData DefaultCharStyle {
+            get { return s_TextStyles.DefaultForChar(); }
+        }
+
         static public TextStyles.StyleData Style(StringHash32 id) {
             return s_TextStyles.Style(id);
         }

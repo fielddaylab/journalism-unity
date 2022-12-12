@@ -23,6 +23,7 @@ namespace Journalism {
         #region Inspector
 
         [SerializeField, Inline(InlineAttribute.DisplayType.HeaderLabel)] private StyleData m_DefaultStyle = null;
+        [SerializeField, Inline(InlineAttribute.DisplayType.HeaderLabel)] private StyleData m_DefaultCharStyle = null;
 
         [Header("Named Styles")]
         [SerializeField] private StyleData[] m_Styles = null;
@@ -33,6 +34,10 @@ namespace Journalism {
 
         public StyleData Default() {
             return m_DefaultStyle;
+        }
+
+        public StyleData DefaultForChar() {
+            return m_DefaultCharStyle;
         }
 
         public StyleData Style(StringHash32 styleId) {
@@ -46,7 +51,7 @@ namespace Journalism {
 
             if (!m_StyleMap.TryGetValue(styleId, out StyleData data)) {
                 Log.Msg("[TextStyles] No style with id '{0}' found!", styleId);
-                data = m_DefaultStyle;
+                data = m_DefaultCharStyle;
             }
 
             return data;
