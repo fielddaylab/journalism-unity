@@ -352,7 +352,8 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {@dionne}Then we need to fast-track this story.
 {@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
-{@dionne} This is a controversial topic. We don't want to put any false information out there. 
+$call ActivateStory()
+{@dionne} This is a controversial topic. We don't want to put any false information out there.
 
 $choice MarshMap; Got it. Thanks. 
 

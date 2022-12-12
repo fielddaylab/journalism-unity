@@ -42,6 +42,7 @@ $call GiveSnippet(BasicInfoFromEmergencyMeeting)
 {@person} Don't worry about that, El. 
 {@person} I need you to do some digging into that flood shelter. 
 {@person} Look for issues that people need to know about. 
+$call ActivateStory()
 {@me} Got it. 
 {@me} And, um... about that letter of recommendation I asked you for....
 {@person} Don't worry, kid. I'm working on it.

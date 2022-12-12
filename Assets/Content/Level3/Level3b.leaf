@@ -126,6 +126,7 @@ Dionne picks up on the first ring.
 {@me} Just saw the news. What do you need me to do?
 {@phone} Khalisa's got breaking news covered. 
 {@phone} I want you to head to the central sandbag filling station.
+$call ActivateStory()
 {@phone} We got a tip that some of the south side neighborhoods haven't been able to access sandbags in time. 
 {@phone} If that's true, people need to know about it. 
 $choice AcceptStory; On it.  
