@@ -1,0 +1,6 @@
+// :: ExampleSnippet
+// @type Photo, Fact, Quote, Observation, Graph (pick one)
+// @quality Bad, Good, Great (pick one)
+// @attr Color, Facts, Useful (pick any number)
+// @image Photo/HospitalDucks.jpg
+// This is a valid description.

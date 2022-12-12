@@ -362,3 +362,9 @@ MonoBehaviour:
     Name:
       m_Source: Char.Wetlandvolunteer3
       m_HashValue: 597839061
+  - Id:
+      m_Source: newChar
+      m_HashValue: 2578756201
+    Name:
+      m_Source: Char.NewPerson
+      m_HashValue: 455305232

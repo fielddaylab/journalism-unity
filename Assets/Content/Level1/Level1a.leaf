@@ -710,10 +710,10 @@ $goto StoryFeedback
 $call BeginFeedback()
 {/bg}
 {portrait Anim/EditorB.png}
-{@person} Alright, let's see how you did...
+{@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
-    {@person}   I thought I told you to include a picture, Ms. Benjamin. 
+    {@dionne}   I thought I told you to include a picture, Ms. Benjamin. 
     {@person}   This will bring down your overall story score. 
     {@person}   Photos and other visuals help us hook readers. Don't forget next time. 
     {@person}   Other than that...

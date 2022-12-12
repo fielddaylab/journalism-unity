@@ -18,12 +18,12 @@ MonoBehaviour:
       m_HashValue: 0
     Background:
       serializedVersion: 2
-      rgba: 4283093503
+      rgba: 4292138227
     Outline:
       serializedVersion: 2
       rgba: 4278388513
-    Tail: 1
-    RoundingScale: 1.2
+    Tail: 0
+    RoundingScale: 1
     Texture: {fileID: 0}
   m_Styles:
   - Id:
