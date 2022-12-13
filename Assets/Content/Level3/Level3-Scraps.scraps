@@ -276,72 +276,170 @@ Local vet Fox Smolder said pet owners should stay with relatives, or look for ne
 "I'm worried about my clients who were kicked out of their building due to the flood. Not sure where they're going to go."
 
 :: DescriptionOfApartmentInterior
-@type
-@quality 
-@attr 
-
-:: PhotosOfApartmentInterior
-@type
-@quality 
-@attr 
+@type Fact
+@quality Great 
+@attr Fact, Color
+Inside Strudel Apartments, the scene is grim: flickering lights, an out-of-order elevator, and moldy carpets.
 
 :: ElectricianInput
 @type Fact 
 @quality Good 
 @attr Facts
-The electrician at Strudel Apartments said the fire alarm system was down. 
+The electrician at Strudel Apartments said the fire alarm was out-of-order. 
 
-::
+:: ElectricianInterviewDetailedReason
+@type Fact 
+@quality Great
+@attr Facts
+The electrician explained why seniors can't move back in yet: out-of-order elevators and fire alarms, and dangerous mold growth. 
+
+:: ElectricianNotSureAboutMovein 
+@type Quote 
+@quality Good 
+@attr Facts 
+"With that new storm on its way, I'm worried that these people will have to wait a lot longer to move back in." 
+
+:: RepairWorkersAllBusy
+@type Fact 
+@quality Good 
+@attr Facts
+Strudel Apartments still need more repairs, and repair workers are swamped with calls from all over town. 
+
+:: ApartmentContext
+@type Quote 
+@quality Great 
+@attr Facts, Color
+"I've lived here for years. That is, until the flood. We had to evacuate when the ground floor flooded. It was dreadful!"
+
+:: SadApartmentColorQuote
+@type Quote 
+@quality Great 
+@attr Color 
+"I'm staying with my sister in West Forks. But that city is too big and noisy for me. I just want to be home."
+
+:: ApartmentNotReturningCalls
+@type Quote 
+@quality Great 
+@attr Facts
+"I came out here today to demand some answers. The building manager isn't answering my calls!" 
+
+:: DescriptionOfGroceryStoreChaos
+@type Fact 
+@quality Good 
+@attr Fact, Color
+The grocery store was a chaotic scene, with empty shelves and lines that stretched all the way to the parking lot. 
+
+:: AngryLandlordQuote
+@type
+@quality 
+@attr 
+"I'm just doing my job, and all these sweet old ladies keep acting like I'm Cruella DeVille. So forgive me if I seem tense." 
+
+:: LandlordFactsAboutSituation 
+@type Fact 
+@quality 
+@attr 
+At Strudel Apartments, the management company only gave each tenant $300 to cover weeks without housing. 
+
+:: NotSafeInApartments
+@type Fact 
+@quality Good 
+@attr Facts 
+"The fire marshal said it's not safe for people to move back in. The elevators are down, and the basement is still drying out." 
+
+:: RepairPeopleAreSwamped
+@type Fact 
+@quality Good 
+@attr Facts 
+According to the manager at Strudel Apartments, repair workers have been swamped and just made it out today.  
+
+:: AggressiveQuote
+@type Quote 
+@quality Good 
+@attr Facts, Color
+When asked about helping tenants, the manager became defensive. "It's not fair. These old folks keep treating me like a monster!"
+
+:: FactAboutStipend 
+@type Fact 
+@quality Great 
+@attr Facts 
+The management company only approved $300 in aid for tenants... not even enough for a week at Twin Lakes's cheapest motel.  
+
+:: ManagerThinkingOfMoving 
+@type Quote 
+@quality Poor  
+@attr Color 
+"Frankly, it's been a nightmare. I'm thinking of moving to Dual Ponds next month."
+
+:: GreatApartmentExteriorPhoto
+@type Photo  
+@quality Great 
+@attr Color 
+//add great photo of apartment exterior 
+
+:: SlightlyBlurryApartmentExteriorPhoto
+@type Photo 
+@quality Good 
+@attr Color
+//add slightly blurry photo of apartment exterior 
+
+
+:: SchoolIsntAccessibleTownIsShrinking
+@type Quote 
+@quality Great 
+@attr Facts 
+"My team has been pushing the city to fix up the high school for years. It's no wonder Twin Lakes is shrinking instead of growing."
+
+:: TwinLakesShrinking
+@type
+@quality 
+@attr 
+"Tourists come to town in the summer, but the locals are moving away. Twin Lakes needs to become more accessible for everyone."  
+
+:: RequirementsForAccessibleShelter
+@type Fact 
+@quality Good  
+@attr Facts 
+According to Ms. Rhodes, the high school needs ramps, automated entrances, wider doorways, and other key updates. 
+
+:: ShortTermShelterSolutions
+@type Quote 
+@quality Good 
+@attr Facts, Useful
+"These are only short-term solutions, but it would help to add portable ramps, traffic cones, and more volunteers!" 
+
+:: ComplicatedIssues
+@type Quote 
+@quality Great 
+@attr Facts 
+"The Mayor is part of the problem, with his #TwinLakesStrong obsession. We need real solutions, not inspiring hashtags."
+
+:: 
 @type
 @quality 
 @attr 
 
-::
+:: 
 @type
 @quality 
 @attr 
 
-::
+:: 
 @type
 @quality 
 @attr 
 
-::
+:: 
 @type
 @quality 
 @attr 
 
-::
+:: 
 @type
 @quality 
 @attr 
 
-::
-@type
-@quality 
-@attr 
-
-::
-@type
-@quality 
-@attr 
-
-::
-@type
-@quality 
-@attr 
-
-::
-@type
-@quality 
-@attr 
-
-::
-@type
-@quality 
-@attr 
-
-::
+:: 
 @type
 @quality 
 @attr 

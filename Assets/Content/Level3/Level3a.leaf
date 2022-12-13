@@ -950,19 +950,17 @@ $elseif StatCheck(Endurance, 5)
       {@person} Well... normally I'd say a few days. 
       {@person} But with that new storm moving in, I really couldn't tell ya.
       $call GiveSnippet(DescriptionOfApartmentInterior)
-      $call GiveSnippet(PhotosOfApartmentInterior)
-      $call GiveSnippet(DecentElectricianQuote)
+      $call GiveSnippet(ElectricianInput)
       $choice GoToSeniorCitizenApartments; Thank him for the interview. 
 $else 
       You dig in your bag for something to offer him... but find only lip balm, tangled cords, and granola crumbs.
       {@me} Um... can I come inside with you? I won't slow you down.
       {@person} I doubt that, kid.
       You try to keep up, but this guy must be a marathon runner... by the time you get inside, he's already gone. 
-      You do manage to snag a few photos, though: flickering lights, an out-of-order elevator, and moldy carpets.
+      You jot down a quick description: flickering lights, an out-of-order elevator, and moldy carpets.
       Obviously this place isn't even close to being safe yet. 
       $call GiveSnippet(DescriptionOfApartmentInterior) 
-      $call GiveSnippet(PhotosOfApartmentInterior)
-      $choice GoToSeniorCitizenApartments; Cut your losses and head back outside. 
+       $choice GoToSeniorCitizenApartments; Cut your losses and head back outside. 
 $endif 
 
 // Interview electrician
@@ -971,6 +969,8 @@ $endif
 {@person} Well, the biggest issue is that the elevators and fire alarms are out of order.
 {@person} Plus, we've got soggy carpet and mold in the floors. 
 {@person} That's unhealthy for anybody, but especially older folks. 
+
+$call GiveSnippet(ElectricianInterviewDetailedReason)
 
 $choice WhenWillPeopleBeAllowedBackInside; The management hasn't been keeping people informed. Do you know when residents will be allowed back inside?  
 $if StatCheck(Social, 5)
@@ -983,8 +983,10 @@ $endif
 :: WhenWillPeopleBeAllowedBackInside
 {@person} Normally, I'd say it'll be ready by the weekend.
 {@person} But with that new storm on its way, I'm worried that these people will have to wait a lot longer. 
-He finishes the last few bites of cherry granola. 
+He finishes his last few bites of cherry granola. 
 {@person} Thank Jim for me, will ya? Good luck out there, kid!
+
+$call GiveSnippet(ElectricianNotSureAboutMovein)
 
 $choice GoToSeniorCitizenApartments; Decide what to do next. 
 
@@ -1019,7 +1021,7 @@ $choice DoYouLiveHere; Do you live here at Strudel Apartments?
 :: DoYouLiveHere
 {@person} Yes, Dear. I've lived here for years.
 {@person} That is, until the flood.
-{@person} We had to be evacuated when the ground floor flooded. It was dreadful. 
+{@person} We had to evacuate when the ground floor flooded. It was dreadful. 
 Poor lady. She reminds you of your neighbor Jeannie...
 Except with a quail curled up on her lap instead of a cat. 
 $call GiveSnippet(ApartmentContext)
@@ -1069,10 +1071,9 @@ $if Visited(MonsterMash)
       {@person} Ugh. You again?? I told you to leave me alone.
       {@me} I just wanted--
       {@person} Don't care. You're outa here, kid. Go bother somebody else. 
-      Before you can get another word in, a cop leads you off the property. 
+      Before you can get another word in, a police officer leads you off the property. 
       {@person} Sorry, kid. Things are tense around here.
       {@person} Hopefully you can find a story somewhere else. 
-      $call GiveSnippet(ApartmentSecurityAnecdote)
       $call AdjustStats(Trust - 1)
       $choice ForcedToLeaveApartments; Decide where to go next. 
 $elseif Visited(TalkToBuildingManager)
@@ -1087,9 +1088,8 @@ $else
 {@me} Are you the building manager?
 {@person} Unfortunately, yes.
 {@person} Would it be okay if I went inside for a few minutes?
-{@me} I was hoping to snag a few photos for my article.
 {@person} It's a safety hazard. Full of mold. Why do you want to go in there, anyway? 
-      $choice JustTryingToHelp; If I got some pictures of the damage inside, it might help people understand why you're not letting them back in. 
+      $choice JustTryingToHelp; If I can report on the damage inside, it might help people understand why you're not letting them back in. 
       $choice LadyNeedsHerStuff; There's a lady over there who really wants to get her quail's snacks. It'll just take two minutes, promise. 
 $endif
 
@@ -1117,11 +1117,11 @@ $choice GoInsideApartmentBuilding; Head into the apartment building with your ca
 
 // Go inside apartment building with your camera
 :: GoInsideApartmentBuilding
-The apartment isn't hard to find.
-You snap a few pictures of the building's interior.
+Luckily, Queenie's apartment isn't hard to find!
+You jot down a few lines of description for your story. 
 Then you grab the sunflower seeds and bring them back out, to Queenie's delight. 
 
-$call GiveSnippet(InsideApartmentBuildingPhoto)
+$call GiveSnippet(DescriptionOfApartmentInterior)
 
 $choice GoToSeniorCitizenApartments; Decide what to do next 
 
@@ -1144,8 +1144,8 @@ Oh no.... since when do small-town apartments have burglar alarms?!
 You try to run, but a police officer blocks your path. 
 {@person} Well, well, well. Looks like we've got our old folks' home thief.
 {@me} What??? I didn't--
-{@person} We caught you red-handed this time, kid. Sunflower seeds, huh?
-{@person} The oatmeal and ovaltine you stole yesterday wasn't enough?
+{@person} Someone's been looting the place all week. 
+{@person} Looks like it was you! Sunflower seeds this time, huh?
 {@me} I didn't take anything else, I was just grabbing these for a hungry quail, I swear! 
 {@person} ...Huh? 
 {@person} Look, I don't have time for nonsense. I'm gonna have to take you down to the station. 
@@ -1156,13 +1156,11 @@ $GameOver("GAME OVER")
 // Offer to take the lady to the fancy grocery store and buy some seeds 
 :: OfferToTakeHerToTheStore
 //Possible pop-up, crowded grocery store aisles - pre storm chaos, overflowing carts
-The lady's eyes brim with gratitude. 
 {@person} Oh, thank you, Dear! That would be wonderful. 
-At the store, you snag a few snacks and take photos of the general chaos. 
+At the store, you snag a few snacks and take notes about the general chaos. 
 The quail owner spends 3 minutes choosing a bag of sunflower seeds...
 And 27 minutes waiting in line behind doomsday-flood preppers. 
 Maaaaybe you should've kept an eye on the clock. 
-$call GiveSnippet(GroceryStorePhoto)
 $call GiveSnippet(DescriptionOfGroceryStoreChaos)
 $call AdjustStats(Trust + 2)
 $call AdjustStats(Resourceful + 1)
@@ -1224,6 +1222,7 @@ Whoa. That was... something.
 This interview is over. 
 But at least you got a dramatic quote out of it. 
 $call GiveSnippet(AngryLandlordQuote)
+$call GiveSnippet(LandlordFactsAboutSituation)
 
 $choice GoToSeniorCitizenApartments; Decide what to do next. 
 
@@ -1261,7 +1260,8 @@ She looks defensive.
 {@me} Renting a motel room for three weeks costs a LOT more than $300...
 {@person} Oh, what do you know? You're not even from here. 
 {@person} These old folks keep treating me like a monster!
-$call GiveSnippet(SmallStipendAggressiveQuote)
+$call GiveSnippet(AggressiveQuote)
+$call GiveSnippet(FactsAboutStipend)
 
 $choice MonsterMash; Well, if you don't want to be treated like a monster, you probably shouldn't act like one.
 $choice FakeSympathyForTheLandlord; I'm sorry to hear that. Sounds like it's been tough. 
@@ -1291,11 +1291,11 @@ $choice GoToSeniorCitizenApartments; Decide what to do next.
 $if StatCheck (Tech, 5)
       You ask permission from the people nearby, and then snap some photos of the building.
       Thanks to your newfound tech skills, the photos come out amazing!
-      $call GiveSnippet(GoodApartmentExteriorPhoto)
+      $call GiveSnippet(GreatApartmentExteriorPhoto)
 $else 
       You ask permission from the people nearby, and then snap some pictures of the building. 
       You're still not the most tech-savvy reporter in the world--the details come out a little blurry. 
-      $call GiveSnippet(BadApartmentExteriorPhoto)
+      $call GiveSnippet(GoodApartmentExteriorPhoto)
 $endif 
 $choice GoToSeniorCitizenApartments; Decide what to do next  
 
@@ -1341,9 +1341,7 @@ $choice CallBackToApologize; Call back to apologize.
 
 //Call back to apologize.
 :: CallBackToApologize
-This time, the call goes straight to voicemail.
-{@me} Hi Ms. Rhodes, about what I said... 
-{@me} It was stupid. I'm really sorry. 
+This time, the call goes straight to voicemail. 
 You might not be able to quote her in your story...
 But at least you can apologize. 
 $call AdjustStats(Trust + 1)
@@ -1375,7 +1373,9 @@ $endif
 {@person} Well, sure, tourists come to town in the summer.
 {@person} But the locals are moving away. 
 {@person} Twin Lakes needs to get with the times. 
+{@person} We have to make sure our infrastructure is accessible to everyone. 
 $call GiveSnippet(SchoolIsntAccessibleTownIsShrinking)
+$call GiveSnippet(TwinLakesShrinking)
 
 $choice RequirementsForAccessibleShelter; Do you have recommendations for how to create an accessible shelter? 
 
@@ -1402,10 +1402,10 @@ $choice WhatDoYouMean; What do you mean?
 
 // What do you think needs to change around here? 
 :: WhatDoYouMean
-{@person} The Mayor is part of the problem, with his #TwinLakesStrong mentality. 
+{@person} The Mayor is part of the problem, with his #TwinLakesStrong obsession. 
 {@person} "Everybody helps their neighbors, we're better than big cities".... 
-{@person} It's nonsense. Yes, some people try to help their neighbors...
-{@person} But real life is a lot more complicated than he makes it sound. 
+{@person} It's nonsense. 
+{@person} We need real solutions, not inspiring hastags. 
 {@me} Yeah. I'm starting to see that.
 {@me} Thank you so much for your help, Summer.
 {@person} No problem. Good luck out there, El.  
