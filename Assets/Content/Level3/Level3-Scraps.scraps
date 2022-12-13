@@ -276,7 +276,7 @@ Local vet Fox Smolder said pet owners should stay with relatives, or look for ne
 "I'm worried about my clients who were kicked out of their building due to the flood. Not sure where they're going to go."
 
 :: DescriptionOfApartmentInterior
-@type Fact
+@type Observation
 @quality Great 
 @attr Fact, Color
 Inside Strudel Apartments, the scene is grim: flickering lights, an out-of-order elevator, and moldy carpets.
@@ -324,7 +324,7 @@ Strudel Apartments still need more repairs, and repair workers are swamped with 
 "I came out here today to demand some answers. The building manager isn't answering my calls!" 
 
 :: DescriptionOfGroceryStoreChaos
-@type Fact 
+@type Observation  
 @quality Good 
 @attr Fact, Color
 The grocery store was a chaotic scene, with empty shelves and lines that stretched all the way to the parking lot. 
@@ -414,6 +414,28 @@ According to Ms. Rhodes, the high school needs ramps, automated entrances, wider
 @attr Facts 
 "The Mayor is part of the problem, with his #TwinLakesStrong obsession. We need real solutions, not inspiring hashtags."
 
+// Level 3B Snippets 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
 :: 
 @type
 @quality 
@@ -443,3 +465,45 @@ According to Ms. Rhodes, the high school needs ramps, automated entrances, wider
 @type
 @quality 
 @attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+:: 
+@type
+@quality 
+@attr 
+
+
