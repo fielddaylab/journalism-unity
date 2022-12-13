@@ -214,7 +214,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, ""
 
 // What about people who don't have transportation to the shelter?
 :: WhatAboutPeopleWithoutTransportation
-{@person} Oh, I'm sure somebody will give them a ride to the shelter.
+{@person} Oh, I'm sure somebody will give'em a ride to the shelter.
 {@person} Like I said, we'll help each other through this. 
 {@person} We're #TwinLakesStrong! And you can quote me on that. 
 {@me} Um, yeah. That's kind of the point. 
@@ -366,6 +366,8 @@ $choice WhatIf; What if the shelter at the high school doesn't have enough space
 {@person} I pay taxes to make sure my street is quiet and clean. 
 {@person} And I deserve to feel safe walking my dog at night! 
 
+$call GiveSnippet(RichLadyQuoteSafeNeighborhood)
+
 $choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
 $choice WhatWouldYouSayToPeople; What about the people who need to evacuate their homes?
 
@@ -373,7 +375,9 @@ $choice WhatWouldYouSayToPeople; What about the people who need to evacuate thei
 :: WalkingDog
 {@person} Well, Buster needs his exercise. 
 {@person} Amarena Grove is a peaceful neighborhood. I'd like to keep it that way. 
-{@person} Who knows what those evacuees will bring with them?? 
+{@person} Who knows what those flood evacuees will bring with them?? 
+
+$choice GiveSnippet(RudeRichLadyQuote)
 
 $choice snarkyresponse; Hm. I would guess some clothes and toothbrushes and granola bars. 
 $choice WhatWouldYouSayToPeople; What would you say to people who need to leave their homes? 
@@ -396,7 +400,7 @@ $choice HeadStraightToShelter; Head straight to the emergency shelter
 {@person} I think we should have more shelters! Just... somewhere else. 
 {@me} But... if your neighborhood doesn't flood, it sounds like the perfect place.
 {@person} Well, I suppose so. But think about it, Dear. 
-{@person} Would you really want hundreds of random strangers staying in your neighborhood? 
+{@person} Would you really want a bunch of random strangers staying in your neighborhood? 
 $call GiveSnippet(NIMBYLadyQuote)
 
 $choice SoMuchForLookingOutForNeighbors; What about the Mayor's request for people to help their neighbors? 
@@ -408,6 +412,8 @@ $choice WhatWouldYouSayToPeople; What about the people who need to evacuate thei
 {@person} I dropped off some food at the canned food drive last week. What more do you want from me? 
 When you start to ask another question, she makes an excuse and hurries away.
 So much for #Twin Lakes Strong... unless the Mayor was talking about this lady's perfume.
+
+$call GiveSnippet(RichLadyCannedFoodDrive)
 
 $HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
@@ -565,6 +571,7 @@ $choice FloodShelterChoices; Wish him well and find someone else to talk to.
 {@person} Though I doubt it. 
 {@article} Strudel Senior Apartments, 1502 Sugar Grove 
 $call GiveSnippet(KickedOutOfApartments)
+$call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
 $set ApartmentAddress = true
 
 $choice FloodShelterChoices; Decide what to do next. 
@@ -578,7 +585,9 @@ $choice FloodShelterChoices; Decide what to do next.
 {@person} Oh. Well, my condolences. 
 {@me} You're here to help from out of town, right? Can I ask you a few questions? 
 {@person} Sorry, I'm too busy. Gotta bring in the latest food delivery.
-{@person} Probably cherry cornbread delivered in a horse and buggy, at this rate. 
+{@person} Probably cherry cornbread delivered in a horse and buggy, at this rate.
+
+$call GiveSnippet(ExasperatedShelterCoordinator)
 
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
@@ -604,7 +613,6 @@ $if !HasTime(0.25)
 $endif
 
 $else 
-{@me} I'm sure I can do it. I almost lifted a sandbag once!
 Unfortunately, the boxes are even heavier than sandbags. 
 {@me} Um... are these full of bricks, or what?
 {@person} Listen, kid. I really need to focus here.
@@ -624,7 +632,7 @@ $if StatCheck (Social, 5)
       {@me} Plus, there are cherries in literally everything.
       She laughs.
       {@person}Finally, somebody who gets it!
-      {@person} You know... I could probably answer a few questions. 
+      {@person} You know... I could probably answer a few questions. From one out-of-towner to another. 
 
       $if !HasTime(0.25)
             Looks like you have to cut this short. You have just enough time to compile your story!
@@ -637,8 +645,8 @@ $else
       You flail for something to say and land on a joke your upstairs neighbor told you.
       {@me} Um.... what do you call three cherries playing the guitar? 
       {@me} A <i>jam</i> session. 
-      She stares blankly at you. Apparently puns only work with locals. 
-      {@person} Um. Okay, then. I better get back to work. 
+      She stares blankly at you. Apparently puns only work with the locals. 
+      {@person} Um. I better get back to work. 
       {@person} I'll answer one question.
 
       $choice DoYouHaveAnyConcernsAboutTheShelterSimple; Do you have any concerns about the shelter? 
@@ -660,6 +668,8 @@ $call GiveSnippet(AccessibilityStandardsResource)
 {@article} Contact: Fox Smolder, Local Vet 
 $set VetContact = true
 
+$call GiveSnippet(OneQuestionConcernsAboutShelter)
+
 $choice EndShelterCoordinatorInterview; End Interview 
 
 // Why doesn't the shelter allow pets - simple version 
@@ -671,6 +681,9 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} I had dinner with him last night. Seemed like a nice guy. 
 {@article} Contact: Fox Smulder, Local Vet 
 $set VetContact = true
+
+$call GiveSnippet(CoordinatorNotSureWhyPetsArentAllowed)
+$call GiveSnippet(CoordinatorQuoteTurningPeopleAway)
 
 $choice EndShelterCoordinatorInterview; End Interview 
 
@@ -686,6 +699,8 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} True. But trust me, this isn't the last storm that's gonna hit this little town. 
 {@person} Now if you'll excuse me, I need to get back to work. 
 
+$call GiveSnippet(UsefulInfoFromShelterCoordinator)
+
 $choice EndShelterCoordinatorInterview; End Interview
 
 // Do you have any concerns about the shelter?
@@ -694,15 +709,19 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} We don't have enough space, supplies, or volunteers. 
 {@person} And this shelter isn't going to work for everyone who's gonna need it.
 
+$call GiveSnippet(ShelterCoordinatorConcerns)
+
 $choice WhatIssuesHaveYouNoticed; What issues have you noticed?
 
 // Can you tell me about the issues you've noticed?
 :: WhatIssuesHaveYouNoticed
-{@person} This building isn't good enough for disabled people. Not enough ramps, outdated bathrooms, an inaccessible entrance... 
+{@person} This building isn't accessible. Not enough ramps, outdated restrooms, an inaccessible entrance... 
 {@person} And it doesn't allow pets. People won't want to leave their fur babies behind. 
 {@me} Or feather babies.
 {@person} Huh?
 {@me} Oh... long story. 
+
+$call GiveSnippet(ShelterCoordinatorDetailedConcerns)
 
 $choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
 $if !Visited(HowCanTheCommunityHelpOut)
@@ -718,6 +737,9 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} The city really needs to renovate this building...
 {@person} But we only have 3 days, so it's too late for that. 
 {@person} For now, I'm trying to get portable ramps, better cots, and braille signs brought in.
+{@person} Still... it's not good enough. We need to do better. 
+
+$call GiveSnippet(UsefulShelterAdviceAboutAccessibility)
 
 $choice DoYouHaveAnyResourcesAboutAccessibleShelters; Do you have any resources I could look at?
 $if !Visited(HowCanTheCommunityHelpOut)
@@ -734,6 +756,7 @@ $choice EndShelterCoordinatorInterview; End Interview
 $call GiveSnippet(AccessibilityStandardsResource)
 {@person} Tell your mayor to get with the times. 
 {@person} This little town needs to keep up, or it's gonna get washed right off the map. 
+$call GiveSnippet(ShelterCoordinatorColorQuote)
 
 $choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
 $if !Visited(HowCanTheCommunityHelpOut)
@@ -749,6 +772,8 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@person} We need more supplies! Food, blankets, bottled water. 
 {@person} And if people let friends and family stay with them, that would free up more space here.
 
+$call GiveSnippet(HowCanTheCommunityHelpShelter)
+
 $choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
 $if !Visited(HowCanTheCommunityHelpOut)
       $choice HowCanTheCommunityHelpOut; Is there anything that the people of Twin Lakes can do to help out?
@@ -762,6 +787,8 @@ $choice EndShelterCoordinatorInterview; End Interview
 :: WhyArentPetsAllowed
 {@person} You know... I don't have all the information on that.
 {@person} I know it's strictly against the rules. Has to do with safety concerns.
+
+$call GiveSnippet(CoordinatorNotSureWhyPetsArentAllowed)
 
 $choice PetQuestions; What would it take to create a pet friendly shelter?
 $choice PetQuestions; How can people keep their pets safe during the flood?
@@ -835,8 +862,8 @@ $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to 
 {@person} We'd need separate spaces for people and pets. 
 {@person} Plus trained volunteers, crates, pet food, and other pet supplies. 
 {@person} I asked the City Coucil for funding a few months ago, but they shot me down. 
-{@person} Hindsight is 20/20, huh?  
 $call GiveSnippet(PetFriendlyShelterRequirements)
+$call GiveSnippet(CityDeniedFundingForPetFriendlyShelter)
 
 $choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
 $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
@@ -876,6 +903,7 @@ $OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly she
 {@person} Thanks, El. I'm glad you're getting the word out. 
 $set ApartmentAddress = true
 $call GiveSnippet(WorriedPeopleWillStayHome)
+$call GiveSnippet(WorriedAboutPeopleKickedOutOfApartment)
 
 $choice NextStepAfterVetMeeting; End Interview 
 

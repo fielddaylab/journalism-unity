@@ -4,3 +4,344 @@
 // @attr Color, Facts, Useful (pick any number)
 // @image Photo/HospitalDucks.jpg
 // This is a valid description.
+
+// Level 3A Snippets 
+
+// Mayor interview quote - dodging your question 
+:: MayorQuoteVagueAnswer
+@type Quote 
+@quality Poor 
+@attr Facts 
+“I'm sure our volunteers are doing their best. I'm proud of them for their efforts!”
+
+
+// Mayor interview quote - not enough space 
+:: MayorInfoNotEnoughSpace
+@type Fact 
+@quality Great
+@attr Facts 
+The mayor admitted that the shelter won’t have enough beds for all evacuees. He suggested staying with friends or relatives.   
+
+// Mayor interview quote - "near tolerable" conditions 
+:: MayorInfoNearTolerableConditions
+@type Fact 
+@quality Great 
+@attr Facts 
+According to Mayor Smuckers, an expert was called in to help at the shelter. She called the space "near tolerable."
+
+// Mayor quote - it'll be fine 
+:: MayorQuotePeopleTakeCareOfEachOther
+@type Quote
+@quality Great 
+@attr Facts  
+The mayor insisted that things will be fine, despite a lack of shelter space. "People here take care of each other," he said. 
+
+// Mayor advice - people should evacuate 
+:: MayorAdvicePeopleShouldEvacuate
+@type Fact 
+@quality Great 
+@attr Useful 
+Mayor Smuckers urged everyone in danger zones to evacuate, for their own safety. 
+
+// Mayor quote - chance of dam failure 
+:: FiftyPercentChanceOfDamFailure
+@type Fact 
+@quality Great 
+@attr Facts
+According to the mayor, the dam has a 50% chance of failing if more rain hits. Dam failure would cause catastrophic damage.  
+
+// Original Name: Mayor interview - downplays pet issue 
+:: MayorDownplaysIssueOfPets
+@type Quote 
+@quality Great 
+@attr Facts
+Mayor Smuckers downplayed the issue of people not wanting to leave their pets. "Every town has its crazies," he said. 
+
+
+// Mayor interview - transportation to shelter 
+:: MayorInterviewNoPlanToHelpTransportPeopleToShelter
+@type Quote 
+@quality Great 
+@attr Facts 
+The mayor didn't have a plan for getting people to the shelter. "I'm sure somebody will give'em a ride. We're #TwinLakesStrong!"
+
+:: UselessFredQuoteAboutDeerAttacks
+@type Quote
+@quality Poor 
+@attr Facts 
+"Did you know deer sightings are up 3% this year?" said Fred Finkler, local gardener. "Some fawns bit the heads clean off my marigolds!" 
+
+:: GreatFredQuoteAboutShelterAndSocialSafetyNets
+@type Quote
+@quality Great 
+@attr Facts
+"I'm concerned. One shelter won't have space for everyone. We need policies to make sure nobody ends up in trouble."
+
+:: UselessFredQuoteAboutGardening
+@type Quote 
+@quality Poor 
+@attr Color 
+"I thought my zinnias were goners, but they <i>rose</i> to the occasion!" Insert more gardening puns here, you get the idea. 
+ 
+:: RichLadyQuoteSafeNeighborhood
+@type Quote 
+@quality Great 
+@attr Facts   
+One local didn't want a shelter in her area, even though it would help the town. "We don't have room for everyone!" 
+
+:: RudeRichLadyQuote
+@type Quote 
+@quality Great 
+@attr Facts 
+Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alone. "It's peaceful here. Let's keep it that way." 
+
+:: NIMBYLadyQuote  
+@type Quote 
+@quality Great 
+@attr  Facts 
+"Twin Lakes should definitely provide shelters! Just not in <i>my</i> neighborhood."
+
+:: RichLadyCannedFoodDrive
+@type Quote 
+@quality Great 
+@attr Facts
+"It's not my job to help everybody. I donated to the canned food drive. What more do you want from me?"
+
+:: ConflictingOpinions
+@type Quote   
+@quality Great 
+@attr Facts
+"People can move if they don't like it... but not all of them, or the whole town would collapse!"
+
+:: AccessibilityNightmare
+@type Quote 
+@quality Great 
+@attr Facts
+"That high school is an accessibility nightmare. My wife and I are both disabled. We'll be safer at home."
+
+:: PeopleStayingHome
+@type Fact 
+@quality Great 
+@attr Facts
+Without an accessible shelter, some people have chosen to stay home and hope for the best. 
+
+:: CityPlanningIssue
+@type Fact 
+@quality Great 
+@attr Facts
+It's the city's responsibility to create an accessible shelter for all, though some people worried it's too late now. 
+
+:: GetWordOutAboutAccessibility
+@type Fact 
+@quality Great   
+@attr Facts, Useful 
+A local man urged people to speak up about the need for an accessible shelter. For many, there's no other option.  
+
+:: GreatShelterPhoto
+@type Photo 
+@quality Great  
+@attr Color 
+//add great shelter photo here 
+
+:: BadLightingShelterPhoto
+@type Photo  
+@quality Good 
+@attr Color 
+//add decent shelter photo with bad lighting here  
+
+:: BlurryShelterPhoto
+@type Photo 
+@quality Poor 
+@attr Color 
+//add bad, blurry shelter photo here 
+
+:: KickedOutOfApartments
+@type Fact  
+@quality Great  
+@attr Facts
+Doug Walker said his apartment building kicked out all the seniors who lived here after the first flood, with no end in sight. 
+
+:: DogOwnerSaysShelterDoesntAllowPets
+@type Fact 
+@quality Great
+@attr Facts 
+Doug Walker is not able to stay at the shelter because they cannot take in his dog, Odie. Many locals will face the same problem. 
+
+:: ExasperatedShelterCoordinator
+@type Quote 
+@quality Great 
+@attr Fact, Color 
+The shelter coordinator wasn't thrilled with local resources. "Next delivery will show up in a horse and buggy, at this rate." 
+
+:: OneQuestionConcernsAboutShelter
+@type Quote   
+@quality Good  
+@attr Facts
+"This building isn't accessible. We can't allow people to bring their pets. And there's not enough space or supplies."
+
+:: AccessibilityStandardsResource
+@type Fact 
+@quality Great   
+@attr Facts
+According to national standards, the local high school needs several updates to be accessible to all. 
+
+:: CoordinatorNotSureWhyPetsArentAllowed
+@type Fact  
+@quality Poor 
+@attr Facts
+The shelter coordinator wasn't sure why pets aren't allowed, but said it might be a safety issue. 
+
+:: CoordinatorQuoteTurningPeopleAway
+@type Quote  
+@quality Good 
+@attr Color 
+The shelter coordinator was worried about pet owners. "I hate turning people away, but there's nothing I can do."
+
+:: UsefulInfoFromShelterCoordinator
+@type Fact
+@quality Great  
+@attr Useful 
+For those looking to help, the shelter needs donations! And the town needs to vote for people who will plan for future disasters. 
+
+:: ShelterCoordinatorConcerns
+@type Fact 
+@quality Good   
+@attr Facts
+"We don't have enough space, supplies, or volunteers. And this shelter isn't going to work for everyone who's gonna need it."
+
+:: ShelterCoordinatorDetailedConcerns
+@type Quote 
+@quality Great 
+@attr Facts 
+"This building isn't accessible. Not enough ramps, outdated restrooms, an inaccessible entrance. And no accomodations for pets." 
+
+:: UsefulShelterAdviceAboutAccessibility
+@type Quote 
+@quality Great 
+@attr Useful 
+"I need portable ramps, better cots, and braille signs. Still, it's not enough. The city needs to fix up this building." 
+
+:: ShelterCoordinatorColorQuote
+@type Quote 
+@quality Great 
+@attr Facts, Color
+"Tell your mayor to get with the times. This little town needs to keep up, or it's gonna get washed right off the map."
+
+:: HowCanTheCommunityHelpShelter
+@type Quote 
+@quality Great 
+@attr Useful  
+"We need food, blankets, and bottled water! And if people let friends stay with them, that would free up more space here."
+
+:: WhyArentPetsAllowedQuote
+@type Quote 
+@quality Great 
+@attr Facts
+"Pets in shelters are a safety issue for people with asthma or allergies. Plus, animals tend to get agitated during disasters."  
+ 
+:: PetFriendlyShelterRequirements
+@type Quote
+@quality Great
+@attr Facts 
+"For a pet friendly shelter, we'd need separate spaces for people and pets, plus volunteers and supplies." 
+
+:: CityDeniedFundingForPetFriendlyShelter
+@type Fact 
+@quality Great 
+@attr Facts 
+Local vet Fox Smolder asked for funding for a pet-friendly shelter, but City Council denied his request. 
+
+:: HowCanCityHelpPetOwners
+@type Quote 
+@quality Great 
+@attr Useful
+"If people want to help, they could take in pets that need a safe place to stay... though I'm not sure it'll be enough." 
+
+:: WhereShouldPetOwnersGo
+@type Fact 
+@quality Great  
+@attr Useful 
+Local vet Fox Smolder said pet owners should stay with relatives, or look for nearby kennels or pet-friendly motels.
+
+:: WorriedPeopleWillStayHome
+@type Quote 
+@quality Great 
+@attr Facts, Color
+"I'm worried a lot of people will stay home with their pets during the storm. It's not safe to stick around here."
+
+:: WorriedAboutPeopleKickedOutOfApartment
+@type Quote
+@quality Great
+@attr Facts, Color 
+"I'm worried about my clients who were kicked out of their building due to the flood. Not sure where they're going to go."
+
+:: DescriptionOfApartmentInterior
+@type
+@quality 
+@attr 
+
+:: PhotosOfApartmentInterior
+@type
+@quality 
+@attr 
+
+:: ElectricianInput
+@type Fact 
+@quality Good 
+@attr Facts
+The electrician at Strudel Apartments said the fire alarm system was down. 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 
+
+::
+@type
+@quality 
+@attr 

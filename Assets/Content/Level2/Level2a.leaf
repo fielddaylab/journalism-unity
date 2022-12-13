@@ -1198,9 +1198,9 @@ $choice DepartmentOfLimnology; Thank her for her help
 
 // Original Name: "How has the flood affected your business?"
 :: HowHasTheFloodAffectedYourBusiness
-{@galleryowner}Bah. It's a complete disaster.
-{@galleryowner}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
-{@galleryowner}If this keeps up, I'm in trouble.
+{@cafeowner}It's a complete disaster.
+{@cafeowner}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
+{@cafeowner}If this keeps up, I'm in trouble.
 
 $call GiveSnippet(InTroubleQuote)
 
@@ -1231,9 +1231,9 @@ $endif
 
 // Original Name: "Are you worried about more rain coming?"
 :: AreYouWorriedAboutMoreRainComing
-{@galleryowner}Of course I am. But we gotta do our best to pick up and rebuild.
-{@galleryowner}Small business is the heart and soul of this town.
-{@galleryowner}I gotta hope it'll all work out. 
+{@cafeowner}Of course I am. But we gotta do our best to pick up and rebuild.
+{@cafeowner}Small business is the heart and soul of this town.
+{@cafeowner}I gotta hope it'll all work out. 
 
 $call GiveSnippet(QuoteHeartAndSoul)
 
@@ -1263,8 +1263,8 @@ $endif
 
 // Original Name: "How do you think it'll impact Twin Lakes if the flooding keeps up?"
 :: HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp
-{@galleryowner}People will go out of business.
-{@galleryowner}And I bet we'll get less and less summer tourists, if this keeps happening. 
+{@cafeowner}People will go out of business.
+{@cafeowner}And I bet we'll get less and less summer tourists, if this keeps happening. 
 
 
 $if !Visited(HowHasTheFloodAffectedYourBusiness)
