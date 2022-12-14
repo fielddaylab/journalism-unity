@@ -114,7 +114,6 @@ $choice PullUpWeatherReport; Pull up the weather report
 {@article}<color="red">EMERGENCY STORM WARNING!</color> A severe thunderstorm warning is now in effect. 8-10 inches of rain expected in the next twelve hours.</color>
 {@article}<color="red">FLASH FLOOD WARNING!</color> Sandbag properties. Stay off roads. High risk zones, evacuate now.</color>
 Oh no. The rain is coming early!
-$call GiveSnippet(WeatherReport)
 $choice CallYourEditor; Call your editor  
 
 //Text your editor back 
@@ -154,6 +153,9 @@ $choice IsItTrueMayor; Is it true that some people haven't been able to sandbag 
 {@person} A whole lot of things, as a matter of fact.
 {@persson} You can see my full response on the city website. 
 {@person} See what I mean? If you were a real reporter, wouldn't you have already checked there?
+
+$call GiveSnippet(BadQuoteAndWebsiteReference)
+
 $choice InYourOwnWords; I'll make sure to check. But can you tell me in your own words? 
 $choice IsItTrue; Is it true that some people haven't been able to sandbag their properties? 
 
@@ -174,9 +176,10 @@ $choice WhatAboutPeopleWhoCant; What about people who can't travel that far, or 
 {@person} And we've set up three sandbagging stations throughout the town.
 {@person} People can get free sandbags and bring them home to protect their properties!
 
-$call GiveSnippet(MayorsOwnWords)
+$call GiveSnippet(MayorSandbagsQuote)
 
 $choice HowDidYouChooseLocationsMayor; How did you choose the locations of filling stations? 
+$choice WhatAboutPeopleWhoCant; What about people who can't travel that far, or can't carry them?
 
 // How did you choose the locations?
 :: HowDidYouChooseLocationsMayor
@@ -194,7 +197,8 @@ $choice MayorEndsInterview; Which neighborhoods?
 {@person} I want to see people helping each other. Volunteering!
 {@person} I wish we had the resources of a big city. But the fact is, we're a small town. 
 {@person} We have to be scrappy and make do with what we've got.
-$call GiveSnippet(MayorTwinLakesStrong)
+$call GiveSnippet(MayorTwinLakesStrongQuote)
+$call GiveSnippe(MayorTwinLakesStrongNarrative)
 
 $choice MayorEndsInterview; What would it take to set up more filling stations?
 
@@ -236,30 +240,31 @@ $choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags
 
 $call GiveSnippet(SandbagsOutsideBookstore)
 
-$choice WhatDoYouMean; What do you mean?
+$choice WhatDoYouMean; Can you explain what the issues are? 
+$choice DoYouKnowOfAnyResources; Do you have any resources that could help me write this story?
 
 // What do you mean?
-{@person} All the rich houses by the lake don't seem to be having any trouble.
+{@person} Well, all the rich houses by the lake are doing fine.
 {@person} I mean... nothing against rich folks. My customers come from all over. 
 {@person} But they've got what they need. Others aren't so lucky.
-{@person} There were people biking twelve blocks just to haul sandbags from Main Street!
+{@person} I saw people biking twelve blocks just to haul sandbags from Main Street. 
 
 $call GiveSnippet(GreatBookstoreQuoteSandbagAccessIssues)
 
-$choice DoYouKnowOfAnyResources; Do you know of any resources that could help me?
+$choice DoYouKnowOfAnyResources; Do you know of any resources that could help me write this story?
 
 // Do you know of any other resources
 :: DoYouKnowOfAnyResources
-{@person} Of course. I'm a bookseller!
+{@person} Hmmm. 
 {@person} Here's a great resource: <i>Floodlights</i>, by Dr. Nora Warner.  
 {@person} It's all about flooding and equity issues!
-{@person} Plus, a great exploration of alternative neutrally-buoyant housing options. 
-{@me} I'm... not quite sure what that means. But it sounds great! 
-{@me} Thanks for your help! 
+{@person} Plus, a great exploration of neutrally-buoyant housing options. 
+{@me} I'm... not sure what that means. But it sounds great! 
 
-$call GiveSnippet(BookstoreBookRec)
+Unfortunately, the book he gives you is heavily water damaged.
+The pages are stuck together, but still, you tuck it in your bag for later. 
 
-$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "")
+$HubChoice(GoToSandbaggingStation, "Head to the nearest city-run sandbag filling station and take a look around", 0.25, "")
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
 
 // Go to sandbagging station
@@ -280,8 +285,8 @@ $endif
 
 // Interview DNR Worker
 :: InterviewDNRWorkerAtSandbagFillingStation
-{@person} El! Nice to see you again. I've loved reading your stories.
-{@person} I wish I could help, but the rain could start any minute! 
+{@person} El! Nice to see you again. 
+{@person} I wish I had time for an interview, but the rain could start any minute! 
 
 $choice OfferToHelpWithSandbags; Offer to help Misty fill some sandbags
 $choice TryToPersuadeHerToTakeABreak; Try to persuade her to take a break 
@@ -289,19 +294,18 @@ $choice TryToPersuadeHerToTakeABreak; Try to persuade her to take a break
 // Offer to help fill some sandbags
 :: OfferToHelpWithSandbags
 $if Visited(HelpMoveSomeSandbags)
-    You're getting a definite feeling of déjà vu here.
+    You're getting a definite feeling of déjà vu here. 
 $else 
     You haven't done this before, but it can't be too hard. 
 $endif 
 $if StatCheck(Endurance, 5)
-    You join the volunteers and start shoveling sand. 
+    You grab a shovel and join the volunteers, filling your sanbags easily. 
     {@person} Oh... thanks, El! 
     {@person} Guess it couldn't hurt to chat, while you're here. 
     $HubChoice(InterviewFillingStationWorker, "Interview her", 0.25, "")
 $else 
-    You try to interview Misty while helping her with the sandbags... 
-    But you must be worn out from all these long work days.
-    You're too out of breath to get a word in! 
+    You try to interview Misty while helping her with the sandbags. 
+    The problem is, you're too out of breath to get a word in.  
     $choice TryToPersuadeHerToTakeABreak; Try to persuade her to take a break
     $choice FindSomeoneElseToTalkToFillingStation; Find someone else to talk to
 $endif 
@@ -309,8 +313,9 @@ $endif
 // Explain why you need her help 
 :: TryToPersuadeHerToTakeABreak
 $if StatCheck(Social, 5)
-    {@me} I understand you're super busy. I'll try to keep it fast!
-    {@me} The story would be so much better with your expert opinion. 
+    {@me} I know you're super busy.
+    {@me} But this story could really use your expert opinion. 
+    {@me} If we get the right information out there, we can actually make a difference here. 
     {@person} Oh, well... I guess I could use a quick break.
     {@person} What do you need to know?
     $HubChoice(InterviewFillingStationWorker, "Interview her", 0.25, "")
@@ -323,15 +328,14 @@ $elseif StatCheck (Trust, 5)
 $else 
     {@me} Please, Misty? I need some good quotes for this story!
     Oops. Judging from the look on her face, your social skills are a little rusty. 
-    {@person} I'll give you our official stattement from the website.
-    {@person} That's the best I can do..
+    {@person} I'll give you our official statement from the website.
+    {@person} That's the best I can do.
     $call GiveSnippet(BadDNRStatementAboutSandbagLocations) 
     $choice GoToSandbaggingStation; Decide what to do next 
 $endif
 
 //Interview filling station worker
 :: InterviewFillingStationWorker
-
 {@me} Do you have concerns about people's ability to access sandbags?
 {@person} Yes. Ideally, we would have a LOT more filling stations. 
 {@person} There are at least 6 or 7 neighborhoods in town that still need sandbags. 
@@ -347,27 +351,25 @@ $choice WhatWouldItTakeToSetUpMoreLocations; What would it take to set up more f
 {@person} We need more help.
 {@person} More sand, more trucks, more volunteers... 
 {@person} Our little town is completely overwhelmed.
+{@person} To anyone who can get here safely... please come volunteer!
 
 $call GiveSnippet(NeedMoreSandbagStationVolunteers)
 
-$choice WhatAboutGovernmentAid; What about government aid?
-$choice WhichAreasNeedTheMostHelp; Which areas of town need the most help? 
-
-// What about government aid?
-:: WhatAboutGovernmentAid
-{@person} I wish we could get the National Guard to come in and help...
-{@person} ...But it sounds like the rains have brought flooding to other, bigger cities across the state. 
-{@person} We're on our own here. 
-$call GiveSnippet(NoHelpFromNationalGuard)
-
-$choice WhichNeighborhoodsAreBeingLeftOut; Which neighborhoods need the most help? 
+$choice WhichNeighborhoodsAreBeingLeftOut; Which areas of town need the most help? 
 
 // How did you choose the locations?
 :: HowDidYouChooseTheLocations
 {@person} The Mayor chose the locations, actually. 
-{@person} He used the government flood maps that show which areas are most at risk. 
+{@person} He used the government flood maps that show at-risk areas.
+{@person} Unfortunately, the maps don't acount for climate change and high lake levels. 
+
+$choice DoYouAgreeWithHisChoices; Do you agree with his choices? 
+
+:: DoYouAgreeWithHisChoices
+{@person} Hmmm. 
 {@person} I think this area was a good choice, because it's right in the middle of town. 
-{@person} There's also a filling station on Main Street, and another in upper lakeside area. 
+{@person} There's also a filling station on Main Street...
+{@person} And one near the shore of Upper Lake. 
 
 $call GiveSnippet(SandbagStationQuoteLocations)
 
@@ -389,24 +391,23 @@ $choice CanYouTakeAGuess; Can you give me your best guess?
 {@person} I... don't want to make any assumptions.
 {@me} What if we keep it off the record? I won't quote you.
 $if StatCheck(Trust, 5)
-    {@person} Well... the upper lakeside neighborhoods are very involved in local business.
+    {@person} Well... okay. The upper lakeside neighborhoods are very involved in local business.
     {@person} And they've been pretty noisy about asking the city to get a filling station set up for them. 
     {@person} I think the City Council felt pressured to help them out. 
 
     $call GiveSnippet(DetailsAboutRichNeighborhoodSandbagStation)
-    $choice WhichNeighborhoodsAreBeingLeftOut; Which neighborhoods are being left out? 
+    $choice WhichNeighborhoodsAreBeingLeftOut; Which neighborhoods are most in need?
 $else 
     {@person} Sorry, El. You'll have to take it up with the Mayor.
-    {@person} I really should get back to work.
-    $choice GoToSandbaggingStation; Decide what to do next 
+    $choice WhichNeighborhoodsAreBeingLeftOut; Can you tell me which neighborhoods are most in need?
 $endif 
 
 // Which areas are you most worried about?
 ::WhichNeighborhoodsAreBeingLeftOut
 
-{@person} I'm worried about the lower-income neighborhoods on the south side, by the river. 
-{@person} A lot of people still haven't been able to get sandbags. 
-{@person} And those are the areas where flooding hurts people the most. 
+{@person} I'm worried about the lower-income neighborhoods along the river. 
+{@person} They're more at risk of flooding... 
+{@person} And a lot of people there don't have access to sandbags. 
 
 $call GiveSnippet(NeighborhoodsLeftOut)
 
@@ -415,8 +416,8 @@ $choice WhyAreLowIncomeAreasMoreAtRiskFromFlooding; Why are those areas more at 
 
 // What barriers are getting in people's way?
 :: WhatBarriersAreGettingInTheWay
-{@person} People in low-income spots can't just drive across town to get sandbags.
-{@person} A lot of them are required to work, or busy taking care of their kids. 
+{@person} Not everyone can just drive across town to get sandbags.
+{@person} A lot of people have to work or look after their kids.
 {@person} Plus, some people are elderly or disabled...
 {@person} And sandbags aren't exactly easy to lug around. 
 
@@ -426,7 +427,7 @@ $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerne
 
 // Why are those areas more at risk?
 :: WhyAreLowIncomeAreasMoreAtRisk
-{@person} Well, in the wealthier neighborhoods, people can pay to repair the flood damage and get on with their lives.
+{@person} Well, if you've got money, you can pay to repair damage and get on with their lives.
 {@person} But if you're living paycheck to paycheck, you've got two choices: 
 {@person} Pay thousands to fix the damage, fall behind on your bills, and maybe never catch up... 
 {@person} Or ignore the damage and end up dealing with toxic mold and a ruined home. 
@@ -508,9 +509,9 @@ $HubChoice(InterviewManFillingSandbags, "Interview him", 0.25, "")
 {@me} Do you live nearby?
 {@person} Actually, I live all the way over on Main Street.
 {@person} But my grandma lives on the south side. The Royal Hazel neighborhood.
-{@person} I've been driving sandbags back and forth to her house all morning!
+{@person} Gotta get her these sandbags, since the city isn't doin' anything to help her. 
 Get location: Royal Hazel neighborhood 
-$call GiveSnippet(AnecdoteAboutDrivingSandbagsToRoyalHazel)
+$call GiveSnippet(QuoteAboutGrandmaInRoyalHazel)
 
 $choice HowIsSheCoping; How is your grandma coping with all of this? 
 $choice IsSheLocatedInAFloodZone; Is her house located in a flood zone?
@@ -523,11 +524,11 @@ $choice AskHimToElaborate; Ask him what he means.
 
 // Ask him what he means
 :: AskHimToElaborate
-{@person} My grandma's a tough lady, but it's been a rough two weeks. 
-{@person} A lot of folks are feeling like nobody's listenin' to them. 
+{@person} My grandma's a tough lady, but it's been a rough week. 
+{@person} A lot of folks by the river are feeling like nobody's listenin' to them. 
 $call GiveSnippet(RoughTwoWeeks)
 
-$choice WhyDoPeopleFeelIgnored; Why do you think people feel that way?
+$choice WhyDoPeopleFeelIgnored; Why do you think people don't feel listened to? 
 
 // Why do you think people feel ignored?
 :: WhyDoPeopleFeelIgnored
@@ -567,32 +568,20 @@ $choice WhyNot; Why not?
 
 $call GiveSnippet(InaccurateFloodMaps)
 
-$choice HowCouldTheCityDoBetter; How could Twin Lakes do a better job next time? 
 $choice HaveYouToldPeopleThatTheFloodMapSeemsWrong; Have you told anyone that the flood map seems wrong?
 
 // Have you told people
 :: HaveYouToldPeopleThatTheFloodMapSeemsWrong
-{@person} Nah. That's the city's job to figure out. 
+{@person} Nah. Haven't had time.  
 {@person} Besides, they'd probably just keep ignorin' us. 
-{@person} This city makes it really hard for people like Grandma to get their voices heard. 
 
-$call GiveSnippet(HardToGetVoicesHeard)
-
-$choice WhyDoPeopleFeelIgnored; Can you tell me more about that? 
-
-// How could the city do a better job next time?
-:: HowCouldTheCityDoBetter
-{@person} Well... it'd help not to ignore folks, for starters. 
-{@person} This city makes it really hard for people like Grandma to get their voices heard. 
-
-$call GiveSnippet(HardToGetVoicesHeard)
-$choice WhyDoPeopleFeelIgnored; Can you tell me more about that? 
+$choice WhyDoPeopleFeelIgnored; What do you mean, ignored? 
 
 // Talk to volunteer filling sandbags
 :: InterviewSandbagFillingVolunteer
 {@me} Hi! You're a volunteer, right?
 {@me} Can you spare a minute to talk?
-{@person} Oh, sorry... I was just about to head out.
+{@person} Oh... actually, I was just about to head out.
 {@person} My phone's almost dead. Gotta make sure my family can contact me. 
     $if StatCheck(Resourceful, 6)
     {@me} I can help with that!
@@ -604,9 +593,10 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
     $choice GoToSandbaggingStation; Find someone else to talk to 
     $else 
     {@me} Oh... maybe I have an extra charger. One sec!
-    You dig thorugh your bag. Unfortunately, it looks like you forgot your portable charger...
+    You dig thorugh your bag.
+    Unfortunately, it looks like you forgot your portable charger...
     And your raincoat, and your breakfast. Whoops.
-    {@person} Hmm. I thought the reporter's motto was Be Prepared.
+    {@person} I thought the reporter's motto was Be Prepared.
     {@me} I think that's the Boy Scouts, actually.
     {@person} Ah, too bad. 
     $choice GoToSandbaggingStation; Find someone else to talk to
@@ -614,10 +604,10 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
 
 // Interview volunteer
 :: InterviewVolunteer
-{@me} Can you tell me how you got involved here?
+{@me} Can you tell me how people can volunteer? 
 {@person} I signed up through the DNR after the first flood hit.
 {@person} Usually there's more training, but Twin Lakes is desperate.
-{@person} I got the feeling they'd take anybody who could lift a shovel.
+{@person} If people want to help, they can just show up at a filling station and start shoveling. 
 
 $call GiveSnippet(HowToVolunteerAtFillingStation)
 
@@ -648,7 +638,6 @@ $choice WhatAboutTheSouthSideNeighborhoods; What about the south side neighborho
 :: AskHimToRephrase
 {@person} What I mean is, three filling stations definitely isn't enough for everybody.  
 {@person} It's a small town, but it's not <i>that</i> small.
-{@person} But I'm just a volunteer. I can't do much to change it. 
 $call GiveSnippet(BetterSandbagStationQuote)
 
 $choice IfThereWereMoreFillingStations; If there were more filling stations, do you think there'd be enough volunteers?
@@ -657,10 +646,10 @@ $choice WhatAboutTheSouthSideNeighborhoods; Do you know why the south side didn'
 // If there were more filling stations
 :: IfThereWereMoreFillingStations
 {@person} I'd like to think so. 
-{@person} I know this town isn't perfect, but people do like to pitch in and help each other. 
-{@person} Reminds me of that old story about all the animals and Noah's Ark: 
+{@person} Folks here are good at heart. 
+{@person} Reminds me of that old story about all the animals and the ark: 
 {@person} If you build it, they will come!
-{@me} Um, I think that was "Field of Dreams"... oh, never mind. 
+{@me} Um... yeah, something like that. 
 {@me} Thanks so much for your help, Lou. 
 $call GiveSnippet(EncouragingFillingStationQuote)
 
@@ -719,8 +708,6 @@ $endif
 {@me} Uh.... just two, please. 
 {@person} Thank you <i>cherry</i> much!
 
-$call GiveSnippet(LemonadeStandAnecdote)
-
 $call AdjustStats(Endurance + 1)
 $call AdjustStats(Social + 1)
 
@@ -745,7 +732,6 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neigh
 {bg $BG_TownTransitional}
 You drive through the historic, higher-income neighborhoods, heading south. 
 The debris from the last flood has already been cleared away. 
-There's even a girl selling lemonade, though her sign is too far away to read. 
 
 $call GiveSnippet(QuickDescriptionHighIncomeNeighborhood)
 
@@ -775,7 +761,7 @@ $choice ArriveAtRoyalHazelNeighborhood; Decide what to do next
 You try knocking at three doors, but no one answers. 
 You're starting to catch on that people around here aren't very excited to talk to you.
 You can't blame them... you've never even driven through here before. 
-Why should they trust you? 
+If only you could earn their trust somehow. 
 
 $choice ArriveAtRoyalHazelNeighborhood; Try something else
 
@@ -787,7 +773,7 @@ $choice TryToConvinceHerSheCanTrustYou; Try to convince her she can trust you
 
 //Offer to help stack sandbags
 :: OfferToHelpStackSandbagsRoyalHazel
-{@person} Ya know... I think I'm good.
+{@person} You know... I think I'm good by myself.
 {@person} Thanks anyway, though.
 $choice TryToConvinceHerSheCanTrustYou; Try to convince her she can trust you
 $choice ArriveAtRoyalHazelNeighborhood; Look for someone else to talk to 
@@ -804,13 +790,13 @@ $choice ArriveAtRoyalHazelNeighborhood; Look for someone else to talk to
 
 // Try to make her understand 
 :: TryToExplain 
-{@me} I'm just trying to help. This story is supposed to help you! 
-{@me} How am I supposed to write it if no one will talk to me? 
+{@me} I'm just trying to help!  
+{@me} How am I supposed to write this story if no one will talk to me? 
 Before you can say anything else, your phone buzzes. Dionne. 
 {@dionne} El. I just got a tip that a reporter is harassing people in Royal Hazel.
 {@phone} PLEASE tell me that's not you.
 {@me} Um.... 
-{@phone} Don't even bother trying to explain. I'm taking you off this story.
+{@phone} Don't bother trying to explain. I'm taking you off this story.
 {@phone} These people have enough nonsense to deal with today. 
 //ToDo: Add better game over message here!
 $GameOver("Turns out harassing people isn't the best way to earn their trust. Who would've thought.")
@@ -841,7 +827,6 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 :: OfferThemLemonade
 {@person} Uh... you just carry cups of lemonade around with you?
 {@person} Sorry, but I'm not drinking that. 
-Oops. This guy has no idea who you are--maybe you should've seen that one coming.
 
 $choice TrySomethingElseToScoreAnInterview; Keep trying to score an interview with them 
 $choice StrategicRetreat; Thank them and make a strategic retreat.
@@ -859,7 +844,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 :: OfferToHelpBringOutFurniture
 {@person} No thanks. We've been working all morning... almost done now.
 {@person} Thanks for asking, though. 
-{@person} Do you need directions back to downtown, or....? 
+{@person} Do you need directions back downtown, or....? 
 
 $choice TrySomethingElseToScoreAnInterview; Keep trying to score an interview with them 
 $choice StrategicRetreat; Thank them and make a strategic retreat.
@@ -871,57 +856,58 @@ $if StatCheck(Trust, 6)
     You've worked hard to build up trust, but it doesn't seem to apply here. 
 $else 
     Maybe you could've built up a little more trust in the community...
-    But finding someone to interview has never been this hard! 
+    But finding someone to interview has never been this hard.  
 $endif
 $choice ArriveAtRoyalHazelNeighborhood; Try something else 
 
 // Text Khalisa for advice
 :: TextKhalisaForAdvice
-{@me} So... I'm on the south side and people don't see thrilled to see me. 
+{@me} So... I'm in a neighborhood on the south side, and nobody wants to talk. 
 {@me} Do you have any tips?
-{@phone} Where are you?
+{@phone} Hmm. Where are you?
 {@me} Royal Hazel. 
 {@phone} Oh, El, why didn't you say so?? I grew up there! 
 {@phone} Just finishing up this breaking news post.
-{@phone} Want me to come meet up with you? 
+{@phone} Want me to come meet you? 
 
 $HubChoice(TeamUpWithKhalisa, "YES!! You're a lifesaver. I'll wait for you here.", 0.25, "")
-$choice HandleItYourself; Oh... I didn't mean to put more on your plate. I'm sure I can handle it. 
+$choice HandleItYourself; Oh... no, I didn't mean to put more on your plate. I'm sure I can handle it! 
 
 // Handle it yourself
 :: HandleItYourself
-You keep looking around, searching for someone who looks willing to talk.
+You wander the neighborhood, searching for someone who looks willing to talk.
 Unfortunately, this takes longer than you thought it would.
 $HubChoice(KeepSearching, "Keep looking around", 0.25, "")
 
 // Keep looking around
 :: KeepSearching
 Finally, an older Black lady answers the door. 
-{@person} Are you lost, Sweetie? Need some help?
-{@me} Actually, I'm a reporter. I was wondering if you had a few minutes to talk.
-{@person} Oh, you must be El Benjamin!
+{@person} Sorry, Sweetie, I'm not really looking to buy any vacuum cleaners.
+{@person} Or whatever it is you're selling. 
+{@me} Oh... actually, with the Gazette. I'm writing a story about--
+{@person} A story?? Oh, you must be El Benjamin!
 {@person} I've heard all about you from Imojean, and Sophia, and Maureen...
 {@me} You know ALL of them?
 {@person} We're in the same book club. 
-{@person} Come on in, Dear. 
+{@person} Come on in, Dear! 
 Phew... THAT was a lucky break. 
 $choice InterviewEsme; Go inside and interview her 
 
 // Interview 
 :: InterviewEsme
-Inside, the house smells musty and there's clutter piled on the floor
-{@person} Ignore the mess. I had to clear out the basement.
-{@person} Everything is still soggy down there... working on ripping the carpet out.  
-{@person} What do you want to know?
+{@person} Please ignore the mess. I had to clear out the basement.
+{@person} Everything is still soggy down there...
+{@person} Haven't been able to find somebody to rip up the carpet.   
+{@person} What do you want to know, Dear?
 
 $choice HaveYouBeenAbleToAccessAnySandbags; Have you been able to access any sandbags?
 $choice HowDidTheFirstFloodAffectYou; How did the first flood affect you? 
 
 // Have you been able to access any sandbags? 
 :: HaveYouBeenAbleToAccessAnySandbags
-{@person} Afraid not. I take the bus everywhere. 
+{@person} Afraid not. I'm 80 years old, and I take the bus everywhere. 
 {@person} There's no way I can get across town just to bring back sandbags.
-{@person} Besides, my basement is already ruined from last time. 
+{@person} Besides, my basement is already ruined from last time. What's one more disaster? 
 
 $call GiveSnippet(RidesBusAndCantAccessSandbags)
 
@@ -933,7 +919,7 @@ $choice WhatKindOfHelpDoYouNeed; What would be most helpful to you now?
 {@person} It was awful. Water came rushing into the basement!
 {@person} My husband is a trumpet player. His instruments and sheet music... all of it was destroyed.
 {@person} And some of my old family photos were down there! 
-{@person} They were up on a shelf--I never dreamed the water would get so deep. 
+{@person} They were up on a shelf--I never dreamed the water would rise so high. 
 
 $call GiveSnippet(FloodDamageAnecdote)
 
@@ -953,21 +939,18 @@ $choice FinalConvergeNode; Thank her and decide what to do next
 
 // What would be most helpful
 ::WhatKindOfHelpDoYouNeed
-{@person} Honestly, I could've used most help weeks ago.
-{@person} But it's too late for that now. 
-{@person} I suppose the biggest problem is being able to pay for repairs.
-{@person} I don't have flood insurance... no one ever told me I would need it.
-{@person} I bought this house 30 years ago, so I suppose things must've changed since then. 
+{@person} Well, I don't have flood insurance... they told me this place wasn't at risk of flooding!
+{@person} And I don't have enough money to repair this place. 
+{@person} I'd hate to leave my home. But I don't see another option. 
 
 $call GiveSnippet(PayingForRepairs)
-$call GiveSnippet(FloodInsuranceIssues)
 
 $choice FinalConvergeNode; Thank her and decide what to do next
 
 // Khalisa shows up!
 :: TeamUpWithKhalisa
-As soon as Khalisa shows up, you can literally feel the vibe shift.
-The woman stacking up sandbags comes over to say hello. 
+As soon as Khalisa shows up, you feel the vibe shift.
+The woman stacking up sandbags hurries over to say hello. 
 {@person} K! Haven't seen you in forever. The paper still treating you okay? 
 {@phone} Oh, yeah. I love it!
 {@phone} Liz, this is my friend El. Brand new reporter. And also a good friend of mine.
@@ -979,11 +962,10 @@ $HubChoice(InterviewLiz, "Interview Liz", 0.25, "")
 
 // Interview Liz
 :: InterviewLiz 
-{@me} My editor got a tip that Royal Hazel isn't getting enough help.
-{@me} What do you think about that? 
-{@person} Well, I don't know who called in that tip, but they're right. 
-{@person} I keep hearing that Twin Lakes doesn't have enough resources to help everybody. 
-{@person} Seems like they weren't prepared for this situation at all.
+{@me} Do you feel like the city was prepared for this disaster?
+{@person} Ha. You're joking, right?
+{@person} All I keep hearing is "not enough money, not enough volunteers, not enough resources."
+{@person} Twin Lakes wasn't prepared for this situation at all.
 
 $call GiveSnippet(LizQuoteTwinLakesNotPrepared)
 
@@ -993,34 +975,26 @@ $choice HowWereYouAbleToGetSandbagsForYourHome; How were you able to get so many
 // Debris piled up
 :: DebrisPiledByTheCurb
 {@person} It's been weeks. Ever since the first flood.
-{@person} Everybody piled up all their ruined stuff, like we're supposed to.
-{@person} I keep calling the city to send a garbage truck to pick it up... 
+{@person} It's not safe for our kids... and it's gonna block the storm drains when it rains. 
+{@person} I keep calling the city to send a truck to pick it up... 
 {@person} They keep saying they'll get to it as soon as they can.
 
 $call GiveSnippet(LizQuoteDebrisPiledUp)
 
-$choice CanYouTalkAboutWhyThatsAProblem; Can you talk about why that's such a big problem?
-
-// Can you talk about why thats a problem
-:: CanYouTalkAboutWhyThatsAProblem
-{@person} I mean... we shouldn't be expected to live in a mess like this. 
-{@person} It's not safe for our kids. 
-{@person} And all that junk will end up blocking the storm drains.
-{@person} We've got another storm coming. Thanks to this mess, our street is gonna flood a lot faster. 
-
-$call GiveSnippet(LizQuoteDebrisBlockingStormDrains)
+$choice HowWereYouAbleToGetSandbagsForYourHome; I heard there's no filling station here. How'd you get all those sandbags? 
+$choice $choice HowDidTheFirstFloodAffectYouLiz; How did the first flood affect you? 
 
 // How were you able to get sandbags 
 :: HowWereYouAbleToGetSandbagsForYourHome
 {@person} I've been working at it literally all day.
 {@person} I'm lucky that I have a car--lots of folks out here don't.
 {@person} I think I've taken maybe... oh, 20 trips back and forth?  
-{@person} I also stacked up sandbags for my neighbor, too, as you can see. 
+{@person} I also stacked up sandbags for my neighbor, too. 
 {@person} Since the first flood, she hasn't even wanted to come outside. 
 $call Givesnippet(LizTripsBackAndForth)
 
-$choice HowDidTheFirstFloodAffectYouLiz; How badly did the first flood affect you? 
 $choice HowCanPeopleHelpOutLiz; What kind of help would be most useful for this neighborhood? 
+$choice WhatWouldYouSayToPeople; What would you say to people who think the city should focus on protecting Main Street? 
 
 // How did the first flood affect you
 :: HowDidTheFirstFloodAffectYouLiz
@@ -1029,13 +1003,12 @@ $choice HowCanPeopleHelpOutLiz; What kind of help would be most useful for this 
 {@person} Not sure if the Mayor and all the folks downtown even noticed.
 $call GiveSnippet(LizBasementFlooded)
 
+$choice HowCanPeopleHelpOutLiz; What kind of help would be most useful for this neighborhood? 
 $choice WhatWouldYouSayToPeople; What would you say to people who think the city should focus on protecting Main Street? 
 
 // What kind of help woudl be most useful
 :: HowCanPeopleHelpOutLiz
-{@person} We definitely needed a sandbag filling station right here in the neighborhood...
-{@person} But it's probably too late for that now.
-{@person} People are also gonna need financial help to recover.
+{@person} When this is over, people are gonna need financial help to recover.
 {@person} So many folks have damaged homes and not enough money to fix it.
 $call GiveSnippet(LizHowCanPeopleHelp)
 
@@ -1046,10 +1019,9 @@ $choice WhatWouldYouSayToPeople; What would you say to people who think the city
 {@person} Um, to be clear. "People" is code for the Mayor, right?
 {@me} Yeah... he's not too happy with me right now.
 {@person} Ha. Well, that makes me like you even more.
-{@person} The Mayor is right that local shops and businesses bring in tons of tourists.
-{@person} But we also need people to <i>work</i> in those shops and keep local business alive. 
-{@person} If half of the south side has to move away or gets evicted, this town won't make it.
-{@person} You'll be seeing a lot of Closed signs and Going Out of Business Sales real soon.
+{@person} The Mayor is right that local shops and businesses matter.
+{@person} But our south side community is crucial to this town, too. It's all connected. 
+{@person} If we all start moving out, this town is gonna collapse like an underbaked cherry pie.
 
 $call GiveSnippet(NeedToProtectTheSouthSide)
 

@@ -416,10 +416,269 @@ According to Ms. Rhodes, the high school needs ramps, automated entrances, wider
 
 // Level 3B Snippets 
 
-:: 
-@type
-@quality 
-@attr 
+:: BadQuoteAndWebsiteReference
+@type Quote 
+@quality Poor 
+@attr Facts
+"I've been doin' a whole lot to prepare for the storm. Just check the city website!"
+
+:: MayorSandbagsQuote 
+@type Quote 
+@quality Poor  
+@attr Facts
+"There are three sandbag filling stations throughout the city. Anyone who needs sandbags can go and get them!"
+
+:: MayorFillingStationLocations 
+@type Quote
+@quality Good 
+@attr Facts
+"We've got a filling station here on Main Street. If we want to save our town, we have to make sure local businesses survive!"
+
+:: MayorTwinLakesStrongQuote 
+@type Quote 
+@quality Good 
+@attr Color  
+"I wish we had the resources of a big city. But the fact is, we have to be scrappy and make do with what we've got."
+
+:: MayorTwinLakesStrongNarrative
+@type Fact 
+@quality Great 
+@attr Facts, Useful  
+The mayor urged people to help their neighbors, but he didn't mention a plan to help those who get overlooked. 
+
+:: BookstoreStillRecovering
+@type Fact 
+@quality Good 
+@attr Facts
+Local shops--including Bookish, on Main Street--are still recovering as the second storm approaches. 
+
+:: SandbagsOutsideBookstore
+@type Quote 
+@quality Poor
+@attr Facts 
+"I sandbagged my shop. But there are definitely issues with the sandbag access."
+
+:: GreatBookstoreQuoteSandbagAccessIssues
+@type Quote 
+@quality Great 
+@attr Facts 
+"Rich folks by the lake are doing fine, but others aren't so lucky. I saw people biking 12 blocks just to get sandbags!"
+
+:: BadDNRStatementAboutSandbagLocations
+@type Fact 
+@quality Poor 
+@attr Facts
+"Sandbag filling stations can be found near Main Street, Amarena Grove, and Morello Road." 
+
+:: OnlyThreeSandbagLocations 
+@type Quote  
+@quality Good 
+@attr Facts
+"Ideally we would've set up 6 or 7 more filling stations, but we only had the resources for 3."
+
+:: NeedMoreSandbagStationVolunteers 
+@type Quote 
+@quality Good
+@attr Useful 
+"We need help. Our little town is completely overwhelmed. To anyone who can get here safely... please come volunteer!"
+
+:: SandbagStationQuoteLocations
+@type Fact 
+@quality Poor 
+@attr Facts 
+According to the DNR, filling stations can be found on Morello Road, Main Street, and the upper lakeside. 
+
+:: SandbagStationInAreaThatDoesntNeedOne
+@type Observation 
+@quality Great 
+@attr Facts 
+Upper lakeside is home to one of the 3 filling stations, even though this high-income area is unlikely to flood. 
+
+:: DetailsAboutRichNeighborhoodSandbagStation
+@type Observation 
+@quality Good  
+@attr Facts
+According to a source, the upper lakeside has ties with local business. The Mayor may have felt pressured to provide sandbags there. 
+
+:: NeighborhoodsLeftOut  
+@type Fact 
+@quality Good 
+@attr Facts
+Misty was concerned about the lower-income neighborhoods along the river, which don't have easy access to sandbags. 
+
+:: BarriersToSandbagAccess
+@type Fact 
+@quality Good 
+@attr Facts
+Misty explained the barriers to sandbag access. "People have to work or watch their kids. And sandbags aren't easy to lug around." 
+
+:: WhyAreLowIncomeAreasMoreAtRisk
+@type Fact 
+@quality Good 
+@attr Facts 
+According to the DNR, lower-income households struggle to recover financially from flood disasters. 
+
+:: GreatFillingStationPhoto
+@type Photo 
+@quality Great 
+@attr Color
+//Insert great filling station photo, with people pictured
+
+:: BlurredFacesFillingStationPhoto
+@type Photo 
+@quality Poor 
+@attr Color
+//Insert filling station photo with faces blurred out 
+
+:: QuoteAboutGrandmaInRoyalHazel
+@type Quote 
+@quality Good 
+@attr Facts, Color
+"I need to get these sandbags to my grandma in Royal Hazel, since the city isn't doin' anything to help her."
+
+:: RoughTwoWeeks
+@type Quote 
+@quality Good 
+@attr Color
+"My grandma's tough, but it's been a rough week. A lot of folks by the river are feeling like nobody's listenin' to them."
+
+:: GrandmaLeftOutOfTownMeetings
+@type Fact 
+@quality Great 
+@attr Facts
+Graham Johnson pointed out that some people, like the elderly, can't make it to town meetings to have their voices heard. 
+
+:: RottenCherryQuote
+@type Quote 
+@quality Great 
+@attr Color
+Despite all the town's flaws, Graham Johnson plans to stay in Twin Lakes. "Can't let one rotten cherry spoil the bunch!" 
+
+:: InaccurateFloodMaps
+@type Quote 
+@quality Great 
+@attr Facts 
+Graham Johnson said his grandma's house flooded, despite not being in a flood zone. "It's hard to trust the city after this." 
+
+:: HowToVolunteerAtFillingStation 
+@type Quote 
+@quality Great 
+@attr Useful 
+"Twin Lakes needs volunteers. If you want to help, just show up at a filling station and start shoveling."
+
+:: PoorSandbagStationQuote
+@type Quote 
+@quality Poor 
+@attr Facts 
+"Nah. Not really. But what can you do?"
+
+:: CameWhereMoreHelpIsNeeded
+@type Fact 
+@quality Good 
+@attr Facts
+Al Tremond felt lucky that his neighborhood, Amarena Grove, didn't flood. He wanted to volunteer in areas that need more help. 
+
+:: BetterSandbagStationQuote 
+@type Quote 
+@quality Great 
+@attr Facts 
+"Three filling stations isn't enough. It's a small town, but it's not <i>that</i> small."
+
+:: EncouragingFillingStationQuote 
+@type Quote 
+@quality Great 
+@attr Facts
+Tremond thought that, if there were more filling stations, more people would volunteer. "Folks here are good at heart." 
+
+:: DetailedDescriptionHighIncomeNeighborhood
+@type Observation 
+@quality Great 
+@attr Facts, Color 
+In Twin Lakes's historic neighborhoods, debris has been cleared and most houses are lined with neat rows of sandbags. 
+
+:: MostPeopleCantGetSandbags
+@type Quote 
+@quality Good 
+@attr Facts 
+"We're lucky our friends had space for us here. A lot of people back in our neighborhood can't even get sandbags!"
+
+:: QuickDescriptionHighIncomeNeighborhood
+@type Observation 
+@quality Good  
+@attr Facts, Color  
+The historic neighborhoods looked tidier than most of Twin Lakes, with debris already cleared away. 
+
+:: BadRoyalHazelPhoto 
+@type Photo 
+@quality Poor 
+@attr Color 
+//Insert bad photo of low-income neighborhood here, with people cropped out or blurred 
+
+:: GreatRoyalHazelPhoto 
+@type Photo 
+@quality Great  
+@attr Color 
+//Insert good photo of low-income neighborhood here 
+
+:: RidesBusAndCantAccessSandbags
+@type Quote 
+@quality Great 
+@attr Facts
+"I'm 80 years old, and I take the bus everywhere. There's no way I can get across town just to bring back sandbags."
+
+:: FloodDamageAnecdote 
+@type Quote 
+@quality Great 
+@attr Facts, Color 
+Esme lamented the musical instruments and photos her family lost to the flood. "I never dreamed the water would rise so high!" 
+
+:: RoyalHazelQuoteInaccurateFloodMaps
+@type Quote 
+@quality Great  
+@attr Facts 
+"According to the flood map, our area wasn't supposed to flood. But tell that to all the black mold growing in my basement."
+
+:: PayingForRepairs
+@type Quote 
+@quality Great 
+@attr Facts 
+"I don't have enough money to repair this place. I'd hate to leave my home, but I don't see another option."
+
+:: LizQuoteTwinLakesNotPrepared
+@type Quote 
+@quality Great 
+@attr Facts 
+"All I keep hearing is "not enough money, not enough volunteers, not enough resources. Twin Lakes wasn't prepared for this." 
+
+:: LizQuoteDebrisPiledUp
+@type Quote 
+@quality Great 
+@attr Facts 
+"I keep calling the city to send a truck to pick up all the debris. They keep saying they'll get to it as soon as they can."
+
+:: LizTripsBackAndForth
+@type Fact  
+@quality Good 
+@attr Facts
+Liz described taking 20 trips back and forth to bring back sandbags for herself and her neighbor. 
+
+:: LizBasementFlooded
+@type Quote 
+@quality Good 
+@attr Facts 
+"During the first flood, the street was full of water for days. Not sure if the Mayor even noticed." 
+
+:: LizHowCanPeopleHelp  
+@type Quote 
+@quality Great 
+@attr Facts, Useful  
+"People are gonna need financial help to recover. So many folks have damaged homes and not enough money to fix it."
+
+:: NeedToProtectTheSouthSide
+@type Quote 
+@quality Great 
+@attr Facts 
+"The whole town is connected. If we all start moving out, this town is gonna collapse like an underbaked cherry pie."
 
 :: 
 @type
@@ -445,65 +704,4 @@ According to Ms. Rhodes, the high school needs ramps, automated entrances, wider
 @type
 @quality 
 @attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
-:: 
-@type
-@quality 
-@attr 
-
 
