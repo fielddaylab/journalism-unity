@@ -303,6 +303,9 @@ $if StatCheck(Research, 2)
 Thank goodness you're so good at doing {stat-name}research{/stat-name} on the fly!
 You use the flood map to dodge all the worst flooded streets.
 The drive takes longer than usual, but at least you're not stranded. 
+
+$choice ArriveAtFloodSite; Arrive at flood site
+
 $elseif StatCheck(Tech, 2)
 Phew, your {stat-name}tech{/stat-name} skills are paying off!
 You use the online flood map to chart a safe course.
