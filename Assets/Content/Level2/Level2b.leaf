@@ -138,6 +138,7 @@ $GameOver("You lost the scoop. Better luck next time."")
 // Original Name: "Tomorrow morning, 8 a.m."
 :: TomorrowMorning8A.M
 {clear-text}
+{layout Right}
 You wake up bright and early. Again.
 You have time to do one thing before heading to Snakebite Trail. 
 
@@ -241,6 +242,7 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 $call SetLocation("CherryCreek")
 
 {bg $BG_CherryCreekMarsh}
+{layout Right}
 Birdie, the aptly-named director of CRANE, is waiting at the trailhead. 
 Plus a few volunteers, and about a thousand mosquitoes. 
 
@@ -382,6 +384,7 @@ $endif
 {bg $BG_OperaHouseInt}
 $call SetLocation("OperaHouse")
 <b>Location: The Twin Lakes Opera House</b>
+{layout Right}
 {@sign}Welcome to the historic Twin Lakes Opera House!
 {@sign}Restored thanks to a generous donation by the Spark Project. 
 
@@ -1018,6 +1021,7 @@ $call SetLocation("Limnology")
 $if FirstVisit()
 <b>Location: Department of Limnology</b>
 
+{layout Right}
 A scientist is near the submerged dock, taking samples of the water. 
 A photographer with a fancy-looking camera is snapping pictures.
 $endif

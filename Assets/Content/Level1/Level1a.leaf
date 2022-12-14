@@ -51,6 +51,7 @@ $choice CheckYourPhone; Check your phone.
 :: CheckYourPhone
 {clear-text}
 {img Anim/1a/MissedCalls.png}
+
 Five missed calls from your editor, Dionne.
 Probably checking up on your puff piece about the Cherry Festival.
 
@@ -61,6 +62,7 @@ $choice CallYourEditor; Call back.
 :: CallYourEditor
 {/img}
 {clear-text}
+{layout Right}
 // rumble text style
 {anim rumble}{@dionne} FINALLY! Where have you been??
 {@me} Um... sleeping. It's 5 in the morning.
@@ -80,6 +82,7 @@ $choice OnMyWay; {@me} "On my way."
 {bg $BG_Bedroom}
 {clear-text}
 $call SetHeaderEnabled(true)
+{layout Right}
 This is it. Your chance to prove yourself.
 You can't stop thinking about that email from your dream job: the Smoke City Herald. 
 {@email} We don't hire reporters fresh out of school, Ms. Benjamin. 
@@ -107,6 +110,7 @@ You help your neighbor find a flashlight and put out some food for her cats.
 {img Anim/1a/CherryHat.png}
 In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries tiny cherries.
 {@jeanie}{auto} I made this just for you, Dear!  
+{/img}
 {@me} Thanks. It's...really something.
 
 $call AdjustStats(Trust + 1, Social + 1)
@@ -145,6 +149,7 @@ You scroll through posts on Squawker, Twin Lakes's preferred form of social medi
 {img Anim/1a/Duck.webm}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
 {@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
+{/img}
 
 $choice MessageNurse; See if the hospital employee will let you use his photo.
 $choice ReadFloodingArticle; Read the click-bait article and brush up on your survival skills.
@@ -198,6 +203,7 @@ $choice OffToWork; Head to work
 {clear-text}
 {img Anim/1a/FlappingChicken.webm}
 {@maureen} Hurry! We can't let them get swept away!
+{/img}
 
 $choice ChaseChickens; Chase after the chickens
 $choice LureChickens; Lure them with food
@@ -207,7 +213,7 @@ $choice LureChickens; Lure them with food
 {clear-text}
 You make up an excuse and hurry to your car.
 Your neighbor can get her own coop in a group.
-{/img}
+
 
 $choice LoadYourBikeItCouldBeUsefulLater; Load your bike, it could be useful later.
 $choice ImInAHurryTheresNoNeedToBringTheBike; Forget the bike--you're in a hurry!
@@ -216,6 +222,7 @@ $choice ImInAHurryTheresNoNeedToBringTheBike; Forget the bike--you're in a hurry
 :: ChaseChickens
 You run around after the chickens and only get pecked twice.
 {@maureen}Oh, thank you so much!
+
 {@me}No big deal. Happy to help.
 {img Anim/1a/Feathers.png}
 You head to your car, plucking feathers out of your hair. 
@@ -282,6 +289,7 @@ Pastries are floating down the street, and cars are stranded...
 Including the famous Twin Lakes Cherrymobile!
 You wish you could snag some photos, but your editor is texting you.
 {/img}
+{layout Right}
 {@dionne} El, where are you?? 
 {@dionne} We need to get this story out, ASAP. 
 
@@ -488,12 +496,14 @@ $choice JenkinssComputer; Track down Jenkins's old computer.
 $if StatCheck(Social, 2)
     The DNR worker sounds stressed out.
     Luckily, you've had some practice comforting stressed-out neighbors lately.  
+    {/img}
     He vents his frustrations about the flood.
     $call GiveSnippet(GoodDNR)
     A high-quality quote like this will definitely give your story a boost!
 $else
     The DNR worker sounds stressed out, and your out-of-towner vibe isn't helping.
     {@dnrworker}Sorry, but who are you? Are you even from here??  
+     {/img}
     {@dnrworker}I'll give you our official statement, but then I need to run. 
     $call GiveSnippet(RehearsedDNR)
     Yikes. Looks like you might need to be more {stat-name}social{/stat-name}. 
