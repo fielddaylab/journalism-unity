@@ -78,8 +78,8 @@ $endif
 
 // Original Name: "Borrow" charger
 :: BorrowCharger
-{layout Left}
 {clear-text}
+{layout Left}
 {img Anim/1b/PhoneCord.png}
 Looks like Ben, the copyeditor, left his phone charger sitting out in the open.
 Small town people... so trusting.

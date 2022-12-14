@@ -136,6 +136,8 @@ $choice OffToWork; Off to work
 {img Anim/1a/CherryMuffin.png}
 Your kitchen is full of food from your aggressively-friendly neighbors.
 Cherry muffins, cherry granola, cherry summer sausage.
+{/img}
+{layout Right}
 It's slightly over-the-top, but at least you won't go hungry. 
 $call AdjustStats(Endurance + 1, Resourceful + 1)
 $choice OffToWork; Off to work
@@ -190,6 +192,7 @@ $choice OffToWork; Off to work
 // Original Name: Read flooding article.
 :: ReadFloodingArticle
 {/img} 
+{layout Right}
 {clear-text}
 {@article} The most important flood safety tip: Stay off the roads! 
 {@article}The #1 cause of death during flash flooding is trying to drive through it. 
@@ -232,6 +235,7 @@ $choice HitTheRoad; Hit the road
 
 // Original Name: Lure chickens
 :: LureChickens
+{layout Right}
 @tags Trust, Resourceful
 You make a trail of cherry granola and the chickens come running. 
 {@maureen}Oh, thank you so much!
@@ -248,6 +252,7 @@ $choice HitTheRoad; Hit the road
 {img Anim/1a/Bike.png}
 You squeeze your bike into the trunk of your car. 
 The hatch doesn't shut all the way, but it's nothing a bungee cord can't fix.
+{/img}
 {@msg} You can use your bike later
 $call AdjustStats(Resourceful + 1)
 $set hasBike = true
@@ -256,9 +261,11 @@ $choice DriveWithBike; Drive to the newsroom
 // Original Name: Drive to the newsroom  
 :: DriveWithBike
 {clear-text}
+{layout Right}
 {img Anim/enml-stuckcar.png}
 Wow. This flood might be more serious than you thought.
 You don't have time to stop for any interviews--you took too long loading up your bike.
+{/img}
 But you should have time to snag a photo or two!
 
 $choice TakeSomePhotos; Take some photos
@@ -445,11 +452,13 @@ $OnceChoice(Office1-Weather, "Check the local weather website")
 :: AnswerThePhone
 @tags Trust, Social
 {clear-text}
+{layout Left}
 {/map}
 {img Anim/1a/Phone.png}
 {@me} Hello?
 {@fredfinkler} Hiya!! This is Fred Finkler.
 {@fredfinkler} You might remember me from the Town Hall meetings.
+{/img}
 Oh gosh. You remember Fred Finkler, alright.
 This guy is singlehandedly responsible for last week's Town Hall meeting going 45 minutes over time.
 
@@ -548,12 +557,14 @@ $goto Office1-Clock
 {@me} The Twin Lakes Gazette.
 
 // Moved from: Police Response
+{layout Left}
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
     {img Anim/1a/HappyChicken.webm}
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
+    {/img}
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
     $call GiveSnippet(PoliceSafetyQuote)
     $call GiveSnippet(PoliceStory)
@@ -641,6 +652,7 @@ $goto Office1-Clock
 $call DecreaseTime(0.5)
 {img Anim/1a/UpsetCat.png}
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
+{/img}
 You don't get any information for your story, but he seems grateful to you for listening.
 
 $call AdjustStats(Trust + 1)
