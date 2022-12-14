@@ -231,8 +231,8 @@ MonoBehaviour:
       m_Source: Char.Squawkertroll2
       m_HashValue: 2711229561
   - Id:
-      m_Source: 'DNR Expert '
-      m_HashValue: 1116769275
+      m_Source: DNRexpert
+      m_HashValue: 236239743
     Name:
       m_Source: Char.Dnrexpert
       m_HashValue: 784795555
@@ -362,6 +362,78 @@ MonoBehaviour:
     Name:
       m_Source: Char.Wetlandvolunteer3
       m_HashValue: 597839061
+  - Id:
+      m_Source: townie1
+      m_HashValue: 1867183206
+    Name:
+      m_Source: Char.Townie1
+      m_HashValue: 1269179050
+  - Id:
+      m_Source: townie2
+      m_HashValue: 1850405587
+    Name:
+      m_Source: Char.townie2
+      m_HashValue: 2110350775
+  - Id:
+      m_Source: townie3
+      m_HashValue: 1833627968
+    Name:
+      m_Source: Char.Townie3
+      m_HashValue: 1235623812
+  - Id:
+      m_Source: townspeople
+      m_HashValue: 1258036481
+    Name:
+      m_Source: Char.Townspeople
+      m_HashValue: 751373501
+  - Id:
+      m_Source: barlow
+      m_HashValue: 189456992
+    Name:
+      m_Source: Char.Barlow
+      m_HashValue: 31327708
+  - Id:
+      m_Source: doug
+      m_HashValue: 884288956
+    Name:
+      m_Source: Char.Doug
+      m_HashValue: 1579397376
+  - Id:
+      m_Source: shelter
+      m_HashValue: 1149270866
+    Name:
+      m_Source: Char.Shelter
+      m_HashValue: 2196035182
+  - Id:
+      m_Source: fox
+      m_HashValue: 3069416270
+    Name:
+      m_Source: Char.Fox
+      m_HashValue: 783329386
+  - Id:
+      m_Source: electrician
+      m_HashValue: 3173973078
+    Name:
+      m_Source: Char.Electrician
+      m_HashValue: 4026354538
+  - Id:
+      m_Source: imojean
+      m_HashValue: 2140490774
+    Name:
+      m_Source: Char.Imojean
+      m_HashValue: 963630130
+  - Id:
+      m_Source: apartmentmanager
+      m_HashValue: 3545273920
+    Name:
+      m_Source: Char.Apartmentmanager
+      m_HashValue: 2849464188
+  - Id:
+      m_Source: summer
+      m_HashValue: 4242745140
+    Name:
+      m_Source: Char.Summer
+      m_HashValue: 4236219944
   - Id:
       m_Source: newChar
       m_HashValue: 2578756201

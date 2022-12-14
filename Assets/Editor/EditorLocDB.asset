@@ -340,7 +340,7 @@ MonoBehaviour:
       Content: Stranded Driver
       Exposed: 0
     - Id: Char.Deli
-      Content: Gallery Owner
+      Content: Deli Owner
       Exposed: 0
     - Id: Char.Neighbor
       Content: Grateful Neighbor
@@ -410,6 +410,48 @@ MonoBehaviour:
       Exposed: 0
     - Id: Char.Townhallworker
       Content: Town Hall  Worker
+      Exposed: 0
+    - Id: Char.Wetlandvolunteer3
+      Content: Wetland Volunteer
+      Exposed: 0
+    - Id: Char.Townie1
+      Content: Townsperson 1
+      Exposed: 0
+    - Id: Char.townie2
+      Content: Townsperson 2
+      Exposed: 0
+    - Id: Char.Townie3
+      Content: Townsperson 3
+      Exposed: 0
+    - Id: Char.Townspeople
+      Content: Townspeople
+      Exposed: 0
+    - Id: Char.Pattyforbes
+      Content: Patty Forbes, townsperson
+      Exposed: 0
+    - Id: Char.Barlow
+      Content: Barlow Scot, townsperson
+      Exposed: 0
+    - Id: Char.Doug
+      Content: Doug Walker, townsperson
+      Exposed: 0
+    - Id: Char.Shelter
+      Content: Shelter Coordinator
+      Exposed: 0
+    - Id: Char.Fox
+      Content: Fox Smolder, Local Vet
+      Exposed: 0
+    - Id: Char.Electrician
+      Content: Electrician
+      Exposed: 0
+    - Id: Char.Imojean
+      Content: Imojean
+      Exposed: 0
+    - Id: Char.Apartmentmanager
+      Content: Apartment Manager
+      Exposed: 0
+    - Id: Char.Summer
+      Content: 'Summer, disability rights expert '
       Exposed: 0
     Headers:
     - Path: Header
