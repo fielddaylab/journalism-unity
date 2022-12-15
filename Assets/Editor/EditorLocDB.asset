@@ -325,7 +325,7 @@ MonoBehaviour:
       Content: Volunteer and Lake Studies Expert
       Exposed: 0
     - Id: Char.Nora
-      Content: Nora
+      Content: 'Nora, the Houseboat Lady '
       Exposed: 0
     - Id: Char.Rescuer
       Content: Rescuer
@@ -451,7 +451,64 @@ MonoBehaviour:
       Content: Apartment Manager
       Exposed: 0
     - Id: Char.Summer
-      Content: 'Summer, disability rights expert '
+      Content: Summer, disability rights expert
+      Exposed: 0
+    - Id: Char.Bookshopowner
+      Content: Bookseller
+      Exposed: 0
+    - Id: Char.Weatheralert
+      Content: Weather Alert
+      Exposed: 0
+    - Id: Char.Misty
+      Content: Misty, the DNR worker
+      Exposed: 0
+    - Id: Char.Manfillingsandbags
+      Content: Man filling sandbags
+      Exposed: 0
+    - Id: Char.Rainn
+      Content: Rainn
+      Exposed: 0
+    - Id: Char.Fillingstationvolunteer
+      Content: Volunteer
+      Exposed: 0
+    - Id: Char.Girlwithlemonade
+      Content: Girl with lemonade stand
+      Exposed: 0
+    - Id: Char.Lemonadesign
+      Content: Lemonade Stand Sign
+      Exposed: 0
+    - Id: Char.Elderlywoman
+      Content: Elderly Woman
+      Exposed: 0
+    - Id: Char.Lizfirstmeeting
+      Content: Woman stacking sandbags
+      Exposed: 0
+    - Id: Char.Manmovingcouch
+      Content: Perplexed-looking man
+      Exposed: 0
+    - Id: Char.Couchmover
+      Content: Man (looking annoyed now)
+      Exposed: 0
+    - Id: Char.Localwoman
+      Content: Local woman
+      Exposed: 0
+    - Id: Char.Esme
+      Content: Esme
+      Exposed: 0
+    - Id: Char.Liz
+      Content: Liz
+      Exposed: 0
+    - Id: Char.Gabby
+      Content: Gabby, Editor at the Smoke City Herald
+      Exposed: 0
+    - Id: Char.Mysteryrescuer
+      Content: Mystery Rescuer
+      Exposed: 0
+    - Id: Char.Drnorawarner
+      Content: 'Dr. Nora Warner, Flooding and Equity Expert '
+      Exposed: 0
+    - Id: Char.Willa
+      Content: Willa
       Exposed: 0
     Headers:
     - Path: Header

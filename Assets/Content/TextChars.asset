@@ -435,8 +435,116 @@ MonoBehaviour:
       m_Source: Char.Summer
       m_HashValue: 4236219944
   - Id:
-      m_Source: newChar
-      m_HashValue: 2578756201
+      m_Source: bookshop
+      m_HashValue: 1887603172
     Name:
-      m_Source: Char.NewPerson
-      m_HashValue: 455305232
+      m_Source: Char.Bookshopowner
+      m_HashValue: 425674887
+  - Id:
+      m_Source: weatheralert
+      m_HashValue: 2654564503
+    Name:
+      m_Source: Char.Weatheralert
+      m_HashValue: 2253967987
+  - Id:
+      m_Source: misty
+      m_HashValue: 1174446607
+    Name:
+      m_Source: Char.Misty
+      m_HashValue: 1386700555
+  - Id:
+      m_Source: manfillingsandbags
+      m_HashValue: 794107059
+    Name:
+      m_Source: Char.Manfillingsandbags
+      m_HashValue: 1264782759
+  - Id:
+      m_Source: rainn
+      m_HashValue: 1773607047
+    Name:
+      m_Source: Char.Rainn
+      m_HashValue: 3815434627
+  - Id:
+      m_Source: fillingstationvolunteer
+      m_HashValue: 1517307078
+    Name:
+      m_Source: Char.Fillingstationvolunteer
+      m_HashValue: 2929877914
+  - Id:
+      m_Source: girlwithlemonade
+      m_HashValue: 3200101686
+    Name:
+      m_Source: Char.Girlwithlemonade
+      m_HashValue: 2922437106
+  - Id:
+      m_Source: lemonadesign
+      m_HashValue: 3654712977
+    Name:
+      m_Source: Char.Lemonadesign
+      m_HashValue: 1976898445
+  - Id:
+      m_Source: elderlywoman
+      m_HashValue: 208512122
+    Name:
+      m_Source: Char.Elderlywoman
+      m_HashValue: 2143967558
+  - Id:
+      m_Source: lizfirstmeeting
+      m_HashValue: 2669252207
+    Name:
+      m_Source: Char.Lizfirstmeeting
+      m_HashValue: 207195155
+  - Id:
+      m_Source: manmovingcouch
+      m_HashValue: 3776559737
+    Name:
+      m_Source: Char.Manmovingcouch
+      m_HashValue: 702665221
+  - Id:
+      m_Source: couchmover
+      m_HashValue: 2130200434
+    Name:
+      m_Source: Char.Couchmover
+      m_HashValue: 2881106934
+  - Id:
+      m_Source: localwoman
+      m_HashValue: 2494164250
+    Name:
+      m_Source: Char.Localwoman
+      m_HashValue: 79259222
+  - Id:
+      m_Source: esme
+      m_HashValue: 2815584139
+    Name:
+      m_Source: Char.Esme
+      m_HashValue: 1520574199
+  - Id:
+      m_Source: liz
+      m_HashValue: 1246553460
+    Name:
+      m_Source: Char.Liz
+      m_HashValue: 3840908104
+  - Id:
+      m_Source: gabby
+      m_HashValue: 1733225108
+    Name:
+      m_Source: Char.Gabby
+      m_HashValue: 4138733912
+  - Id:
+      m_Source: mysteryrescuer
+      m_HashValue: 3207167771
+    Name:
+      m_Source: Char.Mysteryrescuer
+      m_HashValue: 3564285551
+  - Id:
+      m_Source: drnorawarner
+      m_HashValue: 3526916098
+    Name:
+      m_Source: Char.Drnorawarner
+      m_HashValue: 255846534
+  - Id:
+      m_Source: willa
+      m_HashValue: 903678596
+    Name:
+      m_Source: Char.Willa
+      m_HashValue: 3995159192
