@@ -648,7 +648,7 @@ Esme lamented the musical instruments and photos her family lost to the flood. "
 @type Quote 
 @quality Great 
 @attr Facts 
-"All I keep hearing is "not enough money, not enough volunteers, not enough resources. Twin Lakes wasn't prepared for this." 
+"Twin Lakes had plenty of time to get ready for this... Instead, they decided to let us all fend for ourselves." 
 
 :: LizQuoteDebrisPiledUp
 @type Quote 
@@ -678,30 +678,52 @@ Liz described taking 20 trips back and forth to bring back sandbags for herself 
 @type Quote 
 @quality Great 
 @attr Facts 
-"The whole town is connected. If we all start moving out, this town is gonna collapse like an underbaked cherry pie."
+"The whole town is connected. If we all start moving out, this town is gonna collapse like an overbaked cherry souffle."
 
-:: 
-@type
-@quality 
-@attr 
+:: WillasStory
+@type Observation 
+@quality Good 
+@attr Color 
+Local quilter Willa Hornsby wanted to evacuate. But before she could pack up her wares, the dam burst.  
 
-:: 
-@type
-@quality 
-@attr 
+:: NoraBackground
+@type Fact 
+@quality Great
+@attr Color
+Years ago, Dr. Nora Warner's home was destroyed by a flood. Now she researches flood equity in an effort to help others. 
 
-:: 
-@type
-@quality 
-@attr 
+:: DrNoraOnHouseboats
+@type Quote 
+@quality Poor  
+@attr Color 
+"I knew climate change would bring more flooding. Then I discovered houseboats. They literally can't flood!"
 
-:: 
-@type
-@quality 
-@attr 
+:: NoraFloodWarning 
+@type Quote 
+@quality Good 
+@attr Facts 
+"More floods are going to come. Twin Lakes will be washed right off the map unless we make some changes."
 
-:: 
-@type
-@quality 
-@attr 
+:: NoraPrepareBetterNextTime
+@type Quote 
+@quality Great  
+@attr Useful 
+"Update the flood maps. Tell people if they’re at risk. Put a sandbag station in each neighborhood and start enlisting volunteers." 
 
+:: NoraFloodMapIssue
+@type Quote 
+@quality Great 
+@attr Facts, Useful
+"The flood maps don't account for climate change or wetland loss. Twin Lakes needs to pay experts to update those maps ASAP." 
+
+:: NoraFinancialHelp
+@type Quote 
+@quality Great 
+@attr Useful
+"Twin Lakes can help low-income households by pausing rent payments or offering financial aid. Crucial if we want to rebuild."
+
+:: NoraDisasterEquity
+@type Quote 
+@quality Great 
+@attr Facts
+"Disasters hit some people much harder. The town needs to help these groups, or Twin Lakes will fall apart at the seams."

@@ -1102,13 +1102,14 @@ Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 $choice FindAPrivatePlaceToTakeTheCall; Find a private place to take the call 
 
 :: FindAPrivatePlaceToTakeTheCall
+//Todo: add generic town street background with coffee shop and hardware store 
 You hurry to a nearby street corner, away from people.
 {@me} Hi, this is El Benjamin. 
 {@gabby} El, so glad we could finally talk!
 {@gabby} Your reporting is so impressive... especially for a new reporter.
 {@gabby} So, why do you want to come work with us at the Smoke City Herald? 
 You're trying to pay attention. Really, you are.
-But you can't help but notice the raindrops spotting the pavement around you.
+But you can't help but notice the raindrops hitting the pavement around you.
 {@gabby} Ahem. El, are you there? 
 {@gabby} Can you tell me why you're interested in working for us? 
 
@@ -1116,7 +1117,7 @@ $choice IWantToWriteImportantStories; I want to write important stories that mak
 $choice IWantToMakeANameForMyself; I want to make a name for myself. 
 
 :: IWantToWriteImportantStories
-{@gabbyn} That's wonderful, El. 
+{@gabby} That's wonderful, El. 
 {@gabby} Although, since you're new, I'd probably start you on the entertainment beat...
 {@gabby} Music events, C-list celebrities, stuff like that.
 {@gabbyn} You might even get to cover our growing population of short-tailed possoms! 
@@ -1127,10 +1128,10 @@ You try to listen to her next question, but your phone is buzzing again.
 $choice ReadTextFromDionne; Read text 
 
 :: IWantToMakeANameForMyself
-{@person} Well, working here will definitely help with that.
-{@person} People from all over the country read the Smoke City Herald.
-{@person} The Twin Lakes Gazette comes out with amazing stories, but I doubt many people read it.
-{@person} I mean, except for the people who live there.
+{@gabby} Well, working here will definitely help with that.
+{@gabby} People from all over the country read the Smoke City Herald.
+{@gabby} The Twin Lakes Gazette comes out with amazing stories, but I doubt many people read it.
+{@gabby} I mean, except for the people who live there.
 {@me} Yeah. Our local readers are pretty devoted. 
 You try to listen to her next question, but your phone is buzzing again.
 
@@ -1148,15 +1149,15 @@ $choice TellGabbyYoullCallBack; Tell Gabby you'll call back later--you need to f
 :: IgnoreDionnesText
 The rain is coming down harder. 
 You can hear the rush of water at the dam. 
-{@person} El, are you still there? 
+{@gabby} El, are you still there? 
 {@me} Yes, sorry--just got a text from my editor.
 {@person} Oh, Dionne! She spoke very highly of you.
 $if Visited(IWantToMakeANameForMyself)
-    {@person} Sounds like you've already made a name for yourself in Twin Lakes.
-    {@person} I bet they'll be sorry to see you go. 
+    {@gabby} Sounds like you've already made a name for yourself in Twin Lakes.
+    {@gabby} I bet they'll be sorry to see you go. 
 $else 
-    {@person} Sounds like you've already made a big impact in Twin Lakes. 
-    {@person} I bet they'll miss you when you're gone. 
+    {@gabby} Sounds like you've already made a big impact in Twin Lakes. 
+    {@gabby} I bet they'll miss you when you're gone. 
 $endif
 {@me} Yeah... I guess so. 
 You realize that you'll miss them when you leave, too.
@@ -1200,7 +1201,7 @@ $choice TheWaterRises; Run for higher ground
 
 :: TheWaterRises
 Water rushes through the street. 
-You run toward the nearests house--dark, doors shut, windows boarded up.
+You run toward the nearest house--dark, doors shut, windows boarded up.
 You're not going to make it! 
 $choice CallForHelp; Shout for help 
 $choice TryToReachYourCar; Try to reach your car 
@@ -1272,6 +1273,8 @@ $choice AskNoraAboutHerResearch; Ask Nora about her research
 {@willa}That's why Nora's here. She was helping me pack everything up.
 {@willa} But I suppose that ship has sailed. It's raining cats and chickens out there. 
 
+$call GiveSnippet(WillasStory)
+
 $choice AskNoraAboutHerResearch; Ask Nora about her research
 
 // Ask Nora about her research 
@@ -1293,6 +1296,8 @@ Oops. If she did, you probably weren't paying attention.
 {@drnorawarner} Then a flood hit. In one day, I lost everything.
 {@drnorawarner} No one was around to help me. But hopefully, my work will help other people. 
 
+$call GiveSnippet(NoraBackground)
+
 $choice HowDidYouEndUpInAHouseboat; How did you end up living on a houseboat? 
 $choice WhyHasntAnyoneMentionedIt; Why hasn't anyone mentioned that the town flooded ten years ago? 
 
@@ -1303,6 +1308,11 @@ $choice WhyHasntAnyoneMentionedIt; Why hasn't anyone mentioned that the town flo
 {@drnorawarner} Then I discovered houseboats. They literally can't flood!  
 {@drnorawarner} Just wish more people would get on board.... no pun intended. 
 
+$call GiveSnippet(DrNoraOnHouseboats)
+
+Hmmm... it seems like moving onto a houseboat really did help Nora get her life back. 
+But somehow, this doesn't seem like a practical solution for all of Twin Lakes. 
+
 $choice HowCanTwinLakesHelpLowerIncomeHouseholds; How can Twin Lakes help lower-income households bounce back from the flood?
 $choice RumorsAboutFloodMaps; I've heard rumors that the flood maps around here aren't accurate. Can you tell me about that?
 $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepare better for the next flood?  
@@ -1310,9 +1320,11 @@ $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepar
 // Why hasn't anyone mentioned it? 
 :: WhyHasntAnyoneMentionedIt
 {@drnorawarner} Well, many of the people who were hit hardest ended up leaving. 
-{@drnorawarner} I tried to warn everyone that a historic flood was coming. 
-{@drnorawarner} My good friend, Fred, has tried to get the word out, too.
-{@drnorawarner} But it's easier to pretend that everything is fine, isn't it? 
+{@drnorawarner} I tried to warn everyone that another flood was coming. 
+{@drnorawarner} And I'll keep warning them, because the floods are only going to get worse.
+{@drnorawarner} Twin Lakes will be washed right off the map unless we make some changes.
+
+$call GiveSnippet(NoraFloodWarning)
 
 $choice HowCanTwinLakesHelpLowerIncomeHouseholds; How can Twin Lakes help lower-income households bounce back from the flood?
 $choice RumorsAboutFloodMaps; I've heard rumors that the flood maps around here aren't accurate. Can you tell me about that?
@@ -1324,7 +1336,8 @@ $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepar
 {@drnorawarner} Update the flood maps.
 {@drnorawarner} Tell people if their house is at risk.
 {@drnorawarner} Designate a sandbag station for every neighborhood, and start looking for volunteers. 
-{@drnorawarner} If you start preparing when the rain comes, it's already too late. 
+
+$call GiveSnippet(NoraPrepareBetterNextTime)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 
@@ -1333,17 +1346,19 @@ $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know abo
 :: RumorsAboutFloodMaps
 {@drnorawarner} It's pretty simple.
 {@drnorawarner} The flood maps used to be accurate...
-{@drnorawarner} But they don't account for climate change, or wetland destruction.
+{@drnorawarner} But they don't account for climate change, or wetland loss.
 {@drnorawarner} Twin Lakes needs to provide the funds for local experts to figure out which areas are actually flooding... 
 {@drnorawarner} And who's most at risk. 
+
+$call GiveSnippet(NoraFloodMapIssue)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 
 :: HowCanTwinLakesHelpLowerIncomeHouseholds
-{@drnorawarner} Some people could end up losing their homes...
-{@drnorawarner} And others will be stuck living with awful flood damage they can't afford to fix. 
-{@drnorawarner} The city could help by pausing rent payments, or offering financial aid.
-{@drnorawarner} Anything to help people rebuild. 
+{@drnorawarner} Twin Lakes can help the most at-risk, low-income households by pausing rent payments, or offering financial aid.
+{@drnorawarner} We need to look out for everyone if we want to rebuild.  
+
+$call GiveSnippet(NoraFinancialHelp)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 // What do you think people should know about floods and equity?
@@ -1352,6 +1367,8 @@ $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know abo
 {@drnorawarner} But really, disasters hit some people much harder.
 {@drnorawarner} The town needs to help these groups, or Twin Lakes will fall apart at the seams.
 {@drnorawarner} I mean... unless we all move into houseboats. 
+
+$call GiveSnippet(NoraDisasterEquity)
 
 $choice DoYouThinkHouseboatsWork; Do you really think houseboats work as a long-term solution? 
 
