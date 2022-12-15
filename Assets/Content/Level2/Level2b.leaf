@@ -1107,7 +1107,7 @@ $elseif StatCheck(Resourceful, 5)
 
     $choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
 $elseif StatCheck(Social, 5)
-    You can barely keep up, but your {stat-check}social{/stat-check} skills come to your rescue.  
+    You can barely keep up, but your {stat-name}social{/stat-name} skills come to your rescue.  
     He slows down, enjoying the conversation and patiently showing you how to navigate the muck. 
 
     $choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
