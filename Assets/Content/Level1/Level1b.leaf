@@ -470,7 +470,7 @@ $goto STORYEVALUATION
 $if StatCheck(Trust, 3)
     {@dnrvolunteer} Oh, I've heard of you!
     {@dnrvolunteer} So glad Twin Lakes snagged a reporter we can {stat-name}trust{/stat-name}. 
-    He tells you how he became a volunteer and where people can find sandbags.
+    He tells you how people can sign up to become volunteers. 
     Plus, his deepest fears and a story about the time he stole a jar of paper clips from his office.
     $call GiveSnippet(SandbagQuote)
     $call GiveSnippet(VolunteerInfo)
