@@ -119,6 +119,7 @@ $choice CallYourEditor; Call your editor
 //Text your editor back 
 ::CallYourEditor
 @checkpoint
+{bg $BG_Bookshop}
 {clear-text}
 Dionne picks up on the first ring.
 {@me} Just saw the news. What do you need me to do?
@@ -146,12 +147,12 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 {@person} I'm sure you'd just end up tracking me down anyway.
 
 $choice WhatAreYouDoingMayor; What are you doing to make sure that everyone is prepared for the storm? 
-$choice IsItTrueMayor; Is it true that some people haven't been able to sandbag their properties? 
+// $choice IsItTrueMayor; Is it true that some people haven't been able to sandbag their properties?  // <- This choice has no corresponding node
 
 // What are you doing
 :: WhatAreYouDoingMayor
 {@person} A whole lot of things, as a matter of fact.
-{@persson} You can see my full response on the city website. 
+{@person} You can see my full response on the city website. 
 {@person} See what I mean? If you were a real reporter, wouldn't you have already checked there?
 
 $call GiveSnippet(BadQuoteAndWebsiteReference)
@@ -210,6 +211,8 @@ $choice MayorEndsInterview; What would it take to set up more filling stations?
 {@person} The role of the press is to keep people in good spirits!
 Huh... you must've missed that day at Journalism school. 
 
+$CheckFinalConverge()
+
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.5, "")
 $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "")
 
@@ -244,6 +247,7 @@ $choice WhatDoYouMean; Can you explain what the issues are?
 $choice DoYouKnowOfAnyResources; Do you have any resources that could help me write this story?
 
 // What do you mean?
+:: WhatDoYouMean
 {@person} Well, all the rich houses by the lake are doing fine.
 {@person} I mean... nothing against rich folks. My customers come from all over. 
 {@person} But they've got what they need. Others aren't so lucky.
@@ -264,24 +268,32 @@ $choice DoYouKnowOfAnyResources; Do you know of any resources that could help me
 Unfortunately, the book he gives you is heavily water damaged.
 The pages are stuck together, but still, you tuck it in your bag for later. 
 
+$CheckFinalConverge()
+
 $HubChoice(GoToSandbaggingStation, "Head to the nearest city-run sandbag filling station and take a look around", 0.25, "")
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
 
 // Go to sandbagging station
 :: GoToSandbaggingStation
 {bg $BG_SandbagStation}
-$if FirstVisit
-Volunteers and people from the neighborhood hurry to fill sandbags.
-You recognize Misty, the DNR worker you met at Twin Lakes Dam. 
+$if FirstVisit()
+    Volunteers and people from the neighborhood hurry to fill sandbags.
+    You recognize Misty, the DNR worker you met at Twin Lakes Dam. 
 $endif 
 
-$choice InterviewDNRWorkerAtSandbagFillingStation; Ask to interview Misty, the DNR worker   
-$choice InterviewSandbagFillingVolunteer; Talk to volunteer filling sandbags 
-$choice InterviewLocalFromTheNeighborhood; Talk to man loading sandbags into his pickup truck 
-$choice AskPermissionToTakePhoto; Ask permission to take a photo 
 $if RoyalHazelLocation = true
-    $choice HeadToRoyalHazelNeighborhood; Head to Royal Hazel Neighborhood 
+    $choice HeadToRoyalHazelNeighborhood; Head to Royal Hazel Neighborhood
+$elseif Visited(InterviewDNRWorkerAtSandbagFillingStation), Visited(InterviewSandbagFillingVolunteer), Visited(AskPermissionToTakePhoto)
+    // Player has exhausted all options but failed to find Royal Hazel Location
+    Out of nowhere, you get a sinking feeling. Something's not right...
+    $choice FinalConvergeNode; What is it?
 $endif 
+
+$HubChoice(InterviewDNRWorkerAtSandbagFillingStation, "Ask to interview Misty, the DNR worker", 0.25, "")
+$HubChoice(InterviewSandbagFillingVolunteer, "Talk to volunteer filling sandbags", 0.25, "")
+// $choice InterviewLocalFromTheNeighborhood; Talk to man loading sandbags into his pickup truck // <- This choice does not have a resulting conversation
+$HubChoice(AskPermissionToTakePhoto, "Ask permission to take a photo", 0.25, "")
+
 
 // Interview DNR Worker
 :: InterviewDNRWorkerAtSandbagFillingStation
@@ -307,7 +319,7 @@ $else
     You try to interview Misty while helping her with the sandbags. 
     The problem is, you're too out of breath to get a word in.  
     $choice TryToPersuadeHerToTakeABreak; Try to persuade her to take a break
-    $choice FindSomeoneElseToTalkToFillingStation; Find someone else to talk to
+    $choice GoToSandbaggingStation; Decide what to do next 
 $endif 
 
 // Explain why you need her help 
@@ -412,7 +424,7 @@ $endif
 $call GiveSnippet(NeighborhoodsLeftOut)
 
 $choice WhatBarriersAreGettingInTheWay; What barriers are getting in the way? 
-$choice WhyAreLowIncomeAreasMoreAtRiskFromFlooding; Why are those areas more at risk from flooding? 
+$choice WhyAreLowIncomeAreasMoreAtRisk; Why are those areas more at risk from flooding? 
 
 // What barriers are getting in people's way?
 :: WhatBarriersAreGettingInTheWay
@@ -450,12 +462,9 @@ $choice ThankMistyForHerHelp; Thank her for her help
 {@person} Be careful out there. It could start raining any minute! Remember our motto--
 {@me} Turn around, don't drown. Thanks, Misty. I've got it covered. 
 
-$choice InterviewSandbagFillingVolunteer; Talk to volunteer filling sandbags 
-$choice InterviewLocalFromTheNeighborhood; Talk to man loading sandbags into his pickup truck 
-$choice AskPermissionToTakePhoto; Ask permission to take a photo 
-$if RoyalHazelLocation = true 
-    $choice HeadToRoyalHazelNeighborhood; Head to Royal Hazel Neighborhood 
-$endif 
+$CheckFinalConverge()
+
+$choice GoToSandbaggingStation; Decide what to do next 
 
 //Ask to take photo
 :: AskPermissionToTakePhoto
@@ -467,6 +476,9 @@ Seems like some of these folks still don't trust you.
 You manage to snag a great photo... but two of the workers ask for their faces to be blurred out.
 $call GiveSnippet(BlurredFacesFillingStationPhoto)
 $endif 
+
+$CheckFinalConverge()
+
 $choice GoToSandbaggingStation; Decide what to do next 
 
 // Interview man from the neighborhood
@@ -589,16 +601,22 @@ $choice WhyDoPeopleFeelIgnored; What do you mean, ignored?
     {@person} Oh... thanks, kid! 
     {@person} Guess it's true what they say about reporters: Semper Paratus. Always ready. 
     {@me} I... think that's the Coast Guard. 
+
+    $CheckFinalConverge()
+
     $HubChoice(InterviewVolunteer, "Interview volunteer", 0.25, "")
     $choice GoToSandbaggingStation; Find someone else to talk to 
     $else 
     {@me} Oh... maybe I have an extra charger. One sec!
-    You dig thorugh your bag.
+    You dig through your bag.
     Unfortunately, it looks like you forgot your portable charger...
     And your raincoat, and your breakfast. Whoops.
     {@person} I thought the reporter's motto was Be Prepared.
     {@me} I think that's the Boy Scouts, actually.
     {@person} Ah, too bad. 
+
+    $CheckFinalConverge()
+
     $choice GoToSandbaggingStation; Find someone else to talk to
     $endif 
 
@@ -653,6 +671,8 @@ $choice WhatAboutTheSouthSideNeighborhoods; Do you know why the south side didn'
 {@me} Thanks so much for your help, Lou. 
 $call GiveSnippet(EncouragingFillingStationQuote)
 
+$CheckFinalConverge()
+
 $choice GoToSandbaggingStation; Plan your next move 
 
 // What about the south side neighborhoods?
@@ -663,6 +683,8 @@ $choice GoToSandbaggingStation; Plan your next move
 {@person} I wonder if I could borrow my dad's truck and drive some sandbags to the south side...
 {@person} Come to think of it, kid. I'd better scurry. Lots to do. 
 {@person} Thanks for the recharge!
+
+$CheckFinalConverge()
 
 $choice GoToSandbaggingStation; Decide what to do next 
 
@@ -682,9 +704,11 @@ $call GiveSnippet(DetailedDescriptionHighIncomeNeighborhood)
 A kid is sitting out in front of her house, selling cherry lemonade. 
 An elderly couple is climbing the steps of a Victorian house, lugging suitcases.
 
+$CheckFinalConverge()
+
 $HubChoice(StopToBuyLemonade, "Stop to buy lemonade", 0.25, "")
 $HubChoice(SeeIfTheOlderCoupleNeedsHelp, "See if the older couple needs help", 0.25, "")
-$choice ArriveAtDepartmentOfLimnology; Keep biking--there's no story here 
+$choice ArriveAtRoyalHazelNeighborhood; Keep biking--there's no story here 
 
 // Stop to buy lemonade
 :: StopToBuyLemonade
@@ -692,7 +716,7 @@ $choice ArriveAtDepartmentOfLimnology; Keep biking--there's no story here
 {@me} Oh. Uh... that seems pretty steep. I used to sell lemonade for, like, a nickel. 
 The girl frowns at you.
 {@person} It's for charity!
-$if Visited()
+$if Visited() // <- should this have a node here?
     She points at her sign: 
     {@article} Lemonade for flood relief! Help people keep their pets safe!
     {@person} My mom saw a story about it in the Gazette.
@@ -711,6 +735,9 @@ $endif
 $call AdjustStats(Endurance + 1)
 $call AdjustStats(Social + 1)
 
+$CheckFinalConverge()
+$choice ArriveAtRoyalHazelNeighborhood; Keep biking
+
 // Talk to the older couple 
 ::SeeIfTheOlderCoupleNeedsHelp
 {@me} Can I help you with those bags?
@@ -725,6 +752,7 @@ As you set their bags on the top step, the woman's eyes widen.
 $call AdjustStats(Trust + 1)
 $call GiveSnippet(MostPeopleCantGetSandbags)
 
+$CheckFinalConverge()
 $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neighborhood  
 
 // Drive 
@@ -737,16 +765,18 @@ $call GiveSnippet(QuickDescriptionHighIncomeNeighborhood)
 
 // Arrive at Royal Hazel neighborhood 
 :: ArriveAtRoyalHazelNeighborhood
-$if FirstVisit
-Wow. Obviously the city didn't work very hard to clean up the debris here. 
-The few people outside are frowning at you, like maybe you're in the wrong neighborhood. 
+$if FirstVisit()
+    Wow. Obviously the city didn't work very hard to clean up the debris here. 
+    The few people outside are frowning at you, like maybe you're in the wrong neighborhood. 
 $endif 
 
-$choice KnockOnAFewDoors; Knock on a few random doors 
-$choice TalkToWomanStackingSandbags; Talk to woman stacking sandbags 
-$choice TalkToMenCarryingCouchOutside; Talk to men carrying a couch outside 
-$choice AskToTakePhotos; Take some photos 
-$choice TextKhalisaForAdvice; Text Khalisa for advice 
+$CheckFinalConverge()
+
+$HubChoice(KnockOnAFewDoors, "Knock on a few random doors", 0.25, "")
+$HubChoice(TalkToWomanStackingSandbags, "Talk to woman stacking sandbags", 0.25, "")
+$HubChoice(TalkToMenCarryingCouchOutside, "Talk to men carrying a couch outside", 0.25, "")
+$HubChoice(AskToTakePhotos, "Take some photos", 0.25, "")
+$HubChoice(TextKhalisaForAdvice, "Text Khalisa for advice", 0, "")
 
 // AskToTakePhotos
 :: AskToTakePhotos
@@ -803,16 +833,27 @@ $GameOver("Turns out harassing people isn't the best way to earn their trust. Wh
 
 // TalkToMenCarryingCouchOutside
 :: TalkToMenCarryingCouchOutside
-$if FirstVisit
+$if FirstVisit()
 Two men are lugging a couch down their front porch steps.
 They seem surprised when you walk over to them. 
 {@person} You lost, kid? 
 $endif 
 
-$choice AskForAnInterviewFromCouchMovers; Ask to interview them about the flood
-$choice OfferThemLemonade; Offer them your extra cup of cherry lemonade
-$choice OfferASnackFromInYourBag; Offer them a pre-packaged snack from in your bag 
-$choice OfferToHelpBringOutFurniture; Ask if they need help bringing out furniture 
+// Check if player has tried any options yet
+$if Visited(AskForAnInterviewFromCouchMovers)
+    $choice StrategicRetreat; Thank them and make a strategic retreat.
+$elseif Visited(OfferThemLemonade)
+    $choice StrategicRetreat; Thank them and make a strategic retreat.
+$elseif Visited(OfferASnackFromInYourBag)
+    $choice StrategicRetreat; Thank them and make a strategic retreat.
+$elseif Visited(OfferToHelpBringOutFurniture)
+    $choice StrategicRetreat; Thank them and make a strategic retreat.
+$endif
+
+$HubChoice(AskForAnInterviewFromCouchMovers, "Ask to interview them about the flood", 0, "")
+$HubChoice(OfferThemLemonade, "Offer them your extra cup of cherry lemonade", 0, "")
+$HubChoice(OfferASnackFromInYourBag, "Offer them a pre-packaged snack from in your bag", 0, "")
+$HubChoice(OfferToHelpBringOutFurniture, "Ask if they need help bringing out furniture", 0, "")
 
 // Ask to interview them about the flood
 :: AskForAnInterviewFromCouchMovers
@@ -820,7 +861,7 @@ $choice OfferToHelpBringOutFurniture; Ask if they need help bringing out furnitu
 {@person} This place is gonna be underwater in a few hours. Maybe sooner. 
 {@person} We do NOT have time to talk to the press. 
 
-$choice TrySomethingElseToScoreAnInterview; Keep trying to score an interview with them 
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them // <- this choice has no corresponding node
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer the lemonade 
@@ -828,7 +869,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 {@person} Uh... you just carry cups of lemonade around with you?
 {@person} Sorry, but I'm not drinking that. 
 
-$choice TrySomethingElseToScoreAnInterview; Keep trying to score an interview with them 
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer a snack
@@ -837,7 +878,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 {@person} Come to think of it, I could grab you some cold water from inside, if you want...
 {@person} You look a little stressed out. 
 
-$choice TrySomethingElseToScoreAnInterview; Keep trying to score an interview with them 
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer to help bring out furniture 
@@ -846,7 +887,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 {@person} Thanks for asking, though. 
 {@person} Do you need directions back downtown, or....? 
 
-$choice TrySomethingElseToScoreAnInterview; Keep trying to score an interview with them 
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Strategic Retreat
@@ -982,7 +1023,9 @@ $choice HowWereYouAbleToGetSandbagsForYourHome; How were you able to get so many
 $call GiveSnippet(LizQuoteDebrisPiledUp)
 
 $choice HowWereYouAbleToGetSandbagsForYourHome; I heard there's no filling station here. How'd you get all those sandbags? 
-$choice $choice HowDidTheFirstFloodAffectYouLiz; How did the first flood affect you? 
+$choice HowDidTheFirstFloodAffectYouLiz; How did the first flood affect you? 
+
+$choice HowWereYouAbleToGetSandbagsForYourHome; How were you able to get so many sandbags?
 
 // How were you able to get sandbags 
 :: HowWereYouAbleToGetSandbagsForYourHome
@@ -1037,7 +1080,21 @@ $choice FinalConvergeNode; Decide what to do next
 
 :: FinalConvergeNode
 {clear-text}
-{bg } //TODO: add different backgrounds here depending on where you're coming from 
+
+// Possible Origin Nodes:
+    // MayorEndsInterview
+    //  DoYouKnowOfAnyResources (Bookseller)
+    //  ThankMistyForHerHelp
+    //  AskPermissionToTakePhoto
+    //  InterviewSandbagFillingVolunteer
+    //  GoToSandbaggingStation
+    //  IfThereWereMoreFillingStations
+    //  WhatAboutTheSouthSideNeighborhoods
+    //  RideYourBikeRoyalHazel
+    //  StopToBuyLemonade
+    //  SeeIfTheOlderCoupleNeedsHelp
+    //  ArriveAtRoyalHazelNeighborhood
+// {bg }
 Suddenly, your phone buzzes.
 Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 
@@ -1084,8 +1141,8 @@ $choice ReadTextFromDionne; Read text
 {@dionne} Her name's Dr. Nora Warner. No address on file, but she was supposed to be helping people evacuate today. 
 {@dionne} You getting this, El? 
 
-$choice TellDionneYoureBusy
-$choice TellTheInterviewYoullCallBack
+$choice TellDionneYoureBusy; Tell Dionne you're busy
+$choice TellTheInterviewYoullCallBack; Tell the interviewer you'll call back
 
 :: TellDionneYoureBusy
 The rain is coming down harder. This interview could {i}definitely{/i} be going better. 
