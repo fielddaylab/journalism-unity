@@ -124,8 +124,8 @@ $endif
 
 // Original Name: Get Ready part 2
 :: GetReadyPart2
-{layout Left}
 {clear-text}
+{layout Left}
 $if FirstVisit()
 {img Anim/1b/CatchingWater.png}
 The newsroom is starting to fill up now--with people and water.
