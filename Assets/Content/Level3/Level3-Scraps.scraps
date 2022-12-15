@@ -1,5 +1,5 @@
 // :: ExampleSnippet
-// @type Photo, Fact, Quote, Observation, Graph (pick one)
+// @type Photo, Facts, Quote, Observation, Graph (pick one)
 // @quality Bad, Good, Great (pick one)
 // @attr Color, Facts, Useful (pick any number)
 // @image Photo/HospitalDucks.jpg
@@ -10,7 +10,7 @@
 // Mayor interview quote - dodging your question 
 :: MayorQuoteVagueAnswer
 @type Quote 
-@quality Poor 
+@quality Bad 
 @attr Facts 
 “I'm sure our volunteers are doing their best. I'm proud of them for their efforts!”
 
@@ -67,8 +67,8 @@ The mayor didn't have a plan for getting people to the shelter. "I'm sure somebo
 
 :: UselessFredQuoteAboutDeerAttacks
 @type Quote
-@quality Poor 
-@attr Facts 
+@quality Bad 
+@attr Facts
 "Did you know deer sightings are up 3% this year?" said Fred Finkler, local gardener. "Some fawns bit the heads clean off my marigolds!" 
 
 :: GreatFredQuoteAboutShelterAndSocialSafetyNets
@@ -79,7 +79,7 @@ The mayor didn't have a plan for getting people to the shelter. "I'm sure somebo
 
 :: UselessFredQuoteAboutGardening
 @type Quote 
-@quality Poor 
+@quality Bad 
 @attr Color 
 "I thought my zinnias were goners, but they <i>rose</i> to the occasion!" Insert more gardening puns here, you get the idea. 
  
@@ -151,7 +151,7 @@ A local man urged people to speak up about the need for an accessible shelter. F
 
 :: BlurryShelterPhoto
 @type Photo 
-@quality Poor 
+@quality Bad 
 @attr Color 
 //add bad, blurry shelter photo here 
 
@@ -170,7 +170,7 @@ Doug Walker is not able to stay at the shelter because they cannot take in his d
 :: ExasperatedShelterCoordinator
 @type Quote 
 @quality Great 
-@attr Fact, Color 
+@attr Facts, Color 
 The shelter coordinator wasn't thrilled with local resources. "Next delivery will show up in a horse and buggy, at this rate." 
 
 :: OneQuestionConcernsAboutShelter
@@ -187,7 +187,7 @@ According to national standards, the local high school needs several updates to 
 
 :: CoordinatorNotSureWhyPetsArentAllowed
 @type Fact  
-@quality Poor 
+@quality Bad 
 @attr Facts
 The shelter coordinator wasn't sure why pets aren't allowed, but said it might be a safety issue. 
 
@@ -278,7 +278,7 @@ Local vet Fox Smolder said pet owners should stay with relatives, or look for ne
 :: DescriptionOfApartmentInterior
 @type Observation
 @quality Great 
-@attr Fact, Color
+@attr Facts, Color
 Inside Strudel Apartments, the scene is grim: flickering lights, an out-of-order elevator, and moldy carpets.
 
 :: ElectricianInput
@@ -326,7 +326,7 @@ Strudel Apartments still need more repairs, and repair workers are swamped with 
 :: DescriptionOfGroceryStoreChaos
 @type Observation  
 @quality Good 
-@attr Fact, Color
+@attr Facts, Color
 The grocery store was a chaotic scene, with empty shelves and lines that stretched all the way to the parking lot. 
 
 :: AngryLandlordQuote
@@ -367,7 +367,7 @@ The management company only approved $300 in aid for tenants... not even enough 
 
 :: ManagerThinkingOfMoving 
 @type Quote 
-@quality Poor  
+@quality Bad  
 @attr Color 
 "Frankly, it's been a nightmare. I'm thinking of moving to Dual Ponds next month."
 
@@ -418,13 +418,13 @@ According to Ms. Rhodes, the high school needs ramps, automated entrances, wider
 
 :: BadQuoteAndWebsiteReference
 @type Quote 
-@quality Poor 
+@quality Bad 
 @attr Facts
 "I've been doin' a whole lot to prepare for the storm. Just check the city website!"
 
 :: MayorSandbagsQuote 
 @type Quote 
-@quality Poor  
+@quality Bad  
 @attr Facts
 "There are three sandbag filling stations throughout the city. Anyone who needs sandbags can go and get them!"
 
@@ -454,7 +454,7 @@ Local shops--including Bookish, on Main Street--are still recovering as the seco
 
 :: SandbagsOutsideBookstore
 @type Quote 
-@quality Poor
+@quality Bad
 @attr Facts 
 "I sandbagged my shop. But there are definitely issues with the sandbag access."
 
@@ -466,7 +466,7 @@ Local shops--including Bookish, on Main Street--are still recovering as the seco
 
 :: BadDNRStatementAboutSandbagLocations
 @type Fact 
-@quality Poor 
+@quality Bad 
 @attr Facts
 "Sandbag filling stations can be found near Main Street, Amarena Grove, and Morello Road." 
 
@@ -474,7 +474,7 @@ Local shops--including Bookish, on Main Street--are still recovering as the seco
 @type Quote  
 @quality Good 
 @attr Facts
-"Ideally we would've set up 6 or 7 more filling stations, but we only had the resources for 3."
+"We only had the resources for 3 filling stations. That leaves 6 neighborhoods without help."
 
 :: NeedMoreSandbagStationVolunteers 
 @type Quote 
@@ -484,7 +484,7 @@ Local shops--including Bookish, on Main Street--are still recovering as the seco
 
 :: SandbagStationQuoteLocations
 @type Fact 
-@quality Poor 
+@quality Bad 
 @attr Facts 
 According to the DNR, filling stations can be found on Morello Road, Main Street, and the upper lakeside. 
 
@@ -526,7 +526,7 @@ According to the DNR, lower-income households struggle to recover financially fr
 
 :: BlurredFacesFillingStationPhoto
 @type Photo 
-@quality Poor 
+@quality Bad 
 @attr Color
 //Insert filling station photo with faces blurred out 
 
@@ -566,9 +566,9 @@ Graham Johnson said his grandma's house flooded, despite not being in a flood zo
 @attr Useful 
 "Twin Lakes needs volunteers. If you want to help, just show up at a filling station and start shoveling."
 
-:: PoorSandbagStationQuote
+:: BadSandbagStationQuote
 @type Quote 
-@quality Poor 
+@quality Bad 
 @attr Facts 
 "Nah. Not really. But what can you do?"
 
@@ -610,7 +610,7 @@ The historic neighborhoods looked tidier than most of Twin Lakes, with debris al
 
 :: BadRoyalHazelPhoto 
 @type Photo 
-@quality Poor 
+@quality Bad 
 @attr Color 
 //Insert bad photo of low-income neighborhood here, with people cropped out or blurred 
 
@@ -648,7 +648,7 @@ Esme lamented the musical instruments and photos her family lost to the flood. "
 @type Quote 
 @quality Great 
 @attr Facts 
-"All I keep hearing is "not enough money, not enough volunteers, not enough resources. Twin Lakes wasn't prepared for this." 
+"Twin Lakes had plenty of time to get ready for this... Instead, they decided to let us all fend for ourselves." 
 
 :: LizQuoteDebrisPiledUp
 @type Quote 
@@ -678,30 +678,52 @@ Liz described taking 20 trips back and forth to bring back sandbags for herself 
 @type Quote 
 @quality Great 
 @attr Facts 
-"The whole town is connected. If we all start moving out, this town is gonna collapse like an underbaked cherry pie."
+"The whole town is connected. If we all start moving out, this town is gonna collapse like an overbaked cherry souffle."
 
-:: 
-@type
-@quality 
-@attr 
+:: WillasStory
+@type Observation 
+@quality Good 
+@attr Color 
+Local quilter Willa Hornsby wanted to evacuate. But before she could pack up her wares, the dam burst.  
 
-:: 
-@type
-@quality 
-@attr 
+:: NoraBackground
+@type Fact 
+@quality Great
+@attr Color
+Years ago, Dr. Nora Warner's home was destroyed by a flood. Now she researches flood equity in an effort to help others. 
 
-:: 
-@type
-@quality 
-@attr 
+:: DrNoraOnHouseboats
+@type Quote 
+@quality Poor  
+@attr Color 
+"I knew climate change would bring more flooding. Then I discovered houseboats. They literally can't flood!"
 
-:: 
-@type
-@quality 
-@attr 
+:: NoraFloodWarning 
+@type Quote 
+@quality Good 
+@attr Facts 
+"More floods are going to come. Twin Lakes will be washed right off the map unless we make some changes."
 
-:: 
-@type
-@quality 
-@attr 
+:: NoraPrepareBetterNextTime
+@type Quote 
+@quality Great  
+@attr Useful 
+"Update the flood maps. Tell people if they’re at risk. Put a sandbag station in each neighborhood and start enlisting volunteers." 
 
+:: NoraFloodMapIssue
+@type Quote 
+@quality Great 
+@attr Facts, Useful
+"The flood maps don't account for climate change or wetland loss. Twin Lakes needs to pay experts to update those maps ASAP." 
+
+:: NoraFinancialHelp
+@type Quote 
+@quality Great 
+@attr Useful
+"Twin Lakes can help low-income households by pausing rent payments or offering financial aid. Crucial if we want to rebuild."
+
+:: NoraDisasterEquity
+@type Quote 
+@quality Great 
+@attr Facts
+"Disasters hit some people much harder. The town needs to help these groups, or Twin Lakes will fall apart at the seams."
