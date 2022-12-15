@@ -124,8 +124,8 @@ $endif
 
 // Original Name: Get Ready part 2
 :: GetReadyPart2
-{layout Left}
 {clear-text}
+{layout Left}
 $if FirstVisit()
 {img Anim/1b/CatchingWater.png}
 The newsroom is starting to fill up now--with people and water.
@@ -468,25 +468,29 @@ $goto STORYEVALUATION
 {clear-text}
 {/map}
 $if StatCheck(Trust, 3)
-{@dnrvolunteer} Oh, I've heard of you!
-{@dnrvolunteer} So glad Twin Lakes snagged a reporter we can {stat-name}trust{/stat-name}. 
-He tells you how people can sign up to become volunteers.
-Plus, his deepest fears and a story about the time he stole a jar of paper clips from his office.
-$call GiveSnippet(SandbagQuote)
-$call GiveSnippet(VolunteerInfo)
+    {@dnrvolunteer} Oh, I've heard of you!
+    {@dnrvolunteer} So glad Twin Lakes snagged a reporter we can {stat-name}trust{/stat-name}. 
+    He tells you how he became a volunteer and where people can find sandbags.
+    Plus, his deepest fears and a story about the time he stole a jar of paper clips from his office.
+    $call GiveSnippet(SandbagQuote)
+    $call GiveSnippet(VolunteerInfo)
 $elseif StatCheck(Social, 3)
-{@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!  
-He tells you how people can sign up to become volunteers.
-Plus, his favorite color and the names of his three German Shepherds.
-$call GiveSnippet(SandbagQuote)
-$call GiveSnippet(VolunteerInfo)
+    {@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!  
+    He tells you how he became a volunteer and where people can find sandbags.
+    Plus, his favorite color and the names of his three German Shepherds.
+    $call GiveSnippet(SandbagQuote)
+    $call GiveSnippet(VolunteerInfo)
 $else
-You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you. 
+    You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you. 
 
-$choice OfferToShareSomeFoodWithHim; Offer to share some food with him
-$choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record
-$choice ArriveAtFloodSite; Find someone else to talk to 
+    $if StatCheck(Resourceful, 4)
+        $choice OfferToShareSomeFoodWithHim; Offer to share some food with him
+    $endif
+    $if !StatCheck(Trust, 3)
+        $choice AskIfHellTalkOffTheRecord; Ask if he'll talk off the record
+    $endif
 $endif
+    $choice ArriveAtFloodSite; Find someone else to talk to 
 
 // Original Name: Talk to volunteer # 2
 :: TalkToVolunteer2
@@ -673,7 +677,6 @@ $choice AskForAnInterview; Ask the retired fire chief for an interview
 // Original Name: Offer to share some food with him
 :: OfferToShareSomeFoodWithHim
 
-$if StatCheck(Resourceful, 4)
 {@me} Here. I grabbed a sandwich on the way here...
 {@me} Sorry it's a little soggy. 
 {@dnrvolunteer} Hey, thanks, kid!
@@ -681,7 +684,6 @@ While he eats, he tells you how volunteers can get signed up.
 $call GiveSnippet(GreatVolunteeringQuote)
 $call GiveSnippet(VolunteerInfo)
 $choice ArriveAtFloodSite; Decide what to do next 
-$endif
 
 $if !StatCheck(Resourceful, 4)
 You dig through your backpack and find a half-eaten protein bar.
@@ -693,7 +695,6 @@ $endif
 // Original Name: Ask if he'll talk off the record
 :: AskIfHellTalkOffTheRecord
 
-$if !StatCheck(Trust, 3)
 {@dnrvolunteer} Well... okay, fine. 
 {@dnrvolunteer}Please don't put my name in your article, okay?
 He tells you how people can sign up to volunteer.
@@ -701,7 +702,6 @@ You reeeeally wish you could quote him, but it's better than nothing.
 
 $call GiveSnippet(VolunteerInfoWithoutQuote)
 $choice ArriveAtFloodSite; Decide what to do next 
-$endif
 
 
 // Original Name: Record your observations
@@ -881,7 +881,7 @@ $choice CherryFestivalMap; Decide what to do next
 :: AskToBorrowAKayak
 
 $if StatCheck(Trust, 4)
-{@driver} Of course you can borrow a kayak! I can tell you're {stat-name}trustworthy{/stat-check}.
+{@driver} Of course you can borrow a kayak! I can tell you're {stat-name}trustworthy{/stat-name}.
 {@driver}By the way, I loved your piece about the possum family living behind the school.
 {@driver}I had no idea possums were so amazing!! 
 You remember writing that story, the day after you moved here: <i>Playing Possum at Twin Lakes High School</i>. 
