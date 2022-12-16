@@ -7,16 +7,16 @@ This process requires various "secrets" to be configured.
 
 Organizational Secrets:
 
-FIELDDAY_UNITY_LICENSE_2019 (see 'Unity Activiation' Below)
-FIELDDAY_WISC_EDU_DEPLOY_HOST : The host to deploy to, like "fielddaylab.wisc.edu"
-FIELDDAY_WISC_EDU_DEPLOY_KEY : The ssh private key to login to the DEPLOY_HOST
-FIELDDAY_WISC_EDU_DEPLOY_USER : The ssh user to login to the DEPLOY_HOST
-FIELDDAY_VPN_PASSWORD : The password to login to the VPN
-FIELDDAY_VPN_USERNAME : The user to login to the VPN
+* FIELDDAY_UNITY_LICENSE_2019 (see 'Unity Activiation' Below)
+* FIELDDAY_WISC_EDU_DEPLOY_HOST : The host to deploy to, like "fielddaylab.wisc.edu"
+* FIELDDAY_WISC_EDU_DEPLOY_KEY : The ssh private key to login to the DEPLOY_HOST
+* FIELDDAY_WISC_EDU_DEPLOY_USER : The ssh user to login to the DEPLOY_HOST
+* FIELDDAY_VPN_PASSWORD : The password to login to the VPN
+* FIELDDAY_VPN_USERNAME : The user to login to the VPN
 
 Project Secrets:
 
-DEPLOY_DIR : The directory to deploy to, like "/httpdocs/play/game/ci"
+* DEPLOY_DIR : The directory to deploy to, like "/httpdocs/play/game/ci"
 
 UNITY_VERSION is hardcoded into this file and is linked to the activation code. 
 
