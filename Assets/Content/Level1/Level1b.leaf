@@ -467,7 +467,7 @@ $goto STORYEVALUATION
 $if StatCheck(Trust, 3)
     {@dnrvolunteer} Oh, I've heard of you!
     {@dnrvolunteer} So glad Twin Lakes snagged a reporter we can {stat-name}trust{/stat-name}. 
-    He tells you how he became a volunteer and where people can find sandbags.
+    He tells you how people can sign up to become volunteers. 
     Plus, his deepest fears and a story about the time he stole a jar of paper clips from his office.
     $call GiveSnippet(SandbagQuote)
     $call GiveSnippet(VolunteerInfo)
@@ -588,7 +588,11 @@ $choice ArriveAtFloodSite; Back to the dam
 {/map}
 $call SetLocation("Cherry Festival")
 {bg $BG_CherryFestFlood}
+$if FirstVisit()
 <b>Location: the Main Street Cherry Festival</b>
+Or what's left of it.
+Yikes... this is terrifying. You can barely stand up in all this rushing water. 
+$endif 
 
 $if HasTime(0.5)
 $HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25, "Cherry Festival")
@@ -676,7 +680,6 @@ $choice AskForAnInterview; Ask the retired fire chief for an interview
 While he eats, he tells you how volunteers can get signed up. 
 $call GiveSnippet(GreatVolunteeringQuote)
 $call GiveSnippet(VolunteerInfo)
-This high-quality quote will be great for your story! 
 $choice ArriveAtFloodSite; Decide what to do next 
 
 $if !StatCheck(Resourceful, 4)
@@ -694,7 +697,7 @@ $endif
 He tells you how people can sign up to volunteer.
 You reeeeally wish you could quote him, but it's better than nothing.
 
-$call GiveSnippet(VolunteerInfo)
+$call GiveSnippet(VolunteerInfoWithoutQuote)
 $choice ArriveAtFloodSite; Decide what to do next 
 
 
@@ -935,12 +938,8 @@ $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
 Oh no... you must've dropped your zoom lens! 
-
-You try to snap a photo of a crate full of cherries floating past. 
-
-The result: a brownish area, with points.
-
-You're reeeally missing your New York newsroom right about now.  
+You reeeally wish you had the resources of a big city newspaper, like the Smoke City Herald...
+But for now, this'll have to do. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryFloodPhotosTruck)

@@ -138,9 +138,16 @@ Snippet body not implemented.
 // Original Name: Volunteer info
 :: VolunteerInfo
 @type Fact
-@quality Good
+@quality Great 
 @attr Useful
-"The community center is looking for volunteers. People can fill sandbags, check on neighbors, and staff the flood shelter." 
+"Sign up at the community center to become a volunteer. We need people to help fill and stack sandbags! Every bit helps."
+
+// Volunteer info, but don't quote me!
+:: VolunteerInfoWithoutQuote
+@type Fact
+@quality Good
+@attr Useful 
+According to a volunteer, people can sign up at the community center to help fill sandbags. The town is in dire need of help.  
 
 // Original Name: Fire Chief Quote
 :: FireChiefQuote
