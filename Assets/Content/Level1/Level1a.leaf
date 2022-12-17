@@ -121,9 +121,10 @@ $choice OffToWork; Off to work
 @tags Techie, Resourceful
 {clear-text}
 {bg $BG_HouseExterior}
-{img Anim/1a/CollectGear.webm}
+{layout Right}
 You haven't finished unpacking yet--you don't plan to live here very long, anyway. 
 Unfortunately, this makes it <i>slightly<i> tricky to find your rain gear. 
+{img Anim/1a/CollectGear.webm}
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
 $call AdjustStats(Tech + 1, Resourceful + 1)
 $choice OffToWork; Off to work
@@ -150,8 +151,9 @@ $choice OffToWork; Off to work
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
 {img Anim/1a/Duck.webm}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
-{@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
 {/img}
+{@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
+
 
 $choice MessageNurse; See if the hospital employee will let you use his photo.
 $choice ReadFloodingArticle; Read the click-bait article and brush up on your survival skills.
@@ -171,12 +173,13 @@ $choice RushToWork; There's no time, I've got to get to work!
 
 // Original Name: Message Nurse
 :: MessageNurse
-{clear-text}
+{layout Right}
 {@me}Hey - this is a great photo!
 {@me} I'm a reporter at the Gazette. 
 {@me} Would it be okay if I use this photo and credit you? 
 
 $ActionChoice(Send message)
+{layout Right}
 {@localnurse}Ooh, yeah! Go right ahead!
 {@localnurse} I can even give you some headline suggestions! 
 // sway text
@@ -213,7 +216,7 @@ $choice LureChickens; Lure them with food
 
 // Original Name: Rush to work
 :: RushToWork
-{clear-text}
+{layout Right}
 You make up an excuse and hurry to your car.
 Your neighbor can get her own coop in a group.
 
@@ -223,6 +226,7 @@ $choice ImInAHurryTheresNoNeedToBringTheBike; Forget the bike--you're in a hurry
 
 // Original Name: Chase chickens
 :: ChaseChickens
+{layout Right}
 You run around after the chickens and only get pecked twice.
 {@maureen}Oh, thank you so much!
 
@@ -235,8 +239,8 @@ $choice HitTheRoad; Hit the road
 
 // Original Name: Lure chickens
 :: LureChickens
-{layout Right}
 @tags Trust, Resourceful
+{layout Right}
 You make a trail of cherry granola and the chickens come running. 
 {@maureen}Oh, thank you so much!
 {@me}No big deal. Happy to help. 
@@ -262,10 +266,9 @@ $choice DriveWithBike; Drive to the newsroom
 :: DriveWithBike
 {clear-text}
 {layout Right}
-{img Anim/enml-stuckcar.png}
 Wow. This flood might be more serious than you thought.
+{img Anim/RushingWater.png, Left}
 You don't have time to stop for any interviews--you took too long loading up your bike.
-{/img}
 But you should have time to snag a photo or two!
 
 $choice TakeSomePhotos; Take some photos
@@ -275,11 +278,11 @@ $choice TakeSomePhotos; Take some photos
 Wow. It's awful out here. 
 
 $ActionChoice(Stop to look around.)
-{img Anim/1a/CherryMobile.png}
+{img Anim/1a/CherryMobile.png, Left}
 Cars are stranded everywhere--including the famous Twin Lakes Cherrymobile!
 {/img}
 A baker is stacking bags of flour in front of her shop.
-{img Anim/enml-stuckcar.png}
+
 
 $choice HelpTheBaker; Talk to the baker   
 $choice TakeSomePhotos; Take a photo of the stranded Cherrymobile 
@@ -364,18 +367,21 @@ $choice BreakingNewsStory; {@me} Thanks, Dionne. I'm on it.
 
 // Original Name: Help the baker
 :: HelpTheBaker
+{layout Right}
 
-{img Anim/1a/Floursack.png}
 $if StatCheck(Endurance, 2)
     You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
     {@me} Hey. Do you need some help?
+    {img Anim/1a/Floursack.png, Left}
     {@sophia} Ugh. Is it that obvious? 
     She's happy to answer your questions while you stack up bags of flour...
+    {/img}
     And she even gives you a cherry croissant for the road!
     $call AdjustStats(Social + 1, Resourceful + 1)
     $call GiveSnippet(FriendlyShopkeeper)
 $elseif StatCheck(Social, 2)
     You rush over, your heart going out to the struggling shopkeep.
+    {img Anim/1a/Floursack.png, Left}
     You're too tired to lift more than a few bags of flour...
     But the baker seems thrilled to have the chance to vent. 
     She agrees to let you quote her, and even gives you a cherry croissant for the road!
@@ -384,8 +390,11 @@ $elseif StatCheck(Social, 2)
 $else
     You hurry over to the baker, but you don't have the {stat-name}endurance{/stat-name} to help much...
     And you haven't exactly been working on your {stat-name}social skills{/stat-name} lately.  
+    {img Anim/1a/Floursack.png, Left}
     {@me} Um... I think most people use sandbags. Flour might not work. 
     {@sophia} Oh, gee. You think? Thank you, oh-so-brilliant big city reporter, for pointing that out to me. 
+    {/img}
+    {layout Right}
     You ask for an interview, but the baker is, to put it mildly, not interested. 
     Maybe you could quote this, if you remove the profanity...
 
@@ -397,6 +406,7 @@ $choice ArriveAtWork; Arrive at work.
 // Original Name: Take some photos
 :: TakeSomePhotos
 {clear-text}
+{layout Right}
 
 $if StatCheck(Tech, 2)
 Good thing you thought to grab all this {stat-name}tech{/stat-name} gear.
@@ -405,6 +415,7 @@ $call SFX(PhotoSnap)
 $call GiveSnippet(AbandonedCherrymobile)
 
 $else
+{layout Right}
 You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in yoru apartment.
 Your editor is not a fan of blurry photos.
 Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
@@ -439,8 +450,7 @@ $HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.5, "")
 $HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situation", 0.5, "")
 
 :: Office1-Online
-{clear-text}
-{img Anim/1a/OfficeDesk.png}
+{img Anim/1a/OfficeDesk.png, Right}
 You head to your desk, only to find it covered in rain buckets.
 Sigh.
 Stepping between puddles, you eventually find an unoccupied (and dry) corner.
@@ -452,13 +462,13 @@ $OnceChoice(Office1-Weather, "Check the local weather website")
 :: AnswerThePhone
 @tags Trust, Social
 {clear-text}
-{layout Left}
 {/map}
-{img Anim/1a/Phone.png}
+{img Anim/1a/Phone.png, Right}
 {@me} Hello?
 {@fredfinkler} Hiya!! This is Fred Finkler.
 {@fredfinkler} You might remember me from the Town Hall meetings.
 {/img}
+{layout Left}
 Oh gosh. You remember Fred Finkler, alright.
 This guy is singlehandedly responsible for last week's Town Hall meeting going 45 minutes over time.
 
@@ -472,8 +482,7 @@ $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 {clear-text}
 {bg $BG_OfficeExterior}
 {/map}
-{layout Left}
-{img Anim/1a/Map.png}
+{img Anim/1a/Map.png, Right}
 Ooh, here's a great resource for your story: a live flood map! 
 You grab the link and write up a quick blurb on how to use it. 
 Sure, it seems obvious, but this is Twin Lakes. Half of these people are still using flip phones.
@@ -500,20 +509,22 @@ $choice JenkinssComputer; Track down Jenkins's old computer.
 {clear-text}
 {bg $BG_OfficeExterior}
 {/map}
-{layout Left}
-{img Anim/1a/DNRWorker.png}
 $if StatCheck(Social, 2)
+    {layout Left}
     The DNR worker sounds stressed out.
+    {img Anim/1a/DNRWorker.png}
     Luckily, you've had some practice comforting stressed-out neighbors lately.  
-    {/img}
     He vents his frustrations about the flood.
+    {/img}
     $call GiveSnippet(GoodDNR)
     A high-quality quote like this will definitely give your story a boost!
 $else
+    {layout Left}
     The DNR worker sounds stressed out, and your out-of-towner vibe isn't helping.
+    {img Anim/1a/DNRWorker.png, Right}
     {@dnrworker}Sorry, but who are you? Are you even from here??  
-     {/img}
     {@dnrworker}I'll give you our official statement, but then I need to run. 
+    {/img}
     $call GiveSnippet(RehearsedDNR)
     Yikes. Looks like you might need to be more {stat-name}social{/stat-name}. 
 $endif
@@ -561,10 +572,11 @@ $goto Office1-Clock
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
-    {img Anim/1a/HappyChicken.webm}
+    {img Anim/1a/HappyChicken.webm, Right}
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     {/img}
+    {layout Left}
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
     $call GiveSnippet(PoliceSafetyQuote)
     $call GiveSnippet(PoliceStory)
@@ -572,7 +584,7 @@ $else
     The officer coughs awkwardly.
     {@policespokesman} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
     {@policespokesman} She said you almost ran over her chickens this morning.
-    {img Anim/1a/UpsetChicken.webm}
+    {img Anim/1a/UpsetChicken.webm, Right}
     {@me} I wouldn't say 'ran over,' exactly.
     {@policespokesman} I can give you some safety tips, but then I'd better go. 
     {@policespokesman} I don't know what it's like in New York, but around here, we help our neighbors.   
@@ -588,14 +600,16 @@ $goto Office1-Clock
 {/map}
 {layout Left}
 $if StatCheck(Social, 2)
-    {img Anim/1a/Donuts.png}
     {@townhallcontact} El, it's great to hear from you!
+   {img Anim/1a/Donuts.png}
     {@townhallcontact} Everybody here is still talking about those cherry donuts you brought from Sophia's last time. 
     $if Visited(HelpTheBaker)
         {@townhallcontact}I heard you helped rescue her bakery this morning. Nice work!!     
     $else
         {@townhallcontact}Poor Sophia. Did you hear her bakery flooded this morning? What a tragedy.
     $endif
+    {/img}
+    {layout Left}
     {@me} Can you tell me more about the flood?
     {@townhallcontact} Well, so far we know the situation is worst near the Twin Lakes Dam. 
     {@townhallcontact} Volunteers are stacking sandbags, while emergency workers deal with rescues and evacuations.
@@ -604,6 +618,7 @@ $if StatCheck(Social, 2)
     $call GiveSnippet(FloodBackground)
     $call GiveSnippet(CityHallShock)
 $else
+    {layout Left}
     Your Town Hall contact doesn't sound thrilled to hear from you.
     Come to think of it, calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
     {@townhallcontact}{auto} We're pretty busy here, Ms. Benjamin.
@@ -650,9 +665,10 @@ $goto Office1-Clock
 {bg $BG_OfficeExterior}
 {layout Left}
 $call DecreaseTime(0.5)
-{img Anim/1a/UpsetCat.png}
+{img Anim/1a/UpsetCat.png, Right}
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
 {/img}
+{layout Left}
 You don't get any information for your story, but he seems grateful to you for listening.
 
 $call AdjustStats(Trust + 1)
@@ -670,11 +686,13 @@ $endif
 
 // Original Name: Jenkins's Computer
 :: JenkinssComputer
-{img Anim/1a/Computer.png}
+{img Anim/1a/Computer.png, Right}
 
 $if StatCheck(Tech, 2)
 Thanks to your {stat-name}tech skills{/stat-name}, you get logged on easily!
 Jenkins's computer includes data and quotes from local scientists. 
+{/img}
+{layout Left}
 You also dig up his contact at the DNR:
 {@contact}Wynne D. Storme, flood management expert 
 
@@ -683,9 +701,11 @@ Looks like Jenkins knew what he was doing--these quote are seriously high qualit
 $else
 Jenkins's computer looks like it's from the stone age. Or at least the 90's. 
 You don't even know how to turn it on.
+{/img}
+{layout Left}
 Maybe if you were a little more {stat-name}tech{/stat-name}-savvy you could crack it.
 
-You do manage to find a podt-it note with his DNR contact: 
+You do manage to find a post-it note with his DNR contact: 
 {@contact}Wynne D. Storme, flood management expert
 $endif
 

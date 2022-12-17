@@ -79,8 +79,7 @@ $endif
 // Original Name: "Borrow" charger
 :: BorrowCharger
 {clear-text}
-{layout Left}
-{img Anim/1b/PhoneCord.png}
+{img Anim/1b/PhoneCord.png, Right}
 Looks like Ben, the copyeditor, left his phone charger sitting out in the open.
 Small town people... so trusting.
 
@@ -105,8 +104,7 @@ $GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
 @tags Techie
-{layout Left}
-{img Anim/1b/PhoneCord.png}
+{img Anim/1b/PhoneCord.png, Right}
 You plug your phone into Ben's charger and try to look innocent.
 When you hear him coming, you grab your phone and run for it. 
 60% battery should be good enough. Hopefully. 
@@ -127,10 +125,10 @@ $endif
 {clear-text}
 {layout Left}
 $if FirstVisit()
-{img Anim/1b/CatchingWater.png}
+{img Anim/1b/CatchingWater.png, Right}
 The newsroom is starting to fill up now--with people and water.
 Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
-{img Anim/1b/SpinningTire.webm}
+{img Anim/1b/SpinningTire.webm, Right}
 Out front, Khalisa is struggling to push her car out of the flooded street. 
 {/img}
 $endif
@@ -159,7 +157,7 @@ You'll just need to swing by the Lost and Found later for your dignity.
 
 $call AdjustStats(Resourceful + 2, Social - 1, Trust - 1)
 $else
-{img Anim/1b/JellyUmbrella.png}
+{img Anim/1b/JellyUmbrella.png, Right}
 Ben, one of the copyeditors, reluctantly lends you his light-up jellyfish umbrella. 
 {@ben} I worked hard on that thing, El{auto}.
 {@ben} You better not harm a single tentacle.
@@ -206,8 +204,7 @@ $endif
 // Original Name: Lost and Found
 :: LostAndFound
 @tags Resourceful, Techie
-{layout Left}
-{img Anim/1b/LostAndFound.png}
+{img Anim/1b/LostAndFound.png, Right}
 Yikes. The Lost and Found should come with a biohazard warning. 
 But you've got what you need: a phone charger and a raincoat!
 {/img}
@@ -279,7 +276,7 @@ $choice GetReadyPart2; Head back inside
 // Original Name: Breakroom
 :: Breakroom
 {clear-text}
-{img Anim/1b/CoffeePot.png}
+{img Anim/1b/CoffeePot.png, Right}
 Ugh. There's nothing more depressing than soggy donuts and a coffee pot full of rainwater. 
 
 $choice MakeAFreshPotOfCoffeeForTheNewsroom; Make a fresh pot of coffee for the newsroom and boost your {stat-name}social{/stat-name} cred around here 
@@ -370,7 +367,7 @@ $endif
 :: MakeAFreshPotOfCoffeeForTheNewsroom
 @tags Social, Endurance
 {/img} // CoffeePot.png
-{img Anim/1b/CoffeeBag.png}
+{img Anim/1b/CoffeeBag.png, Right}
 You brew some cherry-infused Twin Lakes coffee.  
 Soon all your coworkers are gathered around, trading stories. 
 The coffee tastes like fruit-flavored mud... but it does give you a much-needed energy boost!
