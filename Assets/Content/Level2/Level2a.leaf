@@ -561,7 +561,7 @@ $call GiveSnippet(FloodsAndClimateChange)
 $call GiveSnippet(CauseOfFlood)
 $else
 She doesn't seem interested in talking much... but you can't blame her. 
-You're not really into {stat-name}researcher{/stat-name}, and your {stat-name}social{/stat-name} skills could use some work.
+You're not really into {stat-name}research{/stat-name}, and your {stat-name}social{/stat-name} skills could use some work.
 But she does give you some quick background information.
 Sounds like storms have been getting more severe AND more frequent lately...
 And this one was the worst one yet.
@@ -697,10 +697,11 @@ You ask the business owners if they're okay with being photographed.
 {@businessowner}I saw your article about the Cherry Festival last week. 
 {@businessowner}A "quaint distraction from the boredom of small town life," huh?
 {@me}It.... was an op-ed.... 
-He ignores you and storms away. 
-At least you can still use these photos, if you crop out all the people. 
+He ignores you and storms back to his shopfront. 
 
-$call GiveSnippet(DowntownRecovery)
+$choice MainStreetFloodRecovery; Respect his wishes and don't take any photos here 
+$choice TakeAPhotoAnyway; Take a photo anyway--he probably won't even notice  
+
 $endif
 
 $if !StatCheck(Tech, 3)
@@ -713,8 +714,22 @@ You snap a few random photos and hope for the best.
 $call GiveSnippet(BlurryDowntownRecovery)
 $endif
 
-
 $choice MainStreetFloodRecovery; Keep looking around
+
+:: TakeAPhotoAnyway
+As soon as the guy turns away, you snap a photo. 
+It looks great! This was DEFINITELY worth it! 
+$call GiveSnippet(InspiringDowntownRecovery)
+....Until later, when Dionne calls you from the newsroom.
+{@dionne} What's this photo I just saw come in, El?
+{@dionne} You didn't include that guy's name. 
+Oops... you forgot that she can see your work on the shared drive.
+{@me} Oh, uh... that's because he kinda doesn't know about it. 
+You try to make it sound like a joke, but Dionne isn't laughing.
+<i>Apparently</i> running a photo without someone's consent is a "flagrant ethics violation."
+Come to think of it, you may have heard about that in Journalism school...
+$GameOver("Note to self: that killer photo is NOT worth getting fired over.")
+
 
 // Original Name: Math joke!
 :: MathJoke

@@ -134,7 +134,7 @@ Out front, Khalisa is struggling to push her car out of the flooded street.
 $endif
 
 $if TimeRemaining() >= 0.25
-    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
+    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.50)
     $HubChoice(Breakroom, "Search the break room for snacks", .25)
     $HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
     $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
@@ -908,11 +908,13 @@ Seems your {stat-name}social{/stat-name} cred is going up a little.
 {@deliowner} Here. Have a free sandwich for the road. Be careful out there, kid. 
 $call AdjustStats(Research + 1, Resourceful + 1)
 $else
-Inside, you check the flood map on your phone.
-You could use the deli owner's help, but he's too busy giving you the side-eye.
-You're not the best at navigating {stat-name}social{/stat-name} situations.  
+You could use the deli owner's help, but he's too busy giving you the side-eye.  
 {@deliowner}Buy something if you wanna stick around, kid. 
 {@deliowner}This place is for paying customers only. 
+You'd need a little more {stat-name}social{/stat-name} cred for him to just let you hang out here.
+You buy the cheapest thing on the menu--a slice of day-old cherry loaf. 
+Then you pull up the flood map on your phone. 
+With a little bit of {stat-name}research{/stat-name}, you're able to plan a safe route downtown! 
 $call AdjustStats(Research + 1)
 $endif
 $choice ArriveAtFloodSite; Arrive at the Twin Lakes dam 
