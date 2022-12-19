@@ -236,7 +236,7 @@ $choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags
 
 // Have you been able to access sandbags over the past few days? 
 :: DidYouHaveEnoughAccessToSandbags
-{@bookshop} Yep! My staff and I have sandbags stacked up outside.
+{@bookshop} Yep! A few of my staff members just headed down the street to grab some sandbags. 
 {@bookshop} Though I coudn't help overhearing your phone call...
 {@bookshop} And there are definitely issues with sandbag access around here.
 
@@ -915,23 +915,51 @@ $choice HandleItYourself; Oh... no, I didn't mean to put more on your plate. I'm
 
 // Handle it yourself
 :: HandleItYourself
-You wander the neighborhood, searching for someone who looks willing to talk.
+You canvas the neighborhood, searching for someone who looks willing to talk.
 Unfortunately, this takes longer than you thought it would.
 $HubChoice(KeepSearching, "Keep looking around", 0.25, "")
 
 // Keep looking around
 :: KeepSearching
-Finally, an older Black lady answers the door. 
-{@localwoman} Sorry, Sweetie, I'm not really looking to buy any vacuum cleaners.
-{@localwoman} Or whatever it is you're selling. 
-{@me} Oh... actually, with the Gazette. I'm writing a story about--
-{@localwoman} A story?? Oh, you must be El!
-{@localwoman} I've heard all about you from Imojean, and Sophia, and Maureen...
-{@me} You know ALL of them?
-{@localwoman} We're in the same book club. 
-{@localwoman} I'm Esme. Come on in, Dear! 
-Phew... THAT was a lucky break. 
-$choice InterviewEsme; Go inside and interview her 
+
+$if StatCheck(Research, 6)
+    You're about to give up when you notice a sticker on a nearby window: 
+    <i>Proud Member of The Shelf Indulgence Book Club</i>
+    Ooh... maybe your Wednesday night at the library book club is about to pay off!   
+    You knock and hope for the best. 
+    {@esme} El! Did you read the Stephanie Queen novel yet?
+    {@me} Not yet. I'm actually in the neighborhood working on a story.
+    {@me} Do you think you could spare a few minutes?
+    {@esme} Of course, Dear! Anything for a fellow Shelfie.
+    Phew... looks like your bookish tendancies have paid off again.  
+    $choice InterviewEsme; Go inside and start interview  
+$elseif StatCheck(Social, 6)
+    At one of the last houses you try, an older Black woman opens the door. 
+    {@localwoman} Sorry, Sweetie, I'm not really looking to buy any vacuum cleaners.
+    {@localwoman} Or whatever it is you're selling. 
+    {@me} Oh... actually, with the Gazette. I'm writing a story about--
+    {@localwoman} A story?? Oh, you must be El!
+    {@localwoman} I've heard all about you from Imojean, and Sophia, and Maureen...
+    {@me} You know ALL of them?
+    {@localwoman} We're in the same book club. 
+    {@localwoman} I'm Esme. Come on in, Dear! 
+    Phew... THAT was a lucky break.
+    $choice InterviewEsme; Go inside and start interview 
+$else
+    You keep wandering around, knocking on doors.
+    You're considering calling Khalisa again when your phone rings.
+    //deplete remaining time if possible!
+    {@dionne} El, haven't you been watching the clock? Time's up. 
+    {@me} I'm sorry, Dionne. I just need a few more minutes. 
+    {@me} I can't find anyone in Royal Hazel who's willing to talk!
+    {@dionne} Royal Hazel?
+    {@dionne} El, you're a middle-class white girl from the city. Nobody in Royal Hazel knows you at all.
+    {@dionne} Didn't you think to ask Khalisa or me for help?
+    {@me} Well... I didn't want to bother you...
+    {@dionne} El, the whole point of this story is getting people's voices out there. 
+    {@dionne} Without quotes from the neighborhood you're writing about, I can't publish your story.
+$GameOver("Ugh... looks like this one's destined to die in the Drafts folder.")
+
 
 // Interview 
 :: InterviewEsme
@@ -957,9 +985,9 @@ $choice WhatKindOfHelpDoYouNeed; What would be most helpful to you now?
 // How did the first flood affect you? 
 :: HowDidTheFirstFloodAffectYou
 {@esme} It was awful. Water came rushing into the basement!
-{@esme} My husband is a musician. His trumpet and sheet music... all of it was destroyed.
-{@esme} And some of my old family photos were down there! 
-{@esme} They were up on a shelf--I never dreamed the water would rise so high. 
+{@esme} My husband is a musician. His trumpet, his sheet music... all of it was destroyed.
+{@esme} Plus, some of my old family photos were down there. 
+{@esme} They were up on a shelf--I never dreamed the water would rise so high!
 
 $call GiveSnippet(FloodDamageAnecdote)
 

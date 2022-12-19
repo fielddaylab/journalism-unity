@@ -99,7 +99,7 @@ At least, you think it will be, until your editor calls you into her office.
 {@me} Oh... uh... "steal" is such a strong word.
 {@dionne} Well, look on the bright side, El. 
 {@dionne} Now you'll have a fully charged phone for your job hunt!
-$GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
+$GameOver("Apparently, this is a journalistic way of saying \"you're fired.")
 
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
@@ -134,7 +134,7 @@ Out front, Khalisa is struggling to push her car out of the flooded street.
 $endif
 
 $if TimeRemaining() >= 0.25
-    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.5)
+    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.50)
     $HubChoice(Breakroom, "Search the break room for snacks", .25)
     $HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
     $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
@@ -333,7 +333,7 @@ There's no such thing as too much {stat-name}research{/stat-name}.
 Wellll....ok, maybe there is, but you're not about to go out in a 100-year-flood unprepared. 
 {@me} Sudha, you're monitoring the police scanner, right? Any updates?
 {@sudha} Yeah, but it's not good news.
-{@sudha} Main Street is flooding fast and people are stranded. 
+{@sudha} Main Street is flooding fast and some people are stranded in their shops. 
 {@sudha}Most of the Cherry Festival tents have been swept away! 
 
 $call GiveSnippet(PoliceScannerInfo)
@@ -918,11 +918,13 @@ Seems your {stat-name}social{/stat-name} cred is going up a little.
 {@deliowner} Here. Have a free sandwich for the road. Be careful out there, kid. 
 $call AdjustStats(Research + 1, Resourceful + 1)
 $else
-Inside, you check the flood map on your phone.
-You could use the deli owner's help, but he's too busy giving you the side-eye.
-You're not the best at navigating {stat-name}social{/stat-name} situations.  
+You could use the deli owner's help, but he's too busy giving you the side-eye.  
 {@deliowner}Buy something if you wanna stick around, kid. 
 {@deliowner}This place is for paying customers only. 
+You'd need a little more {stat-name}social{/stat-name} cred for him to just let you hang out here.
+You buy the cheapest thing on the menu--a slice of day-old cherry loaf. 
+Then you pull up the flood map on your phone. 
+With a little bit of {stat-name}research{/stat-name}, you're able to plan a safe route downtown! 
 $call AdjustStats(Research + 1)
 $endif
 $choice ArriveAtFloodSite; Arrive at the Twin Lakes dam 

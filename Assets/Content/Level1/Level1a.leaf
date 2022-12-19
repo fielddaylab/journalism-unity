@@ -31,8 +31,9 @@
 // Original Name: START
 :: START
 {img Anim/1a/Newspaper.png}
-New reporter hired at Twin Lakes Gazette!
-El Benjamin just moved to town from the big city and we’re thrilled to have her here.
+{@article}"NEW REPORTER JOINS TWIN LAKES GAZETTE!"
+{@article} "El Benjamin, who graduated Journalism School last month, is the first out-of-towner to join our staff."
+{@article} "Make sure to give her a warm Twin Lakes welcome!"
 $ActionChoice(Wake up)
 {/img}
 $call SetLocation("Apartment")
@@ -40,8 +41,9 @@ $call SetLocation("Apartment")
 $call Music(Music/rainy day in cherry town.mp3)
 $call Ambience(Ambience/rain-inside.mp3)
 {layout Right}
-Welcome to Twin Lakes, day 11. 
-The Cherry Capitol of the Midwest. 
+You wake up to your phone buzzing.
+It takes a few seconds to remember where you are: 
+Twin Lakes. The Cherry Capitol of the Midwest. 
 Your friends back in New York were SO JEALOUS you snagged a reporting job straight out of college.
 Lucky you. 
 
@@ -52,7 +54,7 @@ $choice CheckYourPhone; Check your phone.
 {clear-text}
 {img Anim/1a/MissedCalls.png}
 
-Five missed calls from your editor, Dionne.
+Five missed calls from your editor.
 Probably checking up on your puff piece about the Cherry Festival.
 
 
@@ -83,10 +85,10 @@ $choice OnMyWay; {@me} "On my way."
 {clear-text}
 $call SetHeaderEnabled(true)
 {layout Right}
-This is it. Your chance to prove yourself.
-You can't stop thinking about that email from your dream job: the Smoke City Herald. 
-{@email} We don't hire reporters fresh out of school, Ms. Benjamin. 
-{@email} Get some real experience. Find an editor who's willing to vouch for you. Then we'll talk.
+You should be focusing on getting ready. 
+But you can't stop thinking about that email from your dream job: the Smoke City Herald. 
+{@email} "We don't hire reporters fresh out of school, Ms. Benjamin. 
+{@email} "Get some real experience. Then we'll talk."
 {img Anim/1a/Countdown.png}
 So... here you are, in a three-month contract with the Twin Lakes Gazette.
 Three months, and you'll be on to bigger and better things.
@@ -122,8 +124,9 @@ $choice OffToWork; Off to work
 {clear-text}
 {bg $BG_HouseExterior}
 {layout Right}
-You haven't finished unpacking yet--you don't plan to live here very long, anyway. 
-Unfortunately, this makes it <i>slightly<i> tricky to find your rain gear. 
+You haven't finished unpacking your boxes yet.
+You don't plan to live here very long, anyway. 
+Unfortunately, this makes it <i>slightly</i> tricky to find your rain gear. 
 {img Anim/1a/CollectGear.webm}
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
 $call AdjustStats(Tech + 1, Resourceful + 1)
@@ -360,8 +363,8 @@ $call BeginTutorial()
     $call CloseWindow()
 $call EndTutorial()
 
-{@dionne} You've got 2 hours. Good luck, El. {auto}
-$call SetTimeRemaining(2)
+{@dionne} You've got 1 hour. Good luck, El. {auto}
+$call SetTimeRemaining(1)
 
 $choice BreakingNewsStory; {@me} Thanks, Dionne. I'm on it. 
 
@@ -444,10 +447,10 @@ $if FirstVisit()
 $endif
 
 $HubChoice(Office1-Online, "Get online and look for useful material", 0.25, "")
-$HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.75, "")
-$HubChoice(Office1-DNR, "Call the Department of Natural Resources for expert advice", 0.5, "")
-$HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.5, "")
-$HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situation", 0.5, "")
+$HubChoice(Office1-Coworker, "Dig through old files about local flooding", 0.25, "")
+$HubChoice(Office1-DNR, "Call the Department of Natural Resources for expert advice", 0.25, "")
+$HubChoice(Office1-Police, "Call the police spokesman for safety tips", 0.25, "")
+$HubChoice(Office1-CityHall, "Call your City Hall contact to ask about the situation", 0.25, "")
 
 :: Office1-Online
 {img Anim/1a/OfficeDesk.png, Right}
@@ -705,7 +708,7 @@ You don't even know how to turn it on.
 {layout Left}
 Maybe if you were a little more {stat-name}tech{/stat-name}-savvy you could crack it.
 
-You do manage to find a post-it note with his DNR contact: 
+You do manage to find a sticky note with his DNR contact: 
 {@contact}Wynne D. Storme, flood management expert
 $endif
 

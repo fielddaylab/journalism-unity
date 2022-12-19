@@ -130,9 +130,8 @@ But hey, it's for a good cause. Sort of.
 {@mayorbarrysmuckers} Because once I talk to your editor, you'll never work in this town again. 
 {@mayorbarrysmuckers} By the way, I won the pie-eating contest at Sophia's last year. 
 {@mayorbarrysmuckers} The prize: free cherry jam for life. 
-Uh oh. Maaaaybe you should've thought this through.
 
-$GameOver("YOU'RE FIRED! GAME OVER")
+$GameOver("Oops. Maaaaybe you should've thought this through.")
 
 //Interview Mayor
 :: InterviewMayorAboutEmergencyShelter
@@ -1148,7 +1147,7 @@ You try to run, but a police officer blocks your path.
 {@person} Look, I don't have time for nonsense, El. 
 {@person} I'm gonna have to take you down to the station and figure all this out. 
 
-$GameOver("GAME OVER. At least you've got a healthy snack for the drive downtown.")
+$GameOver("At least you've got a healthy snack for the drive downtown.")
 
 // Offer to take the lady to the fancy grocery store and buy some seeds 
 :: OfferToTakeHerToTheStore
