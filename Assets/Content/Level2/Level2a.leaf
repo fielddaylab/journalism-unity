@@ -314,14 +314,16 @@ $goto STORYEVALUATION
 {/map}
 $call SetLocation("Downtown")
 {bg $BG_TownTransitional}
-You pedal through town, weaving around abandoned cars and piles of sandbags.
+Wow... the flood really did a number on this place.
+You navigate carefully around broken glass and cherry-themed debris. 
 $call AdjustStats(Endurance + 1)
 
 $if Visited(HelpHer)
-    From down a side street, you hear a soft clucking. 
+    As you bike along, you hear a soft clucking from just around the corner. 
     Did another of Maureen's chickens escape its coop??
 $else
-    From down a side street, you hear a soft clucking. Amelia Egghart???
+As you bike along, you hear a soft clucking from around the corner. 
+Could it be Amelia Egghart???
 $endif
 
 $choice MainStreetFloodRecovery; Head straight to Main Street
@@ -482,6 +484,10 @@ $call SetLocation("Downtown")
 $if FirstVisit()
 {bg $BG_FirstStDowntownCleanup}
 Your story is due in {timeLeft}.
+
+Oh no... this place looks awful.
+A few days ago, there was a bustling Cherry Festival here. 
+How will people ever recover? 
 $endif
 
 $if HasTime(0.5)

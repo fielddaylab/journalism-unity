@@ -31,9 +31,9 @@
 // Original Name: START
 :: START
 {img Anim/1a/Newspaper.png}
-{@article}NEW REPORTER HIRED AT THE TWIN LAKES GAZETTE!
-{@article} El Benjamin just moved to town from the big city! 
-{@article} Make sure to give her a warm Twin Lakes welcome. 
+{@article}"NEW REPORTER JOINS TWIN LAKES GAZETTE!"
+{@article} "El Benjamin, who graduated Journalism School last month, is the first out-of-towner to join our staff."
+{@article} "Make sure to give her a warm Twin Lakes welcome!"
 $ActionChoice(Wake up)
 {/img}
 $call SetLocation("Apartment")
@@ -43,8 +43,7 @@ $call Ambience(Ambience/rain-inside.mp3)
 {layout Right}
 You wake up to your phone buzzing.
 It takes a few seconds to remember where you are: 
-Twin Lakes, day 11. 
-The Cherry Capitol of the Midwest. 
+Twin Lakes. The Cherry Capitol of the Midwest. 
 Your friends back in New York were SO JEALOUS you snagged a reporting job straight out of college.
 Lucky you. 
 
@@ -88,8 +87,8 @@ $call SetHeaderEnabled(true)
 {layout Right}
 You should be focusing on getting ready. 
 But you can't stop thinking about that email from your dream job: the Smoke City Herald. 
-{@email} We don't hire reporters fresh out of school, Ms. Benjamin. 
-{@email} Get some real experience. Find an editor who's willing to vouch for you. Then we'll talk.
+{@email} "We don't hire reporters fresh out of school, Ms. Benjamin. 
+{@email} "Get some real experience. Then we'll talk."
 {img Anim/1a/Countdown.png}
 So... here you are, in a three-month contract with the Twin Lakes Gazette.
 Three months, and you'll be on to bigger and better things.
@@ -709,7 +708,7 @@ You don't even know how to turn it on.
 {layout Left}
 Maybe if you were a little more {stat-name}tech{/stat-name}-savvy you could crack it.
 
-You do manage to find a post-it note with his DNR contact: 
+You do manage to find a sticky note with his DNR contact: 
 {@contact}Wynne D. Storme, flood management expert
 $endif
 

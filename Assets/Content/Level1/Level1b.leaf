@@ -99,7 +99,7 @@ At least, you think it will be, until your editor calls you into her office.
 {@me} Oh... uh... "steal" is such a strong word.
 {@dionne} Well, look on the bright side, El. 
 {@dionne} Now you'll have a fully charged phone for your job hunt!
-$GameOver("Apparently, this is a journalistic way of saying \"you're fired."")
+$GameOver("Apparently, this is a journalistic way of saying \"you're fired.")
 
 // Original Name: Unplug his phone and charge yours
 :: UnplugHisPhoneAndChargeYours
@@ -333,7 +333,7 @@ There's no such thing as too much {stat-name}research{/stat-name}.
 Wellll....ok, maybe there is, but you're not about to go out in a 100-year-flood unprepared. 
 {@me} Sudha, you're monitoring the police scanner, right? Any updates?
 {@sudha} Yeah, but it's not good news.
-{@sudha} Main Street is flooding fast and people are stranded. 
+{@sudha} Main Street is flooding fast and some people are stranded in their shops. 
 {@sudha}Most of the Cherry Festival tents have been swept away! 
 
 $call GiveSnippet(PoliceScannerInfo)

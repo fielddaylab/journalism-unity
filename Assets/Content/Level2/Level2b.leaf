@@ -140,7 +140,7 @@ $GameOver("You lost the scoop. Better luck next time."")
 {clear-text}
 {layout Right}
 You wake up bright and early. Again.
-You have time to do one thing before heading to Snakebite Trail. 
+You have time to do one thing before heading to the marsh.
 
 $OnceChoice(GatherSupplies, "Gather tech supplies and hiking gear")
 $LocationChoice(MeetSomeOtherReportersForCoffee, "Meet Khalisa and Ben for breakfast and coffee", "Downtown")
@@ -214,7 +214,7 @@ When you arrive, Ben is eager to hear about the Great Chicken Rescue.
 {@ben}I heard you saved the mayor's chicken from drowning!!
 {@ben}Is it true you swam to the bottom of the lake to rescue the eggs?
 {@me}Um... not even a little bit.
-Ben doesn't seem to hear you. Maybe this is how small-town legends get started. 
+Ben doesn't seem to hear you. Looks like this is how small-town legends get started. 
 
 $call AdjustStats(Trust + 1)
 $elseif Visited(MainStreetCafe)
@@ -260,12 +260,15 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 // Original Name: "How is that related to the flooding?"
 :: HowIsThatRelatedToTheFlooding
 {@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
-{@birdie}But 90% of our original wetlands are gone.
-{@birdie}Cherry Creek Marsh is the only one we've got left.
+{@birdie}But 90% of our original wetlands are gone!
+{@player} Wow... 90%? That seems like a lot. 
+{@player} Do you have a source for that?
+{@birdie} Well, not offhand. I read it somewhere online.
+{@birdie} The point is, we need to save our wetlands before it's too late. 
 
 $call GiveSnippet(WetlandsRelatedToFlooding)
-
-Hmm... That's a bold claim. Better get that verified later. 
+Hmm... sounds like Birdie wasn't too sure about that statistic. 
+You'll need an expert to verify the numbers. 
 
 $OnceChoice(WhatDoYouMeanByWetlands, "Can you tell me what you mean by \"wetlands?\"")
 $OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
