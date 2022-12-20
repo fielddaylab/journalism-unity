@@ -151,7 +151,7 @@ $endif
 {layout Left}
 $if Visited(BorrowTech)
 Your coworkers take pity on you and lend you stuff. Again. 
-{img Anim/1b/JellyUmbrella.png}
+{img Anim/1b/JellyUmbrella.png, Right}
 Ben lets you borrow his tricked-out jellyfish-themed umbrella. 
 You'll just need to swing by the Lost and Found later for your dignity.
 
@@ -312,7 +312,7 @@ The drive takes longer than usual, but at least you're not stranded.
 $choice ArriveAtFloodSite; Arrive at flood site
 $else
 Uh oh. Turns out flood maps aren't super helpful if you haven't bothered getting to know the local streets yet.
-{img Anim/1b/DoNotDrive.png}
+{img Anim/1b/DoNotDrive.png, Right}
 And does red mean flooding, or is it yellow...?
 If you were more {stat-name}tech{/stat-name} or {stat-name}research{/stat-name} savvy, you might know...
 But that's not helpful right now. Water is rising all around you!
@@ -419,6 +419,7 @@ $endif
 :: FindHigherGround
 {/map}
 $call SetLocation("Deli Parking Lot")
+{layout Left}
 You swerve into a parking lot, just in time!
 
 $choice LookAroundForSomethingUseful; Look around for something useful
@@ -426,6 +427,7 @@ $choice LookAroundForSomethingUseful; Look around for something useful
 // Original Name: Floor it
 :: FloorIt
 {/map}
+{layout Left}
 Your car splashes along valiantly for a few seconds, then sputters and dies.  
 Oh no... now what??? 
 Floodwater rushes past. Minnows and bluegills are jumping around you. 
@@ -607,6 +609,7 @@ $endif
 
 // Original Name: Look around for something useful
 :: LookAroundForSomethingUseful
+{layout Left}
 Nearby, there's a deli with a <color="red">Come On In!</color> sign flashing...
 And a stranded car with two kayaks strapped to the roof. 
 
@@ -626,6 +629,7 @@ $choice EjectJustKeepSwimming; Ahhh! Help!!
 
 // Original Name: Wait for rescue
 :: WaitForRescue
+{layout Left}
 You sit on your car roof, contemplating the meaning of life.
 Then a flood-rescue vehicle splashes up next to you!
 The driver is an older Black man in a Twin Lakes Fire Dept sweater.
@@ -635,6 +639,7 @@ $choice HitchARideWithRetiredFirefighter; Hitch a ride
 
 // Hitch a ride
 :: HitchARideWithRetiredFirefighter
+{layout Left}
 You climb onboard with the retired firefighter...
 Who also happens to be Khalisa's dad. 
 
@@ -661,12 +666,14 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Wait outside
 :: WaitOutside
-{img Anim/1b/FloodTruck.png}
+{img Anim/1b/FloodTruck.png, Right}
 Khalisa's dad shows up in a tricked-out flood rescue vehicle. 
 {@firechief} Rigged this baby up in my spare time!
+{/img}
+{layout Left}
 {@firechief} Khalisa says I need to get a hobby. But have you seen that little coffee bean of a car she drives?
 {@firechief} It's a miracle she hasn't gotten stranded yet!
-{/img}
+
 
 $choice TakePhotosOnTheWay; Take photos on the ride downtown 
 $choice AskForAnInterview; Ask the retired fire chief for an interview
@@ -876,6 +883,7 @@ $choice CherryFestivalMap; Decide what to do next
 
 // Original Name: Ask to borrow a kayak
 :: AskToBorrowAKayak
+{layout Left}
 
 $if StatCheck(Trust, 4)
 {@driver} Of course you can borrow a kayak! I can tell you're {stat-name}trustworthy{/stat-name}.
@@ -898,6 +906,8 @@ $endif
 // Original Name: Use deli wifi
 :: UseDeliWifi
 @tags Bookworm, Resourceful
+
+{layout Left}
 
 $if StatCheck(Social, 3)
 The deli owner helps you plan a safer route.
@@ -932,6 +942,7 @@ $GameOver("You needed to be rescued. Better luck next time.")
 :: TakePhotosOnTheWay
 
 $if StatCheck(Tech, 3)
+{layout Left}
 On the ride downtown, you snag some great shots with your zoom lens!
 The scene is full of cherry-themed drama.
 Your editor is gonna LOVE this. 
@@ -939,6 +950,7 @@ Your editor is gonna LOVE this.
 $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
+{layout LeftS}
 Oh no... you must've dropped your zoom lens! 
 You reeeally wish you had the resources of a big city newspaper, like the Smoke City Herald...
 But for now, this'll have to do. 
@@ -952,9 +964,10 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Ask for an interview
 :: AskForAnInterview
+{layout Left}
 The former chief is eager to chat with you.
 
-{img Anim/1b/CupidArrow.png}
+{img Anim/1b/CupidArrow.png, Right}
 He spends most of the ride trying to set you up with Khalisa (single, adventurous, loves frozen yogurt). 
 {/img}
 
@@ -1117,10 +1130,11 @@ $endif
 
 // Original Name: Ask how the flood has affected his family.
 :: AskHowTheFloodHasAffectedHisFamily
-{img Anim/1b/HigherGround.png}
+{img Anim/1b/HigherGround.png, Right}
 {@firechief}My wife and I have flood insurance and our house is on high ground, so we'll be okay.
 {@firechief} Other folks aren't so lucky. I'm not sure how downtown is gonna recover. 
 {/img}
+{layout Left}
 
 $call GiveSnippet(GreatFloodQuote)
 
@@ -1128,25 +1142,27 @@ $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Ask for flood safety tips.
 :: AskForFloodSafetyTips
+{layout Left}
 {@firechief} Well, there's the obvious: don't drive through floodwater!
 {@firechief} Well... unless you've got a rescue vechicle like mine.
-{img Anim/1b/Bacteria.png}
+{img Anim/1b/Bacteria.png, Right}
 {@firechief} And don't wade or swim in floodwater. It's usually full of bacteria.
 {/img}
 
-$call GiveSnippet(GreatFloodQuote)
 $call GiveSnippet(FloodSafetyTips)
 
 $choice ArriveAtFloodSite; Arrive at flood site
 
 // Original Name: Ask what caused the flood.
 :: AskWhatCausedTheFlood
+{layout Left}
 He gives you a funny look. 
-{@firechief}What <i>caused</i>the flood?
-{img Anim/1b/Cloud.png}
+{@firechief}What <i>caused</i> the flood?
+{img Anim/1b/Cloud.png, Right}
 {@firechief} I'm gonna go out on a limb here and say that it was the rain.
 He's got a point there. Mayyyybe you could've phrased that question a little better. 
 {/img}
+{layout Left}
 $call GiveSnippet(BadFloodCauseQuote)
 
 $choice ArriveAtFloodSite; Arrive at flood site
