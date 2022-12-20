@@ -325,7 +325,7 @@ $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 $HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
 $choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
-$HubCoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "")
 
 //Failed Mayor Interview
 :: SnagInterviewWithMayorFailed
