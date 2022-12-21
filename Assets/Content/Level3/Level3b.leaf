@@ -50,7 +50,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Go for a jog at Cherry Creek Marsh
 :: GoForAJogAtCherryCreekMarsh
-{bg $BG/CherryCreekMarsh2.jpg}
+{bg $BG_CherryCreekMarsh}
 {clear-text}
 You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.

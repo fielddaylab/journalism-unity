@@ -919,11 +919,16 @@ $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments",
 :: GoToSeniorCitizenApartments
 {bg $BG_SeniorCitizenApts}
 
-$HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
-$HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
-$HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
-$HubChoice(TryToInterviewElectricalWorker, "Ask electrical worker why people aren't allowed back inside", 0.25, "")
-$choice NextStepAtApartments; Go somewhere else 
+$if TimeRemaining() > 0.25
+      $choice NextStepAtApartments; Go somewhere else 
+      $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
+      $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
+      $HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
+      $HubChoice(TryToInterviewElectricalWorker, "Ask electrical worker why people aren't allowed back inside", 0.25, "")
+$else
+      $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
 
 //InterviewElectricalWorker
 :: TryToInterviewElectricalWorker
@@ -1022,13 +1027,16 @@ Poor lady. She reminds you of your neighbor Jeannie...
 Except with a quail curled up on her lap instead of a cat. 
 $call GiveSnippet(ApartmentContext)
 
+$if Visited(WhereHaveYouBeenStaying), Visited(DoYouKnowWhenYoullBeAllowedBackIn)
+      $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help?
+$endif
 $OnceChoice(WhereHaveYouBeenStaying, "Where have you been staying?")
 $OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?")
 
 // Where have you been staying in the meantime?
 :: WhereHaveYouBeenStaying
 {@imojean} I'm staying with my sister in West Forks. 
-{@imojean} But that city is too big and noisy for me. 
+{@imojean} But that city is too big and noisy for me.
 {@imojean} I just want to be home. 
 $call GiveSnippet(SadApartmentColorQuote)
 
@@ -1054,11 +1062,18 @@ $OnceChoice(WhereHaveYouBeenStaying, "Where have you been living in the meantime
 {@imojean} She's been having to eat pellets! Poor little thing.
 The quail on her lap curls up and coos sadly. 
 
-$HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
-$HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
-$HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
-$choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks)
+
+$if TimeRemaining() > 0.25
+      $choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks
+      $HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
+      $HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
+      $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
+$else
+      $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
 $choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
+
 
 // Try to convince the building manager to let you go inside for Queenie's food 
 ::SeeIfYouCanGetInside
