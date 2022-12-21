@@ -4,12 +4,13 @@
 // Creator: Twine
 
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
-#const BG_EvacShelter = "BG/EvacShelter.jpeg"
+#const BG_EvacShelter = "BG/EvacShelter.mp4"
 #const BG_SandbagStation = "BG/SandbagStation.mp4"
 #const BG_HouseExt = "BG/HouseExt.mp4"
-#const BG_TownTransitional = "BG/TownTransitional.mp4"
+#const BG_LowIncomeSt = "BG/LowIncomeSt.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 #const BG_Bookshop = "BG/Library.mp4"
+#const BG_QuiltLady = "BG/QuiltLady.mp4"
 
 
 # start Level3Story2
@@ -694,8 +695,6 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
-{bg $BG_TownTransitional}
-
 {layout Right}
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris has been cleared away. 
@@ -757,7 +756,6 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neigh
 
 // Drive 
 :: Drive
-{bg $BG_TownTransitional}
 You drive through the historic, higher-income neighborhoods, heading south. 
 The debris from the last flood has already been cleared away. 
 
@@ -765,6 +763,7 @@ $call GiveSnippet(QuickDescriptionHighIncomeNeighborhood)
 
 // Arrive at Royal Hazel neighborhood 
 :: ArriveAtRoyalHazelNeighborhood
+{bg $BG_LowIncomeSt}
 $if FirstVisit()
     Wow. Obviously the city didn't work very hard to clean up the debris here. 
     The few people outside are frowning at you, like maybe you're in the wrong neighborhood. 
@@ -1283,7 +1282,7 @@ $choice GoInsideTheHouse; Go inside
 
 // Dry off and look around
 :: GoInsideTheHouse
-// Add background: inside the quilter's house! 
+{bg $BG_QuiltLady}
 {@me} Thank you! I didn't think I was gonna make it.
 {@mysteryrescuer} Happy to help, Dear. I'm just glad Willa and I happened to be looking outside.
 Whoa. Your rescuer is Nora, the Houseboat Lady!
