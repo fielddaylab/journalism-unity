@@ -4,20 +4,21 @@
 // Creator: Twine
 
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
+#const BG_HouseExtNoRain = "BG/HouseExtNoRain.jpg"
 #const BG_EvacShelter = "BG/EvacShelter.mp4"
 #const BG_SandbagStation = "BG/SandbagStation.mp4"
-#const BG_HouseExt = "BG/HouseExt.mp4"
 #const BG_LowIncomeSt = "BG/LowIncomeSt.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 #const BG_Bookshop = "BG/Library.mp4"
 #const BG_QuiltLady = "BG/QuiltLady.mp4"
+#const BG_MainStreet = "BG/MainStreet.jpg"
 
 
 # start Level3Story2
 
 // Original Name: Level 3, Story 2
 :: Level3Story2
-{bg $BG_HouseExt}
+{bg $BG_HouseExtNoRain}
 Email Notification:
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
@@ -84,6 +85,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
+{bg $BG_MainStreet}
 {clear-text}
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Smoke City Herald yet. 

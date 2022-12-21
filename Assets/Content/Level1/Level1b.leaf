@@ -1221,15 +1221,15 @@ $else
 $endif 
 
 :: TryToKeepSwimming
-    Phew, thank goodness.
-    You wake up warm and dry in bed. It was all just a dream!
-    Then you notice where you are:
-    A room at the Twin Lakes Medical Center, with a card and a wheel of fancy cheese on the table.
-    {img Anim/1b/ThankYou.png}
-    {@cheeseshop} Dear Ms. Benjamin, thank you so much for risking your life for my little shop! I hope that broken ankle heals up <i>gouda</i>.
-    Ugh. You're out of commission... but at least you've got free cheese for life. 
-    {/img}
-    GAME OVER. 
+Phew, thank goodness.
+You wake up warm and dry in bed. It was all just a dream!
+Then you notice where you are:
+A room at the Twin Lakes Medical Center, with a card and a wheel of fancy cheese on the table.
+{img Anim/1b/ThankYou.png}
+{@cheeseshop} Dear Ms. Benjamin, thank you so much for risking your life for my little shop! I hope that broken ankle heals up <i>gouda</i>.
+Ugh. You're out of commission... but at least you've got free cheese for life. 
+{/img}
+$GameOver("If you're going to fight the current, you've got to be a strong swimmer.")
 
 // Original Name: Show him the photos you took outside, to help him understand this dire situation.
 :: ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation
