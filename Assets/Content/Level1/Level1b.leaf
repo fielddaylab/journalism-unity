@@ -549,38 +549,39 @@ $call GiveSnippet(HouseboatPhotos)
 $endif
 
 $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
-You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
-{img Anim/1b/RainGauge.pn}
-The wind and rain make it tricky to get a good shot...
-But then you notice a nearby tree. The perfect vantage point! 
-Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top. 
-
-$call GiveSnippet(HouseboatPhotos)
+    You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
+    {img Anim/1b/RainGauge.png}
+    The wind and rain make it tricky to get a good shot...
+    {img Anim/1b/Tree.png}
+    But then you notice a nearby tree. The perfect vantage point! 
+    Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top.
+    {/img}
+    $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Resourceful, 3)
-The Twin Lakes Gazette doesn't have big-city resources like fancy gear and pro photographers. 
-Good thing you're {stat-name}resourceful{/stat-name}. 
-// TODO: find asset for this image
-You rig up a tripod with a broken branch, a shoelace, and a scrunchie. 
-This photo isn't perfect, but it's not bad, either. 
+    The Twin Lakes Gazette doesn't have big-city resources like fancy gear and pro photographers. 
+    Good thing you're {stat-name}resourceful{/stat-name}. 
+    // TODO: find asset for this image
+    You rig up a tripod with a broken branch, a shoelace, and a scrunchie. 
+    This photo isn't perfect, but it's not bad, either. 
 
-$call SFX(PhotoSnap)
-$call GiveSnippet(OkayHouseboatPhotos)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(OkayHouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
-Oh no... your camera battery is dead!
-You ask around for help, and your {stat-name}social{/stat-name} graces pay off.
-{@dnrvolunteer} You seem like a nice kid. Go ahead and borrow my camera!
+    Oh no... your camera battery is dead!
+    You ask around for help, and your {stat-name}social{/stat-name} graces pay off.
+    {@dnrvolunteer} You seem like a nice kid. Go ahead and borrow my camera!
 
-$call AdjustStats(Tech + 1)
-$call SFX(PhotoSnap)
-$call GiveSnippet(OkayHouseboatPhotos)
+    $call AdjustStats(Tech + 1)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(OkayHouseboatPhotos)
 $elseif Stat(Tech) == 2
-Oh no... your camera battery is dead!
-You use your phone to snap a few grainy shots.
-You've never really gotten the hang of taking photos in the dark, in the rain...
-But at least a low-quality photo is better than nothing. 
+    Oh no... your camera battery is dead!
+    You use your phone to snap a few grainy shots.
+    You've never really gotten the hang of taking photos in the dark, in the rain...
+    But at least a low-quality photo is better than nothing. 
 
-$call SFX(PhotoSnap)
-$call GiveSnippet(BlurryHouseboatPhotos)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(BlurryHouseboatPhotos)
 $endif
 
 $choice ArriveAtFloodSite; Back to the dam

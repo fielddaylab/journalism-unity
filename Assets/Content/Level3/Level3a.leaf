@@ -59,6 +59,7 @@ $choice AcceptStory; Accept Story Assignment
 //Accept Story Assignment
 :: AcceptStory 
 @checkpoint
+{bg $BG_TownMeeting}
 $call SetTimeRemaining(4)
 
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
@@ -276,16 +277,16 @@ $choice FredFloodShelter; The flood shelter. Do you have any concerns?
 //The flood shelter. Do you have any concerns about it?
 :: FredFloodShelter
 {@fredfinkler} Oh, absolutely I'm concerned. One shelter won't have space for everyone. 
-{@fredfinklern} The mayor keeps talking about how we'll all help each other. 
+{@fredfinkler} The mayor keeps talking about how we'll all help each other. 
 {@fredfinkler} But I'm afraid I don't have that much faith in people.   
 {@fredfinkler} We need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower! 
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 
+$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "")
 
 // Yeah, okay. But if we could just talk about something else for a minute... 
@@ -304,9 +305,9 @@ $HubChoice(KeepPressing, "Keep pressing him about the flood shelter", 0.25, "")
 :: CutYourLosses
 {@me} Thanks, Fred. I better go. Congrats on keeping those zinnias alive.
 
+$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25, "")
 
 //KeepPressing
@@ -322,9 +323,9 @@ $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25
 
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 
+$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "")
 
 //Failed Mayor Interview
@@ -377,7 +378,7 @@ $choice WhatWouldYouSayToPeople; What about the people who need to evacuate thei
 {@pattyforbes} Amarena Grove is a peaceful neighborhood. I'd like to keep it that way. 
 {@pattyforbes} Who knows what those flood evacuees will bring with them?? 
 
-$choice GiveSnippet(RudeRichLadyQuote)
+$call GiveSnippet(RudeRichLadyQuote)
 
 $choice snarkyresponse; Hm. I would guess some clothes and toothbrushes and granola bars. 
 $choice WhatWouldYouSayToPeople; What would you say to people who need to leave their homes? 
@@ -426,7 +427,7 @@ $choice HeadStraightToShelter; Head straight to the emergency shelter
 {@pattyforbes} If they don't like it, they can move somewhere else.
 {@me} So... you're saying everyone who lives in a flood zone should leave?
 {@pattyforbes} What? Of course not, that's a third of Twin Lakes. 
-{pattyforbes} Our whole town would collapse!
+{@pattyforbes} Our whole town would collapse!
 {@me} Hmmm. Interesting. 
 {@pattyforbes} Come to think of it, I better go. I'd like to get some sandbags, just in case.
 {@pattyforbes} Stay safe out there, Dear! 

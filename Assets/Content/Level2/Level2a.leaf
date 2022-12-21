@@ -7,7 +7,7 @@
 #const BG_HouseExt = "BG/HouseExt.mp4"
 #const BG_TownTransitional = "BG/TownTransitional.mp4"
 #const BG_DNRSite = "BG/DNRSite.mp4"
-#const BG_Limnology = "BG/Limnology.jpg"
+#const BG_Limnology = "BG/Limnology.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 
 
@@ -336,6 +336,7 @@ $HubChoice(FollowTheChicken, "Follow the chicken", 0.25)
 {bg $BG_DNRSite}
 {/map}
 $call SetLocation("DNR")
+{layout Left}
 
 $if HasTime(0.25)
     <b>Location: DNR Headquarters</b>
