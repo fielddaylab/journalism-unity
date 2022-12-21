@@ -751,32 +751,30 @@ $GameOver("Note to self: that killer photo is NOT worth getting fired over.")
 {@dnrexpert}Ok, let's see... Did you hear the one about the law of averages? I'd tell you, but it's too <i>mean.</i> 
 
 $if StatCheck(Research, 4)
-You've been reading up on statistics lately--you can top that one. 
+    You've been reading up on statistics lately--you can top that one. 
 
-{@me}Did you hear about the haunted graph? It had paranormal distribution.
+    {@me}Did you hear about the haunted graph? It had paranormal distribution.
 
-{@dnrexpert}Ha! Not bad, kid. How can I help you? 
+    {@dnrexpert}Ha! Not bad, kid. How can I help you? 
 
-$choice GoodDNRInterview; Interview DNR Worker.
-$endif
+    $choice GoodDNRInterview; Interview DNR Worker.
+$elseif StatCheck(Tech, 4)
+    Ha! Being a techie with a back pocket full of computer jokes, you can probably top that one.
 
-$if StatCheck(Tech, 4)
-Ha! Being a techie with a back pocket full of computer jokes, you can probably top that one.
+    {@me}Did you hear about the computer that was full of bugs? It had a broken screen.
 
-{@me}Did you hear about the computer that was full of bugs? It had a broken screen.
+    {@dnrexpert}Ha! Not bad, kid. How can I help you? 
 
-{@dnrexpert}Ha! Not bad, kid. How can I help you? 
-
-$choice GoodDNRInterview; Interview DNR Worker.
+    $choice GoodDNRInterview; Interview DNR Worker.
 $else
-The joke flies right over your head. 
+    The joke flies right over your head. 
 
-{@me}Uh.... good one. I think.
-{@me}Can I ask you some questions about the flood?
+    {@me}Uh.... good one. I think.
+    {@me}Can I ask you some questions about the flood?
 
-{@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
+    {@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
 
-$choice DNRStatement; Get DNR Statement
+    $choice DNRStatement; Get DNR Statement
 $endif
 
 // Original Name: "No thanks."

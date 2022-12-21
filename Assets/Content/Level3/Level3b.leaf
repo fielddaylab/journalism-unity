@@ -16,14 +16,13 @@
 
 // Original Name: Level 3, Story 2
 :: Level3Story2
-//black screen, no background 
+{bg $BG_HouseExt}
 Email Notification:
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
 {@email} Phone interiew, 2 P.M. today. 
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
-{bg $BG_HouseExt}
 Twin Lakes: the calm before the storm. 
 The rain is due to hit tomorrow night...
 Which means you have a little time to catch your breath.
