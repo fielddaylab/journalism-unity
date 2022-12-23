@@ -4,11 +4,11 @@
 // Creator: Twine
 
 #const BG_Bedroom = "BG/Bedroom2.mp4"
-#const BG_Library = "BG/Library.jpeg"
+#const BG_Library = "BG/Library.mp4"
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
 #const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
-#const BG_FloodedLimnology = "BG/Limnology.jpg"
-#const BG_LowIncomeSt = "BG/LowIncomeSt.jpeg"
+#const BG_FloodedLimnology = "BG/Limnology.mp4"
+#const BG_LowIncomeSt = "BG/LowIncomeSt.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 
 # start ScienceStory2Wetlands
@@ -138,7 +138,6 @@ $GameOver("You lost the scoop. Better luck next time."")
 // Original Name: "Tomorrow morning, 8 a.m."
 :: TomorrowMorning8A.M
 {clear-text}
-{layout Right}
 You wake up bright and early. Again.
 You have time to do one thing before heading to the marsh.
 
@@ -148,6 +147,8 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 
 // Original Name: Bike to the library and research local wetlands
 :: DoSomeResearchOnLocalWetlands
+{clear-text}
+{layout Right}
 You hop on your bike and pedal to the Twin Lakes library.
 
 $call SetLocation("Library")
@@ -384,6 +385,7 @@ $endif
 
 // Original Name: Go to the Spark Project meeting
 :: SparkProjectMeeting
+{clear-text}
 {bg $BG_OperaHouseInt}
 $call SetLocation("OperaHouse")
 <b>Location: The Twin Lakes Opera House</b>

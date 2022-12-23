@@ -525,10 +525,11 @@ $endif
 :: TalkToTheHouseboatLady
 {/map}
 {bg $BG_HouseBoat}
-{img Anim/1b/Megaphone.webm}
+{img Anim/1b/Megaphone.webm, Right}
 {@nora} Houseboat, stay afloat! Houseboat, stay afloat!
 {@me} Excuse me... Ms. Houseboat Lady... do you have a minute to talk? 
 {/img}
+{layout Left}
 {@nora} Oh, certainly, Dear. Call me Nora.
 {@nora} What do you need to know?
 
@@ -548,38 +549,39 @@ $call GiveSnippet(HouseboatPhotos)
 $endif
 
 $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
-You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
-{img Anim/1b/RainGauge.pn}
-The wind and rain make it tricky to get a good shot...
-But then you notice a nearby tree. The perfect vantage point! 
-Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top. 
-
-$call GiveSnippet(HouseboatPhotos)
+    You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
+    {img Anim/1b/RainGauge.png}
+    The wind and rain make it tricky to get a good shot...
+    {img Anim/1b/Tree.png}
+    But then you notice a nearby tree. The perfect vantage point! 
+    Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top.
+    {/img}
+    $call GiveSnippet(HouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Resourceful, 3)
-The Twin Lakes Gazette doesn't have big-city resources like fancy gear and pro photographers. 
-Good thing you're {stat-name}resourceful{/stat-name}. 
-// TODO: find asset for this image
-You rig up a tripod with a broken branch, a shoelace, and a scrunchie. 
-This photo isn't perfect, but it's not bad, either. 
+    The Twin Lakes Gazette doesn't have big-city resources like fancy gear and pro photographers. 
+    Good thing you're {stat-name}resourceful{/stat-name}. 
+    // TODO: find asset for this image
+    You rig up a tripod with a broken branch, a shoelace, and a scrunchie. 
+    This photo isn't perfect, but it's not bad, either. 
 
-$call SFX(PhotoSnap)
-$call GiveSnippet(OkayHouseboatPhotos)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(OkayHouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
-Oh no... your camera battery is dead!
-You ask around for help, and your {stat-name}social{/stat-name} graces pay off.
-{@dnrvolunteer} You seem like a nice kid. Go ahead and borrow my camera!
+    Oh no... your camera battery is dead!
+    You ask around for help, and your {stat-name}social{/stat-name} graces pay off.
+    {@dnrvolunteer} You seem like a nice kid. Go ahead and borrow my camera!
 
-$call AdjustStats(Tech + 1)
-$call SFX(PhotoSnap)
-$call GiveSnippet(OkayHouseboatPhotos)
+    $call AdjustStats(Tech + 1)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(OkayHouseboatPhotos)
 $elseif Stat(Tech) == 2
-Oh no... your camera battery is dead!
-You use your phone to snap a few grainy shots.
-You've never really gotten the hang of taking photos in the dark, in the rain...
-But at least a low-quality photo is better than nothing. 
+    Oh no... your camera battery is dead!
+    You use your phone to snap a few grainy shots.
+    You've never really gotten the hang of taking photos in the dark, in the rain...
+    But at least a low-quality photo is better than nothing. 
 
-$call SFX(PhotoSnap)
-$call GiveSnippet(BlurryHouseboatPhotos)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(BlurryHouseboatPhotos)
 $endif
 
 $choice ArriveAtFloodSite; Back to the dam
@@ -786,12 +788,14 @@ $endif
 
 // Original Name: "Can you tell me how the flood has affected you?"
 :: CanYouTellMeHowTheFloodHasAffectedYou
+{layout Left}
 {@nora} The flood hasn't bothered me at all. I've got my trusty houseboat!
 {@me} You're right in the middle of the action here. Can you tell me what you saw? 
 $if StatCheck(Trust, 3)
     {@nora} Certainly, Dear. I can tell you're {stat-name}trustworthy{/stat-name}!
-    {img Anim/1b/NorasCats.png}
+    {img Anim/1b/NorasCats.png, Right}
     {@nora} I'll even let you pet my cats, while you're here!
+    {/img}
 
     $call GiveSnippet(GreatHouseboatStory)
     $choice ArriveAtFloodSite; Decide what to do next 
@@ -802,8 +806,9 @@ $elseif StatCheck(Research, 3)
     {@me}Um... I'm not sure a world full of houseboats is a sustainable solution to climate change.  
     The houseboat lady pats your arm kindly. 
     {@nora}Don't worry, Dear. You'll come around. 
-    {img Anim/1b/NorasCats.png}
+    {img Anim/1b/NorasCats.png, Right}
     {@nora}My cats and I are purrrrfectly happy here.
+    {/img}
 
     $call GiveSnippet(HouseboatStory)
 
@@ -823,6 +828,7 @@ $endif
 
 // Original Name: "What's the deal with the houseboat?"
 :: WhatsTheDealWithTheHouseboat
+{layout Left}
 {@nora}I've been telling everyone for years. Houseboats are the future! 
 {@nora}Off the grid, more fun than tiny homes, and literally flood proof!
 {@nora}I remember when I was a little girl...
@@ -1215,15 +1221,15 @@ $else
 $endif 
 
 :: TryToKeepSwimming
-    Phew, thank goodness.
-    You wake up warm and dry in bed. It was all just a dream!
-    Then you notice where you are:
-    A room at the Twin Lakes Medical Center, with a card and a wheel of fancy cheese on the table.
-    {img Anim/1b/ThankYou.png}
-    {@cheeseshop} Dear Ms. Benjamin, thank you so much for risking your life for my little shop! I hope that broken ankle heals up <i>gouda</i>.
-    Ugh. You're out of commission... but at least you've got free cheese for life. 
-    {/img}
-    GAME OVER. 
+Phew, thank goodness.
+You wake up warm and dry in bed. It was all just a dream!
+Then you notice where you are:
+A room at the Twin Lakes Medical Center, with a card and a wheel of fancy cheese on the table.
+{img Anim/1b/ThankYou.png}
+{@cheeseshop} Dear Ms. Benjamin, thank you so much for risking your life for my little shop! I hope that broken ankle heals up <i>gouda</i>.
+Ugh. You're out of commission... but at least you've got free cheese for life. 
+{/img}
+$GameOver("If you're going to fight the current, you've got to be a strong swimmer.")
 
 // Original Name: Show him the photos you took outside, to help him understand this dire situation.
 :: ShowHimThePhotosYouTookOutsideToHelpHimUnderstandThisDireSituation

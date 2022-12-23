@@ -4,19 +4,21 @@
 // Creator: Twine
 
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
-#const BG_EvacShelter = "BG/EvacShelter.jpeg"
+#const BG_HouseExtNoRain = "BG/HouseExtNoRain.jpg"
+#const BG_EvacShelter = "BG/EvacShelter.mp4"
 #const BG_SandbagStation = "BG/SandbagStation.mp4"
-#const BG_HouseExt = "BG/HouseExt.mp4"
-#const BG_TownTransitional = "BG/TownTransitional.mp4"
+#const BG_LowIncomeSt = "BG/LowIncomeSt.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
-#const BG_Bookshop = "BG/Library.jpeg"
+#const BG_Bookshop = "BG/Library.mp4"
+#const BG_QuiltLady = "BG/QuiltLady.mp4"
+#const BG_MainStreet = "BG/MainStreet.jpg"
 
 
 # start Level3Story2
 
 // Original Name: Level 3, Story 2
 :: Level3Story2
-//black screen, no background 
+{bg $BG_HouseExtNoRain}
 Email Notification:
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
@@ -52,7 +54,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Go for a jog at Cherry Creek Marsh
 :: GoForAJogAtCherryCreekMarsh
-{bg $BG/CherryCreekMarsh2.jpg}
+{bg $BG_CherryCreekMarsh}
 {clear-text}
 You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.
@@ -86,6 +88,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
+{bg $BG_MainStreet}
 {clear-text}
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Smoke City Herald yet. 
@@ -278,6 +281,7 @@ $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations",
 :: GoToSandbaggingStation
 {bg $BG_SandbagStation}
 $if FirstVisit()
+    {layout Left}
     Volunteers and people from the neighborhood hurry to fill sandbags.
     You recognize Misty, the DNR worker you met at Twin Lakes Dam. 
 $endif 
@@ -697,8 +701,7 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
-{bg $BG_TownTransitional}
-
+{layout Right}
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris has been cleared away. 
 $call AdjustStats(Endurance + 1)
@@ -759,7 +762,6 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neigh
 
 // Drive 
 :: Drive
-{bg $BG_TownTransitional}
 You drive through the historic, higher-income neighborhoods, heading south. 
 The debris from the last flood has already been cleared away. 
 
@@ -767,6 +769,7 @@ $call GiveSnippet(QuickDescriptionHighIncomeNeighborhood)
 
 // Arrive at Royal Hazel neighborhood 
 :: ArriveAtRoyalHazelNeighborhood
+{bg $BG_LowIncomeSt}
 $if FirstVisit()
     Wow. Obviously the city didn't work very hard to clean up the debris here. 
     The few people outside are frowning at you, like maybe you're in the wrong neighborhood. 
@@ -913,18 +916,32 @@ $choice ArriveAtRoyalHazelNeighborhood; Try something else
 {@khalisa} Just finishing up this breaking news post.
 {@khalisa} Want me to come meet you? 
 
-$HubChoice(TeamUpWithKhalisa, "YES!! You're a lifesaver. I'll wait for you here.", 0.25, "")
 $choice HandleItYourself; Oh... no, I didn't mean to put more on your plate. I'm sure I can handle it! 
+$HubChoice(TeamUpWithKhalisa, "YES!! You're a lifesaver. I'll wait for you here.", 0.25, "")
 
 // Handle it yourself
 :: HandleItYourself
 You canvas the neighborhood, searching for someone who looks willing to talk.
 Unfortunately, this takes longer than you thought it would.
-$HubChoice(KeepSearching, "Keep looking around", 0.25, "")
+$if TimeRemaining() > 0.25
+    $HubChoice(KeepSearching, "Keep looking around", 0.25, "")
+$else
+    You're considering calling Khalisa again when your phone rings.
+    //deplete remaining time if possible!
+    {@dionne} El, haven't you been watching the clock? Time's up. 
+    {@me} I'm sorry, Dionne. I just need a few more minutes. 
+    {@me} I can't find anyone in Royal Hazel who's willing to talk!
+    {@dionne} Royal Hazel?
+    {@dionne} El, you're a middle-class white girl from the city. Nobody in Royal Hazel knows you at all.
+    {@dionne} Didn't you think to ask Khalisa or me for help?
+    {@me} Well... I didn't want to bother you...
+    {@dionne} El, the whole point of this story is getting people's voices out there. 
+    {@dionne} Without quotes from the neighborhood you're writing about, I can't publish your story.
+    $GameOver("Ugh... looks like this one's destined to die in the Drafts folder.")
+$endif
 
 // Keep looking around
 :: KeepSearching
-
 $if StatCheck(Research, 6)
     You're about to give up when you notice a sticker on a nearby window: 
     <i>Proud Member of The Shelf Indulgence Book Club</i>
@@ -961,7 +978,8 @@ $else
     {@me} Well... I didn't want to bother you...
     {@dionne} El, the whole point of this story is getting people's voices out there. 
     {@dionne} Without quotes from the neighborhood you're writing about, I can't publish your story.
-$GameOver("Ugh... looks like this one's destined to die in the Drafts folder.")
+    $GameOver("Ugh... looks like this one's destined to die in the Drafts folder.")
+$endif
 
 
 // Interview 
@@ -1126,7 +1144,7 @@ $choice FinalConvergeNode; Decide what to do next
     //  SeeIfTheOlderCoupleNeedsHelp
     //  ArriveAtRoyalHazelNeighborhood
 // {bg }
-{bg } //TODO: add different backgrounds here depending on where you're coming from 
+//TODO: add different backgrounds here depending on where you're coming from 
 You're just about to plan your next move when your phone buzzes.
 Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 
@@ -1151,7 +1169,7 @@ $choice IWantToMakeANameForMyself; I want to make a name for myself.
 {@gabby} That's wonderful, El. 
 {@gabby} Although, since you're new, I'd probably start you on the entertainment beat...
 {@gabby} Music events, C-list celebrities, stuff like that.
-{@gabbyn} You might even get to cover our growing population of short-tailed possoms! 
+{@gabby} You might even get to cover our growing population of short-tailed possoms! 
 {@gabby} You could handle that, right, El? 
 {@me} Oh... yeah. I think so. 
 You try to listen to her next question, but your phone is buzzing again.
@@ -1270,7 +1288,7 @@ $choice GoInsideTheHouse; Go inside
 
 // Dry off and look around
 :: GoInsideTheHouse
-// Add background: inside the quilter's house! 
+{bg $BG_QuiltLady}
 {@me} Thank you! I didn't think I was gonna make it.
 {@mysteryrescuer} Happy to help, Dear. I'm just glad Willa and I happened to be looking outside.
 Whoa. Your rescuer is Nora, the Houseboat Lady!
@@ -1372,8 +1390,6 @@ $call GiveSnippet(NoraPrepareBetterNextTime)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 
-:: HowCanTwinLakesHelpLowerIncomeHouseholds
-
 :: RumorsAboutFloodMaps
 {@drnorawarner} It's pretty simple.
 {@drnorawarner} The flood maps used to be accurate...
@@ -1392,6 +1408,7 @@ $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know abo
 $call GiveSnippet(NoraFinancialHelp)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
+
 // What do you think people should know about floods and equity?
 :: WhatDoYouThinkPeopleShouldKnow
 {@drnorawarner} Well, people love to say we're all in this together.

@@ -3,15 +3,18 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
-#const BG_TownMeeting = "BG/TownMeeting.jpeg"
-#const BG_EvacShelter = "BG/EvacShelter.jpeg"
-#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.jpeg"
+#const BG_Bedroom = "BG/Bedroom2.mp4"
+#const BG_TownMeeting = "BG/TownMeeting.mp4"
+#const BG_EvacShelter = "BG/EvacShelter.mp4"
+#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.mp4"
 #const BG_TownTransitional = "BG/TownTransitional.mp4"
 
 # start Level3Intro
 
 // Original Name: Level 3 Intro
 :: Level3Intro
+{bg $BG_Bedroom}
+$call SetHeaderEnabled(true)
 {@email} El, we've been keeping up with your work in Twin Lakes!
 {@email} Very impressive. There might be a place for you at the Smoke City Herald after all.
 {@email} If you're interested, have your editor send over a letter of recommendation. 
@@ -43,6 +46,7 @@ $choice AcceptStory; Accept Story Assignment
 //Accept Story Assignment
 :: AcceptStory 
 @checkpoint
+{bg $BG_TownMeeting}
 $call SetTimeRemaining(4)
 
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
@@ -62,7 +66,7 @@ $if StatCheck(Trust, 5)
             Looks like you have to cut this short. You have just enough time to compile your story!
             $choice StoryConstruction3a; Compile your story
       $endif
-      $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor," 0.50, "")
+      $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
 $elseif StatCheck (Social, 5)
       {@mayorbarrysmuckers} Well... I have to admit, your name's been all over town lately.
       {@mayorbarrysmuckers} I guess I could spare a minute or two for a social butterfly like you.
@@ -260,16 +264,16 @@ $choice FredFloodShelter; The flood shelter. Do you have any concerns?
 //The flood shelter. Do you have any concerns about it?
 :: FredFloodShelter
 {@fredfinkler} Oh, absolutely I'm concerned. One shelter won't have space for everyone. 
-{@fredfinklern} The mayor keeps talking about how we'll all help each other. 
+{@fredfinkler} The mayor keeps talking about how we'll all help each other. 
 {@fredfinkler} But I'm afraid I don't have that much faith in people.   
 {@fredfinkler} We need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower! 
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 
+$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "")
 
 // Yeah, okay. But if we could just talk about something else for a minute... 
@@ -288,9 +292,9 @@ $HubChoice(KeepPressing, "Keep pressing him about the flood shelter", 0.25, "")
 :: CutYourLosses
 {@me} Thanks, Fred. I better go. Congrats on keeping those zinnias alive.
 
+$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25, "")
 
 //KeepPressing
@@ -306,9 +310,9 @@ $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25
 
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 
+$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "")
 
 //Failed Mayor Interview
@@ -361,7 +365,7 @@ $choice WhatWouldYouSayToPeople; What about the people who need to evacuate thei
 {@pattyforbes} Amarena Grove is a peaceful neighborhood. I'd like to keep it that way. 
 {@pattyforbes} Who knows what those flood evacuees will bring with them?? 
 
-$choice GiveSnippet(RudeRichLadyQuote)
+$call GiveSnippet(RudeRichLadyQuote)
 
 $choice snarkyresponse; Hm. I would guess some clothes and toothbrushes and granola bars. 
 $choice WhatWouldYouSayToPeople; What would you say to people who need to leave their homes? 
@@ -410,7 +414,7 @@ $choice HeadStraightToShelter; Head straight to the emergency shelter
 {@pattyforbes} If they don't like it, they can move somewhere else.
 {@me} So... you're saying everyone who lives in a flood zone should leave?
 {@pattyforbes} What? Of course not, that's a third of Twin Lakes. 
-{pattyforbes} Our whole town would collapse!
+{@pattyforbes} Our whole town would collapse!
 {@me} Hmmm. Interesting. 
 {@pattyforbes} Come to think of it, I better go. I'd like to get some sandbags, just in case.
 {@pattyforbes} Stay safe out there, Dear! 
@@ -901,11 +905,16 @@ $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments",
 :: GoToSeniorCitizenApartments
 {bg $BG_SeniorCitizenApts}
 
-$HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
-$HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
-$HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
-$HubChoice(TryToInterviewElectricalWorker, "Ask electrical worker why people aren't allowed back inside", 0.25, "")
-$choice NextStepAtApartments; Go somewhere else 
+$if TimeRemaining() > 0.25
+      $choice NextStepAtApartments; Go somewhere else 
+      $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
+      $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
+      $HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
+      $HubChoice(TryToInterviewElectricalWorker, "Ask electrical worker why people aren't allowed back inside", 0.25, "")
+$else
+      $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
 
 //InterviewElectricalWorker
 :: TryToInterviewElectricalWorker
@@ -1004,13 +1013,16 @@ Poor lady. She reminds you of your neighbor Jeannie...
 Except with a quail curled up on her lap instead of a cat. 
 $call GiveSnippet(ApartmentContext)
 
+$if Visited(WhereHaveYouBeenStaying), Visited(DoYouKnowWhenYoullBeAllowedBackIn)
+      $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help?
+$endif
 $OnceChoice(WhereHaveYouBeenStaying, "Where have you been staying?")
 $OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?")
 
 // Where have you been staying in the meantime?
 :: WhereHaveYouBeenStaying
 {@imojean} I'm staying with my sister in West Forks. 
-{@imojean} But that city is too big and noisy for me. 
+{@imojean} But that city is too big and noisy for me.
 {@imojean} I just want to be home. 
 $call GiveSnippet(SadApartmentColorQuote)
 
@@ -1036,11 +1048,18 @@ $OnceChoice(WhereHaveYouBeenStaying, "Where have you been living in the meantime
 {@imojean} She's been having to eat pellets! Poor little thing.
 The quail on her lap curls up and coos sadly. 
 
-$HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
-$HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
-$HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
-$choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks)
+
+$if TimeRemaining() > 0.25
+      $choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks
+      $HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
+      $HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
+      $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
+$else
+      $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
+
 $choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
+
 
 // Try to convince the building manager to let you go inside for Queenie's food 
 ::SeeIfYouCanGetInside

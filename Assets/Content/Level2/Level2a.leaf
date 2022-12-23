@@ -7,7 +7,7 @@
 #const BG_HouseExt = "BG/HouseExt.mp4"
 #const BG_TownTransitional = "BG/TownTransitional.mp4"
 #const BG_DNRSite = "BG/DNRSite.mp4"
-#const BG_Limnology = "BG/Limnology.jpg"
+#const BG_Limnology = "BG/Limnology.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 
 
@@ -69,6 +69,7 @@ Your other neighbor, Jim, is struggling to call his flood insurance company.
 $choice HelpWithTheCleanUp; Help with the clean up
 $choice HelpJimGetHisPhoneWorking; Help Jim get his phone working
 $else
+{layout Right}
 As soon as you step outside, Maureen shoves a stack of Lost Chicken posters into your hands.
 {@maureen}Amelia Egghart is still missing. 
 {@maureen}Not that I'm blaming you, of course. 
@@ -314,6 +315,7 @@ $goto STORYEVALUATION
 {/map}
 $call SetLocation("Downtown")
 {bg $BG_TownTransitional}
+{layout Right}
 Wow... the flood really did a number on this place.
 You navigate carefully around broken glass and cherry-themed debris. 
 $call AdjustStats(Endurance + 1)
@@ -334,6 +336,7 @@ $HubChoice(FollowTheChicken, "Follow the chicken", 0.25)
 {bg $BG_DNRSite}
 {/map}
 $call SetLocation("DNR")
+{layout Left}
 
 $if HasTime(0.25)
     <b>Location: DNR Headquarters</b>
@@ -449,6 +452,7 @@ $choice ScienceStoryMap; Put away your phone
 
 // Original Name: Phone Call: Mayor's Personal Number
 :: PhoneCallMayorsPersonalNumber
+{layout Right}
 The mayor has already heard about how you rescued poor Omelette.
 {@mayorbarrysmuckers}You're a hero, Ms. Benjamin! 
 {@mayorbarrysmuckers} I don't always love reporters... but you seem like one of the friendly ones. 
@@ -483,6 +487,8 @@ $endif
 $call SetLocation("Downtown")
 $if FirstVisit()
 {bg $BG_FirstStDowntownCleanup}
+
+{layout Left}
 Your story is due in {timeLeft}.
 
 Oh no... this place looks awful.
@@ -593,6 +599,7 @@ $endif
 
 // Original Name: Look for someone to interview
 :: LookForSomeoneToInterview
+{layout Right}
 You try to catch someone as they run by, but he's too busy to talk. 
 
 {@lakescientist}Sorry, lots of damage control to do here. 
@@ -606,6 +613,7 @@ $choice DepartmentOfLimnology; Head back to the docks
 
 // Original Name: Photograph flooded dock
 :: PhotographFloodedDock
+{layout Right}
 You snag a perfect photo: two people standing on the flooded dock.
 
 $call GiveSnippet(LimnologyDocks)
@@ -624,6 +632,7 @@ $endif
 
 // Original Name: Call your neighbor and see if it's hers
 :: CallYourNeighborAndSeeIfItsHers
+{layout Right}
 
 $if Visited(HelpHer)
     You call Maureen. 
@@ -744,32 +753,30 @@ $GameOver("Note to self: that killer photo is NOT worth getting fired over.")
 {@dnrexpert}Ok, let's see... Did you hear the one about the law of averages? I'd tell you, but it's too <i>mean.</i> 
 
 $if StatCheck(Research, 4)
-You've been reading up on statistics lately--you can top that one. 
+    You've been reading up on statistics lately--you can top that one. 
 
-{@me}Did you hear about the haunted graph? It had paranormal distribution.
+    {@me}Did you hear about the haunted graph? It had paranormal distribution.
 
-{@dnrexpert}Ha! Not bad, kid. How can I help you? 
+    {@dnrexpert}Ha! Not bad, kid. How can I help you? 
 
-$choice GoodDNRInterview; Interview DNR Worker.
-$endif
+    $choice GoodDNRInterview; Interview DNR Worker.
+$elseif StatCheck(Tech, 4)
+    Ha! Being a techie with a back pocket full of computer jokes, you can probably top that one.
 
-$if StatCheck(Tech, 4)
-Ha! Being a techie with a back pocket full of computer jokes, you can probably top that one.
+    {@me}Did you hear about the computer that was full of bugs? It had a broken screen.
 
-{@me}Did you hear about the computer that was full of bugs? It had a broken screen.
+    {@dnrexpert}Ha! Not bad, kid. How can I help you? 
 
-{@dnrexpert}Ha! Not bad, kid. How can I help you? 
-
-$choice GoodDNRInterview; Interview DNR Worker.
+    $choice GoodDNRInterview; Interview DNR Worker.
 $else
-The joke flies right over your head. 
+    The joke flies right over your head. 
 
-{@me}Uh.... good one. I think.
-{@me}Can I ask you some questions about the flood?
+    {@me}Uh.... good one. I think.
+    {@me}Can I ask you some questions about the flood?
 
-{@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
+    {@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
 
-$choice DNRStatement; Get DNR Statement
+    $choice DNRStatement; Get DNR Statement
 $endif
 
 // Original Name: "No thanks."
@@ -789,6 +796,7 @@ $goto HowIsTheStateHelpingWithFloodRecovery
 
 // Original Name: Help bail out water from boathouse
 :: HelpBailOutWaterFromBoathouse
+{layout Right}
 You follow the scientist into the boathouse. 
 
 People are working to bail out water. 
@@ -804,6 +812,7 @@ $HubChoice(InterviewScientist, "Can I ask you a few questions, while I'm here?",
 // Original Name: Grab coffee for the Limnology Department
 :: GrabCoffeeForTheLimnologyDepartment
 @tags Social
+{layout Right}
 You bike to a campus coffee shop and order as many coffees as you can carry. 
 
 When you get back, the scientists pause in their work, drawn to the tantalizing aroma of medium roast. 
@@ -817,6 +826,7 @@ $choice DepartmentOfLimnology; Actually, I better go.
 // Original Name: Quick Interview: Limnology Expert
 :: QuickInterviewLimnologyExpert
 
+{layout Right}
 $if !StatCheck(Social, 4)
 {@sarah}Well... I guess I can chat for a minute. 
 {@sarah}Thanks to climate change, we're going to keep seeing more and more rain. 
@@ -1201,6 +1211,7 @@ $choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake level
 
 // Original Name: "How can the city prevent this from happening next time?"
 :: HowCanTheCityPreventThisFromHappeningNextTime
+{layout Right}
 {@lakescientist}It'll take more than some sandbags.
 {@lakescientist}We need lower lake levels and city-wide engineering solutions. 
 {@lakescientist}The problem is, it'll be expensive. 
@@ -1386,6 +1397,7 @@ $choice WhatKindOfPolicies; What kind of policies?
 
 // Original Name: "Tell me more about the high lake levels."
 :: TellMeMoreAboutTheHighLakeLevels
+{layout Right}
 {@lakescientist}The city is using the dam to keep Upper Lake five feet higher than its natural level.
 {@lakescientist}When it rains, where is all that water supposed to go??
 {@lakescientist}I could rant about this all day... but for now, I better get back to work.
@@ -1396,6 +1408,7 @@ $choice DepartmentOfLimnology; Head back outside
 
 // Original Name: What do you mean, engineered solutions?
 :: WhatDoYouMeanEngineeredSolutions
+{layout Right}
 {@lakescientist}A better storm drain system to carry rainwater away.
 {@lakescientist}Rain gardens designed to soak up water.
 {@lakescientist}And.... speaking of water, I better get back to work.
@@ -1406,6 +1419,7 @@ $choice DepartmentOfLimnology; Head back outside
 
 // Original Name: "Can you give me some examples?"
 :: CanYouGiveMeSomeExamples
+{layout Right}
 {@sarah}The city needs more rain gardens, better storm drains, and lower lake levels.
 {@sarah}Plus, new policies to stop people from building on wetlands.
 
