@@ -359,7 +359,7 @@ According to the manager at Strudel Apartments, repair workers have been swamped
 @attr Facts, Color
 When asked about helping tenants, the manager became defensive. "It's not fair. These old folks keep treating me like a monster!"
 
-:: FactAboutStipend 
+:: FactsAboutStipend 
 @type Fact 
 @quality Great 
 @attr Facts 
@@ -694,7 +694,7 @@ Years ago, Dr. Nora Warner's home was destroyed by a flood. Now she researches f
 
 :: DrNoraOnHouseboats
 @type Quote 
-@quality Poor  
+@quality Bad  
 @attr Color 
 "I knew climate change would bring more flooding. Then I discovered houseboats. They literally can't flood!"
 

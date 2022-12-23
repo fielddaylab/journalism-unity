@@ -536,7 +536,9 @@ $endif
 As you're leaving, you literally run into a lady who looks vaguely familiar.
 Blue pantsuit, perfect salon-blown hair, a #TwinLakesStrong pin on her lapel... 
 {@me} Whoa... you're the governor!
-{@governor} Uh, yah. Obviously. 
+{@governor} Yep! That's me. And you're...
+{@governor} ...Wearing a trash bag.
+{@player} Uh, yeah, sorry. I couldn't find my raincoat. 
 
 $HubChoice(InterviewGovernor, "Ask for an interview", 0.5)
 $choice ScienceStoryMap; Gotta go!
@@ -778,8 +780,7 @@ $goto MathJoke
 
 // Original Name: Interview mayor
 :: InterviewGovernor
-{@governor}I'm always happy to talk to the press. Ask away. 
-
+{@governor}I'm always happy to talk to the press! Ask away. 
 This will be an amazing boost for your article, but you try to play it cool. 
 
 $ContinueChoice({@me} How is the state helping with flood recovery?)
@@ -993,9 +994,9 @@ $choice DNRMap; Look elsewhere in the DNR
 
 // Original Name: "How is the state helping with flood recovery?"
 :: HowIsTheStateHelpingWithFloodRecovery
-{@governor} I'm glad you asked. The state is sending supplies and financial aid.
-{@governor}We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state!
-Yikes. Didn't realize this was a campaign speech.   
+{@governor} I'm glad you asked. I've authorized state agencies to send supplies and financial aid.
+{@governor}We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state.
+Wow. Didn't realize this was a campaign speech.   
 $call GiveSnippet(Governor-Impact)
 
 $choice AnythingYoudLikeToSay; Is there anything you'd like to say to the people of Twin Lakes?
@@ -1004,43 +1005,55 @@ $choice WhatAboutPrevention; What about prevention? Do you have any plans to sto
 :: AnythingYoudLikeToSay
 {@governor} Of course! I would tell them to stay strong and keep the faith.
 {@governor} This town is incredibly... ah... unique. 
-{@government} You can count on my support as you recover from this terrible tragedy.
+{@governor} You can count on my support as you recover from this terrible tragedy.
+{@governor} And now I'd really better be going. 
 Hmm. Come to think of it, you probably could've asked her a more challenging question. 
 $call GiveSnippet(BlandGovernorQuote)
 $choice ScienceStoryMap; Head back outside
 
 :: WhatAboutPrevention
-{@governor} Well... I mean, this is a tiny town among thousands of tiny towns.
-{@governor} I don't have time to figure it all out myself. 
+{@governor} Well... I mean, I'm running the entire state. 
+{@governor} I don't have time to plan a tiny town's flood response. 
 {@governor} But I have complete faith in your local officials!
+Hmm. Still not the best quote, but getting closer... 
+
+$call GiveSnippet(GovernorFaithInLocalOfficials)
 
 $choice IThoughtTheyWereTheBackbone; I thought you said tiny towns were the backbone of the state.  
-$choice WhatIfLocalOfficialsNeedMoreHelp; What if local officials can't fix this on their own?
+$choice WhatIfLocalOfficialsNeedMoreHelp; What if local officials can't fix this on their own? 
 
 :: WhatIfLocalOfficialsNeedMoreHelp
-{@governor} Don't worry. I'm sure that Mayor Smithers--
-{@me} Smuckers.
-{@governor} --is more than adequate. 
-{@me} But what if he doesn't have the resources? Will the city send more aid?
-{@governor} You know... I just remembered, I forgot to put change in the meter.
+{@governor} Well, there's flooding happening in many areas, Ms. Benjamin.
+{@governor} I can't give too many resources to a tiny cherry town. 
+{@governor} Plus, the Mayor assured me that the situation was totally under control. 
+{@me} So... there won't be any more aid sent? 
+{@governor} Isn't that what I just said?
+{@me} But... what if Twin Lakes can't recover from this? 
+{@governor} Oh... You know, I just remembered, I forgot to put change in the meter.
 {@me} We... don't have meters here.
 {@governor} Sorry, kid. I really need to run. Nice chatting with you!
 Well... that quote isn't exactly science, but it's definitely juicy.
-$call GiveSnippet(GovernorEvasiveAnswer)
+$call GiveSnippet(GovernorJuicyAnswer)
 $choice ScienceStoryMap; Head back outside 
 
 :: IThoughtTheyWereTheBackbone
 {@governor} Oh, they absolutely are. The backbone and the heart!
 {@governor} This town deserves all the help we can possibly provide. 
-{@me} So... are we talking the National Guard, or volunteers? 
-{@me} Or just a nice photo op?  
-Her gaze turns into a glare.  
-{@governor} I can't believe you would say that. 
-{@governor} What kind of newspaper is Dionne Richards running out here? 
-{@me} Wait... you know Dionne?? Is it true she used to work at the Smoke City Herald?
-{@governor} How should I know? Have a nice life, kid.  
-$call GiveSnippet(JuicyGovernorQuote)
-$choice ScienceStoryMap; Head back outside 
+
+$choice WhatIfLocalOfficialsNeedMoreHelp; So... you'll send more aid if the town needs it? 
+$choice RudeGovernorQuestion; Really? Because it's starting to sound like you'e just here for a photo op. 
+
+:: RudeGovernorQuestion
+
+Her smile turns into a glare.  
+{@governor} I can't believe you would say that!
+{@governor} What kind of newspaper is Dionne Richards running out here??
+{@player} You know Dionne?
+{@governor} Oh, of course I know her. I know everybody.
+{@governor} If you'll excuse me, I need to give her a call...
+{@governor} She'd probably like to know how her new reporter is doing. 
+
+$GameOver("Uh oh. Dionne isn't gonna be thrilled about this... looks like you'll be stuck on email duty for a while.")
 
 // Original Name: Interview scientist
 :: InterviewScientist

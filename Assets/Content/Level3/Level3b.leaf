@@ -24,13 +24,15 @@ Email Notification:
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
 {bg $BG_HouseExt}
-Twin Lakes: the calm before the storm. 
-The rain is due to hit tomorrow night...
-Which means you have a little time to catch your breath.
+Twin Lakes: the second storm. 
+It's been sprinkling on and off...
+But the real downpour is expected to start tomorrow. 
+You wake up to a text from Khalisa. 
 {@khalisa} Hey El! Want to meet up at Bookish before work?
-{@me} Yes!! What time?
+{@khalisa} Sounds like they still need some help with clean-up. 
+{@me} Souds good! What time?
 {@khalisa} One hour. I'll pick up coffee on the way.
-You have time to do one thing before meeting up with Khalisa!  
+You have time to do one thing before meeting up with Khalisa.  
 
 $choice HaveTeaWithYourUpstairsNeighbor; Have tea with your upstairs neighbor, Jeanie
 $choice GoForAJogAtCherryCreekMarsh; Go for a jog at Cherry Creek Marsh
@@ -56,7 +58,7 @@ You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.
 {@Birdie} Be careful out there, El! 
 {@Birdie} The birds are riled up today. Something strange is brewing. 
-{@me} Don't worry, Birdie. The rain's not supposed to hit until tomorrow!
+{@me} Don't worry, Birdie. The storm's not supposed to hit until tomorrow!
 Though, come to think of, those clouds look awfully dark... 
 
 $call AdjustStats(Endurance + 2)
@@ -444,7 +446,7 @@ $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerne
 {@misty} Pay thousands to fix the damage, fall behind on your bills, and maybe never catch up... 
 {@misty} Or ignore the damage and end up dealing with toxic mold and a ruined home. 
 
-$call GiveSnippet(WhyAreThoseAreasMoreAtRisk)
+$call GiveSnippet(WhyAreLowIncomeAreasMoreAtRisk)
 
 $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerned about? 
 
@@ -595,7 +597,7 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
 {@me} Can you spare a minute to talk?
 {@fillingstationvolunteer} Oh... actually, I was just about to head out.
 {@fillingstationvolunteer} My phone's almost dead. Gotta make sure my family can contact me. 
-    $if StatCheck(Resourceful, 6)
+    $if StatCheck(Resourceful, 5)
     {@me} I can help with that!
     {@me} I brought my portable phone charger. You can use it while we talk!
     {@fillingstationvolunteer} Oh... thanks! 
@@ -611,6 +613,7 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
     You dig through your bag.
     Unfortunately, it looks like you forgot your portable charger...
     And your raincoat, and your breakfast. Whoops.
+    Looks like you didn't grab quite enough supplies this morning. 
     {@fillingstationvolunteer} I thought the reporter's motto was Be Prepared.
     {@me} I think that's the Boy Scouts, actually.
     {@fillingstationvolunteer} Ah, too bad. 
@@ -1127,7 +1130,7 @@ $choice FinalConvergeNode; Decide what to do next
 You're just about to plan your next move when your phone buzzes.
 Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 
-$choice FindAPrivatePlaceToTakeTheCall; Find a private place to take the call 
+$choice FindAPrivatePlaceToTakeTheCall; Find a private place to take the call
 
 :: FindAPrivatePlaceToTakeTheCall
 //Todo: add generic town street background with coffee shop and hardware store 

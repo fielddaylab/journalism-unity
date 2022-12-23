@@ -18,41 +18,25 @@
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
 {bg $BG_TownMeeting}
-One week later.
-The Smoke City Herald is still waiting for you to drive out for an interview...
-But you've been too busy to call them back. 
-Here at the Twin Lakes Emergency Meeting, the mood is decidedly anxious.  
+One week later... the Mayor has called an Emergency Town Hall Meeting.  
 {@mayorbarrysmuckers} Welp, we'd better get right down to it.
-{@mayorbarrysmuckers} More rain is expected to hit in 3 days, and Twin Lakes still isn't lookin' its best. 
+{@mayorbarrysmuckers} Another storm is expected to hit in 3 days, and the town's not ready. 
 {@mayorbarrysmuckers} Some of you folks are gonna need to evacuate.
-{@townie1} What??? Where will we go?
-{@townie2} This is my home. I'm not leaving!
-{@townie3} I don't want random evacuees camped out in my neighborhood!
-{@mayorbarrysmuckers}  Aw, cheer up, folks. We'll get through this together. We're #TwinLakesStrong! 
-{@mayorbarrysmuckers}  My emergency response team is settin' up a shelter at the high school!
-{@mayorbarrysmuckers} It's a great shelter. Real cozy. You'll love it. 
+{@mayorbarrysmuckers} But don't worry. We'll get through this together. We're #TwinLakesStrong! 
+{@mayorbarrysmuckers} My team has set up a flood shelter at the high school. 
+{@mayorbarrysmuckers} It's real cozy. You'll love it. 
 {@fredfinkler}  What if the dam bursts?
-{@mayorbarrysmuckers} It won't.
-{@fredfinkler} How can you be so sure? 
-{@fredfinkler} According to the research of local flooding expert, Dr. Warner, it's only a matter of time before--
 {@mayorbarrysmuckers}  Aw, Finkler, quit panicking folks. The dam won't burst.
 {@mayorbarrysmuckers}  ...Probably. 
 {@townspeople}{anim rumble}  CHATTER CHATTER CHATTER
 
 {clear-text}
-{@me}   Wow. This is awful.
-{@me} Sounds like the newsroom might get more flooding.
-{@dionne} Don't worry about that, El. 
-{@dionne} I need you to do some digging into that flood shelter. 
+{@dionne} El, I need you to do some digging into that flood shelter. 
 {@dionne} Look for issues that people need to know about. 
 $call ActivateStory()
-{@me} Got it. 
-{@me} And, um... about that letter of recommendation I asked you for....
-{@dionne} Don't worry, kid. I'm working on it.
-{@me} But... I mean, with all that's going on, I understand if you're too busy--
-{@dionne} I know how much this means to you, El. I'll find the time.
-{@dionne} For now, get to work.
-{@me} Thanks, Dionne. You can count on me. 
+{@dionne} And El... I sent over your letter of recommendation.
+{@dionne} If this all works uot, the Smoke City Herald would be lucky to have you. 
+{@me} Thanks, Dionne. 
 
 $choice AcceptStory; Accept Story Assignment
 

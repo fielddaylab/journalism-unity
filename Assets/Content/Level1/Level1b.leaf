@@ -647,8 +647,8 @@ $if StatCheck(Social, 3)
 {@firechief} Khalisa told me you're a real {stat-name}social{/stat-name} butterfly!
 He gives you some high-quality quotes, and even lets you share his pint of cherry chip ice cream.
 
-$call GiveSnippet(FireChiefQuote)
 $call AdjustStats(Endurance + 1)
+$call GiveSnippet(FireChiefQuote)
 
 $elseif StatCheck(Trust, 3)
 {@firechief} Khalisa told me all about you! She says you're as {stat-name}trustworthy{/stat-name} as they come.

@@ -18,24 +18,28 @@ Extreme rainfall events in the Twin Lakes watershed have increased by 10% in the
 @attr Color, Facts
 Mayor Barry Smuckers is pushing to lower the lake levels. “There won’t be any town left if this flooding keeps up!” 
 
-// Original Name: Governor - impact
-:: Governor-Impact
+:: GovernorJuicyAnswer
 @type Quote
 @quality Great
 @attr Facts, Color
-"I declared a State of Emergency as soon as I found out what was happening. We need to make sure Twin Lakes gets the help it needs."
+"I can't give too many resources to a tiny cherry town. Plus, the Mayor assured me that things are under control."
 
-// Original Name: Mayor - Response
-:: GovernorComments
+:: BlandGovernorQuote
 @type Quote
-@quality Great
+@quality Bad 
 @attr Facts, Color
-"The people of Twin Lakes are incredibly resilient," said the Governor. "Plus, I can always count on them for a good pun." 
+"This town is incredibly unique. You can count on my support as you recover from this terrible tragedy."
+
+:: GovernorFaithInLocalOfficials
+@type Quote
+@quality Bad 
+@attr Facts, Color
+"I don't have time to plan a tiny town's flood response. But I have complete faith in your local officials!"
 
 // Original Name: Flood probability
 :: FloodProbability
 @type Graph
-@quality Good
+@quality Bad
 @attr Facts
 @image Anim/flood-probability.png
 A clean graph of flood probability.
@@ -442,7 +446,7 @@ According to a bulletin board in City Hall, the Spark Project made a donation to
 // Original Name: BadMarshPhoto-Scenery
 :: BadMarshPhoto-Scenery
 @type Photo
-@quality Bad
+@quality Bad 
 @attr Color
 //TODO: Insert bad marsh photo here
 
