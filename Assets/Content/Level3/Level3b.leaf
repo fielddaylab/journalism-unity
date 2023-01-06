@@ -223,7 +223,7 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 // Interview bookseller
 :: InterviewBookseller
 {@bookshop} Hey! You're El, right?
-{@bookshop} I loved your piece about the local possom family! 
+{@bookshop} I loved your piece about the local opossum family! 
 {@bookshop} I used to feed those little guys my tater tots when I was in high school. 
 {@bookshop} How can I help?
 
@@ -1169,7 +1169,7 @@ $choice IWantToMakeANameForMyself; I want to make a name for myself.
 {@gabby} That's wonderful, El. 
 {@gabby} Although, since you're new, I'd probably start you on the entertainment beat...
 {@gabby} Music events, C-list celebrities, stuff like that.
-{@gabby} You might even get to cover our growing population of short-tailed possoms! 
+{@gabby} You might even get to cover our growing population of short-tailed opossums! 
 {@gabby} You could handle that, right, El? 
 {@me} Oh... yeah. I think so. 
 You try to listen to her next question, but your phone is buzzing again.
