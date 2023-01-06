@@ -39,7 +39,7 @@ The mayor insisted that things will be fine, despite a lack of shelter space. "P
 // Mayor advice - people should evacuate 
 :: MayorAdvicePeopleShouldEvacuate
 @type Fact 
-@quality Great 
+@quality Good 
 @attr Useful 
 Mayor Smuckers urged everyone in danger zones to evacuate, for their own safety. 
 
@@ -81,7 +81,7 @@ The mayor didn't have a plan for getting people to the shelter. "I'm sure somebo
 @type Quote 
 @quality Bad 
 @attr Color 
-"I thought my zinnias were goners, but they <i>rose</i> to the occasion!" Insert more gardening puns here, you get the idea. 
+"I thought my zinnias were goners, but they <i>rose</i> to the occasion and put the <i>petal</i> to the metal!
  
 :: RichLadyQuoteSafeNeighborhood
 @type Quote 
@@ -93,12 +93,12 @@ One local didn't want a shelter in her area, even though it would help the town.
 @type Quote 
 @quality Great 
 @attr Facts 
-Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alone. "It's peaceful here. Let's keep it that way." 
+Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alone. "It's peaceful <i>here.</i> Let's keep it that way." 
 
 :: NIMBYLadyQuote  
 @type Quote 
 @quality Great 
-@attr  Facts 
+@attr Facts 
 "Twin Lakes should definitely provide shelters! Just not in <i>my</i> neighborhood."
 
 :: RichLadyCannedFoodDrive
@@ -159,13 +159,13 @@ A local man urged people to speak up about the need for an accessible shelter. F
 @type Fact  
 @quality Great  
 @attr Facts
-Doug Walker said his apartment building kicked out all the seniors who lived here after the first flood, with no end in sight. 
+Doug Walter said his apartment building kicked out all the seniors who lived here after the first flood, with no end in sight. 
 
 :: DogOwnerSaysShelterDoesntAllowPets
 @type Fact 
 @quality Great
 @attr Facts 
-Doug Walker is not able to stay at the shelter because they cannot take in his dog, Odie. Many locals will face the same problem. 
+Doug Walter is not able to stay at the shelter because they cannot take in his dog, Odie. Many locals will face the same problem. 
 
 :: ExasperatedShelterCoordinator
 @type Quote 
@@ -200,8 +200,8 @@ The shelter coordinator was worried about pet owners. "I hate turning people awa
 :: UsefulInfoFromShelterCoordinator
 @type Fact
 @quality Great  
-@attr Useful 
-For those looking to help, the shelter needs donations! And the town needs to vote for people who will plan for future disasters. 
+@attr Useful
+For those looking to help, the shelter is accepting donations. Coordinators urge voting for candidates with disaster plans in place.
 
 :: ShelterCoordinatorConcerns
 @type Fact 
@@ -271,7 +271,7 @@ Local vet Fox Smolder said pet owners should stay with relatives, or look for ne
 
 :: WorriedAboutPeopleKickedOutOfApartment
 @type Quote
-@quality Great
+@quality Good
 @attr Facts, Color 
 "I'm worried about my clients who were kicked out of their building due to the flood. Not sure where they're going to go."
 
@@ -330,21 +330,21 @@ Strudel Apartments still need more repairs, and repair workers are swamped with 
 The grocery store was a chaotic scene, with empty shelves and lines that stretched all the way to the parking lot. 
 
 :: AngryLandlordQuote
-@type
-@quality 
-@attr 
+@type Quote
+@quality Bad
+@attr Color
 "I'm just doing my job, and all these sweet old ladies keep acting like I'm Cruella DeVille. So forgive me if I seem tense." 
 
 :: LandlordFactsAboutSituation 
 @type Fact 
-@quality 
-@attr 
+@quality Good
+@attr Facts
 At Strudel Apartments, the management company only gave each tenant $300 to cover weeks without housing. 
 
 :: NotSafeInApartments
 @type Fact 
 @quality Good 
-@attr Facts 
+@attr Facts
 "The fire marshal said it's not safe for people to move back in. The elevators are down, and the basement is still drying out." 
 
 :: RepairPeopleAreSwamped
@@ -364,12 +364,6 @@ When asked about helping tenants, the manager became defensive. "It's not fair. 
 @quality Great 
 @attr Facts 
 The management company only approved $300 in aid for tenants... not even enough for a week at Twin Lakes's cheapest motel.  
-
-:: ManagerThinkingOfMoving 
-@type Quote 
-@quality Bad  
-@attr Color 
-"Frankly, it's been a nightmare. I'm thinking of moving to Dual Ponds next month."
 
 :: GreatApartmentExteriorPhoto
 @type Photo  
@@ -391,9 +385,9 @@ The management company only approved $300 in aid for tenants... not even enough 
 "My team has been pushing the city to fix up the high school for years. It's no wonder Twin Lakes is shrinking instead of growing."
 
 :: TwinLakesShrinking
-@type
-@quality 
-@attr 
+@type Quote
+@quality Good
+@attr Useful, Facts
 "Tourists come to town in the summer, but the locals are moving away. Twin Lakes needs to become more accessible for everyone."  
 
 :: RequirementsForAccessibleShelter
@@ -485,7 +479,7 @@ Local shops--including Bookish, on Main Street--are still recovering as the seco
 :: SandbagStationQuoteLocations
 @type Fact 
 @quality Bad 
-@attr Facts 
+@attr Facts, Useful
 According to the DNR, filling stations can be found on Morello Road, Main Street, and the upper lakeside. 
 
 :: SandbagStationInAreaThatDoesntNeedOne
