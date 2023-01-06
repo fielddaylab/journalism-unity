@@ -358,6 +358,7 @@ $call GiveSnippet(RichLadyQuoteSafeNeighborhood)
 
 $choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
 $choice WhatWouldYouSayToPeople; What about the people who need to evacuate their homes?
+$choice PetBuster; Can I pet your dog?
 
 // Walking Dog
 :: WalkingDog
@@ -369,6 +370,17 @@ $call GiveSnippet(RudeRichLadyQuote)
 
 $choice snarkyresponse; Hm. I would guess some clothes and toothbrushes and granola bars. 
 $choice WhatWouldYouSayToPeople; What would you say to people who need to leave their homes? 
+
+:: PetBuster
+{@pattyforbes} Erm... well...
+She eyes you up and down.
+{@pattyforbes} Buster's just been groomed.
+{@pattyforbes} His coat is sensitive to... oils. Sorry.
+You've never been more disappointed in your life.
+But, back to the task at hand.
+
+$choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
+$choice WhatWouldYouSayToPeople; Anyway... what about the people who need to evacuate their homes?
 
 //Snarky Response
 :: snarkyresponse
@@ -506,16 +518,34 @@ $choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the
 {@me} Are you... okay? 
 {@doug} Sorry, kid. I'm tired and mad and I don't wanna talk about it. 
 
-$choice CheckYourBagForSomethingToOfferHim; Check your bag for something to offer him.
-$choice UseYourSocialConnections; Use your social connections to find some comm"on ground 
+$choice CheckYourBagForSomethingToOfferHim; Check your bag for something to offer him
+$choice UseYourSocialConnections; Use your social connections to find some common ground 
+$choice PetOdie; Ask to pet the dog
 $HubChoice(OfferToBuyHimBreakfast, "Offer to buy him breakfast and coffee", 0.25, "")
 
 // Use your social connections to find some common ground
 :: UseYourSocialConnections
-As soon as you mention Fred Finkler, he cheers up.
+$if StatCheck (Social, 5)
+As soon as you mention Fred Finkler, his face brightens.
 {@doug} You know Fred? Great fella, isn't he? 
 {@doug} He's always dropping off vases full of zinnias at my apartment building. 
 {@doug} Really brightens up the place. Wish I was back there now... 
+{@doug} And you love the smell, don'tcha Odie?
+He gives the dog a gentle pat.
+{@doug} Wish I was back there now...
+
+
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
+$HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
+
+:: PetOdie
+{@doug} Hah, of course! Behind the ears is his favorite.
+You give Odie some scritches, to his great delight.
+The dog wags his tail so vigorously it wags his whole lower half with it.
+$call AdjustStats(Social + 1)
 
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
@@ -537,10 +567,22 @@ $HubChoice(TellMeWhatHappened, "Interview the man about his troubles.", 0.25, ""
 
 // Check your bag for something to offer him.
 :: CheckYourBagForSomethingToOfferHim
-Score! You knew you packed those dog treats for a reason.
-{@doug} Thanks, kid. Odie here was getting pretty hungry. 
+You rifle around in your pack.
+
+$if StatCheck(Resourceful, 4)
+Hmm... Dogs like beef jerky, right?
+You toss the mutt half a stick and he leaps to catch it midair.
+{@doug} Thanks, kid. Odie here was getting pretty hungry.
 {@doug} Thought we'd be all settled into the shelter by now. 
 $HubChoice(TellMeWhatHappened, "Interview him about his troubles.", 0.25, "")
+
+$else
+Well, you've got, um...
+Two leftover quarters from laundry?
+You drop the coins in his palm halfheartedly.
+{@doug} Uh... thanks.
+$endif
+
 $choice FloodShelterChoices; Wish him well and find someone else to talk to.
 
 // Tell me what happened
@@ -556,7 +598,8 @@ $choice FloodShelterChoices; Wish him well and find someone else to talk to.
 {@doug} 'Fraid not. That building manager is slow as molasses. 
 {@me} Can I have the address of your apartment building? 
 {@doug} Sure thing. Maybe some pressure from the local news will get things moving...
-{@doug} Though I doubt it. 
+{@doug} Though I doubt it.
+He scrawls the address on the back of a receipt for dog food.
 {@article} Strudel Senior Apartments, 1502 Sugar Grove 
 $call GiveSnippet(KickedOutOfApartments)
 $call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
@@ -1201,7 +1244,7 @@ $choice GoToSeniorCitizenApartments; Actually, I'll stay here and keep looking a
 :: TalkToBuildingManager
 {clear-text}
 The building's manager--at least, you assume that's who she is--looks annoyed when she sees you.
-{@apartmentmanager} I've got enough on my plate. No press. 
+{@apartmentmanager} Ugh, I've got enough on my plate. No press. 
 
 $choice WithOrWithoutYou; Well, I'm writing this story with or without you. It's your choice. 
 $choice UnderstandShesInADifficultSpot; I know you're in a difficult spot. Maybe the city can help. 
