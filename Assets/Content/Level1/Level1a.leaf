@@ -39,7 +39,7 @@ $ActionChoice(Wake up)
 $call SetLocation("Apartment")
 {bg $BG_Bedroom}
 $call Music(Music/rainy day in cherry town.mp3)
-$call Ambience(Ambience/rain-inside.mp3)
+$call Rain(Rain/rain-inside.mp3)
 {layout Right}
 You wake up to your phone buzzing.
 It takes a few seconds to remember where you are: 
@@ -165,7 +165,7 @@ $choice ReadFloodingArticle; Read the click-bait article and brush up on your su
 :: OffToWork
 {clear-text}
 {/img}
-$call Ambience(Ambience/rain-inside.mp3)
+$call Rain(Rain/rain-inside.mp3)
 {layout Right}
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
@@ -314,7 +314,7 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
-$call Ambience(Ambience/rain-inside.mp3)
+$call Rain(Rain/rain-inside.mp3)
 {layout Left}
 
 $if Visited(HelpHer)

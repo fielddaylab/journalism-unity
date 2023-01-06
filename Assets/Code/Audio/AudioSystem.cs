@@ -14,6 +14,7 @@ namespace Journalism {
         [SerializeField] private AudioBundle m_DefaultBundle = null;
         [SerializeField, Required] private DownloadStreamingAudioSource m_AmbienceAudio = null;
         [SerializeField, Required] private DownloadStreamingAudioSource m_MusicAudio = null;
+        [SerializeField, Required] private DownloadStreamingAudioSource m_RainAudio = null;
         [SerializeField] private float m_CrossFadeDuration = 0.5f;
 
         #endregion // Inspector
@@ -23,6 +24,7 @@ namespace Journalism {
 
         private Routine m_AmbienceFade;
         private Routine m_MusicFade;
+        private Routine m_RainFade;
 
         private void Awake() {
             if (m_DefaultBundle != null) {
@@ -95,6 +97,10 @@ namespace Journalism {
 
         public void SetMusic(string url, float volume) {
             m_MusicFade.Replace(this, Transition(m_MusicAudio, url, volume, m_CrossFadeDuration));
+        }
+
+        public void SetRain(string url, float volume) {
+            m_RainFade.Replace(this, Transition(m_RainAudio, url, volume, m_CrossFadeDuration));
         }
 
         static private IEnumerator Transition(DownloadStreamingAudioSource source, string url, float volume, float duration) {
@@ -180,6 +186,22 @@ namespace Journalism {
                 return;
             }
             Game.Audio.SetAmbience(null, 1);
+        }
+
+        [LeafMember("Rain"), UnityEngine.Scripting.Preserve]
+        static private void LeafSetRain(string url, float volume = 1) {
+            if (DebugService.AutoTesting) {
+                return;
+            }
+            Game.Audio.SetRain(url, volume);
+        }
+
+        [LeafMember("StopRain"), UnityEngine.Scripting.Preserve]
+        static private void LeafStopRain() {
+            if (DebugService.AutoTesting) {
+                return;
+            }
+            Game.Audio.SetRain(null, 1);
         }
 
         #endregion // Leaf
