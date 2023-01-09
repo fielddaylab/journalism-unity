@@ -44,6 +44,7 @@ namespace Journalism {
         [Header("Default Dimensions")]
         [SerializeField] private Vector2 m_DefaultImageDims = new Vector2(400, 400);
         [SerializeField] private Vector2 m_DefaultPortraitDims = new Vector2(320, 320);
+        [SerializeField] private float m_DefaultPortraitYOffset = -25;
         [SerializeField] private Vector2 m_DefaultMapDims = new Vector2(366, 245);
 
         #endregion // Inspector
@@ -105,6 +106,7 @@ namespace Journalism {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultImageDims);
             this.m_ImageBG.rectTransform.SetSizeDelta(m_DefaultImageDims);
             this.m_ImageLayout.RectTransform.SetPosition(0, Axis.Y, Space.Self);
+            this.m_Image.transform.SetPosition(0, Axis.Y, Space.Self);
             this.m_Border.gameObject.SetActive(false); // disable border
             this.m_ImageBG.sprite = m_ImageBGSprite;
 
@@ -114,6 +116,7 @@ namespace Journalism {
         private IEnumerator HandlePortrait(TagEventData evtData, object context) {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultPortraitDims);
             this.m_ImageBG.rectTransform.SetSizeDelta(m_DefaultPortraitDims);
+            this.m_Image.transform.SetPosition(m_DefaultPortraitYOffset, Axis.Y, Space.Self);
             this.m_Border.gameObject.SetActive(true); // enable border
             this.m_ImageBG.sprite = m_PortraitBGSprite;
 

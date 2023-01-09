@@ -1095,7 +1095,8 @@ namespace Journalism {
 
         static public void PopulateStoryQuality(StoryQualityDisplay display, StoryStats stats) {
             for(int i = 0; i < display.Icons.Length; i++) {
-                PopulateScrapQuality(display.Icons[i], i < stats.QualitySubtract, i < stats.QualityAdd);
+                bool isEmpty = (stats.FactCount + stats.UsefulCount + stats.ColorCount) == 0;
+                PopulateScrapQuality(display.Icons[i], isEmpty ? false : i < stats.QualitySubtract, isEmpty ? false : i < stats.QualityAdd);
             }
         }
 
