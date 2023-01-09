@@ -45,9 +45,10 @@ $choice GetOnlineAndFixTheGazetteWebsite; Fix the latest glitch on the Gazette's
 :: HaveTeaWithYourUpstairsNeighbor
 {clear-text}
 Jeanie and her cat, Patches, are thrilled to see you.
+{img Anim/3b/Tea.png, Left}
 You sip some tea and scratch Patches behind the ears.
 {@me} Ready for the storm tomorrow, Jeanie?
-{@jeanie} I think so. And it's all thanks to your <i>purls</i> of wisdom
+{@jeanie} I think so. And it's all thanks to your <i>purrls</i> of wisdom
 
 $call AdjustStats(Social + 2)
 $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish   
@@ -56,32 +57,40 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 :: GoForAJogAtCherryCreekMarsh
 {bg $BG_CherryCreekMarsh}
 {clear-text}
+{img Anim/3b/RunningShoes.png, Left}
 You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.
 {@Birdie} Be careful out there, El! 
-{@Birdie} The birds are riled up today. Something strange is brewing. 
+{/img}
+{@Birdie} The birds are riled up today. Something strange is brewing.
+{img Anim/3b/DarkCloud.png, Left}
 {@me} Don't worry, Birdie. The storm's not supposed to hit until tomorrow!
 Though, come to think of, those clouds look awfully dark... 
 
 $call AdjustStats(Endurance + 2)
+{/img}
 $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish  
 
 // Replenish your bag with food and supplies 
 :: ReplenishYourBagWithFoodAndSupplies
 {clear-text}
 You hurry around your apartment, stuffing things into your bag. 
+{img Anim/3b/PackedSupplies.png, Left}
 You've finally unpacked all your boxes...
 Though you still have no idea where anything is. 
 
 $call AdjustStats(Resourceful + 2)
+{/img}
 $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish  
 
 // Fix the latest glitch on the Gazette's website 
 :: GetOnlineAndFixTheGazetteWebsite
 {clear-text}
 Ben from copyediting was poking around on the website...
+{img Anim/3b/pizza.png, Left}
 Which means the entire screen is now taken up by an enormous ad for cherry-argula pizza.
 You get online and resize the ad, wondering if 9:30 A.M. is too early to order delivery. 
+{/img}
 
 $call AdjustStats(Tech + 2)
 $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish  
@@ -116,9 +125,11 @@ $choice PullUpWeatherReport; Pull up the weather report
 //Pull up the weather report
 :: PullUpWeatherReport
 {clear-text}
+{img Anim/3b/ThunderstormCloud.png, Left}
 {@weatheralert}<color="red">EMERGENCY STORM WARNING!</color> A severe thunderstorm warning is now in effect. 8-10 inches of rain expected in the next twelve hours.</color>
 {@weatheralert}<color="red">FLASH FLOOD WARNING!</color> Sandbag properties. Stay off roads. High risk zones, evacuate now.</color>
 Oh no. The rain is coming early!
+{/img}
 $choice CallYourEditor; Call your editor  
 
 //Text your editor back 
@@ -223,10 +234,11 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 // Interview bookseller
 :: InterviewBookseller
 {@bookshop} Hey! You're El, right?
+{img Anim/3b/Opossum.png, Left}
 {@bookshop} I loved your piece about the local opossum family! 
 {@bookshop} I used to feed those little guys my tater tots when I was in high school. 
 {@bookshop} How can I help?
-
+{/img}
 $choice DoYouFeelLikeYourShopIsReadyFortheFlood; Do you feel like your shop is ready for the flood?
 
 // Do you feel like your shop is ready for the flood?
@@ -317,8 +329,10 @@ $else
 $endif 
 $if StatCheck(Endurance, 5)
     You grab a shovel and join the volunteers, filling your sanbags easily. 
+    {img Anim/3b/Shovel.png, Left}
     {@misty} Oh... thanks, El! 
     {@misty} Guess it couldn't hurt to chat, while you're here. 
+    {/img}
     $HubChoice(InterviewFillingStationWorker, "Interview her", 0.25, "")
 $else 
     You try to interview Misty while helping her with the sandbags. 
@@ -434,13 +448,14 @@ $choice WhyAreLowIncomeAreasMoreAtRisk; Why are those areas more at risk from fl
 
 // What barriers are getting in people's way?
 :: WhatBarriersAreGettingInTheWay
+{img Anim/3b/LoadofSandbags.png, Left}
 {@misty} Not everyone can just drive across town to get sandbags.
 {@misty} A lot of people have to work or look after their kids.
 {@misty} Plus, some people are elderly or disabled...
 {@misty} And sandbags aren't exactly easy to lug around. 
 
 $call GiveSnippet(BarriersToSandbagAccess)
-
+{/img}
 $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerned about? 
 
 // Why are those areas more at risk?
@@ -520,6 +535,7 @@ $endif
 You explain how flood victims can apply for government aid.
 {@me} Here's the website link, and a list of the info you'll need.
 {@rainn} Wow, thanks, kid!
+$AdjustStats(Trust + 1)
 {@rainn} Is there anything you want to ask me?
 $HubChoice(InterviewManFillingSandbags, "Start interview", 0.25, "")
 
@@ -529,7 +545,7 @@ $HubChoice(InterviewManFillingSandbags, "Start interview", 0.25, "")
 {@rainn} Actually, I live all the way over on Main Street.
 {@rainn} But my grandma lives on the south side. The Royal Hazel neighborhood.
 {@rainn} Gotta get her these sandbags, since the city isn't doin' anything to help her. 
-New location: Royal Hazel neighborhood 
+{@article} New location: Royal Hazel neighborhood 
 $call GiveSnippet(QuoteAboutGrandmaInRoyalHazel)
 
 $choice HowIsSheCoping; How is your grandma coping with all of this? 
@@ -706,9 +722,10 @@ To reach the south side of town, you have to pedal through historic, higher-inco
 The floodwater has gone down, and debris has been cleared away. 
 $call AdjustStats(Endurance + 1)
 $call GiveSnippet(DetailedDescriptionHighIncomeNeighborhood)
+{img Anim/3b/LemonadeStand.png, Left}
 A kid is sitting out in front of her house, selling cherry lemonade. 
 An elderly couple is climbing the steps of a Victorian house, lugging suitcases.
-
+{/img}
 $CheckFinalConverge()
 
 $HubChoice(StopToBuyLemonade, "Stop to buy lemonade", 0.25, "")
@@ -717,6 +734,7 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking--there's no story here
 
 // Stop to buy lemonade
 :: StopToBuyLemonade
+{img Anim/3b/Lemonade.png, Left}
 {@girlwithlemonade} Ice-cold lemonade, two dollars a cup!
 {@me} Oh. Uh... that seems a little pricey...
 The little girl glares at you.
@@ -736,15 +754,19 @@ $endif
 {@girlwithlemonade} So can I put you down for ten cups?
 {@me} Uh.... just two, please. 
 {@girlwithlemonade} Thank you <i>cherry</i> much!
+It's a little heavy on the sugar...
+...but surprisingly refreshing!
 
 $call AdjustStats(Endurance + 1)
 $call AdjustStats(Social + 1)
+{/img}
 
 $CheckFinalConverge()
 $choice ArriveAtRoyalHazelNeighborhood; Keep biking
 
 // Talk to the older couple 
 ::SeeIfTheOlderCoupleNeedsHelp
+{img Anim/3b/Luggage.png, Left}
 {@me} Can I help you with those bags?
 {@elderlywoman} Oh, thank you, Dear! 
 $call AdjustStats(Endurance + 1)
@@ -753,7 +775,7 @@ As you set their bags on the top step, the woman's eyes widen.
 {@elderlywoman} We saw your article about how important it is to evacuate.  
 {@elderlywoman} Luckily, our friends had space for us here. 
 {@elderlywoman} A lot of people back in our neighborhood can't even get sandbags!
-
+{/img}
 $call AdjustStats(Trust + 1)
 $call GiveSnippet(MostPeopleCantGetSandbags)
 
@@ -1114,9 +1136,12 @@ $choice WhatWouldYouSayToPeople; What would you say to people who think the city
 {@liz} Ha. You're not too bad, kid.
 {@liz} The Mayor is right that local shops and businesses matter.
 {@liz} But our south side community is crucial to this town, too. It's all connected. 
-{@liz} If we all start moving out, this town is gonna collapse like an overbaked cherry souffle.
+{@liz} If we all start moving out, this town is gonna collapse... 
+{img Anim/3b/CollapsedSouffle.png, Left}
+{@liz} Like those overbaked cherry souffles from the Goldfish.
 
 $call GiveSnippet(NeedToProtectTheSouthSide)
+{/img}
 
 $choice ThankLiz; Thank her for her time
 
@@ -1158,9 +1183,11 @@ You hurry to a nearby street corner, away from people.
 {@gabby} Your reporting is so impressive... especially for a new reporter.
 {@gabby} So, why do you want to come work with us at the Smoke City Herald? 
 You're trying to pay attention. Really, you are.
+{img Anim/3b/RainDrop.png, Left}
 But you can't help but notice the raindrops hitting the pavement around you.
 {@gabby} Ahem. El, are you there? 
 {@gabby} Can you tell me why you're interested in working for us? 
+{/img}
 
 $choice IWantToWriteImportantStories; I want to write important stories that make a difference.  
 $choice IWantToMakeANameForMyself; I want to make a name for myself. 
@@ -1169,9 +1196,11 @@ $choice IWantToMakeANameForMyself; I want to make a name for myself.
 {@gabby} That's wonderful, El. 
 {@gabby} Although, since you're new, I'd probably start you on the entertainment beat...
 {@gabby} Music events, C-list celebrities, stuff like that.
+{img Anim/3b/ThunderstormCloud.png, Left}
 {@gabby} You might even get to cover our growing population of short-tailed opossums! 
 {@gabby} You could handle that, right, El? 
-{@me} Oh... yeah. I think so. 
+{@me} Oh... yeah. I think so.
+{/img}
 You try to listen to her next question, but your phone is buzzing again.
 
 $choice ReadTextFromDionne; Read text 
@@ -1232,8 +1261,11 @@ You can hear the rush of water at the dam.
 You probably shouldn't have said that last part...
 But Gabby just laughs.
 {@gabby} I get it. I spent the first five years of my career in a tiny town, too.
+{img Anim/3b/Apple.png, Left}
 {@gabby} Except they had an Apple Carnival, not a Cherry Festival. 
 {@gabby} Stay safe for now, El. We'll talk soon. 
+
+{/img}
 
 $choice HangUpPhoneInterview; Hang up and look for shelter 
 
@@ -1296,13 +1328,16 @@ Whoa. Your rescuer is Nora, the Houseboat Lady!
 {@nora} Just visiting my dear friend here. 
 {@nora} I was on my way to drop off a new stack of books at Bookish...
 {@nora} But Willa called and asked for my help.  
+{img Anim/3b/FloodlightsBook.png, Left}
 That's when you notice the book propped up on the table: <i>Floodlights</i>, by Dr. Nora Warner.
 Signed copies, by the looks of it.
-{@me} Oh! You know the author? I've heard she's pretty famous around here.
+{@me} Oh! You know the author?
+{@me} I've heard she's pretty famous around here.
 {@me} And... you're both named Nora.... 
 That's when you realize. Holy cherry-glazed donuts.
+{/img}
 
-$choice InterviewTheFloodingExpert; Interview the flooding expert, Dr. Nora Warner 
+$choice InterviewTheFloodingExpert; Interview the <i>flooding expert</i>, Dr. Nora Warner??
 
 // Interview the flooding expert
 :: InterviewTheFloodingExpert
@@ -1318,12 +1353,13 @@ $choice AskNoraAboutHerResearch; Ask Nora about her research
 // Ask Willa about her quiltwork 
 :: AskWillaAboutTheFlood
 {@willa} Well, I wanted to evacuate. 
-{@willa} But these quilts mean so much to me. And quilting is my livelihood. 
+{@willa} But these quilts mean so much to me. And quilting is my livelihood.
+{img Anim/3b/BoxofQuilts.png, Left}
 {@willa}That's why Nora's here. She was helping me pack everything up.
 {@willa} But I suppose that ship has sailed. It's raining cats and chickens out there. 
 
 $call GiveSnippet(WillasStory)
-
+{/img}
 $choice AskNoraAboutHerResearch; Ask Nora about her research
 
 // Ask Nora about her research 
