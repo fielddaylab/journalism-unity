@@ -59,9 +59,11 @@ $choice CheckInWithYourEditor; Check with your editor
 
 ::TakeASnackBreak
 To say you're tired of cherries would be an understatement.
+{img Anim/2b/Banana.png, Left}
 You grab a slightly overripe banana instead.
 Flopping into bed, you eat around the bruises and contemplate your ceiling for a moment.
 ...
+{img Anim/2b/WaterStain.png, Left}
 That water stain kinda looks like a cherry.
 Darn it.
 At least you feel a bit more refreshed.
@@ -97,10 +99,12 @@ $choice WatchSomeWebflix; Make popcorn and watch some Webflix
 
 //Watch some Webflix
 :: WatchSomeWebflix
+{img Anim/2b/Popcorn.png, Left}
 You stay up half the night watching Streeterton. 
 The next morning, you wake up to a text...
 Make that 3 texts...
 ...From your editor. 
+{/img}
 
 $choice ReadYourEditorsMessage; Read messages
 
@@ -195,8 +199,14 @@ You call Khalisa for advice.
 {@khalisa}Oh, they're beautiful! Lots of wildlife.  
 {@khalisa}Cranes, deer, turtles, tons of snakes. I even saw a coyote once!
 {@khalisa}Cool, huh?
-{@me}.....Mmmhm. 
-You stuff your bag with pepper spray, protein bars, a compass, an air horn, and a roll of duct tape, in case you get lost and need to build a shelter from twigs and prairie grass. 
+{@me}.....yeah. Snakes. Cool.
+You stuff your bag with... 
+pepper spray,
+protein bars,
+a compass,
+an air horn,
+and a roll of duct tape.
+...in case you get lost and need to build a shelter from twigs and prairie grass. 
 Oh, and bug spray, of course. 
 
 $call AdjustStats(Resourceful + 1, Research + 1)
@@ -206,7 +216,7 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 :: MeetSomeOtherReportersForCoffee
 @tags Social, Trust
 
-$call SetLocation("Downtown)
+$call SetLocation(Downtown)
 
 {bg $BG_FirstStDowntownCleanup}
 
@@ -222,18 +232,21 @@ $elseif Visited(MainStreetCafe)
 You meet Khalisa and Ben at the Goldfish Cafe. 
 The cafe owner is delighted to see you again. 
 {@cafeowner}I loved your article! Thanks to you, I've had lots of volunteers offering to help me. 
+{img Anim/2b/CoffeeQuiche.png, Left}
 {@cafeowner}Here's a quiche and some coffee for you and your friends, free of charge. 
 $call AdjustStats(Trust + 1)
 $else
 You meet Khalisa and Ben at the Goldfish Cafe.
 The owner is delighted to meet you. 
-{@cafeowner}You're El Benjamin, right? I read your story about the flood!
+{@cafeowner} You're El Benjamin, right? I read your story about the flood!
 {@cafeowner} I can tell you really care about this town.
+{img Anim/2b/CoffeeQuiche.png, Left}
 {@cafeowner} Here's a quiche and some coffee, free of charge!
 
 $endif
 
 $call AdjustStats(Endurance + 1)
+{/img}
 $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
 
 // Original Name: Head to Cherry Creek Marsh.
@@ -245,8 +258,9 @@ $call SetLocation("CherryCreek")
 {bg $BG_CherryCreekMarsh}
 {layout Right}
 Birdie, the aptly-named director of CRANE, is waiting at the trailhead. 
+{img Anim/2b/Mosquito.png, Left}
 Plus a few volunteers, and about a thousand mosquitoes. 
-
+{/img}
 $OnceChoice(TalkToCRANEDirector, "Talk to Birdie")
 
 // Original Name: Talk to CRANE Director
@@ -261,11 +275,13 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 // Original Name: "How is that related to the flooding?"
 :: HowIsThatRelatedToTheFlooding
 {@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
-{@birdie}But 90% of our original wetlands are gone!
+{img Anim/2b/Sponge.png, Left}
+{@birdie} But 90% of our original wetlands are gone!
 {@player} Wow... 90%? That seems like a lot. 
 {@player} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
 {@birdie} The point is, we need to save our wetlands before it's too late. 
+{/img}
 
 $call GiveSnippet(WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
@@ -302,9 +318,11 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 // Original Name: "What happened to the wetlands in Twin Lakes?"
 :: WhatHappenedToTheWetlandsInTwinLakes
 {@birdie}Shops. Parking lots. Apartment complexes.
+{img Anim/2b/Bulldozer.png, Left}
 {@birdie}The town keeps growing, and our wetlands keep shrinking. 
 
 $call GiveSnippet(WhatHappenedToWetlands)
+{/img}
 $OnceChoice(AreTherePoliciesToProtectWetlands,"Are there any policies to protect wetlands?")
 $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this issue at Town Hall meetings?")
 
@@ -314,7 +332,7 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 {@birdie}The final vote to decide the fate of Cherry Creek Marsh happens tomorrow. 
 {@birdie}That's why I need you to get the word out. 
 
-Wow... tomorrow?? Guess the pressure is on. 
+Sheesh... tomorrow?? Guess the pressure is on. 
 
 $call GiveSnippet(WetlandPolicy)
 $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your information?")
@@ -326,7 +344,7 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 {@birdie}The final vote happens tomorrow. 
 {@birdie}That's why I need your help.
 
-Wow... tomorrow?? Guess the pressure is on. 
+Sheesh... tomorrow?? Guess the pressure is on. 
 
 $call GiveSnippet(WetlandTownHallMeeting)
 
@@ -337,10 +355,12 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 {@birdie}This data comes straight from the Limnology Department website.
 {@birdie}Of course, the Spark Project doesn't care about data. 
 {@me}What's the Spark Project?  
-{@birdie}A local business expansion group. They're awful. 
-{@birdie}They would literally pave over paradise to build a bagel shop. 
+{@birdie}A local business expansion group. They're awful.
+{@birdie}They would literally pave over paradise to build a bagel shop.
+{img Anim/2b/Bagel.png, Left}
 You have to admit, Twin Lakes's bagel scene is sorely lacking. 
-But this doesn't seem like the best time to bring this up. 
+But this doesn't seem like the best time to bring this up.
+{/img}
 {@me}Do you know where I can find the Spark Project?
 {@birdie}They have a meeting this morning, in the old opera house. 
 {@birdie}I wish I could go protest...
@@ -404,7 +424,10 @@ $HubChoice(AskForAnInterview, "Ask the leader for an interview", 0.25)
 :: SitAndListen
 {@sparkleader}Tourists are being scared away by the flood.
 {@sparkleader}We need to help business owners get through this!
-People call out ideas: a Shop Local campaign, free hotel stays, volunteers to help flooded businesses with repairs.
+People call out ideas: 
+a Shop Local campaign!
+Free hotel stays!
+Volunteers to help flooded businesses with repairs!
 Hmm. So far, these people don't seem <i>totally</i> awful...
 
 $call AdjustStats(Research + 1)
@@ -443,10 +466,11 @@ $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the tow
 // Original Name: Spark Project came up in an interview
 :: YourNameCameUpInAnInterview
 {@nancy} I'm glad you asked!
-{@nancy}We plan to pave over parts of the marsh and build low-income apartments.  
+{@nancy}We plan to pave over parts of the marsh and build low-income apartments.
+{img Anim/2b/Bulldozer.png, Left}
 {@nancy}Affordable, peaceful. 
 {@nancy}It'll make space for people who want to move to our beautiful town, but can't afford it. 
-
+{/img}
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
 $OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands will cause more flooding throughout the town?")
@@ -455,9 +479,10 @@ $OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands
 :: CherryCreekMarshPlan
 {@nancy}Of course it'll help!
 {@nancy}We plan to pave over parts of the marsh and build low-income apartments.  
+{img Anim/2b/Bulldozer.png, Left}
 {@nancy}Affordable, peaceful. 
 {@nancy}It'll make space for people who want to move to our beautiful town, but can't afford it. 
-
+{/img}
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
 $OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands will cause more flooding throughout the town?")
@@ -546,9 +571,11 @@ $choice DecideWhatToDoNext; Leave the opera house
 :: PlanForCherryCreekMarsh
 {@nancy}Cherry Creek is peaceful. Secluded. 
 {@nancy}It's perfect place to add some low-income apartments!
-{@me}On... a wetland? 
+{@me}On... a wetland?
+{img Anim/2b/Bulldozer.png, Left}
 {@nancy}We'll pave it over. Add some walking paths. 
 {@nancy}We just need a City Council vote in our favor. 
+{/img}
 
 $call GiveSnippet(PerfectPlaceForApartments)
 
@@ -942,17 +969,21 @@ Looks like there's something to be said for learning on the job.
 $call GiveSnippet(GreatMarshPhoto-Crane)
 
 $elseif StatCheck(Trust, 5)
+{img Anim/2b/Mosquito.png, Left}
 You're too busy swatting at mosquitoes to get any long-distance nature shots... 
 But a photo of the volunteers would be great, too. 
 When you ask for permission, the nearest volunteer absolutely geeks out. 
+{/img}
 {@wetlandvolunteer3}You're that new reporter from New York, right??
 {@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
 
 $call GiveSnippet(GoodMarshPhoto-Volunteers)
 
 $else
+{img Anim/2b/Mosquito.png, Left}
 You're too busy swatting mosquitoes to line up a decent shot.
 Trying to ignore the cloud of bugs, you ask the volunteers for permission to take a photo. 
+{/img}
 {@wetlandvolunteer3}Um, no offense. But we don't trust out-of-towners.
 {@me}What? I'm not an out-of-towner! 
 {@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
@@ -983,9 +1014,11 @@ She tells you about her volunteer work: replanting native species.
 
 {@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
 {@me}It is pretty nice.... though I could probably do without the snakes. 
+{img Anim/2b/Snake.png, Left}
 {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
 Hooooooly cherry donuts.
 You move slowly backward and snap a picture, because this seems more professional than running away screaming.
+{/img}
 
 $call GiveSnippet(Volunteer-ImportanceOfWetlands)
 $call GiveSnippet(SnakeAnecdote)
@@ -993,16 +1026,20 @@ $call GiveSnippet(GreatSnakePhoto)
 $choice MarshMap; Decide what to do next 
 
 $elseif StatCheck(Resourceful, 5)
+{img Anim/2b/Mosquito.png, Left}
 The volunteer is swatting at mosquitoes, looking frustrated. 
 {@wetlandvolunteer2}Can't believe I forgot my bug spray. 
-{@me} Oh.. I've got some in my backpack! Here, help yurself.  
+{@me} Oh.. I've got some in my backpack! Here, help yurself.
+{/img}
 She accepts the bug spray gratefully and tells you all about her volunteer work: replanting native species. 
 {@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
 {@me}It is pretty nice.... though I could probably do without the snakes. 
+{img Anim/2b/Snake.png, Left}
 {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
 Hooooooly cherry donuts.
 You take a few steps backward and snap a picture, because this seems more professional than running away screaming.
 
+{/img}
 $call GiveSnippet(Volunteer-ImportanceOfWetlands)
 $call GiveSnippet(SnakeAnecdote)
 $call GiveSnippet(GreatSnakePhoto)
@@ -1084,7 +1121,7 @@ $HubChoice(InterviewBusinessOrganizer, "Interview business organizer", 0.5)
 :: TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands
 {@spark}Oh... uh, sorry, everybody's at a meeting.
 {@me}Can you call me when the meeting is over?
-{@spark}It's a really long meeting. 
+{@spark}It's... a really long meeting. 
 He hangs up before you can get another word in. 
 Come to think of it, maybe you shouldn't have led with the evil-business angle.
 
