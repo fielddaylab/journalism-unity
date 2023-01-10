@@ -3,23 +3,13 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
-#const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
-#const BG_HouseExtNoRain = "BG/HouseExtNoRain.mp4"
-#const BG_EvacShelter = "BG/EvacShelter.mp4"
-#const BG_SandbagStation = "BG/SandbagStation.mp4"
-#const BG_LowIncomeSt = "BG/LowIncomeSt.mp4"
-#const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
-#const BG_Bookshop = "BG/Library.mp4"
-#const BG_QuiltLady = "BG/QuiltLady.mp4"
-#const BG_MainStreet = "BG/MainStreet.jpg"
-#const BG_Map = "BG/OutsideApt-Map.jpg"
-
 
 # start Level3Story2
 
 // Original Name: Level 3, Story 2
 :: Level3Story2
 {bg $BG_HouseExtNoRain}
+$call Music($Audio_RainyDayInCherryTownWakingDay1)
 Email Notification:
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
@@ -27,6 +17,8 @@ Email Notification:
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
 {bg $BG_HouseExt}
+$call StopAmbience()
+$call Rain($Audio_RainOutsideChill)
 Twin Lakes: the second storm. 
 It's been sprinkling on and off...
 But the real downpour is expected to start tomorrow. 
@@ -57,6 +49,9 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 // Go for a jog at Cherry Creek Marsh
 :: GoForAJogAtCherryCreekMarsh
 {bg $BG_CherryCreekMarsh}
+$call Music($Audio_CherryTownRestoration)
+$call Ambience($Audio_RuralFrogs)
+$call Rain($Audio_CalmStreamRiverFlow)
 {clear-text}
 {img Anim/3b/RunningShoes.png, Left}
 You grab your running shoes and hit the trails.
@@ -99,6 +94,9 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
 {bg $BG_MainStreet}
+$call Music($Audio_StoryRain)
+$call StopAmbience()
+$call StopRain()
 {clear-text}
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Smoke City Herald yet. 
@@ -140,6 +138,9 @@ $choice CallYourEditor; Call your editor
 ::CallYourEditor
 @checkpoint
 {bg $BG_Bookshop}
+$call Music($Audio_PaperPuddle)
+$call StopAmbience()
+$call StopRain()
 {clear-text}
 Dionne picks up on the first ring.
 {@me} Just saw the news. What do you need me to do?
@@ -296,6 +297,9 @@ $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations",
 // Go to sandbagging station
 :: GoToSandbaggingStation
 {bg $BG_SandbagStation}
+$call Music($Audio_PaperPuddle)
+$call StopAmbience()
+$call StopRain()
 $if FirstVisit()
     {layout Left}
     Volunteers and people from the neighborhood hurry to fill sandbags.
@@ -723,6 +727,9 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 :: RideYourBikeRoyalHazel
 {layout Right}
 {bg $BG_Map}
+$call Music($Audio_PaperPuddle)
+$call Ambience($Audio_UrbanSeagulls)
+$call StopRain()
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris has been cleared away. 
 $call AdjustStats(Endurance + 1)
@@ -797,6 +804,10 @@ $call GiveSnippet(QuickDescriptionHighIncomeNeighborhood)
 // Arrive at Royal Hazel neighborhood 
 :: ArriveAtRoyalHazelNeighborhood
 {bg $BG_LowIncomeSt}
+$call Music($Audio_SolemnWaters)
+$call StopAmbience()
+$call StopRain()
+
 $if FirstVisit()
     Wow. Obviously the city didn't work very hard to clean up the debris here. 
     The few people outside are frowning at you, like maybe you're in the wrong neighborhood. 
@@ -1326,6 +1337,10 @@ $choice GoInsideTheHouse; Go inside
 // Dry off and look around
 :: GoInsideTheHouse
 {bg $BG_QuiltLady}
+$call Music($Audio_Flood)
+$call StopAmbience()
+$call StopRain()
+
 {@me} Thank you! I didn't think I was gonna make it.
 {@mysteryrescuer} Happy to help, Dear. I'm just glad Willa and I happened to be looking outside.
 Whoa. Your rescuer is Nora, the Houseboat Lady!

@@ -3,18 +3,6 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
-#const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
-#const BG_UpperLakeDam = "BG/UpperLakeDam.mp4"
-#const BG_HouseBoat = "BG/Houseboat.png"
-#const BG_CherryFestFlood = "BG/MainStCherryFestFlood.mp4"
-
-#const Audio_Flood = "Music/Flood.mp3"
-#const Audio_CherryTownRestoration = "Music/cherry town restoration.mp3"
-#const Audio_StreetBustle = "Ambience/street bustle with traffic.mp3"
-#const Audio_HighFlowRiver = "Rain/High flow river.mp3"
-#const Audio_FloodWaterRushing = "Rain/Flood water rushing.mp3"
-#const Audio_RainOutsideChill = "Rain/outside rain (chill).mp3"
-
 # start Story2Intro
 
 // Original Name: Story 2 Intro

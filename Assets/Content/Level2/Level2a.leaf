@@ -3,22 +3,6 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
-#const BG_Bedroom = "BG/Bedroom2.mp4"
-#const BG_HouseExt = "BG/HouseExt.mp4"
-#const BG_HouseExtNoRain = "BG/HouseExtNoRain.mp4"
-#const BG_TownTransitional = "BG/TownTransitional.mp4"
-#const BG_DNRSite = "BG/DNRSite.mp4"
-#const BG_Limnology = "BG/Limnology.mp4"
-#const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
-
-#const Audio_RainyDayInCherryTownWakingDay1 = "Music/rainy day in cherry town (waking up day 1).mp3"
-#const Audio_StoryRain = "Music/story rain.mp3"
-#const Audio_PaperPuddle = "Music/paper in a puddle.mp3"
-#const Audio_CherryTownRestoration = "Music/cherry town restoration.mp3"
-#const Audio_RuralFrogs = "Ambience/rural ambience (wfrogs).mp3"
-#const Audio_UrbanSeagulls = "Ambience/urban seagulls.mp3"
-#const Audio_CalmStreamRiverFlow = "Rain/calm stream-river flow.mp3"
-
 
 # start Level2Story3TheScienceStory
 
