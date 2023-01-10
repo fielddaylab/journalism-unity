@@ -5,6 +5,7 @@
 
 #const BG_Bedroom = "BG/Bedroom2.mp4"
 #const BG_HouseExt = "BG/HouseExt.mp4"
+#const BG_HouseExtNoRain = "BG/HouseExtNoRain.mp4"
 #const BG_TownTransitional = "BG/TownTransitional.mp4"
 #const BG_DNRSite = "BG/DNRSite.mp4"
 #const BG_Limnology = "BG/Limnology.mp4"
@@ -17,7 +18,7 @@
 :: Level2Story3TheScienceStory
 $call SetLocation("Apartment")
 $ActionChoice(The next morning...)
-{bg $BG_Bedroom}
+{bg $BG_HouseExtNoRain}
 $call SetHeaderEnabled(true)
 $call StopAmbience()
 It's an eerily quiet morning in Twin Lakes. 

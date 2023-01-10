@@ -4,6 +4,7 @@
 // Creator: Twine
 
 #const BG_Bedroom = "BG/Bedroom2.mp4"
+#const BG_MainStreet = "BG/MainStreet.jpg"
 #const BG_Library = "BG/Library.mp4"
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
 #const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
@@ -156,7 +157,7 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 You hop on your bike and pedal to the Twin Lakes library.
 
 $call SetLocation("Library")
-{bg $BG_Library}
+{bg $BG_MainStreet}
 
 $call AdjustStats(Endurance + 1)
 
