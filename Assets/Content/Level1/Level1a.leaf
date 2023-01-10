@@ -10,7 +10,7 @@
 #const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
 
 #const Audio_RainyDayInCherryTownWakingDay1 = "Music/rainy day in cherry town (waking up day 1).mp3"
-#const Audio_CherryDownRestoration = "Music/cherry town restoration.mp3"
+#const Audio_CherryTownRestoration = "Music/cherry town restoration.mp3"
 #const Audio_ChickenSounds = "Ambience/chicken sounds.mp3"
 #const Audio_StreetBustle = "Ambience/street bustle with traffic.mp3"
 #const Audio_RainInside = "Rain/rain-inside.mp3"
@@ -323,7 +323,7 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
-$call Music($Audio_CherryDownRestoration)
+$call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_StreetBustle)
 $call Rain($Audio_RainOutsideChill)
 {layout Left}
@@ -749,7 +749,7 @@ $goto Office1-Clock
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
 {bg $BG_OfficeExterior}
-$call Music($Audio_CherryDownRestoration)
+$call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_StreetBustle)
 $call Rain($Audio_RainOutsideChill)
 {clear-text}

@@ -9,8 +9,11 @@
 #const BG_CherryFestFlood = "BG/MainStCherryFestFlood.mp4"
 
 #const Audio_Flood = "Music/Flood.mp3"
+#const Audio_CherryTownRestoration = "Music/cherry town restoration.mp3"
+#const Audio_StreetBustle = "Ambience/street bustle with traffic.mp3"
 #const Audio_HighFlowRiver = "Rain/High flow river.mp3"
 #const Audio_FloodWaterRushing = "Rain/Flood water rushing.mp3"
+#const Audio_RainOutsideChill = "Rain/outside rain (chill).mp3"
 
 # start Story2Intro
 
@@ -20,7 +23,7 @@ $call SetHeaderEnabled(true)
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 {layout Left}
-$call Music($Audio_CherryDownRestoration)
+$call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_StreetBustle)
 $call Rain($Audio_RainOutsideChill)
 {@me} What's next? Anything else I can do? 

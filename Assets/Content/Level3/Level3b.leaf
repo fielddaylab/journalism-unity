@@ -109,6 +109,9 @@ $choice GoInsideBookish; Go inside bookstore
 // Go inside Bookish
 :: GoInsideBookish
 {bg $BG_Bookshop}
+$call Music($Audio_PaperPuddle)
+$call StopAmbience()
+$call StopRain()
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
 {@mayorbarrysmuckers} Aw, cripes. Not you again!
