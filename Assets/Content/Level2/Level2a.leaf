@@ -154,17 +154,16 @@ $if StatCheck(Tech, 3)
     {img Anim/2a/RingingPhone.png, Left}
     {anim rumble} RRRRING.
     $choice AnswerPhone; Answer phone
-    $else
+$else
     You're not very {stat-name}tech{/stat-name} savvy, but it's Squawker. How hard can it be? 
     You squawk out some... ill-advised hot takes.
     Within five minutes, you've dropped a large portion of your followers. Whoops. 
     $call AdjustStats(Trust - 2)
+    // shudder style
+    {img Anim/2a/RingingPhone.png, Left}
+    {anim rumble} RRRRING.
+    $choice AnswerPhone; Answer phone
 $endif
-
-// shudder style
-{img Anim/2a/RingingPhone.png, Left}
-{anim rumble} RRRRING.
-$choice AnswerPhone; Answer phone
 
 // Original Name: Read a book before work
 :: ReadABookBeforeWork

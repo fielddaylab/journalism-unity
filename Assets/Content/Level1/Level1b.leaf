@@ -50,6 +50,7 @@ $if !StatCheck(Tech, 2) , !StatCheck(Resourceful, 2)
     First things first. You need more {stat-name}tech{/stat-name} supplies.
     And you'll need rain gear if you want to be {stat-name}resourceful{/stat-name} enough to make it downtown.
 
+    $choice GetReadyPart2; Head out anyway
     $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
     $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
     $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
@@ -58,11 +59,13 @@ $elseif !StatCheck(Resourceful, 2)
     It's a mess out there. 
     You'll need some rain gear if you want to be {stat-name}resourceful{/stat-name} enough to handle this.
 
+    $choice GetReadyPart2; Head out anyway
     $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
     $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $elseif !StatCheck(Tech, 2)
     You still need to level up your {stat-name}tech{/stat-name}, or your phone will die before you even make it downtown.
 
+    $choice GetReadyPart2; Head out anyway
     $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
     $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
     $HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
@@ -215,6 +218,11 @@ $choice GetReadyPart2; Head back to your desk
 {layout Left}
 {bg $BG_OfficeExterior}
 $call SetTimeRemaining(0)
+
+$if !StatCheck(Tech, 2)
+    You are heading downtown and your phone dies. You get lost without your map.
+    $GameOver("You got lost in the storm. Make sure you can rely on your tech!")
+$endif
 
 $if hasBike == true
 $choice Bike; Ride your bike downtown and weave around the flooded areas
@@ -542,12 +550,12 @@ $choice WhatsTheDealWithTheHouseboat; What's the deal with the houseboat?
 :: TakePhotosOfTheFloodSite
 {/map}
 $if StatCheck(Tech, 3)
-At the Smoke City Herald, you'd have a pro photographer to help you...
-But here in cherryland, you're on your own. 
-Luckily, your tech gear is advanced enough to get you a high-quality shot!
+    At the Smoke City Herald, you'd have a pro photographer to help you...
+    But here in cherryland, you're on your own. 
+    Luckily, your tech gear is advanced enough to get you a high-quality shot!
 
-$call SFX(PhotoSnap)
-$call GiveSnippet(HouseboatPhotos)
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(HouseboatPhotos)
 $endif
 
 $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
@@ -576,7 +584,7 @@ $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
     $call AdjustStats(Tech + 1)
     $call SFX(PhotoSnap)
     $call GiveSnippet(OkayHouseboatPhotos)
-$elseif Stat(Tech) == 2
+$elseif Stat(Tech) <= 2
     Oh no... your camera battery is dead!
     You use your phone to snap a few grainy shots.
     You've never really gotten the hang of taking photos in the dark, in the rain...

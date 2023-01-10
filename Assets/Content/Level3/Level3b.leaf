@@ -1192,7 +1192,12 @@ Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 $choice FindAPrivatePlaceToTakeTheCall; Find a private place to take the call
 
 :: FindAPrivatePlaceToTakeTheCall
-//Todo: add generic town street background with coffee shop and hardware store 
+//Todo: add generic rainy town street background with coffee shop and hardware store 
+{bg $BG_OfficeExterior}
+$call Music($Audio_CherryTownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
+
 You hurry to a nearby street corner, away from people.
 {@me} Hi, this is El Benjamin. 
 {@gabby} El, so glad we could finally talk!

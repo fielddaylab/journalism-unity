@@ -472,10 +472,10 @@ $choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about the issue
 $call GiveSnippet(CityPlanningIssue)
 
 {/img}
+$choice HeadStraightToShelter; Head straight to the emergency shelter 
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
 $HubChoice (InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
-$choice HeadStraightToShelter; Head straight to the emergency shelter 
 
 // Could you stay somewhere else? Somewhere safe? 
 :: CouldYouStaySomewhereElse
@@ -485,10 +485,10 @@ $choice HeadStraightToShelter; Head straight to the emergency shelter
 
 $call GiveSnippet(GetWordOutAboutAccessibility)
 
+$choice HeadStraightToShelter; Head straight to the emergency shelter 
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
 $HubChoice (InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
-$choice HeadStraightToShelter; Head straight to the emergency shelter 
 
 // Original Name: Head to the evacuation shelter.
 :: HeadStraightToShelter
@@ -498,27 +498,35 @@ $call Music($Audio_Flood)
 $call StopAmbience()
 $call StopRain()
 
-$choice TalkToManWithDog; Comfort the dog owner and ask for an interview
-$choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the clipboard 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
+$HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
+$HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
 $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 
 //Take some photos of the shelter
 :: TakePhotosOfShelter
 {clear-text}
 $if StatCheck (Tech, 5)
-You use your top-notch tech skills to snap some amazing photos of the shelter!
-$call GiveSnippet(GreatShelterPhoto)
+      You use your top-notch tech skills to snap some amazing photos of the shelter!
+      $call GiveSnippet(GreatShelterPhoto)
 $elseif StatCheck (Tech, 3)
-You use your modest tech skills to get some decent photos, though the orange light of the gym isn't helping.
-$call GiveSnippet(BadLightingShelterPhoto)
+      You use your modest tech skills to get some decent photos, though the orange light of the gym isn't helping.
+      $call GiveSnippet(BadLightingShelterPhoto)
 $else 
-Uh oh. There's something wrong with your camera... everything's coming out blurry! 
-Unfortuately, your only tech skill (turn it off and on again) doesn't come through this time. 
-$call GiveSnippet(BlurryShelterPhoto)
+      Uh oh. There's something wrong with your camera... everything's coming out blurry! 
+      Unfortuately, your only tech skill (turn it off and on again) doesn't come through this time. 
+      $call GiveSnippet(BlurryShelterPhoto)
 $endif
 
-$choice TalkToManWithDog; Comfort the dog owner and ask for an interview
-$choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the clipboard 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$endif
+$HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
+$HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
 
 // Talk to the sad-looking man standing with his dog
 :: TalkToManWithDog
@@ -851,14 +859,14 @@ $choice FloodShelterChoices; Decide what to do next.
 //Flood Shelter Choices
 :: FloodShelterChoices
 
+$choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert at local college 
 $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
-$choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the clipboard 
+$HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
 $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "")
 $if ApartmentAddress
       $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building to check things out", 0.25, "")
 $endif 
-$choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert at local college 
 
 // Head downtown to talk to the local vet, Fox Sculder
 :: MeetWithLocalVet

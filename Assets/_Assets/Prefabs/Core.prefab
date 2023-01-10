@@ -459,6 +459,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22614f96fb51b1a4d95a03197edd3a53, type: 2}
   - {fileID: 11400000, guid: 3ea7ac531b7cefc42a665b95a59ab9b0, type: 2}
   - {fileID: 11400000, guid: 1495fb39885c9024a8452e6d1e2fd512, type: 2}
+  - {fileID: 11400000, guid: 2a333ddeb5be82845815f59de416989d, type: 2}
   m_DefaultLoc: {fileID: 11400000, guid: ef3c9838054b79841846de36e1d736c6, type: 2}
   m_AudioSystem: {fileID: 6362356657543418724}
   m_ScriptSystem: {fileID: 7466770506654058423}

@@ -71,6 +71,9 @@
 #const BG_Bookshop = "BG/Library.mp4"
 #const BG_QuiltLady = "BG/QuiltLady.mp4"
 #const BG_Map = "BG/OutsideApt-Map.jpg"
+#const BG_FinalFerrisWheel = "BG/FinalFerrisWheel.mp4"
+#const BG_FinalStreetFestival = "BG/FinalStreetFestival.mp4"
+#const BG_FinalField = "BG/FinalField.mp4"
 
 // Music
 #const Audio_RainyDayInCherryTownWakingDay1 = "Music/rainy day in cherry town (waking up day 1).mp3"
@@ -85,6 +88,7 @@
 #const Audio_StreetBustle = "Ambience/street bustle with traffic.mp3"
 #const Audio_RuralFrogs = "Ambience/rural ambience (wfrogs).mp3"
 #const Audio_UrbanSeagulls = "Ambience/urban seagulls.mp3"
+#const Audio_BustlingCafeChatter = "Ambience/bustling cafe chatter.mp3"
 
 // Rain
 #const Audio_RainInside = "Rain/rain-inside.mp3"
