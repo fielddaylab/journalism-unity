@@ -8,6 +8,10 @@
 #const BG_HouseBoat = "BG/Houseboat.png"
 #const BG_CherryFestFlood = "BG/MainStCherryFestFlood.mp4"
 
+#const Audio_Flood = "Music/Flood.mp3"
+#const Audio_HighFlowRiver = "Rain/High flow river.mp3"
+#const Audio_FloodWaterRushing = "Rain/Flood water rushing.mp3"
+
 # start Story2Intro
 
 // Original Name: Story 2 Intro
@@ -16,8 +20,9 @@ $call SetHeaderEnabled(true)
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 {layout Left}
-$call Music(Music/rainy day in cherry town.mp3)
-$call Ambience(Ambience/rain-inside.mp3)
+$call Music($Audio_CherryDownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {@me} What's next? Anything else I can do? 
 {@dionne} Well... I do need to get a reporter out there on the ground.
 {@dionne} Or, um... the water. Flood. Whatever.
@@ -393,6 +398,9 @@ $choice Crackers; Grab a few saltine crackers. It's not worth making enemies for
 $call SetLocation("Upper Lake Dam")
 {/map}
 {bg $BG_UpperLakeDam}
+$call Music($Audio_Flood)
+$call StopAmbience()
+$call Rain($Audio_HighFlowRiver)
 $if FirstVisit()
     <b>Location: the Upper Lake Dam</b>.
     $call SetTimeRemaining(2)
@@ -428,7 +436,7 @@ $choice LookAroundForSomethingUseful; Look around for something useful
 :: FloorIt
 {/map}
 {layout Left}
-Your car splashes along valiantly for a few seconds, then sputters and dies.  
+Your car splashes along valiantly for a few seconds, then sputters and dies.
 Oh no... now what??? 
 Floodwater rushes past. Minnows and bluegills are jumping around you. 
 
@@ -525,6 +533,9 @@ $endif
 :: TalkToTheHouseboatLady
 {/map}
 {bg $BG_HouseBoat}
+$call Music($Audio_Flood)
+$call StopAmbience()
+$call Rain($Audio_HighFlowRiver)
 {img Anim/1b/Megaphone.webm, Right}
 {@nora} Houseboat, stay afloat! Houseboat, stay afloat!
 {@me} Excuse me... Ms. Houseboat Lady... do you have a minute to talk? 
@@ -592,6 +603,9 @@ $choice ArriveAtFloodSite; Back to the dam
 {/map}
 $call SetLocation("Cherry Festival")
 {bg $BG_CherryFestFlood}
+$call Music($Audio_Flood)
+$call StopAmbience()
+$call Rain($Audio_FloodWaterRushing)
 $if FirstVisit()
 <b>Location: the Main Street Cherry Festival</b>
 Or what's left of it.
@@ -620,6 +634,7 @@ $choice UseDeliWifi; Go into the deli and ask for help
 
 // Original Name: Swim for it
 :: SwimForIt
+{img Anim/1b/Swimming.png}
 The rushing water only comes up to your knees.
 You're going to make it!!
 Until... 
@@ -632,8 +647,10 @@ $choice EjectJustKeepSwimming; Ahhh! Help!!
 // Original Name: Wait for rescue
 :: WaitForRescue
 {layout Left}
+{img Anim/1b/Swimming.png}
 You sit on your car roof, contemplating the meaning of life.
 Then a flood-rescue vehicle splashes up next to you!
+{/img}
 The driver is an older Black man in a Twin Lakes Fire Dept sweater.
 {@firechief}Hey, kid! You need a lift? 
 {@me} Yes!! Thank you so much.
@@ -937,6 +954,7 @@ $choice ArriveAtFloodSite; Arrive at the Twin Lakes dam
 
 // Original Name: Eject: Just keep swimming...
 :: EjectJustKeepSwimming
+{/img}
 The flood washes you straight to the school football field... which has become a small lake. 
 You manage to swim to the bleachers and pull yourself up out of the water. 
 The good news: you're alive!!! 

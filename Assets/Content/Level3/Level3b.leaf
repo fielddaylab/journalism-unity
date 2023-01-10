@@ -12,6 +12,7 @@
 #const BG_Bookshop = "BG/Library.mp4"
 #const BG_QuiltLady = "BG/QuiltLady.mp4"
 #const BG_MainStreet = "BG/MainStreet.jpg"
+#const BG_Map = "BG/OutsideApt-Map.jpg"
 
 
 # start Level3Story2
@@ -718,6 +719,7 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
 {layout Right}
+{bg $BG_Map}
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris has been cleared away. 
 $call AdjustStats(Endurance + 1)

@@ -6,8 +6,15 @@
 // Resources
 
 #const BG_Bedroom = "BG/BedroomMorning.mp4"
-#const BG_HouseExterior = "BG/HouseExt.mp4"
+#const BG_HouseExt = "BG/HouseExt.mp4"
 #const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
+
+#const Audio_RainyDayInCherryTownWakingDay1 = "Music/rainy day in cherry town (waking up day 1).mp3"
+#const Audio_CherryDownRestoration = "Music/cherry town restoration.mp3"
+#const Audio_ChickenSounds = "Ambience/chicken sounds.mp3"
+#const Audio_StreetBustle = "Ambience/street bustle with traffic.mp3"
+#const Audio_RainInside = "Rain/rain-inside.mp3"
+#const Audio_RainOutsideChill = "Rain/outside rain (chill).mp3"
 
 
 //Checks:
@@ -38,8 +45,9 @@ $ActionChoice(Wake up)
 {/img}
 $call SetLocation("Apartment")
 {bg $BG_Bedroom}
-$call Music(Music/rainy day in cherry town.mp3)
-$call Rain(Rain/rain-inside.mp3)
+$call Music($Audio_RainyDayInCherryTownWakingDay1)
+$call StopAmbience()
+$call Rain($Audio_RainInside)
 {layout Right}
 You wake up to your phone buzzing.
 It takes a few seconds to remember where you are: 
@@ -105,7 +113,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 @tags Social, Trust
 {clear-text}
 {layout Right}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 {img Anim/1a/UpstairsCat.png}
 You help your neighbor find a flashlight and put out some food for her cats.
 {/img}
@@ -122,7 +130,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 {clear-text}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 {layout Right}
 You haven't finished unpacking your boxes yet.
 You don't plan to live here very long, anyway. 
@@ -136,7 +144,7 @@ $choice OffToWork; Off to work
 :: DigThroughTheFridgeForSomethingNourishing
 {clear-text}
 {layout Right}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 {img Anim/1a/CherryMuffin.png}
 Your kitchen is full of food from your aggressively-friendly neighbors.
 Cherry muffins, cherry granola, cherry summer sausage.
@@ -150,7 +158,7 @@ $choice OffToWork; Off to work
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 {clear-text}
 {layout Right}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
 {img Anim/1a/Duck.webm}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
@@ -165,7 +173,8 @@ $choice ReadFloodingArticle; Read the click-bait article and brush up on your su
 :: OffToWork
 {clear-text}
 {/img}
-$call Rain(Rain/rain-inside.mp3)
+$call Ambience($Audio_ChickenSounds)
+$call Rain($Audio_RainOutsideChill)
 {layout Right}
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
@@ -314,7 +323,9 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
-$call Rain(Rain/rain-inside.mp3)
+$call Music($Audio_CherryDownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {layout Left}
 
 $if Visited(HelpHer)
@@ -738,6 +749,9 @@ $goto Office1-Clock
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
 {bg $BG_OfficeExterior}
+$call Music($Audio_CherryDownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {clear-text}
 {/img}
 {layout Left}
