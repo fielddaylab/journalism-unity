@@ -967,10 +967,15 @@ $choice NextStepAfterVetMeeting; End Interview
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
+$elseif Visited(HeadStraightToShelter), Visited(CallDisabilityRightsExpertAtLocalCollege), Visited(GoToSeniorCitizenApartments)
+      Looks like you've been just about everywhere. Time to work on your story!
+      $choice StoryConstruction3a; Compile your story
+$else
+      $HubChoice(HeadStraightToShelter, "Return to the flood shelter", 0.25, "")
+      $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
+      $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments", 0.25, "")
 $endif
-$HubChoice (HeadStraightToShelter, "Return to the flood shelter", 0.25, "")
-$HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
-$HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments", 0.25, "")
+
 
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
@@ -980,7 +985,7 @@ $call StopAmbience()
 $call StopRain()
 
 $if TimeRemaining() > 0.25
-      $choice NextStepAtApartments; Go somewhere else 
+      $choice NextStepAtApartments; Go somewhere else
       $HubChoice(TalkToWomanOnBench, "Talk to a woman sitting on a bench, a quail snuggled on her lap", 0.50, "")
       $HubChoice(TalkToBuildingManager, "Talk to the building manager", 0.50, "")
       $HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
@@ -1258,7 +1263,7 @@ $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
 $endif
-$HubChoice(GoToSeniorCitizenApartments, "Return to senior citizen apartments", 0.5, "")
+$choice NextStepAtApartments; Decide where to go next
 
 
 // Check your bag for quail-appropriate snacks 

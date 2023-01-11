@@ -430,10 +430,10 @@ $if FirstVisit()
 <i>Department of Limnology</i>
 $endif
 
-$if !!HasTime(0.25)
-    $HubChoice(PhotographFloodedDock, "Take a photo of the flooded dock", 0.25)
-    $choice LookForSomeoneToInterview; Look for someone to interview 
+$if HasTime(0.25)
     $choice ScienceStoryMap; Leave the Department of Limnology and go somewhere else  
+    $HubChoice(PhotographFloodedDock, "Take a photo of the flooded dock", 0.25)
+    $OnceChoice(LookForSomeoneToInterview, "Look for someone to interview")
 $else
     $choice TimeToAssembleTheScienceStory; Time's up. You need to put your story together.  
 $endif
@@ -892,27 +892,25 @@ $choice DepartmentOfLimnology; Actually, I better go.
 :: QuickInterviewLimnologyExpert
 
 {layout Right}
-$if !StatCheck(Social, 4)
-{@sarah}Well... I guess I can chat for a minute. 
-{@sarah}Thanks to climate change, we're going to keep seeing more and more rain. 
-{@sarah}This town needs to make some changes if it wants to survive.
-
-$call GiveSnippet(BasicFloodBackground)
-{/img}
-$if !Visited(LookForSomeoneToInterview)
-$choice LookForSomeoneToInterview; Look around for someone else to talk to
-$endif
-
-$choice ScienceStoryMap; Head out and decide what to do next 
-$endif
-
 $if StatCheck(Social, 4)
-She seems busy, but your social graces win her over. 
+    She seems busy, but your social graces win her over. 
 
-{@sarah}Sure, why not? I'd be happy to talk. 
+    {@sarah}Sure, why not? I'd be happy to talk. 
 
-$HubChoice(InterviewScientist, "Great, let's get started!", 0.25)
-$choice DepartmentOfLimnology; Actually, I better go. 
+    $HubChoice(InterviewScientist, "Great, let's get started!", 0.25)
+    $choice DepartmentOfLimnology; Actually, I better go. 
+$else
+    {@sarah}Well... I guess I can chat for a minute. 
+    {@sarah}Thanks to climate change, we're going to keep seeing more and more rain. 
+    {@sarah}This town needs to make some changes if it wants to survive.
+
+    $call GiveSnippet(BasicFloodBackground)
+    {/img}
+    $if !Visited(LookForSomeoneToInterview)
+        $choice LookForSomeoneToInterview; Look around for someone else to talk to
+    $endif
+
+    $choice ScienceStoryMap; Head out and decide what to do next 
 $endif
 
 // Original Name: Tell her you met her sister!
