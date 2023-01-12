@@ -25,14 +25,14 @@ The mayor admitted that the shelter won’t have enough beds for all evacuees. H
 // Mayor interview quote - "near tolerable" conditions 
 :: MayorInfoNearTolerableConditions
 @type Fact 
-@quality Great 
+@quality Good 
 @attr Facts 
 According to Mayor Smuckers, an expert was called in to help at the shelter. She called the space "near tolerable."
 
 // Mayor quote - it'll be fine 
 :: MayorQuotePeopleTakeCareOfEachOther
 @type Quote
-@quality Great 
+@quality Bad
 @attr Facts  
 The mayor insisted that things will be fine, despite a lack of shelter space. "People here take care of each other," he said. 
 
@@ -47,13 +47,13 @@ Mayor Smuckers urged everyone in danger zones to evacuate, for their own safety.
 :: FiftyPercentChanceOfDamFailure
 @type Fact 
 @quality Great 
-@attr Facts
+@attr Facts, Useful
 According to the mayor, the dam has a 50% chance of failing if more rain hits. Dam failure would cause catastrophic damage.  
 
 // Original Name: Mayor interview - downplays pet issue 
 :: MayorDownplaysIssueOfPets
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts
 Mayor Smuckers downplayed the issue of people not wanting to leave their pets. "Every town has its crazies," he said. 
 
@@ -85,25 +85,25 @@ The mayor didn't have a plan for getting people to the shelter. "I'm sure somebo
  
 :: RichLadyQuoteSafeNeighborhood
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts   
 One local didn't want a shelter in her area, even though it would help the town. "We don't have room for everyone!" 
 
 :: RudeRichLadyQuote
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts 
 Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alone. "It's peaceful <i>here.</i> Let's keep it that way." 
 
 :: NIMBYLadyQuote  
 @type Quote 
-@quality Great 
+@quality Good
 @attr Facts 
 "Twin Lakes should definitely provide shelters! Just not in <i>my</i> neighborhood."
 
 :: RichLadyCannedFoodDrive
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts
 "It's not my job to help everybody. I donated to the canned food drive. What more do you want from me?"
 
@@ -115,21 +115,21 @@ Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alon
 
 :: AccessibilityNightmare
 @type Quote 
-@quality Great 
-@attr Facts
+@quality Good 
+@attr Facts, Color
 "That high school is an accessibility nightmare. My wife and I are both disabled. We'll be safer at home."
 
 :: PeopleStayingHome
 @type Fact 
-@quality Great 
+@quality Good 
 @attr Facts
 Without an accessible shelter, some people have chosen to stay home and hope for the best. 
 
 :: CityPlanningIssue
 @type Fact 
-@quality Great 
+@quality Good 
 @attr Facts
-It's the city's responsibility to create an accessible shelter for all, though some people worried it's too late now. 
+It's the city's responsibility to create an accessible shelter for all, though some are worried it's too late now. 
 
 :: GetWordOutAboutAccessibility
 @type Fact 
@@ -158,19 +158,19 @@ A local man urged people to speak up about the need for an accessible shelter. F
 :: KickedOutOfApartments
 @type Fact  
 @quality Great  
-@attr Facts
+@attr Facts, Color
 Doug Walter said his apartment building kicked out all the seniors who lived here after the first flood, with no end in sight. 
 
 :: DogOwnerSaysShelterDoesntAllowPets
 @type Fact 
-@quality Great
-@attr Facts 
+@quality Good
+@attr Facts
 Doug Walter is not able to stay at the shelter because they cannot take in his dog, Odie. Many locals will face the same problem. 
 
 :: ExasperatedShelterCoordinator
 @type Quote 
 @quality Great 
-@attr Facts, Color 
+@attr Color 
 The shelter coordinator wasn't thrilled with local resources. "Next delivery will show up in a horse and buggy, at this rate." 
 
 :: OneQuestionConcernsAboutShelter
@@ -181,7 +181,7 @@ The shelter coordinator wasn't thrilled with local resources. "Next delivery wil
 
 :: AccessibilityStandardsResource
 @type Fact 
-@quality Great   
+@quality Good   
 @attr Facts
 According to national standards, the local high school needs several updates to be accessible to all. 
 
@@ -199,7 +199,7 @@ The shelter coordinator was worried about pet owners. "I hate turning people awa
 
 :: UsefulInfoFromShelterCoordinator
 @type Fact
-@quality Great  
+@quality Good  
 @attr Useful
 For those looking to help, the shelter is accepting donations. Coordinators urge voting for candidates with disaster plans in place.
 
@@ -217,7 +217,7 @@ For those looking to help, the shelter is accepting donations. Coordinators urge
 
 :: UsefulShelterAdviceAboutAccessibility
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Useful 
 "I need portable ramps, better cots, and braille signs. Still, it's not enough. The city needs to fix up this building." 
 
@@ -229,44 +229,44 @@ For those looking to help, the shelter is accepting donations. Coordinators urge
 
 :: HowCanTheCommunityHelpShelter
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Useful  
 "We need food, blankets, and bottled water! And if people let friends stay with them, that would free up more space here."
 
 :: WhyArentPetsAllowedQuote
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts
 "Pets in shelters are a safety issue for people with asthma or allergies. Plus, animals tend to get agitated during disasters."  
  
 :: PetFriendlyShelterRequirements
 @type Quote
-@quality Great
-@attr Facts 
+@quality Good
+@attr Facts, Useful
 "For a pet friendly shelter, we'd need separate spaces for people and pets, plus volunteers and supplies." 
 
 :: CityDeniedFundingForPetFriendlyShelter
 @type Fact 
 @quality Great 
 @attr Facts 
-Local vet Fox Smolder asked for funding for a pet-friendly shelter, but City Council denied his request. 
+Local vet Fox Sculder asked for funding for a pet-friendly shelter, but City Council denied their request. 
 
 :: HowCanCityHelpPetOwners
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Useful
 "If people want to help, they could take in pets that need a safe place to stay... though I'm not sure it'll be enough." 
 
 :: WhereShouldPetOwnersGo
 @type Fact 
-@quality Great  
+@quality Good  
 @attr Useful 
-Local vet Fox Smolder said pet owners should stay with relatives, or look for nearby kennels or pet-friendly motels.
+Local vet Fox Sculder said pet owners should stay with relatives, or look for nearby kennels or pet-friendly motels.
 
 :: WorriedPeopleWillStayHome
 @type Quote 
-@quality Great 
-@attr Facts, Color
+@quality Good 
+@attr Useful, Color
 "I'm worried a lot of people will stay home with their pets during the storm. It's not safe to stick around here."
 
 :: WorriedAboutPeopleKickedOutOfApartment
@@ -289,7 +289,7 @@ The electrician at Strudel Apartments said the fire alarm was out-of-order.
 
 :: ElectricianInterviewDetailedReason
 @type Fact 
-@quality Great
+@quality Good
 @attr Facts
 The electrician explained why seniors can't move back in yet: out-of-order elevators and fire alarms, and dangerous mold growth. 
 
@@ -301,19 +301,19 @@ The electrician explained why seniors can't move back in yet: out-of-order eleva
 
 :: RepairWorkersAllBusy
 @type Fact 
-@quality Good 
+@quality Great 
 @attr Facts
 Strudel Apartments still need more repairs, and repair workers are swamped with calls from all over town. 
 
 :: ApartmentContext
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts, Color
 "I've lived here for years. That is, until the flood. We had to evacuate when the ground floor flooded. It was dreadful!"
 
 :: SadApartmentColorQuote
 @type Quote 
-@quality Great 
+@quality Bad 
 @attr Color 
 "I'm staying with my sister in West Forks. But that city is too big and noisy for me. I just want to be home."
 
@@ -405,7 +405,7 @@ According to Ms. Rhodes, the high school needs ramps, automated entrances, wider
 :: ComplicatedIssues
 @type Quote 
 @quality Great 
-@attr Facts 
+@attr Color
 "The Mayor is part of the problem, with his #TwinLakesStrong obsession. We need real solutions, not inspiring hashtags."
 
 // Level 3B Snippets 

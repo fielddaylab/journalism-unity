@@ -57,7 +57,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "")
 {@mayorbarrysmuckers}Oh, sorry, El... I'm pretty busy here.
 {@me} Please? Just a few questions? 
 $if StatCheck(Trust, 5)
-      {@mayorbarrysmuckers} Well.... I gotta admit, you have proven yourself to be trustworthy.
+      {@mayorbarrysmuckers} Well.... I gotta admit, you have proven yourself to be {statname}trustworthy.{/statname}
       {@mayorbarrysmuckers} I guess I could spare a minute or two.
       $if !HasTime(0.25)
             Looks like you have to cut this short. You have just enough time to compile your story!
@@ -66,7 +66,7 @@ $if StatCheck(Trust, 5)
       $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
 $elseif StatCheck (Social, 5)
       {@mayorbarrysmuckers} Well... I have to admit, your name's been all over town lately.
-      {@mayorbarrysmuckers} I guess I could spare a minute or two for a social butterfly like you.
+      {@mayorbarrysmuckers} I guess I could spare a minute or two for a {statname}social{/statname} butterfly like you.
       $if !HasTime(0.25)
             Looks like you have to cut this short. You have just enough time to compile your story!
             $choice StoryConstruction3a; Compile your story
@@ -364,11 +364,22 @@ $choice PetBuster; Can I pet your dog?
 
 // Walking Dog
 :: WalkingDog
+$if StatCheck(Social, 5)
 {@pattyforbes} Well, Buster needs his exercise. 
-{@pattyforbes} Amarena Grove is a peaceful neighborhood. I'd like to keep it that way. 
-{@pattyforbes} Who knows what those flood evacuees will bring with them?? 
+{@pattyforbes} I love walking in Amarena Grove.
+{@pattyforbes} It's peaceful <i>here</i>. 
+{@pattyforbes} I'd like to keep it that way. 
+{@pattyforbes} Who knows what those flood evacuees would bring with them?? 
 
 $call GiveSnippet(RudeRichLadyQuote)
+$else
+The woman scoffs.
+{@pattyforbes} What exactly is that supposed to mean??
+{@pattyforbes} Buster here needs his exercise.
+{@pattyforbes} So I think I'll be going now.
+$call AdjustStats(Social - 1)
+$endif
+
 
 $choice snarkyresponse; Hm. I would guess some clothes and toothbrushes and granola bars. 
 $choice WhatWouldYouSayToPeople; What would you say to people who need to leave their homes? 
@@ -464,8 +475,9 @@ $choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about the issue
 
 // Have you talked to anyone about the accessibility problems?
 :: HaveYouToldAnyoneYourConcerns
-{@barlow} No offense, kid, but why should that be my job?  
-{@barlow} The city obviously isn't prepared, and here's no time to fix it now. 
+{@barlow} No offense, kid, but why should that be my job?
+{@barlow} The city should know about these problems and plan to fix them.
+{@barlow} They obviously aren't prepared, and there's no time to change that now. 
 {@barlow} For now, I need to get to the store before everybody buys up all the toilet paper and bottled water.
 {img Anim/3a/ToiletPaper.png, Left}
 {@barlow} Nice chatting with you, kid. 
@@ -538,7 +550,7 @@ $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with
 $choice CheckYourBagForSomethingToOfferHim; Check your bag for something to offer him
 $choice UseYourSocialConnections; Use your social connections to find some common ground 
 $choice PetOdie; Ask to pet the dog
-$HubChoice(OfferToBuyHimBreakfast, "Offer to buy him breakfast and coffee", 0.25, "")
+$HubChoice(OfferToBuyHimBreakfast, "Offer to buy him breakfast and coffee", 0.50, "")
 
 // Use your social connections to find some common ground
 :: UseYourSocialConnections
@@ -550,13 +562,19 @@ As soon as you mention Fred Finkler, his face brightens.
 {@doug} And you love the smell, don'tcha Odie?
 He gives the dog a gentle pat.
 {@doug} Wish I was back there now...
-
-
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
-$endif
+$else
 $HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
+$endif
+
+$else
+You try to strike up a conversation and mention some people you've met.
+The man clearly isn't in the mood.
+It seems like you don't quite have the {statname}social{/statname} prowess to cheer him up.
+$choice FloodShelterChoices; Decide what to do next. 
+$endif
 
 :: PetOdie
 {@doug} Hah, of course! Behind the ears is his favorite.
@@ -609,20 +627,22 @@ $choice FloodShelterChoices; Wish him well and find someone else to talk to.
 :: TellMeWhatHappened
 {clear-text}
 {@me} Can you tell me what happened? 
-{@doug} Got turned away. I guess the shelter doesn't allow pets. 
+{@doug} Got turned away. I guess the shelter doesn't allow pets.
+$call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
+
 {@me} I'm so sorry.
 {@me} Do you think you'll head back home? 
 {@doug} Can't. I got kicked out of my apartment building when the flood hit. 
 {@me} Wait... the flood was two weeks ago!
 {@me} You're still not back home?
 {@doug} 'Fraid not. That building manager is slow as molasses. 
-{@me} Can I have the address of your apartment building? 
-{@doug} Sure thing. Maybe some pressure from the local news will get things moving...
+{@me} Can I have the address of your apartment building?
+{@doug} Sure thing. 
+{@doug} Maybe some pressure from the local news will get things moving...
 {@doug} Though I doubt it.
 He scrawls the address on the back of a receipt for dog food.
 {@article} Strudel Senior Apartments, 1502 Sugar Grove 
 $call GiveSnippet(KickedOutOfApartments)
-$call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
 $set ApartmentAddress = true
 
 $choice FloodShelterChoices; Decide what to do next. 
@@ -659,7 +679,7 @@ The woman looks skeptical.
 $if StatCheck (Endurance, 5)
 {@me} I'm stronger than I look. 
 You help her lug crates of food into the shelter's kitchen area.
-They weigh a ton, but you've had plenty of practice lugging gear around lately. 
+They weigh a ton, but you've had plenty of practice hoofing gear around lately. 
 {@shelter} Thanks, kid. What do you want to know? 
 {/img}
 
@@ -725,7 +745,7 @@ She sighs.
 {@shelter} Here's a document about accessiblity standards.
 $call GiveSnippet(AccessibilityStandardsResource)
 {@shelter} I don't know much about pet-friendly shelters, but I'm sure your local vet could probaby help with that.
-{@article} Contact: Fox Smolder, Local Vet 
+{@article} Contact: Fox Sculder, Local Vet 
 $set VetContact = true
 
 $call GiveSnippet(OneQuestionConcernsAboutShelter)
@@ -738,7 +758,7 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@shelter} Nope, no pets here. Honestly, I'm not sure why, but I know it's safety related.
 {@shelter} I hate turning away pet owners, but there's nothing I can do.
 {@shelter} I'm sure your local vet would know more.
-{@article} Contact: Fox Smolder, Local Vet 
+{@article} Contact: Fox Sculder, Local Vet 
 $set VetContact = true
 
 $call GiveSnippet(CoordinatorNotSureWhyPetsArentAllowed)
@@ -845,8 +865,8 @@ $choice PetQuestions; How can people keep their pets safe during the flood?
 :: PetQuestions
 {@shelter} I'm not sure. 
 {@shelter} I should probably get back to work. 
-{@shelter} You could try the local vet, Fox Smolder.
-{@article} New Contact: Fox Smolder, Local Vet 
+{@shelter} You could try the local vet, Fox Sculder.
+{@article} New Contact: Fox Sculder, Local Vet 
 $set VetContact = true
 
 $choice EndShelterCoordinatorInterview; End Interview 
@@ -875,12 +895,12 @@ $call Music($Audio_PaperPuddle)
 $call Ambience($Audio_UrbanSeagulls)
 $call StopRain()
 
-The local vet meets you downtown on his lunch break. 
-You can tell he has his hands full.
+The local vet meets you downtown on their lunch break. 
+You can tell they have their hands full.
 {img Anim/3a/VetsPets.png, Left}
-There are several animals crawling, slithering, and/or climbing on him at any given point.
-{@me} Thank you for meeting with me, Mr. Smolder. 
-{@fox} Please, call me Fox. 
+There are several animals crawling, slithering, and/or climbing on them at any given point.
+{@me} Hey! Fox Sculder, right? 
+{@fox} That's me!
 $if Visited(HelpHer)
       {@fox} Maureen told me all about how you helped her chickens during the storm.
 $elseif Visited(CheckOnYourUpstairsNeighborWhoHatesThunderstorms)
@@ -889,7 +909,7 @@ $elseif Visited(AskAroundForItsOwner)
       {@fox} The mayor's niece told me all about how you rescued poor Omelette. 
 $else 
       {@fox} Maureen told me how you nearly ran down Amelia Egghart. 
-      {@fox} But it sounds like you've had a change of heart.
+      {@fox} But it sounds like you've had a change of heart?
       {@me} Oh... yeah. Chickens. I just love 'em. 
 $endif
 {@fox} So, what do you need to know? 
@@ -905,7 +925,11 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 {@me} Do you know why the shelter doesn't allow pets? 
 {@fox} I know it sounds harsh, but it's a safety issue.
 {@fox} Pets can be dangerous for people with asthma or allergies.
-{@fox} Plus, animals tend to get agitated during disasters.  
+{@fox} Plus, animals tend to get agitated during--
+{@fox} Hey! Rupert!!
+They scold a lizard wearing a leg cast and gently bop its nose.
+{@fox} No biting Peppy's ear. We discussed this!
+{@fox} Um. Agitated during disasters.
 $call GiveSnippet(WhyArentPetsAllowedQuote)
 
 $OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
@@ -915,12 +939,31 @@ $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to 
 :: PetFriendlyShelter
 {@fox} We'd need separate spaces for people and pets. 
 {@fox} Plus trained volunteers, crates, pet food, and other pet supplies. 
-{@fox} I asked the City Coucil for funding a few months ago, but they shot me down. 
 $call GiveSnippet(PetFriendlyShelterRequirements)
-$call GiveSnippet(CityDeniedFundingForPetFriendlyShelter)
 
 $choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
 $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
+$OnceChoice(WhyNoPetArea, "Why doesn't the current shelter have those things?")
+
+:: WhyNoPetArea
+{@fox} Well... I'm not sure if I'm allowed to say...
+$if StatCheck(Trust, 5)
+{@fox} But you seem reputable, so I guess I can {statname}trust{/statname} you.
+{@fox} I asked the City Council for funding a few months ago.
+{@fox} That was after the whole Polar Ultracyclone scare.
+(Those winter storms keep getting more sensational, huh...)
+{@fox} But they shot me down.
+
+$call GiveSnippet(CityDeniedFundingForPetFriendlyShelter)
+$else
+{@fox} Sorry. I don't want to break any rules with the City Council.
+$endif
+
+{@fox} Did you have any other questions?
+$choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
+$OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
+$choice NextStepAfterVetMeeting; Nope, that'll be all!
+
 
 // How can the city help pet owners? 
 :: HowCanTheCityHelpOut
@@ -939,6 +982,7 @@ $choice NextStepAfterVetMeeting; End Interview
 :: WhereShouldPetOwnersGo
 {@fox} I wish I knew.
 {@fox} I’ve already taken in more animals than I can handle.
+They shrug bashfully and a cockatiel wearing an eyepatch flaps for balance.
 {@fox} I'd recommend staying with relatives or looking for pet-friendly motels...
 {@fox} Or even driving outside of Twin Lakes to look for kennels and pet daycares.
 $call GiveSnippet(WhereShouldPetOwnersGo)
@@ -952,8 +996,13 @@ $OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly she
 {@fox} I’m afraid so.
 {@fox} I'm worried a lot of people will stay home with their pets during the storm.
 {@fox} And I have some clients who have been kicked out of their apartment building due to the flood.
-{@fox} I'm not sure where they're going to go. 
-{@me} Well, my story comes out today. Maybe the town will be able to help.
+{@fox} I'm not sure where they're going to go.
+{@fox} I dunno if you've noticed yet...
+{@fox} But people have some pretty weird pets around here.
+A chinchilla peeks out of their pocket.
+{@fox} And many of them have special needs.
+{@me} Yeah... Well, my story comes out today. 
+{@me} Maybe the town will be able to help.
 {@fox} Thanks, El. I'm glad you're getting the word out. 
 $set ApartmentAddress = true
 $call GiveSnippet(WorriedPeopleWillStayHome)
@@ -1145,7 +1194,9 @@ $if TimeRemaining() > 0.25
       $choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks
       $HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
       $HubChoice(SneakInTheBack, "Sneak in the back, past the DO NOT ENTER UNDER PENALTY OF LAW sign.", 0.25, "")
-      $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.25, "")
+      $if TimeRemaining() > 0.50
+            $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.50, "")
+      $endif
 $else
       $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
