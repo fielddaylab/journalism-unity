@@ -34,9 +34,24 @@ One week later... the Mayor has called an Emergency Town Hall Meeting.
 {@dionne} El, I need you to do some digging into that flood shelter. 
 {@dionne} Look for issues that people need to know about. 
 $call ActivateStory()
+$if CityScore() > 2
+    {img Anim/CityScore_A.png}
+$elseif CityScore() == 2
+    {img Anim/CityScore_B.png}
+$elseif CityScore() == 1
+    {img Anim/CityScore_C.png}
+$elseif CityScore() == 0
+    {img Anim/CityScore_D.png}
+$else
+    {img Anim/CityScore_F.png}
+$endif
+{@dionne} Here's how well-prepared the city is based on our recent stories.
+{@me} Understood.
+{/img}
 {@dionne} And El... I sent over your letter of recommendation.
-{@dionne} If this all works uot, the Smoke City Herald would be lucky to have you. 
+{@dionne} If this all works out, the Smoke City Herald would be lucky to have you. 
 {@me} Thanks, Dionne. 
+
 
 $choice AcceptStory; Accept Story Assignment
 

@@ -9,16 +9,18 @@
 :: LevelFinalIntro
 
 // great
-$if CityScore() > 3
+$if CityScore() > 2
       {bg $BG_FinalFerrisWheel}
       $call Music($Audio_CherryTownRestoration)
       $call Ambience($Audio_BustlingCafeChatter)
       $call StopRain()
       HOORAY!
       It’s the annual Cherry Festival again… 
+      {img Anim/CityScore_A.png}
       And thanks to your stories, the town has really gotten its cherry-themed ducks in a row. 
       There was another storm last month…
       But the town is still standing, and everyone was able to find shelter.
+      {/img}
       The Mayor is running for reelection…
       But you have a feeling the other candidates, Sophia and Fred, are going to give him a run for his money.
       You still have an open invitation to interview at the Smoke City Herald…
@@ -27,7 +29,7 @@ $if CityScore() > 3
       Plus, Khalisa and her dad are counting on you to bring the cherry-chip ice cream for dinner on Sunday. 
 
 // good
-$elseif CityScore() > 0
+$elseif CityScore() >= 0
       {bg $BG_FinalStreetFestival}
       $call Music($Audio_CherryTownRestoration)
       $call Ambience($Audio_BustlingCafeChatter)
@@ -36,8 +38,16 @@ $elseif CityScore() > 0
       It’s the annual Cherry Festival again…
       Not as impressive as it used to be, but at least all the tents are still standing.
       There was another big storm last month.
-      Everyone made it through, but homes and business are still recovering.  
+      Everyone made it through, but homes and business are still recovering. 
+      $if CityScore() == 2
+            {img Anim/CityScore_B.png}
+      $elseif CityScore() == 1
+            {img Anim/CityScore_C.png}
+      $elseif CityScore() == 0
+            {img Anim/CityScore_D.png}
+      $endif
       Thanks to your hard work, #TwinLakesStrong has become a call to action. 
+      {/img}
       You still have an open invitation to interview at the Smoke City Herald…
       But you’ve decided to stick around for now. 
       You’re working with Dionne to mentor reporters from the high school newspaper… 
@@ -54,9 +64,11 @@ $else
       It’s the annual Cherry Festival again…
       Or at least, it would be, if Twin Lakes still existed.
       Turns out journalism is harder than you thought.
+      {img Anim/CityScore_F.png}
       A huge storm hit last month, and the town wasn’t ready. 
       The Cheese Shop, Sophia’s Bakery, and Bookish have all shut down.
       About a third of the town has moved away, including people who wanted to stay but couldn’t afford it.  
+      {/img}
       Khalisa is working as a reporter at the Smoke City Herald….
       Which is where you would be, if you hadn’t gotten fired. 
       This time your work wasn’t up to par, but you’re ready to try again. 

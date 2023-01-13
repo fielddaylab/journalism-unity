@@ -384,6 +384,20 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {@dionne} And make sure to verify your data. 
 $call ActivateStory()
 {@dionne} This is a controversial topic. We don't want to put any false information out there.
+$if CityScore() > 2
+    {img Anim/CityScore_A.png}
+$elseif CityScore() == 2
+    {img Anim/CityScore_B.png}
+$elseif CityScore() == 1
+    {img Anim/CityScore_C.png}
+$elseif CityScore() == 0
+    {img Anim/CityScore_D.png}
+$else
+    {img Anim/CityScore_F.png}
+$endif
+{@dionne} Here's how well-prepared the city is based on our recent stories.
+{@me} Understood.
+{/img}
 
 $choice MarshMap; Got it. Thanks. 
 
