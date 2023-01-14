@@ -16,11 +16,10 @@ $if CityScore() > 2
       $call StopRain()
       HOORAY!
       It’s the annual Cherry Festival again… 
-      {img Anim/CityScore_A.png}
+      {img-inline Anim/CityScore_A.png}
       And thanks to your stories, the town has really gotten its cherry-themed ducks in a row. 
       There was another storm last month…
       But the town is still standing, and everyone was able to find shelter.
-      {/img}
       The Mayor is running for reelection…
       But you have a feeling the other candidates, Sophia and Fred, are going to give him a run for his money.
       You still have an open invitation to interview at the Smoke City Herald…
@@ -40,14 +39,13 @@ $elseif CityScore() >= 0
       There was another big storm last month.
       Everyone made it through, but homes and business are still recovering. 
       $if CityScore() == 2
-            {img Anim/CityScore_B.png}
+            {img-inline Anim/CityScore_B.png}
       $elseif CityScore() == 1
-            {img Anim/CityScore_C.png}
+            {img-inline Anim/CityScore_C.png}
       $elseif CityScore() == 0
-            {img Anim/CityScore_D.png}
+            {img-inline Anim/CityScore_D.png}
       $endif
       Thanks to your hard work, #TwinLakesStrong has become a call to action. 
-      {/img}
       You still have an open invitation to interview at the Smoke City Herald…
       But you’ve decided to stick around for now. 
       You’re working with Dionne to mentor reporters from the high school newspaper… 
@@ -64,11 +62,10 @@ $else
       It’s the annual Cherry Festival again…
       Or at least, it would be, if Twin Lakes still existed.
       Turns out journalism is harder than you thought.
-      {img Anim/CityScore_F.png}
+      {img-inline Anim/CityScore_F.png}
       A huge storm hit last month, and the town wasn’t ready. 
       The Cheese Shop, Sophia’s Bakery, and Bookish have all shut down.
       About a third of the town has moved away, including people who wanted to stay but couldn’t afford it.  
-      {/img}
       Khalisa is working as a reporter at the Smoke City Herald….
       Which is where you would be, if you hadn’t gotten fired. 
       This time your work wasn’t up to par, but you’re ready to try again. 

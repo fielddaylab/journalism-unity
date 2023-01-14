@@ -13,6 +13,7 @@ using System;
 using Journalism.UI;
 using FDLocalization;
 using UnityEngine.UI;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Journalism {
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
@@ -92,6 +93,7 @@ namespace Journalism {
             handlers
                 .Register(GameText.Events.Image, HandleImage)
                 .Register(GameText.Events.ClearImage, HandleImageOrMapClear)
+                .Register(GameText.Events.ImageInline, HandleImageInline)
                 .Register(GameText.Events.Portrait, HandlePortrait)
                 .Register(GameText.Events.ClearPortrait, HandleImageOrMapClear)
                 .Register(GameText.Events.DisplayStoryStats, HandleStoryStats)
@@ -152,6 +154,13 @@ namespace Journalism {
             } else {
                 return null;
             }
+        }
+
+        private void HandleImageInline(TagEventData evtData, object context) {
+            var args = evtData.ExtractStringArgs();
+            StringSlice path = args[0];
+
+            Game.Scripting.Interrupt(DisplayInlineImage(path));
         }
 
         private IEnumerator HandleStoryStats(TagEventData evtData, object context) {
@@ -259,6 +268,23 @@ namespace Journalism {
             }
 
             Player.WriteVariable(HeaderUI.Var_NotesEnabled, true);
+            yield return GameText.WaitForDefaultNext(m_BaseLayer.Choices, Assets.DefaultStyle, TextAnchor.MiddleCenter, false);
+        }
+
+        private IEnumerator DisplayInlineImage(StringSlice path) {
+            if (DebugService.AutoTesting) {
+                yield break;
+            }
+            
+            InlineImageDisplay img = GameText.AllocInlineImage(path, m_BaseLayer.Text, m_OverLayer.Pools);
+            GameText.PopulateInlineImage(img, path.ToString(), Assets.Style("snippet"));
+            GameText.AlignTextLine(img.Line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(m_BaseLayer.Text, 1);
+            while (Streaming.IsLoading()) {
+                yield return null;
+            }
+            yield return GameText.AnimateLocations(m_BaseLayer.Text, 1);
+
             yield return GameText.WaitForDefaultNext(m_BaseLayer.Choices, Assets.DefaultStyle, TextAnchor.MiddleCenter, false);
         }
 

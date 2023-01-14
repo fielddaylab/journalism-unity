@@ -273,19 +273,18 @@ $choice GatherFloodGear; Gather flood gear
 {@dionne} You're on assignment now, El. Get to work.  
 {@dionne} If you want a good recommendation from me, you need to earn it. 
 $if CityScore() > 2
-    {img Anim/CityScore_A.png}
+    {img-inline Anim/CityScore_A.png}
 $elseif CityScore() == 2
-    {img Anim/CityScore_B.png}
+    {img-inline Anim/CityScore_B.png}
 $elseif CityScore() == 1
-    {img Anim/CityScore_C.png}
+    {img-inline Anim/CityScore_C.png}
 $elseif CityScore() == 0
-    {img Anim/CityScore_D.png}
+    {img-inline Anim/CityScore_D.png}
 $else
-    {img Anim/CityScore_F.png}
+    {img-inline Anim/CityScore_F.png}
 $endif
 {@dionne} Here's how well-prepared the city is based on our recent stories.
 {@me} Understood.
-{/img}
 
 $choice ScienceStoryMap; ...Got it. Thanks, Dionne.
 

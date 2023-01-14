@@ -281,11 +281,27 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Allocates an inline image.
+        /// </summary>
+        static public InlineImageDisplay AllocInlineImage(StringSlice path, TextLineScroll scroll, TextPools pools) {
+            TempAlloc<InlineImageDisplay> inlineImageAlloc = pools.InlineImagePool.TempAlloc();
+
+            TextLine line = inlineImageAlloc.Object.Line;
+            InsertTextLine(scroll, line, inlineImageAlloc);
+            return inlineImageAlloc.Object;
+        }
+
+        /// <summary>
         /// Prepares a text line for animation.
         /// </summary>
         static public void PrepareTextLine(TextLine line, float rotationRange) {
             RectTransform lineRect = line.Root;
-            line.Offset.anchoredPosition = line.Inner.anchoredPosition = default;
+            if (line.Offset != null) {
+                line.Offset.anchoredPosition = default;
+            }
+            if (line.Inner != null) {
+                line.Inner.anchoredPosition = default;
+            }
             lineRect.SetRotation(RNG.Instance.NextFloat(-rotationRange, rotationRange), Axis.Z, Space.Self);
             line.Group.alpha = 0;
         }
@@ -315,6 +331,21 @@ namespace Journalism {
             PrepareTextLine(line, scroll.RotationRange);
             scroll.Lines.PushFront(new TextLineScroll.LineState() {
                 ScrapAlloc = scrapAlloc,
+                Line = line
+            });
+            return ref scroll.Lines[0];
+        }
+
+        /// <summary>
+        /// Inserts a text line into the scroll.
+        /// </summary>
+        static public ref TextLineScroll.LineState InsertTextLine(TextLineScroll scroll, TextLine line, TempAlloc<InlineImageDisplay> inlineImageAlloc) {
+            RectTransform lineRect = line.Root;
+            lineRect.SetParent(scroll.ListRoot, false);
+            lineRect.anchoredPosition = default;
+            PrepareTextLine(line, scroll.RotationRange);
+            scroll.Lines.PushFront(new TextLineScroll.LineState() {
+                InlineImageAlloc = inlineImageAlloc,
                 Line = line
             });
             return ref scroll.Lines[0];
@@ -1112,6 +1143,29 @@ namespace Journalism {
 
         #endregion // Story Scraps
 
+        #region InlineImage
+
+        /// <summary>
+        /// Populates a story scrap.
+        /// </summary>
+        static public void PopulateInlineImage(InlineImageDisplay display, string path, TextStyles.StyleData style) {
+            RectTransform textureAlign = (RectTransform)display.Texture.transform;
+            CanvasUtility.SetAnchor(textureAlign, TextAnchor.MiddleCenter);
+            CanvasUtility.SetPivot(textureAlign, TextAnchor.MiddleCenter);
+
+            SetTextLineBackground(display.Line, false);
+            display.Line.Text?.gameObject.SetActive(false);
+
+            display.Texture.Path = path ?? "Photo/ErrorPhoto.png";
+            display.TextureGroup.SetActive(true);
+
+            SetTextLineStyle(display.Line, style);
+
+            LayoutLine(display.Line);
+        }
+
+        #endregion // InlineImage
+
         #region Parsing
 
         static public class Events {
@@ -1119,6 +1173,7 @@ namespace Journalism {
             static public readonly StringHash32 Layout = "layout";
             static public readonly StringHash32 Anim = "animation";
             static public readonly StringHash32 Image = "image";
+            static public readonly StringHash32 ImageInline = "image-inline";
             static public readonly StringHash32 Portrait = "portrait";
             static public readonly StringHash32 Map = "map";
             static public readonly StringHash32 ClearImage = "clear-image";
@@ -1169,6 +1224,7 @@ namespace Journalism {
             config.AddEvent("bg-fadeout", Events.BackgroundFadeOut).WithStringData();
             config.AddEvent("bg-fadein", Events.BackgroundFadeIn).WithStringData();
             config.AddEvent("img", Events.Image).WithStringData().CloseWith(Events.ClearImage);
+            config.AddEvent("img-inline", Events.ImageInline).WithStringData();
             config.AddEvent("portrait", Events.Portrait).WithStringData().CloseWith(Events.ClearPortrait);
             config.AddEvent("layout", Events.Layout).WithStringData().CloseWith(Events.Layout);
             config.AddEvent("story-stats", Events.DisplayStoryStats);
