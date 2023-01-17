@@ -42,3 +42,58 @@
     $if TimeRemaining() <= 0.5 \ // 30 minutes or less remaining
         $goto .FinalConvergeNode \
     $endif
+
+
+
+// CONSTS / RESOURCES
+
+// Backgrounds
+#const BG_Bedroom = "BG/BedroomMorning.mp4"
+#const BG_BedroomDesk = "BG/Bedroom2.mp4"
+#const BG_HouseExt = "BG/HouseExt.mp4"
+#const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
+#const BG_UpperLakeDam = "BG/UpperLakeDam.mp4"
+#const BG_HouseBoat = "BG/Houseboat.png"
+#const BG_CherryFestFlood = "BG/MainStCherryFestFlood.mp4"
+#const BG_HouseExtNoRain = "BG/HouseExtNoRain.mp4"
+#const BG_TownTransitional = "BG/TownTransitional.mp4"
+#const BG_DNRSite = "BG/DNRSite.mp4"
+#const BG_Limnology = "BG/Limnology.mp4"
+#const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
+#const BG_MainStreet = "BG/MainStreet.jpg"
+#const BG_Library = "BG/Library.mp4"
+#const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
+#const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
+#const BG_LowIncomeSt = "BG/LowIncomeSt.mp4"
+#const BG_TownMeeting = "BG/TownMeeting.mp4"
+#const BG_EvacShelter = "BG/EvacShelter.mp4"
+#const BG_SeniorCitizenApts = "BG/SeniorCitizenApts.mp4"
+#const BG_SandbagStation = "BG/SandbagStation.mp4"
+#const BG_Bookshop = "BG/Library.mp4"
+#const BG_QuiltLady = "BG/QuiltLady.mp4"
+#const BG_Map = "BG/OutsideApt-Map.jpg"
+#const BG_FinalFerrisWheel = "BG/FinalFerrisWheel.mp4"
+#const BG_FinalStreetFestival = "BG/FinalStreetFestival.mp4"
+#const BG_FinalField = "BG/FinalField.mp4"
+
+// Music
+#const Audio_RainyDayInCherryTownWakingDay1 = "Music/rainy day in cherry town (waking up day 1).mp3"
+#const Audio_CherryTownRestoration = "Music/cherry town restoration.mp3"
+#const Audio_Flood = "Music/Flood.mp3"
+#const Audio_StoryRain = "Music/story rain.mp3"
+#const Audio_PaperPuddle = "Music/paper in a puddle.mp3"
+#const Audio_SolemnWaters = "Music/solemn waters.mp3"
+
+// Ambience
+#const Audio_ChickenSounds = "Ambience/chicken sounds.mp3"
+#const Audio_StreetBustle = "Ambience/street bustle with traffic.mp3"
+#const Audio_RuralFrogs = "Ambience/rural ambience (wfrogs).mp3"
+#const Audio_UrbanSeagulls = "Ambience/urban seagulls.mp3"
+#const Audio_BustlingCafeChatter = "Ambience/bustling cafe chatter.mp3"
+
+// Rain
+#const Audio_RainInside = "Rain/rain-inside.mp3"
+#const Audio_RainOutsideChill = "Rain/outside rain (chill).mp3"
+#const Audio_HighFlowRiver = "Rain/High flow river.mp3"
+#const Audio_FloodWaterRushing = "Rain/Flood water rushing.mp3"
+#const Audio_CalmStreamRiverFlow = "Rain/calm stream-river flow.mp3"

@@ -3,13 +3,6 @@
 // Name: Journalism Table Prototype
 // Creator: Twine
 
-// Resources
-
-#const BG_Bedroom = "BG/BedroomMorning.mp4"
-#const BG_HouseExterior = "BG/HouseExt.mp4"
-#const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
-
-
 //Checks:
 //Tech: 3
 //Endurance: 1
@@ -38,8 +31,9 @@ $ActionChoice(Wake up)
 {/img}
 $call SetLocation("Apartment")
 {bg $BG_Bedroom}
-$call Music(Music/rainy day in cherry town.mp3)
-$call Ambience(Ambience/rain-inside.mp3)
+$call Music($Audio_RainyDayInCherryTownWakingDay1)
+$call StopAmbience()
+$call Rain($Audio_RainInside)
 {layout Right}
 You wake up to your phone buzzing.
 It takes a few seconds to remember where you are: 
@@ -105,7 +99,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 @tags Social, Trust
 {clear-text}
 {layout Right}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 {img Anim/1a/UpstairsCat.png}
 You help your neighbor find a flashlight and put out some food for her cats.
 {/img}
@@ -122,7 +116,7 @@ $choice OffToWork; Off to work
 :: RoundUpYourTechAndRainGear
 @tags Techie, Resourceful
 {clear-text}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 {layout Right}
 You haven't finished unpacking your boxes yet.
 You don't plan to live here very long, anyway. 
@@ -136,7 +130,7 @@ $choice OffToWork; Off to work
 :: DigThroughTheFridgeForSomethingNourishing
 {clear-text}
 {layout Right}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 {img Anim/1a/CherryMuffin.png}
 Your kitchen is full of food from your aggressively-friendly neighbors.
 Cherry muffins, cherry granola, cherry summer sausage.
@@ -150,7 +144,7 @@ $choice OffToWork; Off to work
 :: CheckSocialMediaForPostsAndPhotosAboutTheStorm
 {clear-text}
 {layout Right}
-{bg $BG_HouseExterior}
+{bg $BG_HouseExt}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
 {img Anim/1a/Duck.webm}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
@@ -165,7 +159,8 @@ $choice ReadFloodingArticle; Read the click-bait article and brush up on your su
 :: OffToWork
 {clear-text}
 {/img}
-$call Ambience(Ambience/rain-inside.mp3)
+$call Ambience($Audio_ChickenSounds)
+$call Rain($Audio_RainOutsideChill)
 {layout Right}
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
@@ -210,7 +205,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-{img Anim/1a/FlappingChicken.webm}
+{img Anim/1a/FlappingChickenStill.png}
 {@maureen} Hurry! We can't let them get swept away!
 {/img}
 
@@ -296,7 +291,6 @@ $choice TakeSomePhotos; Take a photo of the stranded Cherrymobile
 {/img}
 {layout Right}
 Wow... it's awful out here.
-// {img Anim/enml-stuckcar.png}
 Pastries are floating down the street, and cars are stranded...
 {img Anim/1a/CherryMobile.png}
 Including the famous Twin Lakes Cherrymobile!
@@ -314,7 +308,9 @@ $choice ArriveAtWork; Rush to work
 {/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
-$call Ambience(Ambience/rain-inside.mp3)
+$call Music($Audio_CherryTownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {layout Left}
 
 $if Visited(HelpHer)
@@ -575,7 +571,7 @@ $goto Office1-Clock
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
-    {img Anim/1a/HappyChicken.webm, Right}
+    {img Anim/1a/HappyChickenStill.png, Right}
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     {/img}
@@ -616,10 +612,12 @@ $if StatCheck(Social, 2)
     {@me} Can you tell me more about the flood?
     {@townhallcontact} Well, so far we know the situation is worst near the Twin Lakes Dam. 
     {@townhallcontact} Volunteers are stacking sandbags, while emergency workers deal with rescues and evacuations.
+    
+    $call GiveSnippet(CityHallShock)
+
     {@townhallcontact} I wish I could say nobody saw this coming, but Twin Lakes has been on the verge of a flood like this for years.
 
     $call GiveSnippet(FloodBackground)
-    $call GiveSnippet(CityHallShock)
 $else
     {layout Left}
     Your Town Hall contact doesn't sound thrilled to hear from you.
@@ -738,6 +736,9 @@ $goto Office1-Clock
 // Original Name: You have just enough time to compile the story now.
 :: YouHaveJustEnoughTimeToCompileTheStoryNow
 {bg $BG_OfficeExterior}
+$call Music($Audio_CherryTownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {clear-text}
 {/img}
 {layout Left}

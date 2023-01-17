@@ -1,0 +1,723 @@
+// :: ExampleSnippet
+// @type Photo, Facts, Quote, Observation, Graph (pick one)
+// @quality Bad, Good, Great (pick one)
+// @attr Color, Facts, Useful (pick any number)
+// @image Photo/HospitalDucks.jpg
+// This is a valid description.
+
+// Level 3A Snippets 
+
+// Mayor interview quote - dodging your question 
+:: MayorQuoteVagueAnswer
+@type Quote 
+@quality Bad 
+@attr Facts 
+“I'm sure our volunteers are doing their best. I'm proud of them for their efforts!”
+
+
+// Mayor interview quote - not enough space 
+:: MayorInfoNotEnoughSpace
+@type Fact 
+@quality Great
+@attr Facts 
+The mayor admitted that the shelter won’t have enough beds for all evacuees. He suggested staying with friends or relatives.   
+
+// Mayor interview quote - "near tolerable" conditions 
+:: MayorInfoNearTolerableConditions
+@type Fact 
+@quality Great 
+@attr Facts 
+According to Mayor Smuckers, an expert was called in to help at the shelter. She called the space "near tolerable."
+
+// Mayor quote - it'll be fine 
+:: MayorQuotePeopleTakeCareOfEachOther
+@type Quote
+@quality Great 
+@attr Facts  
+The mayor insisted that things will be fine, despite a lack of shelter space. "People here take care of each other," he said. 
+
+// Mayor advice - people should evacuate 
+:: MayorAdvicePeopleShouldEvacuate
+@type Fact 
+@quality Good 
+@attr Useful 
+Mayor Smuckers urged everyone in danger zones to evacuate, for their own safety. 
+
+// Mayor quote - chance of dam failure 
+:: FiftyPercentChanceOfDamFailure
+@type Fact 
+@quality Great 
+@attr Facts
+According to the mayor, the dam has a 50% chance of failing if more rain hits. Dam failure would cause catastrophic damage.  
+
+// Original Name: Mayor interview - downplays pet issue 
+:: MayorDownplaysIssueOfPets
+@type Quote 
+@quality Great 
+@attr Facts
+Mayor Smuckers downplayed the issue of people not wanting to leave their pets. "Every town has its crazies," he said. 
+
+
+// Mayor interview - transportation to shelter 
+:: MayorInterviewNoPlanToHelpTransportPeopleToShelter
+@type Quote 
+@quality Great 
+@attr Facts 
+The mayor didn't have a plan for getting people to the shelter. "I'm sure somebody will give'em a ride. We're #TwinLakesStrong!"
+
+:: UselessFredQuoteAboutDeerAttacks
+@type Quote
+@quality Bad 
+@attr Facts
+"Did you know deer sightings are up 3% this year?" said Fred Finkler, local gardener. "Some fawns bit the heads clean off my marigolds!" 
+
+:: GreatFredQuoteAboutShelterAndSocialSafetyNets
+@type Quote
+@quality Great 
+@attr Facts
+"I'm concerned. One shelter won't have space for everyone. We need policies to make sure nobody ends up in trouble."
+
+:: UselessFredQuoteAboutGardening
+@type Quote 
+@quality Bad 
+@attr Color 
+"I thought my zinnias were goners, but they <i>rose</i> to the occasion and put the <i>petal</i> to the metal!
+ 
+:: RichLadyQuoteSafeNeighborhood
+@type Quote 
+@quality Great 
+@attr Facts   
+One local didn't want a shelter in her area, even though it would help the town. "We don't have room for everyone!" 
+
+:: RudeRichLadyQuote
+@type Quote 
+@quality Great 
+@attr Facts 
+Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alone. "It's peaceful <i>here.</i> Let's keep it that way." 
+
+:: NIMBYLadyQuote  
+@type Quote 
+@quality Great 
+@attr Facts 
+"Twin Lakes should definitely provide shelters! Just not in <i>my</i> neighborhood."
+
+:: RichLadyCannedFoodDrive
+@type Quote 
+@quality Great 
+@attr Facts
+"It's not my job to help everybody. I donated to the canned food drive. What more do you want from me?"
+
+:: ConflictingOpinions
+@type Quote   
+@quality Great 
+@attr Facts
+"People can move if they don't like it... but not all of them, or the whole town would collapse!"
+
+:: AccessibilityNightmare
+@type Quote 
+@quality Great 
+@attr Facts
+"That high school is an accessibility nightmare. My wife and I are both disabled. We'll be safer at home."
+
+:: PeopleStayingHome
+@type Fact 
+@quality Great 
+@attr Facts
+Without an accessible shelter, some people have chosen to stay home and hope for the best. 
+
+:: CityPlanningIssue
+@type Fact 
+@quality Great 
+@attr Facts
+It's the city's responsibility to create an accessible shelter for all, though some people worried it's too late now. 
+
+:: GetWordOutAboutAccessibility
+@type Fact 
+@quality Great   
+@attr Facts, Useful 
+A local man urged people to speak up about the need for an accessible shelter. For many, there's no other option.  
+
+:: GreatShelterPhoto
+@type Photo 
+@quality Great  
+@attr Color 
+//add great shelter photo here 
+
+:: BadLightingShelterPhoto
+@type Photo  
+@quality Good 
+@attr Color 
+//add decent shelter photo with bad lighting here  
+
+:: BlurryShelterPhoto
+@type Photo 
+@quality Bad 
+@attr Color 
+//add bad, blurry shelter photo here 
+
+:: KickedOutOfApartments
+@type Fact  
+@quality Great  
+@attr Facts
+Doug Walter said his apartment building kicked out all the seniors who lived here after the first flood, with no end in sight. 
+
+:: DogOwnerSaysShelterDoesntAllowPets
+@type Fact 
+@quality Great
+@attr Facts 
+Doug Walter is not able to stay at the shelter because they cannot take in his dog, Odie. Many locals will face the same problem. 
+
+:: ExasperatedShelterCoordinator
+@type Quote 
+@quality Great 
+@attr Facts, Color 
+The shelter coordinator wasn't thrilled with local resources. "Next delivery will show up in a horse and buggy, at this rate." 
+
+:: OneQuestionConcernsAboutShelter
+@type Quote   
+@quality Good  
+@attr Facts
+"This building isn't accessible. We can't allow people to bring their pets. And there's not enough space or supplies."
+
+:: AccessibilityStandardsResource
+@type Fact 
+@quality Great   
+@attr Facts
+According to national standards, the local high school needs several updates to be accessible to all. 
+
+:: CoordinatorNotSureWhyPetsArentAllowed
+@type Fact  
+@quality Bad 
+@attr Facts
+The shelter coordinator wasn't sure why pets aren't allowed, but said it might be a safety issue. 
+
+:: CoordinatorQuoteTurningPeopleAway
+@type Quote  
+@quality Good 
+@attr Color 
+The shelter coordinator was worried about pet owners. "I hate turning people away, but there's nothing I can do."
+
+:: UsefulInfoFromShelterCoordinator
+@type Fact
+@quality Great  
+@attr Useful
+For those looking to help, the shelter is accepting donations. Coordinators urge voting for candidates with disaster plans in place.
+
+:: ShelterCoordinatorConcerns
+@type Fact 
+@quality Good   
+@attr Facts
+"We don't have enough space, supplies, or volunteers. And this shelter isn't going to work for everyone who's gonna need it."
+
+:: ShelterCoordinatorDetailedConcerns
+@type Quote 
+@quality Great 
+@attr Facts 
+"This building isn't accessible. Not enough ramps, outdated restrooms, an inaccessible entrance. And no accomodations for pets." 
+
+:: UsefulShelterAdviceAboutAccessibility
+@type Quote 
+@quality Great 
+@attr Useful 
+"I need portable ramps, better cots, and braille signs. Still, it's not enough. The city needs to fix up this building." 
+
+:: ShelterCoordinatorColorQuote
+@type Quote 
+@quality Great 
+@attr Facts, Color
+"Tell your mayor to get with the times. This little town needs to keep up, or it's gonna get washed right off the map."
+
+:: HowCanTheCommunityHelpShelter
+@type Quote 
+@quality Great 
+@attr Useful  
+"We need food, blankets, and bottled water! And if people let friends stay with them, that would free up more space here."
+
+:: WhyArentPetsAllowedQuote
+@type Quote 
+@quality Great 
+@attr Facts
+"Pets in shelters are a safety issue for people with asthma or allergies. Plus, animals tend to get agitated during disasters."  
+ 
+:: PetFriendlyShelterRequirements
+@type Quote
+@quality Great
+@attr Facts 
+"For a pet friendly shelter, we'd need separate spaces for people and pets, plus volunteers and supplies." 
+
+:: CityDeniedFundingForPetFriendlyShelter
+@type Fact 
+@quality Great 
+@attr Facts 
+Local vet Fox Smolder asked for funding for a pet-friendly shelter, but City Council denied his request. 
+
+:: HowCanCityHelpPetOwners
+@type Quote 
+@quality Great 
+@attr Useful
+"If people want to help, they could take in pets that need a safe place to stay... though I'm not sure it'll be enough." 
+
+:: WhereShouldPetOwnersGo
+@type Fact 
+@quality Great  
+@attr Useful 
+Local vet Fox Smolder said pet owners should stay with relatives, or look for nearby kennels or pet-friendly motels.
+
+:: WorriedPeopleWillStayHome
+@type Quote 
+@quality Great 
+@attr Facts, Color
+"I'm worried a lot of people will stay home with their pets during the storm. It's not safe to stick around here."
+
+:: WorriedAboutPeopleKickedOutOfApartment
+@type Quote
+@quality Good
+@attr Facts, Color 
+"I'm worried about my clients who were kicked out of their building due to the flood. Not sure where they're going to go."
+
+:: DescriptionOfApartmentInterior
+@type Observation
+@quality Great 
+@attr Facts, Color
+Inside Strudel Apartments, the scene is grim: flickering lights, an out-of-order elevator, and moldy carpets.
+
+:: ElectricianInput
+@type Fact 
+@quality Good 
+@attr Facts
+The electrician at Strudel Apartments said the fire alarm was out-of-order. 
+
+:: ElectricianInterviewDetailedReason
+@type Fact 
+@quality Great
+@attr Facts
+The electrician explained why seniors can't move back in yet: out-of-order elevators and fire alarms, and dangerous mold growth. 
+
+:: ElectricianNotSureAboutMovein 
+@type Quote 
+@quality Good 
+@attr Facts 
+"With that new storm on its way, I'm worried that these people will have to wait a lot longer to move back in." 
+
+:: RepairWorkersAllBusy
+@type Fact 
+@quality Good 
+@attr Facts
+Strudel Apartments still need more repairs, and repair workers are swamped with calls from all over town. 
+
+:: ApartmentContext
+@type Quote 
+@quality Great 
+@attr Facts, Color
+"I've lived here for years. That is, until the flood. We had to evacuate when the ground floor flooded. It was dreadful!"
+
+:: SadApartmentColorQuote
+@type Quote 
+@quality Great 
+@attr Color 
+"I'm staying with my sister in West Forks. But that city is too big and noisy for me. I just want to be home."
+
+:: ApartmentNotReturningCalls
+@type Quote 
+@quality Great 
+@attr Facts
+"I came out here today to demand some answers. The building manager isn't answering my calls!" 
+
+:: DescriptionOfGroceryStoreChaos
+@type Observation  
+@quality Good 
+@attr Facts, Color
+The grocery store was a chaotic scene, with empty shelves and lines that stretched all the way to the parking lot. 
+
+:: AngryLandlordQuote
+@type Quote
+@quality Bad
+@attr Color
+"I'm just doing my job, and all these sweet old ladies keep acting like I'm Cruella DeVille. So forgive me if I seem tense." 
+
+:: LandlordFactsAboutSituation 
+@type Fact 
+@quality Good
+@attr Facts
+At Strudel Apartments, the management company only gave each tenant $300 to cover weeks without housing. 
+
+:: NotSafeInApartments
+@type Fact 
+@quality Good 
+@attr Facts
+"The fire marshal said it's not safe for people to move back in. The elevators are down, and the basement is still drying out." 
+
+:: RepairPeopleAreSwamped
+@type Fact 
+@quality Good 
+@attr Facts 
+According to the manager at Strudel Apartments, repair workers have been swamped and just made it out today.  
+
+:: AggressiveQuote
+@type Quote 
+@quality Good 
+@attr Facts, Color
+When asked about helping tenants, the manager became defensive. "It's not fair. These old folks keep treating me like a monster!"
+
+:: FactsAboutStipend 
+@type Fact 
+@quality Great 
+@attr Facts 
+The management company only approved $300 in aid for tenants... not even enough for a week at Twin Lakes's cheapest motel.  
+
+:: GreatApartmentExteriorPhoto
+@type Photo  
+@quality Great 
+@attr Color 
+//add great photo of apartment exterior 
+
+:: SlightlyBlurryApartmentExteriorPhoto
+@type Photo 
+@quality Good 
+@attr Color
+//add slightly blurry photo of apartment exterior 
+
+
+:: SchoolIsntAccessibleTownIsShrinking
+@type Quote 
+@quality Great 
+@attr Facts 
+"My team has been pushing the city to fix up the high school for years. It's no wonder Twin Lakes is shrinking instead of growing."
+
+:: TwinLakesShrinking
+@type Quote
+@quality Good
+@attr Useful, Facts
+"Tourists come to town in the summer, but the locals are moving away. Twin Lakes needs to become more accessible for everyone."  
+
+:: RequirementsForAccessibleShelter
+@type Fact 
+@quality Good  
+@attr Facts 
+According to Ms. Rhodes, the high school needs ramps, automated entrances, wider doorways, and other key updates. 
+
+:: ShortTermShelterSolutions
+@type Quote 
+@quality Good 
+@attr Facts, Useful
+"These are only short-term solutions, but it would help to add portable ramps, traffic cones, and more volunteers!" 
+
+:: ComplicatedIssues
+@type Quote 
+@quality Great 
+@attr Facts 
+"The Mayor is part of the problem, with his #TwinLakesStrong obsession. We need real solutions, not inspiring hashtags."
+
+// Level 3B Snippets 
+
+:: BadQuoteAndWebsiteReference
+@type Quote 
+@quality Bad 
+@attr Facts
+"I've been doin' a whole lot to prepare for the storm. Just check the city website!"
+
+:: MayorSandbagsQuote 
+@type Quote 
+@quality Bad  
+@attr Facts
+"There are three sandbag filling stations throughout the city. Anyone who needs sandbags can go and get them!"
+
+:: MayorFillingStationLocations 
+@type Quote
+@quality Good 
+@attr Facts
+"We've got a filling station here on Main Street. If we want to save our town, we have to make sure local businesses survive!"
+
+:: MayorTwinLakesStrongQuote 
+@type Quote 
+@quality Good 
+@attr Color  
+"I wish we had the resources of a big city. But the fact is, we have to be scrappy and make do with what we've got."
+
+:: MayorTwinLakesStrongNarrative
+@type Fact 
+@quality Great 
+@attr Facts, Useful  
+The mayor urged people to help their neighbors, but he didn't mention a plan to help those who get overlooked. 
+
+:: BookstoreStillRecovering
+@type Fact 
+@quality Good 
+@attr Facts
+Local shops--including Bookish, on Main Street--are still recovering as the second storm approaches. 
+
+:: SandbagsOutsideBookstore
+@type Quote 
+@quality Bad
+@attr Facts 
+"I sandbagged my shop. But there are definitely issues with the sandbag access."
+
+:: GreatBookstoreQuoteSandbagAccessIssues
+@type Quote 
+@quality Great 
+@attr Facts 
+"Rich folks by the lake are doing fine, but others aren't so lucky. I saw people biking 12 blocks just to get sandbags!"
+
+:: BadDNRStatementAboutSandbagLocations
+@type Fact 
+@quality Bad 
+@attr Facts
+"Sandbag filling stations can be found near Main Street, Amarena Grove, and Morello Road." 
+
+:: OnlyThreeSandbagLocations 
+@type Quote  
+@quality Good 
+@attr Facts
+"We only had the resources for 3 filling stations. That leaves 6 neighborhoods without help."
+
+:: NeedMoreSandbagStationVolunteers 
+@type Quote 
+@quality Good
+@attr Useful 
+"We need help. Our little town is completely overwhelmed. To anyone who can get here safely... please come volunteer!"
+
+:: SandbagStationQuoteLocations
+@type Fact 
+@quality Bad 
+@attr Facts, Useful
+According to the DNR, filling stations can be found on Morello Road, Main Street, and the upper lakeside. 
+
+:: SandbagStationInAreaThatDoesntNeedOne
+@type Observation 
+@quality Great 
+@attr Facts 
+Upper lakeside is home to one of the 3 filling stations, even though this high-income area is unlikely to flood. 
+
+:: DetailsAboutRichNeighborhoodSandbagStation
+@type Observation 
+@quality Good  
+@attr Facts
+According to a source, the upper lakeside has ties with local business. The Mayor may have felt pressured to provide sandbags there. 
+
+:: NeighborhoodsLeftOut  
+@type Fact 
+@quality Good 
+@attr Facts
+Misty was concerned about the lower-income neighborhoods along the river, which don't have easy access to sandbags. 
+
+:: BarriersToSandbagAccess
+@type Fact 
+@quality Good 
+@attr Facts
+Misty explained the barriers to sandbag access. "People have to work or watch their kids. And sandbags aren't easy to lug around." 
+
+:: WhyAreLowIncomeAreasMoreAtRisk
+@type Fact 
+@quality Good 
+@attr Facts 
+According to the DNR, lower-income households struggle to recover financially from flood disasters. 
+
+:: GreatFillingStationPhoto
+@type Photo 
+@quality Great 
+@attr Color
+//Insert great filling station photo, with people pictured
+
+:: BlurredFacesFillingStationPhoto
+@type Photo 
+@quality Bad 
+@attr Color
+//Insert filling station photo with faces blurred out 
+
+:: QuoteAboutGrandmaInRoyalHazel
+@type Quote 
+@quality Good 
+@attr Facts, Color
+"I need to get these sandbags to my grandma in Royal Hazel, since the city isn't doin' anything to help her."
+
+:: RoughTwoWeeks
+@type Quote 
+@quality Good 
+@attr Color
+"My grandma's tough, but it's been a rough week. A lot of folks by the river are feeling like nobody's listenin' to them."
+
+:: GrandmaLeftOutOfTownMeetings
+@type Fact 
+@quality Great 
+@attr Facts
+Graham Johnson pointed out that some people, like the elderly, can't make it to town meetings to have their voices heard. 
+
+:: RottenCherryQuote
+@type Quote 
+@quality Great 
+@attr Color
+Despite all the town's flaws, Graham Johnson plans to stay in Twin Lakes. "Can't let one rotten cherry spoil the bunch!" 
+
+:: InaccurateFloodMaps
+@type Quote 
+@quality Great 
+@attr Facts 
+Graham Johnson said his grandma's house flooded, despite not being in a flood zone. "It's hard to trust the city after this." 
+
+:: HowToVolunteerAtFillingStation 
+@type Quote 
+@quality Great 
+@attr Useful 
+"Twin Lakes needs volunteers. If you want to help, just show up at a filling station and start shoveling."
+
+:: BadSandbagStationQuote
+@type Quote 
+@quality Bad 
+@attr Facts 
+"Nah. Not really. But what can you do?"
+
+:: CameWhereMoreHelpIsNeeded
+@type Fact 
+@quality Good 
+@attr Facts
+Al Tremond felt lucky that his neighborhood, Amarena Grove, didn't flood. He wanted to volunteer in areas that need more help. 
+
+:: BetterSandbagStationQuote 
+@type Quote 
+@quality Great 
+@attr Facts 
+"Three filling stations isn't enough. It's a small town, but it's not <i>that</i> small."
+
+:: EncouragingFillingStationQuote 
+@type Quote 
+@quality Great 
+@attr Facts
+Tremond thought that, if there were more filling stations, more people would volunteer. "Folks here are good at heart." 
+
+:: DetailedDescriptionHighIncomeNeighborhood
+@type Observation 
+@quality Great 
+@attr Facts, Color 
+In Twin Lakes's historic neighborhoods, debris has been cleared and most houses are lined with neat rows of sandbags. 
+
+:: MostPeopleCantGetSandbags
+@type Quote 
+@quality Good 
+@attr Facts 
+"We're lucky our friends had space for us here. A lot of people back in our neighborhood can't even get sandbags!"
+
+:: QuickDescriptionHighIncomeNeighborhood
+@type Observation 
+@quality Good  
+@attr Facts, Color  
+The historic neighborhoods looked tidier than most of Twin Lakes, with debris already cleared away. 
+
+:: BadRoyalHazelPhoto 
+@type Photo 
+@quality Bad 
+@attr Color 
+//Insert bad photo of low-income neighborhood here, with people cropped out or blurred 
+
+:: GreatRoyalHazelPhoto 
+@type Photo 
+@quality Great  
+@attr Color 
+//Insert good photo of low-income neighborhood here 
+
+:: RidesBusAndCantAccessSandbags
+@type Quote 
+@quality Great 
+@attr Facts
+"I'm 80 years old, and I take the bus everywhere. There's no way I can get across town just to bring back sandbags."
+
+:: FloodDamageAnecdote 
+@type Quote 
+@quality Great 
+@attr Facts, Color 
+Esme lamented the musical instruments and photos her family lost to the flood. "I never dreamed the water would rise so high!" 
+
+:: RoyalHazelQuoteInaccurateFloodMaps
+@type Quote 
+@quality Great  
+@attr Facts 
+"According to the flood map, our area wasn't supposed to flood. But tell that to all the black mold growing in my basement."
+
+:: PayingForRepairs
+@type Quote 
+@quality Great 
+@attr Facts 
+"I don't have enough money to repair this place. I'd hate to leave my home, but I don't see another option."
+
+:: LizQuoteTwinLakesNotPrepared
+@type Quote 
+@quality Great 
+@attr Facts 
+"Twin Lakes had plenty of time to get ready for this... Instead, they decided to let us all fend for ourselves." 
+
+:: LizQuoteDebrisPiledUp
+@type Quote 
+@quality Great 
+@attr Facts 
+"I keep calling the city to send a truck to pick up all the debris. They keep saying they'll get to it as soon as they can."
+
+:: LizTripsBackAndForth
+@type Fact  
+@quality Good 
+@attr Facts
+Liz described taking 20 trips back and forth to bring back sandbags for herself and her neighbor. 
+
+:: LizBasementFlooded
+@type Quote 
+@quality Good 
+@attr Facts 
+"During the first flood, the street was full of water for days. Not sure if the Mayor even noticed." 
+
+:: LizHowCanPeopleHelp  
+@type Quote 
+@quality Great 
+@attr Facts, Useful  
+"People are gonna need financial help to recover. So many folks have damaged homes and not enough money to fix it."
+
+:: NeedToProtectTheSouthSide
+@type Quote 
+@quality Great 
+@attr Facts 
+"The whole town is connected. If we all start moving out, this town is gonna collapse like an overbaked cherry souffle."
+
+:: WillasStory
+@type Observation 
+@quality Good 
+@attr Color 
+Local quilter Willa Hornsby wanted to evacuate. But before she could pack up her wares, the dam burst.  
+
+:: NoraBackground
+@type Fact 
+@quality Great
+@attr Color
+Years ago, Dr. Nora Warner's home was destroyed by a flood. Now she researches flood equity in an effort to help others. 
+
+:: DrNoraOnHouseboats
+@type Quote 
+@quality Bad  
+@attr Color 
+"I knew climate change would bring more flooding. Then I discovered houseboats. They literally can't flood!"
+
+:: NoraFloodWarning 
+@type Quote 
+@quality Good 
+@attr Facts 
+"More floods are going to come. Twin Lakes will be washed right off the map unless we make some changes."
+
+:: NoraPrepareBetterNextTime
+@type Quote 
+@quality Great  
+@attr Useful 
+"Update the flood maps. Tell people if they’re at risk. Put a sandbag station in each neighborhood and start enlisting volunteers." 
+
+:: NoraFloodMapIssue
+@type Quote 
+@quality Great 
+@attr Facts, Useful
+"The flood maps don't account for climate change or wetland loss. Twin Lakes needs to pay experts to update those maps ASAP." 
+
+:: NoraFinancialHelp
+@type Quote 
+@quality Great 
+@attr Useful
+"Twin Lakes can help low-income households by pausing rent payments or offering financial aid. Crucial if we want to rebuild."
+
+:: NoraDisasterEquity
+@type Quote 
+@quality Great 
+@attr Facts
+"Disasters hit some people much harder. The town needs to help these groups, or Twin Lakes will fall apart at the seams."

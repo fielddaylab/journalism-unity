@@ -94,6 +94,13 @@ namespace Journalism {
 
             s_RootMenu.AddSubmenu(statsMenu);
 
+            /* TODO: adjust city score via debug menu
+            DMInfo cityScoreMenu = new DMInfo("CityScore",);
+            RegisterAdjustStat(statsMenu, StatId.Research);
+
+            s_RootMenu.AddSubmenu(cityScoreMenu);
+            */
+
             s_RootMenu.AddDivider();
             s_RootMenu.AddButton("Unlock All Story Snippets", UnlockAllSnippets);
             s_RootMenu.AddButton("Skip to Story Publish", SkipToStoryPublish);

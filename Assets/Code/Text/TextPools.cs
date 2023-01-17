@@ -8,6 +8,7 @@ namespace Journalism {
         public TextLine.Pool LinePool;
         public TextChoice.Pool ChoicePool;
         public StoryScrapDisplay.Pool ScrapPool;
+        public InlineImageDisplay.Pool InlineImagePool;
         public TextLine.Pool StatChangePool;
     }
 }
