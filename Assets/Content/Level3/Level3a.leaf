@@ -7,7 +7,7 @@
 
 // Original Name: Level 3 Intro
 :: Level3Intro
-{bg $BG_Bedroom}
+{bg $BG_BedroomDesk}
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
@@ -551,8 +551,7 @@ $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
 $endif
-$HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
-$HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
+$choice FloodShelterChoices; Decide what to do next
 
 // Talk to the sad-looking man standing with his dog
 :: TalkToManWithDog
