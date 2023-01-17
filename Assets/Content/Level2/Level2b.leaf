@@ -57,20 +57,21 @@ To say you're tired of cherries would be an understatement.
 {img Anim/2b/Banana.png, Left}
 You grab a slightly overripe banana instead.
 Flopping into bed, you eat around the bruises and contemplate your ceiling for a moment.
+{/img}
 ...
 {img Anim/2b/WaterStain.png, Left}
 That water stain kinda looks like a cherry.
 Darn it.
 At least you feel a bit more refreshed.
 $call AdjustStats(Endurance + 1)
-
+{/img}
 $OnceChoice(RespondToHerMessage, "Respond to Birdie's message")
 $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone else")
 
 // Original Name: Read up on CRANE
 :: ReadUpOnCRANE
 @tags Bookworm, Techie
-You scroll past about a dozen blog posts complaining about CRANE.
+You scroll past about a dozen blog posts denouncing CRANE.
 {@article}CRANE? More like CRYIN!
 {@article}CRANE is once again screeching about city developments...
 {@article}CRANE ought to become endangered!
@@ -95,7 +96,7 @@ $choice WatchSomeWebflix; Make popcorn and watch some Webflix
 //Watch some Webflix
 :: WatchSomeWebflix
 {img Anim/2b/Popcorn.png, Left}
-You stay up half the night watching Streeterton. 
+You stay up half the night watching Streeterton.
 The next morning, you wake up to a text...
 Make that 3 texts...
 ...From your editor. 
@@ -106,31 +107,35 @@ $choice ReadYourEditorsMessage; Read messages
 // Original Name: Agree to meet with her in the morning.
 :: AgreeToMeetWithHerInTheMorning
 {@birdie}Wonderful! Meet me at the Snakebite Trailhead.
+{img Anim/2b/Snake.png, Left}
 {@me}Um... I don't really feel good about the name "Snakebite Trail"....
 {@birdie}Oh, don't worry, dear. There are only two venomous species around here.
 Oh. How comforting. 
+{/img}
 
 $choice TomorrowMorning8A.M; Tomorrow morning, 8 a.m.
 
 // Original Name: Check in with your editor
 :: CheckInWithYourEditor
 Your editor is intrigued.
-
+{img Anim/2b/IntriguedEditor.png, Left}
 {@dionne}Strange... Cherry Creek Marsh hasn't come up much in Town Hall meetings.
 {@me}Then it must not be important, right?
 {@dionne}That's what you need to find out. 
+{/img}
 
 $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
 
 // Original Name: Read your editor's message
 :: ReadYourEditorsMessage
 {@dionne}Is it true you blocked the director of CRANE on Squawker?
+{img Anim/2b/Squawker.png, Left}
 {@dionne}And made fun of her name???  
 {@dionne}There's a story here, El. Where are you??  
 {@me}I'm here. Sorry!! I'll message her now. 
 {@dionne}You're too late. Khalisa's got this one.
 {@dionne}And just a tip for you, rookie: try not to insult your sources. 
-
+{/img}
 $GameOver("You put getting the dunk over getting the scoop... Better luck next time.")
 
 // Original Name: "Tomorrow morning, 8 a.m."
@@ -534,10 +539,15 @@ She starts typing on her phone... and that's when you realize she's been filming
 {@me}Um... what are you doing? 
 {@nancy} You'll see.  
 Your phone starts chiming with Squawker notifications.
+{img Anim/2b/Squawker.png, Left}
 {@squawkermessage}This so-called reporter is harrassing small business owners. It needs to stop!! 
+$call AdjustStats(Trust - 1)
 {@squawkermessage}Libraries? Community centers?? Find something else to get mad about. Jerk. 
+$call AdjustStats(Trust - 1)
 {@squawkermessage}Go back to the big city you came from!!!
+$call AdjustStats(Trust - 1)
 Uh oh. This interview is tanked. And so is your reputation.
+{/img}
 $GameOver("On the plus side, you're the main character on Squawker today. Better luck next time.")
 
 //Original Name: ApologizeForInsultingHer
@@ -567,7 +577,7 @@ $call GiveSnippet(NewDevelopmentPutsTwinLakesOnTheMap)
 
 $OnceChoice(WhatAboutTheFloodRisk, "Did you know that wetland destruction can cause flooding?")
 $OnceChoice(PlanForCherryCreekMarsh, "What is your business plan for Cherry Creek Marsh?")
-$OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population growth is worth destroying local wildlife?")
+$OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population growth is worth destroying our local wildlife?")
 
 //Original Name: What about the flood risk?
 :: WhatAboutTheFloodRisk

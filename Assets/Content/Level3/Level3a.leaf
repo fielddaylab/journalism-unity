@@ -23,10 +23,12 @@ One week later... the Mayor has called an Emergency Town Hall Meeting.
 {@mayorbarrysmuckers} Another storm is expected to hit in 3 days, and the town's not ready. 
 {@mayorbarrysmuckers} Some of you folks are gonna need to evacuate.
 {@mayorbarrysmuckers} But don't worry. We'll get through this together. We're #TwinLakesStrong! 
-{@mayorbarrysmuckers} My team has set up a flood shelter at the high school. 
+{@mayorbarrysmuckers} My team has set up a flood shelter at the high school.
+{img Anim/3a/FredFinkler.png, Left}
 {@fredfinkler}  What if the dam bursts?
 {@mayorbarrysmuckers}  Aw, Finkler, quit panicking folks. The dam won't burst.
 {@mayorbarrysmuckers}  ...Probably. 
+{/img}
 {@townspeople}{anim rumble}  CHATTER CHATTER CHATTER
 
 {clear-text}
@@ -232,8 +234,10 @@ $HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, ""
 {clear-text}
 You take a look around.
 Fred Finkler is still here.
+{img Anim/3a/Tent.png, Left}
 Plus the lady who was worried about evacuees camping out in her neighborhood....
 And the man who said he didn't want to leave his home. 
+{/img}
 
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
@@ -246,6 +250,7 @@ $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evac
 // Talk to Fred Finkler
 :: InterviewFredFinkler 
 {clear-text}
+{img Anim/3a/FredFinkler.png, Left}
 {@fredfinkler} Well? Didn't I tell ya? 
 {@fredfinkler} The dam’s gonna burst. I knew it all along.
 {@me} The mayor said the dam will hold. Probably. 
@@ -283,6 +288,7 @@ $choice FredFloodShelter; The flood shelter. Do you have any concerns?
 {@fredfinkler} We need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower!
+{/img}
 {img Anim/3a/AsterFlower.png, Left}
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 {/img}
@@ -297,8 +303,9 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "")
 {@fredfinkler} <i>Thistle</i> be the best story you'll hear all day. 
 {@fredfinkler} I thought they were goners, but they <i>rose</i> to the occasion. 
 {@fredfinkler} I couldn't be-<i>leaf</i> my eyes!
-Welp.... that's just about all the gardening puns you can handle in a ten-second window. 
+Welp.... that's just about all the gardening puns you can handle for this year. 
 $call GiveSnippet(UselessFredQuoteAboutGardening)
+{/img}
 
 $choice CutYourLosses; Cut your losses and find someone else to talk to. 
 $HubChoice(KeepPressing, "Keep pressing him about the flood shelter", 0.25, "")
@@ -314,6 +321,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25
 
 //KeepPressing
 :: KeepPressing 
+{img Anim/3a/FredFinkler.png, Left}
 {@me} That's great, Fred. But about the flood shelter...
 {@me} Do you have any concerns?
 {@fredfinkler} Oh, absolutely I'm concerned. One shelter won't have space for everyone. 
@@ -322,6 +330,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25
 {@fredfinkler} We need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
 {@fredfinkler} Astute? Hmm... reminds me of asters. My third favorite late summer bloom! 
+{/img}
 
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 

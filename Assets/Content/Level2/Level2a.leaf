@@ -301,8 +301,8 @@ $choice ScienceStoryMap; ...Got it. Thanks, Dionne.
 $if FirstVisit()
     $call SetTimeRemaining(3)
     You miss your college internship, where you worked with a whole team of science reporters.
-    Sure, Twin Lakes has amazing cherry pie.... but at what cost?? 
     {img Anim/2a/CherryPie.png, Left}
+    Sure, Twin Lakes has amazing cherry pie.... but at what cost?? 
     {/img}
 $endif
 
@@ -1327,12 +1327,9 @@ $choice CanYouGiveMeSomeExamples; Can you give me some examples?
 // Original Name: Ask if she has graphics you can use
 :: AskIfSheHasGraphicsYouCanUse
 She pulls up a graph on her phone.
-{img Anim/2a/Graph.png, Left}
 {@sarah}Take a look at the trends. We're seeing an unprecedented increase in rainfall!
 
 $call GiveSnippet(RainfallStats)
-
-{img}
 
 $if !Visited(AskWhatPeopleCanDoToHelp)
     $choice AskWhatPeopleCanDoToHelp; Ask what people can do to help
@@ -1342,6 +1339,7 @@ $choice DepartmentOfLimnology; Thank her for her help
 // Original Name: "How has the flood affected your business?"
 :: HowHasTheFloodAffectedYourBusiness
 {@cafeowner}It's a complete disaster.
+{img Anim/2a/ProfitableWeek.png, Left}
 {@cafeowner}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
 {@cafeowner}If this keeps up, I'm in trouble.
 

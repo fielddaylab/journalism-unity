@@ -262,19 +262,14 @@ $choice TryToRescueHerCar; Try to move the car
 {/img}
 {img Anim/1b/StrongArm.png}
 $if StatCheck(Endurance, 2)
-Luckily, you've been building up your {stat-name}Endurance{/stat-name} lately. 
+Luckily, you've been building up your {stat-name}endurance{/stat-name} lately. 
 You manage to push Khalisa's little compact car to dry ground!
+{@khalisa} Wow, you're stronger than you look. Thanks, El!
 $else
 You wish you could help, but at this point, you're mostly running on coffee and self-doubt. 
 You push with all your strength and move Khalisa's car about half an inch. 
-$endif
-
-$if StatCheck(Endurance, 2)
-{@khalisa} Wow, you're stronger than you look. Thanks, El!
-$else
 {@khalisa}Aw, it's okay, El. I appreciate the effort. 
 $endif
-
 
 $call AdjustStats(Endurance + 1, Trust + 1)
 
@@ -457,10 +452,9 @@ $choice GetReadyPart2; Head back to your desk
 // Original Name: Crackers
 :: Crackers
 @tags Endurance
-{/img} // Saltine.png
 You nibble on a few saltine crackers.
 They're not exactly nourishing, but it's better than stealing an innocent coworker's snacks.
-
+{/img} // Saltine.png
 $call AdjustStats(Endurance + 1)
 
 $choice GetReadyPart2; Head back to your desk
@@ -505,6 +499,7 @@ $endif
 :: TalkToVolunteer2
 {/map}
 {@me} Do you have a minute to talk?
+{img Anim/1b/Bacteria.png, Right}
 {@limvolunteer} Sorry, I'm working. Gotta go sample the bacterial contamination in the epilimnion of Upper Lake. 
 
 $if StatCheck(Research, 3)
@@ -512,6 +507,7 @@ $choice BookwormAnswer; Interesting. Are you worried the flooding will contribut
 $else
 $choice Non-BookwormAnswer; Um....epi-whatium?
 $endif
+{/img}
 
 // Original Name: Interview the DNR worker
 :: InterviewTheDNRWorker
@@ -896,8 +892,8 @@ $choice CherryFestivalMap; Decide what to do next
 A rescue in progress! 
 {img Anim/1b/FirefighterDalmation.png}
 You watch as firefighters rescue a man and his dog from a stranded car. 
-{/img}
 This high-quality anecdote will definitely get your story in front of more readers! 
+{/img}
 
 $call GiveSnippet(DogRescue)
 $call SFX(PhotoSnap)
