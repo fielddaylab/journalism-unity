@@ -193,8 +193,9 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 @tags Resourceful
 You call Khalisa for advice. 
 {@me}Hey.... what are the marshes around here like?
-{@khalisa}Oh, they're beautiful! Lots of wildlife.  
+{@khalisa}Oh, they're beautiful! Lots of wildlife. 
 {@khalisa}Cranes, deer, turtles, tons of snakes. I even saw a coyote once!
+{img Anim/2b/Snake.png}
 {@khalisa}Cool, huh?
 {@me}.....yeah. Snakes. Cool.
 You stuff your bag with... 
@@ -203,6 +204,7 @@ protein bars,
 a compass,
 an air horn,
 and a roll of duct tape.
+{/img}
 ...in case you get lost and need to build a shelter from twigs and prairie grass. 
 Oh, and bug spray, of course. 
 
