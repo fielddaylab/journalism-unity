@@ -565,7 +565,7 @@ $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
     You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
     {img Anim/1b/RainGauge.png}
     The wind and rain make it tricky to get a good shot...
-    {img Anim/1b/Tree.png}
+    {img Anim/1b/tree.png}
     But then you notice a nearby tree. The perfect vantage point! 
     Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top.
     {/img}

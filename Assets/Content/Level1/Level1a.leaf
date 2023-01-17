@@ -205,7 +205,7 @@ $choice OffToWork; Head to work
 // Original Name: Help her
 :: HelpHer
 {clear-text}
-{img Anim/1a/FlappingChicken2.webm}
+{img Anim/1a/FlappingChickenStill.png}
 {@maureen} Hurry! We can't let them get swept away!
 {/img}
 
@@ -572,7 +572,7 @@ $goto Office1-Clock
 
 $if Visited(HelpHer)
     {@policespokesman} Oh, you're the new reporter! Didn't you help rescue Maureen's chickens this morning?
-    {img Anim/1a/HappyChicken2.webm, Right}
+    {img Anim/1a/HappyChickenStill.png, Right}
     {@me} Oh... uh, yeah, that was me!
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     {/img}

@@ -184,6 +184,7 @@ $choice AnswerPhone; Answer phone
 // Original Name: Answer phone
 :: AnswerPhone
 @checkpoint
+{bg $BG_BedroomDesk}
 {img Anim/2a/RingingPhone.png, Left}
 {@dionne}I've got your next assignment, El: a science story.
 {/img}
