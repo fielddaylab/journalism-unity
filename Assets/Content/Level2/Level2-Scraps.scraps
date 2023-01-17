@@ -27,7 +27,7 @@ Mayor Barry Smuckers is pushing to lower the lake levels. “There won’t be an
 :: BlandGovernorQuote
 @type Quote
 @quality Bad 
-@attr Facts, Color
+@attr Facts
 "This town is incredibly unique. You can count on my support as you recover from this terrible tragedy."
 
 :: GovernorFaithInLocalOfficials
@@ -46,7 +46,7 @@ Mayor Barry Smuckers is pushing to lower the lake levels. “There won’t be an
 :: FloodProbability
 @type Graph
 @quality Bad
-@attr Facts
+@attr Facts, Useful
 @image Anim/flood-probability.png
 A clean graph of flood probability.
 
@@ -81,14 +81,14 @@ The DNR estimates that the flood has already caused $50 million in damages.
 :: DNRPreventFromHappeningAgain
 @type Quote
 @quality Great
-@attr Facts
+@attr Useful
 "Hate to say it, but sandbags aren't going to be enough. We need better policies if we want the town to survive."
 
 // Original Name: DNR Rainfall Info
 :: DNRRainfallInfo
 @type Fact
 @quality Good
-@attr Facts
+@attr Facts, Useful
 According to the DNR, some areas of Twin Lakes got 15 inches of rain in 24 hours--the worst rain since 1957.
 
 // Original Name: Basic flood background from DNR phone call
@@ -102,14 +102,14 @@ This is the worst flood Twin Lakes has ever had. It's already caused millions of
 :: BasicFloodPrevention
 @type Quote
 @quality Good
-@attr Facts
+@attr Useful
 We need better policies to prevent future disasters. 
 
 // Original Name: Wynne - Basic Flood Background
 :: WynneBasicFloodBackground
 @type Quote
 @quality Good
-@attr Facts
+@attr Facts, Color
 Over time, storms in Twin Lakes are becoming more severe AND more frequent. We've had a lot of floods around here, but this one is by far the worst.
 
 // Original Name: Detailed flood background
@@ -130,21 +130,21 @@ In the last decade, extreme rainfall in the region has increased by 10% due to c
 :: CauseOfFlood
 @type Quote
 @quality Good
-@attr Facts
+@attr Facts, Color
 Developers have paved over 30% of our wetlands, which soak up water. It's basically a perfect storm. 
 
 // Original Name: Lake level background
 :: LakeLevelBackground
 @type Fact
 @quality Good
-@attr Facts
+@attr Facts, Useful
 At the Town Hall meeting, Mayor Johnson will call to lower lake levels--an issue that many people blame for the flooding. 
 
 // Original Name: Inspiring downtown recovery
 :: InspiringDowntownRecovery
 @type Photo
 @quality Great
-@attr Color
+@attr Color, Useful
 @image Anim/inspiring-downtown-recovery.jpg
 
 // Original Name: What Caused the Flood
@@ -199,25 +199,25 @@ I put all my savings into this place. I'm not sure how I'm gonna recover.
 :: QuoteHeartAndSoul
 @type Quote
 @quality Great
-@attr Color
+@attr Color, Useful
 We gotta do our best to pick up and rebuild. Small business is the heart and soul of this town. I gotta hope it'll work out okay. 
 
 :: InTroubleQuote
 @type Quote
 @quality Great
-@attr Color
+@attr Color, Useful
 The Cherry Festival is usually my most profitable week, but the flood scared everybody away. If this keeps up, I'm in trouble.
 
 :: BasicCityHallInfo
 @type Quote
 @quality Bad
-@attr Facts
+@attr Useful
 City Hall is working to evacuate people from at-risk areas and mitigate damage. 
 
 :: DNRCauseOfFlood
 @type Fact
 @quality Good
-@attr Facts
+@attr Facts, Useful
 According to the local DNR, the flood was caused by extreme rainfall and less places for that water to go.
 
 :: DNRHighLakeLevels
@@ -237,7 +237,7 @@ Flood events will drive away people with enough money to move. If we lose too ma
 :: RainfallStats
 @type Graph
 @quality Good
-@attr Facts, Color
+@attr Facts
 @image Anim/rainfall-stats.png
 Snippet text unimplemented.
 
@@ -256,7 +256,7 @@ The city could change things with new policies: funding for storm drains, rain g
 :: IncreasedFloodingSugarMarsh
 @type Quote
 @quality Good
-@attr Facts
+@attr Facts, Useful
 According to weather reports from the time, flash flooding increased sharply after a community center was built atop Sugar Marsh.
 
 // Original Name: Librarian Quote
@@ -299,21 +299,21 @@ CRANE director Birdie Vance says the wetlands are just as important as the lakes
 :: WhatHappenedToWetlands
 @type Quote
 @quality Good
-@attr Facts
+@attr Facts, Useful
 Wetlands in the Twin Lakes area have been shrinking to make way for parking lots and apartment complexes.
 
 // Original Name: Wetland Policy 
 :: WetlandPolicy
 @type Fact
 @quality Great
-@attr Facts, Useful
+@attr Useful
 City Hall is holding a vote tomorrow concerning the development of Cherry Creek Marsh wetlands.
 
 // Original Name: Wetland Town Hall Meeting
 :: WetlandTownHallMeeting
 @type Quote
 @quality Good
-@attr Facts, Useful
+@attr Useful, Color
 Conservationists have gone unheard in City Hall meetings concerning wetland development. The final vote occurs tomorrow.
 
 // Original Name: Awful Spark Project
@@ -383,7 +383,7 @@ Spark Project representative Nancy Gilcrest declined to provide a flood plan for
 :: MayorOtherOptionsToPreventFlooding
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Facts
 Mayor Barry Smuckers acknowledges the role of wetlands, but favors engineered solutions.
 
 // Original Name: MayorOtherWildlifeAreas
@@ -397,7 +397,7 @@ Twin Lakes Mayor isn't concerned about the loss of marsh wildlife, citing the fo
 :: MayorFloodInsurance
 @type Quote
 @quality Great
-@attr Facts, Color
+@attr Color
 Mayor Smuckers dismissed concerns about flooding in new developments, suggesting "the renters can buy flood insurance."
 
 // Original Name: MayorCondescendingAnswerFinances
@@ -411,7 +411,7 @@ Mayor Smuckers has disclosed that the Spark Project donated to his mayoral campa
 :: MayorCondescendingAnswerLimnology
 @type Quote
 @quality Great
-@attr Color
+@attr Color, Useful
 The mayor is not aware of flooding research conducted by Twin Lakes University's Limnology Department. "I'm too busy to research every issue and educate the public."
 
 // Original Name: QuickMayorWetlandsQuote
@@ -425,7 +425,7 @@ The mayor is more focused on the flood capacity of lakes than wetlands, saying "
 :: SparkProjectDonationInfo
 @type Fact
 @quality Good
-@attr Facts, Color
+@attr Facts, Useful
 Mayor Barry Smuckers met with Spark Project leadership for a luncheon today, discussing their donation to city public works programs.
 
 // Original Name: SparkProjectBulletinBoard
@@ -446,7 +446,7 @@ According to a bulletin board in City Hall, the Spark Project made a donation to
 :: GoodMarshPhoto-Volunteers
 @type Photo
 @quality Good
-@attr Color
+@attr Color, Useful
 //TODO: Insert marsh volunteer photo here
 
 // Original Name: BadMarshPhoto-Scenery
@@ -481,8 +481,8 @@ Volunteers at Cherry Creek Marsh navigate snakes and poison ivy to preserve and 
 :: RushedLimnologist
 @type Quote
 @quality Bad
-@attr Facts, Color
-Local limnologists say paving over the Cherry Creek Marsh would harm rainwater absorption and increase flooding.
+@attr Facts, Useful
+Local limnologists say paving over the Cherry Creek Marsh would hamper rainwater absorption and increase flooding.
 
 // Original Name: MarshLoss
 :: MarshLoss
@@ -495,14 +495,14 @@ Local volunteer Seth McPhee laments the loss of marshland west of Twin Lakes. "I
 :: MarshPollution
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Color, Useful
 According to local volunteer Seth McPhee, the storm has washed "lawn chemicals, trash, and debris" into Cherry Creek Marsh.
 
 // Original Name: WetlandsAndRainfall
 :: WetlandsAndRainfall
 @type Fact
 @quality Good
-@attr Facts
+@attr Facts, Useful
 The Limnology Department website is clear: "We can't control rainfall, but by preserving our marshland we can mitigate its worst effects."
 
 // Original Name: WetlandsAndFlooding
@@ -537,14 +537,14 @@ Twin Lakes' foremost wetlands ecologists have confirmed that 70% of our local we
 :: Limnology-RemovedWetlandProtections
 @type Quote
 @quality Great
-@attr Facts, Color
+@attr Facts, Useful
 A few years ago, City Hall voted to loosen regulations on wetland development: but local ecologists say the city has yet to produce a satisfactory replacement.
 
 // Original Name: Limnology-NoProtectionsInPlace
 :: Limnology-NoProtectionsInPlace
 @type Quote
 @quality Good
-@attr Facts, Color
+@attr Facts
 Old environmental regulations were choking out Twin Lakes' vital agriculture - but now the city is left with no protections at all.
 
 // Original Name: LimnologyConcerned
@@ -579,5 +579,5 @@ The Spark Project is seeking to create a man-made marsh in Apple Valley to offse
 :: AnnoyedBusiness
 @type Quote
 @quality Great
-@attr Color
+@attr Color, Useful
 A Spark Project representative declined to comment on the effectiveness of the Apple Valley plan in preventing floods in Twin Lakes.
