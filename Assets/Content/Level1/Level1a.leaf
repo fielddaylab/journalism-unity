@@ -344,11 +344,15 @@ $call BeginTutorial()
     {clear-text}
     $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
-    {@dionne} Be thoughtful about the snippets you choose.   
+    {@dionne} Be thoughtful about the snippets you choose.
     $call PointTo(TutorialPlayerAttributes, -24, 0)
     {@dionne} This section will show the breakdown of your story.   
     $call PointTo(TutorialTargetAttributes, -24, 0)
-    {@dionne} Try to line up with the target breakdown here. 
+    {@dionne} Try to line up with the target breakdown here.
+    {@dionne} You can usually get Facts from scientists and experts.
+    {@dionne} Eyewitness accounts and nice images can get you Color.
+    {@dionne} Public agencies like City Hall usually provide Useful material.
+
     $call PointTo(TutorialQuality, -24, 0)
     {@dionne} Try to get high-quality snippets.
     {@dionne} And don't forget to add a photo or graphic. That's journalism 101. 
