@@ -1000,6 +1000,8 @@ $endif
 $if StatCheck(Resourceful, 5)
 There are mosquitoes everywhere... good thing you were {stat-name}resourceful{/stat-name} enough to bring bug spray!
 You take a picture of a sandhill crane surrounded by debris.
+$call SFX(PhotoSnap)
+
 $call GiveSnippet(GreatMarshPhoto-Crane)
 
 Birdie looks over your shoulder in amazement. 
@@ -1010,6 +1012,8 @@ Looks like there's something to be said for learning on the job.
 
 $elseif StatCheck(Tech, 5)
 You take a photo of a sandhill crane in the distance, surrounded by debris.
+$call SFX(PhotoSnap)
+
 $call GiveSnippet(GreatMarshPhoto-Crane)
 
 Birdie looks over your shoulder in amazement. 
@@ -1027,6 +1031,7 @@ When you ask for permission, the nearest volunteer absolutely geeks out.
 {/img}
 {@wetlandvolunteer3}You're that new reporter from New York, right??
 {@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
+$call SFX(PhotoSnap)
 
 $call GiveSnippet(GoodMarshPhoto-Volunteers)
 
@@ -1040,6 +1045,7 @@ Trying to ignore the cloud of bugs, you ask the volunteers for permission to tak
 {@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
 Ugh. Word sure gets around here.  
 At least the plants don't have a problem with being photographed. 
+$call SFX(PhotoSnap)
 
 $call GiveSnippet(BadMarshPhoto-Scenery)
 
@@ -1069,6 +1075,8 @@ She tells you about her volunteer work: replanting native species.
 {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
 Hooooooly cherry donuts.
 You move slowly backward and snap a picture, because this seems more professional than running away screaming.
+$call SFX(PhotoSnap)
+
 {/img}
 
 $call GiveSnippet(Volunteer-ImportanceOfWetlands)
@@ -1089,6 +1097,7 @@ She accepts the bug spray gratefully and tells you all about her volunteer work:
 {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
 Hooooooly cherry donuts.
 You take a few steps backward and snap a picture, because this seems more professional than running away screaming.
+$call SFX(PhotoSnap)
 
 {/img}
 $call GiveSnippet(Volunteer-ImportanceOfWetlands)
@@ -1215,6 +1224,8 @@ $else
         Luckily, you've done your {stat-name}research{/stat-name}.
         That pointed beak looks terrifying... but the crane only uses it to root through the soil for insects and seeds.    
         You snap a picture, then head calmly back toward the trailhead.
+        $call SFX(PhotoSnap)
+
         $call GiveSnippet(GreatMarshPhoto-Crane)
         $choice MarshMap; Return to trailhead
     $else 
@@ -1385,6 +1396,7 @@ $endif
 The shoreline is perfect for easy, dramatic-looking photos!
 You'd still rather work with a professional photographer...
 But these shots aren't bad at all. 
+$call SFX(PhotoSnap)
 
 $call GiveSnippet(LimnologyWetlandStoryPhoto)
 

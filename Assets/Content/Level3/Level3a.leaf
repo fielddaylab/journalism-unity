@@ -544,14 +544,17 @@ $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 :: TakePhotosOfShelter
 {clear-text}
 $if StatCheck (Tech, 5)
-      You use your top-notch tech skills to snap some amazing photos of the shelter!
+      You attach a lens and set the white-balance perfectly for this environment.
+      $call SFX(PhotoSnap)
       $call GiveSnippet(GreatShelterPhoto)
 $elseif StatCheck (Tech, 3)
       You use your modest tech skills to get some decent photos, though the orange light of the gym isn't helping.
+      $call SFX(PhotoSnap)
       $call GiveSnippet(BadLightingShelterPhoto)
 $else 
       Uh oh. There's something wrong with your camera... everything's coming out blurry! 
       Unfortuately, your only tech skill (turn it off and on again) doesn't come through this time. 
+      $call SFX(PhotoSnap)
       $call GiveSnippet(BlurryShelterPhoto)
 $endif
 
@@ -1471,10 +1474,12 @@ $choice GoToSeniorCitizenApartments; Decide what to do next.
 :: TakePhotosOfTheApartmentBuildingExterior
 $if StatCheck (Tech, 5)
       You ask permission from the people nearby, and then snap some photos of the building.
+      $call SFX(PhotoSnap)
       Thanks to your newfound tech skills, the photos come out amazing!
       $call GiveSnippet(GreatApartmentExteriorPhoto)
 $else 
-      You ask permission from the people nearby, and then snap some pictures of the building. 
+      You ask permission from the people nearby, and then snap some pictures of the building.
+      $call SFX(PhotoSnap) 
       You're still not the most tech-savvy reporter in the world--the details come out a little blurry. 
       $call GiveSnippet(GoodApartmentExteriorPhoto)
 $endif 

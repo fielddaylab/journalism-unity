@@ -517,10 +517,12 @@ $choice GoToSandbaggingStation; Decide what to do next
 $if StatCheck(Trust, 5)
 {layout Left}
 To your surprise, everyone is happy to let you snap a photo of them working!
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatFillingStationPhoto)
 $else 
 Seems like some of these folks still don't trust you.
 You manage to snag a great photo... but two of the workers ask for their faces to be blurred out.
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurredFacesFillingStationPhoto)
 $endif 
 
@@ -847,6 +849,7 @@ $HubChoice(TextKhalisaForAdvice, "Text Khalisa for advice", 0, "")
 You ask the people outside if you can take a photo of them...
 But they're definitely not interested. 
 Some pictures of houses will have to do.
+$call SFX(PhotoSnap)
 $call GiveSnippet(BadRoyalHazelPhoto)
 $choice ArriveAtRoyalHazelNeighborhood; Decide what to do next 
 
@@ -1174,6 +1177,7 @@ $choice ThankLiz; Thank her for her time
 {@liz} Happy to help, El. 
 {@liz} Feel free to grab a photo, if you need one for your story.
 {@liz} And stay safe out there! The sky's lookin' pretty ominous. 
+$call SFX(PhotoSnap)
 $call GiveSnippet(GreatRoyalHazelPhoto)
 $choice FinalConvergeNode; Decide what to do next 
 

@@ -695,6 +695,8 @@ $choice DepartmentOfLimnology; Head back to the docks
 // Original Name: Photograph flooded dock
 :: PhotographFloodedDock
 {layout Right}
+$call SFX(PhotoSnap)
+
 You snag a perfect photo: two people standing on the flooded dock.
 
 $call GiveSnippet(LimnologyDocks)
@@ -778,16 +780,19 @@ $HubChoice(HelpWithHerComputer, "{@me} Actually, do you need help with that lapt
 :: TakePhotosOfTheDebris
 {img Anim/2a/PhotoOp.png, Left}
 $if StatCheck(Tech, 3) , StatCheck(Trust, 4)
+
+$call SFX(PhotoSnap)
 You get some amazing photos of Main Street!
+
+$call GiveSnippet(InspiringDowntownRecovery)
 
 The business owners all agree to let you use pictures of them.
 
 {@businessowner}We read your article yesterday. Glad you're here to look out for the town! 
 
-$call GiveSnippet(InspiringDowntownRecovery)
 $endif
 
-$if StatCheck(Tech, 3) , !StatCheck(Trust, 4)
+$if StatCheck(Tech, 3), !StatCheck(Trust, 4)
 You ask the business owners if they're okay with being photographed.  
 
 {@businessowner}Sorry, kid. I don't trust you.  
@@ -808,14 +813,15 @@ Uh oh. Your phone screen is on the fritz and you have no idea how to fix it!
 Maybe it's water damage? Low battery? Some kind of 100-year-flood curse? 
 
 You snap a few random photos and hope for the best.
-
+$call SFX(PhotoSnap)
 $call GiveSnippet(BlurryDowntownRecovery)
 $endif
 
 $choice MainStreetFloodRecovery; Keep looking around
 
 :: TakeAPhotoAnyway
-As soon as the guy turns away, you snap a photo. 
+As soon as the guy turns away, you snap a photo.
+$call SFX(PhotoSnap)
 It looks great! This was DEFINITELY worth it!
 {/img}
 $call GiveSnippet(InspiringDowntownRecovery)
