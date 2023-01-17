@@ -1258,7 +1258,7 @@ $if !Visited(CallDisabilityRightsExpertAtLocalCollege)
 $endif 
       $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
 $if !Visited(MeetWithLocalVet)
-      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
+      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "")
 $endif
 
 

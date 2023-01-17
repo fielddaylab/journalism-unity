@@ -93,6 +93,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
+{/img}
 {bg $BG_MainStreet}
 $call Music($Audio_StoryRain)
 $call StopAmbience()
