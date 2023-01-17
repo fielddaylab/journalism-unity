@@ -27,7 +27,6 @@ One week later... the Mayor has called an Emergency Town Hall Meeting.
 {@mayorbarrysmuckers} Some of you folks are gonna need to evacuate.
 {@mayorbarrysmuckers} But don't worry. We'll get through this together. We're #TwinLakesStrong! 
 {@mayorbarrysmuckers} My team has set up a flood shelter at the high school. 
-{@mayorbarrysmuckers} It's real cozy. You'll love it. 
 {@fredfinkler}  What if the dam bursts?
 {@mayorbarrysmuckers}  Aw, Finkler, quit panicking folks. The dam won't burst.
 {@mayorbarrysmuckers}  ...Probably. 
@@ -38,7 +37,7 @@ One week later... the Mayor has called an Emergency Town Hall Meeting.
 {@dionne} Look for issues that people need to know about. 
 $call ActivateStory()
 {@dionne} And El... I sent over your letter of recommendation.
-{@dionne} If this all works uot, the Smoke City Herald would be lucky to have you. 
+{@dionne} If this all works out, the Smoke City Herald would be lucky to have you. 
 {@me} Thanks, Dionne. 
 
 $choice AcceptStory; Accept Story Assignment
@@ -507,7 +506,7 @@ $choice AskToInterviewTheShelterCoordinator; Ask to interview the woman with the
 {@doug} Sorry, kid. I'm tired and mad and I don't wanna talk about it. 
 
 $choice CheckYourBagForSomethingToOfferHim; Check your bag for something to offer him.
-$choice UseYourSocialConnections; Use your social connections to find some comm"on ground 
+$choice UseYourSocialConnections; Use your social connections to find some common ground 
 $HubChoice(OfferToBuyHimBreakfast, "Offer to buy him breakfast and coffee", 0.25, "")
 
 // Use your social connections to find some common ground
@@ -807,6 +806,7 @@ $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert 
 // Head downtown to talk to the local vet, Fox Sculder
 :: MeetWithLocalVet
 {bg $BG_TownTransitional}
+{layout Right}
 The local vet meets you downtown on his lunch break. 
 You can tell he has his hands full--there are several animals crawling, slithering, and/or climbing on him at any given point.
 {@me} Thank you for meeting with me, Mr. Smolder. 
@@ -831,6 +831,7 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 
 // Can you tell me why the flood shelter doesn't allow pets?
 :: WhyDoesntShelterAllowPets
+{layout Right}
 {@me} Do you know why the shelter doesn't allow pets? 
 {@fox} I know it sounds harsh, but it's a safety issue.
 {@fox} Pets can be dangerous for people with asthma or allergies.
@@ -866,6 +867,7 @@ $choice NextStepAfterVetMeeting; End Interview
 
 // Where should pet-owners go if they need to evacuate? 
 :: WhereShouldPetOwnersGo
+{layout Right}
 {@fox} I wish I knew.
 {@fox} I’ve already taken in more animals than I can handle.
 {@fox} I'd recommend staying with relatives or looking for pet-friendly motels...
@@ -999,6 +1001,7 @@ $choice GoToSeniorCitizenApartments; Decide what to do next.
 
 // Talk to a woman sitting on a bench, a quail snuggled on her lap
 :: TalkToWomanOnBench
+{layout Right}
 {@imojean} Oh, I'd be happy to chat!
 {@imojean} I've been waiting here so long, I'm bored out of my mind!
 
@@ -1021,6 +1024,7 @@ $OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allow
 
 // Where have you been staying in the meantime?
 :: WhereHaveYouBeenStaying
+{layout Right}
 {@imojean} I'm staying with my sister in West Forks. 
 {@imojean} But that city is too big and noisy for me.
 {@imojean} I just want to be home. 

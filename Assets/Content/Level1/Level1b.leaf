@@ -532,7 +532,6 @@ $endif
 {layout Left}
 {@nora} Oh, certainly, Dear. Call me Nora.
 {@nora} What do you need to know?
-
 $choice CanYouTellMeHowTheFloodHasAffectedYou; Can you tell me how the flood has affected you?
 $choice WhatsTheDealWithTheHouseboat; What's the deal with the houseboat?
 

@@ -20,6 +20,7 @@ $ActionChoice(The next morning...)
 {bg $BG_Bedroom}
 $call SetHeaderEnabled(true)
 $call StopAmbience()
+{layout Right}
 It's an eerily quiet morning in Twin Lakes. 
 The internet is buzzing about the flood.
 Your breaking news story has gone viral all across the Midwest!
@@ -155,6 +156,7 @@ $choice AnswerPhone; Answer phone
 // Original Name: Read a book before work
 :: ReadABookBeforeWork
 @tags Bookworm
+{layout Right}
 You sit down with a novel by local author Stephanie Queen. 
 The book is about a tiny lakeside town being overtaken by a terrible flood.
 The fictional town of Dual Ponds feels vaguely familiar...
@@ -230,6 +232,7 @@ $choice GatherFloodGear; Gather flood gear
 
 // Original Name: Assignment: Science Story
 :: AssignmentScienceStory
+{layout Right}
 {@dionne} You want to get in at the Smoke City Herald, right?
 {@me} Well... yeah, someday. 
 {@dionne} Trust me. They love science features like this.
@@ -250,7 +253,7 @@ $choice ScienceStoryMap; ...Got it. Thanks, Dionne.
 
 $if FirstVisit()
     $call SetTimeRemaining(3)
-    You miss your old college newspaper, which had a whole team of science reporters.
+    You miss your college internship, where you worked with a whole team of science reporters.
     Sure, Twin Lakes has amazing cherry pie.... but at what cost?? 
 $endif
 
@@ -412,6 +415,7 @@ $choice ScienceStoryMap; Put away your phone and decide what to do next
 
 // Original Name: Phone Call: Wynne D. Storme @ DNR
 :: PhoneCallWynneD.StormeDNR
+{layout Left}
 {@person}Oh, hey, El! Nice to hear from you again. 
 $if StatCheck(Social, 5)
     {@wynnedstorme} You must be super {stat-name}social{/stat-name}. I've been hearing your name everywhere!
@@ -509,6 +513,7 @@ $endif
 
 // Original Name: Knock on the nearest office door
 :: KnockOnTheNearestOfficeDoor
+{layout Left}
 You find an office with a handwritten sign on the door: <i>Knock for math puns.</i>
 {@dnrexpert} Oh, great, a visitor. I've been cooped up in here all day!
 {@dnrexpert}Wanna hear a joke? 
@@ -518,6 +523,7 @@ $choice NoThanks; No thanks.
 
 // Original Name: Read the bulletin board in the hallway
 :: ReadTheBulletinBoardInTheHallway
+{layout Left}
 {@article} Twin Lakes in danger of catastrophic flooding! Learn more from Sarah McCloud, climate resaercher at the Dept. of Limnology 
 {@flyer} Mayor Smuckers wants to lower the lake levels! Join the discussion at this week's Town Hall meeting. 
 Hmmm. The Department of Limnology... sounds like somewhere you might want to check out. 
@@ -539,6 +545,7 @@ $endif
 
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheGovernorInHallway
+{layout Left}
 As you're leaving, you literally run into a lady who looks vaguely familiar.
 Blue pantsuit, perfect salon-blown hair, a #TwinLakesStrong pin on her lapel... 
 {@me} Whoa... you're the governor!

@@ -21,7 +21,7 @@ You finally get home, exhausted from your first day on the science beat.
 
 Then your Squawker notification chimes.
 
-$OnceChoice(CheckSquawkerMessages, "Check Squawker")
+$OnceChoice (CheckSquawkerMessages, "Check Squawker")
 
 // Original Name: Check Squawker messages
 :: CheckSquawkerMessages
