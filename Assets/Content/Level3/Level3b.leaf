@@ -1083,6 +1083,7 @@ $choice FinalConvergeNode; Thank her and decide what to do next
 // Khalisa shows up!
 :: TeamUpWithKhalisa
 As soon as Khalisa shows up, you feel the vibe shift.
+{img Anim/3b/Khalisa.png, Left}
 The woman stacking up sandbags hurries over to say hello. 
 {@lizfirstmeeting} K! Haven't seen you in forever. The paper still treating you okay? 
 {@khalisa} Oh, yeah. I love it!
@@ -1091,6 +1092,7 @@ The woman stacking up sandbags hurries over to say hello.
 {@liz} Of course. Any friend of yours is welcome here.
 {@khalisa} El, you're the lead on this story. You go ahead.
 {@khalisa} I'll keep looking around and see who else I can talk to.  
+{/img}
 
 $HubChoice(InterviewLiz, "Interview Liz", 0.25, "")
 

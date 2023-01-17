@@ -741,9 +741,11 @@ $choice DecideWhatToDoNext; Plan your next move
 :: GoToCityHall
 Wow. You can't believe your luck! 
 You're halfway to city hall when you see Mayor Smuckers on the street, unwrapping a hot dog from its foil wrapper.
+{img Anim/2b/HotDog.png, Left}
 He fumbles a bit...
 And spills his little tub of ketchup all over.
-{@mayorbarrysmuckers}Cripes! What a day. 
+{@mayorbarrysmuckers} Agh, cripes! What a day. 
+{/img}
 
 $choice HurryToCatchUp; Hurry to catch up with him 
 $HubChoice(RunIntoNearbyShop, "Run into a nearby shop for ketchup packets", 0.25)
@@ -757,14 +759,21 @@ The guy at the register recognizes you.
 {@dinerworker}Hey! You're that hotshot reporter, right?
 {@me}Um... yeah, sort of. 
 {@dinerworker}Take whatever you need!
+{img Anim/2b/Fries.png, Left}
 {@dinerworker}Here's some extra fries, in case ya get hungry. 
-Aww. Free French fries. Looks like Twin Lakes knows the way to your heart.  
+Aww. Free French fries. Looks like Twin Lakes knows the way to your heart.
+...specifically, your coronary arteries.
+$call AdjustStats(Endurance + 1)
+{/img}
+
 $else
 The guy at the register looks miffed.
 {@dinerworker}Who are you again?
 {@me}A reporter. Need to score an interview. Hot dogs are involved. 
 {@dinerworker}Um, sure, I guess. Knock yourself out.
-He lets you take a few handfuls of ketchup packets, but watches suspiciously until you leave. 
+{img Anim/2b/Ketchup.png, Left}
+He lets you take a few handfuls of ketchup packets, but watches suspiciously until you leave.
+{/img}
 $endif
 $choice RushBackToCityHall; Hurry back to the Mayor 
 
@@ -772,14 +781,16 @@ $choice RushBackToCityHall; Hurry back to the Mayor
 :: RushBackToCityHall
 $if StatCheck(Endurance, 4)
     Phew. Thank goodness you're fast. You're just in time!
+    {img Anim/2b/Shoes.png, Left}
     The mayor is climbing the steps to the Town Hall, looking dejectedly at his ketchup-splattered shoes.
     {@me}Excuse me, Mayor Smuckers?
     {@me}I have some leftover napkins from lunch. And ketchup, too.
-    He blinks in surprise.
+    He blinks in surprise, and narrows his eyes.
     {@mayorbarrysmuckers}What's the catch?
     {@me}No catch!
     {@me}Although... that since we're both here, you might have time for an interview...
     {@mayorbarrysmuckers} Welp... couldn't hurt, I guess.  Go ahead, kid. Ask away.
+    {/img}
 
     $if !HasTime(0.25)
         Looks like you have to cut this short. You have just enough time to compile your story!
@@ -817,9 +828,12 @@ $else
     He looks irritated.
     {@mayorbarrysmuckers}You're that new reporter, aren't you?
     {@me}Uh, yes. Sorry about your...
+    {img Anim/2b/Shoes.png, Left}
     You gesture awkwardly at the ketchup-spatter on his dress shoes.
-    {@mayorbarrysmuckers}Welp. Thanks, kid. That's life, I suppose. 
+    {@mayorbarrysmuckers}Welp. No sweat, kid. That's life, I suppose. 
     {@mayorbarrysmuckers}One question. I need to get cleaned up.
+    {/img}
+
     $if !HasTime(0.25)
         You have just enough time to compile your story!
         $choice WetlandsStoryConstruction; Compile your story
@@ -973,7 +987,9 @@ $endif
 //TODO: maybe replace with Resourceful - too busy swatting mosquitos to take a good picture?
 $if StatCheck(Resourceful, 5)
 There are mosquitoes everywhere... good thing you were {stat-name}resourceful{/stat-name} enough to bring bug spray!
-You take a picture of a sandhill crane surrounded by debris. 
+You take a picture of a sandhill crane surrounded by debris.
+$call GiveSnippet(GreatMarshPhoto-Crane)
+
 Birdie looks over your shoulder in amazement. 
 {@birdie}Let me know if you ever decide to sell your work.
 {@birdie}I'd love to hang that photo in my kitchen! 
@@ -981,14 +997,15 @@ Wow. A week ago you didn't even know how to switch your phone to portrait mode.
 Looks like there's something to be said for learning on the job. 
 
 $elseif StatCheck(Tech, 5)
-You take a photo of a sandhill crane in the distance, surrounded by debris. 
+You take a photo of a sandhill crane in the distance, surrounded by debris.
+$call GiveSnippet(GreatMarshPhoto-Crane)
+
 Birdie looks over your shoulder in amazement. 
 {@birdie}Let me know if you ever decide to sell your work.
 {@birdie}I'd love to hang that photo in my kitchen! 
 Wow. A week ago you didn't even know how to switch your phone to portrait mode.
 Looks like there's something to be said for learning on the job. 
 
-$call GiveSnippet(GreatMarshPhoto-Crane)
 
 $elseif StatCheck(Trust, 5)
 {img Anim/2b/Mosquito.png, Left}
@@ -1180,17 +1197,21 @@ $elseif StatCheck(Social, 5)
     $choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
 $else
     You stumble through the mud after the volunteer, who has disappeared around a bend.... 
+    {img Anim/2b/Crane.png, Left}
     And nearly run into a sandhill crane!
     $if StatCheck(Research, 6)
         Luckily, you've done your {stat-name}research{/stat-name}.
         That pointed beak looks terrifying... but the crane only uses it to root through the soil for insects and seeds.    
-        You snap a picture, then head calmly back toward the trailhead. 
+        You snap a picture, then head calmly back toward the trailhead.
+        $call GiveSnippet(GreatMarshPhoto-Crane)
+        $choice MarshMap; Return to trailhead
     $else 
         It really is beautiful. Yellow eyes. Pointed beak. 
         Only slightly reminiscent of a hungry velociraptor. 
     $choice MarshMap; Run for your life 
     $choice SprayItWithPepperSpray; Stand your ground and whip out the pepper spray
     $endif
+    {/img}
 $endif
 
 //Original Name: Spray it with pepper spray
@@ -1255,7 +1276,14 @@ $else
 $endif
 
 ::GoPickUpDonutsAndCoffee
-//TODO: add some actual text here.
+You take a quick detour to a nearby donut place, The Hole Truth.
+You deftly bike around some fallen branches and stranded cars.
+{img Anim/2b/CoffeeDonut.png, Left}
+But it's worth it for those crullers.
+You return triumphant to some ravenous researchers.
+With a mouthful of eclair, she asks:
+{@limexpert} So, what can I help you with?
+{/img}
 
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
