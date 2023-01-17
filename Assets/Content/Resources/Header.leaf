@@ -49,6 +49,7 @@
 
 // Backgrounds
 #const BG_Bedroom = "BG/BedroomMorning.mp4"
+#const BG_BedroomDesk = "BG/Bedroom2.mp4"
 #const BG_HouseExt = "BG/HouseExt.mp4"
 #const BG_OfficeExterior = "BG/GazetteExtRain.mp4"
 #const BG_UpperLakeDam = "BG/UpperLakeDam.mp4"

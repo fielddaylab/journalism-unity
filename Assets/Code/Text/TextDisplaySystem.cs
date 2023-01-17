@@ -13,7 +13,6 @@ using System;
 using Journalism.UI;
 using FDLocalization;
 using UnityEngine.UI;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Journalism {
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {

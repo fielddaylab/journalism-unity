@@ -7,7 +7,7 @@
 
 // Original Name: Science Story 2: Wetlands
 :: ScienceStory2Wetlands
-{bg $BG_Bedroom}
+{bg $BG_BedroomDesk}
 $call SetLocation("Apartment")
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
