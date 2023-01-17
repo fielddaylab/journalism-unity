@@ -131,8 +131,7 @@ $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
 {@dionne}You're too late. Khalisa's got this one.
 {@dionne}And just a tip for you, rookie: try not to insult your sources. 
 
-//TODO: Replace with a better game over message
-$GameOver("You lost the scoop. Better luck next time."")
+$GameOver("You put getting the dunk over getting the scoop... Better luck next time.")
 
 // Original Name: "Tomorrow morning, 8 a.m."
 :: TomorrowMorning8A.M

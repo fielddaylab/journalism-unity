@@ -26,7 +26,7 @@ The mayor admitted that the shelter won’t have enough beds for all evacuees. H
 :: MayorInfoNearTolerableConditions
 @type Fact 
 @quality Good 
-@attr Facts 
+@attr Facts, Color
 According to Mayor Smuckers, an expert was called in to help at the shelter. She called the space "near tolerable."
 
 // Mayor quote - it'll be fine 
@@ -123,7 +123,7 @@ Despite the mayor's #TwinLakesStrong hashtag, some locals wanted to be left alon
 @type Fact 
 @quality Good 
 @attr Facts
-Without an accessible shelter, some people have chosen to stay home and hope for the best. 
+Without an accessible shelter, some people have no choice but to stay home and hope for the best. 
 
 :: CityPlanningIssue
 @type Fact 
@@ -371,7 +371,7 @@ The management company only approved $300 in aid for tenants... not even enough 
 @attr Color 
 //add great photo of apartment exterior 
 
-:: SlightlyBlurryApartmentExteriorPhoto
+:: GoodApartmentExteriorPhoto
 @type Photo 
 @quality Good 
 @attr Color
@@ -544,7 +544,7 @@ Graham Johnson pointed out that some people, like the elderly, can't make it to 
 
 :: RottenCherryQuote
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Color
 Despite all the town's flaws, Graham Johnson plans to stay in Twin Lakes. "Can't let one rotten cherry spoil the bunch!" 
 

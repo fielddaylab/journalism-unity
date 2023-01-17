@@ -1088,7 +1088,7 @@ $choice DNRMap; Look elsewhere in the DNR
 // Original Name: "How is the state helping with flood recovery?"
 :: HowIsTheStateHelpingWithFloodRecovery
 {@governor} I'm glad you asked. I've authorized state agencies to send supplies and financial aid.
-{@governor}We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state.
+{@governor} We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state.
 Wow. Didn't realize this was a campaign speech.   
 $call GiveSnippet(Governor-Impact)
 

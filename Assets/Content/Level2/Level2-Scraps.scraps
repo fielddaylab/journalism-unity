@@ -36,6 +36,12 @@ Mayor Barry Smuckers is pushing to lower the lake levels. “There won’t be an
 @attr Facts, Color
 "I don't have time to plan a tiny town's flood response. But I have complete faith in your local officials!"
 
+:: Governor-Impact
+@type Quote
+@quality Good 
+@attr Useful, Color
+"We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state."
+
 // Original Name: Flood probability
 :: FloodProbability
 @type Graph

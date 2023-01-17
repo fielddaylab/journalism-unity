@@ -291,7 +291,6 @@ $choice TakeSomePhotos; Take a photo of the stranded Cherrymobile
 {/img}
 {layout Right}
 Wow... it's awful out here.
-// {img Anim/enml-stuckcar.png}
 Pastries are floating down the street, and cars are stranded...
 {img Anim/1a/CherryMobile.png}
 Including the famous Twin Lakes Cherrymobile!
@@ -613,10 +612,12 @@ $if StatCheck(Social, 2)
     {@me} Can you tell me more about the flood?
     {@townhallcontact} Well, so far we know the situation is worst near the Twin Lakes Dam. 
     {@townhallcontact} Volunteers are stacking sandbags, while emergency workers deal with rescues and evacuations.
+    
+    $call GiveSnippet(CityHallShock)
+
     {@townhallcontact} I wish I could say nobody saw this coming, but Twin Lakes has been on the verge of a flood like this for years.
 
     $call GiveSnippet(FloodBackground)
-    $call GiveSnippet(CityHallShock)
 $else
     {layout Left}
     Your Town Hall contact doesn't sound thrilled to hear from you.

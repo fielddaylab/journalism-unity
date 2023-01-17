@@ -160,7 +160,7 @@ $choice DontWantToLeaveTheirHomes; What would you say to people who don't want t
 {@mayorbarrysmuckers} She was very happy with the space we had available! Called the conditions "near tolerable."
 {@mayorbarrysmuckers}  Pretty impressive, huh?
 {@me} Um. Sure, Mr. Mayor.
-$call GiveSnippet(MayorQuoteNearTolerableConditions)
+$call GiveSnippet(MayorInfoNearTolerableConditions)
 
 $choice DontWantToLeaveTheirHomes; What would you say to people who don't want to leave their homes?
 $choice WhyWasntTheCityMorePrepared; Why wasn't Twin Lakes better prepared for this? 

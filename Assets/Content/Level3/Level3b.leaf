@@ -176,14 +176,9 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 :: InterviewMayor
 {@me} Mr. Mayor, since we're both here...
 {@me} Can I ask you a few questions?
-{@mayorbarrysmuckers} Oh, sure. Why the heck not?
+{@mayorbarrysmuckers} Ugh, sure. Why the heck not?
 {@mayorbarrysmuckers} I'm sure you'd just end up tracking me down anyway.
-
-$choice WhatAreYouDoingMayor; What are you doing to make sure that everyone is prepared for the storm? 
-// $choice IsItTrueMayor; Is it true that some people haven't been able to sandbag their properties?  // <- This choice has no corresponding node
-
-// What are you doing
-:: WhatAreYouDoingMayor
+{@me} What are you doing to make sure that everyone is prepared for the storm?
 {@mayorbarrysmuckers} A whole lot of things, as a matter of fact.
 {@mayorbarrysmuckers} You can see my full response on the city website. 
 {@mayorbarrysmuckers} See what I mean? If you were a real reporter, wouldn't you have already checked there?
