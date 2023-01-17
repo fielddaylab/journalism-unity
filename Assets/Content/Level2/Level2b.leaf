@@ -1012,6 +1012,7 @@ Looks like there's something to be said for learning on the job.
 
 $elseif StatCheck(Tech, 5)
 You take a photo of a sandhill crane in the distance, surrounded by debris.
+
 $call SFX(PhotoSnap)
 
 $call GiveSnippet(GreatMarshPhoto-Crane)
