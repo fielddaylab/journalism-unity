@@ -71,7 +71,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "")
 {@mayorbarrysmuckers}Oh, sorry, El... I'm pretty busy here.
 {@me} Please? Just a few questions? 
 $if StatCheck(Trust, 5)
-      {@mayorbarrysmuckers} Well.... I gotta admit, you have proven yourself to be {statname}trustworthy.{/statname}
+      {@mayorbarrysmuckers} Well.... I gotta admit, you have proven yourself to be {stat-name}trustworthy.{/stat-name}
       {@mayorbarrysmuckers} I guess I could spare a minute or two.
       $if !HasTime(0.25)
             Looks like you have to cut this short. You have just enough time to compile your story!
@@ -80,7 +80,7 @@ $if StatCheck(Trust, 5)
       $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
 $elseif StatCheck (Social, 5)
       {@mayorbarrysmuckers} Well... I have to admit, your name's been all over town lately.
-      {@mayorbarrysmuckers} I guess I could spare a minute or two for a {statname}social{/statname} butterfly like you.
+      {@mayorbarrysmuckers} I guess I could spare a minute or two for a {stat-name}social{/stat-name} butterfly like you.
       $if !HasTime(0.25)
             Looks like you have to cut this short. You have just enough time to compile your story!
             $choice StoryConstruction3a; Compile your story
@@ -585,7 +585,7 @@ $endif
 $else
 You try to strike up a conversation and mention some people you've met.
 The man clearly isn't in the mood.
-It seems like you don't quite have the {statname}social{/statname} prowess to cheer him up.
+It seems like you don't quite have the {stat-name}social{/stat-name} prowess to cheer him up.
 $choice FloodShelterChoices; Decide what to do next. 
 $endif
 
@@ -961,7 +961,7 @@ $OnceChoice(WhyNoPetArea, "Why doesn't the current shelter have those things?")
 :: WhyNoPetArea
 {@fox} Well... I'm not sure if I'm allowed to say...
 $if StatCheck(Trust, 5)
-{@fox} But you seem reputable, so I guess I can {statname}trust{/statname} you.
+{@fox} But you seem reputable, so I guess I can {stat-name}trust{/stat-name} you.
 {@fox} I asked the City Council for funding a few months ago.
 {@fox} That was after the whole Polar Ultracyclone scare.
 (Those winter storms keep getting more sensational, huh...)
@@ -1053,7 +1053,7 @@ $if TimeRemaining() > 0.25
       $HubChoice(TakePhotosOfTheApartmentBuildingExterior, "Take photos of the scene", 0.25, "")
       $HubChoice(TryToInterviewElectricalWorker, "Ask electrical worker why people aren't allowed back inside", 0.25, "")
 $else
-      $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+      $choice StoryConstruction3a; Time to assemble the science story...
 $endif
 
 
@@ -1145,7 +1145,7 @@ $choice GoToSeniorCitizenApartments; Decide what to do next.
 {@electrician} Excuse me? It sounds like you're blaming me, kid.
 {@me} Oh, I didn't mean--
 {@electrician} Thanks for the granola and everything, but I better get back to work.
-Oops. Maybe you should've brushed up on your {statname}social{/statname} skills. 
+Oops. Maybe you should've brushed up on your {stat-name}social{/stat-name} skills. 
 $choice GoToSeniorCitizenApartments; Decide what to do next. 
 
 // Talk to a woman sitting on a bench, a quail snuggled on her lap
@@ -1211,7 +1211,7 @@ $if TimeRemaining() > 0.25
             $HubChoice(OfferToTakeHerToTheStore, "Offer to take the lady to the fancy grocery store and buy some seeds", 0.50, "")
       $endif
 $else
-      $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+      $choice StoryConstruction3a; Time to assemble the science story...
 $endif
 {/img}
 $choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
@@ -1480,7 +1480,7 @@ $else
       The woman on the other end of the line sounds a little suspicious. 
       {@summer} You're El Benjamin, right?
       {@summer} I've heard mixed reviews...
-      {@summer} I'm not so sure I can {statname} trust {/statname} your journalistic integrity.
+      {@summer} I'm not so sure I can {stat-name} trust {/stat-name} your journalistic integrity.
       $choice ExplainWhyThisInterviewIsSoImportant; Explain why this interview is so important for the city.
       $choice TellHerYouHaveTonsOfDisabledFriends; Tell her you have tons of disabled friends. 
 $endif
