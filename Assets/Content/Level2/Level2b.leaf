@@ -152,6 +152,7 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 :: DoSomeResearchOnLocalWetlands
 {clear-text}
 {layout Right}
+{img Anim/2b/TwinLakesLibrary.png, Left}
 You hop on your bike and pedal to the Twin Lakes library.
 
 $call SetLocation("Library")
@@ -183,15 +184,13 @@ $else
     {@librarian}Oh, hey, El! Need some help?
     {@me}Oh... yeah, that would be great!
     {@librarian} Here. Some articles on all the wetlands this town has paved over. 
-    {img Anim/2b/TwinLakesLibrary.png, Left}
     {@librarian}Sugar Marsh used to be right where we're standing.
     {@librarian}The library is so important for our community...
     {@librarian}But I wish they could've built it somewhere else. 
-    {/img}
     $call GiveSnippet(LibrarianQuote)
     $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $endif
-
+{/img}
 $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
 
 // Original Name: Gather supplies
