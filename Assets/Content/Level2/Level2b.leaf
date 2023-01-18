@@ -155,7 +155,7 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 You hop on your bike and pedal to the Twin Lakes library.
 
 $call SetLocation("Library")
-{bg $BG_MainStreet}
+{bg $BG_TownTransitional}
 $call Music($Audio_StoryRain)
 $call StopAmbience()
 $call StopRain()
@@ -1147,27 +1147,25 @@ $endif
 :: CallTheSparkProject
 
 $if Visited(TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands)
+    $if StatCheck(Tech, 3)
+        You remember a method to set yourself as a <i>private caller</i> and even install a subtle voice changer. 
+        Hopefully now they won't recognize you as that mudraking journalist from earlier.
+        {@spark}Hi! How can I help you? 
 
-$if StatCheck(Tech, 3)
-You remember a method to set yourself as a <i>private caller</i> and even install a subtle voice changer. 
-Hopefully now they won't recognize you as that mudraking journalist from earlier.
-{@spark}Hi! How can I help you? 
+        $choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on. I wanted to get your perspective."
+    $else
+        You give the Spark Project another call. 
+        This time it goes straight to voicemail. Figures.
 
-$choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on. I wanted to get your perspective."
+        $choice WetlandsStoryConstruction; Wetlands Story Construction
+    $endif
 $else
-You give the Spark Project another call. 
-This time it goes straight to voicemail. Figures.
+    You dig up the number of the Spark Project. 
+    A cheerful-sounding man answers on the first ring. 
+    {@spark}How can I help you? 
 
-$choice WetlandsStoryConstruction; Wetlands Story Construction
-$endif
-
-$else
-You dig up the number of the Spark Project. 
-A cheerful-sounding man answers on the first ring. 
-{@spark}How can I help you? 
-
-$choice TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands; "I'm writing a story about how business expansion is destroying the wetlands."
-$choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on, and I wanted to get your perspective.""
+    $choice TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands; "I'm writing a story about how business expansion is destroying the wetlands."
+    $choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on, and I wanted to get your perspective.""
 $endif
 
 // Original Name: Tell them their name came up in a story and you want to get their perspective.
@@ -1175,7 +1173,7 @@ $endif
 {@spark}Well, everyone is busy at a meeting, but I can chat with you!
 {@spark} I'm a local business owner. I volunteer with the Spark Project. 
 
-$if !HasTime(0.25)
+$if !HasTime(0.5)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
 $endif

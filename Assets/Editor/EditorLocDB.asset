@@ -433,7 +433,7 @@ MonoBehaviour:
       Content: Historical Marker
       Exposed: 0
     - Id: Char.Wetlandvolunteer1
-      Content: Blaise Orange, Wetland Volunteer
+      Content: Seth McPhee, Wetland Volunteer
       Exposed: 0
     - Id: Char.Wetlandvolunteer2
       Content: Lilly Gardner, Wetland Volunteer
@@ -454,7 +454,7 @@ MonoBehaviour:
       Content: Diner Worker
       Exposed: 0
     - Id: Char.Townhallworker
-      Content: Town Hall  Worker
+      Content: Town Hall Worker
       Exposed: 0
     - Id: Char.Wetlandvolunteer3
       Content: Wetland Volunteer
@@ -484,7 +484,7 @@ MonoBehaviour:
       Content: Shelter Coordinator
       Exposed: 0
     - Id: Char.Fox
-      Content: Fox Smolder, Local Vet
+      Content: Fox Sculder, Local Vet
       Exposed: 0
     - Id: Char.Electrician
       Content: Electrician
@@ -532,7 +532,7 @@ MonoBehaviour:
       Content: Perplexed-looking man
       Exposed: 0
     - Id: Char.Couchmover
-      Content: Man (looking annoyed now)
+      Content: Annoyed-looking man
       Exposed: 0
     - Id: Char.Localwoman
       Content: Local woman
