@@ -107,7 +107,7 @@ $choice ReadYourEditorsMessage; Read messages
 // Original Name: Agree to meet with her in the morning.
 :: AgreeToMeetWithHerInTheMorning
 {@birdie}Wonderful! Meet me at the Snakebite Trailhead.
-{img Anim/2b/Snake.png, Left}
+{img Anim/2b/SnakebiteTrail.png, Left}
 {@me}Um... I don't really feel good about the name "Snakebite Trail"....
 {@birdie}Oh, don't worry, dear. There are only two venomous species around here.
 Oh. How comforting. 
@@ -181,12 +181,13 @@ $elseif StatCheck(Tech, 4)
 $else 
     The librarian notices you looking helpless.
     {@librarian}Oh, hey, El! Need some help?
-     {@me}Oh... yeah, that would be great!
-    {@librarian} Here. Some articles on all the wetlands this town has paved over.  
+    {@me}Oh... yeah, that would be great!
+    {@librarian} Here. Some articles on all the wetlands this town has paved over. 
+    {img Anim/2b/TwinLakesLibrary.png, Left}
     {@librarian}Sugar Marsh used to be right where we're standing.
     {@librarian}The library is so important for our community...
     {@librarian}But I wish they could've built it somewhere else. 
-
+    {/img}
     $call GiveSnippet(LibrarianQuote)
     $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $endif
@@ -284,19 +285,19 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 
 // Original Name: "How is that related to the flooding?"
 :: HowIsThatRelatedToTheFlooding
-{@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
 {img Anim/2b/Sponge.png, Left}
+{@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
 {@birdie} But 90% of our original wetlands are gone!
+{/img}
 {@player} Wow... 90%? That seems like a lot. 
 {@player} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
+{img Anim/2b/SaveTheWetlands.png, Left}
 {@birdie} The point is, we need to save our wetlands before it's too late. 
-{/img}
-
 $call GiveSnippet(WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
 You'll need an expert to verify the numbers. 
-
+{/img}
 $OnceChoice(WhatDoYouMeanByWetlands, "Can you tell me what you mean by \"wetlands?\"")
 $OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
 $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands around here?")
@@ -453,11 +454,13 @@ $HubChoice(AskForAnInterview, "Ask the leader for an interview", 0.25)
 :: SitAndListen
 {@sparkleader}Tourists are being scared away by the flood.
 {@sparkleader}We need to help business owners get through this!
-People call out ideas: 
+People call out ideas:
+{img Anim/2b/Clipboard.png, Left}
 a Shop Local campaign!
 Free hotel stays!
 Volunteers to help flooded businesses with repairs!
 Hmm. So far, these people don't seem <i>totally</i> awful...
+{/img}
 
 $call AdjustStats(Research + 1)
 
@@ -522,8 +525,10 @@ Instantly, her smile fades.
 {@nancy}So we're the bad guys in this little story of yours?
 {@me}No, that's not what I--
 {@nancy}Sugar Marsh was paved over before I was even born.
+{img Anim/2b/TwinLakesLibrary.png, Left}
 {@nancy}It's now a library, a pool, and a community center.
 {@nancy}Or don't you want the children to have somewhere to play? 
+{/img}
 
 $call GiveSnippet (SugarMarshReplacedWithLibrary)
 
@@ -569,9 +574,11 @@ $endif
 //Original Name: What would you say to people who think wetlands are more important than a community center?
 :: WhatWouldYouSayToPeopleWhoThinkWetlandsAreMoreImportant
 She shrugs.
-{@nancy}I respect their opinion. 
+{@nancy}I respect their opinion.
+{img Anim/2b/SwimmingFloat.png, Left}
 {@nancy}But they should realize that the pool they love swimming in and the shops they love to visit are all on old wetlands.
 {@nancy}Our town has grown by 30% in the last ten years. 
+{/img}
 
 $call GiveSnippet(NewDevelopmentPutsTwinLakesOnTheMap)
 
@@ -1337,13 +1344,16 @@ $endif
 :: AskWhyHesOutHereVolunteering
 {@wetlandvolunteer1}The storm brought tons of urban runoff.
 {@me}Like what?
+{img Anim/2b/Litter.png, Left}
 {@wetlandvolunteer1}Lawn chemicals, trash, and debris, mostly. I'm out here cleaning what I can. 
 {@wetlandvolunteer1}There used to be another marsh on the west side of town.
+{/img}
+{img Anim/2b/Golf.png, Left}
 {@wetlandvolunteer1}It's a golf course now. 28 holes, and not a speck of wildlife.
 
 $call GiveSnippet(MarshLoss)
 $call GiveSnippet(MarshPollution)
-
+{/img}
 $choice MarshMap; Thank him for his time 
 
 // Original Name: Ask her about the wetlands
