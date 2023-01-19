@@ -566,6 +566,7 @@ $choice FloodShelterChoices; Decide what to do next
 
 // Talk to the sad-looking man standing with his dog
 :: TalkToManWithDog
+{layout Center}
 {clear-text}
 {@me} Excuse me. I'm a reporter with the Twin Lakes Gazette. 
 {@me} Are you... okay? 
