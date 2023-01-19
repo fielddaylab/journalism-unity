@@ -9,7 +9,8 @@
 :: Level3Story2
 {bg $BG_HouseExtNoRain}
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
-Email Notification:
+{layout Right}
+{anim rumble}  Email Notification
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
 {@email} Phone interview, 2 P.M. today. 
@@ -19,16 +20,19 @@ Email Notification:
 
 $call StopAmbience()
 $call Rain($Audio_RainOutsideChill)
+{layout Right}
 Its started to rain.
 It's been sprinkling on and off...
-Must be the second storm everyone in Twin Lakes has been talking about. 
+Must be the second storm. Everyone in Twin Lakes is talking about it. 
 But the real downpour is expected to start tomorrow. 
 You wake up to a text from Khalisa. 
 
 {@khalisaS} Hey El! Want to meet up at Bookish before work?
 {@me} Yes!! What time?
+{img Anim/3a/CoffeeToGo.png, Left}
 {@khalisa} One hour. I'll pick up coffee on the way.
 You have time to do one thing before meeting up with Khalisa!  
+{/img}
 
 $choice HaveTeaWithYourUpstairsNeighbor; Have tea with your upstairs neighbor, Jeanie
 $choice GoForAJogAtCherryCreekMarsh; Go for a jog at Cherry Creek Marsh
@@ -37,11 +41,12 @@ $choice GetOnlineAndFixTheGazetteWebsite; Fix the latest glitch on the Gazette's
 
 // Have breakfast tea with your upstars neighbor, Jeannie
 :: HaveTeaWithYourUpstairsNeighbor
-{clear-text}
+{layout Right}
 Jeanie and her cat, Patches, are thrilled to see you.
 {img Anim/3b/Tea.png, Left}
 You sip some tea and scratch Patches behind the ears.
 {@me} Ready for the storm tomorrow, Jeanie?
+{/img}
 {@jeanie} I think so. And it's all thanks to your <i>purrls</i> of wisdom
 
 $call AdjustStats(Social + 2)
@@ -55,12 +60,12 @@ $call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_RuralFrogs)
 $call Rain($Audio_CalmStreamRiverFlow)
 {clear-text}
+{layout Right}
 {img Anim/3b/RunningShoes.png, Left}
 You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.
-{@Birdie} Be careful out there, El! 
-
 {/img}
+{@Birdie} Be careful out there, El! 
 {@Birdie} The birds are riled up today. Something strange is brewing.
 {img Anim/3b/DarkCloud.png, Left}
 {@me} Don't worry, Birdie. The storm's not supposed to hit until tomorrow!
@@ -85,6 +90,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 // Fix the latest glitch on the Gazette's website 
 :: GetOnlineAndFixTheGazetteWebsite
 {clear-text}
+{layout Right}
 Ben from copyediting was poking around on the website...
 {img Anim/3b/pizza.png, Left}
 Which means the entire screen is now taken up by an enormous ad for cherry-argula pizza.
@@ -134,8 +140,8 @@ $choice PullUpWeatherReport; Pull up the weather report
 {img Anim/3b/ThunderstormCloud.png, Left}
 {@weatheralert}<color="red">EMERGENCY STORM WARNING!</color> A severe thunderstorm warning is now in effect. 8-10 inches of rain expected in the next twelve hours.</color>
 {@weatheralert}<color="red">FLASH FLOOD WARNING!</color> Sandbag properties. Stay off roads. High risk zones, evacuate now.</color>
-Oh no. The rain is coming early!
 {/img}
+Oh no. The rain is coming early!
 $choice CallYourEditor; Call your editor  
 
 //Text your editor back 
@@ -149,6 +155,7 @@ $call StopRain()
 Dionne picks up on the first ring.
 {@me} Just saw the news. What do you need me to do?
 $call ActivateStory()
+{img Anim/1b/Sandbag.png, Left}
 {@dionne} We got a tip that some of the south side neighborhoods haven't been able to access sandbags in time. 
 {@dionne} If that's true, people need to know about it.
 {@dionne} Start at one of the sandbag filling stations, and see where that takes you.  
