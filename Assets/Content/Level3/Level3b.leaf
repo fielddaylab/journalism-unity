@@ -12,7 +12,7 @@ $call Music($Audio_RainyDayInCherryTownWakingDay1)
 Email Notification:
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
-{@email} Phone interiew, 2 P.M. today. 
+{@email} Phone interview, 2 P.M. today. 
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
 {clear-text}
 {bg $BG_HouseExt}
@@ -24,7 +24,7 @@ It's been sprinkling on and off...
 But the real downpour is expected to start tomorrow. 
 You wake up to a text from Khalisa. 
 
-{@khalisa} Hey El! Want to meet up at Bookish before work?
+{@khalisaS} Hey El! Want to meet up at Bookish before work?
 {@me} Yes!! What time?
 {@khalisa} One hour. I'll pick up coffee on the way.
 You have time to do one thing before meeting up with Khalisa!  
