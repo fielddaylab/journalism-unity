@@ -141,19 +141,19 @@ A local man urged people to speak up about the need for an accessible shelter. F
 @type Photo 
 @quality Great  
 @attr Color 
-//add great shelter photo here 
+@image Photos/floodshelter.jpg
 
 :: BadLightingShelterPhoto
 @type Photo  
 @quality Good 
 @attr Color 
-//add decent shelter photo with bad lighting here  
+@image Photos/floodshelter-DARK.jpg
 
 :: BlurryShelterPhoto
 @type Photo 
 @quality Bad 
 @attr Color 
-//add bad, blurry shelter photo here 
+@image Photos/floodshelter-BAD.jpg
 
 :: KickedOutOfApartments
 @type Fact  
@@ -369,14 +369,13 @@ The management company only approved $300 in aid for tenants... not even enough 
 @type Photo  
 @quality Great 
 @attr Color 
-//add great photo of apartment exterior 
+@image Photo/strudel_apts.jpg
 
 :: GoodApartmentExteriorPhoto
 @type Photo 
 @quality Good 
 @attr Color
-//add slightly blurry photo of apartment exterior 
-
+@image Photo/strudel_apts-BAD.jpg
 
 :: SchoolIsntAccessibleTownIsShrinking
 @type Quote 
@@ -516,13 +515,13 @@ According to the DNR, lower-income households struggle to recover financially fr
 @type Photo 
 @quality Great 
 @attr Color
-//Insert great filling station photo, with people pictured
+@image Photo/sandbagfilling.jpg
 
 :: BlurredFacesFillingStationPhoto
 @type Photo 
 @quality Bad 
 @attr Color
-//Insert filling station photo with faces blurred out 
+@image Photo/sandbagfilling-blurred.jpg
 
 :: QuoteAboutGrandmaInRoyalHazel
 @type Quote 
@@ -606,13 +605,13 @@ The historic neighborhoods looked tidier than most of Twin Lakes, with debris al
 @type Photo 
 @quality Bad 
 @attr Color 
-//Insert bad photo of low-income neighborhood here, with people cropped out or blurred 
+@image Photo/lowincome-blurred.jpg
 
 :: GreatRoyalHazelPhoto 
 @type Photo 
 @quality Great  
 @attr Color 
-//Insert good photo of low-income neighborhood here 
+@image Photo/lowincome.jpg
 
 :: RidesBusAndCantAccessSandbags
 @type Quote 
