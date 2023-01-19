@@ -372,9 +372,11 @@ You have to admit, Twin Lakes's bagel scene is sorely lacking.
 But this doesn't seem like the best time to bring this up.
 {/img}
 {@me}Do you know where I can find the Spark Project?
-{@birdie}They have a meeting this morning, in the old opera house. 
+{@birdie}They have a meeting this morning, in the old opera house.
+{img Anim/2b/SaveTheWetlands.png, Left}
 {@birdie}I wish I could go protest...
 {@birdie}But there's so much work to do here.  
+{/img}
 
 $call GiveSnippet(AwfulSparkProject)
 $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor with an update")
@@ -1076,7 +1078,7 @@ $if StatCheck(Trust, 4)
 The volunteer seems to trust you. 
 She tells you about her volunteer work: replanting native species.
 
-{@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
+{@wetlandvolunteer2} My kids love exploring here. It's part of what makes Twin Lakes so magical. 
 {@me}It is pretty nice.... though I could probably do without the snakes. 
 {img Anim/2b/Snake.png, Left}
 {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
@@ -1206,23 +1208,25 @@ $goto STORYEVALUATION
 
 // Original Name: Join him on the hike.
 :: JoinHimOnTheHike
+{img Anim/2b/MuddyBoots.png, Left}
 You follow him down the narrow, muddy trail. 
 
 $if StatCheck(Endurance, 5)
     He's a brisk walker, but thanks to your {stat-name}endurance{/stat-name}, you keep up easily. 
-
+    {/img}
     $OnceChoice(AskWhyHesOutHereVolunteering, "Ask why he's out here volunteering")
 $elseif StatCheck(Resourceful, 5)
     Your hiking boots and bug spray give you the edge you need to keep up!
-
+    {/img}
     $choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
 $elseif StatCheck(Social, 5)
     You can barely keep up, but your {stat-name}social{/stat-name} skills come to your rescue.  
     He slows down, enjoying the conversation and patiently showing you how to navigate the muck. 
-
+    {/img}
     $choice AskWhyHesOutHereVolunteering; Ask why he's out here volunteering
 $else
-    You stumble through the mud after the volunteer, who has disappeared around a bend.... 
+    You stumble through the mud after the volunteer, who has disappeared around a bend...
+    {/img}
     {img Anim/2b/Crane.png, Left}
     And nearly run into a sandhill crane!
     $if StatCheck(Research, 6)

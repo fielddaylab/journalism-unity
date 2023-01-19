@@ -955,11 +955,13 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 {@fox} Pets can be dangerous for people with asthma or allergies.
 {@fox} Plus, animals tend to get agitated during--
 {@fox} Hey! Rupert!!
+{img Anim/3a/VetsPets.png, Left}
 They scold a lizard wearing a leg cast and gently bop its nose.
 {@fox} No biting Peppy's ear. We discussed this!
 {@fox} Um. Agitated during disasters.
 $call GiveSnippet(WhyArentPetsAllowedQuote)
 
+{/img}
 $OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
 $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
 
