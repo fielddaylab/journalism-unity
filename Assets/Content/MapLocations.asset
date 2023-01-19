@@ -97,3 +97,38 @@ MonoBehaviour:
       m_Source: Map.Library
       m_HashValue: 1341187192
     NormalizedCoords: {x: 0.066238046, y: 0.13791665}
+  - Id:
+      m_HashValue: 2283516658
+    Name: Shelter
+    NameId:
+      m_Source: Map.Shelter
+      m_HashValue: 1785091914
+    NormalizedCoords: {x: -0.2309947, y: 0.23791666}
+  - Id:
+      m_HashValue: 4041566169
+    Name: SeniorApts
+    NameId:
+      m_Source: Map.SeniorApts
+      m_HashValue: 943478801
+    NormalizedCoords: {x: -0.092230186, y: -0.05625}
+  - Id:
+      m_HashValue: 498560089
+    Name: Bookstore
+    NameId:
+      m_Source: Map.Bookstore
+      m_HashValue: 528144497
+    NormalizedCoords: {x: -0.037730534, y: 0.08958333}
+  - Id:
+      m_HashValue: 3517520812
+    Name: FillingStation
+    NameId:
+      m_Source: Map.FillingStation
+      m_HashValue: 1376021748
+    NormalizedCoords: {x: -0.15092213, y: 0.03125}
+  - Id:
+      m_HashValue: 1731990618
+    Name: RoyalHazel
+    NameId:
+      m_Source: Map.RoyalHazel
+      m_HashValue: 1540350786
+    NormalizedCoords: {x: 0.026830602, y: -0.35354167}

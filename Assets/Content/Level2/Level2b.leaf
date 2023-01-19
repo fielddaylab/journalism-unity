@@ -223,7 +223,7 @@ $LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Cr
 :: MeetSomeOtherReportersForCoffee
 @tags Social, Trust
 
-$call SetLocation(Downtown)
+$call SetLocation("Downtown")
 
 {bg $BG_FirstStDowntownCleanup}
 $call Music($Audio_StoryRain)
@@ -435,7 +435,7 @@ $if HasTime(0.5)
     $HubChoice(TalkToVolunteerHeadingOutOntoTheTrail, "Talk to a volunteer heading out onto the trail", 0.5)
     $HubChoice(TalkToVolunteerWithBagFullOfSeedPackets, "Talk to a volunteer with bag full of seed packets", 0.25)
     $HubChoice(ReturnToTheDepartmentOfLimnology, "Visit the Department of Limnology", 0.5, "Limnology")
-    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting", 0.5, "Opera House")
+    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting", 0.5, "OperaHouse")
 $else
     $goto WetlandsStoryConstruction
 $endif
