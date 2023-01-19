@@ -1541,15 +1541,14 @@ $if StoryHasPicture() == false
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
-    $endif
-$endif
-$if StoryIsFull() == false
-    $if StoryHasPicture() == false
+    $else
         // player has not filled all slots AND is missing picture
         {@dionne}   And you haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
-    $else
+    $endif
+$else
+    $if StoryIsFull() == false
         // player has not filled all slots
         {@dionne}   I see you have some blank spots here.
         {@dionne}   Make sure to use all the space that's given to you.
@@ -1557,7 +1556,6 @@ $if StoryIsFull() == false
         {@dionne}   Other than that...
     $endif
 $endif
-
 
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment

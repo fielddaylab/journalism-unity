@@ -1324,20 +1324,22 @@ $if StoryHasPicture() == false
     {@dionne}   Hmmm. No picture. 
     {@dionne}   This will bring down your story's impact, El. 
     {@dionne}   Most readers need visuals to grab their attention. 
-    {@dionne}   Other than that...
+    {@me} Yeah, but... How am I supposed to get a good picture with such limited time??
+    {@dionne} We have to operate on a shoestring here.
+    {@dionne} I know we're not your fancy big-town paper, but...
+    {@dionne} We all have to make do with the limited resources.
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
-    $endif
-$endif
-$if StoryIsFull() == false
-    $if StoryHasPicture() == false
+    $else //NO picture, NOT full
         // player has not filled all slots AND is missing picture
         {@dionne}   And you haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
-    $else
-        // player has not filled all slots
+    $endif
+$else //if StoryHasPicture() == true
+    $if StoryIsFull() == false
+        // YES picture, NOT full
         {@dionne}   I see you have some blank spots here.
         {@dionne}   Make sure to use all the space that's given to you.
         {@dionne}   This is going to make people think it's a lower-quality story.

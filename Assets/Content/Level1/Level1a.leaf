@@ -764,26 +764,31 @@ $call BeginFeedback()
 {story-stats}
 $if StoryHasPicture() == false
     {@dionne}   I thought I told you to include a picture, Ms. Benjamin. 
-    {@person}   This will bring down your overall story score. 
-    {@person}   Photos and other visuals help us hook readers. Don't forget next time. 
-    {@person}   Other than that...
+    {@dionne}   This will bring down your overall story score. 
+    {@dionne}   Photos and other visuals help us hook readers. Don't forget next time.
+    {@me} I didn't forget! 
+    {@me} I just didn't have time to get a good one...
+    {@dionne} Well, breaking news goes that way sometimes.
+    {@dionne} We're always on a deadline here, so just try to get a bit of everything.
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
-    $endif
-$endif
-$if StoryIsFull() == false
-    $if StoryHasPicture() == false
+    $else //if StoryIsFull() == false
         // player has not filled all slots AND is missing picture
         {@dionne}   And you haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
-    $else
-        // player has not filled all slots
+    $endif
+$else //if StoryHasPicture() == true
+    $if StoryIsFull() == false
+        // YES picture, NOT full
         {@dionne}   I see you have some blank spots here.
         {@dionne}   Make sure to use all the space that's given to you.
         {@dionne}   This is going to make people think it's a lower-quality story.
-        {@dionne}   Other than that...
+        {@me} I tried, I just didn't have time to get enough good info!
+        {@dionne} Well, breaking news goes that way sometimes.
+        {@dionne} We're always on a deadline here, so just try to get a bit of everything.
+        {@dionne} Other than that...
     $endif
 $endif
 
@@ -812,7 +817,7 @@ $if StoryScore() == "good" //3+ net quality
     $if StoryAlignment() >= 0.5
         {@person}   Stellar work, El! I can tell you put your heart into this.
         {@person}   Solid story construction and lots of useful info.
-        {@person}   Maybe you've got a Pulitzer Prize in your future.
+        {@person}   Maybe you've got a Pulitzer in your future!
     $elseif StoryAlignment() >= 0.3
         {@person}   Nice work, Rookie! This info is top-notch quality.
         {@person}   Admittedly, we could've used a little more useful info... 
