@@ -574,6 +574,7 @@ $choice FloodShelterChoices; Decide what to do next
 
 // Talk to the sad-looking man standing with his dog
 :: TalkToManWithDog
+{layout Center}
 {clear-text}
 {@me} Excuse me. I'm a reporter with the Twin Lakes Gazette. 
 {@me} Are you... okay? 
@@ -1556,7 +1557,7 @@ $elseif Visited(HeadStraightToShelter), Visited(MeetWithLocalVet), Visited(GoToS
       $choice StoryConstruction3a; Compile your story
 $endif
 $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
-$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
+$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "")
 $if ApartmentAddress
       $HubChoice(GoToSeniorCitizenApartments, "Go to Strudel Senior Apartments", 0.25, "")
 $endif 
