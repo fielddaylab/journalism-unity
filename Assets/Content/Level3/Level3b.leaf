@@ -1463,8 +1463,6 @@ $call GiveSnippet(NoraPrepareBetterNextTime)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
 
-:: HowCanTwinLakesHelpLowerIncomeHouseholds
-
 :: RumorsAboutFloodMaps
 {@drnorawarner} It's pretty simple.
 {@drnorawarner} The flood maps used to be accurate...
