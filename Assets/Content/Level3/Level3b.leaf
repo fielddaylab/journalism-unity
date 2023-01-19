@@ -1026,8 +1026,8 @@ $else
     {@me} Well... I didn't want to bother you...
     {@dionne} El, the whole point of this story is getting people's voices out there. 
     {@dionne} Without quotes from the neighborhood you're writing about, I can't publish your story.
-$GameOver("Ugh... looks like this one's destined to die in the Drafts folder.")
-
+    $GameOver("Ugh... looks like this one's destined to die in the Drafts folder.")
+$endif
 
 // Interview 
 :: InterviewEsme
