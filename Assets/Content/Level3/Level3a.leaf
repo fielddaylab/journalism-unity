@@ -12,6 +12,10 @@ $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
 $call SetHeaderEnabled(true)
+{clear-text}
+Its been a long day.
+You look over at your bed.
+But you open your computer to catch up on some work instead.
 {@email} El, we've been keeping up with your work in Twin Lakes!
 {@email} Very impressive. There might be a place for you at the Smoke City Herald after all.
 {@email} If you're interested, have your editor send over a letter of recommendation. 
@@ -20,13 +24,16 @@ $call SetHeaderEnabled(true)
 {bg $BG_TownMeeting}
 One week later... the Mayor has called an Emergency Town Hall Meeting.  
 {@mayorbarrysmuckers} Welp, we'd better get right down to it.
+{img Anim/3a/angryCloud.png, Left}
 {@mayorbarrysmuckers} Another storm is expected to hit in 3 days, and the town's not ready. 
 {@mayorbarrysmuckers} Some of you folks are gonna need to evacuate.
+{/img}
 {@mayorbarrysmuckers} But don't worry. We'll get through this together. We're #TwinLakesStrong! 
-{@mayorbarrysmuckers} My team has set up a flood shelter at the high school.
-{img Anim/3a/FredFinkler.png, Left}
+{@mayorbarrysmuckers} My team has set up a flood shelter at the high school. 
+{img Anim/3a/Fred.png, Left}
 {@fredfinkler}  What if the dam bursts?
 {@mayorbarrysmuckers}  Aw, Finkler, quit panicking folks. The dam won't burst.
+{/img}
 {@mayorbarrysmuckers}  ...Probably. 
 {/img}
 {@townspeople}{anim rumble}  CHATTER CHATTER CHATTER
@@ -46,11 +53,11 @@ $elseif CityScore() == 0
 $else
     {img-inline Anim/CityScore_F.png}
 $endif
-{@dionne} Here's how well-prepared the city is based on our recent stories.
-{@me} Understood.
+{@dionne} Here's an update on the City Disaster Preparedness. You can make a difference with these stories.
+{@me} On it boss.
 {@dionne} And El... I sent over your letter of recommendation.
 {@dionne} If this all works out, the Smoke City Herald would be lucky to have you. 
-{@me} Thanks, Dionne. 
+{@me} Um, thanks. 
 
 
 $choice AcceptStory; Accept Story Assignment
@@ -544,16 +551,17 @@ $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 :: TakePhotosOfShelter
 {clear-text}
 $if StatCheck (Tech, 5)
-      You attach a lens and set the white-balance perfectly for this environment.
+You attach a lens and set the white-balance perfectly for this environment.
+You use your top-notch {stat-name}tech{/stat-name} skills to snap some amazing photos of the shelter!
       $call SFX(PhotoSnap)
       $call GiveSnippet(GreatShelterPhoto)
 $elseif StatCheck (Tech, 3)
-      You use your modest tech skills to get some decent photos, though the orange light of the gym isn't helping.
+      You use your modest {stat-name}tech{/stat-name} skills to get some decent photos, though the orange light of the gym isn't helping.
       $call SFX(PhotoSnap)
       $call GiveSnippet(BadLightingShelterPhoto)
 $else 
       Uh oh. There's something wrong with your camera... everything's coming out blurry! 
-      Unfortuately, your only tech skill (turn it off and on again) doesn't come through this time. 
+      Unfortuately, your only {stat-name}tech{/stat-name} skill (turn it off and on again) doesn't come through this time. 
       $call SFX(PhotoSnap)
       $call GiveSnippet(BlurryShelterPhoto)
 $endif
@@ -770,7 +778,7 @@ She sighs.
 {@shelter} Here's a document about accessiblity standards.
 $call GiveSnippet(AccessibilityStandardsResource)
 {@shelter} I don't know much about pet-friendly shelters, but I'm sure your local vet could probaby help with that.
-{@article} Contact: Fox Sculder, Local Vet 
+{@article} Contact: Fox Smolder, Local Vet 
 $set VetContact = true
 
 $call GiveSnippet(OneQuestionConcernsAboutShelter)
@@ -783,7 +791,7 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@shelter} Nope, no pets here. Honestly, I'm not sure why, but I know it's safety related.
 {@shelter} I hate turning away pet owners, but there's nothing I can do.
 {@shelter} I'm sure your local vet would know more.
-{@article} Contact: Fox Sculder, Local Vet 
+{@article} Contact: Fox Smolder, Local Vet 
 $set VetContact = true
 
 $call GiveSnippet(CoordinatorNotSureWhyPetsArentAllowed)
@@ -890,8 +898,8 @@ $choice PetQuestions; How can people keep their pets safe during the flood?
 :: PetQuestions
 {@shelter} I'm not sure. 
 {@shelter} I should probably get back to work. 
-{@shelter} You could try the local vet, Fox Sculder.
-{@article} New Contact: Fox Sculder, Local Vet 
+{@shelter} You could try the local vet, Fox Smolder.
+{@article} New Contact: Fox Smolder, Local Vet 
 $set VetContact = true
 
 $choice EndShelterCoordinatorInterview; End Interview 
@@ -908,12 +916,12 @@ $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert 
 $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
 $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
 $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
-$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "")
+$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Smolder", 0.25, "")
 $if ApartmentAddress
       $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building to check things out", 0.25, "")
 $endif 
 
-// Head downtown to talk to the local vet, Fox Sculder
+// Head downtown to talk to the local vet, Fox Smolder
 :: MeetWithLocalVet
 {bg $BG_TownTransitional}
 
@@ -925,7 +933,7 @@ The local vet meets you downtown on their lunch break.
 You can tell they have their hands full.
 {img Anim/3a/VetsPets.png, Left}
 There are several animals crawling, slithering, and/or climbing on them at any given point.
-{@me} Hey! Fox Sculder, right? 
+{@me} Hey! Fox Smolder, right? 
 {@fox} That's me!
 
 $if Visited(HelpHer)
@@ -1278,7 +1286,7 @@ $if !Visited(CallDisabilityRightsExpertAtLocalCollege)
 $endif 
       $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
 $if !Visited(MeetWithLocalVet)
-      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "")
+      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25,"")
 $endif
 
 

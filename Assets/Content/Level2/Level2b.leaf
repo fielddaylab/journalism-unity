@@ -13,8 +13,9 @@ $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
 You finally get home, exhausted from your first day on the science beat.
-
+{img Anim/2b/Squawker.png, Left}
 Then your Squawker notification chimes.
+{/img}
 
 $OnceChoice (CheckSquawkerMessages, "Check Squawker")
 
@@ -151,9 +152,11 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 // Original Name: Bike to the library and research local wetlands
 :: DoSomeResearchOnLocalWetlands
 {clear-text}
+
 {layout Right}
 {img Anim/2b/TwinLakesLibrary.png, Left}
 You hop on your bike and pedal to the Twin Lakes library.
+{/img}
 
 $call SetLocation("Library")
 {bg $BG_TownTransitional}
@@ -244,11 +247,15 @@ The cafe owner is delighted to see you again.
 $call AdjustStats(Trust + 1)
 $else
 You meet Khalisa and Ben at the Goldfish Cafe.
+{@Khalisa} Have you gotten any sleep?
+{@me} Just a little. 
+{@me} Yawn.
 The owner is delighted to meet you. 
 {@cafeowner} You're El Benjamin, right? I read your story about the flood!
 {@cafeowner} I can tell you really care about this town.
 {img Anim/2b/CoffeeQuiche.png, Left}
 {@cafeowner} Here's a quiche and some coffee, free of charge!
+You wave to your friends as you head out. 
 
 $endif
 
@@ -289,6 +296,7 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 {@birdie} But 90% of our original wetlands are gone!
 {/img}
 {@player} Wow... 90%? That seems like a lot. 
+{/img}
 {@player} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
 {img Anim/2b/SaveTheWetlands.png, Left}
@@ -384,6 +392,7 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 // Original Name: Call your editor
 :: CallYourEditorAboutWetlandStory
 @checkpoint
+{clear-text}
 {@dionne} What do you think, El? 
 {@me} I think there's a story here. 
 {@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
@@ -403,8 +412,8 @@ $elseif CityScore() == 0
 $else
     {img-inline Anim/CityScore_F.png}
 $endif
-{@dionne} Here's how well-prepared the city is based on our recent stories.
-{@me} Understood.
+{@dionne} Here's the most recent disaster preparedness score for the city. 
+{@dionne} Our stories can make a difference - for better or worse.
 
 $choice MarshMap; Got it. Thanks. 
 
@@ -440,7 +449,6 @@ $call StopAmbience()
 $call StopRain()
 $call SetLocation("OperaHouse")
 <b>Location: The Twin Lakes Opera House</b>
-{layout Right}
 {@sign}Welcome to the historic Twin Lakes Opera House!
 {@sign}Restored thanks to a generous donation by the Spark Project. 
 
@@ -629,8 +637,10 @@ $OnceChoice(HowDoYouPlanToMitigateTheDamage, "How do you plan to make up for the
 {@nancy}Oh, don't worry so much. 
 {@nancy}As long as yearly rainfall stay the same, the apartments should be fine. 
 {@me}And what if rainfall events get worse? 
+{img Anim/2b/angryCloud.png, Left}
 She looks shrewdly at you.
 {@nancy}Wow. Look at the time. I really better be going.
+{/img}
 You've obviously ruffled some feathers here. 
 No flood plan to speak of... That's quite the scoop.
 
