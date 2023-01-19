@@ -1548,7 +1548,7 @@ $elseif Visited(HeadStraightToShelter), Visited(MeetWithLocalVet), Visited(GoToS
       $choice StoryConstruction3a; Compile your story
 $endif
 $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
-$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
+$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "")
 $if ApartmentAddress
       $HubChoice(GoToSeniorCitizenApartments, "Go to Strudel Senior Apartments", 0.25, "")
 $endif 
