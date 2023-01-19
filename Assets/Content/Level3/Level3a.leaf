@@ -8,6 +8,7 @@
 // Original Name: Level 3 Intro
 :: Level3Intro
 {bg $BG_BedroomDesk}
+$call SetLocation("Apartment")
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
@@ -19,10 +20,14 @@ But you open your computer to catch up on some work instead.
 {@email} El, we've been keeping up with your work in Twin Lakes!
 {@email} Very impressive. There might be a place for you at the Smoke City Herald after all.
 {@email} If you're interested, have your editor send over a letter of recommendation. 
-{@email} -Gabby White, Senior Editor, Smoke City Herald 
+{@email} -Gabby White, Senior Editor, Smoke City Herald
+
+$choice Level3Intro2; One week later...
+:: Level3Intro2
 {clear-text}
 {bg $BG_TownMeeting}
-One week later... the Mayor has called an Emergency Town Hall Meeting.  
+$call SetLocation("CityHall")
+...Mayor Smuckers has called an Emergency Town Hall Meeting.  
 {@mayorbarrysmuckers} Welp, we'd better get right down to it.
 {img Anim/3a/angryCloud.png, Left}
 {@mayorbarrysmuckers} Another storm is expected to hit in 3 days, and the town's not ready. 
@@ -56,8 +61,9 @@ $endif
 {@dionne} Here's an update on the City Disaster Preparedness. You can make a difference with these stories.
 {@me} On it boss.
 {@dionne} And El... I sent over your letter of recommendation.
-{@dionne} If this all works out, the Smoke City Herald would be lucky to have you. 
-{@me} Um, thanks. 
+{@dionne} If this all works out, well...
+{@dionne} The Smoke City Herald would be lucky to have you. 
+{@me} Thanks, Dionne. 
 
 
 $choice AcceptStory; Accept Story Assignment
@@ -70,7 +76,7 @@ $call SetTimeRemaining(4)
 
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
 $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
-$HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "Shelter")
 
 // Try to snag an interview with the Mayor
 :: SnagInterviewWithMayor
@@ -99,7 +105,7 @@ $else
       Great. Because an interview 3 weeks from now is gonna be SO helpful.
 
       $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
-      $HubChoice(HeadStraightToShelter, "Head to the flood shelter", 0.25, "")
+      $HubChoice(HeadStraightToShelter, "Head to the flood shelter", 0.25, "Shelter")
       $choice RemindTheMayor; Tell the Mayor that you've got some dirt on him--maybe he'll be more willing to talk 
       $HubChoice(OfferToGrabHimCoffee, "Offer to grab him coffee--it'll take some time, but it might score you an interview", 0.25, "")
 $endif
@@ -220,7 +226,7 @@ $endif
 $call GiveSnippet(MayorDownplaysIssueOfPets)
  
 $choice StickAroundToInterviewTownspeople; Stick around to interview the townspeople
-$HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, "Shelter")
 
 // What about people who don't have transportation to the shelter?
 :: WhatAboutPeopleWithoutTransportation
@@ -234,7 +240,7 @@ Um... yeah. That's kind of the point.
 $call GiveSnippet(MayorInterviewNoPlanToHelpTransportPeopleToShelter)
 
 $choice StickAroundToInterviewTownspeople; Stick around to interview the townspeople
-$HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, "Shelter")
 
 //Stick around to interview townspeople
 :: StickAroundToInterviewTownspeople
@@ -302,7 +308,7 @@ $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 $choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 // Yeah, okay. But if we could just talk about something else for a minute... 
 :: YeahOkay 
@@ -324,7 +330,7 @@ $HubChoice(KeepPressing, "Keep pressing him about the flood shelter", 0.25, "")
 $choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25, "Shelter")
 
 //KeepPressing
 :: KeepPressing 
@@ -344,7 +350,7 @@ $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 $choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "Shelter")
 
 //Failed Mayor Interview
 :: SnagInterviewWithMayorFailed
@@ -359,7 +365,7 @@ $if !HasTime(0.25)
 $endif
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 // Ask the lady about her concerns
 :: InterviewTheLady
@@ -435,7 +441,7 @@ $call AdjustStats(Trust - 1)
 $HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
-$choice HeadStraightToShelter; Head straight to the emergency shelter  
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 // What if the city needs another shelter? 
 :: WhatIf 
@@ -462,7 +468,7 @@ $call GiveSnippet(RichLadyCannedFoodDrive)
 $HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
-$choice HeadStraightToShelter; Head straight to the emergency shelter  
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 // What about the people who need to evacuate their homes?
 ::WhatWouldYouSayToPeople
@@ -479,7 +485,7 @@ $call GiveSnippet(ConflictingOpinions)
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
 $HubChoice(InterviewTheMan, " Interview the man about why he doesn't want to evacuate", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
-$choice HeadStraightToShelter; Head straight to the emergency shelter 
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 // Interview the man about why he doesn't want to evacuate 
 :: InterviewTheMan
@@ -513,7 +519,7 @@ $choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about the issue
 $call GiveSnippet(CityPlanningIssue)
 
 {/img}
-$choice HeadStraightToShelter; Head straight to the emergency shelter 
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
 $HubChoice (InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
@@ -526,7 +532,7 @@ $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor
 
 $call GiveSnippet(GetWordOutAboutAccessibility)
 
-$choice HeadStraightToShelter; Head straight to the emergency shelter 
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
 $HubChoice (InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
 $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor 
@@ -691,8 +697,9 @@ $choice FloodShelterChoices; Decide what to do next.
 {@me} Well... it grows on you after a while. 
 {@me} Can I ask you a few questions? 
 {@shelter} Sorry, I'm too busy. Gotta bring in the latest food delivery.
-{@shelter} Probably cherry cornbread delivered in a horse and buggy, at this rate.
 {img Anim/3a/HorseBuggy.png, Left}
+
+{@shelter} Probably cherry cornbread delivered in a horse and buggy, at this rate.
 
 $call GiveSnippet(ExasperatedShelterCoordinator)
 {/img}
@@ -917,9 +924,11 @@ $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert 
 $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
 $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
 $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
-$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Smolder", 0.25, "")
+$if VetContact == true
+      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "Downtown")
+$endif
 $if ApartmentAddress
-      $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building to check things out", 0.25, "")
+      $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building to check things out", 0.25, "SeniorApts")
 $endif 
 
 // Head downtown to talk to the local vet, Fox Smolder
@@ -1060,9 +1069,9 @@ $elseif Visited(HeadStraightToShelter), Visited(CallDisabilityRightsExpertAtLoca
       Looks like you've been just about everywhere. Time to work on your story!
       $choice StoryConstruction3a; Compile your story
 $else
-      $HubChoice(HeadStraightToShelter, "Return to the flood shelter", 0.25, "")
+      $HubChoice(HeadStraightToShelter, "Return to the flood shelter", 0.25, "Shelter")
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
-      $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments", 0.25, "")
+      $HubChoice(GoToSeniorCitizenApartments, "Head to the Strudel Senior Apartments", 0.25, "SeniorApts")
 $endif
 
 
@@ -1285,9 +1294,11 @@ $endif
 $if !Visited(CallDisabilityRightsExpertAtLocalCollege)
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at local college", 0.25, "")
 $endif 
-      $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
+      $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
 $if !Visited(MeetWithLocalVet)
-      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25,"")
+      $if VetContact == true
+            $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "Downtown")
+      $endif
 $endif
 
 
@@ -1380,8 +1391,10 @@ $choice GoToSeniorCitizenApartments; Find someone else to talk to.
 {clear-text}
 Time is ticking. What do you want to do next? 
 
-$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
-$HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "")
+$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
+$if VetContact == true
+      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "Downtown")
+$endif
 $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
 $choice GoToSeniorCitizenApartments; Actually, I'll stay here and keep looking around. 
 
@@ -1556,10 +1569,10 @@ $elseif Visited(HeadStraightToShelter), Visited(MeetWithLocalVet), Visited(GoToS
       Looks like you have to cut this short. You have just enough time to compile your story!
       $choice StoryConstruction3a; Compile your story
 $endif
-$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "")
 $if ApartmentAddress
-      $HubChoice(GoToSeniorCitizenApartments, "Go to Strudel Senior Apartments", 0.25, "")
+      $HubChoice(GoToSeniorCitizenApartments, "Go to Strudel Senior Apartments", 0.25, "SeniorApts")
 $endif 
 
 // Do you know anything about the flood shelter?
@@ -1636,15 +1649,14 @@ $if StoryHasPicture() == false
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
-    $endif
-$endif
-$if StoryIsFull() == false
-    $if StoryHasPicture() == false
+    $else
         // player has not filled all slots AND is missing picture
         {@dionne}   And you haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
-    $else
+    $endif
+$else
+    $if StoryIsFull() == false
         // player has not filled all slots
         {@dionne}   I see you have some blank spots here.
         {@dionne}   Make sure to use all the space that's given to you.
@@ -1652,7 +1664,6 @@ $if StoryIsFull() == false
         {@dionne}   Other than that...
     $endif
 $endif
-
 
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment

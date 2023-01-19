@@ -1324,20 +1324,22 @@ $if StoryHasPicture() == false
     {@dionne}   Hmmm. No picture. 
     {@dionne}   This will bring down your story's impact, El. 
     {@dionne}   Most readers need visuals to grab their attention. 
-    {@dionne}   Other than that...
+    {@me} Yeah, but... How am I supposed to get a good picture with such limited time??
+    {@dionne} We have to operate on a shoestring here.
+    {@dionne} I know we're not your fancy big-town paper, but...
+    {@dionne} We all have to make do with the limited resources.
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
-    $endif
-$endif
-$if StoryIsFull() == false
-    $if StoryHasPicture() == false
+    $else //NO picture, NOT full
         // player has not filled all slots AND is missing picture
         {@dionne}   And you haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
-    $else
-        // player has not filled all slots
+    $endif
+$else //if StoryHasPicture() == true
+    $if StoryIsFull() == false
+        // YES picture, NOT full
         {@dionne}   I see you have some blank spots here.
         {@dionne}   Make sure to use all the space that's given to you.
         {@dionne}   This is going to make people think it's a lower-quality story.
@@ -1397,19 +1399,16 @@ $else //<1 net quality
         {@dionne}   Great job sticking to the assignment, El! 
         {@dionne}   Yikes... your quality control could use some work, though. 
         {@dionne}   See if you can scrape together some more quality images and quotes.
-        $call AdjustCityScore(0)
     $elseif StoryAlignment() >= 0.3
         {@dionne}   Not bad, El! Pretty decent story construction. 
         {@dionne}   These story segments are... a little out there.
         {@dionne}   Bigger papers have more help, but out here, you need to be a little scrappy. 
         {@dionne}   The higher the quality of quotes and photos, the more people we'll reach.
-        $call AdjustCityScore(-1) 
     $else
         {@dionne}   Yikes. Got a little distracted out there, huh, Rookie?   
         {@dionne}   Your story didn't match my notes. 
         {@dionne}   I'm glad we got something out there. But keep an eye on the story breakdown next time.
         {@dionne}   And some higher quality content couldn't hurt.
-        $call AdjustCityScore(-2) 
     $endif
 $endif
 

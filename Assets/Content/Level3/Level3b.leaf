@@ -8,6 +8,7 @@
 // Original Name: Level 3, Story 2
 :: Level3Story2
 {bg $BG_HouseExtNoRain}
+$call SetLocation("Apartment")
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 {layout Right}
 {anim rumble}  Email Notification
@@ -47,9 +48,11 @@ Jeanie and her cat, Patches, are thrilled to see you.
 You sip some tea and scratch Patches behind the ears.
 {@me} Ready for the storm tomorrow, Jeanie?
 {/img}
-{@jeanie} I think so. And it's all thanks to your <i>purrls</i> of wisdom
+{@jeanie} I think so. And it's all thanks to your <i>purrls</i> of wisdom!
 
-$call AdjustStats(Social + 2)
+$call AdjustStats(Social + 1)
+{/img}
+
 $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish   
 
 // Go for a jog at Cherry Creek Marsh
@@ -102,6 +105,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
+$call SetLocation("Bookstore")
 {/img}
 {bg $BG_MainStreet}
 $call Music($Audio_StoryRain)
@@ -183,7 +187,7 @@ $call SetTimeRemaining(4)
 
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.5, "")
-$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "")
+$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "FillingStation")
 
 // Interview mayor
 :: InterviewMayor
@@ -255,7 +259,7 @@ Huh... you must've missed that day at Journalism School.
 $CheckFinalConverge()
 
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.5, "")
-$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "")
+$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "FillingStation")
 
 // Interview bookseller
 :: InterviewBookseller
@@ -312,7 +316,7 @@ The pages are stuck together, but still, you tuck it in your bag for later.
 
 $CheckFinalConverge()
 
-$HubChoice(GoToSandbaggingStation, "Head to the nearest city-run sandbag filling station and take a look around", 0.25, "")
+$HubChoice(GoToSandbaggingStation, "Head to the nearest city-run sandbag filling station and take a look around", 0.25, "FillingStation")
 $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations", 0.5, "")
 
 // Go to sandbagging station
@@ -328,7 +332,7 @@ $if FirstVisit()
 $endif 
 
 $if RoyalHazelLocation = true
-    $choice HeadToRoyalHazelNeighborhood; Head to Royal Hazel Neighborhood
+    $HubChoice(HeadToRoyalHazelNeighborhood, "Head to Royal Hazel Neighborhood", 0.25, "RoyalHazel")
 $elseif Visited(InterviewDNRWorkerAtSandbagFillingStation), Visited(InterviewSandbagFillingVolunteer), Visited(AskPermissionToTakePhoto)
     // Player has exhausted all options but failed to find Royal Hazel Location
     Out of nowhere, you get a sinking feeling. Something's not right...
@@ -337,7 +341,7 @@ $endif
 
 $HubChoice(InterviewDNRWorkerAtSandbagFillingStation, "Ask to interview Misty, the DNR worker", 0.25, "")
 $HubChoice(InterviewSandbagFillingVolunteer, "Talk to volunteer filling sandbags", 0.25, "")
-// $choice InterviewLocalFromTheNeighborhood; Talk to man loading sandbags into his pickup truck // <- This choice does not have a resulting conversation
+$HubChoice(AskToInterviewManFillingSandbags, "Talk to man loading sandbags into his pickup truck", 0.25, "")
 $HubChoice(AskPermissionToTakePhoto, "Ask permission to take a photo", 0.25, "")
 
 
@@ -1545,15 +1549,14 @@ $if StoryHasPicture() == false
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
-    $endif
-$endif
-$if StoryIsFull() == false
-    $if StoryHasPicture() == false
+    $else
         // player has not filled all slots AND is missing picture
         {@dionne}   And you haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
-    $else
+    $endif
+$else
+    $if StoryIsFull() == false
         // player has not filled all slots
         {@dionne}   I see you have some blank spots here.
         {@dionne}   Make sure to use all the space that's given to you.
@@ -1561,7 +1564,6 @@ $if StoryIsFull() == false
         {@dionne}   Other than that...
     $endif
 $endif
-
 
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment
