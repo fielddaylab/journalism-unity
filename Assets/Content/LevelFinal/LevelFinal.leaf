@@ -24,8 +24,10 @@ $if CityScore() > 2
       But you have a feeling the other candidates, Sophia and Fred, are going to give him a run for his money.
       You still have an open invitation to interview at the Smoke City Herald…
       You're going to stick around Twin Lakes for now. 
-      This place has grown on you.  
+      This place has grown on you. 
+      {img Anim/Final/Icecream.png, Left} 
       Plus, Khalisa and her dad are counting on you to bring the cherry-chip ice cream for dinner on Sunday. 
+      {/img}
 
 // good
 $elseif CityScore() >= 0
@@ -50,8 +52,10 @@ $elseif CityScore() >= 0
       You still have an invitation to interview at the Smoke City Herald…
       But you’ve decided to stick around for now. 
       You’re working with Dionne to mentor reporters from the high school newspaper… 
+      {img Anim/Final/CherryCroissant.png, Left}
       And Sophia has been teaching you to bake cherry croissants for the bake sale. 
       Twin Lakes still has a ways to go… 
+      {/img}
       Maybe you'll stick around, at least for now.
       Or maybe longer. 
       
@@ -74,7 +78,9 @@ $else
       Khalisa is working as a reporter at the Smoke City Herald….
       Which is where you would be, if you hadn’t gotten fired. 
       This time your work wasn’t up to par, but you’re can try again. 
+      {img Anim/Final/RecipeCard.png, Left}
       At least you have an unparalleled recipe for cherry-chocolate granola. 
+      {/img}
 $endif
 
 // TODO: Go to credits
