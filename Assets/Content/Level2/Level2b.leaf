@@ -511,7 +511,7 @@ $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the tow
 // Original Name: Spark Project came up in an interview
 :: YourNameCameUpInAnInterview
 {@nancy} I'm glad you asked!
-{@nancy}We plan to pave over parts of the marsh and build low-income apartments.
+{@nancy}We plan to build over parts of the marsh and build low-income apartments.
 {img Anim/2b/Bulldozer.png, Left}
 {@nancy}Affordable, peaceful. 
 {@nancy}It'll make space for people who want to move to our beautiful town, but can't afford it. 
@@ -606,6 +606,7 @@ $OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population
 {@me}That...doesn't answer my question. 
 {@nancy}Well then, maybe you're not asking the right question. 
 {@nancy}It's been an interesting chat. Stop by any time.
+{img Anim/Final/Icecream.png, Right}
 She's smiling, but her voice is colder than the pint of cherry chip ice cream in your freezer.
 
 $call GiveSnippet(NewYorkBuiltOnSwamp)
@@ -885,7 +886,6 @@ $endif
 {@me}What about the flood risk of destroying the wetlands?
 {@me}Won't this cause more flooding?
 {@mayorbarrysmuckers} Well, how should I know? 
-{@mayorbarrysmuckers} You're the reporter. Isn't it your job to figure that out? 
 You try to ask something else, but he's already heading inside.
 
 $call GiveSnippet(QuickMayorWetlandsQuote)
