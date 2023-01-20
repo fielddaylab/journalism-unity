@@ -396,6 +396,7 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 :: CallYourEditorAboutWetlandStory
 @checkpoint
 {clear-text}
+{bg $BG_CherryCreekMarsh}
 {@dionne} What do you think, El? 
 {@me} I think there's a story here. 
 {@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
