@@ -440,21 +440,21 @@ According to a bulletin board in City Hall, the Spark Project made a donation to
 @type Photo
 @quality Great
 @attr Color
-//TODO: Insert crane photo here
+@image Photo/sandhill_cranes.jpg
 
 // Original Name: GoodMarshPhoto-Volunteers
 :: GoodMarshPhoto-Volunteers
 @type Photo
 @quality Good
 @attr Color
-//TODO: Insert marsh volunteer photo here
+@image Photo/WetlandVolunteers.jpg
 
 // Original Name: BadMarshPhoto-Scenery
 :: BadMarshPhoto-Scenery
 @type Photo
 @quality Bad 
 @attr Color
-//TODO: Insert bad marsh photo here
+@image Photo/wetlandplants-BAD.jpg
 
 // Original Name: Volunteer-ImportanceOfWetlands
 :: Volunteer-ImportanceOfWetlands
@@ -475,7 +475,7 @@ Volunteers at Cherry Creek Marsh navigate snakes and poison ivy to preserve and 
 @type Photo
 @quality Great
 @attr Color
-//TODO: add picture of a snake next to a volunteer
+@image Photo/wetlandsnake.jpg
 
 // Original Name: RushedLimnologist
 :: RushedLimnologist
@@ -517,14 +517,14 @@ Twin Lakes University's Department of Limnology has tracked an increase in flood
 @type Photo
 @quality Good
 @attr Color
-//TODO: add photo
+@image Photo/limnology-wetlands.jpg
 
 // Original Name: WetlandsAndFloodingGraph
 :: WetlandsAndFloodingGraph
 @type Graph
 @quality Good
 @attr Facts
-//TODO: add graph
+@image Photo/FloodWetlandsGraph.jpg
 
 // Original Name: WetlandLossConfirmation
 :: WetlandLossConfirmation
@@ -567,6 +567,12 @@ One member of the Spark Project development initative says that it's been effect
 @quality Good
 @attr Color
 Members of the Spark Project are intent on growing Twin Lakes. "Either a town is growing, or it's dying."
+
+:: BusinessScaredOfALittleWater
+@type Quote
+@quality Good
+@attr Color
+The Spark Project brushed off development concerns. "We can't stop growing just because we're scared of a little water."
 
 // Original Name: NewMarshAppleValley
 :: NewMarshAppleValley
