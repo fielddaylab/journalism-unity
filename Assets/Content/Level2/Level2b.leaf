@@ -676,8 +676,12 @@ $HubChoice(GoToCityHall, "Go to City Hall and try to track down the mayor", 0.5,
 $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite)
     $HubChoice(CallTheMayor, "Call the mayor's personal number", 0.25)
 $endif
-$HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting at the opera house", 0.25, "Opera House")
-$HubChoice(CallTheSparkProject, "Track down a phone number for the Spark Project", 0.25)
+$if !Visited(CallTheSparkProject)
+    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting at the opera house", 0.25, "Opera House")
+$endif
+$if !Visited(SparkProjectMeeting)
+    $HubChoice(CallTheSparkProject, "Track down a phone number for the Spark Project", 0.25)
+$endif
 
 
 //Original Name: Call the Mayor
