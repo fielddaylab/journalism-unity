@@ -314,7 +314,9 @@ $choice DoYouKnowOfAnyResources; Do you know of any resources that could help me
 {@me} I'm... not sure what that means. But it sounds great.
 
 Unfortunately, the book they give you is heavily water damaged.
+{img Anim/3b/FloodlightsBook.png, Left}
 The pages are stuck together, but still, you tuck it in your bag for later. 
+{/img}
 
 $CheckFinalConverge()
 

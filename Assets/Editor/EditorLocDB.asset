@@ -272,19 +272,19 @@ MonoBehaviour:
       Content: Library
       Exposed: 0
     - Id: Map.Shelter
-      Content: 
+      Content: Shelter
       Exposed: 0
     - Id: Map.SeniorApts
-      Content: 
+      Content: Senior Apartments
       Exposed: 0
     - Id: Map.Bookstore
-      Content: 
+      Content: Bookish
       Exposed: 0
     - Id: Map.FillingStation
-      Content: 
+      Content: Sandbag Station
       Exposed: 0
     - Id: Map.RoyalHazel
-      Content: 
+      Content: Royal Hazel
       Exposed: 0
     - Id: Title.NewGame
       Content: New Game
