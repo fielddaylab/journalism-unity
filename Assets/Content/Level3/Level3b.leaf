@@ -324,6 +324,7 @@ $HubChoice(InterviewMayor, "Interview the Mayor about sandbag filling stations",
 // Go to sandbagging station
 :: GoToSandbaggingStation
 {bg $BG_SandbagStation}
+$call SetLocation("FillingStation")
 $call Music($Audio_PaperPuddle)
 $call StopAmbience()
 $call StopRain()
@@ -758,6 +759,7 @@ $choice GoToSandbaggingStation; Decide what to do next
 
 // Go to Royal Hazel neighborhood
 :: HeadToRoyalHazelNeighborhood
+$call SetLocation("RoyalHazel")
 $HubChoice(RideYourBikeRoyalHazel, "Ride your bike", 0.5, "")
 $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 

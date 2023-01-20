@@ -350,7 +350,7 @@ $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
 $choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter; "Head to the emergency shelter", 0.25, "Shelter")
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 //Failed Mayor Interview
 :: SnagInterviewWithMayorFailed
@@ -541,6 +541,7 @@ $choice SnagInterviewWithMayor; Try to snag an interview with the Mayor
 :: HeadStraightToShelter
 {clear-text}
 {bg $BG_EvacShelter}
+$call SetLocation("Shelter")
 $call Music($Audio_Flood)
 $call StopAmbience()
 $call StopRain()
@@ -756,8 +757,8 @@ $if StatCheck (Social, 5)
             Looks like you have to cut this short. You have just enough time to compile your story!
             $choice StoryConstruction3a; Compile your story
       $endif
-      $HubChoice(DoYouHaveAnyConcernsAboutTheShelter, "Do you have any concerns about the shelter?", 0.25, "")
-$else 
+      $HubChoice(DoYouHaveAnyConcernsAboutTheShelterSimple, "Do you have any concerns about the shelter?", 0.25, "")
+$else
       You try to empathize. 
       Unfortunately, you haven't been socializing much lately.
       You flail for something to say and land on a joke your upstairs neighbor told you.
@@ -919,7 +920,7 @@ $choice FloodShelterChoices; Decide what to do next.
 
 //Flood Shelter Choices
 :: FloodShelterChoices
-
+$call SetLocation("Shelter")
 $choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert at local college 
 $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
 $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
@@ -1077,6 +1078,7 @@ $endif
 
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
+$call SetLocation("SeniorApts")
 {bg $BG_SeniorCitizenApts}
 $call Music($Audio_SolemnWaters)
 $call StopAmbience()
@@ -1393,7 +1395,7 @@ Time is ticking. What do you want to do next?
 
 $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
 $if VetContact == true
-      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters" 0.25, "Downtown")
+      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "Downtown")
 $endif
 $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
 $choice GoToSeniorCitizenApartments; Actually, I'll stay here and keep looking around. 
