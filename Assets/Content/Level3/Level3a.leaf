@@ -263,9 +263,10 @@ $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evac
 // Talk to Fred Finkler
 :: InterviewFredFinkler 
 {clear-text}
-{img Anim/3a/FredFinkler.png, Left}
+{img Anim/3a/Fred.png, Left}
 {@fredfinkler} Well? Didn't I tell ya? 
 {@fredfinkler} The dam’s gonna burst. I knew it all along.
+{/img}
 {@me} The mayor said the dam will hold. Probably. 
 {@fredfinkler} Ha. Then what's all this commotion about?
 You have to admit, Fred's got a point. 
@@ -280,8 +281,9 @@ $choice IsYourHouseInAHighRiskZone; Is your house in a high risk zone, Fred?
 {img Anim/3a/Deer.png, Left}
 {@fredfinkler} Some fawns just bit the heads clean off my marigolds! It was a bloodbath!
 {@fredfinkler} Well... not a bloodbath, I suppose. A sap bath?
-$call GiveSnippet(UselessFredQuoteAboutDeerAttacks)
 {/img}
+$call GiveSnippet(UselessFredQuoteAboutDeerAttacks)
+
 
 $choice SoSorry; I'm so sorry to hear that, Fred. I know how much those marigolds meant to you.  
 $choice YeahOkay; Yeah, okay. But if we could just talk about the flood shelter for a minute... 
@@ -300,11 +302,10 @@ $choice FredFloodShelter; The flood shelter. Do you have any concerns?
 {@fredfinkler} But I'm afraid I don't have that much faith in people.   
 {@fredfinkler} We need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
+{img Anim/3a/AsterFlower.png, Left}
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower!
 {/img}
-{img Anim/3a/AsterFlower.png, Left}
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
-{/img}
 $choice SnagInterviewWithMayorFailed; Try to snag an interview with the Mayor 
 $HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
@@ -478,8 +479,10 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {@pattyforbes} What? Of course not, that's a third of Twin Lakes. 
 {@pattyforbes} Our whole town would collapse!
 {@me} Hmmm. Interesting. 
+{img Anim/3b/LoadofSandbags.png, Left}
 {@pattyforbes} Come to think of it, I better go. I'd like to get some sandbags, just in case.
 {@pattyforbes} Stay safe out there, Dear! 
+{/img}
 $call GiveSnippet(ConflictingOpinions)
 
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
@@ -492,8 +495,10 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {clear-text}
 {@me} Excuse me. You said earlier that you don't plan to evacuate.
 {@me} Can you tell me why? 
+{img Anim/3a/NoAccessibility.png, Left}
 {@barlow} That high school is an accessibility nightmare.
 {@barlow} My wife and I are both disabled. We'll probably be safer at home.
+{/img}
 $call GiveSnippet(AccessibilityNightmare)
 
 $choice WhatIfTheDamBursts; But you're in a high risk zone, right? What if the dam bursts? 
@@ -510,15 +515,15 @@ $choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about the issue
 
 // Have you talked to anyone about the accessibility problems?
 :: HaveYouToldAnyoneYourConcerns
-{@barlow} No offense, kid, but why should that be my job?
-{@barlow} The city should know about these problems and plan to fix them.
-{@barlow} They obviously aren't prepared, and there's no time to change that now. 
-{@barlow} For now, I need to get to the store before everybody buys up all the toilet paper and bottled water.
+{@barlow}The town meeting was over before I could say anything. 
+{@barlow} There's no time to change it now. 
 {img Anim/3a/ToiletPaper.png, Left}
+{@barlow} I'm headed to the store before everybody buys up all the toilet paper and bottled water.
 {@barlow} Nice chatting with you, kid. 
+{/img}
 $call GiveSnippet(CityPlanningIssue)
 
-{/img}
+
 $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
 $HubChoice (InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
