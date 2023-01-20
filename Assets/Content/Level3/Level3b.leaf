@@ -28,7 +28,7 @@ Must be the second storm. Everyone in Twin Lakes is talking about it.
 But the real downpour is expected to start tomorrow. 
 You wake up to a text from Khalisa. 
 
-{@khalisaS} Hey El! Want to meet up at Bookish before work?
+{@khalisa} Hey El! Want to meet up at Bookish before work?
 {@me} Yes!! What time?
 {img Anim/3a/CoffeeToGo.png, Left}
 {@khalisa} One hour. I'll pick up coffee on the way.
@@ -68,8 +68,8 @@ $call Rain($Audio_CalmStreamRiverFlow)
 You grab your running shoes and hit the trails.
 Birdie, the aptly-named birdwatcher, waves as you run past.
 {/img}
-{@Birdie} Be careful out there, El! 
-{@Birdie} The birds are riled up today. Something strange is brewing.
+{@birdie} Be careful out there, El! 
+{@birdie} The birds are riled up today. Something strange is brewing.
 {img Anim/3b/DarkCloud.png, Left}
 {@me} Don't worry, Birdie. The storm's not supposed to hit until tomorrow!
 Though, come to think of, those clouds look awfully dark... 
@@ -761,8 +761,6 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
-{bg $BG_TownTransitional}
-
 {layout Right}
 {bg $BG_Map}
 $call Music($Audio_PaperPuddle)
