@@ -17,8 +17,10 @@ $if CityScore() > 2
       Has it already been a year?
       It’s the annual Cherry Festival is back... 
       {img-inline Anim/CityScore_A.png}
+      {img Anim/Final/CherryDuck.png, Left}
       The town got its cherry-themed ducks in a row. 
       There was another storm last month…
+      {/img}
       But the town is still standing, and everyone was able to find shelter.
       The Mayor is running for reelection…
       But you have a feeling the other candidates, Sophia and Fred, are going to give him a run for his money.

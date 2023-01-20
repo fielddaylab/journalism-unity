@@ -130,10 +130,12 @@ $call StopRain()
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
 {@mayorbarrysmuckers} Aw, cripes. Not you again!
-{@me} Um... did I do something wrong, Mr. Mayor? 
+{@me} Um... did o something wrong, Mr. Mayor? 
 {@mayorbarrysmuckers} Your latest article! It was full of gripes, complaints...
+{img Anim/3b/TwinLakesStrong.png, Left}
 {@mayorbarrysmuckers} What happened to #TwinLakesStrong?? 
 {@bookshop} *Ahem.*
+{/img}
 {@bookshop} I liked the story. 
 You're trying to sneakily text Khalisa: <i>Mayor's ticked off, don't come in!</i>.
 ...when she texts you first.
@@ -419,8 +421,10 @@ $endif
 {@me} Do you have concerns about people's ability to access sandbags?
 {@misty} Yes. Ideally, we would have a LOT more filling stations. 
 {@misty} Have you heard of Dr. Warner? Local equity expert. 
+{img Anim/3b/SandbagMap.png, Right}
 {@misty} She recommends a filling station in each neighborhood.
 {@misty} Unfortunately, we were only able to set up 3. That leaves 6 neighborhoods without help.
+{/img}
 
 $call GiveSnippet(OnlyThreeSandbagLocations)
 
@@ -491,8 +495,10 @@ $endif
 // Which areas are you most worried about?
 ::WhichNeighborhoodsAreBeingLeftOut
 {layout Left}
+{img Anim/3b/HouseInFlood.png, Right}
 {@misty} I'm worried about the lower-income neighborhoods along the river. 
 {@misty} They're more at risk of flooding... 
+{/img}
 {@misty} And a lot of people there don't have access to sandbags. 
 
 $call GiveSnippet(NeighborhoodsLeftOut)
@@ -580,8 +586,10 @@ $else
     {@me} I wish I could help. I'm not much of a researcher.  
     {@me} But if you could just spare a minute or two...
     {@rainn} Sorry. That rain could hit any minute. 
+    {img Anim/3b/CherryPitSpitting.png, Right}
     {@rainn} No time to sit around spittin' cherry pits, know what I mean? 
     {@me} Uh... sort of.
+    {/img}
     {@me} Where does your grandma live? 
     {@rainn} The Royal Hazel neighborhood, on the south side. 
     {@rainn} Gotta get her these sandbags... since the city isn't doin' anything to help her.
@@ -1481,8 +1489,10 @@ Oops. If she did, you probably weren't paying attention.
 {@me} Um, sorry, Nora. Can you tell me again?
 {@drnorawarner} Well. 10 years ago, I used to live in a nice little house along the river.
 {@drnorawarner} It was like a dream come true! 
+{img Anim/3b/HouseInFlood.png, Right}
 {@drnorawarner} Then a flood hit. In one day, I lost everything.
 {@drnorawarner} No one was around to help me. But hopefully, my work will help other people. 
+{/img}
 
 $call GiveSnippet(NoraBackground)
 

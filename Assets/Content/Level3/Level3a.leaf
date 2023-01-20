@@ -19,7 +19,7 @@ You look over at your bed.
 But you open your computer to catch up on some work instead.
 {@email} El, we've been keeping up with your work in Twin Lakes!
 {@email} Very impressive. There might be a place for you at the Smoke City Herald after all.
-{@email} If you're interested, have your editor send over a letter of recommendation. 
+{@email} If you're interested, have your editor send over a recommendation. 
 {@email} -Gabby White, Senior Editor, Smoke City Herald
 
 $choice Level3Intro2; One week later...
@@ -60,8 +60,10 @@ $else
 $endif
 {@dionne} Here's an update on the City Disaster Preparedness. You can make a difference with these stories.
 {@me} On it boss.
+{img Anim/3a/Envelope.png, Left}
 {@dionne} And El... I sent over your letter of recommendation.
 {@dionne} The Smoke City Herald would be lucky to have you. 
+{/img}
 {@me} Thanks, Dionne. 
 
 
@@ -207,7 +209,9 @@ $choice IsTheDamLikelyToBurst; How likely is it that the dam will fail?
 {@mayorbarrysmuckers} I'd say maybe.... half?
 {@me} You mean... there's a 50% chance the dam will fail??
 {@mayorbarrysmuckers} And a 50% chance it'll hold!
-{@mayorbarrysmuckers} I'm a glass half full person, myself.  
+{img Anim/3a/GlassHalfFull.png, Left}
+{@mayorbarrysmuckers} I'm a glass half full person, myself. 
+{/img} 
 $call GiveSnippet(FiftyPercentChanceOfDamFailure)
 
 $choice WhatAboutPeopleWithoutTransportation; What about people who don't have transportation to the shelter?
@@ -391,6 +395,7 @@ $choice WhatIf; What if the shelter at the high school doesn't have enough space
 :: WhatsTheProblem
 {@pattyforbes} Well, it's a safety issue. We don't have room for everyone.
 {@pattyforbes} I pay taxes to make sure my street is quiet and clean. 
+{img Anim/3a/DogOnLeash.png, Right}
 {@pattyforbes} And I deserve to feel safe walking my dog at night! 
 
 $call GiveSnippet(RichLadyQuoteSafeNeighborhood)
@@ -403,6 +408,7 @@ $choice PetBuster; Can I pet your dog?
 :: WalkingDog
 $if StatCheck(Social, 5)
 {@pattyforbes} Well, Buster needs his exercise. 
+{/img}
 {@pattyforbes} I love walking in Amarena Grove.
 {@pattyforbes} It's peaceful <i>here</i>. 
 {@pattyforbes} I'd like to keep it that way. 
@@ -413,6 +419,7 @@ $else
 The woman scoffs.
 {@pattyforbes} What exactly is that supposed to mean??
 {@pattyforbes} Buster here needs his exercise.
+{/img}
 {@pattyforbes} So I think I'll be going now.
 $call AdjustStats(Social - 1)
 $endif
@@ -426,6 +433,7 @@ $choice WhatWouldYouSayToPeople; What would you say to people who need to leave 
 She eyes you up and down.
 {@pattyforbes} Buster's just been groomed.
 {@pattyforbes} His coat is sensitive to... oils. Sorry.
+{/img}
 You've never been more disappointed in your life.
 But, back to the task at hand.
 
@@ -435,6 +443,7 @@ $choice WhatWouldYouSayToPeople; Anyway... what about the people who need to eva
 //Snarky Response
 :: snarkyresponse
 Her eyes narrow. It seems she doesn't appreciate the sarcasm. 
+{/img}
 {@pattyforbes} I guess you don't think my concerns are important enough.
 {@pattyforbes} You'd better find someone else to talk to.
 She hurries away, muttering angrily about big-city reporters. 
