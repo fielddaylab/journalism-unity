@@ -580,8 +580,10 @@ $if Visited(HelpHer)
     {@policespokesman} Well, I'm glad our new reporter is looking out for her neighbors.
     {/img}
     {layout Left}
+    {img Anim/1b/TurnAroundSign.png, Right}
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
     $call GiveSnippet(PoliceSafetyQuote)
+    {/img}
     $call GiveSnippet(PoliceStory)
 $else
     The officer coughs awkwardly.
