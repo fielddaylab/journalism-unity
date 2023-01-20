@@ -458,12 +458,12 @@ $choice WhatWouldYouSayToPeople; What about the people who need to evacuate thei
 // Did you hear what the Mayor said about people helping their neighbors? 
 ::SoMuchForLookingOutForNeighbors
 {@pattyforbes} I do help my neighbors! 
-{@pattyforbes} I dropped off some food at the canned food drive last week. What more do you want from me? 
 {img Anim/3a/CannedFoodDrive.png, Left}
+{@pattyforbes} I dropped off some food at the canned food drive last week. What more do you want from me? 
 When you start to ask another question, she makes an excuse and speed-walks away.
+{/img}
 So much for #TwinLakesStrong... 
 ...unless the Mayor was talking about this lady's perfume.
-{/img}
 $call GiveSnippet(RichLadyCannedFoodDrive)
 
 $HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
@@ -754,7 +754,7 @@ $if StatCheck (Social, 5)
       You try to empathize. You remember what it was like when you first moved to town. 
       {@me}I know. This place can be weird at first.
       {@me} Plus, there are cherries in literally everything.
-      She laughs.
+      {anim rumble}She laughs.
       {@shelter}Finally, somebody who gets it!
       {@shelter} You know... I could probably answer a few questions. From one out-of-towner to another. 
 

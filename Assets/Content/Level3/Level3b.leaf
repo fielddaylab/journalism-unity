@@ -234,8 +234,10 @@ $choice WhatAboutPeopleWhoCant; What about people who can't travel that far, or 
 
 // How did you choose the locations?
 :: HowDidYouChooseLocationsMayor
+{img Anim/3b/MainStreet.png, Right}
 {@mayorbarrysmuckers} Well, of course we needed a filling station here on Main Street.
 {@mayorbarrysmuckers} If we want to save our town, we have to make sure our local shops survive!
+{/img}
 {@mayorbarrysmuckers} And there are filling stations in two local neighborhoods, as well.
 
 $call GiveSnippet(MayorFillingStationLocations)
@@ -302,7 +304,10 @@ $choice DoYouKnowOfAnyResources; Do you have any resources that could help me wr
 {@bookshop} All the rich houses by the lake are doing fine.
 {@bookshop} I mean... nothing against rich folks. My customers come from all over. 
 {@bookshop} But they've got what they need. Others aren't so lucky.
+{img Anim/3b/BikeWithSandbags.png, Right}
 {@bookshop} I saw a guy biking twelve blocks with a bike trailer, just to haul sandbags from Main Street. 
+{/img}
+
 
 $call GiveSnippet(GreatBookstoreQuoteSandbagAccessIssues)
 
@@ -437,15 +442,19 @@ $choice WhichNeighborhoodsAreBeingLeftOut; Which areas of town need the most hel
 :: HowDidYouChooseTheLocations
 {layout Left}
 {@misty} The Mayor chose the locations, actually. 
+{img Anim/3b/FloodMap.png, Right}
 {@misty} He used the government flood maps that show at-risk areas.
 {@misty} Unfortunately, the maps don't acount for climate change and high lake levels. 
+{/img}
 
 $choice DoYouAgreeWithHisChoices; Do you agree with his choices? 
 
 :: DoYouAgreeWithHisChoices
 {@misty} Hmmm. 
 {@misty} I think this area was a good choice, because it's right in the middle of town. 
+{img Anim/3b/MainStreet.png, Right}
 {@misty} There's also a filling station on Main Street...
+{/img}
 {@misty} And one near the shore of Upper Lake. 
 
 $call GiveSnippet(SandbagStationQuoteLocations)
@@ -561,7 +570,9 @@ $choice GoToSandbaggingStation; Decide what to do next
 {@manfillingsandbags} I'm Rainn Martell. I've read all your stories in the paper. 
 {@rainn} Wish I could talk, but I gotta get these sandbags to my grandma...
 {@rainn} And then I need to figure out if she can get financial aid from the government. 
+{img Anim/3b/ChickenTinRoof.png, Right}
 {@rainn} The whole thing's as confusing as a chicken on a tin roof. 
+{/img}
 $if StatCheck(Research, 5)
     {@me} Oh, I might know something about that! I've been doing tons of research lately.
     $HubChoice(HelpHimOut, "Help him figure things out", 0.25, "")
@@ -683,9 +694,11 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
     $choice GoToSandbaggingStation; Find someone else to talk to 
     $else 
     {@me} Oh... maybe I have an extra charger. One sec!
+    {img Anim/3b/emptyBag.png, Right}
     You dig through your bag.
     Unfortunately, it looks like you forgot your portable charger...
     And your raincoat, and your breakfast. Whoops.
+    {/img}
     {@fillingstationvolunteer} I thought the reporter's motto was Be Prepared.
     {@me} I think that's the Boy Scouts, actually.
     {@fillingstationvolunteer} Ah, too bad. 
@@ -812,7 +825,9 @@ $else
 $endif  
 {@me} So... you're helping out? That's actually pretty cool.
 {@girlwithlemonade} So can I put you down for ten cups?
+{img Anim/3b/Lemonade.png, Right}
 {@me} Uh.... just two, please. 
+{/img}
 {@girlwithlemonade} Thank you <i>cherry</i> much!
 It's a little heavy on the sugar...
 ...but surprisingly refreshing!
@@ -964,8 +979,10 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer the lemonade 
 :: OfferThemLemonade
+{img Anim/3b/Lemonade.png, Right}
 {@couchmover} Uh... you just carry cups of lemonade around with you?
 {@couchmover} Sorry, but I'm not drinking that. 
+{/img}
 
 $choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
 $choice StrategicRetreat; Thank them and make a strategic retreat.
@@ -1099,6 +1116,8 @@ $choice WhatKindOfHelpDoYouNeed; What would be most helpful to you now?
 :: DidYouHaveAnyWarning
 {@esme} We had no warning at all.
 {@esme} My son got me all set up with weather alerts. 
+{img Anim/3b/FloodMap.png, Right}
+
 {@esme} According to the flood maps, our neighborhood wasn't supposed to flood...
 {@esme} But try telling that to all the black mold growing in my basement. 
 
@@ -1148,9 +1167,10 @@ $choice HowWereYouAbleToGetSandbagsForYourHome; How were you able to get so many
 :: DebrisPiledByTheCurb
 {@liz} It's been weeks. Ever since the first flood.
 {@liz} It's not safe for our kids... and it's gonna block the storm drains when it rains. 
+{img Anim/3b/GarbageTruck.png, Right}
 {@liz} I keep calling the city, asking them to send a truck out...
 {@liz} And they keep saying they'll get to it as soon as they can.
-
+{/img}
 $call GiveSnippet(LizQuoteDebrisPiledUp)
 
 $choice HowWereYouAbleToGetSandbagsForYourHome; I heard there's no filling station here. How'd you get all those sandbags? 
@@ -1398,10 +1418,14 @@ $call StopRain()
 {layout Left}
 {@me} Thank you! I didn't think I was gonna make it.
 {@mysteryrescuer} Happy to help, Dear. I'm just glad Willa and I happened to be looking outside.
+{img Anim/3b/HappyHouseBoat.png, Right}
 Whoa. Your rescuer is Nora, the Houseboat Lady!
 {@me} What are you doing here, Houseboat La——um, I mean, Nora?
+{/img}
 {@nora} Just visiting my dear friend here. 
+{img Anim/3b/Research.png, Right}
 {@nora} I was on my way to drop off a new stack of books at Bookish...
+{/img}
 {@nora} But Willa called and asked for my help.  
 {img Anim/3b/FloodlightsBook.png, Left}
 That's when you notice the book propped up on the table: <i>Floodlights</i>, by Dr. Nora Warner.
@@ -1443,8 +1467,10 @@ $choice AskNoraAboutHerResearch; Ask Nora about her research
 {layout Left}
 {@me} Nora, can you tell me about your work? 
 {@drnorawarner} Certainly, Dear. I studied climate change and public policy at the college...
+{img Anim/3b/GlobeWithPlane.png, Right}
 {@drnorawarner} And I've traveled the world to learn about how people in other climates deal with flooding. 
 {@drnorawarner} I want to learn all I can about equity and flood disasters. 
+{/img}
 
 $choice WhatMadeYouWantToStudyFlooding; What made you want to study floods? 
 
@@ -1495,8 +1521,10 @@ $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepar
 // How can Twin Lakes prepare better for the next flood? 
 :: HowDoYouThinkTwinLakesCanDoBetterNextTime
 {@drnorawarner} The city needs to start preparing for the next flood now.
+{img Anim/3b/FloodMap.png, Right}
 {@drnorawarner} Update the flood maps.
 {@drnorawarner} Tell people if their house is at risk.
+{/img}
 {@drnorawarner} Designate a sandbag station for every neighborhood, and start looking for volunteers. 
 
 $call GiveSnippet(NoraPrepareBetterNextTime)
