@@ -73,9 +73,9 @@ Birdie, the aptly-named birdwatcher, waves as you run past.
 {img Anim/3b/DarkCloud.png, Left}
 {@me} Don't worry, Birdie. The storm's not supposed to hit until tomorrow!
 Though, come to think of, those clouds look awfully dark... 
+{/img}
 
 $call AdjustStats(Endurance + 2)
-{/img}
 $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish  
 
 // Replenish your bag with food and supplies 
@@ -132,7 +132,9 @@ Khalisa isn't here yet.... but somebody else is.
 {@mayorbarrysmuckers} What happened to #TwinLakesStrong?? 
 {@bookshop} *Ahem.*
 {@bookshop} I liked the story. 
-You're trying to sneakily text Khalisa: <i>Mayor's ticked off, don't come in!</i> when she texts you first.
+You're trying to sneakily text Khalisa: <i>Mayor's ticked off, don't come in!</i>.
+...when she texts you first.
+{anim rumble} BUZZZZ
 {@khalisa}El, 911!! Gonna need to take a raincheck. 
 {@khalisa}Check weather report ASAP!
 Uh oh. This can't be good.
@@ -267,8 +269,8 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 {img Anim/3b/Opossum.png, Left}
 {@bookshop} I loved your piece about the local opossum family! 
 {@bookshop} I used to feed those little guys my tater tots when I was in high school. 
-{@bookshop} How can I help?
 {/img}
+{@bookshop} How can I help?
 $choice DoYouFeelLikeYourShopIsReadyFortheFlood; Do you feel like your shop is ready for the flood?
 
 // Do you feel like your shop is ready for the flood?
@@ -756,7 +758,7 @@ $choice GoToSandbaggingStation; Decide what to do next
 
 // Go to Royal Hazel neighborhood
 :: HeadToRoyalHazelNeighborhood
-$HubChoice(RideYourBikeRoyalHazel, "Ride your bike and stop to take photos along the way", 0.5, "")
+$HubChoice(RideYourBikeRoyalHazel, "Ride your bike", 0.5, "")
 $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 
 // Ride bike to neighborhood 
@@ -787,10 +789,11 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking--there's no story here
 {img Anim/3b/Lemonade.png, Left}
 {@girlwithlemonade} Ice-cold lemonade, two dollars a cup!
 {@me} Oh. Uh... that seems a little pricey...
+{/img}
 The little girl glares at you.
 {@girlwithlemonade} It's for charity!
 $if Visited(MeetWithLocalVet)
-    She points at her sign: 
+    She points at her sign.
     {@lemonadesign} Lemonade for flood relief! Help people keep their pets safe!
     {@girlwithlemonade} My mom saw a story about it in the Gazette.
     {@girlwithlemonade} Some people can't afford to get a babysitter for their pets!
@@ -809,7 +812,7 @@ It's a little heavy on the sugar...
 
 $call AdjustStats(Endurance + 1)
 $call AdjustStats(Social + 1)
-{/img}
+
 
 $CheckFinalConverge()
 $choice ArriveAtRoyalHazelNeighborhood; Keep biking
@@ -990,9 +993,11 @@ $choice ArriveAtRoyalHazelNeighborhood; Try something else
 
 // Text Khalisa for advice
 :: TextKhalisaForAdvice
+{img Anim/3b/Khalisa.png, Left}
 {@me} So... I'm in a neighborhood on the south side, and nobody wants to talk. 
 {@me} Do you have any tips?
 {@khalisa} Hmm. Where are you?
+{/img}
 {@me} Royal Hazel. 
 {@khalisa} Oh, El, why didn't you say so?? I grew up there! 
 {@khalisa} Just finishing up this breaking news post.
@@ -1106,7 +1111,6 @@ $choice FinalConvergeNode; Thank her and decide what to do next
 // Khalisa shows up!
 :: TeamUpWithKhalisa
 As soon as Khalisa shows up, you feel the vibe shift.
-{img Anim/3b/Khalisa.png, Left}
 The woman stacking up sandbags hurries over to say hello. 
 {@lizfirstmeeting} K! Haven't seen you in forever. The paper still treating you okay? 
 {@khalisa} Oh, yeah. I love it!
@@ -1115,7 +1119,7 @@ The woman stacking up sandbags hurries over to say hello.
 {@liz} Of course. Any friend of yours is welcome here.
 {@khalisa} El, you're the lead on this story. You go ahead.
 {@khalisa} I'll keep looking around and see who else I can talk to.  
-{/img}
+
 
 $HubChoice(InterviewLiz, "Interview Liz", 0.25, "")
 
@@ -1149,8 +1153,10 @@ $choice HowWereYouAbleToGetSandbagsForYourHome; How were you able to get so many
 // How were you able to get sandbags 
 :: HowWereYouAbleToGetSandbagsForYourHome
 {@liz} I've been working at it literally all day.
+{img Anim/3b/LoadofSandbags.png, Right}
 {@liz} I'm lucky that I have a car. Some folks out here just take the bus. 
 {@liz} I think I've driven back and forth maybe... oh, 20 times?  
+{/img}
 {@liz} I brought back some sandbags for my neighbor, too. 
 {@liz} Since the first flood, she's been too anxious to come outside most days.  
 $call Givesnippet(LizTripsBackAndForth)
