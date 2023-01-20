@@ -12,9 +12,11 @@ $call SetLocation("Apartment")
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
-You finally get home, exhausted from your first day on the science beat.
+You're finally home.
+Exhausted from your first day on the science beat.
+{anim rumble} BUZZZZ
 {img Anim/2b/Squawker.png, Left}
-Then your Squawker notification chimes.
+Your Squawker notification chimes.
 {/img}
 
 $OnceChoice (CheckSquawkerMessages, "Check Squawker")
@@ -107,12 +109,13 @@ $choice ReadYourEditorsMessage; Read messages
 
 // Original Name: Agree to meet with her in the morning.
 :: AgreeToMeetWithHerInTheMorning
-{@birdie}Wonderful! Meet me at the Snakebite Trailhead.
 {img Anim/2b/SnakebiteTrail.png, Left}
+{@birdie}Wonderful! Meet me at the Snakebite Trailhead.
 {@me}Um... I don't really feel good about the name "Snakebite Trail"....
-{@birdie}Oh, don't worry, dear. There are only two venomous species around here.
-Oh. How comforting. 
 {/img}
+{@birdie}Oh, don't worry, kid. There are only two venomous species around here.
+Oh. How comforting. 
+
 
 $choice TomorrowMorning8A.M; Tomorrow morning, 8 a.m.
 
@@ -299,12 +302,12 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 {/img}
 {@player} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
-{img Anim/2b/SaveTheWetlands.png, Left}
+{img Anim/2b/Crane.png, Left}
 {@birdie} The point is, we need to save our wetlands before it's too late. 
 $call GiveSnippet(WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
-You'll need an expert to verify the numbers. 
 {/img}
+You'll need an expert to verify the numbers. 
 $OnceChoice(WhatDoYouMeanByWetlands, "Can you tell me what you mean by \"wetlands?\"")
 $OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
 $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands around here?")
@@ -374,11 +377,11 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 {@birdie}Of course, the Spark Project doesn't care about data. 
 {@me}What's the Spark Project?  
 {@birdie}A local business expansion group. They're awful.
-{@birdie}They would literally pave over paradise to build a bagel shop.
 {img Anim/2b/Bagel.png, Left}
-You have to admit, Twin Lakes's bagel scene is sorely lacking. 
+{@birdie}They would literally pave over paradise to build a bagel shop.
+You have to admit, Twin Lakes's bagel scene is sorely lacking.
+{/img} 
 But this doesn't seem like the best time to bring this up.
-{/img}
 {@me}Do you know where I can find the Spark Project?
 {@birdie}They have a meeting this morning, in the old opera house.
 {img Anim/2b/SaveTheWetlands.png, Left}
@@ -560,8 +563,8 @@ $call AdjustStats(Trust - 1)
 $call AdjustStats(Trust - 1)
 {@squawkermessage}Go back to the big city you came from!!!
 $call AdjustStats(Trust - 1)
-Uh oh. This interview is tanked. And so is your reputation.
 {/img}
+Uh oh. This interview is tanked. And so is your reputation.
 $GameOver("On the plus side, you're the main character on Squawker today. Better luck next time.")
 
 //Original Name: ApologizeForInsultingHer
@@ -770,12 +773,12 @@ $choice DecideWhatToDoNext; Plan your next move
 //Go to City Hall
 :: GoToCityHall
 Wow. You can't believe your luck! 
-You're halfway to city hall when you see Mayor Smuckers on the street, unwrapping a hot dog from its foil wrapper.
 {img Anim/2b/HotDog.png, Left}
+You're halfway to city hall when you see Mayor Smuckers on the street, unwrapping a hot dog from its foil wrapper.
 He fumbles a bit...
 And spills his little tub of ketchup all over.
-{@mayorbarrysmuckers} Agh, cripes! What a day. 
 {/img}
+{@mayorbarrysmuckers} Agh, cripes! What a day. 
 
 $choice HurryToCatchUp; Hurry to catch up with him 
 $HubChoice(RunIntoNearbyShop, "Run into a nearby shop for ketchup packets", 0.25)

@@ -61,7 +61,6 @@ $endif
 {@dionne} Here's an update on the City Disaster Preparedness. You can make a difference with these stories.
 {@me} On it boss.
 {@dionne} And El... I sent over your letter of recommendation.
-{@dionne} If this all works out, well...
 {@dionne} The Smoke City Herald would be lucky to have you. 
 {@me} Thanks, Dionne. 
 
@@ -847,13 +846,15 @@ $choice WhatIssuesHaveYouNoticed; What issues have you noticed?
 {@shelter} This building isn't accessible. Not enough ramps, outdated restrooms, an inaccessible entrance... 
 {@shelter} And it doesn't allow pets. People won't want to leave their fur babies behind. 
 {/img}
+{img Anim/1a/HappyChicken.png}
 {@me} Or feather babies.
-{img Anim/1a/FlappingChicken2.webm}
+
 {@shelter} Huh?
+{/img}
 {@me} Oh... long story. 
 
 $call GiveSnippet(ShelterCoordinatorDetailedConcerns)
-{/img}
+{
 
 $OnceChoice(HowCanTheCityMakeTheShelterMoreAccessible, "How can the city make the shelter more accessible?")
 $OnceChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?")
@@ -954,18 +955,27 @@ You can tell they have their hands full.
 {img Anim/3a/VetsPets.png, Left}
 There are several animals crawling, slithering, and/or climbing on them at any given point.
 {@me} Hey! Fox Smolder, right? 
+{/img}
 {@fox} That's me!
 
 $if Visited(HelpHer)
+{img Anim/2a/Omlet.png, Left}
       {@fox} Maureen told me all about how you helped her chickens during the storm.
+      {/img}
 $elseif Visited(CheckOnYourUpstairsNeighborWhoHatesThunderstorms)
+    {img Anim/1a/UpstairsCat.png, Left}
       {@fox} You're Jeannie's neighbor, right? She told me how you look after Sprinkles whe she's away. 
+      {/img}
 $elseif Visited(AskAroundForItsOwner)
+      {img Anim/2a/Omlet.png, Left}
       {@fox} The mayor's niece told me all about how you rescued poor Omelette. 
+      {/img}
 $else 
+    {img Anim/2a/Omlet.png, Left}
       {@fox} Maureen told me how you nearly ran down Amelia Egghart. 
       {@fox} But it sounds like you've had a change of heart?
       {@me} Oh... yeah. Chickens. I just love 'em. 
+      {/img}
 $endif
 {@fox} So, what do you need to know? 
 {/img}
@@ -983,13 +993,12 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 {@fox} Pets can be dangerous for people with asthma or allergies.
 {@fox} Plus, animals tend to get agitated during--
 {@fox} Hey! Rupert!!
-{img Anim/3a/VetsPets.png, Left}
+{img Anim/3a/LizardWithCast.png, Left}
 They scold a lizard wearing a leg cast and gently bop its nose.
 {@fox} No biting Peppy's ear. We discussed this!
+{/img}
 {@fox} Um. Agitated during disasters.
 $call GiveSnippet(WhyArentPetsAllowedQuote)
-
-{/img}
 $OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
 $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
 
@@ -1522,7 +1531,7 @@ $choice GoToSeniorCitizenApartments; Decide what to do next
 
 // Call disability rights expert at local college
 :: CallDisabilityRightsExpertAtLocalCollege
-RING.... RING.... 
+{anim rumble} RING.... RING.... 
 {@summer} This is Summer Rhodes. How can I help you?
 {@me} I'm a reporter writing a story about the flood shelter downtown.
 {@me} Do you have a few minutes to talk? 
@@ -1591,8 +1600,10 @@ $endif
 {@summer} Unfortunately, yes.
 {@summer} My team has been pushing the city to fix up that school for years. 
 {@summer} It's no wonder Twin Lakes is shrinking instead of growing.
+{img anim/1b/Banner.png, Left} 
 {@me} Wait... really? But what about the Cherry Festival and all the tourist stuff?
 {@summer} Well, sure, tourists come to town in the summer.
+{/img}
 {@summer} But the locals are moving away. 
 {@summer} Twin Lakes needs to get with the times. 
 {@summer} We have to make sure our infrastructure is accessible to everyone. 
@@ -1603,13 +1614,14 @@ $choice RequirementsForAccessibleShelter; Do you have recommendations for how to
 
 // Do you have recommendations
 :: RequirementsForAccessibleShelter
-{@summer} For starters, the building needs ramps, automated entrances, wide enough doorways, braille signs, drinking fountains that don't stick out into the hallway...
 {img Anim/3a/Ramp.png, Left}
+{@summer} For starters, the building needs ramps, automated entrances, wide enough doorways, braille signs, drinking fountains that don't stick out into the hallway...
 {@me} What about the disabled kids that go to school there?? They have to deal with a terrible building all year round? 
+{/img}
 {@summer} Exactly. It's awful.
 {@summer} Hopefully your story will bring some attention to the issue. 
 $call GiveSnippet(RequirementsForAccessibleShelter)
-{/img}
+
 
 $choice IsThereAnythingTheCityCanDoRightNow; Is there anything the city can do in the next three days?
 
