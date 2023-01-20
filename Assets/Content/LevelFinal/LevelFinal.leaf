@@ -14,17 +14,17 @@ $if CityScore() > 2
       $call Music($Audio_CherryTownRestoration)
       $call Ambience($Audio_BustlingCafeChatter)
       $call StopRain()
-      HOORAY!
-      It’s the annual Cherry Festival again… 
+      Has it already been a year?
+      It’s the annual Cherry Festival is back... 
       {img-inline Anim/CityScore_A.png}
-      And thanks to your stories, the town has really gotten its cherry-themed ducks in a row. 
+      The town got its cherry-themed ducks in a row. 
       There was another storm last month…
       But the town is still standing, and everyone was able to find shelter.
       The Mayor is running for reelection…
       But you have a feeling the other candidates, Sophia and Fred, are going to give him a run for his money.
       You still have an open invitation to interview at the Smoke City Herald…
-      But you’ve decided to stick around in Twin Lakes for now. 
-      You care about the people here. 
+      You're going to stick around Twin Lakes for now. 
+      This place has grown on you.  
       Plus, Khalisa and her dad are counting on you to bring the cherry-chip ice cream for dinner on Sunday. 
 
 // good

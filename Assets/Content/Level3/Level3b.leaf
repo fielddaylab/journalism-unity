@@ -1537,10 +1537,13 @@ $choice DoYouThinkHouseboatsWork; Do you really think houseboats work as a long-
 {@drnorawarner} Of course! People use houseboats in waterfront areas all over the world. 
 {@drnorawarner} I mean... I suppose floating houses aren't the most practical for everyone. 
 {@drnorawarner} And most of Twin Lakes might still end up being washed away. 
-{@drnorawarner} But I'm not sure what else to do. I couldn't deal with the pain of losing another home.
+{@drnorawarner} But I'm not sure what else to do. 
+{@drnorawarner} I can't lose another home.
 {@drnorawarner} Houseboat, stay afloat! 
 
-You're about to ask another question when your phone buzzes.
+You're about to ask another question when...
+{anim rumble} BUZZZ
+
 {@dionne} You okay, El?? What's the situation out there?
 {@me} I'm ok. Found shelter with Dr. Warner.
 {@dionne} Great. It's press time. 
