@@ -201,8 +201,10 @@ $choice IsTheDamLikelyToBurst; How likely is it that the dam will fail?
 
 // How likely is it that the dam will fail?
 :: IsTheDamLikelyToBurst
+{img Anim/2a/Dam.png, Left}
 {@mayorbarrysmuckers}Oh, I'd hate to put a number on it.
 {@mayorbarrysmuckers} These things are so hard to predict.
+{/img}
 {@mayorbarrysmuckers} I'd say maybe.... half?
 {@me} You mean... there's a 50% chance the dam will fail??
 {@mayorbarrysmuckers} And a 50% chance it'll hold!
@@ -753,7 +755,9 @@ $endif
 $if StatCheck (Social, 5)
       You try to empathize. You remember what it was like when you first moved to town. 
       {@me}I know. This place can be weird at first.
+        {img Anim/3a/CannedFoodDrive.png, Left}
       {@me} Plus, there are cherries in literally everything.
+      {/img}
       {anim rumble}She laughs.
       {@shelter}Finally, somebody who gets it!
       {@shelter} You know... I could probably answer a few questions. From one out-of-towner to another. 
