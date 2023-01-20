@@ -982,7 +982,7 @@ There are several animals crawling, slithering, and/or climbing on them at any g
 {@fox} That's me!
 
 $if Visited(HelpHer)
-{img Anim/2a/Omlet.png, Left}
+{img Anim/2a/Omelet.png, Left}
       {@fox} Maureen told me all about how you helped her chickens during the storm.
       {/img}
 $elseif Visited(CheckOnYourUpstairsNeighborWhoHatesThunderstorms)
@@ -990,11 +990,11 @@ $elseif Visited(CheckOnYourUpstairsNeighborWhoHatesThunderstorms)
       {@fox} You're Jeannie's neighbor, right? She told me how you look after Sprinkles whe she's away. 
       {/img}
 $elseif Visited(AskAroundForItsOwner)
-      {img Anim/2a/Omlet.png, Left}
+      {img Anim/2a/Omelet.png, Left}
       {@fox} The mayor's niece told me all about how you rescued poor Omelette. 
       {/img}
 $else 
-    {img Anim/2a/Omlet.png, Left}
+    {img Anim/2a/Omelet.png, Left}
       {@fox} Maureen told me how you nearly ran down Amelia Egghart. 
       {@fox} But it sounds like you've had a change of heart?
       {@me} Oh... yeah. Chickens. I just love 'em. 
@@ -1623,7 +1623,7 @@ $endif
 {@summer} Unfortunately, yes.
 {@summer} My team has been pushing the city to fix up that school for years. 
 {@summer} It's no wonder Twin Lakes is shrinking instead of growing.
-{img anim/1b/Banner.png, Left} 
+{img anim/1b/Banner.png, Left}
 {@me} Wait... really? But what about the Cherry Festival and all the tourist stuff?
 {@summer} Well, sure, tourists come to town in the summer.
 {/img}

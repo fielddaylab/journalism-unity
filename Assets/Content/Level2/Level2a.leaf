@@ -173,7 +173,7 @@ $endif
 {layout Right}
 You sit down with a novel by local author Stephanie Queen. 
 The book is about a tiny lakeside town being overtaken by a terrible flood.
-{img Anim/2a/DualPonds.png, Left}
+{img Anim/2a/DualPondsBook.png, Left}
 The fictional town of Dual Ponds feels vaguely familiar...
 
 $call AdjustStats(Research + 2)
