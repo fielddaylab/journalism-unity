@@ -786,7 +786,7 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 // Ride bike to neighborhood 
 :: RideYourBikeRoyalHazel
 {layout Right}
-{bg $BG_Map}
+{bg $BG_NoDebris}
 $call Music($Audio_PaperPuddle)
 $call Ambience($Audio_UrbanSeagulls)
 $call StopRain()
@@ -860,15 +860,16 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking toward the Royal Hazel neigh
 
 // Drive 
 :: Drive
-{bg $BG_TownTransitional}
+{bg $BG_NoDebris}
 You drive through the historic, higher-income neighborhoods, heading south. 
 The debris from the last flood has already been cleared away. 
 
 $call GiveSnippet(QuickDescriptionHighIncomeNeighborhood)
 
+$choice ArriveAtRoyalHazelNeighborhood; Keep driving toward the Royal Hazel neighborhood  
+
 // Arrive at Royal Hazel neighborhood 
 :: ArriveAtRoyalHazelNeighborhood
-
 {bg $BG_LowIncomeSt}
 $call Music($Audio_SolemnWaters)
 $call StopAmbience()
@@ -947,9 +948,9 @@ $GameOver("Turns out distracting people from preparing for the flood is the exac
 // TalkToMenCarryingCouchOutside
 :: TalkToMenCarryingCouchOutside
 $if FirstVisit()
-Two men are lugging a couch down their front porch steps.
-They seem surprised when you walk over to them. 
-{@manmovingcouch} You lost, kid? 
+    Two men are lugging a couch down their front porch steps.
+    They seem surprised when you walk over to them. 
+    {@manmovingcouch} You lost, kid? 
 $endif 
 
 // Check if player has tried any options yet
@@ -971,10 +972,10 @@ $HubChoice(OfferToHelpBringOutFurniture, "Ask if they need help bringing out fur
 // Ask to interview them about the flood
 :: AskForAnInterviewFromCouchMovers
 {@couchmover} Are you serious, kid??
-{@couchmover} This place is gonna be underwater in a few hours. Maybe sooner. 
+{@couchmover} This place is gonna be underwater in a few hours. Maybe sooner.
 {@couchmover} We do NOT have time to talk to the press. 
 
-$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them // <- this choice has no corresponding node
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer the lemonade 
@@ -984,7 +985,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 {@couchmover} Sorry, but I'm not drinking that. 
 {/img}
 
-$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer a snack
@@ -993,7 +994,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 {@couchmover} Come to think of it, I could grab you some cold water from inside, if you want...
 {@couchmover} You look a little stressed out. 
 
-$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Offer to help bring out furniture 
@@ -1002,7 +1003,7 @@ $choice StrategicRetreat; Thank them and make a strategic retreat.
 {@manmovingcouch} Thanks for asking, though. 
 {@manmovingcouch} Do you need directions back downtown, or....? 
 
-$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them  // <- this choice has no corresponding node
+$choice TalkToMenCarryingCouchOutside; Keep trying to score an interview with them
 $choice StrategicRetreat; Thank them and make a strategic retreat.
 
 // Strategic Retreat
