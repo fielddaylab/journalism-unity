@@ -378,16 +378,6 @@ PrefabInstance:
       propertyPath: m_text
       value: Cherry Creek Marsh
       objectReference: {fileID: 0}
-    - target: {fileID: 269880349988773003, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 598.6295
-      objectReference: {fileID: 0}
-    - target: {fileID: 269880349988773003, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 350.68524
-      objectReference: {fileID: 0}
     - target: {fileID: 743937671520972061, guid: a463191c978fd574ca44aab8ffda8bf3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -497,16 +487,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 470
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 469
       objectReference: {fileID: 0}
     - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
         type: 3}
