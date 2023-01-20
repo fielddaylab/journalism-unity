@@ -187,9 +187,10 @@ Your coworkers give you the tech you need, but people have started hiding under 
 $call AdjustStats(Tech + 2, Social - 1, Trust - 1)
 $else
 {@dionne} You looking for something, El?
-{@me} Oh... uh, you don't have an extra phone charger, do you?
 {img Anim/1b/PhoneCord.png}
+{@me} Oh... uh, you don't have an extra phone charger, do you?
 {@dionne} Here. Take mine.
+{/img}
 {@dionne} Just make sure to bring your own next time. 
 {@dionne}I need to know I can trust you to be prepared.
 
@@ -1061,8 +1062,10 @@ $choice ArriveAtFloodSite; Thank her for the interview
 
 // Original Name: "How can people protect their houses and businesses?"
 :: HowCanPeopleProtectTheirHousesAndBusinesses
+{img Anim/1b/Sandbag.png, Right}
 {@dnrworker}Free sandbags are available at the community center. 
 {@dnrworker}The problem is, it's not safe to drive in this mess, so people can't get to them.
+{/img}
 {@dnrworker}Right now, the best thing people can do is clear out their basements, stay off the roads, and find higher ground. 
 
 $call GiveSnippet(SandbagTroubles)

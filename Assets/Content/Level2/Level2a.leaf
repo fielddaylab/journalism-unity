@@ -288,8 +288,9 @@ $elseif CityScore() == 0
 $else
     {img-inline Anim/CityScore_F.png}
 $endif
-{@dionne} Here's how well-prepared the city is based on our recent stories.
-{@me} Understood.
+{@dionne} Here's an update on the city disaster preparedness score. 
+{@dionne} Our stories make a difference. 
+{@me} On it!
 
 $choice ScienceStoryMap; ...Got it. Thanks, Dionne.
 
@@ -615,11 +616,11 @@ $endif
 :: RunIntoTheGovernorInHallway
 {layout Left}
 As you're leaving, you literally run into a lady who looks vaguely familiar.
-Blue pantsuit, perfect salon-blown hair, a #TwinLakesStrong pin on her lapel... 
 {img Anim/2a/Governor.png, Left}
-
+Blue pantsuit, perfect salon-blown hair, a #TwinLakesStrong pin on her lapel... 
 {@me} Whoa... you're the governor!
 {@governor} Yep! That's me. 
+{/img}
 {@governor} And you are...
 $if Visited(RoundUpYourTechAndRainGear)
 {@governor} ...Wearing a trash bag.
@@ -839,32 +840,30 @@ $GameOver("Note to self: that killer photo is NOT worth getting fired over.")
 // Original Name: Math joke!
 :: MathJoke
 {img Anim/2a/LaughMask.png, Left}
-{@dnrexpert}Ok, let's see... Did you hear the one about the law of averages? I'd tell you, but it's too <i>mean.</i> 
+{@dnrexpert} Did you hear the one about the law of averages? I'd tell you, but it's too <i>mean.</i> 
 
 $if StatCheck(Research, 4)
     You've been reading up on statistics lately--you can top that one. 
+    {/img}
 
     {@me}Did you hear about the haunted graph? It had paranormal distribution.
 
     {@dnrexpert}Ha! Not bad, kid. How can I help you? 
-    {/img}
     $choice GoodDNRInterview; Interview DNR Worker.
 $elseif StatCheck(Tech, 4)
     Ha! Being a techie with a back pocket full of computer jokes, you can probably top that one.
-
+    {/img}
     {@me}Did you hear about the computer that was full of bugs? It had a broken screen.
 
     {@dnrexpert}Ha! Not bad, kid. How can I help you? 
-    {/img}
     $choice GoodDNRInterview; Interview DNR Worker.
 $else
     The joke flies right over your head. 
-
+    {/img}
     {@me}Uh.... good one. I think.
     {@me}Can I ask you some questions about the flood?
-
     {@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
-    {/img}
+
     $choice DNRStatement; Get DNR Statement
 $endif
 
@@ -929,7 +928,7 @@ $if StatCheck(Social, 4)
     $choice DepartmentOfLimnology; Actually, I better go. 
 $else
     {@sarah}Well... I guess I can chat for a minute. 
-    {@sarah}Thanks to climate change, we're going to keep seeing more and more rain. 
+    {@sarah}Due to climate change, we expect to see more heavy rain like this. 
     {@sarah}This town needs to make some changes if it wants to survive.
 
     $call GiveSnippet(BasicFloodBackground)
