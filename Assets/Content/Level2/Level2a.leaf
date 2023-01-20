@@ -249,7 +249,7 @@ $choice AnswerPhone; Answer phone
 
 // Original Name: Make an excuse and rush back inside
 :: MakeAnExcuseAndRushBackInside
-{bg $BG_Bedroom}
+{bg $BG_BedroomDesk}
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
