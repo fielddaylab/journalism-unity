@@ -219,7 +219,6 @@ $choice GetReadyPart2; Head back to your desk
 
 // Original Name: Head out
 :: HeadOut
-@checkpoint
 {clear-text}
 {layout Left}
 {bg $BG_OfficeExterior}

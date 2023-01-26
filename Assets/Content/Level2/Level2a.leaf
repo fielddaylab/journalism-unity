@@ -917,7 +917,7 @@ $choice DepartmentOfLimnology; Actually, I better go.
 
 // Original Name: Quick Interview: Limnology Expert
 :: QuickInterviewLimnologyExpert
-
+{/img}
 {layout Right}
 $if StatCheck(Social, 4)
     She seems busy, but your social graces win her over. 
@@ -932,7 +932,6 @@ $else
     {@sarah}This town needs to make some changes if it wants to survive.
 
     $call GiveSnippet(BasicFloodBackground)
-    {/img}
     $if !Visited(LookForSomeoneToInterview)
         $choice LookForSomeoneToInterview; Look around for someone else to talk to
     $endif
@@ -942,6 +941,7 @@ $endif
 
 // Original Name: Tell her you met her sister!
 :: TellHerYouMetHerSister
+{/img}
 {@me}I met your sister this morning. Her cafe is amazing!
 {@sarah}Awww! Did she make you her world-famous PB&J? 
 {@sarah}I'm glad she sent you along. I'd be happy to do an interview!
@@ -1172,8 +1172,6 @@ $choice ScienceStoryMap; Actually... I'm running low on time. I better run.
 :: In-DepthInterviewLimnologyExpert
 {@sarah}Twin Lakes is super vulnerable to flooding. I mean, we're right between two giant lakes.  
 {@sarah}That, plus the high lake levels... it was a disaster waiting to happen.
-
-{/img}
 
 $if !Visited(AskWhatPeopleCanDoToHelp)
     $choice AskWhatPeopleCanDoToHelp; How can the people of Twin Lakes help stop future flooding? 
