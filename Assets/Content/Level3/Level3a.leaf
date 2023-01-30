@@ -164,7 +164,7 @@ $choice WhoIsRunningTheShelter; Who is in charge of running the shelter?
 {@mayorbarrysmuckers} Well, ah... I have to admit, the evacuation order is bigger than I expected.
 {@mayorbarrysmuckers} There might not be enough beds for everyone. 
 {@mayorbarrysmuckers} But I'm sure people have friends or relatives to stay with!
-$call GiveSnippet(MayorQuoteNotEnoughSpace)
+$call GiveSnippet(MayorInfoNotEnoughSpace)
 
 $choice WhyWasntTheCityMorePrepared; Why wasn't Twin Lakes better prepared for this? 
 $choice DontWantToLeaveTheirHomes; What would you say to people who don't want to leave their homes? 
