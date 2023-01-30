@@ -7,6 +7,7 @@ using BeauPools;
 using EasyAssetStreaming;
 using BeauUtil.UI;
 using FDLocalization;
+using Journalism.UI;
 
 namespace Journalism {
     
@@ -49,6 +50,10 @@ namespace Journalism {
         public Image HeaderBG;
         public Image Icon; // Radial
         public Image MarkerIcon; // Marker
+
+        [Header("Animation")]
+        public AnimatedElement AnimElement = null;
+        [NonSerialized] private CanvasSpaceTransformation m_SpaceHelper;
 
         #endregion // Inspector
 

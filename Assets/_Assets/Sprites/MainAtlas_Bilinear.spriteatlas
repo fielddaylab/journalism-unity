@@ -88,6 +88,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e9b7af09a3ec2f54bb23ccce5480167d, type: 3}
   - {fileID: 21300000, guid: fb4aec490a752b041b214a02b9055a10, type: 3}
   - {fileID: 21300000, guid: 5ddf5a6977022c646847e4cb928a030d, type: 3}
+  - {fileID: 21300000, guid: 0daa92b9016fd3149ba201634ddbdf85, type: 3}
   - {fileID: 21300000, guid: a10e8fe9fd6fbd347b87d1f493b29f39, type: 3}
   - {fileID: 21300000, guid: 237eff2a97bddf94e8109891d11b2470, type: 3}
   - {fileID: 21300000, guid: 43db8c6a54c3e244791c7d7c0ec7c083, type: 3}
@@ -125,6 +126,7 @@ SpriteAtlas:
   - ThickX
   - StorySlotArrow
   - PointArrow
+  - stats-highlight
   - star
   - CircleGradient75
   - ClockFlipOver

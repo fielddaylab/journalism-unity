@@ -15,6 +15,7 @@ using BeauUtil.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using FDLocalization;
+using BeauRoutine.Splines;
 
 namespace Journalism {
     static public class GameText {
@@ -384,6 +385,12 @@ namespace Journalism {
             line.gameObject.SetActive(false);
         }
 
+        static public IEnumerator AnimateStatsRays(Image raysImg, Vector2 offset, float duration) {
+            raysImg.enabled = true;
+            yield return duration;
+            raysImg.enabled = false;
+        }
+
         /// <summary>
         /// Animates the text line as a "pinned" animation.
         /// </summary>
@@ -588,6 +595,27 @@ namespace Journalism {
             }
 
             return Routine.WaitSeconds(count * scroll.TextVanishDelay + scroll.VanishAnimParams.Time);
+        }
+
+        /// <summary>
+        /// Animates stats rising to stats window button
+        /// </summary>
+        /// <returns></returns>
+        static public IEnumerator AnimateStatsRise(TextLine line, TextDisplaySystem textDisplay, float transitionTime, float finalScale, float rotationAmt) {
+            Vector3 targetPos;
+
+            Transform statsButtonTransform = Game.UI.Header.FindButton("Stats").transform;
+            targetPos = statsButtonTransform.position;
+
+            SimpleSpline spline = Spline.Simple(line.transform.position, targetPos, RNG.Instance.NextFloat(0.5f, 0.6f), new Vector3(RNG.Instance.NextFloat(-4, 4), 0));
+
+            yield return Routine.Combine(
+                line.transform.MoveAlong(spline, transitionTime).Ease(Curve.CubeIn),
+                line.transform.ScaleTo(finalScale, transitionTime),
+                line.transform.RotateTo(line.transform.localEulerAngles.z + rotationAmt, transitionTime, Axis.Z, Space.Self, AngleMode.Absolute)
+                );
+
+            line.transform.localScale = Vector2.zero;
         }
 
         /// <summary>

@@ -22,6 +22,7 @@ namespace Journalism.UI {
         public ClockIncrements TimeClock = null;
         public TextLine TimeEffect = null;
         public TextLine StatsEffect = null;
+        public Image StatsRays = null;
 
         #endregion // Inspector
 
@@ -30,6 +31,7 @@ namespace Journalism.UI {
         [NonSerialized] private bool m_FaderEvaluateQueued;
         [NonSerialized] private bool m_FaderState;
         [NonSerialized] private Routine m_StatsEffectAnim;
+        [NonSerialized] private Routine m_StatsRaysAnim;
         [NonSerialized] private Routine m_TimeEffectAnim;
 
         private void Awake() {
@@ -75,6 +77,11 @@ namespace Journalism.UI {
 
         public bool AnyOpen() {
             return m_FaderState || m_FaderRoutine;
+        }
+
+        public void ShowStatsRays() {
+            StatsRays.gameObject.SetActive(true);
+            m_StatsRaysAnim.Replace(this, GameText.AnimateStatsRays(StatsRays, Vector2.zero, 0.3f)).DelayBy(0.35f);
         }
 
         public HeaderButton FindButton(StringHash32 id) {
@@ -154,7 +161,7 @@ namespace Journalism.UI {
                         GameText.PopulateTextLine(StatsEffect, "<b>-</b>", null, default, Assets.Style("stat-decrease"), null);
                     }
                     GameText.PrepareTextLine(StatsEffect, 2);
-                    m_StatsEffectAnim.Replace(this, GameText.AnimateTextLineEffect(StatsEffect, new Vector2(0, 15), 0.3f, 2));
+                    m_StatsEffectAnim.Replace(this, GameText.AnimateTextLineEffect(StatsEffect, new Vector2(0, 15), 0.3f, 2)).DelayBy(2.5f);
                 }
             }
         }
