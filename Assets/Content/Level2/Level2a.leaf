@@ -106,7 +106,7 @@ $else
 You're struggling to find some not-expired food when a neighbor taps at the front window.
 {@neighbor}Hiya! You wrote that story yesterday, right? 
 {@neighbor}Thanks to you, I got all my stuff out of the basement in time!
-{img Anim/2b/LemonLoaf.png, Left}
+{img Anim/2a/LemonLoaf.png, Left}
 He offers you a homemade lemon loaf--a little off-brand for the Cherry Capitol of the Midwest, but still delicious.  
 ...even if it's got a bit of a soggy bottom.
 $call AdjustStats(Endurance + 1, Trust + 1)
