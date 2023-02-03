@@ -115,6 +115,13 @@ namespace Journalism {
             this.m_Border.gameObject.SetActive(false); // disable border
             this.m_ImageBG.sprite = m_ImageBGSprite;
 
+            /*
+            m_ImageBG.Animation.Replace(this, OpeningAnimation())
+                .OnComplete(
+                    m_PopUp.Animation.Replace(this, IdleAnimation())
+                );
+            */
+
             yield return HandleImageOrMap(evtData, context);
         }
 
@@ -372,9 +379,16 @@ namespace Journalism {
 
                 m_Image.Texture.Path = path.ToString();
                 m_Image.Texture.Preload();
+
                 while(m_Image.Texture.IsLoading()) {
                     yield return null;
                 }
+
+                /*
+                while (m_ImageBG.Texture.IsLoading())
+
+                    // layered secondary animation?
+                */
             }
         }
 

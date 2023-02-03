@@ -298,7 +298,7 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 {@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
 {@birdie} But 90% of our original wetlands are gone!
 {/img}
-{@player} Wow... 90%? That seems like a lot. 
+{@me} Wow... 90%? That seems like a lot. 
 {/img}
 {@player} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
@@ -667,9 +667,32 @@ $choice DecideWhatToDoNext; Leave the opera house
 
 //Original Name: Decide where to go next
 :: DecideWhatToDoNext
+
 $if !HasTime(0.25)
     You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
+$elseif Visited(ReturnToTheDepartmentOfLimnology)
+    $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite), Visited(CallTheMayor)
+        $if Visited(SparkProjectMeeting)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $elseif Visited(CallTheSparkProject)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $endif
+    $else
+        $if Visited(SparkProjectMeeting)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $elseif Visited(CallTheSparkProject)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $endif
+    $endif
 $endif
 
 $HubChoice(ReturnToTheDepartmentOfLimnology, "Go to the Department of Limnology", 0.25, "Limnology")
