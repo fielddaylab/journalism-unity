@@ -66,6 +66,7 @@ namespace Journalism.UI {
                     m_StatsEffectAnim.Stop();
                     TimeEffect.gameObject.SetActive(false);
                     StatsEffect.gameObject.SetActive(false);
+                    StatsRays.gameObject.SetActive(false);
                 });
             }
 

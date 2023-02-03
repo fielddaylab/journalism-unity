@@ -569,14 +569,12 @@ How will people ever recover?
 $endif
 
 $if HasTime(0.5)
-
-$choice ScienceStoryMap; Leave Main Street
-$HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
-$HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!!'' sign in the window", -1)
-$HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
-
+    $choice ScienceStoryMap; Leave Main Street
+    $HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
+    $HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!!'' sign in the window", -1)
+    $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 $else
-$choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+    $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
 
 // Original Name: Knock on the nearest office door
