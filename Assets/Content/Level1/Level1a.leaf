@@ -817,45 +817,45 @@ $endif //1 or 2: no change
 
 $if StoryScore() == "good" //3+ net quality
     $if StoryAlignment() >= 0.5
-        {@person}   Stellar work, El! I can tell you put your heart into this.
-        {@person}   Solid story construction and lots of useful info.
-        {@person}   Maybe you've got a Pulitzer in your future!
+        {@dionne}   Stellar work, El! I can tell you put your heart into this.
+        {@dionne}   Solid story construction and lots of useful info.
+        {@dionne}   Maybe you've got a Pulitzer in your future!
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work, Rookie! This info is top-notch quality.
-        {@person}   Admittedly, we could've used a little more useful info... 
-        {@person}   But this should still help a lot of people. 
+        {@dionne}   Nice work, Rookie! This info is top-notch quality.
+        {@dionne}   Admittedly, we could've used a little more useful info... 
+        {@dionne}   But this should still help a lot of people. 
     $else
-        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
-        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
-        {@person}   Make sure to keep an eye on the story breakdown next time. 
+        {@dionne}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@dionne}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@dionne}   Make sure to keep an eye on the story breakdown next time. 
     $endif
 $elseif StoryScore() == "medium" //1 or 2 net quality
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work matching up with that story breakdown!
-        {@person}   I'd like to see even more high-quality info...
-        {@person}   But still, a solid story. This should help a lot of people.  
+        {@dionne}   Nice work matching up with that story breakdown!
+        {@dionne}   I'd like to see even more high-quality info...
+        {@dionne}   But still, a solid story. This should help a lot of people.  
     $elseif StoryAlignment() >= 0.3
-        {@person}   Not bad, Rookie! Not perfect, but definitely not bad.  
-        {@person}   This should be enough to help a lot of people.  
-        {@person}   Next time, make sure to check my notes. 
+        {@dionne}   Not bad, Rookie! Not perfect, but definitely not bad.  
+        {@dionne}   This should be enough to help a lot of people.  
+        {@dionne}   Next time, make sure to check my notes. 
     $else
-        {@person}   Hmmm... not too bad, El. You gathered some useful, quality information here.   
-        {@person}   Next time, keep an eye on the story breakdown.   
-        {@person}   Still. Not bad for your first natural disaster. 
+        {@dionne}   Hmmm... not too bad, El. You gathered some useful, quality information here.   
+        {@dionne}   Next time, keep an eye on the story breakdown.   
+        {@dionne}   Still. Not bad for your first natural disaster. 
     $endif
 $else //<1 net quality
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work, El. You got a lot of useful information out there! 
-        {@person}   This story should help a lot of people... 
-        {@person}   Though I gotta admit, we could use some higher-quality snippets.
+        {@dionne}   Nice work, El. You got a lot of useful information out there! 
+        {@dionne}   This story should help a lot of people... 
+        {@dionne}   Though I gotta admit, we could use some higher-quality snippets.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work, Rookie. Your story construction is pretty solid!
-        {@person}   Your quality control could definitely use some work. 
-        {@person}   Still. Not bad for your first natural disaster. 
+        {@dionne}   Nice work, Rookie. Your story construction is pretty solid!
+        {@dionne}   Your quality control could definitely use some work. 
+        {@dionne}   Still. Not bad for your first natural disaster. 
     $else
-        {@person}   Well.... this could be worse. Sort of.  
-        {@person}   We needed more high-quality snippets here. And a closer match with the story breakdown.
-        {@person}   But this was your first natural disaster, so I'll let it slide.
+        {@dionne}   Well.... this could be worse. Sort of.  
+        {@dionne}   We needed more high-quality snippets here. And a closer match with the story breakdown.
+        {@dionne}   But this was your first natural disaster, so I'll let it slide.
     $endif
 $endif
 
