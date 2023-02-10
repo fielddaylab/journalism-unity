@@ -49,7 +49,7 @@ namespace Journalism {
         static public bool SetLocation(StringHash32 locationId) {
             if (s_Current.LocationId != locationId) {
                 s_Current.LocationId = locationId;
-                Game.Events.Dispatch(GameEvents.Locationupdated, locationId);
+                Game.Events.Dispatch(GameEvents.LocationUpdated, locationId);
                 return true;
             }
 

@@ -253,6 +253,8 @@ namespace Journalism {
                 yield return GameText.WaitForPlayerNext(Choices, inSourceString.RichText, Assets.Style(characterId), GetDefaultChoiceAnchor());
             }
 
+            Game.Events.Dispatch(GameEvents.DisplayTextDialog, new TextNodeParams("", "", ""));
+
             yield return GameText.AnimateLocations(Text, 1);
             GameText.ClearOverflowLines(Text);
             yield return 0.3f;
@@ -340,7 +342,9 @@ namespace Journalism {
                             iconMarker = MapMarkerLoader.StreamIn(locId, this.gameObject);
                         }
 
-                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId));
+                        uint choiceFlavor = inChoice.GetCustomData(option.Index, GameText.ChoiceData.Flavor).AsUInt();
+
+                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId), choiceFlavor);
                     }
                     // send option locations to map
                     Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdating, locIds);
@@ -355,8 +359,14 @@ namespace Journalism {
                         AltColumn?.RectTransform.AnchorPosTo(m_AltColumnBaseline + m_ChoiceRowsOffset, m_ChoiceRowsAnim, Axis.Y).DelayBy(0.03f)
                     );
 
+                    // display
                     yield return GameText.AnimateLocations(Choices);
+                    Game.Events.Dispatch(GameEvents.DisplayChoices);
+
+                    // wait
                     yield return GameText.WaitForChoice(Choices, inChoice);
+
+                    // clear
                     Game.Events.Dispatch(GameEvents.ChoicesClearing);
                     yield return GameText.AnimateVanish(Choices);
                     GameText.ClearChoices(Choices);

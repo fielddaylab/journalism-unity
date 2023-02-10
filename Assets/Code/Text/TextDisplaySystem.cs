@@ -183,6 +183,7 @@ namespace Journalism {
             GameText.AdjustComputedLocations(m_CurrentLayer.Text, 1);
             yield return GameText.AnimateLocations(m_CurrentLayer.Text, 1);
             GameText.ClearOverflowLines(m_CurrentLayer.Text);
+            Game.Events.Dispatch(GameEvents.DisplayBreakdownDialog, Player.StoryStatistics);
             yield return 0.2f;
 
             // Quality
@@ -193,6 +194,7 @@ namespace Journalism {
             GameText.AdjustComputedLocations(m_CurrentLayer.Text, 1);
             yield return GameText.AnimateLocations(m_CurrentLayer.Text, 1);
             GameText.ClearOverflowLines(m_CurrentLayer.Text);
+            Game.Events.Dispatch(GameEvents.DisplaySnippetQualityDialog, Player.StoryStatistics);
             yield return 0.2f;
 
             yield return m_CurrentLayer.CompleteLine();

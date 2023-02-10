@@ -27,6 +27,7 @@ namespace Journalism {
         [NonSerialized] public uint TimeCost;
         
         [NonSerialized] public bool Selected;
+        [NonSerialized] public uint ChoiceType;
 
         private void Awake() {
             Button.onClick.AddListener(() => Selected = true);

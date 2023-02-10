@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 1374342849930155033}
   - component: {fileID: 7466770506654058423}
   - component: {fileID: 8448198686697289918}
+  - component: {fileID: 323105464560375374}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -495,6 +496,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ServerAddress: 
   m_SaveRetryDelay: 10
+--- !u!114 &323105464560375374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7466770506654058422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d0a8b413c14484e980ddb61f6978c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AppId: JOURNALISM
+  m_AppVersion: 1.0
+  m_Firebase:
+    ApiKey: 
+    ProjectId: 
+    StorageBucket: 
+    MessagingSenderId: 
+    AppId: 
+    MeasurementId: 
 --- !u!1 &8242933497971727063
 GameObject:
   m_ObjectHideFlags: 0
