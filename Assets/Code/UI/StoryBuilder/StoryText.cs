@@ -18,6 +18,8 @@ namespace Journalism.UI {
             slot.Data = data;
             slot.Animation.Stop();
             GameText.PopulateStoryScrap(slot.Snippet, data, Assets.Style("snippet-in-story"));
+            Game.Events.Dispatch(GameEvents.PlaceSnippet);
+            Game.Events.Dispatch(GameEvents.StoryUpdated);
         }
 
         static public void EmptySlot(StoryBuilderSlot slot) {

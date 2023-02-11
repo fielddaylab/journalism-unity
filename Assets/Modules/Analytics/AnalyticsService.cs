@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using FieldDay;
 using BeauUtil.Debugger;
+using static Journalism.Player;
 
 namespace Journalism
 {
@@ -64,94 +65,92 @@ namespace Journalism
             Game.Events.Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
                 .Register<uint>(GameEvents.ChoiceCompleted, OnChoiceCompleted, this);
-                    // also handles LogHubChoiceClick
-                    // also handles LogTimeChoiceClick
-                    // also handles LogLocationChoiceClick
-                    // also handles LogOnceChoiceClick
-                    // also handles LogContinueChoiceClick
-                    // also handles LogActionChoiceClick
-                    // also handles LogFallbackhoiceClick
+            // also handles LogHubChoiceClick
+            // also handles LogTimeChoiceClick
+            // also handles LogLocationChoiceClick
+            // also handles LogOnceChoiceClick
+            // also handles LogContinueChoiceClick
+            // also handles LogActionChoiceClick
+            // also handles LogFallbackhoiceClick
 
             // Analytics Events
             // text click
             Game.Events.Register<TextNodeParams>(GameEvents.TextClicked, LogTextClick, this)
             // display text dialog
                 .Register<TextNodeParams>(GameEvents.DisplayTextDialog, LogDisplayTextDialog, this)
-                    // also handles LogDisplayFeedbackDialog
-            // display breakdown dialog
+                // also handles LogDisplayFeedbackDialog
+                // display breakdown dialog
                 .Register<StoryStats>(GameEvents.DisplayBreakdownDialog, LogDisplayBreakdownDialog, this)
             // display snippet quality dialog
                 .Register<StoryStats>(GameEvents.DisplaySnippetQualityDialog, LogDisplaySnippetQualityDialog, this)
             // display choices
-                .Register(GameEvents.DisplayChoices, LogDisplayChoices, this);
-            /*
-            // open stats tab                   || LogOpenStatsTab()
+                .Register(GameEvents.DisplayChoices, LogDisplayChoices, this)
+            // open stats tab
                 .Register(GameEvents.OpenStatsTab, LogOpenStatsTab, this)
-            // close stats tab                  || LogCloseStatsTab()
+            // close stats tab
                 .Register(GameEvents.CloseStatsTab, LogCloseStatsTab, this)
-            // open map tab                     || LogOpenMapTab()
+            // open map tab
                 .Register(GameEvents.OpenMapTab, LogOpenMapTab, this)
-            // open choice map                  || LogOpenChoiceMap()
+            // open choice map
                 .Register(GameEvents.OpenChoiceMap, LogOpenChoiceMap, this)
-            // close map tab                    || LogCloseMapTab()
+            // close map tab
                 .Register(GameEvents.CloseMapTab, LogCloseMapTab, this)
-            // open impact map                  || LogOpenImpactMap()
-                .Register(GameEvents.OpenImpactMap, LogOpenImpactMap, this)
-            // close impact map                 || LogCloseImpactMap()
-                .Register(GameEvents.CloseImpactMap, LogCloseImpactMap, this)
-            // reached checkpoint               || LogReachedCheckpoint()
+            // open impact map
+                .Register(GameEvents.StoryEvalImpact, LogOpenImpactMap, this)
+            // close impact map
+                .Register(GameEvents.StoryEvalEnd, LogCloseImpactMap, this)
+            // reached checkpoint
                 .Register(GameEvents.LevelCheckpoint, LogLevelCheckpoint, this)
-            // stat update                      || LogStatUpdate()
-                .Register(GameEvents.StatsUpdated, LogStatsUpdated, this)
-            // change background image          || LogChangeBackgroundImage()
+            // stat update
+                .Register<int[]>(GameEvents.StatsUpdated, LogStatsUpdated, this)
+            // change background image
                 .Register(GameEvents.ChangeBackgroundImage, LogChangeBackgroundImage, this)
-            // show popup image                 || LogShowPopupImage()
+            // show popup image
                 .Register(GameEvents.ShowPopupImage, LogShowPopupImage, this)
-            // change location                  || LogChangeLocation()
+            // change location
                 .Register(GameEvents.LocationUpdated, LogLocationUpdated, this)
-            // unlocked notebook                || LogUnlockedNotebook()
+            // unlocked notebook
                 .Register(GameEvents.UnlockedNotebook, LogUnlockedNotebook, this)
-            // open notebook                    || LogOpenNotebook()
+            // open notebook
                 .Register(GameEvents.OpenNotebook, LogOpenNotebook, this)
-            // select snippet                   || LogSelectSnippet()
+            // select snippet
                 .Register(GameEvents.SelectSnippet, LogSelectSnippet, this)
-            // place snippet                    || LogPlaceSnippet()
+            // place snippet
                 .Register(GameEvents.PlaceSnippet, LogPlaceSnippet, this)
-            // remove snippet                   || LogRemoveSnippet()
+            // remove snippet
                 .Register(GameEvents.RemoveSnippet, LogRemoveSnippet, this)
-            // open editor note                 || LogOpenEditorNote()
+            // open editor note
                 .Register(GameEvents.EditorNotesOpen, LogEditorNotesOpen, this)
-            // close editor note                || LogCloseEditorNote()
+            // close editor note
                 .Register(GameEvents.EditorNotesClose, LogEditorNotesClose, this)
-            // close notebook                   || LogCloseNotebook()
+            // close notebook
                 .Register(GameEvents.CloseNotebook, LogCloseNotebook, this)
-            // time limit assigned              || LogTimeLimitAssigned()    
-                .Register(GameEvents.TimeUpdated, LogTimeUpdated, this)
-            // open timer                       || LogOpenTimer()
+            // time limit assigned  
+                .Register<TimeUpdateArgs>(GameEvents.TimeLimitAssigned, LogTimeLimitAssigned, this)
+            // open timer
                 .Register(GameEvents.OpenTimer, LogOpenTimer, this)
-            // close timer                      || LogCloseTimer()
+            // close timer
                 .Register(GameEvents.CloseTimer, LogCloseTimer, this)
-            // time elapsed                     || LogTimeElapsed()
-                .Register(GameEvents.TimeElapsed, LogTimeElapsed, this)
-            // time expired                     || LogTimeExpired()
+            // time elapsed
+                .Register<TimeUpdateArgs>(GameEvents.TimeElapsed, LogTimeElapsed, this)
+            // time expired
                 .Register(GameEvents.TimeExpired, LogTimeExpired, this)
-            // snippet received                 || LogSnippetReceived()    
+            // snippet received  
                 .Register(GameEvents.SnippetReceived, LogSnippetReceived, this)
-            // story updated                    || LogStoryUpdated()
+            // story updated
                 .Register(GameEvents.StoryUpdated, LogStoryUpdated, this)
-            // publish story click              || LogPublishStoryClick()
-                .Register(GameEvents.PublishStoryClick, LogPublishStoryClick, this)
-            // display published story          || LogDisplayPublishedStory()
+            // publish story click
+                .Register(GameEvents.StoryPublished, LogPublishStoryClick, this)
+            // display published story
                 .Register(GameEvents.DisplayPublishedStory, LogDisplayPublishedStory, this)
-            // close published story            || LogClosePublishedStory() 
+            // close published story
                 .Register(GameEvents.ClosePublishedStory, LogClosePublishedStory, this)
-            // start level                      || LogStartLevel()
+            // start level
                 .Register(GameEvents.LevelStarted, LogLevelStarted, this)
-            // complete level                   || LogCompleteLevel()
+            // complete level
                 .Register(GameEvents.CompleteLevel, LogCompleteLevel, this)
-            // start endgame                    || LogStartEndgame()
+            // start endgame
                 .Register(GameEvents.StartEndgame, LogStartEndgame, this);
-                */
 
 
             // SceneHelper.OnSceneLoaded += LogSceneChanged;
@@ -216,15 +215,15 @@ namespace Journalism
             else {
                 // generic text dialog
                 Debug.Log("[Analytics] event: display_text_dialog");
-            }
 
-            /*
-            using (var e = m_Log.NewEvent("display_text_dialog")) {
-                e.Param("node_id", args.NodeId);
-                e.Param("text_content", args.Content);
-                e.Param("speaker", args.Speaker);
+                /*
+                using (var e = m_Log.NewEvent("display_text_dialog")) {
+                    e.Param("node_id", args.NodeId);
+                    e.Param("text_content", args.Content);
+                    e.Param("speaker", args.Speaker);
+                }
+                */
             }
-            */
         }
 
         // display breakdown dialog
@@ -292,168 +291,201 @@ namespace Journalism
 
         }
 
-        // open stats tab                   || LogOpenStatsTab()
+        // open stats tab
         private void LogOpenStatsTab() {
+            Debug.Log("[Analytics] event: open_stats_tab");
 
         }
 
-        // close stats tab                  || LogCloseStatsTab()
+        // close stats tab
         private void LogCloseStatsTab() {
+            Debug.Log("[Analytics] event: close_stats_tab");
 
         }
 
-        // open map tab                     || LogOpenMapTab()
+        // open map tab
         private void LogOpenMapTab() {
+            Debug.Log("[Analytics] event: open_map_tab");
 
         }
 
-        // open choice map                  || LogOpenChoiceMap()
+        // open choice map
         private void LogOpenChoiceMap() {
+            Debug.Log("[Analytics] event: open_choice_map");
 
         }
 
-        // close map tab                    || LogCloseMapTab()
+        // close map tab
         private void LogCloseMapTab() {
+            Debug.Log("[Analytics] event: close_map_tab");
 
         }
 
-        // open impact map                  || LogOpenImpactMap()
+        // open impact map
         private void LogOpenImpactMap() {
+            Debug.Log("[Analytics] event: open_impact_map");
 
         }
 
-        // close impact map                 || LogCloseImpactMap()
+        // close impact map
         private void LogCloseImpactMap() {
+            Debug.Log("[Analytics] event: close_impact_map");
 
         }
 
-        // reached checkpoint               || LogReachedCheckpoint()
+        // reached checkpoint
         private void LogLevelCheckpoint() {
+            Debug.Log("[Analytics] event: reached_checkpoint");
 
         }
 
-        // stat update                      || LogStatUpdate()
-        private void LogStatsUpdated() {
+        // stat update
+        private void LogStatsUpdated(int[] adjustments) {
+            Debug.Log("[Analytics] event: stat_update");
 
         }
 
-        // change background image          || LogChangeBackgroundImage()
+        // change background image
         private void LogChangeBackgroundImage() {
+            Debug.Log("[Analytics] event: change_background_image");
 
         }
 
-        // show popup image                 || LogShowPopupImage()
+        // show popup image
         private void LogShowPopupImage() {
+            Debug.Log("[Analytics] event: show_popup-image");
 
         }
 
-        // change location                  || LogChangeLocation()
+        // change location
         private void LogLocationUpdated() {
+            Debug.Log("[Analytics] event: change_location");
 
         }
 
-        // unlocked notebook                || LogUnlockedNotebook()
+        // unlocked notebook
         private void LogUnlockedNotebook() {
+            Debug.Log("[Analytics] event: unlocked_notebook");
 
         }
 
-        // open notebook                    || LogOpenNotebook()
+        // open notebook
         private void LogOpenNotebook() {
+            Debug.Log("[Analytics] event: open_notebook");
 
         }
 
-        // select snippet                   || LogSelectSnippet()
+        // select snippet
         private void LogSelectSnippet() {
+            Debug.Log("[Analytics] event: select_snippet");
 
         }
 
-        // place snippet                    || LogPlaceSnippet()
+        // place snippet
         private void LogPlaceSnippet() {
+            Debug.Log("[Analytics] event: place_snippet");
 
         }
 
-        // remove snippet                   || LogRemoveSnippet()
+        // remove snippet
         private void LogRemoveSnippet() {
+            Debug.Log("[Analytics] event: remove_snippet");
 
         }
 
-        // open editor note                 || LogOpenEditorNote()
+        // open editor note
         private void LogEditorNotesOpen() {
+            Debug.Log("[Analytics] event: editor_notes_open");
 
         }
 
-        // close editor note                || LogCloseEditorNote()
+        // close editor note
         private void LogEditorNotesClose() {
+            Debug.Log("[Analytics] event: editor_notes_close");
 
         }
 
-        // close notebook                   || LogCloseNotebook()
+        // close notebook
         private void LogCloseNotebook() {
+            Debug.Log("[Analytics] event: close_notebook");
 
         }
 
-        // time limit assigned              || LogTimeLimitAssigned()    
-        private void LogTimeUpdated() {
+        // time limit assigned   
+        private void LogTimeLimitAssigned(TimeUpdateArgs args) {
+            Debug.Log("[Analytics] event: time_limit_assigned");
 
         }
 
-        // open timer                       || LogOpenTimer()
+        // open timer
         private void LogOpenTimer() {
+            Debug.Log("[Analytics] event: open_timer");
 
         }
 
-        // close timer                      || LogCloseTimer()
+        // close timer
         private void LogCloseTimer() {
+            Debug.Log("[Analytics] event: close_timer");
 
         }
 
-        // time elapsed                     || LogTimeElapsed()
-        private void LogTimeElapsed() {
+        // time elapsed
+        private void LogTimeElapsed(TimeUpdateArgs args) {
+            Debug.Log("[Analytics] event: time_elapsed");
 
         }
 
-        // time expired                     || LogTimeExpired()
+        // time expired
         private void LogTimeExpired() {
+            Debug.Log("[Analytics] event: time_expired");
 
         }
 
-        // snippet received                 || LogSnippetReceived()    
+        // snippet received 
         private void LogSnippetReceived() {
+            Debug.Log("[Analytics] event: snippet_received");
 
         }
 
-        // story updated                    || LogStoryUpdated()
+        // story updated
         private void LogStoryUpdated() {
+            Debug.Log("[Analytics] event: story_updated");
 
         }
 
-        // publish story click              || LogPublishStoryClick()
+        // publish story click
         private void LogPublishStoryClick() {
+            Debug.Log("[Analytics] event: story_click");
 
         }
 
-        // display published story          || LogDisplayPublishedStory()
+        // display published story
         private void LogDisplayPublishedStory() {
+            Debug.Log("[Analytics] event: display_published_story");
 
         }
 
-        // close published story            || LogClosePublishedStory() 
+        // close published story
         private void LogClosePublishedStory() {
+            Debug.Log("[Analytics] event: close_published_story");
 
         }
 
-        // start level                      || LogStartLevel()
+        // start level
         private void LogLevelStarted() {
-        
+            Debug.Log("[Analytics] event: start_level");
+
         }
 
-        // complete level                   || LogCompleteLevel()
+        // complete level
         private void LogCompleteLevel() {
+            Debug.Log("[Analytics] event: complete_level");
 
         }
 
-        // start endgame                    || LogStartEndgame()
+        // start endgame
         private void LogStartEndgame() {
+            Debug.Log("[Analytics] event: start_endgame");
 
         }
 

@@ -227,6 +227,7 @@ namespace Journalism {
             if (units != s_Current.TimeRemaining) {
                 int delta = (int) (units - s_Current.TimeRemaining);
                 s_Current.TimeRemaining = units;
+                Game.Events.Dispatch(GameEvents.TimeLimitAssigned, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
                 Game.Events.Dispatch(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, delta));
             }
         }
@@ -242,7 +243,11 @@ namespace Journalism {
             }
             if (units > 0) {
                 s_Current.TimeRemaining -= units;
+                Game.Events.Queue(GameEvents.TimeElapsed, new TimeUpdateArgs(s_Current.TimeRemaining, -(int)units));
                 Game.Events.Queue(GameEvents.TimeUpdated, new TimeUpdateArgs(s_Current.TimeRemaining, -(int) units));
+                if (s_Current.TimeRemaining == 0) {
+                    Game.Events.Queue(GameEvents.TimeExpired);
+                }
             }
         }
 
@@ -353,6 +358,8 @@ namespace Journalism {
                 s_Current.StoryScrapInventory.Add(scrapId);
                 Log.Msg("[Player] Added story scrap '{0}'!", scrapId);
                 Game.Events.Dispatch(GameEvents.InventoryUpdated, scrapId);
+                Game.Events.Dispatch(GameEvents.SnippetReceived);
+
                 return true;
             }
 

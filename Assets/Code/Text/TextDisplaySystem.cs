@@ -122,6 +122,8 @@ namespace Journalism {
                 );
             */
 
+            Game.Events.Dispatch(GameEvents.ShowPopupImage);
+
             yield return HandleImageOrMap(evtData, context);
         }
 
@@ -138,6 +140,8 @@ namespace Journalism {
         private IEnumerator HandleMap(TagEventData evtData, object context) {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultMapDims);
             this.m_Border.gameObject.SetActive(true); // enable border
+
+            Game.Events.Dispatch(GameEvents.OpenChoiceMap);
 
             yield return HandleImageOrMap(evtData, context);
         }
@@ -504,7 +508,9 @@ namespace Journalism {
             }
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 1;
+            Game.Events.Dispatch(GameEvents.DisplayPublishedStory);
             yield return GameText.WaitForPlayerNext(m_CurrentLayer.Choices, Loc.Get(TextConsts.TalkToEditor), Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
+            Game.Events.Dispatch(GameEvents.ClosePublishedStory);
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_FinishedStoryLayout.gameObject.SetActive(false);
         }

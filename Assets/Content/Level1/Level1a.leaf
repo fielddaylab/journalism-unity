@@ -184,7 +184,7 @@ $ActionChoice(Send message)
 {@localnurse}{anim sway}<i>Fowl</i> weather at the <i>quack</i> of dawn!
 {@localnurse}{anim sway}Storm expected to rack up large <i>bill</i>.
 
-$ContinueChoice({@me} Thanks. I'll keep those in mind.)
+$ActionChoice(Thanks. I'll keep those in mind.)
 
 $call $call AdjustStats(Social + 1)
 $call GiveSnippet(HospitalDucks)
@@ -322,11 +322,11 @@ $else
     {@dionne} You made it. I'm impressed.
 $endif
 
-$ContinueChoice({@me} Where is everybody??)
+$ActionChoice(Where is everybody??)
 {@dionne}Ben and Sudha are stranded, and Khalisa's bailing out her flooded basement.
 {@dionne}Right now, you're my lead reporter.
 
-$ContinueChoice({@me} How can I help?)
+$ActionChoice(How can I help?)
 
 $call ActivateStory()
 {@dionne} We need a breaking news story.

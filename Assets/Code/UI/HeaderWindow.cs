@@ -22,6 +22,19 @@ namespace Journalism.UI {
 
         #endregion // Inspector
 
+        private enum ToolbarType { 
+            None,
+            Stats,
+            Map,
+            Notes,
+            Time
+        }
+
+        [SerializeField] private ToolbarType m_ToolbarType;
+
+
+        private HeaderButton m_CallingButton;
+
         public Action LoadData;
         public Func<IEnumerator> LoadDataAsync;
         public Action BuildLayout;
@@ -39,7 +52,27 @@ namespace Journalism.UI {
             base.Awake();
 
             if (m_CloseButton) {
-                m_CloseButton.onClick.AddListener(() => Hide());
+                m_CloseButton.onClick.AddListener(() => { 
+                    Hide();
+                    if (WasShowing()) {
+                        switch (m_ToolbarType) {
+                            case ToolbarType.Map:
+                                Game.Events.Dispatch(GameEvents.CloseMapTab);
+                                break;
+                            case ToolbarType.Stats:
+                                Game.Events.Dispatch(GameEvents.CloseStatsTab);
+                                break;
+                            case ToolbarType.Notes:
+                                Game.Events.Dispatch(GameEvents.CloseNotebook);
+                                break;
+                            case ToolbarType.Time:
+                                Game.Events.Dispatch(GameEvents.CloseTimer);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
             }
         }
 
@@ -81,6 +114,25 @@ namespace Journalism.UI {
             }
             Game.Audio.PlayOneShot(m_OpenAudio);
             yield return m_RootTransform.AnchorPosTo(0, m_ShowAnim, Axis.Y);
+
+            if (!WasShowing()) {
+                switch (m_ToolbarType) {
+                    case ToolbarType.Map:
+                        Game.Events.Dispatch(GameEvents.OpenMapTab);
+                        break;
+                    case ToolbarType.Stats:
+                        Game.Events.Dispatch(GameEvents.OpenStatsTab);
+                        break;
+                    case ToolbarType.Notes:
+                        Game.Events.Dispatch(GameEvents.OpenNotebook);
+                        break;
+                    case ToolbarType.Time:
+                        Game.Events.Dispatch(GameEvents.OpenTimer);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         protected override IEnumerator TransitionToHide() {

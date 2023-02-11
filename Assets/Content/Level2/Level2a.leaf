@@ -195,7 +195,7 @@ $call ActivateStory()
 {@dionne} People are all talking about the flood, wondering how this could've happened. 
 {@dionne} I want you to figure out the science behind it. 
 
-$ContinueChoice({@me} Um... I'm not really a science writer.)
+$ActionChoice(Um... I'm not really a science writer.)
 $goto AssignmentScienceStory
 
 // Original Name: Help with the clean up
@@ -292,7 +292,7 @@ $endif
 {@dionne} Our stories make a difference. 
 {@me} On it!
 
-$choice ScienceStoryMap; ...Got it. Thanks, Dionne.
+$choice ScienceStoryMap; Get started
 
 // Original Name: Science Story Map
 :: ScienceStoryMap
@@ -876,7 +876,7 @@ $goto MathJoke
 {@governor}I'm always happy to talk to the press! Ask away. 
 This will be an amazing boost for your article, but you try to play it cool. 
 
-$ContinueChoice({@me} How is the state helping with flood recovery?)
+$ActionChoice(How is the state helping with flood recovery?)
 
 $goto HowIsTheStateHelpingWithFloodRecovery
 
@@ -962,7 +962,7 @@ $choice MainStreetFloodRecovery; Arrive at Main Street
 She scribbles down her brother's contact info: <i>Barry Smuckers, 555-1678</i>
 
 
-$ContinueChoice({@me} Barry Smuckers? You mean.... the mayor of Twin Lakes?)
+$ActionChoice(Barry Smuckers? You mean.... the mayor of Twin Lakes?)
 
 
 {@mayorsister}Oh, you've heard of him? 

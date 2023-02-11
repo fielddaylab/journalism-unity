@@ -27,6 +27,7 @@ namespace Journalism.UI {
         #endregion // Inspector
 
         [NonSerialized] private HeaderButton m_TimeButton;
+
         private Routine m_FaderRoutine;
         [NonSerialized] private bool m_FaderEvaluateQueued;
         [NonSerialized] private bool m_FaderState;
@@ -40,12 +41,12 @@ namespace Journalism.UI {
 
             m_TimeButton = FindButton("Time");
 
-            for(int i = 0; i < Buttons.Length; i++) {
+            for (int i = 0; i < Buttons.Length; i++) {
                 HeaderButton button = Buttons[i];
                 if (!button.Window) {
                     continue;
                 }
-                
+
                 button.Button.onValueChanged.AddListener((b) => {
                     if (b) {
                         button.Window.Show();
