@@ -11,6 +11,7 @@ using BeauUtil.Debugger;
 using static Journalism.Player;
 using Journalism.UI;
 using BeauUtil.Tags;
+using UnityEngine.Networking.Types;
 
 namespace Journalism
 {
@@ -19,7 +20,7 @@ namespace Journalism
         #region Inspector
 
         [SerializeField, Required] private string m_AppId = "JOURNALISM";
-        [SerializeField, Required] private string m_AppVersion = " "; // "1.0"; // TODO: what should this val be?
+        [SerializeField, Required] private string m_AppVersion = "1.0";
         [SerializeField] private FirebaseConsts m_Firebase = default(FirebaseConsts);
 
         private const uint HUB_INDEX = 1;
@@ -234,7 +235,7 @@ namespace Journalism
             m_Log = new OGDLog(new OGDLogConsts() {
                 AppId = m_AppId,
                 AppVersion = m_AppVersion,
-                ClientLogVersion = 3 // TODO: what should this val be?
+                ClientLogVersion = 1 // TODO: what should this val be?
             });
             m_Log.UseFirebase(m_Firebase);
 
@@ -269,13 +270,11 @@ namespace Journalism
         private void LogTextClick() {
             Debug.Log("[Analytics] event: text_click" + "\n    node id: " + m_LastKnownNodeId + " || content: " + m_LastKnownNodeContent + " || speaker: " + m_LastKnownSpeaker);
             
-            /*
             using (var e = m_Log.NewEvent("text_click")) {
-                e.Param("node_id", args.NodeId);
-                e.Param("text_content", args.Content);
-                e.Param("speaker", args.Speaker);
+                e.Param("node_id", m_LastKnownNodeId.ToString());
+                e.Param("text_content", m_LastKnownNodeContent);
+                e.Param("speaker", m_LastKnownSpeaker);
             }
-            */
         }
 
         // display text dialog
@@ -288,13 +287,11 @@ namespace Journalism
                 // generic text dialog
                 Debug.Log("[Analytics] event: display_text_dialog" + "\n    node id:: " + m_LastKnownNodeId + " || content: " + m_LastKnownNodeContent + " || speaker: " + m_LastKnownSpeaker);
 
-                /*
                 using (var e = m_Log.NewEvent("display_text_dialog")) {
-                    e.Param("node_id", args.NodeId);
-                    e.Param("text_content", args.Content);
-                    e.Param("speaker", args.Speaker);
+                    e.Param("node_id", m_LastKnownNodeId.ToString());
+                    e.Param("text_content", m_LastKnownNodeContent);
+                    e.Param("speaker", m_LastKnownSpeaker);
                 }
-                */
             }
         }
 
@@ -315,6 +312,10 @@ namespace Journalism
             target_breakdown.Add("facts_weight", m_TargetBreakdown.FactWeight);
             target_breakdown.Add("useful_weight", m_TargetBreakdown.UsefulWeight);
 
+            using (var e = m_Log.NewEvent("display_breakdown_dialog")) {
+                e.Param("final_breakdown", final_breakdown.ToString());
+                e.Param("target_breakdown", target_breakdown.ToString());
+            }
         }
 
         // display snippet quality dialog
@@ -322,6 +323,10 @@ namespace Journalism
             Debug.Log("[Analytics] event: display_snippet_quality_dialog");
 
             List<StoryScrapQuality> current_quality = GenerateStoryScrapQualityList();
+
+            using (var e = m_Log.NewEvent("display_snippet_quality_dialog")) {
+                e.Param("final_breakdown", current_quality.ToString());
+            }
         }
 
         // display feedback dialog
@@ -330,8 +335,15 @@ namespace Journalism
 
             string node_id = m_LastKnownNodeId.ToString();
             string text_content = m_LastKnownNodeContent;
-            float storyScore = m_CurrentBreakdown.TotalQuality;
+            float story_score = m_CurrentBreakdown.TotalQuality;
             float story_alignment = m_CurrentBreakdown.Alignment;
+
+            using (var e = m_Log.NewEvent("display_feedback_dialog")) {
+                e.Param("node_id", node_id);
+                e.Param("text_content", text_content);
+                e.Param("story_score", story_score);
+                e.Param("story_alignment", story_alignment);
+            }
         }
 
         // display choices
@@ -351,12 +363,22 @@ namespace Journalism
             string text_content = m_LastKnownNodeContent;
             string node_id = m_LastKnownNodeId.ToString(); // TODO: change to current_node_id for consistency?
             string next_node_id = choice.TargetId.ToString();
-            string next_location = Assets.Location(choice.LocationId).Name; // optional
+            string next_location = "";
+            if (!choice.LocationId.IsEmpty) {
+                next_location = Assets.Location(choice.LocationId).Name; // optional
+            }
             int time_cost = (int)choice.TimeCost;
             bool time_cost_is_mystery = choice.QuestionMark.IsActive() && choice.QuestionMark.enabled;
-        }
 
-        // ------------------- RESUME WORKING HERE -------------------
+            using (var e = m_Log.NewEvent("hub_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("node_id", node_id);
+                e.Param("next_node_id", next_node_id);
+                if (!choice.LocationId.IsEmpty) { e.Param("next_location", next_location); } // optional
+                e.Param("time_cost", time_cost);
+                e.Param("time_cost_is_mystery", time_cost_is_mystery);
+            }
+        }
 
         // time choice click
         private void LogTimeChoiceClick(TextChoice choice) {
@@ -368,6 +390,13 @@ namespace Journalism
             int time_cost = (int)choice.TimeCost;
             bool time_cost_is_mystery = choice.QuestionMark.IsActive() && choice.QuestionMark.enabled;
 
+            using (var e = m_Log.NewEvent("time_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("current_node_id", current_node_id);
+                e.Param("next_node_id", next_node_id);
+                e.Param("time_cost", time_cost);
+                e.Param("time_cost_is_mystery", time_cost_is_mystery);
+            }
         }
 
         // location choice click
@@ -378,6 +407,13 @@ namespace Journalism
             string current_node_id = m_LastKnownNodeId.ToString();
             string next_node_id = choice.TargetId.ToString();
             string next_location = Assets.Location(choice.LocationId).Name;
+
+            using (var e = m_Log.NewEvent("location_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("current_node_id", current_node_id);
+                e.Param("next_node_id", next_node_id);
+                e.Param("next_location", next_location);
+            }
         }
 
         // once choice click
@@ -387,6 +423,12 @@ namespace Journalism
             string text_content = m_LastKnownNodeContent;
             string current_node_id = m_LastKnownNodeId.ToString();
             string next_node_id = choice.TargetId.ToString();
+
+            using (var e = m_Log.NewEvent("once_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("current_node_id", current_node_id);
+                e.Param("next_node_id", next_node_id);
+            }
         }
 
         // continue choice click
@@ -395,6 +437,11 @@ namespace Journalism
 
             string text_content = m_LastKnownNodeContent;
             string current_node_id = m_LastKnownNodeId.ToString();
+
+            using (var e = m_Log.NewEvent("continue_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("current_node_id", current_node_id);
+            }
         }
 
         // action choice click
@@ -403,6 +450,11 @@ namespace Journalism
 
             string text_content = m_LastKnownNodeContent;
             string current_node_id = m_LastKnownNodeId.ToString();
+
+            using (var e = m_Log.NewEvent("action_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("current_node_id", current_node_id);
+            }
         }
 
         // fallback choice click
@@ -412,6 +464,13 @@ namespace Journalism
             string text_content = m_LastKnownNodeContent;
             string current_node_id = m_LastKnownNodeId.ToString();
             string next_node_id = choice.TargetId.ToString();
+
+
+            using (var e = m_Log.NewEvent("fallback_choice_click")) {
+                e.Param("text_content", text_content);
+                e.Param("current_node_id", current_node_id);
+                e.Param("next_node_id", next_node_id);
+            }
         }
 
         // open stats tab
@@ -419,6 +478,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: open_stats_tab");
 
             // no event data
+            m_Log.NewEvent("open_stats_tab");
         }
 
         // close stats tab
@@ -426,6 +486,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: close_stats_tab");
 
             // no event data
+            m_Log.NewEvent("close_stats_tab");
         }
 
         // open map tab
@@ -438,7 +499,10 @@ namespace Journalism
                 locations_list.Add(Assets.Location(id).Name);
             }
 
-
+            using (var e = m_Log.NewEvent("open_map_tab")) {
+                e.Param("current_location", current_location);
+                e.Param("locations_list", locations_list.ToString());
+            }
         }
 
         // open choice map
@@ -451,7 +515,10 @@ namespace Journalism
                 locations_list.Add(Assets.Location(id).Name);
             }
 
-
+            using (var e = m_Log.NewEvent("open_choice_map")) {
+                e.Param("current_location", current_location);
+                e.Param("locations_list", locations_list.ToString());
+            }
         }
 
         // close map tab
@@ -459,6 +526,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: close_map_tab");
 
             // no event data
+            m_Log.NewEvent("close_map_tab");
         }
 
         // open impact map
@@ -472,6 +540,11 @@ namespace Journalism
                 feedback_ids.Add(item.SnippetId.ToString());
                 feedback_texts.Add(item.RichText);
             }
+
+            using (var e = m_Log.NewEvent("open_impact_map")) {
+                e.Param("feeback_ids", feedback_ids.ToString());
+                e.Param("feedback_texts", feedback_texts.ToString());
+            }
         }
 
         // close impact map
@@ -479,6 +552,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: close_impact_map");
 
             // no event data
+            m_Log.NewEvent("close_impact_map");
         }
 
         // reached checkpoint
@@ -486,11 +560,17 @@ namespace Journalism
             Debug.Log("[Analytics] event: reached_checkpoint");
 
             string node_id = m_LastKnownNodeId.ToString();
+
+            using (var e = m_Log.NewEvent("reached_checkpoint")) {
+                e.Param("node_id", node_id.ToString());
+            }
         }
 
         // stat update
         private void LogStatsUpdated(int[] adjustments) {
             Debug.Log("[Analytics] event: stat_update");
+
+            string node_id = m_LastKnownNodeId.ToString();
 
             Dictionary<StatId, int> updatedStats = new Dictionary<StatId, int>();
 
@@ -506,7 +586,10 @@ namespace Journalism
             updateStatsStr += "TRUST : " + updatedStats[StatId.Trust] + "\n";
             updateStatsStr += "RESEARCH : " + updatedStats[StatId.Research] + "\n";
 
-
+            using (var e = m_Log.NewEvent("stat_update")) {
+                e.Param("node_id", node_id.ToString());
+                e.Param("stats", updateStatsStr);
+            }
         }
 
         // change background image
@@ -516,11 +599,15 @@ namespace Journalism
             string node_id = m_LastKnownNodeId.ToString();
             string image_name = ParseFileName(path);
 
+            using (var e = m_Log.NewEvent("change_background_image")) {
+                e.Param("node_id", node_id.ToString());
+                e.Param("image_name", image_name);
+            }
         }
 
         // show popup image
         private void LogShowPopupImage(TagEventData evtData) {
-            Debug.Log("[Analytics] event: show_popup-image");
+            Debug.Log("[Analytics] event: show_popup_image");
 
             var args = evtData.ExtractStringArgs();
             string path = args[0].ToString();
@@ -529,6 +616,11 @@ namespace Journalism
             string node_id = m_LastKnownNodeId.ToString();
             string image_name = ParseFileName(path);
 
+            using (var e = m_Log.NewEvent("show_popup_image")) {
+                e.Param("is_animated", is_animated);
+                e.Param("node_id", node_id.ToString());
+                e.Param("image_name", image_name);
+            }
         }
 
         // change location
@@ -537,7 +629,9 @@ namespace Journalism
 
             string new_location_id = Assets.Location(locId).Name;
 
-
+            using (var e = m_Log.NewEvent("change_location")) {
+                e.Param("new_location_id", new_location_id);
+            }
         }
 
         // unlocked notebook
@@ -545,6 +639,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: unlocked_notebook");
 
             // no event data
+            m_Log.NewEvent("unlocked_notebook");
         }
 
         // open notebook
@@ -553,7 +648,6 @@ namespace Journalism
 
             List<SnippetDetails> snippet_list = new List<SnippetDetails>();
 
-            // TODO: adding dicts as params?
             string snippetDetailsStr = "";
 
             foreach(SnippetDetails snippet in snippet_list) {
@@ -568,8 +662,10 @@ namespace Journalism
                 layoutDetailsStr += layout.ToString();
             }
 
-            // e.Param snippetDetailsStr
-            // e.Param layoutDetailsStr
+            using (var e = m_Log.NewEvent("open_notebook")) {
+                e.Param("snippet_list", snippetDetailsStr);
+                e.Param("layout", layoutDetailsStr);
+            }
         }
 
         // select snippet
@@ -583,7 +679,12 @@ namespace Journalism
 
             string attributesStr = GenerateAttributesString(snippetData);
 
-
+            using (var e = m_Log.NewEvent("select_snippet")) {
+                e.Param("snippet_id", snippet_id);
+                e.Param("snippet_type", snippet_type.ToString());
+                e.Param("snippet_quality", snippet_quality.ToString());
+                e.Param("snippet_attributes", attributesStr);
+            }
         }
 
         // place snippet
@@ -610,10 +711,16 @@ namespace Journalism
             string snippet_type = slot.Data.Type.ToString();
             string snippet_quality = slot.Data.Quality.ToString();
 
-            // List<StoryScrapAttribute> snippet_attributes = new List<StoryScrapAttribute>();
-
             string attributesStr = GenerateAttributesString(slot.Data);
 
+            using (var e = m_Log.NewEvent("place_snippet")) {
+                e.Param("layout", layoutDetailsStr);
+                e.Param("location", location);
+                e.Param("snippet_id", snippet_id);
+                e.Param("snippet_type", snippet_type);
+                e.Param("snippet_quality", snippet_quality);
+                e.Param("snippet_attribute", attributesStr);
+            }
         }
 
         // remove snippet
@@ -640,11 +747,16 @@ namespace Journalism
             string snippet_type = slot.Data.Type.ToString();
             string snippet_quality = slot.Data.Quality.ToString();
 
-            // List<StoryScrapAttribute> snippet_attributes = new List<StoryScrapAttribute>();
-
             string attributesStr = GenerateAttributesString(slot.Data);
 
-
+            using (var e = m_Log.NewEvent("remove_snippet")) {
+                e.Param("layout", layoutDetailsStr);
+                e.Param("location", location);
+                e.Param("snippet_id", snippet_id);
+                e.Param("snippet_type", snippet_type);
+                e.Param("snippet_quality", snippet_quality);
+                e.Param("snippet_attribute", attributesStr);
+            }
         }
 
         // open editor note
@@ -666,7 +778,11 @@ namespace Journalism
 
             List<StoryScrapQuality> current_quality = GenerateStoryScrapQualityList();
 
-
+            using (var e = m_Log.NewEvent("editor_notes_open")) {
+                e.Param("current_breakdown", current_breakdown.ToString());
+                e.Param("target_breakdown", target_breakdown.ToString());
+                e.Param("current_quality", current_quality.ToString());
+            }
         }
 
         // close editor note
@@ -674,6 +790,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: editor_notes_close");
 
             // no event data
+            m_Log.NewEvent("editor_notes_close");
         }
 
         // close notebook
@@ -681,6 +798,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: close_notebook");
 
             // no event data
+            m_Log.NewEvent("close_notebook");
         }
 
         // time limit assigned   
@@ -689,6 +807,11 @@ namespace Journalism
 
             string node_id = m_LastKnownNodeId.ToString();
             float time_delta = args.Delta;
+
+            using (var e = m_Log.NewEvent("time_limit_assigned")) {
+                e.Param("node_id", node_id);
+                e.Param("time_delta", time_delta);
+            }
         }
 
         // open timer
@@ -696,6 +819,10 @@ namespace Journalism
             Debug.Log("[Analytics] event: open_timer");
 
             float time_left = Player.TimeRemaining();
+
+            using (var e = m_Log.NewEvent("open_timer")) {
+                e.Param("time_left", time_left);
+            }
         }
 
         // close timer
@@ -703,6 +830,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: close_timer");
 
             // no event data
+            m_Log.NewEvent("close_timer");
         }
 
         // time elapsed
@@ -712,7 +840,10 @@ namespace Journalism
             string node_id = m_LastKnownNodeId.ToString();
             int how_much = args.Delta; // in minutes
 
-
+            using (var e = m_Log.NewEvent("time_elapsed")) {
+                e.Param("node_id", node_id);
+                e.Param("how_much", how_much);
+            }
         }
 
         // time expired
@@ -720,9 +851,13 @@ namespace Journalism
             Debug.Log("[Analytics] event: time_expired");
 
             string node_id = m_LastKnownNodeId.ToString();
-            int leftover_time = 0; // in minutes // TODO: revisit premise. Time doesn't expire with leftover time, there are just limits on options
-        
-        
+            // TODO: revisit premise of leftover_time. Time doesn't expire with leftover time, there are just limits on options
+            int leftover_time = 0; // in minutes 
+
+            using (var e = m_Log.NewEvent("time_expired")) {
+                e.Param("node_id", node_id);
+                e.Param("leftover_time", leftover_time);
+            }
         }
 
         // snippet received 
@@ -730,12 +865,21 @@ namespace Journalism
             Debug.Log("[Analytics] event: snippet_received");
 
             StoryScrapData snippetData = Assets.Scrap(snippetId);
+
             string node_id = m_LastKnownNodeId.ToString();
             string snippet_id = snippetId.ToString();
             string snippet_type = snippetData.Type.ToString();
             string snippet_quality = snippetData.Quality.ToString();
 
-            GenerateAttributesString(snippetData);
+            string attributeStr = GenerateAttributesString(snippetData);
+
+            using (var e = m_Log.NewEvent("time_expired")) {
+                e.Param("node_id", node_id);
+                e.Param("snippet_id", snippet_id);
+                e.Param("snippet_type", snippet_type);
+                e.Param("snippet_quality", snippet_quality);
+                e.Param("snippet_attributes", attributeStr);
+            }
         }
 
         // story updated
@@ -757,7 +901,11 @@ namespace Journalism
 
             List<StoryScrapQuality> new_quality = GenerateStoryScrapQualityList();
 
-
+            using (var e = m_Log.NewEvent("story_updated")) {
+                e.Param("new_breakdown", new_breakdown.ToString());
+                e.Param("target_breakdown", target_breakdown.ToString());
+                e.Param("new_quality", new_quality.ToString());
+            }
         }
 
         // publish story click
@@ -782,9 +930,11 @@ namespace Journalism
                 layoutDetailsStr += layout.ToString();
             }
 
-            // e.Param snippetDetailsStr
-            // e.Param layoutDetailsStr
 
+            using (var e = m_Log.NewEvent("story_click")) {
+                e.Param("snippet_list", snippetDetailsStr);
+                e.Param("layout", layoutDetailsStr);
+            }
         }
 
         // display published story
@@ -799,6 +949,7 @@ namespace Journalism
             Debug.Log("[Analytics] event: close_published_story");
 
             // no event data
+            m_Log.NewEvent("close_published_story");
         }
 
         // start level
@@ -807,7 +958,9 @@ namespace Journalism
 
             int level_started = Assets.CurrentLevel.LevelIndex;
 
-
+            using (var e = m_Log.NewEvent("start_level")) {
+                e.Param("level_started", level_started);
+            }
         }
 
         // complete level
@@ -815,6 +968,10 @@ namespace Journalism
             Debug.Log("[Analytics] event: complete_level");
 
             int level_completed = Assets.CurrentLevel.LevelIndex;
+
+            using (var e = m_Log.NewEvent("complete_level")) {
+                e.Param("level_completed", level_completed);
+            }
         }
 
         // start endgame
@@ -835,7 +992,10 @@ namespace Journalism
                 scenario = 3; // bad
             }
 
-
+            using (var e = m_Log.NewEvent("start_endgame")) {
+                e.Param("city_score", city_score);
+                e.Param("scenario", scenario);
+            }
         }
 
 

@@ -257,9 +257,8 @@ namespace Journalism {
             if ((m_RequireInputForPlayerText && GameText.IsPlayer(characterId)) || inSourceString.TryFindEvent(GameText.Events.ForceInput, out var _)) {
                 yield return GameText.WaitForPlayerNext(Choices, inSourceString.RichText, Assets.Style(characterId), GetDefaultChoiceAnchor());
             }
-            var charLocName = Assets.Char(characterId).Name;
-            string charName = (charLocName.IsEmpty ? "" : FDLocalization.Loc.Get(charLocName));
-            Game.Events.Dispatch(GameEvents.DisplayTextDialog, new TextNodeParams("node name here]", inSourceString.VisibleText, charName));
+            
+            Game.Events.Dispatch(GameEvents.DisplayTextDialog);
             
 
             yield return GameText.AnimateLocations(Text, 1);
