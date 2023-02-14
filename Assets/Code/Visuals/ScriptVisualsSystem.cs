@@ -66,7 +66,7 @@ namespace Journalism {
             LeafEvalContext eval = LeafEvalContext.FromObject(context);
             string path = args[0].ToString();
 
-            Game.Events.Dispatch(GameEvents.ChangeBackgroundImage);
+            Game.Events.Dispatch(GameEvents.ChangeBackgroundImage, path);
 
             return FadeInBackground(path);
         }
@@ -81,7 +81,7 @@ namespace Journalism {
             if (m_CurrentBackgroundTexture != null) {
                 yield return FadeIn(m_CurrentBackgroundTexture, 0.3f);
 
-                Game.Events.Dispatch(GameEvents.ChangeBackgroundImage);
+                Game.Events.Dispatch(GameEvents.ChangeBackgroundImage, "N/A");
             }
         }
 

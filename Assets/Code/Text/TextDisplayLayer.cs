@@ -240,6 +240,11 @@ namespace Journalism {
                 GameText.PopulateTextLine(m_QueuedLine, inString.RichText, null, default, Assets.Style(characterId), Assets.Char(characterId), Text.MaxTextWidth);
                 GameText.AlignTextLine(m_QueuedLine, GameText.ComputeDesiredAlignment(m_QueuedLine, Text));
                 GameText.AdjustComputedLocations(Text, 1);
+
+                var charLocName = Assets.Char(characterId).Name;
+                string charName = (charLocName.IsEmpty ? "" : FDLocalization.Loc.Get(charLocName));
+
+                Game.Events.Dispatch(GameEvents.OnPrepareLine, new TextNodeParams("[node name here]", inString.VisibleText, charName));
             }
 
             m_ForceNext = inString.TryFindEvent(GameText.Events.ForceNext, out var _);
@@ -252,8 +257,10 @@ namespace Journalism {
             if ((m_RequireInputForPlayerText && GameText.IsPlayer(characterId)) || inSourceString.TryFindEvent(GameText.Events.ForceInput, out var _)) {
                 yield return GameText.WaitForPlayerNext(Choices, inSourceString.RichText, Assets.Style(characterId), GetDefaultChoiceAnchor());
             }
-
-            Game.Events.Dispatch(GameEvents.DisplayTextDialog, new TextNodeParams("", "", ""));
+            var charLocName = Assets.Char(characterId).Name;
+            string charName = (charLocName.IsEmpty ? "" : FDLocalization.Loc.Get(charLocName));
+            Game.Events.Dispatch(GameEvents.DisplayTextDialog, new TextNodeParams("node name here]", inSourceString.VisibleText, charName));
+            
 
             yield return GameText.AnimateLocations(Text, 1);
             GameText.ClearOverflowLines(Text);
@@ -344,7 +351,7 @@ namespace Journalism {
 
                         uint choiceFlavor = inChoice.GetCustomData(option.Index, GameText.ChoiceData.Flavor).AsUInt();
 
-                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId), choiceFlavor);
+                        GameText.PopulateChoice(choice, choiceText.RichText, option.TargetId, timeCost, iconMarker, Assets.Style(characterId), choiceFlavor, locId);
                     }
                     // send option locations to map
                     Game.Events.Dispatch(GameEvents.ChoiceOptionsUpdating, locIds);

@@ -18,7 +18,7 @@ namespace Journalism.UI {
             slot.Data = data;
             slot.Animation.Stop();
             GameText.PopulateStoryScrap(slot.Snippet, data, Assets.Style("snippet-in-story"));
-            Game.Events.Dispatch(GameEvents.PlaceSnippet);
+            Game.Events.Dispatch(GameEvents.PlaceSnippet, slot); // send all snippets, and location of this snippet
             Game.Events.Dispatch(GameEvents.StoryUpdated);
         }
 
@@ -87,6 +87,8 @@ namespace Journalism.UI {
             }
 
             layout.StoryType.SetText(configuration.HeadlineTypeId);
+
+            Game.Events.Dispatch(GameEvents.SlotsLaidOut, layout.ActiveSlots);
         }
 
         static public void LayoutNewspaper(NewspaperLayout layout, StoryConfig config, PlayerData data) {

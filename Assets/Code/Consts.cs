@@ -70,12 +70,18 @@ namespace Journalism {
         static public readonly StringHash32 CloseTimer = "analytics:close-timer";
         static public readonly StringHash32 TimeElapsed = "analytics:time-elapsed";
         static public readonly StringHash32 TimeExpired = "analytics:time-expired";
-        static public readonly StringHash32 SnippetReceived = "analytics:snippet-received";
+        // static public readonly StringHash32 SnippetReceived = "analytics:snippet-received";
         static public readonly StringHash32 StoryUpdated = "analytics:story-updated";
         // static public readonly StringHash32 PublishStoryClick = "analytics:publish-story-click";
         static public readonly StringHash32 DisplayPublishedStory = "analytics:display-published-story";
         static public readonly StringHash32 ClosePublishedStory = "analytics:close-published-story";
         static public readonly StringHash32 CompleteLevel = "analytics:complete-level";
         static public readonly StringHash32 StartEndgame = "analytics:start-endgame";
+
+        static public readonly StringHash32 OnPrepareLine = "analytics:entering-node";
+        static public readonly StringHash32 StatsRefreshed = "analytics:stats-refreshed";
+        static public readonly StringHash32 StoryImpactDisplayed = "analytics:story-impact-displayed";
+        static public readonly StringHash32 SlotsLaidOut = "analytics:slots-laid-out";
+
     }
 }

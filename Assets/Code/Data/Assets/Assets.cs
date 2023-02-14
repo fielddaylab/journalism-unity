@@ -47,6 +47,10 @@ namespace Journalism {
             return s_TextChars.Char(id);
         }
 
+        static public MapLocationDef.MapLocation Location(StringHash32 id) {
+            return MapLocations.GetMapLocation(id);
+        }
+
         #endregion // Styles
 
         #region Level List
