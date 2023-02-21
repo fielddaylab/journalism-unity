@@ -243,10 +243,16 @@ namespace Journalism {
 
         [LeafMember("NextLevel"), Preserve]
         static private IEnumerator LeafNextLevel() {
+            Game.Events.Dispatch(GameEvents.CompleteLevel);
             Future loader = Game.Scripting.LoadLevel(Player.Data.LevelIndex + 1, false);
             yield return Game.Scripting.ClearAllVisuals();
             yield return loader.Wait();
             Game.Scripting.StartLevel();
+        }
+
+        [LeafMember("StartEndgame"), Preserve]
+        static private void LeafStartEndgame() {
+            Game.Events.Dispatch(GameEvents.StartEndgame);
         }
 
         [LeafMember("GameOver"), Preserve]
@@ -322,6 +328,8 @@ namespace Journalism {
         static private void BeginTutorial() {
             Game.Events.Dispatch(GameEvents.TutorialBegin);
             Game.UI.PushInputMask(InputLayerFlags.OverStory);
+
+            Game.Events.Dispatch(GameEvents.UnlockedNotebook);
         }
 
         [LeafMember("EndTutorial"), Preserve]

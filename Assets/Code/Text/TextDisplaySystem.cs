@@ -31,6 +31,7 @@ namespace Journalism {
         [Header("Animation")]
         [SerializeField] private float m_FeedbackOverlayEditorY = -170f;
         [SerializeField] private float m_FeedbackOverlayImpactY = -75f;
+        [SerializeField] private Canvas m_Canvas = null;
 
         [Header("Image Contents")]
         [SerializeField] private AnimatedElement m_ImageLayout = null;
@@ -50,6 +51,7 @@ namespace Journalism {
         #endregion // Inspector
 
         [NonSerialized] private TextDisplayLayer m_CurrentLayer;
+        [NonSerialized] private CanvasSpaceTransformation m_SpaceHelper;
 
         private Routine m_OverlayAnim;
 
@@ -76,6 +78,8 @@ namespace Journalism {
             m_BaseLayer.NeedReloadColumn = CheckColumnLoad;
             m_BaseLayer.LoadColumn = LoadColumnData;
             m_BaseLayer.UnloadColumn = UnloadColumnData;
+
+            m_SpaceHelper.CanvasCamera = m_Canvas.worldCamera;
         }
 
         #endregion // Unity
@@ -111,6 +115,15 @@ namespace Journalism {
             this.m_Border.gameObject.SetActive(false); // disable border
             this.m_ImageBG.sprite = m_ImageBGSprite;
 
+            /*
+            m_ImageBG.Animation.Replace(this, OpeningAnimation())
+                .OnComplete(
+                    m_PopUp.Animation.Replace(this, IdleAnimation())
+                );
+            */
+
+            Game.Events.Dispatch(GameEvents.ShowPopupImage);
+
             yield return HandleImageOrMap(evtData, context);
         }
 
@@ -127,6 +140,8 @@ namespace Journalism {
         private IEnumerator HandleMap(TagEventData evtData, object context) {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultMapDims);
             this.m_Border.gameObject.SetActive(true); // enable border
+
+            Game.Events.Dispatch(GameEvents.OpenChoiceMap);
 
             yield return HandleImageOrMap(evtData, context);
         }
@@ -172,6 +187,7 @@ namespace Journalism {
             GameText.AdjustComputedLocations(m_CurrentLayer.Text, 1);
             yield return GameText.AnimateLocations(m_CurrentLayer.Text, 1);
             GameText.ClearOverflowLines(m_CurrentLayer.Text);
+            Game.Events.Dispatch(GameEvents.DisplayBreakdownDialog, Player.StoryStatistics);
             yield return 0.2f;
 
             // Quality
@@ -182,6 +198,7 @@ namespace Journalism {
             GameText.AdjustComputedLocations(m_CurrentLayer.Text, 1);
             yield return GameText.AnimateLocations(m_CurrentLayer.Text, 1);
             GameText.ClearOverflowLines(m_CurrentLayer.Text);
+            Game.Events.Dispatch(GameEvents.DisplaySnippetQualityDialog, Player.StoryStatistics);
             yield return 0.2f;
 
             yield return m_CurrentLayer.CompleteLine();
@@ -315,8 +332,7 @@ namespace Journalism {
                     }
                 }
 
-                yield return DisplayCustomMessage(m_OverLayer, psb.ToString(), "msg");
-                yield return 0.8f; //time to display stat change before dismissing
+                yield return DisplayCustomStatsMessage(m_OverLayer, psb.ToString(), "msg", this);
                 yield return m_OverLayer.ClearLines();
 
                 Player.WriteVariable(HeaderUI.Var_StatsEnabled, true);
@@ -369,9 +385,16 @@ namespace Journalism {
 
                 m_Image.Texture.Path = path.ToString();
                 m_Image.Texture.Preload();
+
                 while(m_Image.Texture.IsLoading()) {
                     yield return null;
                 }
+
+                /*
+                while (m_ImageBG.Texture.IsLoading())
+
+                    // layered secondary animation?
+                */
             }
         }
 
@@ -396,6 +419,30 @@ namespace Journalism {
         }
 
         #endregion // Columns
+
+        #region Anim Helpers
+
+        public Vector2 GetLocation(Transform inFocusTransform) {
+            Vector3 pos;
+            inFocusTransform.TryGetCamera(out m_SpaceHelper.WorldCamera);
+            m_SpaceHelper.TryConvertToLocalSpace(inFocusTransform, out pos);
+            return (Vector2)pos;
+        }
+
+        public Vector2 GetVectorBetween(Transform inStart, Transform inEnd) {
+            Vector3 startPos;
+            inStart.TryGetCamera(out m_SpaceHelper.WorldCamera);
+            m_SpaceHelper.TryConvertToLocalSpace(inStart, out startPos);
+
+            Vector3 endPos;
+            inStart.TryGetCamera(out m_SpaceHelper.WorldCamera);
+            m_SpaceHelper.TryConvertToLocalSpace(inEnd, out endPos);
+
+            Vector2 between = endPos - startPos;
+            return between;
+        }
+
+        #endregion // Anim Helpers
 
         #region Clear
 
@@ -426,8 +473,25 @@ namespace Journalism {
             GameText.PopulateTextLine(line, text, null, default, Assets.Style("msg"), null, layer.Text.MaxTextWidth);
             GameText.AlignTextLine(line, TextAlignment.Center);
             GameText.AdjustComputedLocations(layer.Text, 1);
+
             yield return GameText.AnimateLocations(layer.Text, 1);
             GameText.ClearOverflowLines(layer.Text);
+        }
+
+        static private IEnumerator DisplayCustomStatsMessage(TextDisplayLayer layer, string text, StringHash32 style, TextDisplaySystem textDisplay) {
+            TextLine line = GameText.AllocLine(layer.Text, layer.Pools);
+            GameText.PopulateTextLine(line, text, null, default, Assets.Style("msg"), null, layer.Text.MaxTextWidth);
+            GameText.AlignTextLine(line, TextAlignment.Center);
+            GameText.AdjustComputedLocations(layer.Text, 1);
+
+            yield return GameText.AnimateLocations(layer.Text, 1);
+            GameText.ClearOverflowLines(layer.Text);
+
+            textDisplay.m_SpaceHelper.CanvasSpace = line.AnimElement.RectTransform;
+
+            yield return 1.25f; // delay so player can read the increase
+            yield return GameText.AnimateStatsRise(line, textDisplay, 0.75f, 0.1f, 80);
+            Game.UI.Header.ShowStatsRays();
         }
 
         public IEnumerator DisplayNewspaper() {
@@ -444,7 +508,9 @@ namespace Journalism {
             }
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 1;
+            Game.Events.Dispatch(GameEvents.DisplayPublishedStory);
             yield return GameText.WaitForPlayerNext(m_CurrentLayer.Choices, Loc.Get(TextConsts.TalkToEditor), Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight);
+            Game.Events.Dispatch(GameEvents.ClosePublishedStory);
             yield return m_FinishedStoryLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_FinishedStoryLayout.gameObject.SetActive(false);
         }

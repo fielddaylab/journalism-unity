@@ -298,7 +298,7 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 {@birdie}When it rains, wetlands soak up water like a sponge and help prevent flooding.
 {@birdie} But 90% of our original wetlands are gone!
 {/img}
-{@player} Wow... 90%? That seems like a lot. 
+{@me} Wow... 90%? That seems like a lot. 
 {/img}
 {@player} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
@@ -342,7 +342,7 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 {img Anim/2b/Bulldozer.png, Left}
 {@birdie}The town keeps growing, and our wetlands keep shrinking. 
 
-$call GiveSnippet(WhatHappenedToWetlands)
+$call GiveSnippet(WhatHappenedToWetlands) // here?
 {/img}
 $OnceChoice(AreTherePoliciesToProtectWetlands,"Are there any policies to protect wetlands?")
 $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this issue at Town Hall meetings?")
@@ -421,6 +421,7 @@ $endif
 
 $choice MarshMap; Got it. Thanks. 
 
+
 // Original Name: Marsh Map
 :: MarshMap
 {bg $BG_CherryCreekMarsh}
@@ -429,7 +430,7 @@ $call Ambience($Audio_RuralFrogs)
 $call Rain($Audio_CalmStreamRiverFlow)
 
 $if FirstVisit()
-$call SetTimeRemaining(2.5)
+    $call SetTimeRemaining(2.5)
 $endif
 
 $if HasTime(0.5)
@@ -667,9 +668,32 @@ $choice DecideWhatToDoNext; Leave the opera house
 
 //Original Name: Decide where to go next
 :: DecideWhatToDoNext
+
 $if !HasTime(0.25)
     You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
+$elseif Visited(ReturnToTheDepartmentOfLimnology)
+    $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite), Visited(CallTheMayor)
+        $if Visited(SparkProjectMeeting)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $elseif Visited(CallTheSparkProject)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $endif
+    $else
+        $if Visited(SparkProjectMeeting)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $elseif Visited(CallTheSparkProject)
+            // player has time but has expended all options
+            You have just enough time to compile your story!
+            $choice WetlandsStoryConstruction; Compile your story
+        $endif
+    $endif
 $endif
 
 $HubChoice(ReturnToTheDepartmentOfLimnology, "Go to the Department of Limnology", 0.25, "Limnology")
@@ -778,6 +802,7 @@ $choice DecideWhatToDoNext; Plan your next move
 
 //Go to City Hall
 :: GoToCityHall
+// TODO: city hall image here
 Wow. You can't believe your luck! 
 {img Anim/2b/HotDog.png, Left}
 You're halfway to city hall when you see Mayor Smuckers on the street, unwrapping a hot dog from its foil wrapper.
@@ -1006,17 +1031,17 @@ $choice DecideWhatToDoNext; Leave City Hall and plan your next move
 :: WetlandsStoryConstruction
 
 $if !HasTime(0.5)
-Time to compile that big story on the wetlands!
-$set storyType = "Investigation"
-$set snippetLimit = 6
-$set destination = "TO BE CONTINUED"
-$goto STORYEVALUATION
+    Time to compile that big story on the wetlands!
+    $set storyType = "Investigation"
+    $set snippetLimit = 6
+    $set destination = "TO BE CONTINUED"
+    $goto STORYEVALUATION
 $else
-There's still time to collect information for this story!
+    There's still time to collect information for this story!
 
-$choice DecideWhatToDoNext; Decide what to do next
+    $choice DecideWhatToDoNext; Decide what to do next
 
-$choice StartCompilingAnyway; Start compiling anyway.
+    $choice StartCompilingAnyway; Start compiling anyway.
 $endif
 
 // Original Name: Take photos of the marsh
@@ -1024,57 +1049,57 @@ $endif
 
 //TODO: maybe replace with Resourceful - too busy swatting mosquitos to take a good picture?
 $if StatCheck(Resourceful, 5)
-There are mosquitoes everywhere... good thing you were {stat-name}resourceful{/stat-name} enough to bring bug spray!
-You take a picture of a sandhill crane surrounded by debris.
-$call SFX(PhotoSnap)
+    There are mosquitoes everywhere... good thing you were {stat-name}resourceful{/stat-name} enough to bring bug spray!
+    You take a picture of a sandhill crane surrounded by debris.
+    $call SFX(PhotoSnap)
 
-$call GiveSnippet(GreatMarshPhoto-Crane)
+    $call GiveSnippet(GreatMarshPhoto-Crane)
 
-Birdie looks over your shoulder in amazement. 
-{@birdie}Let me know if you ever decide to sell your work.
-{@birdie}I'd love to hang that photo in my kitchen! 
-Wow. A week ago you didn't even know how to switch your phone to portrait mode.
-Looks like there's something to be said for learning on the job. 
+    Birdie looks over your shoulder in amazement. 
+    {@birdie}Let me know if you ever decide to sell your work.
+    {@birdie}I'd love to hang that photo in my kitchen! 
+    Wow. A week ago you didn't even know how to switch your phone to portrait mode.
+    Looks like there's something to be said for learning on the job. 
 
 $elseif StatCheck(Tech, 5)
-You take a photo of a sandhill crane in the distance, surrounded by debris.
+    You take a photo of a sandhill crane in the distance, surrounded by debris.
 
-$call SFX(PhotoSnap)
+    $call SFX(PhotoSnap)
 
-$call GiveSnippet(GreatMarshPhoto-Crane)
+    $call GiveSnippet(GreatMarshPhoto-Crane)
 
-Birdie looks over your shoulder in amazement. 
-{@birdie}Let me know if you ever decide to sell your work.
-{@birdie}I'd love to hang that photo in my kitchen! 
-Wow. A week ago you didn't even know how to switch your phone to portrait mode.
-Looks like there's something to be said for learning on the job. 
+    Birdie looks over your shoulder in amazement. 
+    {@birdie}Let me know if you ever decide to sell your work.
+    {@birdie}I'd love to hang that photo in my kitchen! 
+    Wow. A week ago you didn't even know how to switch your phone to portrait mode.
+    Looks like there's something to be said for learning on the job. 
 
 
 $elseif StatCheck(Trust, 5)
-{img Anim/2b/Mosquito.png, Left}
-You're too busy swatting at mosquitoes to get any long-distance nature shots... 
-But a photo of the volunteers would be great, too. 
-When you ask for permission, the nearest volunteer absolutely geeks out. 
-{/img}
-{@wetlandvolunteer3}You're that new reporter from New York, right??
-{@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
-$call SFX(PhotoSnap)
+    {img Anim/2b/Mosquito.png, Left}
+    You're too busy swatting at mosquitoes to get any long-distance nature shots... 
+    But a photo of the volunteers would be great, too. 
+    When you ask for permission, the nearest volunteer absolutely geeks out. 
+    {/img}
+    {@wetlandvolunteer3}You're that new reporter from New York, right??
+    {@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
+    $call SFX(PhotoSnap)
 
-$call GiveSnippet(GoodMarshPhoto-Volunteers)
+    $call GiveSnippet(GoodMarshPhoto-Volunteers)
 
 $else
-{img Anim/2b/Mosquito.png, Left}
-You're too busy swatting mosquitoes to line up a decent shot.
-Trying to ignore the cloud of bugs, you ask the volunteers for permission to take a photo. 
-{/img}
-{@wetlandvolunteer3}Um, no offense. But we don't trust out-of-towners.
-{@me}What? I'm not an out-of-towner! 
-{@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
-Ugh. Word sure gets around here.  
-At least the plants don't have a problem with being photographed. 
-$call SFX(PhotoSnap)
+    {img Anim/2b/Mosquito.png, Left}
+    You're too busy swatting mosquitoes to line up a decent shot.
+    Trying to ignore the cloud of bugs, you ask the volunteers for permission to take a photo. 
+    {/img}
+    {@wetlandvolunteer3}Um, no offense. But we don't trust out-of-towners.
+    {@me}What? I'm not an out-of-towner! 
+    {@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
+    Ugh. Word sure gets around here.  
+    At least the plants don't have a problem with being photographed. 
+    $call SFX(PhotoSnap)
 
-$call GiveSnippet(BadMarshPhoto-Scenery)
+    $call GiveSnippet(BadMarshPhoto-Scenery)
 
 $endif
 
@@ -1093,54 +1118,53 @@ $choice MarshMap; Find someone else to talk to. Hiking isn't exactly gonna help 
 :: TalkToVolunteerWithBagFullOfSeedPackets
 
 $if StatCheck(Trust, 4)
-The volunteer seems to trust you. 
-She tells you about her volunteer work: replanting native species.
+    The volunteer seems to trust you. 
+    She tells you about her volunteer work: replanting native species.
 
-{@wetlandvolunteer2} My kids love exploring here. It's part of what makes Twin Lakes so magical. 
-{@me}It is pretty nice.... though I could probably do without the snakes. 
-{img Anim/2b/Snake.png, Left}
-{@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
-Hooooooly cherry donuts.
-You move slowly backward and snap a picture, because this seems more professional than running away screaming.
-$call SFX(PhotoSnap)
+    {@wetlandvolunteer2} My kids love exploring here. It's part of what makes Twin Lakes so magical. 
+    {@me}It is pretty nice.... though I could probably do without the snakes. 
+    {img Anim/2b/Snake.png, Left}
+    {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
+    Hooooooly cherry donuts.
+    You move slowly backward and snap a picture, because this seems more professional than running away screaming.
+    {/img}
+    $call SFX(PhotoSnap)
 
-{/img}
-
-$call GiveSnippet(Volunteer-ImportanceOfWetlands)
-$call GiveSnippet(SnakeAnecdote)
-$call GiveSnippet(GreatSnakePhoto)
-$choice MarshMap; Decide what to do next 
+    $call GiveSnippet(Volunteer-ImportanceOfWetlands)
+    $call GiveSnippet(SnakeAnecdote)
+    $call GiveSnippet(GreatSnakePhoto)
+    $choice MarshMap; Decide what to do next 
 
 $elseif StatCheck(Resourceful, 5)
-{img Anim/2b/Mosquito.png, Left}
-The volunteer is swatting at mosquitoes, looking frustrated. 
-{@wetlandvolunteer2}Can't believe I forgot my bug spray. 
-{@me} Oh.. I've got some in my backpack! Here, help yurself.
-{/img}
-She accepts the bug spray gratefully and tells you all about her volunteer work: replanting native species. 
-{@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
-{@me}It is pretty nice.... though I could probably do without the snakes. 
-{img Anim/2b/Snake.png, Left}
-{@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
-Hooooooly cherry donuts.
-You take a few steps backward and snap a picture, because this seems more professional than running away screaming.
-$call SFX(PhotoSnap)
+    {img Anim/2b/Mosquito.png, Left}
+    The volunteer is swatting at mosquitoes, looking frustrated. 
+    {@wetlandvolunteer2}Can't believe I forgot my bug spray. 
+    {@me} Oh.. I've got some in my backpack! Here, help yurself.
+    {/img}
+    She accepts the bug spray gratefully and tells you all about her volunteer work: replanting native species. 
+    {@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
+    {@me}It is pretty nice.... though I could probably do without the snakes. 
+    {img Anim/2b/Snake.png, Left}
+    {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
+    Hooooooly cherry donuts.
+    You take a few steps backward and snap a picture, because this seems more professional than running away screaming.
+    {/img}
+    $call SFX(PhotoSnap)
 
-{/img}
-$call GiveSnippet(Volunteer-ImportanceOfWetlands)
-$call GiveSnippet(SnakeAnecdote)
-$call GiveSnippet(GreatSnakePhoto)
-$choice MarshMap; Decide what to do next 
+    $call GiveSnippet(Volunteer-ImportanceOfWetlands)
+    $call GiveSnippet(SnakeAnecdote)
+    $call GiveSnippet(GreatSnakePhoto)
+    $choice MarshMap; Decide what to do next 
 
 $else
-Unfortunately, the volunteer isn't interested in chatting. 
+    Unfortunately, the volunteer isn't interested in chatting. 
 
-{@wetlandvolunteer2}Sorry. I don't trust reporters.  
-{@wetlandvolunteer2}Good luck, though.  
+    {@wetlandvolunteer2}Sorry. I don't trust reporters.  
+    {@wetlandvolunteer2}Good luck, though.  
 
-Well, at least she's honest. 
+    Well, at least she's honest. 
 
-$choice MarshMap; Decide what to do next 
+    $choice MarshMap; Decide what to do next 
 $endif
 
 // Original Name: Return to the Department of Limnology
@@ -1252,16 +1276,17 @@ $else
         That pointed beak looks terrifying... but the crane only uses it to root through the soil for insects and seeds.    
         You snap a picture, then head calmly back toward the trailhead.
         $call SFX(PhotoSnap)
+        {/img}
 
         $call GiveSnippet(GreatMarshPhoto-Crane)
         $choice MarshMap; Return to trailhead
     $else 
         It really is beautiful. Yellow eyes. Pointed beak. 
-        Only slightly reminiscent of a hungry velociraptor. 
-    $choice MarshMap; Run for your life 
-    $choice SprayItWithPepperSpray; Stand your ground and whip out the pepper spray
+        Only slightly reminiscent of a hungry velociraptor.
+        {/img}
+        $choice MarshMap; Run for your life 
+        $choice SprayItWithPepperSpray; Stand your ground and whip out the pepper spray
     $endif
-    {/img}
 $endif
 
 //Original Name: Spray it with pepper spray
@@ -1354,11 +1379,11 @@ $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
 $else
+    $choice DecideWhatToDoNext; Leave the Limnology Department
     $if Visited(DoYouHaveSourcesForAllThisInformation)
         $OnceChoice(AskHerToConfirmCRANEsInformation, "Ask her to confirm Birdie's data")
         $HubChoice(CheckLimnologyDepartmentWebsite, "Use the Limnology Department website to fact check Birdie's information", 0.25)
     $endif
-    $choice DecideWhatToDoNext; Leave the Limnology Department
 $endif
 
 // Original Name: Ask why he's out here volunteering
@@ -1371,10 +1396,10 @@ $endif
 {/img}
 {img Anim/2b/Golf.png, Left}
 {@wetlandvolunteer1}It's a golf course now. 28 holes, and not a speck of wildlife.
+{/img}
 
 $call GiveSnippet(MarshLoss)
 $call GiveSnippet(MarshPollution)
-{/img}
 $choice MarshMap; Thank him for his time 
 
 // Original Name: Ask her about the wetlands
@@ -1414,8 +1439,8 @@ $else
 $endif
 
 $if HasTime(0.25)
-    $HubChoice(TakePhotosOfLimnologyDepartment, "Take photos for your story", 0.25)
     $choice DecideWhatToDoNext; Leave the Limnology Department
+    $HubChoice(TakePhotosOfLimnologyDepartment, "Take photos for your story", 0.25)
 $else
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
@@ -1443,15 +1468,15 @@ She looks over your notes.
 She sends you a link to a long, complicated academic paper about wetlands and flooding.
 
 $if StatCheck(Research, 6)
-Thanks to your bookish tendencies, you should be able to knock this out by lunchtime.
+    Thanks to your bookish tendencies, you should be able to knock this out by lunchtime.
 
-$call GiveSnippet(WetlandsAndFloodingGraph)
-$call GiveSnippet(WetlandLossConfirmation)
+    $call GiveSnippet(WetlandsAndFloodingGraph)
+    $call GiveSnippet(WetlandLossConfirmation)
 $else
-Just the thought of reading this makes you want to crawl into a hole somewhere.
-But at least you got your data verified. 
+    Just the thought of reading this makes you want to crawl into a hole somewhere.
+    But at least you got your data verified. 
 
-$call GiveSnippet(WetlandLossConfirmation)
+    $call GiveSnippet(WetlandLossConfirmation)
 $endif
  
 $choice DecideWhatToDoNext; Thank her for her help  
@@ -1617,45 +1642,45 @@ $endif //1 or 2: no change
 
 $if StoryScore() == "good"
     $if StoryAlignment() >= 0.5
-        {@person}   Stellar work Rookie! I can tell you put your heart into this.
-        {@person}   Solid story construction and lots of useful info.
-        {@person}   Maybe you've got a Pulitzer Prize in your future.
+        {@dionne}   Stellar work Rookie! I can tell you put your heart into this.
+        {@dionne}   Solid story construction and lots of useful info.
+        {@dionne}   Maybe you've got a Pulitzer Prize in your future.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work, Rookie! Your quotes and photos are top notch.
-        {@person}   Admittedly, we could've used a little more useful info... 
-        {@person}   But this should still help a lot of people. 
+        {@dionne}   Nice work, Rookie! Your quotes and photos are top notch.
+        {@dionne}   Admittedly, we could've used a little more useful info... 
+        {@dionne}   But this should still help a lot of people. 
     $else
-        {@person}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
-        {@person}   Admittedly, it's not quite what I asked... but still a good effort. 
-        {@person}   Make sure to check my notes next time. It's all in there.  
+        {@dionne}   Wow, your writing is top notch! Gorgeous prose! Quality quotes!
+        {@dionne}   Admittedly, it's not quite what I asked... but still a good effort. 
+        {@dionne}   Make sure to check my notes next time. It's all in there.  
     $endif
 $elseif StoryScore() == "medium"
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work getting the right info out there!
-        {@person}   These story segments could use some quality control, 
-        {@person}   But still, a solid story. Twin Lakes is lucky to have you.
+        {@dionne}   Nice work getting the right info out there!
+        {@dionne}   These story segments could use some quality control, 
+        {@dionne}   But still, a solid story. Twin Lakes is lucky to have you.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
-        {@person}   This should be enough to help a lot of people.  
-        {@person}   Next time, make sure to check my notes. You veered off topic a little. 
+        {@dionne}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
+        {@dionne}   This should be enough to help a lot of people.  
+        {@dionne}   Next time, make sure to check my notes. You veered off topic a little. 
     $else
-        {@person}   Nice work, Rookie. Your reporting is pretty solid. 
-        {@person}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
-        {@person}   Still. Not bad for your first natural disaster. 
+        {@dionne}   Nice work, Rookie. Your reporting is pretty solid. 
+        {@dionne}   Next time, make sure to pay attention to my notes. You veered off topic a little.   
+        {@dionne}   Still. Not bad for your first natural disaster. 
     $endif
 $else
     $if StoryAlignment() >= 0.5
-        {@person}   Nice work, Rookie. You got a lot of useful information out there! 
-        {@person}   This story should help a lot of people... 
-        {@person}   Though I gotta admit, some of this info is pretty low-quality.
+        {@dionne}   Nice work, Rookie. You got a lot of useful information out there! 
+        {@dionne}   This story should help a lot of people... 
+        {@dionne}   Though I gotta admit, some of this info is pretty low-quality.
     $elseif StoryAlignment() >= 0.3
-        {@person}   Nice work, Rookie. Your story construction is pretty solid!
-        {@person}   Your quality control could definitely use some work. 
-        {@person}   Still. Not bad for your first natural disaster. 
+        {@dionne}   Nice work, Rookie. Your story construction is pretty solid!
+        {@dionne}   Your quality control could definitely use some work. 
+        {@dionne}   Still. Not bad for your first natural disaster. 
     $else
-        {@person}   Well.... this could be worse. Sort of.  
-        {@person}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
-        {@person}   This was your first natural disaster, so I'll let it slide. 
+        {@dionne}   Well.... this could be worse. Sort of.  
+        {@dionne}   We needed more useful, high-quality info here. Make sure to check my notes next time. 
+        {@dionne}   This was your first natural disaster, so I'll let it slide. 
     $endif
 $endif
 

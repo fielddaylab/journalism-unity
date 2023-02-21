@@ -534,6 +534,7 @@ MonoBehaviour:
   m_CloseAudio:
     m_Source: 
     m_HashValue: 0
+  m_ToolbarType: 1
 --- !u!114 &7091283740535102435
 MonoBehaviour:
   m_ObjectHideFlags: 0

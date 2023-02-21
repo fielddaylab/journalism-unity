@@ -15,6 +15,8 @@ using BeauUtil.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using FDLocalization;
+using BeauRoutine.Splines;
+using UnityEditor;
 
 namespace Journalism {
     static public class GameText {
@@ -384,6 +386,12 @@ namespace Journalism {
             line.gameObject.SetActive(false);
         }
 
+        static public IEnumerator AnimateStatsRays(Image raysImg, Vector2 offset, float duration) {
+            raysImg.enabled = true;
+            yield return duration;
+            raysImg.enabled = false;
+        }
+
         /// <summary>
         /// Animates the text line as a "pinned" animation.
         /// </summary>
@@ -591,6 +599,27 @@ namespace Journalism {
         }
 
         /// <summary>
+        /// Animates stats rising to stats window button
+        /// </summary>
+        /// <returns></returns>
+        static public IEnumerator AnimateStatsRise(TextLine line, TextDisplaySystem textDisplay, float transitionTime, float finalScale, float rotationAmt) {
+            Vector3 targetPos;
+
+            Transform statsButtonTransform = Game.UI.Header.FindButton("Stats").transform;
+            targetPos = statsButtonTransform.position;
+
+            SimpleSpline spline = Spline.Simple(line.transform.position, targetPos, RNG.Instance.NextFloat(0.5f, 0.6f), new Vector3(RNG.Instance.NextFloat(-4, 4), 0));
+
+            yield return Routine.Combine(
+                line.transform.MoveAlong(spline, transitionTime).Ease(Curve.CubeIn),
+                line.transform.ScaleTo(finalScale, transitionTime),
+                line.transform.RotateTo(line.transform.localEulerAngles.z + rotationAmt, transitionTime, Axis.Z, Space.Self, AngleMode.Absolute)
+                );
+
+            line.transform.localScale = Vector2.zero;
+        }
+
+        /// <summary>
         /// Clears lines overflowing from the given scroll.
         /// </summary>
         static public void ClearOverflowLines(TextLineScroll scroll) {
@@ -656,7 +685,7 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given choice.
         /// </summary>
-        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, float timeCost, MapMarker choiceMarker, TextStyles.StyleData style) {
+        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, float timeCost, MapMarker choiceMarker, TextStyles.StyleData style, uint choiceType) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
 
             textString = StripQuotes(textString);
@@ -666,6 +695,7 @@ namespace Journalism {
             line.Text.gameObject.SetActive(true);
 
             choice.TargetId = targetId;
+            choice.ChoiceType = choiceType;
             choice.TimeCost = Stats.HoursToTimeUnits(Mathf.Max(0, timeCost));
             choice.Selected = false;
 
@@ -784,13 +814,13 @@ namespace Journalism {
                     TextChoice choiceButton = btnState.Choice.Object;
                     if (choiceButton.Selected) {
                         choice.Choose(choiceButton.TargetId);
+                        Game.Events.Dispatch(GameEvents.ChoiceCompleted, btnState.Choice.Object.ChoiceType);
                         break;
                     }
                 }
                 yield return null;
             }
             choices.GridGroup.blocksRaycasts = false;
-            Game.Events.Dispatch(GameEvents.ChoiceCompleted);
         }
 
         /// <summary>
@@ -846,7 +876,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
             
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices, choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, -0.1f, allowFullscreenInput, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices, choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, -0.1f, allowFullscreenInput, choices.VanishAnimParams, true);
         }
 
         static public IEnumerator WaitForPlayerNext(TextChoiceGroup choices, string text, TextStyles.StyleData style, TextAnchor anchor = TextAnchor.MiddleCenter) {
@@ -855,7 +885,7 @@ namespace Journalism {
             CanvasUtility.SetPivot(choices.DefaultNextButton.Line.Root, anchor);
 
             choices.DefaultNextButton.transform.SetRotation(RNG.Instance.NextFloat(-choices.RotationRange, choices.RotationRange), Axis.Z, Space.Self);
-            yield return WaitForButtonOrSkip(choices, choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, 0.4f, false, choices.VanishAnimParams);
+            yield return WaitForButtonOrSkip(choices, choices.DefaultNextButton, choices.DefaultChoiceGroup, choices.NewChoiceAnimParams, 0.4f, false, choices.VanishAnimParams, false);
         }
 
         static public IEnumerator WaitForYesNoChoice(TextChoiceGroup choices, Future<bool> future, string yesText, string noText, TextStyles.StyleData yesStyle, TextStyles.StyleData noStyle = null) {
@@ -867,7 +897,7 @@ namespace Journalism {
             future.Complete(choices.DefaultNextButton.Selected);
         }
 
-        static public IEnumerator WaitForButtonOrSkip(TextChoiceGroup choices, TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, float holdDelay, bool allowFullscreenInput, TweenSettings vanishAnimParams) {
+        static public IEnumerator WaitForButtonOrSkip(TextChoiceGroup choices, TextChoice button, CanvasGroup fade, TweenSettings newAnimParams, float holdDelay, bool allowFullscreenInput, TweenSettings vanishAnimParams, bool isDefaultChoice) {
             using(Routine fadeIn = fade.FadeTo(1, newAnimParams.Time / 2).Play()) {
                 fade.blocksRaycasts = true;
                 button.Selected = false;
@@ -878,6 +908,15 @@ namespace Journalism {
                     if (spaceDelay > 0) {
                         spaceDelay -= Time.deltaTime;
                     }
+                }
+                if (isDefaultChoice) {
+                    // generic text click
+                    Game.Events.Dispatch(GameEvents.TextClicked, new TextNodeParams("", "", ""));
+                }
+                else {
+                    // TODO: continue choice (player dialogue), or single choice
+                    Game.Events.Dispatch(GameEvents.ChoiceCompleted, button.ChoiceType);
+
                 }
             }
             fade.blocksRaycasts = false;
@@ -1198,6 +1237,7 @@ namespace Journalism {
             static public readonly StringHash32 Time = "time";
             static public readonly StringHash32 Once = "once";
             static public readonly StringHash32 LocationId = "location";
+            static public readonly StringHash32 Flavor = "flavor";
         }
 
         static public class Characters {

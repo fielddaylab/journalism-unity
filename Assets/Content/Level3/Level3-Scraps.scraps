@@ -141,19 +141,19 @@ A local man urged people to speak up about the need for an accessible shelter. F
 @type Photo 
 @quality Great  
 @attr Color 
-@image Photos/floodshelter.jpg
+@image Photo/floodshelter.jpg
 
 :: BadLightingShelterPhoto
 @type Photo  
 @quality Good 
 @attr Color 
-@image Photos/floodshelter-DARK.jpg
+@image Photo/floodshelter-DARK.jpg
 
 :: BlurryShelterPhoto
 @type Photo 
 @quality Bad 
 @attr Color 
-@image Photos/floodshelter-BAD.jpg
+@image Photo/floodshelter-BAD.jpg
 
 :: KickedOutOfApartments
 @type Fact  
@@ -549,8 +549,8 @@ Despite all the town's flaws, Graham Johnson plans to stay in Twin Lakes. "Can't
 
 :: InaccurateFloodMaps
 @type Quote 
-@quality Great 
-@attr Facts 
+@quality Good 
+@attr Color, Useful 
 Graham Johnson said his grandma's house flooded, despite not being in a flood zone. "It's hard to trust the city after this." 
 
 :: HowToVolunteerAtFillingStation 
@@ -615,44 +615,44 @@ The historic neighborhoods looked tidier than most of Twin Lakes, with debris al
 
 :: RidesBusAndCantAccessSandbags
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts
 "I'm 80 years old, and I take the bus everywhere. There's no way I can get across town just to bring back sandbags."
 
 :: FloodDamageAnecdote 
 @type Quote 
-@quality Great 
+@quality Good 
 @attr Facts, Color 
 Esme lamented the musical instruments and photos her family lost to the flood. "I never dreamed the water would rise so high!" 
 
 :: RoyalHazelQuoteInaccurateFloodMaps
 @type Quote 
-@quality Great  
-@attr Facts 
+@quality Good  
+@attr Facts, Useful 
 "According to the flood map, our area wasn't supposed to flood. But tell that to all the black mold growing in my basement."
 
 :: PayingForRepairs
 @type Quote 
-@quality Great 
-@attr Facts 
+@quality Good 
+@attr Color 
 "I don't have enough money to repair this place. I'd hate to leave my home, but I don't see another option."
 
 :: LizQuoteTwinLakesNotPrepared
 @type Quote 
 @quality Great 
-@attr Facts 
+@attr Color, Useful
 "Twin Lakes had plenty of time to get ready for this... Instead, they decided to let us all fend for ourselves." 
 
 :: LizQuoteDebrisPiledUp
 @type Quote 
-@quality Great 
-@attr Facts 
+@quality Good 
+@attr Facts
 "I keep calling the city to send a truck to pick up all the debris. They keep saying they'll get to it as soon as they can."
 
 :: LizTripsBackAndForth
 @type Fact  
 @quality Good 
-@attr Facts
+@attr Color
 Liz described taking 20 trips back and forth to bring back sandbags for herself and her neighbor. 
 
 :: LizBasementFlooded
@@ -664,13 +664,13 @@ Liz described taking 20 trips back and forth to bring back sandbags for herself 
 :: LizHowCanPeopleHelp  
 @type Quote 
 @quality Great 
-@attr Facts, Useful  
+@attr Useful  
 "People are gonna need financial help to recover. So many folks have damaged homes and not enough money to fix it."
 
 :: NeedToProtectTheSouthSide
 @type Quote 
 @quality Great 
-@attr Facts 
+@attr Facts, Color
 "The whole town is connected. If we all start moving out, this town is gonna collapse like an overbaked cherry souffle."
 
 :: WillasStory
@@ -694,12 +694,12 @@ Years ago, Dr. Nora Warner's home was destroyed by a flood. Now she researches f
 :: NoraFloodWarning 
 @type Quote 
 @quality Good 
-@attr Facts 
+@attr Facts, Color
 "More floods are going to come. Twin Lakes will be washed right off the map unless we make some changes."
 
 :: NoraPrepareBetterNextTime
 @type Quote 
-@quality Great  
+@quality Good  
 @attr Useful 
 "Update the flood maps. Tell people if they’re at risk. Put a sandbag station in each neighborhood and start enlisting volunteers." 
 
@@ -718,5 +718,5 @@ Years ago, Dr. Nora Warner's home was destroyed by a flood. Now she researches f
 :: NoraDisasterEquity
 @type Quote 
 @quality Great 
-@attr Facts
+@attr Facts, Useful
 "Disasters hit some people much harder. The town needs to help these groups, or Twin Lakes will fall apart at the seams."

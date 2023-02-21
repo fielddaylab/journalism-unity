@@ -381,7 +381,7 @@ The nurse is happy to let you use his photo. He even has some headline ideas:
 {anim sway}Fowl weather at the quack of dawn!
 {anim sway}Storm expected to rack up large bill
 
-$ContinueChoice({@me} Thanks. I'll keep those in mind.)
+$ActionChoice(Thanks. I'll keep those in mind.)
 
 $call GiveSnippet(HospitalDucks)
 $choice OffToWork; Off to work
@@ -519,12 +519,12 @@ $else
     {@person} You made it. I'm impressed.
 $endif
 
-$ContinueChoice({@me} Where is everybody??)
+$ActionChoice(Where is everybody??)
 She explains that the other field reporters are stranded in the flood, or bailing out their flooded basements.
 
 $call GiveSnippet(DifficultCommute)
 
-$ContinueChoice({@me} How can I help?)
+$ActionChoice(How can I help?)
 
 {@person} We need a breaking news story, so that the people of Twin Lakes will know what's going on.
 {@person} Keep it short and sweet--what's the situation, and how can people stay safe.
@@ -921,7 +921,7 @@ You're about to head out into the storm when your editor strolls by.
 {@person} We're almost out.
 
 
-$ContinueChoice({@me} But... shouldn't I head downtown?\" )
+$ActionChoice(But... shouldn't I head downtown?\" )
 
 
 Your boss shakes her head. "I saw you were still sitting around, so I gave the story to Khalisa."
@@ -1607,7 +1607,7 @@ You ask her about the flooding.
 "It's not just about floods," she says. "Hosueboats are great in winter, too. Just travel south! If geese can do it, why not us?" 
 
 
-$ContinueChoice({@me} Yeah, that's great. So about the flooding...)
+$ActionChoice(Yeah, that's great. So about the flooding...)
 "Let me put it this way. My houseboat can do literally anything your house can do. Plus, float!!" 
 
 $call GiveSnippet(HouseboatStory)
@@ -1687,7 +1687,7 @@ The driver isn't interested--but they do notice the granola you brought from hom
 "Wow! Is that Jim's famous cherry crisp granola??" 
 
 
-$ContinueChoice({@me} Uh, I think so? Jim is my neighbor.)
+$ActionChoice(Uh, I think so? Jim is my neighbor.)
 The driver gladly accepts the trade.
 
 Time to get on the water!
@@ -2458,7 +2458,7 @@ The woman looks surprised. "Oh, you're a reporter? You should talk to my brother
 She scribbles down her brother's contact info: <i>Barry Zingerman, 555-1678</i>
 
 
-$ContinueChoice({@me} Barry Zingerman? You mean.... the mayor of Twin Lakes?)
+$ActionChoice(Barry Zingerman? You mean.... the mayor of Twin Lakes?)
 
 
 "Oh, you've heard of him? Give him a call. Tell him you rescued his niece's pet. I'm sure he'd love to chat."
@@ -3690,7 +3690,7 @@ $endif
 "Wetlands stop flooding by giving water somewhere to go," she says. "The problem is, our wetlands keep shrinking."
 
 
-$ContinueChoice({@me} What do you mean, shrinking?)
+$ActionChoice(What do you mean, shrinking?)
 
 
 "The city keeps building over them. Yes, the city is growing, but we're losing wildlife AND putting ourselves at risk of more flooding." 
@@ -3764,7 +3764,7 @@ $choice ThankHerAndEndInterview; Thank her and end interview
 "Some of them are," she says. "But a few years ago, the Big Business Bureau fought to get rid of protections for smaller wetlands."
 
 
-$ContinueChoice({@me} People were okay with that?)
+$ActionChoice(People were okay with that?)
 
 
 "Well, they wanted to build a community center on Sugar Marsh," she says. "It's hard for a wet, buggy marsh to compete with a gym and an indoor pool."

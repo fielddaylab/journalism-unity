@@ -24,7 +24,7 @@ $call Rain($Audio_RainOutsideChill)
 {@me} Yikes.
 This is the break you've been waiting for.
 One natural disaster might not be quite enough to get you in at the Smoke City Herald...
-[img Anim/3b/Opossum.png, Right]
+{img Anim/3b/Opossum.png, Right}
 But it's better than reporting on local opossom families and unique varieties of cherry jam.   
 $call ActivateStory()
 {@dionne} Okay, El. 
@@ -219,7 +219,6 @@ $choice GetReadyPart2; Head back to your desk
 
 // Original Name: Head out
 :: HeadOut
-@checkpoint
 {clear-text}
 {layout Left}
 {bg $BG_OfficeExterior}
@@ -245,7 +244,7 @@ $endif
 You're about to head out into the storm when Dionne stops by your desk. 
 {@dionne} Can you put on a pot of coffee, El? We're almost out. 
 
-$ContinueChoice({@me} But... shouldn't I head downtown?)
+$ActionChoice(But... shouldn't I head downtown?)
 
 
 {@dionne}Too late. I saw you were still wasting time here, so I gave the story to Khalisa.
@@ -835,7 +834,7 @@ $else
     {@nora} Luckily houseboats are neutrally buoyant, like all seaworthy vessels!
     {@nora} I've got a bed, a small kitchen, and a nice little collection of my dear friend's quilts!
 
-    $ContinueChoice({@me} Yeah, that's great. So about the flooding...)
+    $ActionChoice(Yeah, that's great. So about the flooding...)
     {@nora}Let me put it this way. My houseboat can do literally anything your house can do. Plus, float!
 
     $call GiveSnippet(HouseboatStory)
@@ -1124,7 +1123,7 @@ The driver isn't interested--but they do notice the granola you brought from hom
 
 {@driver}Wow! Is that Jim's famous cherry crisp granola??
 
-$ContinueChoice({@me} Uh, I think so? Jim is my neighbor.)
+$ActionChoice(Uh, I think so? Jim is my neighbor.)
 The driver gladly accepts the trade. Time to get on the water!
 
 $call AdjustStats(Resourceful - 1)

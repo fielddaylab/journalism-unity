@@ -188,6 +188,7 @@ namespace Journalism.UI
             else {
                 SetSelectedScrap(display);
                 Game.Audio.PlayOneShot("NotebookLift");
+                Game.Events.Dispatch(GameEvents.SelectSnippet);
             }
         }
 
@@ -307,6 +308,8 @@ namespace Journalism.UI
             var current = slot.Data;
             if (current != null) {
                 StoryText.EmptySlot(slot);
+                Game.Events.Dispatch(GameEvents.RemoveSnippet);
+                Game.Events.Dispatch(GameEvents.StoryUpdated);
                 Player.Data.AllocatedScraps[slot.Index] = default;
                 var scrap = FindScrapWithId(current.Id);
                 if (scrap) {

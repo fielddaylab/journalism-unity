@@ -293,6 +293,7 @@ MonoBehaviour:
   m_CloseAudio:
     m_Source: 
     m_HashValue: 0
+  m_ToolbarType: 2
 --- !u!114 &6299212319876626975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,16 +378,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Cherry Creek Marsh
-      objectReference: {fileID: 0}
-    - target: {fileID: 269880349988773003, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 578.6295
-      objectReference: {fileID: 0}
-    - target: {fileID: 269880349988773003, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 340.68524
       objectReference: {fileID: 0}
     - target: {fileID: 743937671520972061, guid: a463191c978fd574ca44aab8ffda8bf3,
         type: 3}
@@ -497,16 +488,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 440
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 455
       objectReference: {fileID: 0}
     - target: {fileID: 2066762159802647171, guid: a463191c978fd574ca44aab8ffda8bf3,
         type: 3}
