@@ -41,6 +41,8 @@ namespace Journalism {
         
         [Header("Column")]
         [SerializeField, Required] public AnimatedElement AltColumn = null;
+        [SerializeField, Required] public AnimatedElement ImageAnimElement;
+
         [SerializeField] private float m_ColumnShift = 250;
 
         [Header("Options")]
@@ -190,6 +192,8 @@ namespace Journalism {
 
                 if (desiredAltState == DesiredColumnState.Reload) {
                     anims.Add(AnimatedElement.Show(AltColumn, 0.2f));
+                    anims.Add(AnimatedElement.Show(ImageAnimElement, 0.2f));
+
                 }
 
                 yield return Routine.Combine(anims);
@@ -202,8 +206,10 @@ namespace Journalism {
                     AnimatedElement.Hide(AltColumn, 0.2f),
                     ClearLines()
                 );
+                
 
                 UnloadColumn?.Invoke();
+
                 AltColumn.Alignment = TextAlignment.Center;
                 Text.Root.SetAnchorPos(0, Axis.X);
                 Text.Alignment = TextAlignment.Center;

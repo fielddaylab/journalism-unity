@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e39d987ed577a4dae56db0083cc049, type: 3}
+  m_Name: ThoughtBubble_Outro
+  m_EditorClassIdentifier: 
+  m_Frames:
+  - Sprite: {fileID: 21300000, guid: 63486952595e7a04583d27a92b31c8b5, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 9241a5dd361b542418aaad4951655ba2, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 729df5587df6afd4693c9c4573051822, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 897879347eb4d0b4da6257aeff9cdec3, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 07902f96b4f728546a987e925b8a85a9, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 79c7826c6ca30874caa0570a7b7a6870, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 12603aacf9d9b7246ad40b5067cd637d, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  - Sprite: {fileID: 21300000, guid: 5a23e2d87db206a4092ce35646fb72b8, type: 3}
+    AudioEvent: 
+    ExtraEvents: 
+  m_FrameRate: 10
+  m_PlaybackMode: 0
+  m_NextAnimations: []

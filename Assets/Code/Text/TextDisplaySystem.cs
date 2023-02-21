@@ -1,20 +1,21 @@
-using UnityEngine;
-using Leaf.Defaults;
-using Leaf;
-using Leaf.Runtime;
-using System.Collections;
-using BeauUtil.Tags;
-using BeauUtil;
-using BeauUtil.Debugger;
-using BeauRoutine;
-using EasyAssetStreaming;
 using BeauPools;
-using System;
-using Journalism.UI;
+using BeauRoutine;
+using BeauUtil;
+using BeauUtil.Tags;
+using EasyAssetStreaming;
 using FDLocalization;
+using Journalism.Animation;
+using Journalism.UI;
+using Leaf;
+using Leaf.Defaults;
+using Leaf.Runtime;
+using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Journalism {
+namespace Journalism
+{
     public sealed class TextDisplaySystem : MonoBehaviour, ITextDisplayer, IChoiceDisplayer {
         #region Inspector
 
@@ -35,12 +36,17 @@ namespace Journalism {
 
         [Header("Image Contents")]
         [SerializeField] private AnimatedElement m_ImageLayout = null;
-        [SerializeField] private ImageColumn m_Image = null;
-        [SerializeField] private Image m_ImageBG = null;
+        [SerializeField] private ImageColumn m_Image = null; // Animated image
         [SerializeField] private ImageColumn m_Map = null;
         [SerializeField] private Image m_Border = null;
-        [SerializeField] private Sprite m_ImageBGSprite = null;
+
+        [SerializeField] private Image m_ImagePortraitBG = null; // Portrait BG
         [SerializeField] private Sprite m_PortraitBGSprite = null;
+
+        [SerializeField] private SpriteAnimator m_ImageThoughtBG = null; // Thought Bubble BG
+        [SerializeField] private SpriteAnimation m_ImageThoughtBGIdle;
+        [SerializeField] private SpriteAnimation m_ImageThoughtBGOutro;
+
 
         [Header("Default Dimensions")]
         [SerializeField] private Vector2 m_DefaultImageDims = new Vector2(400, 400);
@@ -109,18 +115,15 @@ namespace Journalism {
 
         private IEnumerator HandleImage(TagEventData evtData, object context) {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultImageDims);
-            this.m_ImageBG.rectTransform.SetSizeDelta(m_DefaultImageDims);
             this.m_ImageLayout.RectTransform.SetPosition(0, Axis.Y, Space.Self);
             this.m_Image.transform.SetPosition(0, Axis.Y, Space.Self);
             this.m_Border.gameObject.SetActive(false); // disable border
-            this.m_ImageBG.sprite = m_ImageBGSprite;
 
-            /*
-            m_ImageBG.Animation.Replace(this, OpeningAnimation())
-                .OnComplete(
-                    m_PopUp.Animation.Replace(this, IdleAnimation())
-                );
-            */
+            // set animation to idle
+            m_ImageThoughtBG.Play(m_ImageThoughtBGIdle, true);
+
+            this.m_ImageThoughtBG.gameObject.SetActive(true);
+            this.m_ImagePortraitBG.gameObject.SetActive(false);
 
             Game.Events.Dispatch(GameEvents.ShowPopupImage);
 
@@ -129,10 +132,13 @@ namespace Journalism {
 
         private IEnumerator HandlePortrait(TagEventData evtData, object context) {
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultPortraitDims);
-            this.m_ImageBG.rectTransform.SetSizeDelta(m_DefaultPortraitDims);
+            this.m_ImagePortraitBG.rectTransform.SetSizeDelta(m_DefaultPortraitDims);
             this.m_Image.transform.SetPosition(m_DefaultPortraitYOffset, Axis.Y, Space.Self);
             this.m_Border.gameObject.SetActive(true); // enable border
-            this.m_ImageBG.sprite = m_PortraitBGSprite;
+            this.m_ImagePortraitBG.sprite = m_PortraitBGSprite;
+
+            this.m_ImageThoughtBG.gameObject.SetActive(false);
+            this.m_ImagePortraitBG.gameObject.SetActive(true);
 
             yield return HandleImageOrMap(evtData, context);
         }
@@ -162,11 +168,25 @@ namespace Journalism {
         
         private IEnumerator HandleImageOrMapClear(TagEventData evtData, object context) {
             if (evtData.Type == GameText.Events.ClearMap && m_Map.gameObject.activeSelf) {
-                return m_CurrentLayer.ResetLayout();
+                yield return m_CurrentLayer.ResetLayout();
             } else if (evtData.Type == GameText.Events.ClearImage && m_Image.gameObject.activeSelf) {
-                return m_CurrentLayer.ResetLayout();
+                yield return Routine.Combine(
+                    AnimatedElement.Hide(m_CurrentLayer.ImageAnimElement, 0.2f),
+                    AnimateThoughtOutro()
+                    );
+                yield return m_CurrentLayer.ResetLayout();
             } else {
-                return null;
+                yield return null;
+            }
+        }
+
+        private IEnumerator AnimateThoughtOutro() {
+            // set animation to fade out
+            m_ImageThoughtBG.Play(m_ImageThoughtBGOutro, false);
+
+            while (m_ImageThoughtBG.IsPlaying()) {
+                Debug.Log("Playing");
+                yield return null;
             }
         }
 
