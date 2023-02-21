@@ -1347,6 +1347,7 @@ $choice DepartmentOfLimnology; Thank her for her help
 {img Anim/2a/ProfitableWeek.png, Left}
 {@cafeowner}The Cherry Festival is usually my most profitable week all year, but the flood scared everybody away.
 {@cafeowner}If this keeps up, I'm in trouble.
+{/img}
 
 $call GiveSnippet(InTroubleQuote)
 
@@ -1380,8 +1381,8 @@ $endif
 {img Anim/2a/angryCloud.png, Left}
 {@cafeowner}Of course I am. But we gotta do our best to pick up and rebuild.
 {@cafeowner}Small business is the heart and soul of this town.
-{@cafeowner}I gotta hope it'll all work out. 
 {/img}
+{@cafeowner}I gotta hope it'll all work out. 
 
 $call GiveSnippet(QuoteHeartAndSoul)
 
