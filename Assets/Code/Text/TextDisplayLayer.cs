@@ -367,7 +367,7 @@ namespace Journalism {
 
                     // display
                     yield return GameText.AnimateLocations(Choices);
-                    Game.Events.Dispatch(GameEvents.DisplayChoices);
+                    Game.Events.Dispatch(GameEvents.DisplayChoices, fullOptions);
 
                     // wait
                     yield return GameText.WaitForChoice(Choices, inChoice);

@@ -12,6 +12,8 @@ using static Journalism.Player;
 using Journalism.UI;
 using BeauUtil.Tags;
 using UnityEngine.Networking.Types;
+using BeauPools;
+using Leaf;
 
 namespace Journalism
 {
@@ -42,19 +44,18 @@ namespace Journalism
             LOCATION_MAP
         }
 
-
         private struct SnippetDetails {
             public string SnippetId;
             public StoryScrapType StoryScrapType;
             public StoryScrapQuality StoryScrapQuality;
-            public List<StoryScrapAttribute> StoryScrapAttributes;
+            public string StoryScrapAttributesList; // format of a list
             public bool IsSelectable;
 
-            public SnippetDetails(string inId, StoryScrapType inType, StoryScrapQuality inQuality, List<StoryScrapAttribute> inAttributes, bool inSelectable) {
+            public SnippetDetails(string inId, StoryScrapType inType, StoryScrapQuality inQuality, string inAttributesList, bool inSelectable) {
                 SnippetId = inId;
                 StoryScrapType = inType;
                 StoryScrapQuality = inQuality;
-                StoryScrapAttributes = inAttributes;
+                StoryScrapAttributesList = inAttributesList;
                 IsSelectable = inSelectable;
             }
 
@@ -62,7 +63,7 @@ namespace Journalism
                 string str = "snippet_id : " + SnippetId + "\n";
                 str += "snippet_type : " + StoryScrapType.ToString() + "\n";
                 str += "snippet_quality : " + StoryScrapQuality.ToString() + "\n";
-                str += "snippet_attributes : " + StoryScrapAttributes.ToString() + "\n";
+                str += "snippet_attributes : " + StoryScrapAttributesList + "\n";
                 str += "is_selectable : " + IsSelectable.ToString() + "\n";
 
                 return str;
@@ -114,6 +115,8 @@ namespace Journalism
         private StoryConfig m_TargetBreakdown;
         private StoryStats m_CurrentBreakdown;
 
+        private bool m_TextMapVisible;
+
         [NonSerialized] private bool m_Debug;
 
 
@@ -125,9 +128,10 @@ namespace Journalism
 
         #region IService
 
-        protected override void Initialize() // TODO: Where to actually initialize this?
+        protected override void Initialize()
         {
             m_FeedbackInProgress = false;
+            m_TextMapVisible = false;
 
             // General Events
             Game.Events.Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
@@ -143,7 +147,9 @@ namespace Journalism
                 .Register<TextNodeParams>(GameEvents.OnPrepareLine, OnPrepareLine, this)
                 .Register<PlayerData>(GameEvents.StatsRefreshed, OnStatsRefreshed, this)
                 .Register<StringHash32[]>(GameEvents.ChoiceOptionsUpdating, OnChoiceOptionsUpdating)
-                .Register<List<StoryBuilderSlot>>(GameEvents.SlotsLaidOut, OnSlotsLaidOut);
+                .Register<List<StoryBuilderSlot>>(GameEvents.SlotsLaidOut, OnSlotsLaidOut)
+                .Register(GameText.Events.Map, OnTextMap)
+                .Register(GameText.Events.ClearMap, OnTextMapClear);
 
 
             // Analytics Events
@@ -157,7 +163,7 @@ namespace Journalism
             // display snippet quality dialog
                 .Register<StoryStats>(GameEvents.DisplaySnippetQualityDialog, LogDisplayStoryScrapQualityDialog, this)
             // display choices
-                .Register(GameEvents.DisplayChoices, LogDisplayChoices, this)
+                .Register<PooledList<LeafChoice.Option>>(GameEvents.DisplayChoices, LogDisplayChoices, this)
             // open stats tab
                 .Register(GameEvents.OpenStatsTab, LogOpenStatsTab, this)
             // close stats tab
@@ -235,7 +241,7 @@ namespace Journalism
             m_Log = new OGDLog(new OGDLogConsts() {
                 AppId = m_AppId,
                 AppVersion = m_AppVersion,
-                ClientLogVersion = 1 // TODO: what should this val be?
+                ClientLogVersion = 1
             });
             m_Log.UseFirebase(m_Firebase);
 
@@ -347,13 +353,22 @@ namespace Journalism
         }
 
         // display choices
-        private void LogDisplayChoices() {
+        private void LogDisplayChoices(PooledList<LeafChoice.Option> fullOptions) {
             Debug.Log("[Analytics] event: display_choices");
 
-            ChoiceContext context;
+            ChoiceContext context = m_TextMapVisible ? ChoiceContext.LOCATION_MAP : ChoiceContext.CONVERSATION;
 
             // TODO: journalism schema indicates this section is a TODO
-            // List<>
+            string choicesStr = "";
+
+            foreach(var option in fullOptions) {
+                choicesStr += option.TargetId.ToString() + "\n";
+            }
+
+            using (var e = m_Log.NewEvent("display_choices")) {
+                e.Param("context", context.ToString());
+                e.Param("choices", choicesStr);
+            }
         }
 
         // hub choice click
@@ -650,11 +665,25 @@ namespace Journalism
 
             string snippetDetailsStr = "";
 
+            for (int s = 0; s < Player.StoryScraps.Length; s++) {
+                StoryScrapData sData = Assets.Scrap(Player.StoryScraps[s]);
+                string attributeStr = GenerateAttributesString(sData);
+                SnippetDetails newDetails = new SnippetDetails(Player.StoryScraps[s].ToString(), sData.Type, sData.Quality, attributeStr, true);
+                snippet_list.Add(newDetails);
+            }
+
             foreach(SnippetDetails snippet in snippet_list) {
                 snippetDetailsStr += snippet.ToString();
             }
 
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
+
+            foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                layout_list.Add(new LayoutDetails(
+                    s.Data.Type,
+                    m_TargetBreakdown.Slots[s.Index].Wide,
+                    s.Data.Id.ToString()));
+            }
 
             string layoutDetailsStr = "";
 
@@ -695,7 +724,7 @@ namespace Journalism
             foreach(StoryBuilderSlot s in m_LastKnownSlotLayout) {
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
-                    m_TargetBreakdown.Slots[slot.Index].Wide,
+                    m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString()));
             }
 
@@ -731,7 +760,7 @@ namespace Journalism
             foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
-                    m_TargetBreakdown.Slots[slot.Index].Wide,
+                    m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString()));
             }
 
@@ -914,8 +943,14 @@ namespace Journalism
 
             List<SnippetDetails> snippet_list = new List<SnippetDetails>();
 
-            // TODO: adding dicts as params?
             string snippetDetailsStr = "";
+
+            for (int s = 0; s < Player.StoryScraps.Length; s++) {
+                StoryScrapData sData = Assets.Scrap(Player.StoryScraps[s]);
+                string attributeStr = GenerateAttributesString(sData);
+                SnippetDetails newDetails = new SnippetDetails(Player.StoryScraps[s].ToString(), sData.Type, sData.Quality, attributeStr, true);
+                snippet_list.Add(newDetails);
+            }
 
             foreach (SnippetDetails snippet in snippet_list) {
                 snippetDetailsStr += snippet.ToString();
@@ -923,6 +958,13 @@ namespace Journalism
 
 
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
+
+            foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                layout_list.Add(new LayoutDetails(
+                    s.Data.Type,
+                    m_TargetBreakdown.Slots[s.Index].Wide,
+                    s.Data.Id.ToString()));
+            }
 
             string layoutDetailsStr = "";
 
@@ -941,7 +983,20 @@ namespace Journalism
         private void LogDisplayPublishedStory() {
             Debug.Log("[Analytics] event: display_published_story");
 
-            // TODO: revisit schema -- seems like it should mirror event above with LayoutDetails, instead of defining a new struct
+            List<LayoutDetails> layout_list = new List<LayoutDetails>();
+
+            foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                layout_list.Add(new LayoutDetails(
+                    s.Data.Type,
+                    m_TargetBreakdown.Slots[s.Index].Wide,
+                    s.Data.Id.ToString())); // schema lists text here, but every other list of layouts uses snippetId
+            }
+
+            string layoutDetailsStr = "";
+
+            foreach (LayoutDetails layout in layout_list) {
+                layoutDetailsStr += layout.ToString();
+            }
         }
 
         // close published story
@@ -1081,6 +1136,14 @@ namespace Journalism
 
         private void OnSlotsLaidOut(List<StoryBuilderSlot> activeSlots) {
             m_LastKnownSlotLayout = activeSlots;
+        }
+
+        private void OnTextMap() {
+            m_TextMapVisible = true;
+        }
+
+        private void OnTextMapClear() {
+            m_TextMapVisible = false;
         }
 
         #endregion // Other Events
