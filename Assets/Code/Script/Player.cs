@@ -466,6 +466,7 @@ namespace Journalism {
             }
 
             if (def.LevelIndex != s_Current.LevelIndex) {
+                s_Current.StoryScrapInventory.Clear();
                 Array.Clear(s_Current.AllocatedScraps, 0, s_Current.AllocatedScraps.Length);
                 s_Current.LevelIndex = def.LevelIndex;
                 s_Current.CheckpointId = default;
