@@ -133,6 +133,8 @@ namespace Journalism
             m_FeedbackInProgress = false;
             m_TextMapVisible = false;
 
+            m_LastKnownSlotLayout = new List<StoryBuilderSlot>();
+
             // General Events
             Game.Events.Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
@@ -1010,6 +1012,9 @@ namespace Journalism
         // start level
         private void LogLevelStarted() {
             Debug.Log("[Analytics] event: start_level");
+
+            m_TargetBreakdown = Assets.CurrentLevel.Story;
+            m_CurrentBreakdown = Player.StoryStatistics;
 
             int level_started = Assets.CurrentLevel.LevelIndex;
 
