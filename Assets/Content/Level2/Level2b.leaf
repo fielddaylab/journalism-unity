@@ -12,6 +12,7 @@ $call SetLocation("Apartment")
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
+$call SetHeaderEnabled(true)
 You're finally home.
 Exhausted from your first day on the science beat.
 {anim rumble} BUZZZZ
