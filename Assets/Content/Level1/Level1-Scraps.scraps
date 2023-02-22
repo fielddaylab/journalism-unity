@@ -25,14 +25,14 @@ Insert a photo of ducks swimming in the hospital parking lot.
 @type Photo
 @quality Great
 @attr Color 
-@image Anim/enml-stuckcar.png
+@image Photo/StuckCar.jpg
 
 // Original Name: Blurry cars
 :: BlurryCars
 @type Photo
 @quality Bad
 @attr Color 
-@image Anim/enml-stuckcar-blurry.png
+@image Photo/StuckCar-blurred.jpg
 
 // Original Name: Flood map
 :: FloodMap
@@ -95,7 +95,7 @@ City officials were unavailable for comment. Check the City of Twin Lakes websit
 @type Photo
 @quality Bad
 @attr Color
-@image Photo/FloodedLibrary.png
+@image Photo/FloodedLibrary.jpg
 
 // Original Name: Scientist quotes
 :: ScientistQuotes
@@ -123,7 +123,7 @@ This flood is record-breaking, but not surprising. Local scientist, Rainn E. Day
 @type Photo
 @quality Bad
 @attr Color
-@image Photo/FloodedStreetDark.jpg
+@image Photo/FloodedMainStreet.jpg
 Snippet body not implemented.
 
 // 1b starts here
@@ -202,7 +202,7 @@ Trust me, Dear. Houseboats are the future! Stylish, off the grid, and your cats 
 @type Observation
 @quality Good
 @attr Color
-@image Anim/dog-rescue.png
+@image Photo/DogRescue.jpg
 Near Main Street, a pickup truck got swept into a flooded ditch. Firefighters rescued the driver-—and his dog—-just in time.  
 
 // Original Name: Dog rescue picture
@@ -210,7 +210,7 @@ Near Main Street, a pickup truck got swept into a flooded ditch. Firefighters re
 @type Photo
 @quality Good
 @attr Color
-@image Anim/dog-rescue.png
+@image Photo/DogRescue.jpg
 Insert picture of a rescue worker saving a dog from the flood.
 
 // Original Name: Great flood photos from kayak
@@ -218,7 +218,7 @@ Insert picture of a rescue worker saving a dog from the flood.
 @type Photo
 @quality Great
 @attr Color
-@image Anim/downtown-flooding-kayak.png
+@image Photo/kayak-flood.jpg
 Snippet text unimplemented.
 
 // Original Name: Good flood photos from kayak
@@ -226,7 +226,7 @@ Snippet text unimplemented.
 @type Photo
 @quality Good
 @attr Color
-@image Anim/downtown-flooding-kayak-good.png
+@image Photo/kayak-flood-good-cropped.jpg
 Snippet text unimplemented.
 
 // Original Name: Good flood photos from kayak
@@ -234,7 +234,7 @@ Snippet text unimplemented.
 @type Photo
 @quality Bad
 @attr Color
-@image Anim/downtown-flooding-kayak-blurry.png
+@image Photo/kayak-flood-bad-blurred.jpg
 Snippet text unimplemented.
 
 // Original Name: Great flood photos from truck or bike ride downtown
@@ -258,7 +258,7 @@ Snippet text unimplemented.
 @type Photo
 @quality Great
 @attr Color
-@image Anim/flooded-main-st.png
+@image Photo/FloodedMainStreet.jpg
 
 // Original Name: Lake levels
 :: LakeLevels
