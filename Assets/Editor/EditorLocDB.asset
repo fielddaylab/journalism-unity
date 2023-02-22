@@ -14,6 +14,712 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultLanguage:
     m_Value: 0
-  m_FileRecords: []
+  m_FileRecords:
+  - Name: level
+    Asset: {fileID: -4270002856181823206, guid: f0d2a6d4335d7b545bf608ad84a23d7d,
+      type: 3}
+    AssetPath: Assets/Content/Strings/level.strg
+    Records:
+    - Id: Level.1a.Headline
+      Content: Widespread flooding in Twin Lakes
+      Exposed: 0
+    - Id: Level.1a.Brief
+      Content: 'We need a breaking news announcement! Make sure to include:
+
+        -Lots
+        of useful information to help people stay safe
+
+        -Facts to provide
+        background on what''s happening
+
+        -Color (like interesting quotes
+        or eye-catching photos) to grab people''s attention'
+      Exposed: 0
+    - Id: Level.1a.HeadlineType
+      Content: Breaking News Bulletin
+      Exposed: 0
+    - Id: Level.1b.HeadlineType
+      Content: Breaking News Feature
+      Exposed: 0
+    - Id: Level.1b.Brief
+      Content: 'People need to know what''s happening out there. Make sure to include:
+
+        -Lots
+        of color, with people''s personal stories front and center
+
+        -Facts
+        from experts
+
+        -More useful info to keep people safe'
+      Exposed: 0
+    - Id: Level.1b.Headline
+      Content: Twin Lakes Battles Rising Water
+      Exposed: 0
+    - Id: Level.2a.HeadlineType
+      Content: Science Story
+      Exposed: 0
+    - Id: Level.2a.Brief
+      Content: 'People want to know why this happened. You''ll need:
+
+        -Facts
+        from expert sources to explain what caused the flood
+
+        -A dash of
+        color to help people understand why they should care
+
+        -One or two
+        useful tidbits for people who want to get involved'
+      Exposed: 0
+    - Id: Level.2a.Headline
+      Content: How a Summer Storm Became a 100-Year Flood
+      Exposed: 0
+    - Id: Level.2b.Brief
+      Content: 'Focus on what''s happening at the Cherry Creek Marsh. Give your readers:
+
+        -Facts
+        about the loss of our wetlands and the situation at Cherry Creek
+
+        -A
+        dash of color to catch your readers'' attention
+
+        -Useful info so
+        that readers can take action'
+      Exposed: 0
+    - Id: Level.2b.Headline
+      Content: Deciding the Fate of Cherry Creek Marsh
+      Exposed: 0
+    - Id: Level.3a.Headline
+      Content: 'Rethinking #TwinLakesStrong: The Weak Spots in the Town Flood Response'
+      Exposed: 0
+    - Id: Level.3b.Headline
+      Content: "The Truth Behind How Flooding Affects Twin Lakes\u2014\u2014and What
+        Needs to Change"
+      Exposed: 0
+    - Id: Level.3a.HeadlineType
+      Content: Investigative Story
+      Exposed: 0
+    - Id: Level.3a.Brief
+      Content: 'Check out the flood shelter and keep an eye out for equity issues.
+        Make sure to include:
+
+        -Equal parts facts and color, to explain the
+        issues and tell your readers why they should care
+
+        -Useful info,
+        so that the town can work on solving these issues'
+      Exposed: 0
+    - Id: Level.3b.HeadlineType
+      Content: Investigative Story
+      Exposed: 0
+    - Id: Level.3b.Brief
+      Content: 'Not everyone is getting the help they need. Find out who''s being
+        left out, and why. You''ll need:
+
+        -Equal parts facts and color, to
+        explain the issues and tell your readers why they should care
+
+        -Useful
+        info, so that the town can work on solving these issues'
+      Exposed: 0
+    Headers:
+    - Path: Level
+      RecordStart: 0
+    BasePath: Level
+    Dirty: 0
+  - Name: main
+    Asset: {fileID: -4270002856181823206, guid: 716563e30c9bf434da81dbaacee31abd,
+      type: 3}
+    AssetPath: Assets/Content/Strings/main.strg
+    Records:
+    - Id: Message.NewSnippet
+      Content: New Story Snippet
+      Exposed: 0
+    - Id: TalkToEditor
+      Content: Talk to Editor
+      Exposed: 0
+    - Id: GameOver.Continue
+      Content: Continue
+      Exposed: 0
+    - Id: GameOver.Quit
+      Content: Quit
+      Exposed: 0
+    - Id: Slot.Empty.Picture
+      Content: Picture Lead
+      Exposed: 0
+    - Id: Slot.Empty.Any
+      Content: Snippet
+      Exposed: 0
+    - Id: GameOver.Prompt
+      Content: Continue from last checkpoint?
+      Exposed: 0
+    - Id: CheckpointSaved
+      Content: Checkpoint Saved
+      Exposed: 0
+    - Id: Newspaper.Byline
+      Content: by El Benjamin
+      Exposed: 0
+    - Id: StoryReview.Editor
+      Content: 'Editor:'
+      Exposed: 0
+    - Id: StoryReview.Impact
+      Content: 'Impact:'
+      Exposed: 0
+    - Id: Header.Stats
+      Content: stats
+      Exposed: 0
+    - Id: Header.Map
+      Content: map
+      Exposed: 0
+    - Id: Header.Notes
+      Content: notes
+      Exposed: 0
+    - Id: Header.Time
+      Content: time
+      Exposed: 0
+    - Id: Window.Stats
+      Content: Stats
+      Exposed: 0
+    - Id: Window.Notes.YourStory
+      Content: Your Story
+      Exposed: 0
+    - Id: Window.Notes.Target
+      Content: Target
+      Exposed: 0
+    - Id: Window.Notes.StoryType
+      Content: 'Story Type:'
+      Exposed: 0
+    - Id: Window.Notes.EditorButton
+      Content: 'Editor
+
+        Notes'
+      Exposed: 0
+    - Id: Window.Notes.EditorHeader
+      Content: 'Editor Notes:'
+      Exposed: 0
+    - Id: Window.Time.StoryDeadline
+      Content: 'Time Until Story Deadline:'
+      Exposed: 0
+    - Id: Label.Color
+      Content: Color
+      Exposed: 0
+    - Id: Label.Useful
+      Content: Useful
+      Exposed: 0
+    - Id: Label.Facts
+      Content: Facts
+      Exposed: 0
+    - Id: Label.StoryBreakdown
+      Content: 'Story Breakdown:'
+      Exposed: 0
+    - Id: Label.StoryQuality
+      Content: 'Story Quality:'
+      Exposed: 0
+    - Id: Label.StoryImpact
+      Content: 'Story Impact:'
+      Exposed: 0
+    - Id: Label.Hours.Short
+      Content: HRS
+      Exposed: 0
+    - Id: Label.Minutes.Short
+      Content: MINS
+      Exposed: 0
+    - Id: Label.Quality.Good
+      Content: Quality
+      Exposed: 0
+    - Id: Label.Quality.Bad
+      Content: Lousy
+      Exposed: 0
+    - Id: Label.Location
+      Content: 'location:'
+      Exposed: 0
+    - Id: Label.Loading
+      Content: Loading...
+      Exposed: 0
+    - Id: Map.Apartment
+      Content: Apartment
+      Exposed: 0
+    - Id: Map.Newsroom
+      Content: Newsroom
+      Exposed: 0
+    - Id: Map.DNR
+      Content: DNR
+      Exposed: 0
+    - Id: Map.Limnology
+      Content: Limnology
+      Exposed: 0
+    - Id: Map.DeliLot
+      Content: Deli Lot
+      Exposed: 0
+    - Id: Map.Downtown
+      Content: Downtown
+      Exposed: 0
+    - Id: Map.UpperLakeDam
+      Content: Upper Lake Dam
+      Exposed: 0
+    - Id: Map.CherryFestival
+      Content: Cherry Festival
+      Exposed: 0
+    - Id: Map.OperaHouse
+      Content: Opera House
+      Exposed: 0
+    - Id: Map.CityHall
+      Content: City Hall
+      Exposed: 0
+    - Id: Map.CherryCreek
+      Content: Cherry Creek Marsh
+      Exposed: 0
+    - Id: Map.Library
+      Content: Library
+      Exposed: 0
+    - Id: Map.Shelter
+      Content: Flood Shelter
+      Exposed: 0
+    - Id: Map.SeniorApts
+      Content: Senior Apartments
+      Exposed: 0
+    - Id: Map.Bookstore
+      Content: Bookish
+      Exposed: 0
+    - Id: Map.FillingStation
+      Content: Sandbag Station
+      Exposed: 0
+    - Id: Map.RoyalHazel
+      Content: Royal Hazel
+      Exposed: 0
+    - Id: Title.NewGame
+      Content: New Game
+      Exposed: 0
+    - Id: Title.ContinueGame
+      Content: Resume
+      Exposed: 0
+    - Id: Title.Options
+      Content: Options
+      Exposed: 0
+    - Id: Title.NewGame.Header
+      Content: New Game
+      Exposed: 0
+    - Id: Title.PlayerCode
+      Content: Player Code
+      Exposed: 0
+    - Id: Title.PlayerCodePrompt
+      Content: 'Enter your
+
+        Player Code'
+      Exposed: 0
+    - Id: Char.Me
+      Content: You
+      Exposed: 0
+    - Id: Char.Person
+      Content: Person
+      Exposed: 0
+    - Id: Char.Editor
+      Content: Editor, Dionne Richards
+      Exposed: 0
+    - Id: Char.Phone
+      Content: Phone
+      Exposed: 0
+    - Id: Char.Article
+      Content: Article
+      Exposed: 0
+    - Id: Char.Maureen
+      Content: Maureen
+      Exposed: 0
+    - Id: Char.Jeanie
+      Content: Jeanie
+      Exposed: 0
+    - Id: Char.Localnurse
+      Content: Local nurse on Squawker
+      Exposed: 0
+    - Id: Char.Wynnedstorme
+      Content: Wynne
+      Exposed: 0
+    - Id: Char.Policespokesman
+      Content: Police Spokesman
+      Exposed: 0
+    - Id: Char.Townhallcontact
+      Content: Town Hall Contact
+      Exposed: 0
+    - Id: Char.Librarian
+      Content: Maisy, the librarian
+      Exposed: 0
+    - Id: Char.Fredfinkler
+      Content: Fred Finkler
+      Exposed: 0
+    - Id: Char.Cherrycharlie07
+      Content: CherryCharlie07
+      Exposed: 0
+    - Id: Char.Mayorbarrysmuckers
+      Content: Barry Smuckers, the Mayor of Twin Lakes
+      Exposed: 0
+    - Id: Char.Jim
+      Content: Jim
+      Exposed: 0
+    - Id: Char.Dionne
+      Content: Dionne Richards, Editor
+      Exposed: 0
+    - Id: Char.Email
+      Content: Email
+      Exposed: 0
+    - Id: Char.Sophia
+      Content: Sophia
+      Exposed: 0
+    - Id: Char.Dnrworker
+      Content: DNR worker
+      Exposed: 0
+    - Id: Char.Contact
+      Content: New Contact
+      Exposed: 0
+    - Id: Char.Ben
+      Content: Ben
+      Exposed: 0
+    - Id: Char.Khalisa
+      Content: Khalisa
+      Exposed: 0
+    - Id: Char.Sudha
+      Content: Sudha
+      Exposed: 0
+    - Id: Char.Dnrvolunteer
+      Content: DNR Volunteer
+      Exposed: 0
+    - Id: Char.Limvolunteer
+      Content: Volunteer and Lake Studies Expert
+      Exposed: 0
+    - Id: Char.Nora
+      Content: Nora, the Houseboat Lady
+      Exposed: 0
+    - Id: Char.Rescuer
+      Content: Rescuer
+      Exposed: 0
+    - Id: Char.Firechief
+      Content: Retired Fire Chief
+      Exposed: 0
+    - Id: Char.Cheeseshop
+      Content: Cheese Shop Owner
+      Exposed: 0
+    - Id: Char.Driver
+      Content: Stranded Driver
+      Exposed: 0
+    - Id: Char.Deli
+      Content: Deli Owner
+      Exposed: 0
+    - Id: Char.Neighbor
+      Content: Grateful Neighbor
+      Exposed: 0
+    - Id: Char.Squawkertroll1
+      Content: Squawker Troll 1
+      Exposed: 0
+    - Id: Char.Squawkertroll2
+      Content: Squawker Troll 2
+      Exposed: 0
+    - Id: Char.Dnrexpert
+      Content: DNR Statistics Expert
+      Exposed: 0
+    - Id: Char.Governor
+      Content: Governor
+      Exposed: 0
+    - Id: Char.Flyer
+      Content: Flyer
+      Exposed: 0
+    - Id: Char.Sarah
+      Content: Dr. Sarah McCloud
+      Exposed: 0
+    - Id: Char.Businessowner
+      Content: Business Owner
+      Exposed: 0
+    - Id: Char.Mayorsister
+      Content: Mayor Smuckers's Sister!
+      Exposed: 0
+    - Id: Char.Lakescientist
+      Content: Lake Studies Scientist
+      Exposed: 0
+    - Id: Char.Chickenowner
+      Content: Cheerful Chicken Owner
+      Exposed: 0
+    - Id: Char.Cafeowner
+      Content: "Caf\xE9 Owner"
+      Exposed: 0
+    - Id: Char.Birdie
+      Content: Birdie
+      Exposed: 0
+    - Id: Char.Nancy
+      Content: Nancy, the business organizer
+      Exposed: 0
+    - Id: Char.sign
+      Content: Historical Marker
+      Exposed: 0
+    - Id: Char.Wetlandvolunteer1
+      Content: Seth McPhee, Wetland Volunteer
+      Exposed: 0
+    - Id: Char.Wetlandvolunteer2
+      Content: Lilly Gardner, Wetland Volunteer
+      Exposed: 0
+    - Id: Char.Spark
+      Content: Spark Project organizer
+      Exposed: 0
+    - Id: Char.Limexpert
+      Content: Limnology Expert
+      Exposed: 0
+    - Id: Char.Sparkprojectleader
+      Content: Spark Project leader
+      Exposed: 0
+    - Id: Char.Squawkermessage
+      Content: Squawker Post
+      Exposed: 0
+    - Id: Char.Dinerworker
+      Content: Diner Worker
+      Exposed: 0
+    - Id: Char.Townhallworker
+      Content: Town Hall Worker
+      Exposed: 0
+    - Id: Char.Wetlandvolunteer3
+      Content: Wetland Volunteer
+      Exposed: 0
+    - Id: Char.Townie1
+      Content: Townsperson 1
+      Exposed: 0
+    - Id: Char.townie2
+      Content: Townsperson 2
+      Exposed: 0
+    - Id: Char.Townie3
+      Content: Townsperson 3
+      Exposed: 0
+    - Id: Char.Townspeople
+      Content: Townspeople
+      Exposed: 0
+    - Id: Char.Pattyforbes
+      Content: Patty Forbes, townsperson
+      Exposed: 0
+    - Id: Char.Barlow
+      Content: Barlow Scot, townsperson
+      Exposed: 0
+    - Id: Char.Doug
+      Content: Doug Walker, townsperson
+      Exposed: 0
+    - Id: Char.Shelter
+      Content: Shelter Coordinator
+      Exposed: 0
+    - Id: Char.Fox
+      Content: Fox Sculder, Local Vet
+      Exposed: 0
+    - Id: Char.Electrician
+      Content: Electrician
+      Exposed: 0
+    - Id: Char.Imojean
+      Content: Imojean
+      Exposed: 0
+    - Id: Char.Apartmentmanager
+      Content: Apartment Manager
+      Exposed: 0
+    - Id: Char.Summer
+      Content: Summer, disability rights expert
+      Exposed: 0
+    - Id: Char.Bookshopowner
+      Content: Bookseller
+      Exposed: 0
+    - Id: Char.Weatheralert
+      Content: Weather Alert
+      Exposed: 0
+    - Id: Char.Misty
+      Content: Misty, the DNR worker
+      Exposed: 0
+    - Id: Char.Manfillingsandbags
+      Content: Man filling sandbags
+      Exposed: 0
+    - Id: Char.Rainn
+      Content: Rainn
+      Exposed: 0
+    - Id: Char.Fillingstationvolunteer
+      Content: Volunteer
+      Exposed: 0
+    - Id: Char.Girlwithlemonade
+      Content: Girl with lemonade stand
+      Exposed: 0
+    - Id: Char.Lemonadesign
+      Content: Lemonade Stand Sign
+      Exposed: 0
+    - Id: Char.Elderlywoman
+      Content: Elderly Woman
+      Exposed: 0
+    - Id: Char.Lizfirstmeeting
+      Content: Woman stacking sandbags
+      Exposed: 0
+    - Id: Char.Manmovingcouch
+      Content: Perplexed-looking man
+      Exposed: 0
+    - Id: Char.Couchmover
+      Content: Annoyed-looking man
+      Exposed: 0
+    - Id: Char.Localwoman
+      Content: Local woman
+      Exposed: 0
+    - Id: Char.Esme
+      Content: Esme
+      Exposed: 0
+    - Id: Char.Liz
+      Content: Liz
+      Exposed: 0
+    - Id: Char.Gabby
+      Content: Gabby, Editor at the Smoke City Herald
+      Exposed: 0
+    - Id: Char.Mysteryrescuer
+      Content: Mystery Rescuer
+      Exposed: 0
+    - Id: Char.Drnorawarner
+      Content: Dr. Nora Warner
+      Exposed: 0
+    - Id: Char.Willa
+      Content: Willa
+      Exposed: 0
+    Headers:
+    - Path: Header
+      RecordStart: 11
+    - Path: Window
+      RecordStart: 15
+    - Path: Label
+      RecordStart: 22
+    - Path: Map
+      RecordStart: 34
+    - Path: Title
+      RecordStart: 51
+    - Path: Char
+      RecordStart: 57
+    BasePath: Char
+    Dirty: 0
+  - Name: stats
+    Asset: {fileID: -4270002856181823206, guid: e1277c9a295376443a847a46b8b4df26,
+      type: 3}
+    AssetPath: Assets/Content/Strings/stats.strg
+    Records:
+    - Id: Stats.Research
+      Content: Research
+      Exposed: 0
+    - Id: Stats.Research.Rank0
+      Content: Unaware
+      Exposed: 0
+    - Id: Stats.Research.Rank1
+      Content: Myopic
+      Exposed: 0
+    - Id: Stats.Research.Rank2
+      Content: Curious
+      Exposed: 0
+    - Id: Stats.Research.Rank3
+      Content: Bookworm
+      Exposed: 0
+    - Id: Stats.Research.Rank4
+      Content: Wonk
+      Exposed: 0
+    - Id: Stats.Research.Rank5
+      Content: Professor
+      Exposed: 0
+    - Id: Stats.Resourceful
+      Content: Resourcefulness
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank0
+      Content: Forgetful
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank5
+      Content: Cherry Scout
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank4
+      Content: Geared Up
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank3
+      Content: Prepared
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank2
+      Content: Distracted
+      Exposed: 0
+    - Id: Stats.Resourceful.Rank1
+      Content: Inattentive
+      Exposed: 0
+    - Id: Stats.Endurance
+      Content: Endurance
+      Exposed: 0
+    - Id: Stats.Endurance.Rank0
+      Content: Out of Shape
+      Exposed: 0
+    - Id: Stats.Endurance.Rank5
+      Content: Olympian
+      Exposed: 0
+    - Id: Stats.Endurance.Rank4
+      Content: Athlete
+      Exposed: 0
+    - Id: Stats.Endurance.Rank3
+      Content: Fit
+      Exposed: 0
+    - Id: Stats.Endurance.Rank2
+      Content: Sleepy
+      Exposed: 0
+    - Id: Stats.Endurance.Rank1
+      Content: Couch Potato
+      Exposed: 0
+    - Id: Stats.Tech
+      Content: Tech
+      Exposed: 0
+    - Id: Stats.Tech.Rank0
+      Content: Luddite
+      Exposed: 0
+    - Id: Stats.Tech.Rank5
+      Content: Cyber Punk
+      Exposed: 0
+    - Id: Stats.Tech.Rank4
+      Content: Techie
+      Exposed: 0
+    - Id: Stats.Tech.Rank3
+      Content: Geek
+      Exposed: 0
+    - Id: Stats.Tech.Rank2
+      Content: Dabbler
+      Exposed: 0
+    - Id: Stats.Tech.Rank1
+      Content: Newbie
+      Exposed: 0
+    - Id: Stats.Social
+      Content: Social
+      Exposed: 0
+    - Id: Stats.Social.Rank0
+      Content: Recluse
+      Exposed: 0
+    - Id: Stats.Social.Rank5
+      Content: Social Butterfly
+      Exposed: 0
+    - Id: Stats.Social.Rank4
+      Content: Social Caterpillar
+      Exposed: 0
+    - Id: Stats.Social.Rank3
+      Content: Amiable
+      Exposed: 0
+    - Id: Stats.Social.Rank2
+      Content: Reserved
+      Exposed: 0
+    - Id: Stats.Social.Rank1
+      Content: Shy
+      Exposed: 0
+    - Id: Stats.Trust
+      Content: Trust
+      Exposed: 0
+    - Id: Stats.Trust.Rank0
+      Content: Cryptid
+      Exposed: 0
+    - Id: Stats.Trust.Rank1
+      Content: Unknown
+      Exposed: 0
+    - Id: Stats.Trust.Rank2
+      Content: Average
+      Exposed: 0
+    - Id: Stats.Trust.Rank3
+      Content: Reputable
+      Exposed: 0
+    - Id: Stats.Trust.Rank4
+      Content: Esteemed
+      Exposed: 0
+    - Id: Stats.Trust.Rank5
+      Content: Community Pillar
+      Exposed: 0
+    Headers:
+    - Path: Stats
+      RecordStart: 0
+    BasePath: Stats
+    Dirty: 0
   m_LastExportClassName: 
   m_LastExportPath: 

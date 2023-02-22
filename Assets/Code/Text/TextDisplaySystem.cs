@@ -185,7 +185,6 @@ namespace Journalism
             m_ImageThoughtBG.Play(m_ImageThoughtBGOutro, false);
 
             while (m_ImageThoughtBG.IsPlaying()) {
-                Debug.Log("Playing");
                 yield return null;
             }
         }

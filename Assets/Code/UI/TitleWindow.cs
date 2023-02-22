@@ -37,6 +37,7 @@ namespace Journalism.UI
         [SerializeField] private TMP_Text m_ErrorText;
         [NonSerialized] private Routine m_ErrorAnim;
 
+        private bool m_LoadedFromPlaythrough;
 
         #endregion //  Inspector
 
@@ -44,6 +45,8 @@ namespace Journalism.UI
 
         protected override void Awake() {
             base.Awake();
+
+            m_LoadedFromPlaythrough = false;
 
             m_HubPlayButton.onClick.AddListener(OnHubPlayButtonClicked);
             m_HubContinueButton.onClick.AddListener(OnHubContinueButtonClicked);
@@ -59,12 +62,30 @@ namespace Journalism.UI
 
             Game.Events.Register<string>(GameEvents.NewNameGenerated, OnNewNameGenerated, this)
                 .Register<string>(GameEvents.ContinueNameRetrieved, OnContinueNameRetrieved, this)
-                .Register<string>(GameEvents.TitleErrorReceived, OnTitleErrorReceived, this);
+                .Register<string>(GameEvents.TitleErrorReceived, OnTitleErrorReceived, this)
+                .Register(GameEvents.PrepareTitleReturn, OnPrepareTitleReturn, this);
         }
 
         #endregion // Unity Callbacks
 
         #region Handlers
+
+        protected override void OnShow(bool inbInstant) {
+            base.OnShow(inbInstant);
+
+            m_HubPage.SetActive(true);
+            m_NewPage.SetActive(false);
+            m_ContinuePage.SetActive(false);
+
+            // if player returns to title menu from game, start at continue screen
+            if (m_LoadedFromPlaythrough) {
+                OnHubContinueButtonClicked();
+            }
+        }
+
+        private void OnPrepareTitleReturn() {
+            m_LoadedFromPlaythrough = true;
+        }
 
         private void OnHubPlayButtonClicked() {
             m_NewPlayButton.interactable = false;

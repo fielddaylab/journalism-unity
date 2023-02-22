@@ -8,6 +8,7 @@
 // Original Name: Level Fianl Intro
 :: LevelFinalIntro
 $call StartEndgame()
+$call SetHeaderEnabled(false)
 
 // great
 $if CityScore() > 2
@@ -31,7 +32,6 @@ $if CityScore() > 2
       {img Anim/Final/Icecream.png, Left} 
       Plus, Khalisa and her dad are counting on you to bring the cherry-chip ice cream for dinner on Sunday. 
       {/img}
-
 // good
 $elseif CityScore() >= 0
       {bg $BG_FinalStreetFestival}
@@ -61,7 +61,6 @@ $elseif CityScore() >= 0
       {/img}
       Maybe you'll stick around, at least for now.
       Or maybe longer. 
-      
 // bad
 $else
       {bg $BG_FinalField}
@@ -86,5 +85,6 @@ $else
       {/img}
 $endif
 
-// TODO: Go to credits
-ROLL CREDITS
+{clear-text}
+{bg $BG_Credits}
+$call RollCredits()
