@@ -1025,18 +1025,22 @@ $endif
 :: InterviewCafeOwner
 
 $if Visited(OrderTheDailySpecial)
-{@cafeowner}Of course! 
-{@cafeowner}You're my first customer of the day. It's the least I can do. 
+    {@cafeowner}Of course! 
+    {@cafeowner}You're my first customer of the day. It's the least I can do. 
 $elseif Visited(HelpWithHerComputer)
-{@cafeowner}Sure! I could use a break from my computer, anyway. 
+    {@cafeowner}Sure! I could use a break from my computer, anyway. 
 $else
-Her face falls. 
-{@cafeowner}Sure, I guess. It's not like I've got any customers, anyhow.
+    Her face falls. 
+    {@cafeowner}Sure, I guess. It's not like I've got any customers, anyhow.
 $endif
 
+$if !HasTime(0.5)
+    You are about to ask the first question... when you realize how little time you have left.
+    There's no way you'll be able to finish this interview in time.
+$endif
 
+$choice MainStreetFloodRecovery; Actually, never mind. I gotta go.
 $HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.5)
-$HubChoice(MainStreetFloodRecovery, "Actually, never mind. I gotta go.", 0)
 
 // Original Name: Order the daily special
 :: OrderTheDailySpecial
