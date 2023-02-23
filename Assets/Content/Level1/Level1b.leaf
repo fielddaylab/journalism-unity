@@ -17,8 +17,7 @@ $call Rain($Audio_RainOutsideChill)
 {@me} What's next? Anything else I can do? 
 {@dionne} Well... I do need to get a reporter out there on the ground.
 {@dionne} Or, um... the water. Flood. Whatever.
-{@dionne} You think you've got what it takes, El?
-{@me} Yes!!
+{@me} On it!
 {img-inline Anim/CityScore_D.png}
 {@dionne} Great, because when it comes to preparedness, Twin Lakes doesn’t exactly have a stellar track record.
 {@me} Yikes.
@@ -281,9 +280,9 @@ $choice GetReadyPart2; Head back inside
 :: Breakroom
 {clear-text}
 {img Anim/1b/CoffeePot.png, Right}
-Ugh. There's nothing more depressing than soggy donuts and a coffee pot full of rainwater. 
+Ugh. There's nothing more depressing than soggy donuts. 
 
-$choice MakeAFreshPotOfCoffeeForTheNewsroom; Make a fresh pot of coffee for the newsroom and boost your {stat-name}social{/stat-name} cred around here 
+$choice MakeAFreshPotOfCoffeeForTheNewsroom; Make a fresh pot of coffee and boost your {stat-name}social{/stat-name} cred around here 
 $choice SearchForSnacksToBoostYourStrength; Search for healthy snacks to build up your {stat-name}endurance{/stat-name}
 
 // Original Name: Bike
@@ -304,7 +303,6 @@ $call SetLocation("Newsroom")
 $if StatCheck(Research, 2)
 Thank goodness you're so good at doing {stat-name}research{/stat-name} on the fly!
 You use the flood map to dodge all the worst flooded streets.
-The drive takes longer than usual, but at least you're not stranded. 
 
 $choice ArriveAtFloodSite; Arrive at flood site
 
@@ -334,11 +332,10 @@ $endif
 // TODO: find asset for this image
 {layout Left}
 There's no such thing as too much {stat-name}research{/stat-name}.
-Wellll....ok, maybe there is, but you're not about to go out in a 100-year-flood unprepared. 
+Wellll....ok, maybe there is. 
 {@me} Sudha, you're monitoring the police scanner, right? Any updates?
 {@sudha} Yeah, but it's not good news.
 {@sudha} Main Street is flooding fast and some people are stranded in their shops. 
-{@sudha}Most of the Cherry Festival tents have been swept away! 
 
 $call GiveSnippet(PoliceScannerInfo)
 $call AdjustStats(Research + 1)

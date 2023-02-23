@@ -26,7 +26,7 @@
 {img Anim/1a/Newspaper.png}
 {@article}"NEW REPORTER JOINS TWIN LAKES GAZETTE!"
 {@article} "El Benjamin, who graduated Journalism School last month, is the first out-of-towner to join our staff."
-{@article} "Make sure to give her a warm Twin Lakes welcome!"
+{@article} "Give her a warm Twin Lakes welcome!"
 $ActionChoice(Wake up)
 {/img}
 $call SetLocation("Apartment")
@@ -35,10 +35,10 @@ $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call Rain($Audio_RainInside)
 {layout Right}
-You wake up to your phone buzzing.
+{anim rumble} You wake up to your phone buzzing.
 It takes a few seconds to remember where you are...
 Twin Lakes. The Cherry Capitol of the Midwest. 
-Your friends back in New York were SO JEALOUS you snagged a reporting job straight out of college.
+Your friends in New York were SO JEALOUS you snagged a job straight out of college.
 Lucky you. 
 
 $choice CheckYourPhone; Check your phone.
@@ -63,11 +63,6 @@ $choice CallYourEditor; Call back.
 {anim rumble}{@dionne} FINALLY! Where have you been??
 {@me} Um... sleeping. It's 5 in the morning.
 {@dionne} El, it's been raining all night. Downtown is flooding!
-{@me} What?? You're joking, right?
-{@dionne} Do I sound like I'm joking, El?
-{@me} Um... no, ma'am.
-{@dionne} You've been asking for a serious story.
-{@dionne} So... here's your chance. 
 {@dionne} Get to the newsroom, ASAP. 
 
 $choice OnMyWay; {@me} "On my way."
@@ -104,7 +99,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 You help your neighbor find a flashlight and put out some food for her cats.
 {/img}
 {img Anim/1a/CherryHat.png}
-In return, she gives you a mustard-yellow hat covered in tiny embroidered cherries tiny cherries.
+In return, she gives you a hat covered in tiny embroidered cherries.
 {@jeanie}{auto} I made this just for you, Dear!  
 {/img}
 {@me} Thanks. It's...really something.
@@ -119,7 +114,6 @@ $choice OffToWork; Off to work
 {bg $BG_HouseExt}
 {layout Right}
 You haven't finished unpacking your boxes yet.
-You don't plan to live here very long, anyway. 
 Unfortunately, this makes it <i>slightly</i> tricky to find your rain gear. 
 {img Anim/1a/CollectGear.webm}
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
@@ -164,7 +158,6 @@ $call Rain($Audio_RainOutsideChill)
 {layout Right}
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
-It might be nice to help out. She did bring you a cherry strudel the other day.
 
 $choice HelpHer; Help her and earn her trust 
 $choice RushToWork; There's no time, I've got to get to work!
@@ -253,7 +246,6 @@ $choice HitTheRoad; Hit the road
 @tags Resourceful
 {img Anim/1a/Bike.png}
 You squeeze your bike into the trunk of your car. 
-The hatch doesn't shut all the way, but it's nothing a bungee cord can't fix.
 {/img}
 {@msg} You can use your bike later
 $call AdjustStats(Resourceful + 1)
@@ -266,8 +258,9 @@ $choice DriveWithBike; Drive to the newsroom
 {layout Right}
 Wow. This flood might be more serious than you thought.
 {img Anim/RushingWater.png, Left}
-You don't have time to stop for any interviews--you took too long loading up your bike.
-But you should have time to snag a photo or two!
+You don't have time to stop for any interviews
+--you took too long loading up your bike.
+But you can snag a photo or two!
 
 $choice TakeSomePhotos; Take some photos
 
@@ -294,7 +287,7 @@ Wow... it's awful out here.
 Pastries are floating down the street, and cars are stranded...
 {img Anim/1a/CherryMobile.png}
 Including the famous Twin Lakes Cherrymobile!
-You wish you could snag some photos, but your editor is texting you.
+You could snag some photos, but your editor is texting you.
 {/img}
 {layout Right}
 {@dionne} El, where are you?? 
@@ -373,7 +366,8 @@ $choice BreakingNewsStory; {@me} Thanks, Dionne. I'm on it.
 {layout Right}
 
 $if StatCheck(Endurance, 2)
-    You rush over, emboldened by your cherry breakfast full of healthy antioxidants.
+    You rush over. 
+    Good thing you ate that cherry breakfast to raise your {stat-name}endurance{/stat-name}.
     {@me} Hey. Do you need some help?
     {img Anim/1a/Floursack.png, Left}
     {@sophia} Ugh. Is it that obvious? 
@@ -383,11 +377,11 @@ $if StatCheck(Endurance, 2)
     $call AdjustStats(Social + 1, Resourceful + 1)
     $call GiveSnippet(FriendlyShopkeeper)
 $elseif StatCheck(Social, 2)
-    You rush over, your heart going out to the struggling shopkeep.
+    You rush over.
     {img Anim/1a/Floursack.png, Left}
-    You're too tired to lift more than a few bags of flour...
-    But the baker seems thrilled to have the chance to vent. 
-    She agrees to let you quote her, and even gives you a cherry croissant for the road!
+    Too bad your {stat-name}endurance{/stat-name} is low. 
+    You are too tired to lift more than a few bags of flour.
+    The baker agrees to let you quote her, and even gives you a cherry croissant for the road!
     $call AdjustStats(Social + 1, Resourceful + 1) 
     $call GiveSnippet(FriendlyShopkeeper)
 $else
@@ -399,7 +393,6 @@ $else
     {/img}
     {layout Right}
     You ask for an interview, but the baker is, to put it mildly, not interested. 
-    Maybe you could quote this, if you remove the profanity...
 
     $call GiveSnippet(RudeShopkeeper)
 $endif
@@ -420,7 +413,6 @@ $call GiveSnippet(AbandonedCherrymobile)
 $else
 {layout Right}
 You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in yoru apartment.
-Your editor is not a fan of blurry photos.
 Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
@@ -676,8 +668,9 @@ $call DecreaseTime(0.5)
 He tells you all his storm woes--his zinnias are flooded, his cat is getting cranky, and the ceiling is leaking! 
 {/img}
 {layout Left}
-You don't get any information for your story, but he seems grateful to you for listening.
-
+He seems grateful to you for listening.
+You pick up your phone to text your friend Sammy back in NYC to complain...
+...but you already wasted enough time.
 $call AdjustStats(Trust + 1)
 $choice BreakingNewsStory; Return to your desk
 
@@ -730,7 +723,6 @@ $if StatCheck(Trust, 2)
     $call GiveSnippet(LibraryLot)
 $else
     {@cherrycharlie07}the twin lakes gazette?? that sounds fake. how do i know i can trust you? 
-        You've been waiting your whole life for this moment.
         You rain down on them with credentials: press badge, bylines, your photo on the Twin Lake Gazette website (which you singlehandedly created).  
         {@cherrycharlie07}yikes, ok. you've convinced me! go ahead and use the photo. 
         {@cherrycharlie07} but... please don't contact me again. 
@@ -766,11 +758,11 @@ $call BeginFeedback()
 {story-stats}
 $if StoryHasPicture() == false
     {@dionne}   I thought I told you to include a picture, Ms. Benjamin. 
+    {@dionne}   Make sure to take a picture when you see a chance.
     {@dionne}   This will bring down your overall story score. 
-    {@dionne}   Photos and other visuals help us hook readers. Don't forget next time.
+    {@dionne}   Photos help hook readers. Don't forget next time.
     {@me} I didn't forget! 
     {@me} I just didn't have time to get a good one...
-    {@dionne} Well, breaking news goes that way sometimes.
     {@dionne} We're always on a deadline here, so just try to get a bit of everything.
     $if StoryIsFull() == true
         // no more preliminary feedback
@@ -789,7 +781,7 @@ $else //if StoryHasPicture() == true
         {@dionne}   This is going to make people think it's a lower-quality story.
         {@me} I tried, I just didn't have time to get enough good info!
         {@dionne} Well, breaking news goes that way sometimes.
-        {@dionne} We're always on a deadline here, so just try to get a bit of everything.
+        {@dionne} We're always on a deadline here.
         {@dionne} Other than that...
     $endif
 $endif
