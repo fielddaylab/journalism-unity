@@ -118,13 +118,6 @@ Over time, storms in Twin Lakes are becoming more severe AND more frequent. We'v
 @attr Facts, Useful
 Twin Lakes has a history of flooding. We're surrounded by water, and the city keeps the lake levels much higher than they used to.
 
-// Original Name: Floods and climate change
-:: FloodsAndClimateChange
-@type Graph
-@quality Good
-@attr Facts
-In the last decade, extreme rainfall in the region has increased by 10% due to climate change. 
-
 // Original Name: Cause of flood
 :: CauseOfFlood
 @type Quote
@@ -238,6 +231,7 @@ Flood events will drive away people with enough money to move. If we lose too ma
 @quality Good
 @attr Facts
 @image Anim/rainfall-stats.png
+In the last decade, extreme rainfall in the region has increased by 10% due to climate change. 
 
 // Original Name: DNR Policies to prevent flooding
 :: PoliciesToPreventFlooding
