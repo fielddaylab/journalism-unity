@@ -397,6 +397,7 @@ $else
     $call GiveSnippet(RudeShopkeeper)
 $endif
 
+$choice TakeSomePhotos; Take a photo of the stranded Cherrymobile outside the shop
 $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Take some photos
@@ -412,7 +413,7 @@ $call GiveSnippet(AbandonedCherrymobile)
 
 $else
 {layout Right}
-You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in yoru apartment.
+You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in your apartment.
 Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)
