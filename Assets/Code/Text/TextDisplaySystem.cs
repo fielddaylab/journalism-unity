@@ -170,10 +170,12 @@ namespace Journalism
             if (evtData.Type == GameText.Events.ClearMap && m_Map.gameObject.activeSelf) {
                 yield return m_CurrentLayer.ResetLayout();
             } else if (evtData.Type == GameText.Events.ClearImage && m_Image.gameObject.activeSelf) {
-                yield return Routine.Combine(
-                    AnimatedElement.Hide(m_CurrentLayer.ImageAnimElement, 0.2f),
-                    AnimateThoughtOutro()
-                    );
+                if (AnimatedElement.IsActive(m_CurrentLayer.ImageAnimElement)) {
+                    yield return AnimatedElement.Hide(m_CurrentLayer.ImageAnimElement, 0.2f);
+                }
+                if (m_ImageThoughtBG.gameObject.activeInHierarchy) {
+                    yield return AnimateThoughtOutro();
+                }
                 yield return m_CurrentLayer.ResetLayout();
             } else {
                 yield return null;
@@ -183,7 +185,7 @@ namespace Journalism
         private IEnumerator AnimateThoughtOutro() {
             // set animation to fade out
             m_ImageThoughtBG.Play(m_ImageThoughtBGOutro, false);
-
+            
             while (m_ImageThoughtBG.IsPlaying()) {
                 yield return null;
             }

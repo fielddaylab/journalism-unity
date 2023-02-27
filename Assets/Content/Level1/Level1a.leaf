@@ -298,7 +298,6 @@ $choice ArriveAtWork; Rush to work
 // Original Name: Arrive at work.
 :: ArriveAtWork
 {clear-text}
-{/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 $call Music($Audio_CherryTownRestoration)
@@ -384,6 +383,7 @@ $elseif StatCheck(Social, 2)
     The baker agrees to let you quote her, and even gives you a cherry croissant for the road!
     $call AdjustStats(Social + 1, Resourceful + 1) 
     $call GiveSnippet(FriendlyShopkeeper)
+    {/img}
 $else
     You hurry over to the baker, but you don't have the {stat-name}endurance{/stat-name} to help much...
     And you haven't exactly been working on your {stat-name}social skills{/stat-name} lately.  

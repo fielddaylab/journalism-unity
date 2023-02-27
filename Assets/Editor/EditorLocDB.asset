@@ -112,10 +112,14 @@ MonoBehaviour:
       Content: Investigative Story
       Exposed: 0
     - Id: Level.3b.Brief
-      Content: "Not everyone is getting the help they need. Find out who's being
-        left out, and why. You'll need equal parts of each type: \r\n-Facts and Color,
-        to explain the issues and tell your readers why they should care\r\n-Useful
-        info, so that the town can work on solving these issues"
+      Content: 'Not everyone is getting the help they need. Find out who''s being
+        left out, and why. You''ll need equal parts of each type:
+
+        -Facts
+        and Color, to explain the issues and tell your readers why they should care
+
+        -Useful
+        info, so that the town can work on solving these issues'
       Exposed: 0
     Headers:
     - Path: Level
