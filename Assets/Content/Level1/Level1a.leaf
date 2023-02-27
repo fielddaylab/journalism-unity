@@ -77,7 +77,6 @@ $call SetHeaderEnabled(true)
 You should be focusing on getting ready. 
 But you can't stop thinking about that email from your dream job: the Smoke City Herald. 
 {@email} "We don't hire reporters fresh out of school, Ms. Benjamin. 
-{@email} "Get some real experience. Then we'll talk."
 {img Anim/1a/Countdown.png}
 So... here you are, in a three-month contract with the Twin Lakes Gazette.
 Three months, and you'll be on to bigger and better things.
@@ -97,6 +96,7 @@ $choice CheckSocialMediaForPostsAndPhotosAboutTheStorm; Check social media for p
 {bg $BG_HouseExt}
 {img Anim/1a/UpstairsCat.png}
 You help your neighbor find a flashlight and put out some food for her cats.
+The cat rubs against your leg with a pur. 
 {/img}
 {img Anim/1a/CherryHat.png}
 In return, she gives you a hat covered in tiny embroidered cherries.
@@ -159,7 +159,7 @@ $call Rain($Audio_RainOutsideChill)
 Your neighbor, Maureen, is running around after her backyard chickens.
 {@maureen}{anim rumble}Help! They're everywhere!! 
 
-$choice HelpHer; Help her and earn her trust 
+$choice HelpHer; Help her and earn her {stat-name}trust{/stat-name} 
 $choice RushToWork; There's no time, I've got to get to work!
 
 // Original Name: Message Nurse
@@ -348,7 +348,7 @@ $call BeginTutorial()
 
     $call PointTo(TutorialQuality, -24, 0)
     {@dionne} Try to get high-quality snippets.
-    {@dionne} And don't forget to add a photo or graphic. That's journalism 101. 
+    {anim rumble} {@dionne} And don't forget to add a photo or graphic. That's journalism 101. 
     $call ClearPointer()
     $call ClickOn(BackToNotes)
     {clear-text}
@@ -619,7 +619,7 @@ $if StatCheck(Social, 2)
 $else
     {layout Left}
     Your Town Hall contact doesn't sound thrilled to hear from you.
-    Come to think of it, calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
+    Calling the Cherry Festival a "quaint distraction from the boredom of small town life" might've been a mistake.    
     {@townhallcontact}{auto} We're pretty busy here, Ms. Benjamin.
     {@townhallcontact} Just check the city website. It's all there. 
     $call GiveSnippet(CityHallAnnoyance)
