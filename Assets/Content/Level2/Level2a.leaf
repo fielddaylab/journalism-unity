@@ -485,7 +485,7 @@ $if StatCheck(Social, 5)
     {@wynnedstorme} Plus, climate change is bringing more extreme weather.
     {@wynnedstorme} It's basically a perfect storm... no pun intended. 
     $call GiveSnippet(DetailedFloodBackground)
-    $call GiveSnippet(FloodsAndClimateChange)
+    $call GiveSnippet(RainfallStats)
     $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Research, 5)
     She's excited to talk to someone who's so well-informed on floods and climate change.
@@ -493,7 +493,7 @@ $elseif StatCheck(Research, 5)
     {@wynnedstorme} Plus, climate change is bringing more extreme weather.
     {@wynnedstorme} It's basically a perfect storm... no pun intended. 
     $call GiveSnippet(DetailedFloodBackground)
-    $call GiveSnippet(FloodsAndClimateChange)
+    $call GiveSnippet(RainfallStats)
     $call GiveSnippet(CauseOfFlood)
 $else
     {@wynnedstorme}Sorry, I need to stay focused on my work. 
@@ -622,9 +622,9 @@ Blue pantsuit, perfect salon-blown hair, a #TwinLakesStrong pin on her lapel...
 {@governor} And you are...
 $if Visited(RoundUpYourTechAndRainGear)
 {@governor} ...Wearing a trash bag.
-{@player} Uh, yeah, sorry. I couldn't find my raincoat. 
+{@me} Uh, yeah, sorry. I couldn't find my raincoat. 
 $endif
-{@player} I'm a reporter at the Gazette.
+{@me} I'm a reporter at the Gazette.
 
 $HubChoice(InterviewGovernor, "Ask for an interview", 0.5)
 $choice ScienceStoryMap; Gotta go!
@@ -642,7 +642,7 @@ Wynne tells you all about local increases in rainfall and rising lake volume.
 Apparently the lakes are being kept 5 feet higher than their natural level!
 It's a lot of data--good thing you're such a {stat-name}research{/stat-name} expert. 
 $call GiveSnippet(DetailedFloodBackground)
-$call GiveSnippet(FloodsAndClimateChange)
+$call GiveSnippet(RainfallStats)
 $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Social, 5)
 Wynne tells you all about local increases in rainfall and rising lake volume.
@@ -651,7 +651,7 @@ All the data goes over your head at first...
 But your {stat-name}social{/stat-name} skills make up for it.
 Wynne is happy to slow down and explain everything. 
 $call GiveSnippet(DetailedFloodBackground)
-$call GiveSnippet(FloodsAndClimateChange)
+$call GiveSnippet(RainfallStats)
 $call GiveSnippet(CauseOfFlood)
 $else
 She doesn't seem interested in talking much... but you can't blame her. 
@@ -1025,18 +1025,22 @@ $endif
 :: InterviewCafeOwner
 
 $if Visited(OrderTheDailySpecial)
-{@cafeowner}Of course! 
-{@cafeowner}You're my first customer of the day. It's the least I can do. 
+    {@cafeowner}Of course! 
+    {@cafeowner}You're my first customer of the day. It's the least I can do. 
 $elseif Visited(HelpWithHerComputer)
-{@cafeowner}Sure! I could use a break from my computer, anyway. 
+    {@cafeowner}Sure! I could use a break from my computer, anyway. 
 $else
-Her face falls. 
-{@cafeowner}Sure, I guess. It's not like I've got any customers, anyhow.
+    Her face falls. 
+    {@cafeowner}Sure, I guess. It's not like I've got any customers, anyhow.
 $endif
 
+$if !HasTime(0.5)
+    You are about to ask the first question... when you realize how little time you have left.
+    There's no way you'll be able to finish this interview in time.
+$endif
 
+$choice MainStreetFloodRecovery; Actually, never mind. I gotta go.
 $HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.5)
-$HubChoice(MainStreetFloodRecovery, "Actually, never mind. I gotta go.", 0)
 
 // Original Name: Order the daily special
 :: OrderTheDailySpecial
@@ -1152,7 +1156,7 @@ $choice RudeGovernorQuestion; Really? Because it's starting to sound like you're
 Her smile turns into a glare.  
 {@governor} I can't believe you would say that!
 {@governor} What kind of newspaper is Dionne Richards running out here??
-{@player} You know Dionne?
+{@me} You know Dionne?
 {@governor} Oh, of course I know her. I know everybody.
 {@governor} If you'll excuse me, I need to give her a call...
 {@governor} She'd probably like to know how her new reporter is doing. 
@@ -1658,7 +1662,7 @@ $Feedback("BasicFloodBackground", "feedbackA", "Worst flood we've ever seen... S
 $Feedback("BasicFloodPrevention", "feedbackA", "We definitely need to fight for more policy changes! Volunteering with sandbags can only do so much.")
 $Feedback("WynneBasicFloodBackground", "feedbackA", "Oh yes, I remember some of our other floods over the years... But none like this!")
 $Feedback("DetailedFloodBackground", "feedbackA", "I wonder why the city would keep the lake levels so high?")
-$Feedback("FloodsAndClimateChange", "feedbackA", "10% increase sounds about right... Scary stuff!")
+// $Feedback("FloodsAndClimateChange", "feedbackA", "10% increase sounds about right... Scary stuff!")
 $Feedback("CauseOfFlood", "feedbackA", "30% of our wetlands gone?? Somebody ought to stop those developers!")
 $Feedback("LakeLevelBackground", "feedbackA", "Lowering lake levels seems apt! I wonder where they'll put all that water?")
 $Feedback("InspiringDowntownRecovery", "feedbackA", "Truly inspiring photo of downtown! We'll get through this, Twin Lakers!")
@@ -1690,7 +1694,7 @@ $Feedback("BasicFloodBackground", "feedbackB", "It is telling that we count the 
 $Feedback("BasicFloodPrevention", "feedbackB", "The question remains, will the city actually commit to these policy changes?")
 $Feedback("WynneBasicFloodBackground", "feedbackB", "More severe storms? Sounds like yet another symptom of climate change...")
 $Feedback("DetailedFloodBackground", "feedbackB", "The history of flooding really sheds some light on our situation. City Hall should be ready for this.")
-$Feedback("FloodsAndClimateChange", "feedbackB", "10% increase... sounds like climate change in action.")
+// $Feedback("FloodsAndClimateChange", "feedbackB", "10% increase... sounds like climate change in action.")
 $Feedback("CauseOfFlood", "feedbackB", "More environmental destruction for the sake of 'progress...' depressing, but not surprising.")
 $Feedback("LakeLevelBackground", "feedbackB", "Lowering lake levels is temporary... What about the people keeping them high in the first place?")
 $Feedback("InspiringDowntownRecovery", "feedbackB", "It's pretty inspiring to see people getting out there and making a difference.!")
@@ -1722,7 +1726,7 @@ $Feedback("BasicFloodBackground", "feedbackC", "Millions of dollars in damages! 
 $Feedback("BasicFloodPrevention", "feedbackC", "City Hall needs policies to protect us business owners!")
 $Feedback("WynneBasicFloodBackground", "feedbackC", "The worst flood ever! City Hall needs to come out and support us business owners!")
 $Feedback("DetailedFloodBackground", "feedbackC", "I had no idea City Hall had raised the water levels! What can we do about this?")
-$Feedback("FloodsAndClimateChange", "feedbackC", "A 10% increase!? Imagine how much damage that could cause in the long run!")
+// $Feedback("FloodsAndClimateChange", "feedbackC", "A 10% increase!? Imagine how much damage that could cause in the long run!")
 $Feedback("CauseOfFlood", "feedbackC", "I'm all for developing our city, but if it comes at the cost of these disasters... Is it worth it?")
 $Feedback("LakeLevelBackground", "feedbackC", "It's good to see the mayor taking action in all this!")
 $Feedback("InspiringDowntownRecovery", "feedbackC", "Seeing people work for recovery makes me want to go out and help!")
@@ -1754,7 +1758,7 @@ $Feedback("BasicFloodBackground", "feedbackD", "Millions in damages, not to ment
 $Feedback("BasicFloodPrevention", "feedbackD", "Certainly makes more sense to prevent these floods than deal with the damages!")
 $Feedback("WynneBasicFloodBackground", "feedbackD", "Sounds like this really was the storm of a lifetime...")
 $Feedback("DetailedFloodBackground", "feedbackD", "If the city keeps the lake levels high, surely we can lower them, right?")
-$Feedback("FloodsAndClimateChange", "feedbackD", "10% increase in rainfall is worrying... What will floods look like if this continues?")
+// $Feedback("FloodsAndClimateChange", "feedbackD", "10% increase in rainfall is worrying... What will floods look like if this continues?")
 $Feedback("CauseOfFlood", "feedbackD", "30% of our wetlands gone, just like that? We need to do something to stop this!")
 $Feedback("LakeLevelBackground", "feedbackD", "Lowering lake levels seems like a simple enough solution!")
 $Feedback("InspiringDowntownRecovery", "feedbackD", "Truly inspirational to see everyone working together! We'll get through this, Twin Lakes!")

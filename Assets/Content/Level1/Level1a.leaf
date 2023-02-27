@@ -298,7 +298,6 @@ $choice ArriveAtWork; Rush to work
 // Original Name: Arrive at work.
 :: ArriveAtWork
 {clear-text}
-{/img}
 $call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 $call Music($Audio_CherryTownRestoration)
@@ -384,6 +383,7 @@ $elseif StatCheck(Social, 2)
     The baker agrees to let you quote her, and even gives you a cherry croissant for the road!
     $call AdjustStats(Social + 1, Resourceful + 1) 
     $call GiveSnippet(FriendlyShopkeeper)
+    {/img}
 $else
     You hurry over to the baker, but you don't have the {stat-name}endurance{/stat-name} to help much...
     And you haven't exactly been working on your {stat-name}social skills{/stat-name} lately.  
@@ -397,6 +397,7 @@ $else
     $call GiveSnippet(RudeShopkeeper)
 $endif
 
+$choice TakeSomePhotos; Take a photo of the stranded Cherrymobile outside the shop
 $choice ArriveAtWork; Arrive at work.
 
 // Original Name: Take some photos
@@ -412,7 +413,7 @@ $call GiveSnippet(AbandonedCherrymobile)
 
 $else
 {layout Right}
-You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in yoru apartment.
+You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in your apartment.
 Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryCars)

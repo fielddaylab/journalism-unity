@@ -127,24 +127,24 @@ $endif
 {clear-text}
 {layout Left}
 $if FirstVisit()
-{img Anim/1b/CatchingWater.png, Right}
-The newsroom is starting to fill up now--with people and water.
-Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
-{img Anim/1b/SpinningTire.webm, Right}
-Out front, Khalisa is struggling to push her car out of the flooded street. 
-{/img}
+    {img Anim/1b/CatchingWater.png, Right}
+    The newsroom is starting to fill up now--with people and water.
+    Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
+    {img Anim/1b/SpinningTire.webm, Right}
+    Out front, Khalisa is struggling to push her car out of the flooded street. 
+    {/img}
 $endif
 
-$if TimeRemaining() >= 0.25
-    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", 0.50)
+$if TimeRemaining() < 0.25
+    You check the clock.
+    $choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
+$else
+    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", -1)
     $HubChoice(Breakroom, "Search the break room for snacks", .25)
     $HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
     $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
-// $elseif StatCheck(Tech, 2), StatCheck(Resourceful, 2)
-//     $choice HeadOut; Enough stalling. Time to go.
-$else
-    You check the clock.
-    $choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
+    // $elseif StatCheck(Tech, 2), StatCheck(Resourceful, 2)
+    //     $choice HeadOut; Enough stalling. Time to go.
 $endif
 
 // Original Name: Borrow gear
@@ -272,6 +272,7 @@ You push with all your strength and move Khalisa's car about half an inch.
 $endif
 
 $call AdjustStats(Endurance + 1, Trust + 1)
+$call DecreaseTime(0.5)
 
 $choice GetReadyPart2; Head back inside
 

@@ -242,7 +242,7 @@ Snippet text unimplemented.
 @type Photo
 @quality Great
 @attr Color
-@image Anim/downtown-flooding-truck.png
+@image Photo/downtown-flooding.png
 Snippet text unimplemented.
 
 // Original Name: Blurry flood photos from truck 
@@ -250,7 +250,7 @@ Snippet text unimplemented.
 @type Photo
 @quality Bad
 @attr Color
-@image Anim/downtown-flooding-truck-blurry.png
+@image Photo/downtown-flooding-blurry.png
 Snippet text unimplemented.
 
 // Original Name: Flooded Main Street Photo
