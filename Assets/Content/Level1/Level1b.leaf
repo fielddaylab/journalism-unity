@@ -27,7 +27,7 @@ But it's better than reporting on local opossom families and unique varieties of
 $call ActivateStory()
 {@dionne} Okay, El. 
 {/img}
-{@dionne} Take 45 minutes to get ready. Make sure you've got all the gear you need.
+{@dionne} Take 30 minutes to get ready. Make sure you've got all the gear you need.
 {@dionne} Then head to the dam and find out what's happening.
 $choice GetReadyCheckpoint; Got it. 
 
@@ -43,7 +43,7 @@ $goto GetReady
 $call SetHeaderEnabled(true)
 
 $if FirstVisit()
-$call SetTimeRemaining(0.75)
+$call SetTimeRemaining(0.50)
 $endif
 
 
@@ -207,9 +207,9 @@ $endif
 // Original Name: Lost and Found
 :: LostAndFound
 @tags Resourceful, Techie
-{img Anim/1b/LostAndFound.png, Right}
-Yikes. The Lost and Found should come with a biohazard warning. 
-But you've got what you need: a phone charger and a raincoat!
+{img Anim/1b/LostAndFound.png, Right} 
+You've got what you need: a phone charger and a raincoat!
+It might be better to get wet than to wear this pink polk dot raincoat...
 {/img}
 $call AdjustStats(Resourceful + 1, Tech + 1)
 
@@ -517,6 +517,7 @@ $endif
 $if !StatCheck(Social, 3)
 {@dnrworker}Sorry, kid. We're literally swamped here. 
 {@dnrworker}Help or get out of the way.
+You bite your tongue. These small town folk annoy you. 
 
 $choice HelpMoveSomeSandbags; Help move some sandbags.
 $choice ArriveAtFloodSite; Talk to someone else.
@@ -570,17 +571,18 @@ $elseif Stat(Tech) == 2 , StatCheck(Resourceful, 3)
     $call SFX(PhotoSnap)
     $call GiveSnippet(OkayHouseboatPhotos)
 $elseif Stat(Tech) == 2 , StatCheck(Social, 3)
-    Oh no... your camera battery is dead!
-    You ask around for help, and your {stat-name}social{/stat-name} graces pay off.
-    {@dnrvolunteer} You seem like a nice kid. Go ahead and borrow my camera!
+    Your lens was smeared. 
+    You've already made a friend who pointed it out to you.
+    Good thing your {stat-name}social{/stat-name} graces pay off.
+    {@dnrvolunteer} You want to use this clean hankee?
+    You clean the lens...mostly.
 
     $call AdjustStats(Tech + 1)
     $call SFX(PhotoSnap)
     $call GiveSnippet(OkayHouseboatPhotos)
 $elseif Stat(Tech) <= 2
-    Oh no... your camera battery is dead!
-    You use your phone to snap a few grainy shots.
-    You've never really gotten the hang of taking photos in the dark, in the rain...
+    Oh no... your camera lens was smeared!
+    You need to learn to pay more attention.
     But at least a low-quality photo is better than nothing. 
 
     $call SFX(PhotoSnap)

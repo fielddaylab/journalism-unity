@@ -336,11 +336,10 @@ $call BeginTutorial()
     {clear-text}
     $call Wait(0.2)
     $call PointTo(TutorialDescription, -24, 0)
-    {@dionne} Be thoughtful about the snippets you choose.
     $call PointTo(TutorialPlayerAttributes, -24, 0)
     {@dionne} This section will show the breakdown of your story.   
     $call PointTo(TutorialTargetAttributes, -24, 0)
-    {@dionne} Try to line up with the target breakdown here.
+    {@dionne} Choose snippets that achieve the target breakdown here.
     {@dionne} You can usually get Facts from scientists and experts.
     {@dionne} Eyewitness accounts and nice images can get you Color.
     {@dionne} Public agencies like City Hall usually provide Useful material.
@@ -600,7 +599,7 @@ $goto Office1-Clock
 $if StatCheck(Social, 2)
     {@townhallcontact} El, it's great to hear from you!
    {img Anim/1a/Donuts.png}
-    {@townhallcontact} Everybody here is still talking about those cherry donuts you brought from Sophia's last time. 
+    {@townhallcontact} Everybody is still talking about those cherry donuts you brought last time. 
     $if Visited(HelpTheBaker)
         {@townhallcontact}I heard you helped rescue her bakery this morning. Nice work!!     
     $else
@@ -758,19 +757,18 @@ $call BeginFeedback()
 {@dionne} Alright, let's see how you did...
 {story-stats}
 $if StoryHasPicture() == false
-    {@dionne}   I thought I told you to include a picture, Ms. Benjamin. 
-    {@dionne}   Make sure to take a picture when you see a chance.
-    {@dionne}   This will bring down your overall story score. 
+    {@dionne}   I told you to include a picture, Ms. Benjamin. 
+    {@dionne}   Take a picture when you see a chance.
     {@dionne}   Photos help hook readers. Don't forget next time.
     {@me} I didn't forget! 
     {@me} I just didn't have time to get a good one...
-    {@dionne} We're always on a deadline here, so just try to get a bit of everything.
+    {@dionne} We're always on a deadline here.
     $if StoryIsFull() == true
         // no more preliminary feedback
         {@dionne}   Other than that...
     $else //if StoryIsFull() == false
         // player has not filled all slots AND is missing picture
-        {@dionne}   And you haven't used up all the space?
+        {@dionne}   You haven't used up all the space?
         {@dionne}   That makes two errors, both of which are impacting the quality of your story.
         {@dionne}   Other than that...
     $endif
@@ -778,12 +776,9 @@ $else //if StoryHasPicture() == true
     $if StoryIsFull() == false
         // YES picture, NOT full
         {@dionne}   I see you have some blank spots here.
-        {@dionne}   Make sure to use all the space that's given to you.
-        {@dionne}   This is going to make people think it's a lower-quality story.
+        {@dionne}   Try to use all the space that's given to you.
         {@me} I tried, I just didn't have time to get enough good info!
-        {@dionne} Well, breaking news goes that way sometimes.
         {@dionne} We're always on a deadline here.
-        {@dionne} Other than that...
     $endif
 $endif
 
@@ -828,7 +823,7 @@ $elseif StoryScore() == "medium" //1 or 2 net quality
         {@dionne}   I'd like to see even more high-quality info...
         {@dionne}   But still, a solid story. This should help a lot of people.  
     $elseif StoryAlignment() >= 0.3
-        {@dionne}   Not bad, Rookie! Not perfect, but definitely not bad.  
+        {@dionne}   Not bad, Rookie. Not perfect, but definitely not bad.  
         {@dionne}   This should be enough to help a lot of people.  
         {@dionne}   Next time, make sure to check my notes. 
     $else
@@ -847,8 +842,9 @@ $else //<1 net quality
         {@dionne}   Still. Not bad for your first natural disaster. 
     $else
         {@dionne}   Well.... this could be worse. Sort of.  
-        {@dionne}   We needed more high-quality snippets here. And a closer match with the story breakdown.
-        {@dionne}   But this was your first natural disaster, so I'll let it slide.
+        {@dionne}   You need more high-quality snippets here. 
+        {@dionne}   And a closer match with the story breakdown.
+        {@dionne}   But this was your first natural disaster.
     $endif
 $endif
 
