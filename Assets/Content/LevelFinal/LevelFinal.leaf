@@ -18,7 +18,7 @@ $if CityScore() > 2
       $call StopRain()
       Has it already been a year?
       It’s the annual Cherry Festival is back... 
-      {img-inline Anim/CityScore_A.png}
+      // {img-inline Anim/CityScore_A.png}
       {img Anim/Final/CherryDuck.png, Left}
       The town got its cherry-themed ducks in a row. 
       There was another storm last month…
@@ -43,13 +43,13 @@ $elseif CityScore() >= 0
       Not as impressive as it used to be.
       But at least all the tents are still standing.
       Homes and business are still recovering. 
-      $if CityScore() == 2
-            {img-inline Anim/CityScore_B.png}
-      $elseif CityScore() == 1
-            {img-inline Anim/CityScore_C.png}
-      $elseif CityScore() == 0
-            {img-inline Anim/CityScore_D.png}
-      $endif
+      // $if CityScore() == 2
+      //       {img-inline Anim/CityScore_B.png}
+      // $elseif CityScore() == 1
+      //       {img-inline Anim/CityScore_C.png}
+      // $elseif CityScore() == 0
+      //       {img-inline Anim/CityScore_D.png}
+      // $endif
       #TwinLakesStrong has become a call to action. 
       Not just a #Hashtag
       You still have an invitation to interview at the Smoke City Herald…
@@ -72,7 +72,7 @@ $else
       Or at least, it would be...
       ...if Twin Lakes still existed.
       Turns out making a difference is harder than you thought.
-      {img-inline Anim/CityScore_F.png}
+      // {img-inline Anim/CityScore_F.png}
       A huge storm hit last month, and the town wasn’t ready. 
       The Cheese Shop, Sophia’s Bakery, and Bookish have all shut down.
       About a third of the town has moved away...

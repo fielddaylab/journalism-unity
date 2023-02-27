@@ -18,9 +18,9 @@ $call Rain($Audio_RainOutsideChill)
 {@dionne} Well... I do need to get a reporter out there on the ground.
 {@dionne} Or, um... the water. Flood. Whatever.
 {@me} On it!
-{img-inline Anim/CityScore_D.png}
-{@dionne} Great, because when it comes to preparedness, Twin Lakes doesn’t exactly have a stellar track record.
-{@me} Yikes.
+// {img-inline Anim/CityScore_D.png}
+// {@dionne} Great, because when it comes to preparedness, Twin Lakes doesn’t exactly have a stellar track record.
+// {@me} Yikes.
 This is the break you've been waiting for.
 One natural disaster might not be quite enough to get you in at the Smoke City Herald...
 {img Anim/3b/Opossum.png, Right}

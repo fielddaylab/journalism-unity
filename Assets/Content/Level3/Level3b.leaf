@@ -176,20 +176,20 @@ $choice AcceptStory; On it.
 
 // Accept story
 :: AcceptStory
-$if CityScore() > 2
-    {img-inline Anim/CityScore_A.png}
-$elseif CityScore() == 2
-    {img-inline Anim/CityScore_B.png}
-$elseif CityScore() == 1
-    {img-inline Anim/CityScore_C.png}
-$elseif CityScore() == 0
-    {img-inline Anim/CityScore_D.png}
-$else
-    {img-inline Anim/CityScore_F.png}
-$endif
-{@dionne} Did you see the updated city disaster preparedness score? 
-{@dionne} Our stories could make a difference. 
-{@me} Got it!
+// $if CityScore() > 2
+//     {img-inline Anim/CityScore_A.png}
+// $elseif CityScore() == 2
+//     {img-inline Anim/CityScore_B.png}
+// $elseif CityScore() == 1
+//     {img-inline Anim/CityScore_C.png}
+// $elseif CityScore() == 0
+//     {img-inline Anim/CityScore_D.png}
+// $else
+//     {img-inline Anim/CityScore_F.png}
+// $endif
+// {@dionne} Did you see the updated city disaster preparedness score? 
+// {@dionne} Our stories could make a difference. 
+// {@me} Got it!
 
 $call SetTimeRemaining(4)
 

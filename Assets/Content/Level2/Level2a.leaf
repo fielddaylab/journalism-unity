@@ -277,19 +277,19 @@ $choice GatherFloodGear; Gather flood gear
 {@me} Okay, yeah. But about the Herald--
 {@dionne} You're on assignment now, El. Get to work.  
 {@dionne} If you want a good recommendation from me, you need to earn it. 
-$if CityScore() > 2
-    {img-inline Anim/CityScore_A.png}
-$elseif CityScore() == 2
-    {img-inline Anim/CityScore_B.png}
-$elseif CityScore() == 1
-    {img-inline Anim/CityScore_C.png}
-$elseif CityScore() == 0
-    {img-inline Anim/CityScore_D.png}
-$else
-    {img-inline Anim/CityScore_F.png}
-$endif
-{@dionne} Here's an update on the city disaster preparedness score. 
-{@dionne} Our stories make a difference. 
+// $if CityScore() > 2
+//     {img-inline Anim/CityScore_A.png}
+// $elseif CityScore() == 2
+//     {img-inline Anim/CityScore_B.png}
+// $elseif CityScore() == 1
+//     {img-inline Anim/CityScore_C.png}
+// $elseif CityScore() == 0
+//     {img-inline Anim/CityScore_D.png}
+// $else
+//     {img-inline Anim/CityScore_F.png}
+// $endif
+// {@dionne} Here's an update on the city disaster preparedness score. 
+// {@dionne} Our stories make a difference. 
 {@me} On it!
 
 $choice ScienceStoryMap; Get started
