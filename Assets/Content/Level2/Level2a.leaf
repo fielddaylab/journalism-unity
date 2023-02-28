@@ -1038,7 +1038,7 @@ $if !HasTime(0.5)
 $endif
 
 $choice MainStreetFloodRecovery; Actually, never mind. I gotta go.
-$HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.5)
+$HubChoice(InterviewQuestionsCafeOwner, "Ok, let's get started!", 0.25)
 
 // Original Name: Order the daily special
 :: OrderTheDailySpecial
@@ -1250,24 +1250,21 @@ $if !Visited(AreYouWorriedAboutMoreRainComing)
 $choice AreYouWorriedAboutMoreRainComing; Are you worried the next storm that's coming?
 $endif
 
-
 $if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
 $choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How will it impact Twin Lakes if next storm brings more flooding?
 $endif
 
-
-
 $set local:_localOr = false
 $if Visited(OrderTheDailySpecial) 
-$set local:_localOr = true
+    $set local:_localOr = true
 $elseif  Visited(HelpWithHerComputer)
-
-$set local:_localOr = true
+    $set local:_localOr = true
 $endif
+
 $if local:_localOr
-$choice ThanksPlusUniversityContact; Thank her for her time
+    $choice ThanksPlusUniversityContact; Thank her for her time
 $else
-$choice Thanks; Thank her for her time
+    $choice Thanks; Thank her for her time
 $endif
 
 // Original Name: "What was the cause of the flood?"
@@ -1343,30 +1340,28 @@ $choice DepartmentOfLimnology; Thank her for her help
 
 $call GiveSnippet(InTroubleQuote)
 
-
-$if !Visited(AreYouWorriedAboutMoreRainComing)
-$choice AreYouWorriedAboutMoreRainComing; Are you worried about more rain coming?
-$endif
-
-
-$if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
-$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How do you think it'll impact Twin Lakes if the flooding keeps up?
-$endif
-
-
-
-$set local:_localOr = false
-$if Visited(OrderTheDailySpecial) 
-$set local:_localOr = true
-$elseif  Visited(HelpWithHerComputer)
-
-$set local:_localOr = true
-$endif
-$if local:_localOr
-$choice ThanksPlusUniversityContact; Thank her for her time
+$if TimeRemaining() < 0.25
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice TimeToAssembleTheScienceStory; Compile your story
 $else
-$choice Thanks; Thank her for her time
+    $HubChoice(AreYouWorriedAboutMoreRainComing, "Are you worried about more rain coming?", 0.25)
+    $HubChoice(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp, "How do you think it'll impact Twin Lakes if the flooding keeps up?", 0.25)
+
+
+    $set local:_localOr = false
+    $if Visited(OrderTheDailySpecial) 
+        $set local:_localOr = true
+    $elseif  Visited(HelpWithHerComputer)
+        $set local:_localOr = true
+    $endif
+
+    $if local:_localOr
+        $choice ThanksPlusUniversityContact; Thank her for her time
+    $else
+        $choice Thanks; Thank her for her time
+    $endif
 $endif
+
 
 // Original Name: "Are you worried about more rain coming?"
 :: AreYouWorriedAboutMoreRainComing
@@ -1378,29 +1373,28 @@ $endif
 
 $call GiveSnippet(QuoteHeartAndSoul)
 
-$if !Visited(HowHasTheFloodAffectedYourBusiness)
-$choice HowHasTheFloodAffectedYourBusiness; How has the flood affected your business?
-$endif
 
-
-$if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
-$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How do you think it'll impact Twin Lakes if the flooding keeps up?
-$endif
-
-
-
-$set local:_localOr = false
-$if Visited(OrderTheDailySpecial) 
-$set local:_localOr = true
-$elseif  Visited(HelpWithHerComputer)
-
-$set local:_localOr = true
-$endif
-$if local:_localOr
-$choice ThanksPlusUniversityContact; Thank her for her time
+$if TimeRemaining() < 0.25
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice TimeToAssembleTheScienceStory; Compile your story
 $else
-$choice Thanks; Thank her for her time
+    $HubChoice(HowHasTheFloodAffectedYourBusiness, "How has the flood affected your business?", 0.25)
+    $HubChoice(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp, "How do you think it'll impact Twin Lakes if the flooding keeps up?", 0.25)
+
+
+    $set local:_localOr = false
+    $if Visited(OrderTheDailySpecial) 
+        $set local:_localOr = true
+    $elseif  Visited(HelpWithHerComputer)
+        $set local:_localOr = true
+    $endif
+    $if local:_localOr
+        $choice ThanksPlusUniversityContact; Thank her for her time
+    $else
+        $choice Thanks; Thank her for her time
+    $endif
 $endif
+
 
 // Original Name: "How do you think it'll impact Twin Lakes if the flooding keeps up?"
 :: HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp
@@ -1408,29 +1402,28 @@ $endif
 {@cafeowner}And I bet we'll get less and less summer tourists, if this keeps happening. 
 
 
-$if !Visited(HowHasTheFloodAffectedYourBusiness)
-$choice HowHasTheFloodAffectedYourBusiness; How has the flood affected your business?
-$endif
-
-
-$if !Visited(AreYouWorriedAboutMoreRainComing)
-$choice AreYouWorriedAboutMoreRainComing; Are you worried about more rain coming?
-$endif
-
-
-
-$set local:_localOr = false
-$if Visited(OrderTheDailySpecial) 
-$set local:_localOr = true
-$elseif  Visited(HelpWithHerComputer)
-
-$set local:_localOr = true
-$endif
-$if local:_localOr
-$choice ThanksPlusUniversityContact; Thank her for her time
+$if TimeRemaining() < 0.25
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice TimeToAssembleTheScienceStory; Compile your story
 $else
-$choice Thanks; Thank her for her time
+    $HubChoice(HowHasTheFloodAffectedYourBusiness, "How has the flood affected your business?", 0.25)
+    $HubChoice(AreYouWorriedAboutMoreRainComing, "Are you worried about more rain coming?", 0.25)
+
+
+    $set local:_localOr = false
+    $if Visited(OrderTheDailySpecial) 
+        $set local:_localOr = true
+    $elseif  Visited(HelpWithHerComputer)
+        $set local:_localOr = true
+    $endif
+
+    $if local:_localOr
+        $choice ThanksPlusUniversityContact; Thank her for her time
+    $else
+        $choice Thanks; Thank her for her time
+    $endif
 $endif
+
 
 // Original Name: Thanks, plus university contact
 :: ThanksPlusUniversityContact
