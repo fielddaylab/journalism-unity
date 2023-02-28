@@ -188,7 +188,7 @@ namespace Journalism.UI
             else {
                 SetSelectedScrap(display);
                 Game.Audio.PlayOneShot("NotebookLift");
-                Game.Events.Dispatch(GameEvents.SelectSnippet);
+                Game.Events.Dispatch(GameEvents.SelectSnippet, display.Data);
             }
         }
 
@@ -307,8 +307,8 @@ namespace Journalism.UI
         private bool ClearSlot(StoryBuilderSlot slot) {
             var current = slot.Data;
             if (current != null) {
+                Game.Events.Dispatch(GameEvents.RemoveSnippet, slot);
                 StoryText.EmptySlot(slot);
-                Game.Events.Dispatch(GameEvents.RemoveSnippet);
                 Game.Events.Dispatch(GameEvents.StoryUpdated);
                 Player.Data.AllocatedScraps[slot.Index] = default;
                 var scrap = FindScrapWithId(current.Id);
@@ -434,6 +434,9 @@ namespace Journalism.UI
 
             // display previous distribution
             GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats);
+
+            m_TargetInfoPopUpDistribution.Current.AttributeGroup.alpha = 1;
+
             yield return m_TargetInfoPopUpGroup.Root.AnchorPosTo(320, 0.4f, Axis.Y).Ease(Curve.Smooth);
 
             yield return 0.6f;
@@ -446,7 +449,7 @@ namespace Journalism.UI
 
             // fade in if prev stats are empty
             if (prevStats.ScrapCount == 0) {
-                yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, 0f);
+                m_TargetInfoPopUpDistribution.Current.AttributeGroup.alpha = 0;
 
                 m_RedistributionAnim.Replace(this,
                     GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0f))
@@ -454,19 +457,27 @@ namespace Journalism.UI
 
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(1f, .4f);
 
+                m_TargetInfoPopUpDistribution.Current.AttributeGroup.alpha = 1;
+
                 yield return 2.1f;
             }
             // fade out if curr stats are empty
             else if (m_CachedStats.ScrapCount == 0) {
+                m_TargetInfoPopUpDistribution.Current.AttributeGroup.alpha = 1;
+
                 yield return m_TargetInfoPopUpDistribution.Current.AttributeGroup.FadeTo(0f, .4f);
 
                 m_RedistributionAnim.Replace(this,
                     GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0.4f))
                     .TryManuallyUpdate(0);
 
+                m_TargetInfoPopUpDistribution.Current.AttributeGroup.alpha = 0;
+
                 yield return 2.1f;
             }
             else {
+                m_TargetInfoPopUpDistribution.Current.AttributeGroup.alpha = 1;
+
                 m_RedistributionAnim.Replace(this,
                     GameText.PopulateStoryAttributeDistribution(m_TargetInfoPopUpDistribution.Current, prevStats, m_CachedStats, 0.4f))
                     .TryManuallyUpdate(0);

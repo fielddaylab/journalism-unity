@@ -570,7 +570,7 @@ $endif
 $if HasTime(0.5)
     $choice ScienceStoryMap; Leave Main Street
     $HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
-    $HubChoice(MainStreetCafe, "Enter the cafe. The sign says ''PLEASE COME IN, WE'RE OPEN!!'', -1)
+    $HubChoice(MainStreetCafe, "Enter the cafe. The sign says ''PLEASE COME IN, WE'RE OPEN!!''", -1)
     $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
