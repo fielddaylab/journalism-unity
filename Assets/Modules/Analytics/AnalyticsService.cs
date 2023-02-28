@@ -520,7 +520,8 @@ namespace Journalism
             string current_location = Assets.Location(Player.Location()).Name;
             List<string> locations_list = new List<string>(); // locations currently displayed on the map
             foreach (var id in m_LastKnownChoiceLocations) {
-                locations_list.Add(Assets.Location(id).Name);
+                string locStr = id.IsEmpty ? "N/A" : Assets.Location(id).Name;
+                locations_list.Add(locStr);
             }
 
             using (var e = m_Log.NewEvent("open_choice_map")) {
