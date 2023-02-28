@@ -135,17 +135,10 @@ $if FirstVisit()
     {/img}
 $endif
 
-$if TimeRemaining() < 0.25
-    You check the clock.
-    $choice EjectWastedTooMuchTime; Oh no, you should be out there already! 
-$else
-    $HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", -1)
-    $HubChoice(Breakroom, "Search the break room for snacks", .25)
-    $HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
-    $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
-    // $elseif StatCheck(Tech, 2), StatCheck(Resourceful, 2)
-    //     $choice HeadOut; Enough stalling. Time to go.
-$endif
+$HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
+$HubChoice(HelpKhalisa, "Help Khalisa push her car to safety", -1)
+$HubChoice(Breakroom, "Search the break room for snacks", .25)
+$HubChoice(ListenToThePoliceScanner, "Listen to the police scanner", 0.25)
 
 // Original Name: Borrow gear
 :: BorrowGear
@@ -268,13 +261,23 @@ You manage to push Khalisa's little compact car to dry ground!
 $else
 You wish you could help, but at this point, you're mostly running on coffee and self-doubt. 
 You push with all your strength and move Khalisa's car about half an inch. 
-{@khalisa}Aw, it's okay, El. I appreciate the effort. 
+{@khalisa}Aw, it's okay, El. I appreciate the effort.
 $endif
 
 $call AdjustStats(Endurance + 1, Trust + 1)
-$call DecreaseTime(0.5)
+$if TimeRemaining() <= 0
+    {clear-text}
+    {/img}
+    // fail state
+    You head back into the office.
+    As you enter you glance at the clock, and your stomach sinks.
+    $choice EjectWastedTooMuchTime; Oh no, you should be out there already!
+$else
+    $call DecreaseTime(0.5)
+    $choice GetReadyPart2; Head back inside
+$endif
 
-$choice GetReadyPart2; Head back inside
+
 
 // Original Name: Breakroom
 :: Breakroom
@@ -1348,10 +1351,10 @@ $endif
 
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment
-$if StoryAlignment() >= 0.5
+$if StoryAlignment() >= 0.4
     //good: +1 city score
     $call AdjustCityScore(+1)
-$elseif StoryAlignment() < 0.3
+$elseif StoryAlignment() < 0.2
     //bad: -1 city score
     $call AdjustCityScore(-1)
 $endif //medium: no change

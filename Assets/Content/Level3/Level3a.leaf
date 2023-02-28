@@ -625,25 +625,24 @@ $HubChoice(OfferToBuyHimBreakfast, "Offer to buy him breakfast and coffee", 0.50
 // Use your social connections to find some common ground
 :: UseYourSocialConnections
 $if StatCheck (Social, 5)
-As soon as you mention Fred Finkler, his face brightens.
-{@doug} You know Fred? Great fella, isn't he? 
-{@doug} He's always dropping off vases full of zinnias at my apartment building. 
-{@doug} Really brightens up the place. Wish I was back there now... 
-{@doug} And you love the smell, don'tcha Odie?
-He gives the dog a gentle pat.
-{@doug} Wish I was back there now...
-$if !HasTime(0.25)
-    Looks like you have to cut this short. You have just enough time to compile your story!
-    $choice StoryConstruction3a; Compile your story
+      As soon as you mention Fred Finkler, his face brightens.
+      {@doug} You know Fred? Great fella, isn't he? 
+      {@doug} He's always dropping off vases full of zinnias at my apartment building. 
+      {@doug} Really brightens up the place. Wish I was back there now... 
+      {@doug} And you love the smell, don'tcha Odie?
+      He gives the dog a gentle pat.
+      {@doug} Wish I was back there now...
+      $if !HasTime(0.25)
+            Looks like you have to cut this short. You have just enough time to compile your story!
+            $choice StoryConstruction3a; Compile your story
+      $else
+            $HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
+      $endif
 $else
-$HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
-$endif
-
-$else
-You try to strike up a conversation and mention some people you've met.
-The man clearly isn't in the mood.
-It seems like you don't quite have the {stat-name}social{/stat-name} prowess to cheer him up.
-$choice FloodShelterChoices; Decide what to do next. 
+      You try to strike up a conversation and mention some people you've met.
+      The man clearly isn't in the mood.
+      It seems like you don't quite have the {stat-name}social{/stat-name} prowess to cheer him up.
+      $choice FloodShelterChoices; Decide what to do next. 
 $endif
 
 :: PetOdie
@@ -1559,7 +1558,7 @@ $choice GoToSeniorCitizenApartments; Decide what to do next
 {@me} I'm a reporter writing a story about the flood shelter downtown.
 {@me} Do you have a few minutes to talk? 
 $if StatCheck(Trust, 6)
-      The woman on the line sounds excied to hear from you. 
+      The woman on the line sounds excited to hear from you. 
       {@summer} Oh, you're El Benjamin, right? I've loved your work in the Gazette! 
       {@summer} I'd love to talk. What do you need to know? 
       $choice DoYouKnowAnythingAboutTheShelter; Is it true that the flood shelter in the high school doesn't meet accessibility standards? 
