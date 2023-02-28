@@ -14,6 +14,7 @@ using BeauUtil.Tags;
 using UnityEngine.Networking.Types;
 using BeauPools;
 using Leaf;
+using Newtonsoft.Json;
 
 namespace Journalism
 {
@@ -44,7 +45,8 @@ namespace Journalism
             LOCATION_MAP
         }
 
-        private struct SnippetDetails {
+        [Serializable]
+        public struct SnippetDetails {
             public string SnippetId;
             public StoryScrapType StoryScrapType;
             public StoryScrapQuality StoryScrapQuality;
@@ -70,11 +72,12 @@ namespace Journalism
             }
         }
 
-        private struct LayoutDetails
+        [Serializable]
+        public struct LayoutDetails
         {
-            public StoryScrapType ScrapType;
-            public bool IsWide;
-            public string SnippetId;
+            [SerializeField] public StoryScrapType ScrapType;
+            [SerializeField] public bool IsWide;
+            [SerializeField] public string SnippetId;
 
             public LayoutDetails(StoryScrapType inType, bool inIsWide, string inId = null) {
                 ScrapType = inType;
@@ -321,8 +324,8 @@ namespace Journalism
             target_breakdown.Add("useful_weight", m_TargetBreakdown.UsefulWeight);
 
             using (var e = m_Log.NewEvent("display_breakdown_dialog")) {
-                e.Param("final_breakdown", final_breakdown.ToString());
-                e.Param("target_breakdown", target_breakdown.ToString());
+                e.Param("final_breakdown", JsonConvert.SerializeObject(final_breakdown));
+                e.Param("target_breakdown", JsonConvert.SerializeObject(target_breakdown));
             }
         }
 
@@ -333,7 +336,7 @@ namespace Journalism
             List<StoryScrapQuality> current_quality = GenerateStoryScrapQualityList();
 
             using (var e = m_Log.NewEvent("display_snippet_quality_dialog")) {
-                e.Param("final_breakdown", current_quality.ToString());
+                e.Param("final_breakdown", JsonConvert.SerializeObject(current_quality));
             }
         }
 
@@ -361,15 +364,15 @@ namespace Journalism
             ChoiceContext context = m_TextMapVisible ? ChoiceContext.LOCATION_MAP : ChoiceContext.CONVERSATION;
 
             // TODO: journalism schema indicates this section is a TODO
-            string choicesStr = "";
+            List<string> choices = new List<string>();
 
             foreach(var option in fullOptions) {
-                choicesStr += option.TargetId.ToString() + "\n";
+                choices.Add(option.TargetId.ToString());
             }
 
             using (var e = m_Log.NewEvent("display_choices")) {
                 e.Param("context", context.ToString());
-                e.Param("choices", choicesStr);
+                e.Param("choices", JsonConvert.SerializeObject(choices));
             }
         }
 
@@ -518,8 +521,9 @@ namespace Journalism
 
             using (var e = m_Log.NewEvent("open_map_tab")) {
                 e.Param("current_location", current_location);
-                e.Param("locations_list", locations_list.ToString());
+                e.Param("locations_list", JsonConvert.SerializeObject(locations_list));
             }
+
         }
 
         // open choice map
@@ -534,7 +538,7 @@ namespace Journalism
 
             using (var e = m_Log.NewEvent("open_choice_map")) {
                 e.Param("current_location", current_location);
-                e.Param("locations_list", locations_list.ToString());
+                e.Param("locations_list", JsonConvert.SerializeObject(locations_list));
             }
         }
 
@@ -559,8 +563,8 @@ namespace Journalism
             }
 
             using (var e = m_Log.NewEvent("open_impact_map")) {
-                e.Param("feeback_ids", feedback_ids.ToString());
-                e.Param("feedback_texts", feedback_texts.ToString());
+                e.Param("feeback_ids", JsonConvert.SerializeObject(feedback_ids));
+                e.Param("feedback_texts", JsonConvert.SerializeObject(feedback_texts));
             }
         }
 
@@ -579,7 +583,7 @@ namespace Journalism
             string node_id = m_LastKnownNodeId.ToString();
 
             using (var e = m_Log.NewEvent("reached_checkpoint")) {
-                e.Param("node_id", node_id.ToString());
+                e.Param("node_id", node_id);
             }
         }
 
@@ -596,16 +600,9 @@ namespace Journalism
                 updatedStats.Add((StatId)i, adjust);
             }
 
-            string updateStatsStr = "ENDURANCE : " + updatedStats[StatId.Endurance] + "\n";
-            updateStatsStr += "RESOURCEFUL : " + updatedStats[StatId.Resourceful] + "\n";
-            updateStatsStr += "TECH : " + updatedStats[StatId.Tech] + "\n";
-            updateStatsStr += "SOCIAL : " + updatedStats[StatId.Social] + "\n";
-            updateStatsStr += "TRUST : " + updatedStats[StatId.Trust] + "\n";
-            updateStatsStr += "RESEARCH : " + updatedStats[StatId.Research] + "\n";
-
             using (var e = m_Log.NewEvent("stat_update")) {
-                e.Param("node_id", node_id.ToString());
-                e.Param("stats", updateStatsStr);
+                e.Param("node_id", node_id);
+                e.Param("stats", JsonConvert.SerializeObject(updatedStats));
             }
         }
 
@@ -617,7 +614,7 @@ namespace Journalism
             string image_name = ParseFileName(path);
 
             using (var e = m_Log.NewEvent("change_background_image")) {
-                e.Param("node_id", node_id.ToString());
+                e.Param("node_id", node_id);
                 e.Param("image_name", image_name);
             }
         }
@@ -635,7 +632,7 @@ namespace Journalism
 
             using (var e = m_Log.NewEvent("show_popup_image")) {
                 e.Param("is_animated", is_animated);
-                e.Param("node_id", node_id.ToString());
+                e.Param("node_id", node_id);
                 e.Param("image_name", image_name);
             }
         }
@@ -665,37 +662,29 @@ namespace Journalism
 
             List<SnippetDetails> snippet_list = new List<SnippetDetails>();
 
-            string snippetDetailsStr = "";
-
-            for (int s = 0; s < Player.StoryScraps.Length; s++) {
+            // first 25 snippets to prevent overflow
+            for (int s = 0; s < Player.StoryScraps.Length && s < 25; s++) {
                 StoryScrapData sData = Assets.Scrap(Player.StoryScraps[s]);
                 string attributeStr = GenerateAttributesString(sData);
                 SnippetDetails newDetails = new SnippetDetails(Player.StoryScraps[s].ToString(), sData.Type, sData.Quality, attributeStr, true);
                 snippet_list.Add(newDetails);
             }
 
-            foreach(SnippetDetails snippet in snippet_list) {
-                snippetDetailsStr += snippet.ToString();
-            }
-
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
 
             foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                if (s.Data == null || m_TargetBreakdown.Slots == null) {
+                    continue;
+                }
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
                     m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString()));
             }
 
-            string layoutDetailsStr = "";
-
-            foreach (LayoutDetails layout in layout_list) {
-                layoutDetailsStr += layout.ToString();
-            }
-
             using (var e = m_Log.NewEvent("open_notebook")) {
-                e.Param("snippet_list", snippetDetailsStr);
-                e.Param("layout", layoutDetailsStr);
+                e.Param("snippet_list", JsonConvert.SerializeObject(snippet_list));
+                e.Param("layout", JsonConvert.SerializeObject(layout_list));
             }
         }
 
@@ -724,16 +713,13 @@ namespace Journalism
 
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
             foreach(StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                if (s.Data == null || m_TargetBreakdown.Slots == null) {
+                    continue;
+                }
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
                     m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString()));
-            }
-
-            string layoutDetailsStr = "";
-
-            foreach (LayoutDetails layout in layout_list) {
-                layoutDetailsStr += layout.ToString();
             }
 
 
@@ -745,7 +731,7 @@ namespace Journalism
             string attributesStr = GenerateAttributesString(slot.Data);
 
             using (var e = m_Log.NewEvent("place_snippet")) {
-                e.Param("layout", layoutDetailsStr);
+                e.Param("layout", JsonConvert.SerializeObject(layout_list));
                 e.Param("location", location);
                 e.Param("snippet_id", snippet_id);
                 e.Param("snippet_type", snippet_type);
@@ -760,18 +746,14 @@ namespace Journalism
 
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
             foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                if (s.Data == null || m_TargetBreakdown.Slots == null) {
+                    continue;
+                }
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
                     m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString()));
             }
-
-            string layoutDetailsStr = "";
-
-            foreach (LayoutDetails layout in layout_list) {
-                layoutDetailsStr += layout.ToString();
-            }
-
 
             int location = slot.Index;
             string snippet_id = slot.Data.Id.ToString();
@@ -781,7 +763,7 @@ namespace Journalism
             string attributesStr = GenerateAttributesString(slot.Data);
 
             using (var e = m_Log.NewEvent("remove_snippet")) {
-                e.Param("layout", layoutDetailsStr);
+                e.Param("layout", JsonConvert.SerializeObject(layout_list));
                 e.Param("location", location);
                 e.Param("snippet_id", snippet_id);
                 e.Param("snippet_type", snippet_type);
@@ -933,9 +915,9 @@ namespace Journalism
             List<StoryScrapQuality> new_quality = GenerateStoryScrapQualityList();
 
             using (var e = m_Log.NewEvent("story_updated")) {
-                e.Param("new_breakdown", new_breakdown.ToString());
-                e.Param("target_breakdown", target_breakdown.ToString());
-                e.Param("new_quality", new_quality.ToString());
+                e.Param("new_breakdown", JsonConvert.SerializeObject(new_breakdown));
+                e.Param("target_breakdown", JsonConvert.SerializeObject(target_breakdown));
+                e.Param("new_quality", JsonConvert.SerializeObject(new_quality));
             }
         }
 
@@ -945,39 +927,29 @@ namespace Journalism
 
             List<SnippetDetails> snippet_list = new List<SnippetDetails>();
 
-            string snippetDetailsStr = "";
-
-            for (int s = 0; s < Player.StoryScraps.Length; s++) {
+            // first 25 to prevent overlow
+            for (int s = 0; s < Player.StoryScraps.Length && s < 25; s++) {
                 StoryScrapData sData = Assets.Scrap(Player.StoryScraps[s]);
                 string attributeStr = GenerateAttributesString(sData);
                 SnippetDetails newDetails = new SnippetDetails(Player.StoryScraps[s].ToString(), sData.Type, sData.Quality, attributeStr, true);
                 snippet_list.Add(newDetails);
             }
 
-            foreach (SnippetDetails snippet in snippet_list) {
-                snippetDetailsStr += snippet.ToString();
-            }
-
-
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
 
             foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                if (s.Data == null || m_TargetBreakdown.Slots == null) {
+                    continue;
+                }
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
                     m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString()));
             }
 
-            string layoutDetailsStr = "";
-
-            foreach (LayoutDetails layout in layout_list) {
-                layoutDetailsStr += layout.ToString();
-            }
-
-
             using (var e = m_Log.NewEvent("story_click")) {
-                e.Param("snippet_list", snippetDetailsStr);
-                e.Param("layout", layoutDetailsStr);
+                e.Param("snippet_list", JsonConvert.SerializeObject(snippet_list));
+                e.Param("layout", JsonConvert.SerializeObject(layout_list));
             }
         }
 
@@ -988,16 +960,17 @@ namespace Journalism
             List<LayoutDetails> layout_list = new List<LayoutDetails>();
 
             foreach (StoryBuilderSlot s in m_LastKnownSlotLayout) {
+                if (s.Data == null || m_TargetBreakdown.Slots == null) {
+                    continue;
+                }
                 layout_list.Add(new LayoutDetails(
                     s.Data.Type,
                     m_TargetBreakdown.Slots[s.Index].Wide,
                     s.Data.Id.ToString())); // schema lists text here, but every other list of layouts uses snippetId
             }
 
-            string layoutDetailsStr = "";
-
-            foreach (LayoutDetails layout in layout_list) {
-                layoutDetailsStr += layout.ToString();
+            using (var e = m_Log.NewEvent("display_published_story")) {
+                e.Param("story_layout", JsonConvert.SerializeObject(layout_list));
             }
         }
 
@@ -1168,8 +1141,6 @@ namespace Journalism
         private string GenerateAttributesString(StoryScrapData snippetData) {
             List<StoryScrapAttribute> snippet_attributes = new List<StoryScrapAttribute>();
 
-            string attributesStr = "";
-
             if ((snippetData.Attributes & StoryScrapAttribute.Facts) != 0) {
                 snippet_attributes.Add(StoryScrapAttribute.Facts);
             }
@@ -1180,11 +1151,7 @@ namespace Journalism
                 snippet_attributes.Add(StoryScrapAttribute.Useful);
             }
 
-            foreach (StoryScrapAttribute attr in snippet_attributes) {
-                attributesStr += attr.ToString() + "\n";
-            }
-
-            return attributesStr;
+            return JsonConvert.SerializeObject(snippet_attributes);
         } 
 
         private List<StoryScrapQuality> GenerateStoryScrapQualityList() {
