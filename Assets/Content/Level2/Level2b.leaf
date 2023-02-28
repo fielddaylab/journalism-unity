@@ -474,7 +474,6 @@ People call out ideas:
 a Shop Local campaign!
 Free hotel stays!
 Volunteers to help flooded businesses with repairs!
-Hmm. So far, these people don't seem <i>totally</i> awful...
 {/img}
 
 $call AdjustStats(Research + 1)
@@ -1058,9 +1057,7 @@ $if StatCheck(Resourceful, 5)
 
     Birdie looks over your shoulder in amazement. 
     {@birdie}Let me know if you ever decide to sell your work.
-    {@birdie}I'd love to hang that photo in my kitchen! 
-    Wow. A week ago you didn't even know how to switch your phone to portrait mode.
-    Looks like there's something to be said for learning on the job. 
+    Wow. Your photography skills are rapidly improving.
 
 $elseif StatCheck(Tech, 5)
     You take a photo of a sandhill crane in the distance, surrounded by debris.
@@ -1071,19 +1068,17 @@ $elseif StatCheck(Tech, 5)
 
     Birdie looks over your shoulder in amazement. 
     {@birdie}Let me know if you ever decide to sell your work.
-    {@birdie}I'd love to hang that photo in my kitchen! 
     Wow. A week ago you didn't even know how to switch your phone to portrait mode.
-    Looks like there's something to be said for learning on the job. 
+    Wow. Your photography skills are rapidly improving.
 
 
 $elseif StatCheck(Trust, 5)
     {img Anim/2b/Mosquito.png, Left}
-    You're too busy swatting at mosquitoes to get any long-distance nature shots... 
-    But a photo of the volunteers would be great, too. 
-    When you ask for permission, the nearest volunteer absolutely geeks out. 
+    You're distracted by the mosquitoes... 
+    But you decide to get a photo of the volunteers. 
+    When you ask for permission, the nearest volunteer absolutely smiles. 
     {/img}
-    {@wetlandvolunteer3}You're that new reporter from New York, right??
-    {@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
+    {@wetlandvolunteer3}You're that new reporter from New York, right?? Go ahead!
     $call SFX(PhotoSnap)
 
     $call GiveSnippet(GoodMarshPhoto-Volunteers)
@@ -1094,9 +1089,6 @@ $else
     Trying to ignore the cloud of bugs, you ask the volunteers for permission to take a photo. 
     {/img}
     {@wetlandvolunteer3}Um, no offense. But we don't trust out-of-towners.
-    {@me}What? I'm not an out-of-towner! 
-    {@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
-    Ugh. Word sure gets around here.  
     At least the plants don't have a problem with being photographed. 
     $call SFX(PhotoSnap)
 
@@ -1113,13 +1105,13 @@ The volunteer is getting ready to head out onto the trail.
 {@wetlandvolunteer1}That depends. You okay with getting your feet wet? 
 
 $HubChoice(JoinHimOnTheHike, "Join him on the trail. Hopefully your gear will be enough to keep you dry.", 0.25)
-$choice MarshMap; Find someone else to talk to. Hiking isn't exactly gonna help you meet your deadline. 
+$choice MarshMap; Move on. Hiking will blow your deadline. 
 
 // Original Name: Talk to volunteer with bag full of seed packets
 :: TalkToVolunteerWithBagFullOfSeedPackets
 
 $if StatCheck(Trust, 4)
-    The volunteer seems to trust you. 
+    The volunteer seems to {stat-name}trust{/stat-name} you. 
     She tells you about her volunteer work: replanting native species.
 
     {@wetlandvolunteer2} My kids love exploring here. It's part of what makes Twin Lakes so magical. 
@@ -1127,7 +1119,7 @@ $if StatCheck(Trust, 4)
     {img Anim/2b/Snake.png, Left}
     {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
     Hooooooly cherry donuts.
-    You move slowly backward and snap a picture, because this seems more professional than running away screaming.
+    You move slowly backward and snap a picture. This seems more professional than running away screaming.
     {/img}
     $call SFX(PhotoSnap)
 
@@ -1140,9 +1132,9 @@ $elseif StatCheck(Resourceful, 5)
     {img Anim/2b/Mosquito.png, Left}
     The volunteer is swatting at mosquitoes, looking frustrated. 
     {@wetlandvolunteer2}Can't believe I forgot my bug spray. 
-    {@me} Oh.. I've got some in my backpack! Here, help yurself.
+    {@me} Oh.. I've got some in my backpack! Help yourself.
     {/img}
-    She accepts the bug spray gratefully and tells you all about her volunteer work: replanting native species. 
+    She accepts gratefully and tells you about her volunteer work: replanting native species. 
     {@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
     {@me}It is pretty nice.... though I could probably do without the snakes. 
     {img Anim/2b/Snake.png, Left}
