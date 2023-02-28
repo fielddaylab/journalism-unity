@@ -20,7 +20,7 @@ $call SetHeaderEnabled(true)
 It's an eerily quiet morning in Twin Lakes. 
 The internet is buzzing about the flood.
 Your breaking news story has gone viral all across the Midwest!
-You might not love Twin Lakes... but you're glad this little cherry-obsessed town is still standing. 
+You're glad this little cherry-obsessed town is still standing. 
 
 $choice GatherFloodGear; Gather flood gear
 $choice GoOutsideAndHelpYourNeighbors; Go outside and help your neighbors
@@ -103,9 +103,9 @@ The sparse cupboards make your stomach grumble. Then you remember!
 In the corner of the fridge is some slightly soggy Emmentaler cheese from the grateful cheese shop owner!
 $call AdjustStats(Endurance + 2)
 $else
-You're struggling to find some not-expired food when a neighbor taps at the front window.
-{@neighbor}Hiya! You wrote that story yesterday, right? 
-{@neighbor}Thanks to you, I got all my stuff out of the basement in time!
+You're staring into an empty fridge when a neighbor taps at the front window.
+{@neighbor}Hiya! I read your story yesterday! 
+{@neighbor}Thanks to you, I got my stuff out of the basement in time!
 {img Anim/2a/LemonLoaf.png, Left}
 He offers you a homemade lemon loaf--a little off-brand for the Cherry Capitol of the Midwest, but still delicious.  
 ...even if it's got a bit of a soggy bottom.
@@ -301,7 +301,7 @@ $choice ScienceStoryMap; Get started
 
 $if FirstVisit()
     $call SetTimeRemaining(3)
-    You miss your college internship, where you worked with a whole team of science reporters.
+    You miss the paper from your last internship, where you worked with a whole team of science reporters.
     {img Anim/2a/CherryPie.png, Left}
     Sure, Twin Lakes has amazing cherry pie.... but at what cost?? 
     {/img}
@@ -462,7 +462,7 @@ $endif
 The DNR person sounds a little distracted, but he's willing to talk!
 {@dnrworker}I'd say this flood had two main causes: 
 {@dnrworker}Extreme rainfall, and less places for water to go. 
-{@dnrworker}This flood has already caused millions of dollars in damages.
+{@dnrworker}This caused millions of dollars in damages.
 {@dnrworker}We need better policies to prevent this kind of disaster in the future.
 
 You want to ask more, but he's getting another call.
@@ -1004,7 +1004,6 @@ $if StatCheck(Social, 4)
 {@me}Yeah, I saw your art installation at the ice cream social last week! 
 {@me}I'm so sorry you got caught in the flood.
 He looks more cheerful now. 
-{@galleryowner}Well, this is my series of paintings on toxic lakewater bacteria, so it's actually sort of fitting.
 {@galleryowner} Guess it couldn't hurt to do a quick interview... 
 
 $HubChoice(InterviewGalleryOwner, "{@me} Okay, let's get started!", 0.5)
@@ -1049,7 +1048,7 @@ She rummages around behind the counter and comes back with a peanut butter and j
 {img Anim/2a/PBandJ.png, Left}
 {@cafeowner}Um, sorry it's not fancy. We're a little low on inventory.
 {@me}No problem. 
-You're not just being polite. This is literally the best PB&J you've ever tasted. 
+You're not just being polite. This is literally the best PB&J you've ever tasted. Must be the cherry jam.
 
 $call AdjustStats(Endurance + 1)
 
@@ -1107,8 +1106,8 @@ $choice DNRMap; Look elsewhere in the DNR
 Wow. Didn't realize this was a campaign speech.   
 $call GiveSnippet(Governor-Impact)
 
-$choice AnythingYoudLikeToSay; Is there anything you'd like to say to the people of Twin Lakes?
-$choice WhatAboutPrevention; What about prevention? Do you have any plans to stop this from happening again? 
+$choice AnythingYoudLikeToSay; Do you have anything else to say to the people of Twin Lakes?
+$choice WhatAboutPrevention; Do you have any plans to stop this from happening again? 
 
 :: AnythingYoudLikeToSay
 {@governor} Of course! I would tell them to stay strong and keep the faith.
@@ -1120,10 +1119,9 @@ $call GiveSnippet(BlandGovernorQuote)
 $choice ScienceStoryMap; Head back outside
 
 :: WhatAboutPrevention
-{@governor} Well... I mean, I'm running the entire state. 
 {@governor} I don't have time to plan a tiny town's flood response. 
-{@governor} But I have complete faith in your local officials!
-Hmm. Still not the best quote, but getting closer... 
+{@governor} But I have faith in your local officials!
+Hmm. Not the best quote... 
 
 $call GiveSnippet(GovernorFaithInLocalOfficials)
 
@@ -1146,15 +1144,13 @@ $choice ScienceStoryMap; Head back outside
 
 :: IThoughtTheyWereTheBackbone
 {@governor} Oh, they absolutely are. The backbone and the heart!
-{@governor} This town deserves all the help we can possibly provide. 
 
-$choice WhatIfLocalOfficialsNeedMoreHelp; So... you'll send more aid if the town needs it? 
-$choice RudeGovernorQuestion; Really? Because it's starting to sound like you're just here for a photo op. 
+$choice WhatIfLocalOfficialsNeedMoreHelp; Will you send more aid if the town needs it? 
+$choice RudeGovernorQuestion; Really? It seems like you're just here for a photo op. 
 
 :: RudeGovernorQuestion
 
 Her smile turns into a glare.  
-{@governor} I can't believe you would say that!
 {@governor} What kind of newspaper is Dionne Richards running out here??
 {@me} You know Dionne?
 {@governor} Oh, of course I know her. I know everybody.
@@ -1238,7 +1234,7 @@ $endif
 :: InterviewGalleryOwner
 He tells you this is his third year running the gallery. 
 {@galleryowner}I put all my savings into this place. I'm not sure how I'm gonna recover.
-{@me}Do you think the city should be responsible for helping business owners? 
+{@me}Should the city be responsible for helping business owners? 
 {@galleryowner}Well, they're the ones who let this happen.
 {@galleryowner}The least they could do is help bail us out. 
 
@@ -1493,7 +1489,7 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 // Original Name: "How can we stop this from happening again?"
 :: HowCanWeStopThisFromHappeningAgain
 {@dnrexpert}Hate to say it, but sandbags aren't going to be enough.
-{@dnrexpert}We need better policies if we want the town to survive.
+{@dnrexpert}We need better policies for the town to survive.
 
 $call GiveSnippet(DNRPreventFromHappeningAgain)
 
@@ -1549,7 +1545,6 @@ $choice DNRMap; Thank him and decide what to do next.
 // Original Name: "What kind of policies?"
 :: WhatKindOfPolicies
 {@dnrexpert}We need regulations to keep the lakes lower.
-{@dnrexpert}Plus, new buildings should be required to include flood prevention measures. 
 
 $call GiveSnippet(PoliciesToPreventFlooding)
 $choice DNRMap; Decide what to do next.

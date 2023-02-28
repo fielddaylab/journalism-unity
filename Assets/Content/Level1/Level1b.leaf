@@ -1048,8 +1048,8 @@ $endif
 
 // Original Name: "When will the situation be under control?"
 :: WhenWillTheSituationBeUnderControl
-{@dnrworker} The situation depends on the amount of rainfall. 
-{@dnrworker} It's supposed to keep raining on and off all day. We're expecting things to get worse before they get better.
+{@dnrworker} It depends on the amount of rainfall. 
+{@dnrworker} It's supposed to keep raining on and off all day. We're expecting things to get worse.
 
 $call GiveSnippet(FloodInfo)
 $choice ArriveAtFloodSite; Thank her for the interview 
