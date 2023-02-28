@@ -23,7 +23,7 @@ $call SetHeaderEnabled(true)
 $call StopAmbience()
 $call Rain($Audio_RainOutsideChill)
 {layout Right}
-Its started to rain.
+It's started to rain.
 {img Anim/1b/Cloud.png, Left}
 It's been sprinkling on and off...
 {/img}
@@ -131,7 +131,7 @@ $call StopRain()
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
 {@mayorbarrysmuckers} Aw, cripes. Not you again!
-{@me} Um... did o something wrong, Mr. Mayor? 
+{@me} Um... did I do something wrong, Mr. Mayor? 
 {@mayorbarrysmuckers} Your latest article! It was full of gripes, complaints...
 {img Anim/3b/TwinLakesStrong.png, Left}
 {@mayorbarrysmuckers} What happened to #TwinLakesStrong?? 
@@ -176,20 +176,20 @@ $choice AcceptStory; On it.
 
 // Accept story
 :: AcceptStory
-$if CityScore() > 2
-    {img-inline Anim/CityScore_A.png}
-$elseif CityScore() == 2
-    {img-inline Anim/CityScore_B.png}
-$elseif CityScore() == 1
-    {img-inline Anim/CityScore_C.png}
-$elseif CityScore() == 0
-    {img-inline Anim/CityScore_D.png}
-$else
-    {img-inline Anim/CityScore_F.png}
-$endif
-{@dionne} Did you see the updated city disaster preparedness score? 
-{@dionne} Our stories could make a difference. 
-{@me} Got it!
+// $if CityScore() > 2
+//     {img-inline Anim/CityScore_A.png}
+// $elseif CityScore() == 2
+//     {img-inline Anim/CityScore_B.png}
+// $elseif CityScore() == 1
+//     {img-inline Anim/CityScore_C.png}
+// $elseif CityScore() == 0
+//     {img-inline Anim/CityScore_D.png}
+// $else
+//     {img-inline Anim/CityScore_F.png}
+// $endif
+// {@dionne} Did you see the updated city disaster preparedness score? 
+// {@dionne} Our stories could make a difference. 
+// {@me} Got it!
 
 $call SetTimeRemaining(4)
 
@@ -1464,7 +1464,7 @@ $choice AskNoraAboutHerResearch; Ask Nora about her research
 // Ask Willa about her quiltwork 
 :: AskWillaAboutTheFlood
 {@willa} Well, I wanted to evacuate. 
-{img Anim/3b/BoxofQuilts.png, Left}
+{img Anim/3b/BoxOfQuilts.png, Left}
 {@willa} But these quilts mean so much to me. And quilting is my livelihood.
 {@willa}That's why Nora's here. She was helping me pack everything up.
 {/img}

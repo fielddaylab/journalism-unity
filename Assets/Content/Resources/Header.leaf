@@ -69,6 +69,7 @@
 #const BG_Limnology = "BG/Limnology.mp4"
 #const BG_FirstStDowntownCleanup = "BG/FirstStDowntownCleanup.mp4"
 #const BG_MainStreet = "BG/StreetV2.mp4"
+#const BG_MainStreetStill = "BG/MainStreet.jpg"
 #const BG_Library = "BG/Library.mp4"
 #const BG_CherryCreekMarsh = "BG/CherryCreekMarsh.mp4"
 #const BG_OperaHouseInt = "BG/RestoredOperaHouseInt.mp4"
@@ -83,6 +84,7 @@
 #const BG_FinalFerrisWheel = "BG/FinalFerrisWheel.mp4"
 #const BG_FinalStreetFestival = "BG/FinalStreetFestival.mp4"
 #const BG_FinalField = "BG/FinalField.mp4"
+#const BG_Credits = "BG/Credits.png"
 
 // Music
 #const Audio_RainyDayInCherryTownWakingDay1 = "Music/rainy day in cherry town (waking up day 1).mp3"

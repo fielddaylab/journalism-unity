@@ -93,18 +93,19 @@ $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone 
 // Original Name: Block her and turn on some Webflix
 :: BlockHerAndTurnOnSomeWebflix
 @tags Endurance, Trust
-Sure, it's a great lead, but you've been working alllll day. 
-And what are the odds of a nature activist named Birdie?? She must be a bot.
+...you've been working alllll day and you're tired. 
+A nature activist named Birdie sounds fake. Must be a bot.
 $choice WatchSomeWebflix; Make popcorn and watch some Webflix
 
 //Watch some Webflix
 :: WatchSomeWebflix
 {img Anim/2b/Popcorn.png, Left}
 You stay up half the night watching Streeterton.
-The next morning, you wake up to a text...
-Make that 3 texts...
-...From your editor. 
+{anim rumble} The next morning, you wake up to a text...
 {/img}
+{anim rumble} Make that 3 texts...
+...From your editor. 
+
 
 $choice ReadYourEditorsMessage; Read messages
 
@@ -112,7 +113,7 @@ $choice ReadYourEditorsMessage; Read messages
 :: AgreeToMeetWithHerInTheMorning
 {img Anim/2b/SnakebiteTrail.png, Left}
 {@birdie}Wonderful! Meet me at the Snakebite Trailhead.
-{@me}Um... I don't really feel good about the name "Snakebite Trail"....
+{@me}Um... I don't feel great about the name "Snakebite Trail"....
 {/img}
 {@birdie}Oh, don't worry, kid. There are only two venomous species around here.
 Oh. How comforting. 
@@ -136,11 +137,11 @@ $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
 {@dionne}Is it true you blocked the director of CRANE on Squawker?
 {img Anim/2b/Squawker.png, Left}
 {@dionne}And made fun of her name???  
-{@dionne}There's a story here, El. Where are you??  
+{@dionne}There's a story here, El. Where are you?? 
+{/img}
 {@me}I'm here. Sorry!! I'll message her now. 
 {@dionne}You're too late. Khalisa's got this one.
 {@dionne}And just a tip for you, rookie: try not to insult your sources. 
-{/img}
 $GameOver("You put getting the dunk over getting the scoop... Better luck next time.")
 
 // Original Name: "Tomorrow morning, 8 a.m."
@@ -287,11 +288,11 @@ $OnceChoice(TalkToCRANEDirector, "Talk to Birdie")
 // Original Name: Talk to CRANE Director
 :: TalkToCRANEDirector
 {@birdie}I'm glad you're here. This situation is urgent.
-{@birdie} More rain is sure to come soon.
+{@birdie} Another storm is forcasted. More rain is on its way.
 {@birdie}If we don't protect our wetlands, Twin Lakes won't survive!
 
 $call GiveSnippet(SeriousWetlands)
-$OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the flood?")
+$OnceChoice(HowIsThatRelatedToTheFlooding, "Why do the wetlands matter?")
 
 // Original Name: "How is that related to the flooding?"
 :: HowIsThatRelatedToTheFlooding
@@ -301,7 +302,7 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the floo
 {/img}
 {@me} Wow... 90%? That seems like a lot. 
 {/img}
-{@player} Do you have a source for that?
+{@me} Do you have a source for that?
 {@birdie} Well, not offhand. I read it somewhere online.
 {img Anim/2b/Crane.png, Left}
 {@birdie} The point is, we need to save our wetlands before it's too late. 
@@ -309,14 +310,14 @@ $call GiveSnippet(WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
 {/img}
 You'll need an expert to verify the numbers. 
-$OnceChoice(WhatDoYouMeanByWetlands, "Can you tell me what you mean by \"wetlands?\"")
-$OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
-$OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands around here?")
+$OnceChoice(WhatDoYouMeanByWetlands, "Tell me about the \"wetlands?\"")
+$OnceChoice(WhatAboutTheLakes, "Aren't the lakes more important?")
+$OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands?")
 
 // Original Name: "Can you tell me what you mean by "wetlands?""
 :: WhatDoYouMeanByWetlands
 She seems irked that you don't know this already.
-{@birdie}Well, isn't it obvious? Wetlands are areas where water covers the soil for at least part of the year. 
+{@birdie}Um... wetlands are areas where water covers the soil most of the year. 
 {@birdie}Literally "wet land." Like Cherry Creek Marsh here. 
 
 $call GiveSnippet(WetlandDefinition)
@@ -334,8 +335,8 @@ $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all of Twin 
 
 $call GiveSnippet(ConnectedWatershed)
 
-$OnceChoice(AreTherePoliciesToProtectWetlands, "Are there any policies to protect wetlands?")
-$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this issue at Town Hall meetings?")
+$OnceChoice(AreTherePoliciesToProtectWetlands, "Are there policies to protect wetlands?")
+$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you talking about this at Town Hall?")
 
 // Original Name: "What happened to the wetlands in Twin Lakes?"
 :: WhatHappenedToTheWetlandsInTwinLakes
@@ -357,7 +358,7 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 Sheesh... tomorrow?? Guess the pressure is on. 
 
 $call GiveSnippet(WetlandPolicy)
-$OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your information?")
+$OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your facts?")
 
 //Have you brought up this issue at Town Hall meetings? 
 :: HaveYouBroughtThisUpAtTownHallMeetings
@@ -405,20 +406,19 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
 $call ActivateStory()
-{@dionne} This is a controversial topic. We don't want to put any false information out there.
-$if CityScore() > 2
-    {img-inline Anim/CityScore_A.png}
-$elseif CityScore() == 2
-    {img-inline Anim/CityScore_B.png}
-$elseif CityScore() == 1
-    {img-inline Anim/CityScore_C.png}
-$elseif CityScore() == 0
-    {img-inline Anim/CityScore_D.png}
-$else
-    {img-inline Anim/CityScore_F.png}
-$endif
-{@dionne} Here's the most recent disaster preparedness score for the city. 
-{@dionne} Our stories can make a difference - for better or worse.
+{@dionne} This is a controversial topic so be careful.
+// $if CityScore() > 2
+//     {img-inline Anim/CityScore_A.png}
+// $elseif CityScore() == 2
+//     {img-inline Anim/CityScore_B.png}
+// $elseif CityScore() == 1
+//     {img-inline Anim/CityScore_C.png}
+// $elseif CityScore() == 0
+//     {img-inline Anim/CityScore_D.png}
+// $else
+//     {img-inline Anim/CityScore_F.png}
+// $endif
+// {@dionne} Here's the most recent disaster preparedness score for the city. 
 
 $choice MarshMap; Got it. Thanks. 
 
@@ -474,7 +474,6 @@ People call out ideas:
 a Shop Local campaign!
 Free hotel stays!
 Volunteers to help flooded businesses with repairs!
-Hmm. So far, these people don't seem <i>totally</i> awful...
 {/img}
 
 $call AdjustStats(Research + 1)
@@ -803,7 +802,7 @@ $choice DecideWhatToDoNext; Plan your next move
 
 //Go to City Hall
 :: GoToCityHall
-// TODO: city hall image here
+{bg $BG_MainStreetStill}
 Wow. You can't believe your luck! 
 {img Anim/2b/HotDog.png, Left}
 You're halfway to city hall when you see Mayor Smuckers on the street, unwrapping a hot dog from its foil wrapper.
@@ -1058,9 +1057,7 @@ $if StatCheck(Resourceful, 5)
 
     Birdie looks over your shoulder in amazement. 
     {@birdie}Let me know if you ever decide to sell your work.
-    {@birdie}I'd love to hang that photo in my kitchen! 
-    Wow. A week ago you didn't even know how to switch your phone to portrait mode.
-    Looks like there's something to be said for learning on the job. 
+    Wow. Your photography skills are rapidly improving.
 
 $elseif StatCheck(Tech, 5)
     You take a photo of a sandhill crane in the distance, surrounded by debris.
@@ -1071,19 +1068,17 @@ $elseif StatCheck(Tech, 5)
 
     Birdie looks over your shoulder in amazement. 
     {@birdie}Let me know if you ever decide to sell your work.
-    {@birdie}I'd love to hang that photo in my kitchen! 
     Wow. A week ago you didn't even know how to switch your phone to portrait mode.
-    Looks like there's something to be said for learning on the job. 
+    Wow. Your photography skills are rapidly improving.
 
 
 $elseif StatCheck(Trust, 5)
     {img Anim/2b/Mosquito.png, Left}
-    You're too busy swatting at mosquitoes to get any long-distance nature shots... 
-    But a photo of the volunteers would be great, too. 
-    When you ask for permission, the nearest volunteer absolutely geeks out. 
+    You're distracted by the mosquitoes... 
+    But you decide to get a photo of the volunteers. 
+    When you ask for permission, the nearest volunteer absolutely smiles. 
     {/img}
-    {@wetlandvolunteer3}You're that new reporter from New York, right??
-    {@wetlandvolunteer3}I'm such a fan of your work! Go right ahead!
+    {@wetlandvolunteer3}You're that new reporter from New York, right?? Go ahead!
     $call SFX(PhotoSnap)
 
     $call GiveSnippet(GoodMarshPhoto-Volunteers)
@@ -1094,9 +1089,6 @@ $else
     Trying to ignore the cloud of bugs, you ask the volunteers for permission to take a photo. 
     {/img}
     {@wetlandvolunteer3}Um, no offense. But we don't trust out-of-towners.
-    {@me}What? I'm not an out-of-towner! 
-    {@wetlandvolunteer3}Really? Because I heard you're gonna move to Smoke City as soon as they'll hire you. 
-    Ugh. Word sure gets around here.  
     At least the plants don't have a problem with being photographed. 
     $call SFX(PhotoSnap)
 
@@ -1113,13 +1105,13 @@ The volunteer is getting ready to head out onto the trail.
 {@wetlandvolunteer1}That depends. You okay with getting your feet wet? 
 
 $HubChoice(JoinHimOnTheHike, "Join him on the trail. Hopefully your gear will be enough to keep you dry.", 0.25)
-$choice MarshMap; Find someone else to talk to. Hiking isn't exactly gonna help you meet your deadline. 
+$choice MarshMap; Move on. Hiking will blow your deadline. 
 
 // Original Name: Talk to volunteer with bag full of seed packets
 :: TalkToVolunteerWithBagFullOfSeedPackets
 
 $if StatCheck(Trust, 4)
-    The volunteer seems to trust you. 
+    The volunteer seems to {stat-name}trust{/stat-name} you. 
     She tells you about her volunteer work: replanting native species.
 
     {@wetlandvolunteer2} My kids love exploring here. It's part of what makes Twin Lakes so magical. 
@@ -1127,7 +1119,7 @@ $if StatCheck(Trust, 4)
     {img Anim/2b/Snake.png, Left}
     {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
     Hooooooly cherry donuts.
-    You move slowly backward and snap a picture, because this seems more professional than running away screaming.
+    You move slowly backward and snap a picture. This seems more professional than running away screaming.
     {/img}
     $call SFX(PhotoSnap)
 
@@ -1140,9 +1132,9 @@ $elseif StatCheck(Resourceful, 5)
     {img Anim/2b/Mosquito.png, Left}
     The volunteer is swatting at mosquitoes, looking frustrated. 
     {@wetlandvolunteer2}Can't believe I forgot my bug spray. 
-    {@me} Oh.. I've got some in my backpack! Here, help yurself.
+    {@me} Oh.. I've got some in my backpack! Help yourself.
     {/img}
-    She accepts the bug spray gratefully and tells you all about her volunteer work: replanting native species. 
+    She accepts gratefully and tells you about her volunteer work: replanting native species. 
     {@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
     {@me}It is pretty nice.... though I could probably do without the snakes. 
     {img Anim/2b/Snake.png, Left}

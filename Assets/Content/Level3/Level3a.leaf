@@ -47,18 +47,18 @@ $call SetLocation("CityHall")
 {@dionne} El, I need you to do some digging into that flood shelter. 
 {@dionne} Look for issues that people need to know about. 
 $call ActivateStory()
-$if CityScore() > 2
-    {img-inline Anim/CityScore_A.png}
-$elseif CityScore() == 2
-    {img-inline Anim/CityScore_B.png}
-$elseif CityScore() == 1
-    {img-inline Anim/CityScore_C.png}
-$elseif CityScore() == 0
-    {img-inline Anim/CityScore_D.png}
-$else
-    {img-inline Anim/CityScore_F.png}
-$endif
-{@dionne} Here's an update on the City Disaster Preparedness. You can make a difference with these stories.
+// $if CityScore() > 2
+//     {img-inline Anim/CityScore_A.png}
+// $elseif CityScore() == 2
+//     {img-inline Anim/CityScore_B.png}
+// $elseif CityScore() == 1
+//     {img-inline Anim/CityScore_C.png}
+// $elseif CityScore() == 0
+//     {img-inline Anim/CityScore_D.png}
+// $else
+//     {img-inline Anim/CityScore_F.png}
+// $endif
+// {@dionne} Here's an update on the City Disaster Preparedness. You can make a difference with these stories.
 {@me} On it boss.
 {img Anim/3a/Envelope.png, Left}
 {@dionne} And El... I sent over your letter of recommendation.

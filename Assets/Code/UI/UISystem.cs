@@ -33,6 +33,7 @@ namespace Journalism.UI {
         [SerializeField] private CanvasGroup m_SolidBGFader = null;
         [SerializeField] private GameOverWindow m_GameOver = null;
         [SerializeField] private TitleWindow m_Title = null;
+        [SerializeField] private CreditsWindow m_Credits = null;
         [SerializeField] private TutorialArrow m_TutorialArrow = null;
         [SerializeField] private AnimatedElement m_CheckpointNotification = null;
         [SerializeField] private float m_CheckpointNotificationOffscreenPos = -300;
@@ -65,7 +66,8 @@ namespace Journalism.UI {
                 .Register(GameEvents.GameOverClose, OnNoLongerNeedSolidBG)
                 .Register(GameEvents.RequireStoryPublish, OnRequirePublish, this)
                 .Register(GameEvents.LevelCheckpoint, OnCheckpointSaved, this)
-                .Register(GameEvents.LoadTitleScreen, OnTitleScreenLoad, this);
+                .Register(GameEvents.LoadTitleScreen, OnTitleScreenLoad, this)
+                .Register(GameEvents.RollCredits, OnRollCredits, this);
 
             m_HeaderUnderFader.gameObject.SetActive(false);
             m_HeaderUnderFader.alpha = 0;
@@ -213,6 +215,10 @@ namespace Journalism.UI {
 
         private void OnTitleScreenLoad() {
             m_Title.Show();
+        }
+
+        private void OnRollCredits() {
+            m_Credits.Show();
         }
 
         #endregion // Handlers
@@ -396,6 +402,11 @@ namespace Journalism.UI {
             Game.UI.PopInputMask();
             yield return 0.2f;
             yield return Game.Scripting.DisplayNewspaper();
+        }
+
+        [LeafMember("RollCredits"), Preserve]
+        static public void RollCredits() {
+            Game.Events.Dispatch(GameEvents.RollCredits);
         }
 
         #endregion // Leaf

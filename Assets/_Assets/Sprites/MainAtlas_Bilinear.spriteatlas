@@ -85,6 +85,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 58bd53e6ae6a9ca4b903cd4a3b575639, type: 3}
   - {fileID: 21300000, guid: 48b2f1b7346efcf42942b5766b9a2106, type: 3}
   - {fileID: 21300000, guid: ac7df418fb00b094baf405cecda134b0, type: 3}
+  - {fileID: 21300000, guid: 6def0909e52ad424b9a330e0f79dd9ef, type: 3}
   - {fileID: 21300000, guid: e9b7af09a3ec2f54bb23ccce5480167d, type: 3}
   - {fileID: 21300000, guid: fb4aec490a752b041b214a02b9055a10, type: 3}
   - {fileID: 21300000, guid: 5ddf5a6977022c646847e4cb928a030d, type: 3}
@@ -123,6 +124,7 @@ SpriteAtlas:
   - Back
   - Time
   - Gradient100_Down
+  - headlines-high-water
   - ThickX
   - StorySlotArrow
   - PointArrow

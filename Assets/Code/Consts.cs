@@ -22,11 +22,13 @@ namespace Journalism {
         static public readonly StringHash32 StoryEvalEnd = "level:story-eval-end";
         static public readonly StringHash32 TutorialBegin = "level:tutorial-begin";
         static public readonly StringHash32 TutorialEnd = "level:tutorial-end";
+        static public readonly StringHash32 RollCredits = "level:roll-credits";
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments
         static public readonly StringHash32 ChoiceOptionsUpdating = "save:options-updating"; // StringHash32[] locIds
         static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated";
         static public readonly StringHash32 ChoicesClearing = "save:choices-clearing";
         static public readonly StringHash32 ChoiceCompleted = "save:choice-completed";
+        static public readonly StringHash32 PrepareTitleReturn = "title:prepare-return";
         static public readonly StringHash32 LoadTitleScreen = "title:loading";
         static public readonly StringHash32 TitleErrorReceived = "title:error";
         static public readonly StringHash32 TryNewName = "title:new-name";
