@@ -107,8 +107,8 @@ You're staring into an empty fridge when a neighbor taps at the front window.
 {@neighbor}Hiya! I read your story yesterday! 
 {@neighbor}Thanks to you, I got my stuff out of the basement in time!
 {img Anim/2a/LemonLoaf.png, Left}
-He offers you a homemade lemon loaf--a little off-brand for the Cherry Capitol of the Midwest, but still delicious.  
-...even if it's got a bit of a soggy bottom.
+He offers you a homemade lemon loaf--a little off-brand for the Cherry Capitol of the Midwest.  
+As you bite into it, you taste cherries on the bottom. 
 $call AdjustStats(Endurance + 1, Trust + 1)
 {/img}
 $endif
@@ -253,8 +253,8 @@ $choice AnswerPhone; Answer phone
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call StopRain()
-Okay, so maybe it was slightly antisocial to rush back inside.
-But things were getting a little too real out there. 
+Okay, so maybe it was slightly anti-{stat-name}social{/stat-name} to rush back inside.
+But you need to save energy and build your {stat-name}endurance{/stat-name}
 $call AdjustStats(Social - 1)
 $call AdjustStats(Endurance + 1)
 
@@ -462,8 +462,7 @@ $endif
 The DNR person sounds a little distracted, but he's willing to talk!
 {@dnrworker}I'd say this flood had two main causes: 
 {@dnrworker}Extreme rainfall, and less places for water to go. 
-{@dnrworker}This caused millions of dollars in damages.
-{@dnrworker}We need better policies to prevent this kind of disaster in the future.
+
 
 You want to ask more, but he's getting another call.
 Going in person might've gotten you more info... but at least this was quicker. 
@@ -571,7 +570,7 @@ $endif
 $if HasTime(0.5)
     $choice ScienceStoryMap; Leave Main Street
     $HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
-    $HubChoice(MainStreetCafe, "Go into the cafe with a ''PLEASE COME IN, WE'RE OPEN!!'' sign in the window", -1)
+    $HubChoice(MainStreetCafe, "Enter the cafe. The sign says ''PLEASE COME IN, WE'RE OPEN!!'', -1)
     $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
@@ -807,11 +806,11 @@ $choice TakeAPhotoAnyway; Take a photo anyway--he probably won't even notice
 $endif
 
 $if !StatCheck(Tech, 3)
-Uh oh. Your phone screen is on the fritz and you have no idea how to fix it! 
+Uh oh. Your camera screen is on the fritz and you have no idea how to fix it! 
 
-Maybe it's water damage? Low battery? Some kind of 100-year-flood curse? 
+Maybe it's water damage? Some kind of 100-year-flood curse? 
 
-You snap a few random photos and hope for the best.
+You point and snap a few photos and hope for the best.
 $call SFX(PhotoSnap)
 $call GiveSnippet(BlurryDowntownRecovery)
 $endif
@@ -1057,7 +1056,7 @@ $choice InterviewCafeOwner; Ask for a quick interview while you eat
 
 // Original Name: Help with her computer
 :: HelpWithHerComputer
-The cafe owner is struggling with a glitchy website that looks like it was made with Angelfire.
+The cafe owner is struggling with a glitchy website.
 {@cafeowner}Ugh. I don't know why they make this so impossible!
 
 $if StatCheck(Tech, 4)
@@ -1233,10 +1232,7 @@ $endif
 // Original Name: Interview Gallery Owner
 :: InterviewGalleryOwner
 He tells you this is his third year running the gallery. 
-{@galleryowner}I put all my savings into this place. I'm not sure how I'm gonna recover.
-{@me}Should the city be responsible for helping business owners? 
-{@galleryowner}Well, they're the ones who let this happen.
-{@galleryowner}The least they could do is help bail us out. 
+{@galleryowner}I put all my savings into this place. I'm not sure if I'll recover.
 
 $call GiveSnippet(ArtBusinessImpact)
 
@@ -1251,12 +1247,12 @@ $endif
 
 
 $if !Visited(AreYouWorriedAboutMoreRainComing)
-$choice AreYouWorriedAboutMoreRainComing; Are you worried about more rain coming?
+$choice AreYouWorriedAboutMoreRainComing; Are you worried the next storm that's coming?
 $endif
 
 
 $if !Visited(HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp)
-$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How do you think it'll impact Twin Lakes if the flooding keeps up?
+$choice HowDoYouThinkItllImpactTwinLakesIfTheFloodingKeepsUp; How will it impact Twin Lakes if next storm brings more flooding?
 $endif
 
 
@@ -1438,7 +1434,7 @@ $endif
 
 // Original Name: Thanks, plus university contact
 :: ThanksPlusUniversityContact
-{@cafeowner}No problem. And since you helped me out, I've got a tip for ya! 
+{@cafeowner}No problem. Oh...I've got a tip for ya! 
 {@cafeowner}You oughta talk to my sister, Sarah McCloud--she's an expert on lakes and flooding. 
 
 She gives you the address for the Department of Limnology. 

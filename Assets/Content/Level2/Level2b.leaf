@@ -93,18 +93,19 @@ $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone 
 // Original Name: Block her and turn on some Webflix
 :: BlockHerAndTurnOnSomeWebflix
 @tags Endurance, Trust
-Sure, it's a great lead, but you've been working alllll day. 
-And what are the odds of a nature activist named Birdie?? She must be a bot.
+...you've been working alllll day and you're tired. 
+A nature activist named Birdie sounds fake. Must be a bot.
 $choice WatchSomeWebflix; Make popcorn and watch some Webflix
 
 //Watch some Webflix
 :: WatchSomeWebflix
 {img Anim/2b/Popcorn.png, Left}
 You stay up half the night watching Streeterton.
-The next morning, you wake up to a text...
-Make that 3 texts...
-...From your editor. 
+{anim rumble} The next morning, you wake up to a text...
 {/img}
+{anim rumble} Make that 3 texts...
+...From your editor. 
+
 
 $choice ReadYourEditorsMessage; Read messages
 
@@ -112,7 +113,7 @@ $choice ReadYourEditorsMessage; Read messages
 :: AgreeToMeetWithHerInTheMorning
 {img Anim/2b/SnakebiteTrail.png, Left}
 {@birdie}Wonderful! Meet me at the Snakebite Trailhead.
-{@me}Um... I don't really feel good about the name "Snakebite Trail"....
+{@me}Um... I don't feel great about the name "Snakebite Trail"....
 {/img}
 {@birdie}Oh, don't worry, kid. There are only two venomous species around here.
 Oh. How comforting. 
@@ -136,11 +137,11 @@ $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
 {@dionne}Is it true you blocked the director of CRANE on Squawker?
 {img Anim/2b/Squawker.png, Left}
 {@dionne}And made fun of her name???  
-{@dionne}There's a story here, El. Where are you??  
+{@dionne}There's a story here, El. Where are you?? 
+{/img}
 {@me}I'm here. Sorry!! I'll message her now. 
 {@dionne}You're too late. Khalisa's got this one.
 {@dionne}And just a tip for you, rookie: try not to insult your sources. 
-{/img}
 $GameOver("You put getting the dunk over getting the scoop... Better luck next time.")
 
 // Original Name: "Tomorrow morning, 8 a.m."
@@ -287,11 +288,11 @@ $OnceChoice(TalkToCRANEDirector, "Talk to Birdie")
 // Original Name: Talk to CRANE Director
 :: TalkToCRANEDirector
 {@birdie}I'm glad you're here. This situation is urgent.
-{@birdie} More rain is sure to come soon.
+{@birdie} Another storm is forcasted. More rain is on its way.
 {@birdie}If we don't protect our wetlands, Twin Lakes won't survive!
 
 $call GiveSnippet(SeriousWetlands)
-$OnceChoice(HowIsThatRelatedToTheFlooding, "How are wetlands related to the flood?")
+$OnceChoice(HowIsThatRelatedToTheFlooding, "Why do the wetlands matter?")
 
 // Original Name: "How is that related to the flooding?"
 :: HowIsThatRelatedToTheFlooding
@@ -309,14 +310,14 @@ $call GiveSnippet(WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
 {/img}
 You'll need an expert to verify the numbers. 
-$OnceChoice(WhatDoYouMeanByWetlands, "Can you tell me what you mean by \"wetlands?\"")
-$OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
-$OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands around here?")
+$OnceChoice(WhatDoYouMeanByWetlands, "Tell me about the \"wetlands?\"")
+$OnceChoice(WhatAboutTheLakes, "Aren't the lakes more important?")
+$OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands?")
 
 // Original Name: "Can you tell me what you mean by "wetlands?""
 :: WhatDoYouMeanByWetlands
 She seems irked that you don't know this already.
-{@birdie}Well, isn't it obvious? Wetlands are areas where water covers the soil for at least part of the year. 
+{@birdie}Um... wetlands are areas where water covers the soil most of the year. 
 {@birdie}Literally "wet land." Like Cherry Creek Marsh here. 
 
 $call GiveSnippet(WetlandDefinition)
@@ -334,8 +335,8 @@ $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all of Twin 
 
 $call GiveSnippet(ConnectedWatershed)
 
-$OnceChoice(AreTherePoliciesToProtectWetlands, "Are there any policies to protect wetlands?")
-$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this issue at Town Hall meetings?")
+$OnceChoice(AreTherePoliciesToProtectWetlands, "Are there policies to protect wetlands?")
+$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you talking about this at Town Hall?")
 
 // Original Name: "What happened to the wetlands in Twin Lakes?"
 :: WhatHappenedToTheWetlandsInTwinLakes
@@ -357,7 +358,7 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 Sheesh... tomorrow?? Guess the pressure is on. 
 
 $call GiveSnippet(WetlandPolicy)
-$OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your information?")
+$OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your facts?")
 
 //Have you brought up this issue at Town Hall meetings? 
 :: HaveYouBroughtThisUpAtTownHallMeetings
@@ -405,7 +406,7 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
 $call ActivateStory()
-{@dionne} This is a controversial topic. We don't want to put any false information out there.
+{@dionne} This is a controversial topic so be careful.
 // $if CityScore() > 2
 //     {img-inline Anim/CityScore_A.png}
 // $elseif CityScore() == 2
@@ -418,7 +419,6 @@ $call ActivateStory()
 //     {img-inline Anim/CityScore_F.png}
 // $endif
 // {@dionne} Here's the most recent disaster preparedness score for the city. 
-{@dionne} Our stories can make a difference - for better or worse.
 
 $choice MarshMap; Got it. Thanks. 
 
