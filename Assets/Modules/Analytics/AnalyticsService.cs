@@ -101,12 +101,6 @@ namespace Journalism
 
         private OGDLog m_Log;
 
-        /* Examples
-        [NonSerialized] private StringHash32 m_CurrentJobHash = null;
-        [NonSerialized] private string m_CurrentJobName = NoActiveJobId;
-        [NonSerialized] private string m_PreviousJobName = NoActiveJobId;
-        */
-
         private bool m_FeedbackInProgress;
         private StringHash32 m_LastKnownNodeId;
         private string m_LastKnownSpeaker;
@@ -142,13 +136,6 @@ namespace Journalism
             Game.Events.Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
                 .Register<TextChoice>(GameEvents.ChoiceCompleted, OnChoiceCompleted, this)
-            // also handles LogHubChoiceClick
-            // also handles LogTimeChoiceClick
-            // also handles LogLocationChoiceClick
-            // also handles LogOnceChoiceClick
-            // also handles LogContinueChoiceClick
-            // also handles LogActionChoiceClick
-            // also handles LogFallbackchoiceClick
                 .Register<TextNodeParams>(GameEvents.OnPrepareLine, OnPrepareLine, this)
                 .Register<PlayerData>(GameEvents.StatsRefreshed, OnStatsRefreshed, this)
                 .Register<StringHash32[]>(GameEvents.ChoiceOptionsUpdating, OnChoiceOptionsUpdating)
@@ -589,6 +576,8 @@ namespace Journalism
 
         // stat update
         private void LogStatsUpdated(int[] adjustments) {
+            UpdateGameState();
+
             Debug.Log("[Analytics] event: stat_update");
 
             string node_id = m_LastKnownNodeId.ToString();
@@ -639,6 +628,8 @@ namespace Journalism
 
         // change location
         private void LogLocationUpdated(StringHash32 locId) {
+            UpdateGameState();
+
             Debug.Log("[Analytics] event: change_location");
 
             string new_location_id = Assets.Location(locId).Name;
@@ -984,6 +975,8 @@ namespace Journalism
 
         // start level
         private void LogLevelStarted() {
+            UpdateGameState();
+
             Debug.Log("[Analytics] event: start_level");
 
             m_TargetBreakdown = Assets.CurrentLevel.Story;
@@ -1165,6 +1158,15 @@ namespace Journalism
             }
 
             return qualities;
+        }
+
+        private void UpdateGameState() {
+            string location = Player.Data.LocationId.IsEmpty ? "N/A" : Assets.Location(Player.Data.LocationId).Name;
+            m_Log.BeginGameState();
+                m_Log.GameStateParam("level", Assets.CurrentLevel.LevelIndex);
+                m_Log.GameStateParam("current_stats", JsonConvert.SerializeObject(Player.Data.StatValues));
+                m_Log.GameStateParam("location", location);
+            m_Log.SubmitGameState();
         }
 
         #endregion // Helpers
