@@ -330,8 +330,20 @@ $if HasTime(0.25)
         $HubChoice(DepartmentOfLimnology, "Visit the Department of Limnology", 0.5, "Limnology")
     $endif
 
-    $choice PhoneContacts; Check your phone contacts for someone to call
+    $set local:_callsAvailable = false
+    $if !Visited(PhoneCallDNRHeadquarters)
+        $set local:_callsAvailable = true
+    $elseif Visited(JenkinssComputer), !Visited(PhoneCallWynneD.StormeDNR)
+        $set local:_callsAvailable = true
+    $elseif !Visited(PhoneCallCityHall)
+        $set local:_callsAvailable = true
+    $elseif Visited(AskAroundForItsOwner), !Visited(PhoneCallMayorsPersonalNumber)
+        $set local:_callsAvailable = true
+    $endif
 
+    $if local:_callsAvailable
+        $choice PhoneContacts; Check your phone contacts for someone to call
+    $endif
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
@@ -544,8 +556,9 @@ $if HasTime(0.5)
     $HubChoice(CallYourNeighborAndSeeIfItsHers, "Call your neighbor and see if it's hers", 0.25)
     $HubChoice(AskAroundForItsOwner, "Ask around for its owner", 0.5)
 $else
-    Uh oh. There's no time to chase it - your story is due!
-        $choice TimeToAssembleTheScienceStory; Assemble the science story
+    You never thought so much of your life as a journalist would revolve around chickens.
+    Right now you must write your story and leave her to find her own way.
+    $choice TimeToAssembleTheScienceStory; Assemble the science story
 $endif
 {/img}
 
@@ -1106,8 +1119,9 @@ $choice DNRMap; Look elsewhere in the DNR
 Wow. Didn't realize this was a campaign speech.   
 $call GiveSnippet(Governor-Impact)
 
-$choice AnythingYoudLikeToSay; Do you have anything else to say to the people of Twin Lakes?
-$choice WhatAboutPrevention; Do you have any plans to stop this from happening again? 
+$choice ScienceStoryMap; End interview
+$HubChoice(AnythingYoudLikeToSay, "Do you have anything else to say to the people of Twin Lakes?", 0.5)
+$HubChoice(WhatAboutPrevention, "Do you have any plans to stop this from happening again?", 0.5)
 
 :: AnythingYoudLikeToSay
 {@governor} Of course! I would tell them to stay strong and keep the faith.
@@ -1453,8 +1467,9 @@ $choice ScienceStoryMap; Decide where to go next
 
 $call GiveSnippet(DNRRainfallInfo)
 
-$choice WhatDoYouMeanLessPlacesForTheWaterToGo; Why was this flood so much worse than in 1957?
-$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+$choice DepartmentOfLimnology; End interview
+$HubChoice(WhatDoYouMeanLessPlacesForTheWaterToGo, "Why was this flood so much worse than in 1957?", 0.5)
+$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.5)
 
 // Original Name: "What do you mean, less places for the water to go?"
 :: WhatDoYouMeanLessPlacesForTheWaterToGo
@@ -1464,8 +1479,9 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 
 $call GiveSnippet(DNRLessPlacesForWater)
 
-$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
-$choice WhyAreTheLakesBeingKeptSoHigh; Why are the lakes being kept so high?
+$choice DepartmentOfLimnology; End interview
+$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.5)
+$HubChoice(WhyAreTheLakesBeingKeptSoHigh, "Why are the lakes being kept so high?", 0.5)
 
 // Original Name: "How much financial damage has the flood caused?"
 :: HowMuchFinancialDamageHasTheFloodCaused

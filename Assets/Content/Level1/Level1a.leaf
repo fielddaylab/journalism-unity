@@ -34,6 +34,7 @@ $call SetLocation("Apartment")
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 $call Rain($Audio_RainInside)
+$set editor.impressed.1a = true
 {layout Right}
 {anim rumble} You wake up to your phone buzzing.
 It takes a few seconds to remember where you are...
@@ -260,9 +261,7 @@ Wow. This flood might be more serious than you thought.
 {img Anim/RushingWater.png, Left}
 You don't have time to stop for any interviews
 --you took too long loading up your bike.
-But you can snag a photo or two!
-
-$choice TakeSomePhotos; Take some photos
+$goto SnagPhotosLowTime
 
 // Original Name: I'm in a hurry, there's no need to bring the bike!
 :: ImInAHurryTheresNoNeedToBringTheBike
@@ -273,7 +272,6 @@ $ActionChoice(Stop to look around.)
 Cars are stranded everywhere--including the famous Twin Lakes Cherrymobile!
 {/img}
 A baker is stacking bags of flour in front of her shop.
-
 
 $choice HelpTheBaker; Talk to the baker   
 $choice TakeSomePhotos; Take a photo of the stranded Cherrymobile 
@@ -287,13 +285,17 @@ Wow... it's awful out here.
 Pastries are floating down the street, and cars are stranded...
 {img Anim/1a/CherryMobile.png}
 Including the famous Twin Lakes Cherrymobile!
+$goto SnagPhotosLowTime
+
+:: SnagPhotosLowTime
 You could snag some photos, but your editor is texting you.
 {/img}
 {layout Right}
 {@dionne} El, where are you?? 
 {@dionne} We need to get this story out, ASAP. 
 
-$choice ArriveAtWork; Rush to work 
+$choice ArriveAtWork; The boss is impatient. Skip the picture and head straight to work.
+$choice TakeSomePhotos; Stop to take picture, risking that your editor doesn't {stat-name}trust{/stat-name} you yet.
 
 // Original Name: Arrive at work.
 :: ArriveAtWork
@@ -310,8 +312,10 @@ $if Visited(HelpHer)
 $elseif Visited(RoundUpYourGear)
     {@dionne} I like your gear.
     {@dionne} The swim goggles are a nice touch.
-$else
+$elseif editor.impressed.1a
     {@dionne} You made it. I'm impressed.
+$else
+    {@dionne} Well, you made it. Eventually.
 $endif
 
 $ActionChoice(Where is everybody??)
@@ -405,19 +409,25 @@ $choice ArriveAtWork; Arrive at work.
 {layout Right}
 
 $if StatCheck(Tech, 2)
-Good thing you thought to grab all this {stat-name}tech{/stat-name} gear.
-The conditions are awful, but you use your tripod and rain-sleeve to get a quality shot.
-$call SFX(PhotoSnap)
-$call GiveSnippet(AbandonedCherrymobile)
-
+    Good thing you thought to grab all this {stat-name}tech{/stat-name} gear.
+    The conditions are awful, but you use your tripod and rain-sleeve to get a quality shot.
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(AbandonedCherrymobile)
 $else
-{layout Right}
-You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in your apartment.
-Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
-$call SFX(PhotoSnap)
-$call GiveSnippet(BlurryCars)
+    {layout Right}
+    You snap a few blurry pictures, thinking wistfully of the tripod and rainsleeve buried somewhere in your apartment.
+    Too bad you didn't grab more of your fancy {stat-name}tech{/stat-name} gear. 
+    $call SFX(PhotoSnap)
+    $call GiveSnippet(BlurryCars)
 $endif
 
+$if !Visited(ImInAHurryTheresNoNeedToBringTheBike)
+    // player took photos instead of heading straight to work after editor texts
+    Your editor isn't going to be impressed by your lateness.
+    But you think snagging the picture was worth it.
+    $call AdjustStats(Trust - 1)
+    $set editor.impressed.1a = false
+$endif
 
 $choice ArriveAtWork; Arrive at work.
 
