@@ -387,9 +387,13 @@ namespace Journalism {
         }
 
         static public IEnumerator AnimateStatsRays(Image raysImg, Vector2 offset, float duration) {
+            raysImg.gameObject.SetActive(true);
+            Debug.Log("[StatsRise] before duration");
             raysImg.enabled = true;
             yield return duration;
+            Debug.Log("[StatsRise] after duration");
             raysImg.enabled = false;
+            yield return null;
         }
 
         /// <summary>
@@ -611,10 +615,17 @@ namespace Journalism {
             SimpleSpline spline = Spline.Simple(line.transform.position, targetPos, RNG.Instance.NextFloat(0.5f, 0.6f), new Vector3(RNG.Instance.NextFloat(-4, 4), 0));
 
             yield return Routine.Combine(
-                line.transform.MoveAlong(spline, transitionTime).Ease(Curve.CubeIn),
+                line.transform.MoveAlong(spline, transitionTime).Ease(Curve.CubeOut),
                 line.transform.ScaleTo(finalScale, transitionTime),
-                line.transform.RotateTo(line.transform.localEulerAngles.z + rotationAmt, transitionTime, Axis.Z, Space.Self, AngleMode.Absolute)
+                line.transform.RotateTo(line.transform.localEulerAngles.z + rotationAmt, transitionTime, Axis.Z, Space.Self, AngleMode.Absolute),
+                statsButtonTransform.ScaleTo(1.2f, .2f).DelayBy(transitionTime - 0.2f)
                 );
+
+            yield return Routine.Combine(
+                line.Group.FadeTo(0, 0.1f)
+                );
+
+            yield return statsButtonTransform.ScaleTo(1f, .2f);
 
             line.transform.localScale = Vector2.zero;
         }

@@ -81,9 +81,8 @@ namespace Journalism.UI {
             return m_FaderState || m_FaderRoutine;
         }
 
-        public void ShowStatsRays() {
-            StatsRays.gameObject.SetActive(true);
-            m_StatsRaysAnim.Replace(this, GameText.AnimateStatsRays(StatsRays, Vector2.zero, 0.3f)).DelayBy(0.35f);
+        public IEnumerator ShowStatsRays() {
+            yield return m_StatsRaysAnim.Replace(this, GameText.AnimateStatsRays(StatsRays, Vector2.zero, 0.3f)).DelayBy(0.55f);
         }
 
         public HeaderButton FindButton(StringHash32 id) {

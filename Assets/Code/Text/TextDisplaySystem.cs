@@ -511,8 +511,10 @@ namespace Journalism
             textDisplay.m_SpaceHelper.CanvasSpace = line.AnimElement.RectTransform;
 
             yield return 1.25f; // delay so player can read the increase
-            yield return GameText.AnimateStatsRise(line, textDisplay, 0.75f, 0.1f, 80);
-            Game.UI.Header.ShowStatsRays();
+            yield return Routine.Combine(
+                GameText.AnimateStatsRise(line, textDisplay, 0.75f, 0.5f, 80),
+                Game.UI.Header.ShowStatsRays()
+            );
         }
 
         public IEnumerator DisplayNewspaper() {
