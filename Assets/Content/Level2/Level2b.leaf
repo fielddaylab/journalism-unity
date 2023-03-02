@@ -242,8 +242,8 @@ Ben doesn't seem to hear you. Looks like this is how small-town legends get star
 $call AdjustStats(Trust + 1)
 $elseif Visited(MainStreetCafe)
 You meet Khalisa and Ben at the Goldfish Cafe. 
-The cafe owner is delighted to see you again. 
-{@cafeowner}I loved your article! Thanks to you, I've had lots of volunteers offering to help me. 
+The cafe owner is happy to see you again. 
+{@cafeowner}Thanks to your article, I've had lots of volunteers offering to help me. 
 {img Anim/2b/CoffeeQuiche.png, Left}
 {@cafeowner}Here's a quiche and some coffee for you and your friends, free of charge. 
 $call AdjustStats(Trust + 1)
@@ -252,11 +252,10 @@ You meet Khalisa and Ben at the Goldfish Cafe.
 {@Khalisa} Have you gotten any sleep?
 {@me} Just a little. 
 {@me} Yawn.
-The owner is delighted to meet you. 
+The owner is happy to meet you. 
 {@cafeowner} You're El Benjamin, right? I read your story about the flood!
 {@cafeowner} I can tell you really care about this town.
 {img Anim/2b/CoffeeQuiche.png, Left}
-{@cafeowner} Here's a quiche and some coffee, free of charge!
 You wave to your friends as you head out. 
 
 $endif
@@ -286,9 +285,7 @@ $OnceChoice(TalkToCRANEDirector, "Talk to Birdie")
 :: TalkToCRANEDirector
 {@birdie}I'm glad you're here. This situation is urgent.
 {@birdie} Another storm is forcasted. More rain is on its way.
-{@birdie}If we don't protect our wetlands, Twin Lakes won't survive!
 
-$call GiveSnippet(SeriousWetlands)
 $OnceChoice(HowIsThatRelatedToTheFlooding, "Why do the wetlands matter?")
 
 // Original Name: "How is that related to the flooding?"
@@ -317,7 +314,6 @@ She seems irked that you don't know this already.
 {@birdie}Um... wetlands are areas where water covers the soil most of the year. 
 {@birdie}Literally "wet land." Like Cherry Creek Marsh here. 
 
-$call GiveSnippet(WetlandDefinition)
 $call AdjustStats(Trust - 1)
 
 $OnceChoice(WhatAboutTheLakes, "What about the lakes? Aren't they more important?")
@@ -327,13 +323,10 @@ $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all of Twin 
 :: WhatAboutTheLakes
 
 {@birdie}The lakes are important, too. 
-{@birdie}But everyone talks about the lakes. They forget about the wetlands.
 {@birdie}The whole watershed is connected. Every part has its role. 
 
-$call GiveSnippet(ConnectedWatershed)
-
 $OnceChoice(AreTherePoliciesToProtectWetlands, "Are there policies to protect wetlands?")
-$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you talking about this at Town Hall?")
+$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought this up at Town Hall?")
 
 // Original Name: "What happened to the wetlands in Twin Lakes?"
 :: WhatHappenedToTheWetlandsInTwinLakes
@@ -341,7 +334,6 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you talking about this
 {img Anim/2b/Bulldozer.png, Left}
 {@birdie}The town keeps growing, and our wetlands keep shrinking. 
 
-$call GiveSnippet(WhatHappenedToWetlands) // here?
 {/img}
 $OnceChoice(AreTherePoliciesToProtectWetlands,"Are there any policies to protect wetlands?")
 $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this issue at Town Hall meetings?")
@@ -354,19 +346,15 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 
 Sheesh... tomorrow?? Guess the pressure is on. 
 
-$call GiveSnippet(WetlandPolicy)
 $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your facts?")
 
 //Have you brought up this issue at Town Hall meetings? 
 :: HaveYouBroughtThisUpAtTownHallMeetings
 {@birdie}I've tried. No one listens. 
-{@birdie}The mayor always moves on to the next topic so quickly! 
 {@birdie}The final vote happens tomorrow. 
 {@birdie}That's why I need your help.
 
 Sheesh... tomorrow?? Guess the pressure is on. 
-
-$call GiveSnippet(WetlandTownHallMeeting)
 
 $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back up your information?")
 
@@ -388,7 +376,6 @@ But this doesn't seem like the best time to bring this up.
 {@birdie}But there's so much work to do here.  
 {/img}
 
-$call GiveSnippet(AwfulSparkProject)
 $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor with an update")
 
 // Original Name: Call your editor
@@ -396,12 +383,14 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 @checkpoint
 {clear-text}
 {bg $BG_CherryCreekMarsh}
+{img Anim/2b/IntriguedEditor.png, Left}
 {@dionne} What do you think, El? 
 {@me} I think there's a story here. 
 {@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
 {@dionne}Then we need to fast-track this story.
 {@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
+{/img}
 $call ActivateStory()
 {@dionne} This is a controversial topic so be careful.
 // $if CityScore() > 2
@@ -415,7 +404,7 @@ $call ActivateStory()
 // $else
 //     {img-inline Anim/CityScore_F.png}
 // $endif
-// {@dionne} Here's the most recent disaster preparedness score for the city. 
+// {@SS} Here's the most recent disaster preparedness score for the city. 
 
 $choice MarshMap; Got it. Thanks. 
 
@@ -1101,7 +1090,7 @@ The volunteer is getting ready to head out onto the trail.
 {@me}Excuse me. Do you have time for an interview?
 {@wetlandvolunteer1}That depends. You okay with getting your feet wet? 
 
-$HubChoice(JoinHimOnTheHike, "Join him on the trail. Hopefully your gear will be enough to keep you dry.", 0.25)
+$HubChoice(JoinHimOnTheHike, "Join him on the trail. Hopefully you can keep dry.", 0.25)
 $choice MarshMap; Move on. Hiking will blow your deadline. 
 
 // Original Name: Talk to volunteer with bag full of seed packets
@@ -1111,8 +1100,8 @@ $if StatCheck(Trust, 4)
     The volunteer seems to {stat-name}trust{/stat-name} you. 
     She tells you about her volunteer work: replanting native species.
 
-    {@wetlandvolunteer2} My kids love exploring here. It's part of what makes Twin Lakes so magical. 
-    {@me}It is pretty nice.... though I could probably do without the snakes. 
+    {@wetlandvolunteer2} My kids love exploring here. It's of what makes Twin Lakes magical. 
+    {@me}It is nice.... but I could do without the snakes. 
     {img Anim/2b/Snake.png, Left}
     {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
     Hooooooly cherry donuts.
@@ -1120,8 +1109,6 @@ $if StatCheck(Trust, 4)
     {/img}
     $call SFX(PhotoSnap)
 
-    $call GiveSnippet(Volunteer-ImportanceOfWetlands)
-    $call GiveSnippet(SnakeAnecdote)
     $call GiveSnippet(GreatSnakePhoto)
     $choice MarshMap; Decide what to do next 
 
@@ -1141,8 +1128,6 @@ $elseif StatCheck(Resourceful, 5)
     {/img}
     $call SFX(PhotoSnap)
 
-    $call GiveSnippet(Volunteer-ImportanceOfWetlands)
-    $call GiveSnippet(SnakeAnecdote)
     $call GiveSnippet(GreatSnakePhoto)
     $choice MarshMap; Decide what to do next 
 
@@ -1387,9 +1372,8 @@ $endif
 {img Anim/2b/Golf.png, Left}
 {@wetlandvolunteer1}It's a golf course now. 28 holes, and not a speck of wildlife.
 {/img}
-
 $call GiveSnippet(MarshLoss)
-$call GiveSnippet(MarshPollution)
+
 $choice MarshMap; Thank him for his time 
 
 // Original Name: Ask her about the wetlands
