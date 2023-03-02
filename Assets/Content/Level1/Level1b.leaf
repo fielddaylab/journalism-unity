@@ -930,23 +930,27 @@ $endif
 {layout Left}
 
 $if StatCheck(Social, 3)
-The deli owner helps you plan a safer route.
-Seems your {stat-name}social{/stat-name} cred is going up a little. 
-{@deliowner}So... you're heading <i>toward</i> downtown??
-{@deliowner}You know it's flooded, right? The Gazette just posted a breaking news update! 
-{@me}Uh, yeah. I heard. 
-{@deliowner} Here. Have a free sandwich for the road. Be careful out there, kid. 
-$call AdjustStats(Research + 1, Resourceful + 1)
+    The deli owner helps you plan a safer route.
+    Seems your {stat-name}social{/stat-name} cred is going up a little. 
+    {@deliowner}So... you're heading <i>toward</i> downtown??
+    {@deliowner}You know it's flooded, right? The Gazette just posted a breaking news update! 
+    {@me}Uh, yeah. I heard. 
+    {@deliowner} Here. Have a free sandwich for the road. Be careful out there, kid. 
+    $call AdjustStats(Research + 1, Resourceful + 1)
 $else
-You could use the deli owner's help, but he's too busy giving you the side-eye.  
-{@deliowner}Buy something if you wanna stick around, kid. 
-{@deliowner}This place is for paying customers only. 
-You'd need a little more {stat-name}social{/stat-name} cred for him to just let you hang out here.
-You buy the cheapest thing on the menu--a slice of day-old cherry loaf. 
-Then you pull up the flood map on your phone. 
-With a little bit of {stat-name}research{/stat-name}, you're able to plan a safe route downtown! 
-$call AdjustStats(Research + 1)
+    You could use the deli owner's help, but he's too busy giving you the side-eye.  
+    {@deliowner}Buy something if you wanna stick around, kid. 
+    {@deliowner}This place is for paying customers only. 
+    You'd need a little more {stat-name}social{/stat-name} cred for him to just let you hang out here.
+    You buy the cheapest thing on the menu--a slice of day-old cherry loaf. 
+    Then you pull up the flood map on your phone. 
+    With a little bit of {stat-name}research{/stat-name}, you're able to plan a safe route downtown! 
+    $call AdjustStats(Research + 1)
 $endif
+
+$call DecreaseTime(0.25)
+That detour cost you 15 minutes.
+It's annoying, but at least you aren't working in a cubicle.
 $choice ArriveAtFloodSite; Arrive at the Twin Lakes dam 
 
 // Original Name: Eject: Just keep swimming...

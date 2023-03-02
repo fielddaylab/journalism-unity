@@ -388,11 +388,8 @@ namespace Journalism {
 
         static public IEnumerator AnimateStatsRays(Image raysImg, Vector2 offset, float duration) {
             raysImg.gameObject.SetActive(true);
-            Debug.Log("[StatsRise] before duration");
-            raysImg.enabled = true;
             yield return duration;
-            Debug.Log("[StatsRise] after duration");
-            raysImg.enabled = false;
+            raysImg.gameObject.SetActive(false);
             yield return null;
         }
 

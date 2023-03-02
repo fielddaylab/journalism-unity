@@ -67,7 +67,7 @@ namespace Journalism.UI {
                     m_StatsEffectAnim.Stop();
                     TimeEffect.gameObject.SetActive(false);
                     StatsEffect.gameObject.SetActive(false);
-                    StatsRays.gameObject.SetActive(false);
+                    StatsRays.enabled = false;
                 });
             }
 
@@ -75,6 +75,8 @@ namespace Journalism.UI {
                 .Register<int[]>(GameEvents.StatsUpdated, OnStatsUpdated, this)
                 .Register(GameEvents.LevelStarted, OnLevelStarted, this)
                 .Register<TableKeyPair>(GameEvents.VariableUpdated, OnVariableChanged, this);
+
+            StatsRays.gameObject.SetActive(false);
         }
 
         public bool AnyOpen() {
