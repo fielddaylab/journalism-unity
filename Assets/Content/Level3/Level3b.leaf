@@ -555,17 +555,10 @@ $choice GoToSandbaggingStation; Decide what to do next
 
 //Ask to take photo
 :: AskPermissionToTakePhoto
-$if StatCheck(Trust, 5)
 {layout Left}
 To your surprise, everyone is happy to let you snap a photo of them working!
 $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFillingStationPhoto)
-$else 
-Seems like some of these folks still don't trust you.
-You manage to snag a great photo... but two of the workers ask for their faces to be blurred out.
-$call SFX(PhotoSnap)
-$call GiveSnippet(BlurredFacesFillingStationPhoto)
-$endif 
 
 $CheckFinalConverge()
 

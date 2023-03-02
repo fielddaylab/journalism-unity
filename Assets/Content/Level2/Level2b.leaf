@@ -380,7 +380,6 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 
 // Original Name: Call your editor
 :: CallYourEditorAboutWetlandStory
-@checkpoint
 {clear-text}
 {bg $BG_CherryCreekMarsh}
 {img Anim/2b/IntriguedEditor.png, Left}
@@ -411,6 +410,7 @@ $choice MarshMap; Got it. Thanks.
 
 // Original Name: Marsh Map
 :: MarshMap
+@checkpoint
 {bg $BG_CherryCreekMarsh}
 $call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_RuralFrogs)
@@ -429,6 +429,7 @@ $if HasTime(0.5)
     $HubChoice(ReturnToTheDepartmentOfLimnology, "Visit the Department of Limnology", 0.5, "Limnology")
     $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting", 0.5, "OperaHouse")
 $else
+    Time to compile that big story on the wetlands!
     $goto WetlandsStoryConstruction
 $endif
 
@@ -658,25 +659,25 @@ $choice DecideWhatToDoNext; Leave the opera house
 $if !HasTime(0.25)
     You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
-$elseif Visited(ReturnToTheDepartmentOfLimnology)
+$elseif Visited(ReturnToTheDepartmentOfLimnology), Visited(GoToCityHall)
     $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite), Visited(CallTheMayor)
         $if Visited(SparkProjectMeeting)
             // player has time but has expended all options
-            You have just enough time to compile your story!
+            You've been pretty thorough here! All that's left is to work on your story.
             $choice WetlandsStoryConstruction; Compile your story
         $elseif Visited(CallTheSparkProject)
             // player has time but has expended all options
-            You have just enough time to compile your story!
+            You've been pretty thorough here! All that's left is to work on your story.
             $choice WetlandsStoryConstruction; Compile your story
         $endif
     $else
         $if Visited(SparkProjectMeeting)
             // player has time but has expended all options
-            You have just enough time to compile your story!
+            You've been pretty thorough here! All that's left is to work on your story.
             $choice WetlandsStoryConstruction; Compile your story
         $elseif Visited(CallTheSparkProject)
             // player has time but has expended all options
-            You have just enough time to compile your story!
+            You've been pretty thorough here! All that's left is to work on your story.
             $choice WetlandsStoryConstruction; Compile your story
         $endif
     $endif
@@ -1017,7 +1018,6 @@ $choice DecideWhatToDoNext; Leave City Hall and plan your next move
 :: WetlandsStoryConstruction
 
 $if !HasTime(0.5)
-    Time to compile that big story on the wetlands!
     $set storyType = "Investigation"
     $set snippetLimit = 6
     $set destination = "TO BE CONTINUED"
@@ -1214,7 +1214,7 @@ Come to think of it, maybe you shouldn't have led with the evil-business angle.
 
 $choice CallTheSparkProject; Call back and try again 
 $choice DecideWhatToDoNext; Plan your next move 
-$choice WetlandsStoryConstruction; Wetlands Story Construction
+$choice WetlandsStoryConstruction; Compile your story
 
 // Original Name: Start compiling anyway.
 :: StartCompilingAnyway
@@ -1541,7 +1541,7 @@ Looks like it's a bit of a touchy subject.
 
 $call GiveSnippet(BusinessScaredOfALittleWater)
 $choice DecideWhatToDoNext; Decide what to do next
-$choice WetlandsStoryConstruction; Wetlands Story Construction 
+$choice WetlandsStoryConstruction; Compile your story
 
 // Original Name: "Did you do anything to reduce the flood risk?"
 :: DoYouHaveAPlanToReduceFloodRisk
@@ -1560,7 +1560,7 @@ You try to ask more questions, but he makes an excuse and hangs up.
 
 $call GiveSnippet(AnnoyedBusiness)
 $choice DecideWhatToDoNext; Decide what to do next 
-$choice WetlandsStoryConstruction; Wetlands Story Construction
+$choice WetlandsStoryConstruction; Compile your story
 
 :: STORYEVALUATION
 $call RunPublish()
