@@ -578,10 +578,14 @@ $call StopRain()
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
+$elseif Visited(TalkToManWithDog), Visited(AskToInterviewTheShelterCoordinator), Visited(TakePhotosOfShelter)
+      Looks like you've already done everything you can here.
+      $choice FloodShelterChoices; Decide what to do next.
+$else
+      $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
+      $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
+      $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 $endif
-$HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
-$HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
-$HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
 
 //Take some photos of the shelter
 :: TakePhotosOfShelter
@@ -1118,6 +1122,7 @@ $endif
 
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
+{clear-text}
 $call SetLocation("SeniorApts")
 {bg $BG_SeniorCitizenApts}
 $call Music($Audio_SolemnWaters)
@@ -1336,7 +1341,7 @@ $endif
 $if !Visited(CallDisabilityRightsExpertAtLocalCollege)
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at local college", 0.25, "")
 $endif 
-      $HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
+$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
 $if !Visited(MeetWithLocalVet)
       $if VetContact == true
             $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "Downtown")
