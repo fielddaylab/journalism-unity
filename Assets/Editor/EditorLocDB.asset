@@ -235,6 +235,9 @@ MonoBehaviour:
     - Id: Label.Loading
       Content: Loading...
       Exposed: 0
+    - Id: Label.boot.prompt
+      Content: click anywhere to continue
+      Exposed: 0
     - Id: Map.Apartment
       Content: Apartment
       Exposed: 0
@@ -578,11 +581,11 @@ MonoBehaviour:
     - Path: Label
       RecordStart: 22
     - Path: Map
-      RecordStart: 34
+      RecordStart: 35
     - Path: Title
-      RecordStart: 51
+      RecordStart: 52
     - Path: Char
-      RecordStart: 57
+      RecordStart: 58
     BasePath: Char
     Dirty: 0
   - Name: stats

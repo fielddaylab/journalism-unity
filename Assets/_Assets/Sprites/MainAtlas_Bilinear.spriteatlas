@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c0093ff28a1119346a4df66361c0ed17, type: 3}
   - {fileID: 21300000, guid: f746f2031973bdb4587a279ebc548704, type: 3}
   - {fileID: 21300000, guid: 49665413db1e1d84cb59245271b435cf, type: 3}
+  - {fileID: 21300000, guid: a01f8b83f4b91dd43b48819143fcf4af, type: 3}
   - {fileID: 21300000, guid: a4bb5ff349a448c44a99e13478f70e43, type: 3}
   - {fileID: 21300000, guid: 863d051417f2ff7429b1a919f8062be7, type: 3}
   - {fileID: 21300000, guid: c84281f42d83cfd4b87ba1cf0caad0ba, type: 3}
@@ -111,6 +112,7 @@ SpriteAtlas:
   - ShoddyBox
   - Close
   - Stats
+  - square
   - Notes
   - CircleGradient0
   - notebook
