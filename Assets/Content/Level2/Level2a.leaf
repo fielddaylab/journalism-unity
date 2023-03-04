@@ -631,6 +631,8 @@ $endif
 
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheGovernorInHallway
+@checkpoint
+{bg $BG_DNRSite}
 {layout Left}
 As you're leaving, you literally run into a lady who looks vaguely familiar.
 {img Anim/2a/Governor.png, Left}
