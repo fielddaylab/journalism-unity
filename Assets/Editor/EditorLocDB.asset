@@ -238,6 +238,18 @@ MonoBehaviour:
     - Id: Label.boot.prompt
       Content: click anywhere to continue
       Exposed: 0
+    - Id: Label.title.newGame
+      Content: New Game
+      Exposed: 0
+    - Id: Label.title.resumeGame
+      Content: Resume Game
+      Exposed: 0
+    - Id: Label.title.playGame
+      Content: Play Game
+      Exposed: 0
+    - Id: Label.title.resumeGame2
+      Content: Resume Game
+      Exposed: 0
     - Id: Map.Apartment
       Content: Apartment
       Exposed: 0
@@ -581,11 +593,11 @@ MonoBehaviour:
     - Path: Label
       RecordStart: 22
     - Path: Map
-      RecordStart: 35
+      RecordStart: 39
     - Path: Title
-      RecordStart: 52
+      RecordStart: 56
     - Path: Char
-      RecordStart: 58
+      RecordStart: 62
     BasePath: Char
     Dirty: 0
   - Name: stats

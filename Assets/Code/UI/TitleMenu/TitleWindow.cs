@@ -14,19 +14,23 @@ namespace Journalism.UI
         #region Inspector
 
         [Header("Title")]
-        [SerializeField] private GameObject m_HubPage;
-        [SerializeField] private Button m_HubPlayButton;
-        [SerializeField] private Button m_HubContinueButton;
-        [SerializeField] private Button m_HubOptionsButton;
+        [SerializeField] private RectTransform m_BG;
+        [SerializeField] private float m_TransitionTime;
+
+        [SerializeField] private CanvasGroup m_HubPage;
+        [SerializeField] private Button m_HubNewGameButton;
+        [SerializeField] private Button m_HubResumeGameButton;
 
         [Space(10)]
-        [SerializeField] private GameObject m_NewPage;
+        [SerializeField] private CanvasGroup m_NewPage;
+        [SerializeField] private RectTransform m_NewPageTransform;
         [SerializeField] private Button m_NewBackButton;
         [SerializeField] private TMP_Text m_NewNameText;
         [SerializeField] private Button m_NewPlayButton;
 
         [Space(10)]
-        [SerializeField] private GameObject m_ContinuePage;
+        [SerializeField] private CanvasGroup m_ContinuePage;
+        [SerializeField] private RectTransform m_ContinuePageTransform;
         [SerializeField] private Button m_ContinueBackButton;
         [SerializeField] private TMP_InputField m_ContinueNameText;
         [SerializeField] private Button m_ContinuePlayButton;
@@ -48,9 +52,8 @@ namespace Journalism.UI
 
             m_LoadedFromPlaythrough = false;
 
-            m_HubPlayButton.onClick.AddListener(OnHubPlayButtonClicked);
-            m_HubContinueButton.onClick.AddListener(OnHubContinueButtonClicked);
-            m_HubOptionsButton.onClick.AddListener(OnHubOptionsButtonClicked);
+            m_HubNewGameButton.onClick.AddListener(OnHubPlayButtonClicked);
+            m_HubResumeGameButton.onClick.AddListener(OnHubContinueButtonClicked);
 
             m_NewBackButton.onClick.AddListener(OnNewBackButtonClicked);
             m_NewPlayButton.onClick.AddListener(OnNewPlayButtonClicked);
@@ -58,7 +61,7 @@ namespace Journalism.UI
             m_ContinueBackButton.onClick.AddListener(OnContinueBackButtonClicked);
             m_ContinuePlayButton.onClick.AddListener(OnContinuePlayButtonClicked);
 
-            m_HubPage.SetActive(true);
+            m_HubPage.alpha = 1;
 
             Game.Events.Register<string>(GameEvents.NewNameGenerated, OnNewNameGenerated, this)
                 .Register<string>(GameEvents.ContinueNameRetrieved, OnContinueNameRetrieved, this)
@@ -73,9 +76,9 @@ namespace Journalism.UI
         protected override void OnShow(bool inbInstant) {
             base.OnShow(inbInstant);
 
-            m_HubPage.SetActive(true);
-            m_NewPage.SetActive(false);
-            m_ContinuePage.SetActive(false);
+            m_HubPage.alpha = 1;
+            m_NewPage.alpha = 0;
+            m_ContinuePage.alpha = 0;
 
             // if player returns to title menu from game, start at continue screen
             if (m_LoadedFromPlaythrough) {
@@ -88,30 +91,53 @@ namespace Journalism.UI
         }
 
         private void OnHubPlayButtonClicked() {
-            m_NewPlayButton.interactable = false;
-            m_NewPage.SetActive(true);
+            Routine.Start(HubNewGameTransition());
+        }
 
-            m_HubPage.SetActive(false);
+        private IEnumerator HubNewGameTransition() {
+            m_NewPlayButton.interactable = false;
+            m_NewPage.alpha = 1;
+
+            m_HubPage.alpha = 0;
+
+            yield return Routine.Combine(
+                m_BG.AnchorPosTo(-273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_NewPageTransform.AnchorPosTo(-91, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
+                );
 
             Game.Events.Dispatch(GameEvents.TryNewName);
         }
 
         private void OnHubContinueButtonClicked() {
-            m_ContinuePage.SetActive(true);
+            Routine.Start(HubContinueGameTransition());
+        }
 
-            m_HubPage.SetActive(false);
+        private IEnumerator HubContinueGameTransition() {
+            m_ContinuePage.alpha = 1;
+
+            m_HubPage.alpha = 0;
+
+            yield return Routine.Combine(
+                m_BG.AnchorPosTo(-273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_ContinuePageTransform.AnchorPosTo(-91, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
+                );
 
             Game.Events.Dispatch(GameEvents.TryContinueName);
         }
 
-        private void OnHubOptionsButtonClicked() {
-            // not implemented
+        private void OnNewBackButtonClicked() {
+            Routine.Start(NewBackButtonTransition());
         }
 
-        private void OnNewBackButtonClicked() {
-            m_HubPage.SetActive(true);
+        private IEnumerator NewBackButtonTransition() {
+            m_HubPage.alpha = 1;
 
-            m_NewPage.SetActive(false);
+            m_NewPage.alpha = 0;
+
+            yield return Routine.Combine(
+                m_BG.AnchorPosTo(273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_NewPageTransform.AnchorPosTo(564, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
+                );
         }
 
         private void OnNewPlayButtonClicked() {
@@ -119,9 +145,18 @@ namespace Journalism.UI
         }
 
         private void OnContinueBackButtonClicked() {
-            m_HubPage.SetActive(true);
+            Routine.Start(ContinueBackButtonTransition());
+        }
 
-            m_ContinuePage.SetActive(false);
+        private IEnumerator ContinueBackButtonTransition() {
+            m_HubPage.alpha = 1;
+
+            m_ContinuePage.alpha = 0;
+
+            yield return Routine.Combine(
+                m_BG.AnchorPosTo(273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_ContinuePageTransform.AnchorPosTo(564, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
+                );
         }
 
         private void OnContinuePlayButtonClicked() {
