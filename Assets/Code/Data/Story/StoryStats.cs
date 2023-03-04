@@ -104,6 +104,8 @@ namespace Journalism {
                 stats.Score = StoryScore.Bad;
             }
 
+            Game.Events.Dispatch(GameEvents.StatsRefreshed, data);
+
             return stats;
         }
     }

@@ -609,7 +609,7 @@ namespace Journalism {
             Transform statsButtonTransform = Game.UI.Header.FindButton("Stats").transform;
             targetPos = statsButtonTransform.position;
 
-            SimpleSpline spline = Spline.Simple(line.transform.position, targetPos, RNG.Instance.NextFloat(0.5f, 0.6f), new Vector3(RNG.Instance.NextFloat(-4, 4), 0));
+            SimpleSpline spline = Spline.Simple(line.transform.position, targetPos, RNG.Instance.NextFloat(0.5f, 0.6f), new Vector3(RNG.Instance.NextFloat(-5, 5), 0));
 
             yield return Routine.Combine(
                 line.transform.MoveAlong(spline, transitionTime).Ease(Curve.CubeOut),
@@ -693,7 +693,7 @@ namespace Journalism {
         /// <summary>
         /// Populates the contents of a given choice.
         /// </summary>
-        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, float timeCost, MapMarker choiceMarker, TextStyles.StyleData style, uint choiceType) {
+        static public void PopulateChoice(TextChoice choice, StringSlice textString, Variant targetId, float timeCost, MapMarker choiceMarker, TextStyles.StyleData style, uint choiceType, StringHash32 locationId) {
             Assert.True(choice.gameObject.activeInHierarchy, "TextChoice must be active before calling PopulateTextLine");
 
             textString = StripQuotes(textString);
@@ -704,6 +704,7 @@ namespace Journalism {
 
             choice.TargetId = targetId;
             choice.ChoiceType = choiceType;
+            choice.LocationId = locationId;
             choice.TimeCost = Stats.HoursToTimeUnits(Mathf.Max(0, timeCost));
             choice.Selected = false;
 
@@ -822,7 +823,7 @@ namespace Journalism {
                     TextChoice choiceButton = btnState.Choice.Object;
                     if (choiceButton.Selected) {
                         choice.Choose(choiceButton.TargetId);
-                        Game.Events.Dispatch(GameEvents.ChoiceCompleted, btnState.Choice.Object.ChoiceType);
+                        Game.Events.Dispatch(GameEvents.ChoiceCompleted, btnState.Choice.Object);
                         break;
                     }
                 }
@@ -919,11 +920,11 @@ namespace Journalism {
                 }
                 if (isDefaultChoice) {
                     // generic text click
-                    Game.Events.Dispatch(GameEvents.TextClicked, new TextNodeParams("", "", ""));
+                    Game.Events.Dispatch(GameEvents.TextClicked);
                 }
                 else {
                     // TODO: continue choice (player dialogue), or single choice
-                    Game.Events.Dispatch(GameEvents.ChoiceCompleted, button.ChoiceType);
+                    Game.Events.Dispatch(GameEvents.ChoiceCompleted, button);
 
                 }
             }

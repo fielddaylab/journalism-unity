@@ -511,12 +511,12 @@ MonoBehaviour:
   m_AppId: JOURNALISM
   m_AppVersion: 1.0
   m_Firebase:
-    ApiKey: 
-    ProjectId: 
-    StorageBucket: 
-    MessagingSenderId: 
-    AppId: 
-    MeasurementId: 
+    ApiKey: AIzaSyCwCeSzm8E-zz99GIAL70R4LDRjbthJr30
+    ProjectId: journalism-a3fbb
+    StorageBucket: journalism-a3fbb.appspot.com
+    MessagingSenderId: 449376229201
+    AppId: 1:449376229201:web:4e74fdbb5f9184010aa570
+    MeasurementId: G-9NSF8HY7H7
 --- !u!1 &8242933497971727063
 GameObject:
   m_ObjectHideFlags: 0

@@ -125,7 +125,7 @@ namespace Journalism
             this.m_ImageThoughtBG.gameObject.SetActive(true);
             this.m_ImagePortraitBG.gameObject.SetActive(false);
 
-            Game.Events.Dispatch(GameEvents.ShowPopupImage);
+            Game.Events.Dispatch(GameEvents.ShowPopupImage, evtData);
 
             yield return HandleImageOrMap(evtData, context);
         }
@@ -147,7 +147,7 @@ namespace Journalism
             this.m_BaseLayer.AltColumn.RectTransform.SetSizeDelta(m_DefaultMapDims);
             this.m_Border.gameObject.SetActive(true); // enable border
 
-            Game.Events.Dispatch(GameEvents.OpenChoiceMap);
+            Game.Events.Dispatch(GameEvents.OpenChoiceMap, evtData);
 
             yield return HandleImageOrMap(evtData, context);
         }
@@ -208,7 +208,7 @@ namespace Journalism
             GameText.AdjustComputedLocations(m_CurrentLayer.Text, 1);
             yield return GameText.AnimateLocations(m_CurrentLayer.Text, 1);
             GameText.ClearOverflowLines(m_CurrentLayer.Text);
-            Game.Events.Dispatch(GameEvents.DisplayBreakdownDialog, Player.StoryStatistics);
+            Game.Events.Dispatch(GameEvents.DisplayBreakdownDialog);
             yield return 0.2f;
 
             // Quality
@@ -562,6 +562,7 @@ namespace Journalism
             yield return m_ImpactLayout.Root.AnchorPosTo(0, 0.5f, Axis.Y).Ease(Curve.CubeOut);
             yield return 0.2f;
             yield return StoryText.AnimateFeedback(m_ImpactLayout);
+            Game.Events.Dispatch(GameEvents.StoryImpactDisplayed, m_ImpactLayout.Items);
             yield return GameText.WaitForDefaultNext(m_CurrentLayer.Choices, Assets.Style(GameText.Characters.Action), TextAnchor.LowerRight, false);
             yield return m_ImpactLayout.Root.AnchorPosTo(660, 0.5f, Axis.Y).Ease(Curve.BackIn);
             m_ImpactLayout.gameObject.SetActive(false);
