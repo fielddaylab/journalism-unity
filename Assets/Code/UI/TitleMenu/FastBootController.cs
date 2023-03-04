@@ -14,14 +14,6 @@ using Journalism.UI;
 
 namespace Aqua {
     public class FastBootController : MonoBehaviour {
-
-        #if USE_JSLIB
-
-        [DllImport("__Internal")]
-        static private extern void FastBoot_Initialize();
-
-        #endif // USE_JSLIB
-
         private enum ReadyPhase {
             AudioClick,
             Ready
@@ -77,10 +69,6 @@ namespace Aqua {
             if (m_ReadyPhase != ReadyPhase.AudioClick) {
                 yield return null;
             }
-            
-            #if USE_JSLIB
-            FastBoot_Initialize();
-            #endif // USE_JSLIB
 
             if (BootAudio != null) {
                 BootAudio.Play();
