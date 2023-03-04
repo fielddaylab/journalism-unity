@@ -107,6 +107,21 @@ location:
 :: Loading
 Loading...
 
+:: boot.prompt
+click anywhere to continue
+
+:: title.newGame
+New Game
+
+:: title.resumeGame
+Resume Game
+
+:: title.playGame
+Play Game
+
+:: title.resumeGame2
+Resume Game
+
 # basePath Map
 
 :: Apartment

@@ -358,7 +358,6 @@ namespace Journalism {
                 s_Current.StoryScrapInventory.Add(scrapId);
                 Log.Msg("[Player] Added story scrap '{0}'!", scrapId);
                 Game.Events.Dispatch(GameEvents.InventoryUpdated, scrapId);
-                Game.Events.Dispatch(GameEvents.SnippetReceived);
 
                 return true;
             }

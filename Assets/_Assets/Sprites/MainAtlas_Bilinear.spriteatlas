@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c0093ff28a1119346a4df66361c0ed17, type: 3}
   - {fileID: 21300000, guid: f746f2031973bdb4587a279ebc548704, type: 3}
   - {fileID: 21300000, guid: 49665413db1e1d84cb59245271b435cf, type: 3}
+  - {fileID: 21300000, guid: a01f8b83f4b91dd43b48819143fcf4af, type: 3}
   - {fileID: 21300000, guid: a4bb5ff349a448c44a99e13478f70e43, type: 3}
   - {fileID: 21300000, guid: 863d051417f2ff7429b1a919f8062be7, type: 3}
   - {fileID: 21300000, guid: c84281f42d83cfd4b87ba1cf0caad0ba, type: 3}
@@ -93,11 +94,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a10e8fe9fd6fbd347b87d1f493b29f39, type: 3}
   - {fileID: 21300000, guid: 237eff2a97bddf94e8109891d11b2470, type: 3}
   - {fileID: 21300000, guid: 43db8c6a54c3e244791c7d7c0ec7c083, type: 3}
+  - {fileID: 21300000, guid: 6a4afd7a7abb8b345bf8d71a13f4eb0a, type: 3}
   - {fileID: 154641881785775158, guid: 2501c9baf1022384eb313d1b65f0d057, type: 3}
   - {fileID: 21300000, guid: 5703785b27a186b4bb61ecae44095ee1, type: 3}
   - {fileID: 21300000, guid: 2514285dbbe219d45939af2ca6f15a5d, type: 3}
   - {fileID: 21300000, guid: e4b66e9d2addd2d428e10a3bac8ee3ae, type: 3}
   - {fileID: 21300000, guid: b42bb2fe3e3d8de4ea3fb2368db5f612, type: 3}
+  - {fileID: 21300000, guid: 8fbd151f76146f64287324aa45017bfa, type: 3}
   m_PackedSpriteNamesToIndex:
   - ThinX
   - NextIcon
@@ -111,6 +114,7 @@ SpriteAtlas:
   - ShoddyBox
   - Close
   - Stats
+  - square
   - Notes
   - CircleGradient0
   - notebook
@@ -132,10 +136,12 @@ SpriteAtlas:
   - star
   - CircleGradient75
   - ClockFlipOver
+  - rounded-rect-74
   - SemiCircle0
   - LeftTriangle
   - RoundedRect100
   - Gradient100_Left
   - ClockFlip
+  - rounded-rect-74-outline
   m_Tag: MainAtlas_Bilinear
   m_IsVariant: 0

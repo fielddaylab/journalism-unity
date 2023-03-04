@@ -239,7 +239,7 @@ MonoBehaviour:
       Content: New Game
       Exposed: 0
     - Id: Title.PlayerCode
-      Content: Player Code
+      Content: Player Code:
       Exposed: 0
     - Id: Title.PlayerCodePrompt
       Content: 'Enter your

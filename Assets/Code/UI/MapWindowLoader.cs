@@ -99,7 +99,7 @@ namespace Journalism.UI
         public static void Setup(GameObject containerPrefab, StreamingUGUITexture mapTex) {
             // Register handler to load choice options for marker placement
             Game.Events.Register<StringHash32[]>(GameEvents.ChoiceOptionsUpdating, OnChoiceOptionsUpdating);
-            Game.Events.Register<uint>(GameEvents.ChoiceCompleted, OnChoiceCompleted);
+            Game.Events.Register<TextChoice>(GameEvents.ChoiceCompleted, OnChoiceCompleted);
 
             m_markerContainerPrefab = containerPrefab;
             m_markerContainer = m_markerContainerPrefab.GetComponent<MapMarkerContainer>();
@@ -312,7 +312,7 @@ namespace Journalism.UI
             m_choiceLocations = locIds;
         }
 
-        private static void OnChoiceCompleted(uint flavorIndex) {
+        private static void OnChoiceCompleted(TextChoice choice) {
             m_choiceLocations = null;
         }
 

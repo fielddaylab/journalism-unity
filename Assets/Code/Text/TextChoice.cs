@@ -28,6 +28,7 @@ namespace Journalism {
         
         [NonSerialized] public bool Selected;
         [NonSerialized] public uint ChoiceType;
+        [NonSerialized] public StringHash32 LocationId;
 
         private void Awake() {
             Button.onClick.AddListener(() => Selected = true);

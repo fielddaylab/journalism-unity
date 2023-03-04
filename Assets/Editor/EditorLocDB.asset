@@ -235,6 +235,21 @@ MonoBehaviour:
     - Id: Label.Loading
       Content: Loading...
       Exposed: 0
+    - Id: Label.boot.prompt
+      Content: click anywhere to continue
+      Exposed: 0
+    - Id: Label.title.newGame
+      Content: New Game
+      Exposed: 0
+    - Id: Label.title.resumeGame
+      Content: Resume Game
+      Exposed: 0
+    - Id: Label.title.playGame
+      Content: Play Game
+      Exposed: 0
+    - Id: Label.title.resumeGame2
+      Content: Resume Game
+      Exposed: 0
     - Id: Map.Apartment
       Content: Apartment
       Exposed: 0
@@ -299,7 +314,7 @@ MonoBehaviour:
       Content: New Game
       Exposed: 0
     - Id: Title.PlayerCode
-      Content: Player Code
+      Content: Player Code:
       Exposed: 0
     - Id: Title.PlayerCodePrompt
       Content: 'Enter your
@@ -578,11 +593,11 @@ MonoBehaviour:
     - Path: Label
       RecordStart: 22
     - Path: Map
-      RecordStart: 34
+      RecordStart: 39
     - Path: Title
-      RecordStart: 51
+      RecordStart: 56
     - Path: Char
-      RecordStart: 57
+      RecordStart: 62
     BasePath: Char
     Dirty: 0
   - Name: stats
