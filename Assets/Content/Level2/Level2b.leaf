@@ -47,7 +47,7 @@ $if Visited(TakeASnackBreak)
 $elseif Visited(ReadUpOnCRANE)
 {@birdie}About time.
 $else
-{@birdie}Oh, thanks for the quick response!
+{@birdie}Thanks for the quick response!
 $call AdjustStats(Trust + 1)
 $endif
 {@birdie}Wetland destruction is a huge part of what caused the flood. 
@@ -158,7 +158,7 @@ $LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research
 {layout Right}
 {img Anim/2b/TwinLakesLibrary.png, Left}
 You hop on your bike and pedal to the Twin Lakes library.
-{/img}
+
 
 $call SetLocation("Library")
 {bg $BG_TownTransitional}
@@ -170,6 +170,7 @@ $call AdjustStats(Endurance + 1)
 
 $if StatCheck(Research, 4)
     With your {stat-name}research{/stat-name} skills, you dig up old articles in the archive section. 
+    {/img}
     {@article}August 1979: New community center is built on Sugar Marsh!
     {@article}July 1982: Flash flooding has increased by 30% in the past 2 years.    
     Hmmm. It could be a coincidence, but the timing here seems suspicious.
@@ -179,6 +180,7 @@ $if StatCheck(Research, 4)
 $elseif StatCheck(Tech, 4)
     Inside, you spot a bulky CRT kiosk.
     Finally, your internet deep-dive on microfiche machines has paid off!
+    {/img}
     {@article}August 1979: New community center is built on Sugar Marsh!
     {@article}July 1982: Flash flooding has increased by 30% in the past 2 years.    
     Hmmm. It could be a coincidence, but the timing here seems suspicious.
@@ -188,11 +190,10 @@ $else
     The librarian notices you looking helpless.
     {@librarian}Oh, hey, El! Need some help?
     {@me}Oh... yeah, that would be great!
+    {/img}
     {@librarian} Here. Some articles on all the wetlands this town has paved over. 
     {@librarian}Sugar Marsh used to be right where we're standing.
-    {@librarian}The library is so important for our community...
-    {@librarian}But I wish they could've built it somewhere else. 
-    $call GiveSnippet(LibrarianQuote)
+    {@librarian}The library is so important but I wish they built it somewhere else. 
     $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $endif
 {/img}
@@ -249,12 +250,12 @@ The cafe owner is happy to see you again.
 $call AdjustStats(Trust + 1)
 $else
 You meet Khalisa and Ben at the Goldfish Cafe.
-{@Khalisa} Have you gotten any sleep?
+{@khalisa} Have you gotten any sleep?
 {@me} Just a little. 
 {@me} Yawn.
 The owner is happy to meet you. 
 {@cafeowner} You're El Benjamin, right? I read your story about the flood!
-{@cafeowner} I can tell you really care about this town.
+{@cafeowner} I can tell you really care about this town. Have some coffee and quiche on me. 
 {img Anim/2b/CoffeeQuiche.png, Left}
 You wave to your friends as you head out. 
 
@@ -300,7 +301,7 @@ $OnceChoice(HowIsThatRelatedToTheFlooding, "Why do the wetlands matter?")
 {@birdie} Well, not offhand. I read it somewhere online.
 {img Anim/2b/Crane.png, Left}
 {@birdie} The point is, we need to save our wetlands before it's too late. 
-$call GiveSnippet(WetlandsRelatedToFlooding)
+$call GiveSnippet (WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
 {/img}
 You'll need an expert to verify the numbers. 
@@ -343,6 +344,7 @@ $OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought up this is
 {@birdie}There are some regulations... but not enough. 
 {@birdie}The final vote to decide the fate of Cherry Creek Marsh happens tomorrow. 
 {@birdie}That's why I need you to get the word out. 
+WetlandTownHallMeeting
 
 Sheesh... tomorrow?? Guess the pressure is on. 
 
@@ -479,9 +481,9 @@ $endif
 {@sparkleader}What are you writing about? 
 {@sparkleader}The flood recovery volunteers? Our new playground initiatve? 
 
-$OnceChoice(BusinessIsDestroyingTheWetlands, "I'm writing about how business is destroying all of our wetlands.")
+$OnceChoice(BusinessIsDestroyingTheWetlands, "I'm writing about how business is destroying the wetlands.")
 $OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in an interview about Cherry Creek Marsh I wanted to get your perspective.")
-$OnceChoice(PlaygroundInitiative, "Actually, I'd love to hear about the playground initiative. What's that about?")
+$OnceChoice(PlaygroundInitiative, "I'd love to hear about the playground initiative. What's that about?")
 
 //Original Name: Playground initiative 
 :: PlaygroundInitiative
@@ -501,11 +503,11 @@ $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the tow
 {@nancy}We plan to build over parts of the marsh and build low-income apartments.
 {img Anim/2b/Bulldozer.png, Left}
 {@nancy}Affordable, peaceful. 
-{@nancy}It'll make space for people who want to move to our beautiful town, but can't afford it. 
+{@nancy}It's for people who want to move here, but can't afford it. 
 {/img}
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
-$OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands will cause more flooding throughout the town?")
+$OnceChoice(WhatAboutTheFloodRisk, "Will paving over wetlands cause more flooding throughout the town?")
 
 //OriginalName: What about your plan for the Cherry Creek Marsh? 
 :: CherryCreekMarshPlan
@@ -591,12 +593,12 @@ $OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population
 {@nancy}Sure, floods are a risk. That doesn't mean our town should stop growing. 
 {@nancy}Did you know that New York City was built on a swamp?
 {@me}That...doesn't answer my question. 
-{@nancy}Well then, maybe you're not asking the right question. 
 {@nancy}It's been an interesting chat. Stop by any time.
 {img Anim/Final/Icecream.png, Right}
 She's smiling, but her voice is colder than the pint of cherry chip ice cream in your freezer.
+{/img}
 
-$call GiveSnippet(NewYorkBuiltOnSwamp)
+// $call GiveSnippet(NewYorkBuiltOnSwamp)
 $choice DecideWhatToDoNext; Head out and plan your next move
 
 //OriginalName: Do you think population growth is worth destroying our local wildlife
@@ -1189,7 +1191,7 @@ $else
     A cheerful-sounding man answers on the first ring. 
     {@spark}How can I help you? 
 
-    $choice TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands; "I'm writing a story about how business expansion is destroying the wetlands."
+    $choice TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands; "I'm writing about how business expansion is destroying the wetlands."
     $choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on, and I wanted to get your perspective.""
 $endif
 
@@ -1380,8 +1382,7 @@ $choice MarshMap; Thank him for his time
 :: AskHerAboutTheWetlands
 {@limexpert}The destruction of our wetlands are a serious cause of flooding.
 {@me}Can you tell me about the science?
-{@limexpert}It's really pretty simple.
-{@limexpert}Think about it--when you pour water on grass or soil, it gets soaked up.
+{@limexpert}It's like when you pour water on grass or soil, it gets soaked up.
 {@limexpert}When you pour water on pavement, it pools up there...
 {@limexpert}Or else it runs downhill.
 {@limexpert}The city is the same way. 

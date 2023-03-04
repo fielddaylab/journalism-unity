@@ -18,7 +18,7 @@ $call Rain($Audio_RainOutsideChill)
 {@dionne} Well... I do need to get a reporter out there on the ground.
 {@dionne} Or, um... the water. Flood. Whatever.
 {@me} On it!
-// {img-inline Anim/CityScore_D.png}
+// {img-inline Anim/CityScore_D.png, Right}
 // {@dionne} Great, because when it comes to preparedness, Twin Lakes doesn’t exactly have a stellar track record.
 // {@me} Yikes.
 This is the break you've been waiting for.
@@ -27,6 +27,8 @@ But it's better than reporting on local opossom families and unique varieties of
 $call ActivateStory()
 {@dionne} Okay, El. 
 {/img}
+
+{layout Left}
 {@dionne} Take 30 minutes to get ready. Make sure you've got all the gear you need.
 {@dionne} Then head to the dam and find out what's happening.
 $choice GetReadyCheckpoint; Got it. 
@@ -53,7 +55,7 @@ $if !StatCheck(Tech, 2) , !StatCheck(Resourceful, 2)
     First things first. You need more {stat-name}tech{/stat-name} supplies.
     And you'll need rain gear if you want to be {stat-name}resourceful{/stat-name} enough to make it downtown.
 
-    $choice GetReadyPart2; Head out anyway
+    $choice GetReadyPart2; Impatient to go, move on
     $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
     $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
     $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
@@ -62,13 +64,13 @@ $elseif !StatCheck(Resourceful, 2)
     It's a mess out there. 
     You'll need some rain gear if you want to be {stat-name}resourceful{/stat-name} enough to handle this.
 
-    $choice GetReadyPart2; Head out anyway
+    $choice GetReadyPart2; Impatient to go, move on
     $HubChoice(BorrowGear, "Ask to borrow rain gear", 0.25)
     $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
 $elseif !StatCheck(Tech, 2)
     You still need to level up your {stat-name}tech{/stat-name}, or your phone will die before you even make it downtown.
 
-    $choice GetReadyPart2; Head out anyway
+    $choice GetReadyPart2; Impatient to go, move on
     $HubChoice(BorrowTech, "Ask to borrow tech gear", 0.25)
     $HubChoice(LostAndFound, "Check the Lost and Found", 0.25)
     $HubChoice(BorrowCharger, "\"Borrow\" someone's charger", 0.25)
@@ -216,8 +218,8 @@ $choice GetReadyPart2; Head back to your desk
 $call SetTimeRemaining(0)
 
 $if !StatCheck(Tech, 2)
-    You are heading downtown and your phone dies. You get lost without your map.
-    $GameOver("You got lost in the storm. Make sure you can rely on your tech!")
+    You are heading downtown and the map website is asking for your login but you can't remember you password. 
+    $GameOver("You got lost in the storm. Make sure you brush up on {stat-name}tech{/stat-name} skills!")
 $endif
 
 $if hasBike == true
@@ -364,7 +366,7 @@ Then Khalisa swings by your desk.
 {@khalisa} He's a little chatty sometimes, but he's the best in the biz. 
 
 $choice WaitOutside; Call Khalisa's dad, the retired fire chief
-$choice HeadOut; Find your own way--you'd rather not waste time waiting 
+$choice HeadOut; Find your own way--you want to keep it simple 
 $endif
 
 // Original Name: Make a fresh pot of coffee for the newsroom
@@ -735,21 +737,21 @@ Hopefully, these little details will help hook your readers.
 $call GiveSnippet(SuperDetailedObservation)
 $elseif StatCheck(Resourceful, 3)
 Ugh. You don't have the {stat-name}tech{/stat-name} you need to record a voice memo.
-Your phone battery is only at 10%. 
+Your phone doesn't have enough memory left to record. 
 Luckily, you were {stat-name}resourceful{/stat-name} enough to bring your notebook!
 You write down all the details you can. Hopefully this will help catch your readers' attention. 
 
 $call GiveSnippet(DetailedObservation)
 $elseif StatCheck(Social, 4)
 Uh oh. You would use your {stat-name}tech{/stat-name} to record a voice memo of observations...
-But your phone battery is at 10%.
+Your phone doesn't have enough memory left to record. 
 Luckily, one of the volunteers has heard of you from {stat-name}social{/stat-name} media!
 He lends you his wireless charger, and you end up with a great quote. 
 
 $call GiveSnippet(DetailedObservation)
 $call GiveSnippet(VolunteerConversation)
 $else
-Uh oh. You don't have the {stat-name}tech{/stat-name} tech to record a voice memo. Your phone is almost dead!
+Uh oh. You don't have the {stat-name}tech{/stat-name} tech to record a voice memo. Your phone doesn't have enough memory left to record. 
 You take a few frantic notes on a napkin in your bag.
 It's not exactly prize-winning prose, but it's better than nothing.
 
@@ -931,7 +933,7 @@ $endif
 
 $if StatCheck(Social, 3)
 The deli owner helps you plan a safer route.
-Seems your {stat-name}social{/stat-name} cred is going up a little. 
+Seems your {stat-name}social{/stat-name} cred is up a little. 
 {@deliowner}So... you're heading <i>toward</i> downtown??
 {@deliowner}You know it's flooded, right? The Gazette just posted a breaking news update! 
 {@me}Uh, yeah. I heard. 
@@ -966,14 +968,13 @@ $if StatCheck(Tech, 3)
 {layout Left}
 On the ride downtown, you snag some great shots with your zoom lens!
 The scene is full of cherry-themed drama.
-Your editor is gonna LOVE this. 
 
 $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
 {layout LeftS}
 Oh no... you must've dropped your zoom lens! 
-You reeeally wish you had the resources of a big city newspaper, like the Smoke City Herald...
+You reeeally wish you had a photographer with you. The job at the Smoke City Herald would be so cool...
 But for now, this'll have to do. 
 
 $call SFX(PhotoSnap)
