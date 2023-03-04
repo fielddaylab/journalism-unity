@@ -92,15 +92,16 @@ namespace Journalism.UI
 
         private void OnHubPlayButtonClicked() {
             Routine.Start(HubNewGameTransition());
+
+            m_HubNewGameButton.interactable = false;
         }
 
         private IEnumerator HubNewGameTransition() {
             m_NewPlayButton.interactable = false;
-            m_NewPage.alpha = 1;
-
-            m_HubPage.alpha = 0;
 
             yield return Routine.Combine(
+                m_NewPage.FadeTo(1, 0.5f),
+                m_HubPage.FadeTo(0, 0.5f),
                 m_BG.AnchorPosTo(-273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_NewPageTransform.AnchorPosTo(-91, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
@@ -110,14 +111,14 @@ namespace Journalism.UI
 
         private void OnHubContinueButtonClicked() {
             Routine.Start(HubContinueGameTransition());
+
+            m_HubResumeGameButton.interactable = false;
         }
 
         private IEnumerator HubContinueGameTransition() {
-            m_ContinuePage.alpha = 1;
-
-            m_HubPage.alpha = 0;
-
             yield return Routine.Combine(
+                m_ContinuePage.FadeTo(1, 0.5f),
+                m_HubPage.FadeTo(0, 0.5f),
                 m_BG.AnchorPosTo(-273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_ContinuePageTransform.AnchorPosTo(-91, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
@@ -127,14 +128,15 @@ namespace Journalism.UI
 
         private void OnNewBackButtonClicked() {
             Routine.Start(NewBackButtonTransition());
+
+            m_HubNewGameButton.interactable = true;
+            m_NewPlayButton.interactable = false;
         }
 
         private IEnumerator NewBackButtonTransition() {
-            m_HubPage.alpha = 1;
-
-            m_NewPage.alpha = 0;
-
             yield return Routine.Combine(
+                m_HubPage.FadeTo(1, 0.5f),
+                m_NewPage.FadeTo(0, 0.5f),
                 m_BG.AnchorPosTo(273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_NewPageTransform.AnchorPosTo(564, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
@@ -146,14 +148,15 @@ namespace Journalism.UI
 
         private void OnContinueBackButtonClicked() {
             Routine.Start(ContinueBackButtonTransition());
+
+            m_HubResumeGameButton.interactable = true;
+            m_ContinuePlayButton.interactable = false;
         }
 
         private IEnumerator ContinueBackButtonTransition() {
-            m_HubPage.alpha = 1;
-
-            m_ContinuePage.alpha = 0;
-
             yield return Routine.Combine(
+                m_HubPage.FadeTo(1, 0.5f),
+                m_ContinuePage.FadeTo(0, 0.5f),
                 m_BG.AnchorPosTo(273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_ContinuePageTransform.AnchorPosTo(564, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
