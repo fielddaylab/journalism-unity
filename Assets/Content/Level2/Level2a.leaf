@@ -54,8 +54,8 @@ $choice AnswerPhone; Answer phone
 $if Visited(LureChickens)
 Maureen's chickens come running, pecking around your feet for more granola.
 Your other neighbor, Jim, is struggling to call his flood insurance company.  
-{@person}Gah. Blast it all. 
-{@person} The storm must've knocked out our cell service!
+{@jim}Gah. Blast it all. 
+{@jim} The storm must've knocked out our cell service!
 
 $choice HelpWithTheCleanUp; Help clean up debris 
 $choice HelpJimGetHisPhoneWorking; Help Jim get his phone working

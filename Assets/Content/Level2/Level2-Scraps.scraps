@@ -409,7 +409,7 @@ The mayor is not aware of flooding research conducted by Twin Lakes University's
 // Original Name: QuickMayorWetlandsQuote
 :: QuickMayorWetlandsQuote
 @type Quote
-@quality Good
+@quality Bad
 @attr Facts, Color
 The mayor is more focused on the flood capacity of lakes than wetlands, saying "My understanding is that lakes are the most crucial part of flood prevention."
 
@@ -530,14 +530,14 @@ Twin Lakes' foremost wetlands ecologists have confirmed that 70% of our local we
 @type Quote
 @quality Great
 @attr Facts, Useful
-A few years ago, City Hall voted to loosen regulations on wetland development: but local ecologists say the city has yet to produce a satisfactory replacement.
+A few years ago, City Hall loosen regulations on wetland development: the city has yet to produce a satisfactory replacement.
 
 // Original Name: Limnology-NoProtectionsInPlace
 :: Limnology-NoProtectionsInPlace
 @type Quote
 @quality Good
 @attr Facts
-Old environmental regulations were choking out Twin Lakes' vital agriculture - but now the city is left with no protections at all.
+Old environmental regulations were choking out vital agriculture - now the city has no protections at all.
 
 // Original Name: LimnologyConcerned
 :: LimnologyConcerned

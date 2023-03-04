@@ -520,7 +520,7 @@ $OnceChoice(WhatAboutTheFloodRisk, "Will paving over wetlands cause more floodin
 {/img}
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
-$OnceChoice(WhatAboutTheFloodRisk, "What if I told you that paving over wetlands will cause more flooding throughout the town?")
+$OnceChoice(WhatAboutTheFloodRisk, "Do you know that paving over wetlands will cause more flooding throughout the town?")
 
 //Original Name: BusinessIsDestroyingTheWetlands
 :: BusinessIsDestroyingTheWetlands
@@ -755,7 +755,7 @@ $OnceChoice(MayorLimnology, "Have you talked with the Limnology Department about
 {@mayorbarrysmuckers}And the renters can buy flood insurance! Easy as pie.
 {@me}Is it really <i>easy</i> for low-income people to buy flood insurance?
 {@mayorbarrysmuckers} Well, I don't know. I'm not an economics expert.   
-{@mayorbarrysmuckers} I'm sure it'll all work out fine. 
+{@mayorbarrysmuckers} But I believe in our business community. 
 Talk about evasive.
 The mayor recommends flood insurance instead of an action plan... Sounds like quite the scoop.
 
@@ -771,7 +771,7 @@ $OnceChoice(MayorLimnology, "Have you talked with the Limnology Department about
 {@mayorbarrysmuckers}The Spark Project has donated to the city and to my campaign.
 {@mayorbarrysmuckers} That doesn't have anything to do with the Cherry Creek Marsh!
 {@mayorbarrysmuckers}When you're older, you'll understand how these things work. 
-{@mayorbarrysmuckers}Now if you'll excuse me, I oughta get back to work. 
+{@mayorbarrysmuckers}Now if you'll excuse me, I oughta get back. 
 
 Well, that wasn't condescending at all... 
 $call GiveSnippet(MayorCondescendingAnswerFinances)
@@ -870,8 +870,10 @@ $endif
 $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite)
     At first he looks irritated that you're even talking to him.
     Then his eyes widen.
+    {img Anim/1/FlappingChickenStill.png}
     {@mayorbarrysmuckers}Cripes, you're the famous chicken rescuer!!
     {@mayorbarrysmuckers}Sure thing, kid. I can spare a minute.
+    {/img}
     $if !HasTime(0.25)
         You have just enough time to compile your story!
         $choice WetlandsStoryConstruction; Compile your story
@@ -981,8 +983,7 @@ $OnceChoice(InPersonMayorLimnology, "Have you talked with the Limnology Departme
 {@mayorbarrysmuckers}And the renters can buy flood insurance! Easy as pie.
 {@me}Is it really <i>easy</i> for low-income people to buy flood insurance?
 {@mayorbarrysmuckers}No offense, kid, but you're a brand-new reporter. Not an economics expert. 
-{@mayorbarrysmuckers}I'm sure they've got a plan for all of this. 
-Wow. That wasn't evasive at all.
+Wow. That guys is evasive.
 
 $call GiveSnippet(MayorFloodInsurance)
 
@@ -995,7 +996,6 @@ $OnceChoice(InPersonMayorLimnology, "Have you talked with the Limnology Departme
 {@me}Do they support you? Financially, I mean?
 {@mayorbarrysmuckers} Well, sure. They've donated to my campaign.
 {@mayorbarrysmuckers} But that doesn't have anything to do with the Cherry Creek Marsh. 
-{@mayorbarrysmuckers}When you're older, you'll understand how these things work. 
 {@mayorbarrysmuckers}Now if you'll excuse me, I oughta get back to work. 
 
 Well, that wasn't condescending at all... 
@@ -1121,7 +1121,6 @@ $elseif StatCheck(Resourceful, 5)
     {@me} Oh.. I've got some in my backpack! Help yourself.
     {/img}
     She accepts gratefully and tells you about her volunteer work: replanting native species. 
-    {@wetlandvolunteer2}My kids love exploring here. It's part of what makes Twin Lakes so magical. 
     {@me}It is pretty nice.... though I could probably do without the snakes. 
     {img Anim/2b/Snake.png, Left}
     {@wetlandvolunteer2}Well, that one by your foot seems pretty harmless. 
@@ -1136,10 +1135,10 @@ $elseif StatCheck(Resourceful, 5)
 $else
     Unfortunately, the volunteer isn't interested in chatting. 
 
-    {@wetlandvolunteer2}Sorry. I don't trust reporters.  
+    {@wetlandvolunteer2}Sorry. I don't {stat-name}trust{/stat-name} reporters.  
     {@wetlandvolunteer2}Good luck, though.  
 
-    Well, at least she's honest. 
+    This is so annoying. 
 
     $choice MarshMap; Decide what to do next 
 $endif
@@ -1175,14 +1174,16 @@ $endif
 
 $if Visited(TellThemYoureWritingAboutHowBusinessIsDestroyingTheWetlands)
     $if StatCheck(Tech, 3)
-        You remember a method to set yourself as a <i>private caller</i> and even install a subtle voice changer. 
+        You remember a {stat-name}tech{/stat-name} hack to set yourself as a <i>private caller</i> and even install a subtle voice changer. 
         Hopefully now they won't recognize you as that mudraking journalist from earlier.
         {@spark}Hi! How can I help you? 
 
         $choice TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective; "Your name came up in a story I'm working on. I wanted to get your perspective."
     $else
         You give the Spark Project another call. 
-        This time it goes straight to voicemail. Figures.
+         This time it goes straight to voicemail.
+         This is so annoying.
+         Wish you had some {stat-name}tech{/stat-name} hack to get through.
 
         $choice WetlandsStoryConstruction; Wetlands Story Construction
     $endif
@@ -1197,11 +1198,11 @@ $endif
 
 // Original Name: Tell them their name came up in a story and you want to get their perspective.
 :: TellThemTheirNameCameUpInAStoryAndYouWantToGetTheirPerspective
-{@spark}Well, everyone is busy at a meeting, but I can chat with you!
+{@spark}Well, everyone is busy, but I can chat with you!
 {@spark} I'm a local business owner. I volunteer with the Spark Project. 
 
 $if !HasTime(0.5)
-    Looks like you have to cut this short. You have just enough time to compile your story!
+    You have to cut this short. You have just enough time to compile your story!
     $choice WetlandsStoryConstruction; Compile your story
 $endif
 $HubChoice(InterviewBusinessOrganizer, "Interview business organizer", 0.5)
@@ -1305,11 +1306,13 @@ $if Visited(BookwormAnswer)
     $HubChoice(AskHerAboutTheWetlands, "Ask her how the wetlands are related to flooding", 0.25)
 $elseif StatCheck(Resourceful, 5)
     At first, the scientist doesn't look thrilled to stop her work to chat with you.
+    {img Anim/2b/CoffeeDonut.png, Left}
     Then she notices the pastries you've brought from the Goldfish Cafe!
     {@limexpert}Ooh. What are those for?
     {@me}Just thought you all might be swamped out here. No pun intended. 
     {@me}Want to take a donut break and chat about the local wetlands?
     {@limexpert}Girl, you had me at donuts. 
+    {/img}
 
     $if !HasTime(0.25)
         Looks like you have to cut this short. You have just enough time to compile your story!
@@ -1329,9 +1332,11 @@ $endif
 
 ::GoPickUpDonutsAndCoffee
 You take a quick detour to a nearby donut place, The Hole Truth.
+{img Anim/1a/Bike.png, Left}
 You deftly bike around some fallen branches and stranded cars.
-{img Anim/2b/CoffeeDonut.png, Left}
 But it's worth it for those crullers.
+{/img}
+{img Anim/2b/CoffeeDonut.png, Left}
 You return triumphant to some ravenous researchers.
 With a mouthful of eclair, she asks:
 {@limexpert} So, what can I help you with?
@@ -1400,11 +1405,11 @@ $elseif  StatCheck(Tech, 4)
     $set local:_localOr = true
 $endif
 $if local:_localOr
-    You go online and search their website. It's full of peer-reviewed research and statistics!
-    You gather tons of stats for your article--the percentage of lost wetlands, the percent increase in rainfall, and a quote for your story.
+    You search their website and find peer-reviewed research and statistics!
+    You gather tons of stats --the percentage of lost wetlands, and the percent increase in rainfall.
     Plus, you're able to verify Birdie's data!
 
-    $call GiveSnippet(WetlandsAndRainfall)
+   // $call GiveSnippet(WetlandsAndRainfall)
     $call GiveSnippet(WetlandsAndFlooding)
 $else
     This website is absolutely impenetrable.
@@ -1424,8 +1429,6 @@ $endif
 //Original Name: Take Photos of Limnology Department
 :: TakePhotosOfLimnologyDepartment
 The shoreline is perfect for easy, dramatic-looking photos!
-You'd still rather work with a professional photographer...
-But these shots aren't bad at all. 
 $call SFX(PhotoSnap)
 
 $call GiveSnippet(LimnologyWetlandStoryPhoto)
@@ -1440,7 +1443,7 @@ She looks over your notes.
 {@limexpert}Twin Lakes has lost 70% of our wetlands, not 90%.
 {@limexpert}Though that figure goes up if you count the surrounding counties. 
 {@limexpert}Here's some of my research if you want to dig deeper. 
-She sends you a link to a long, complicated academic paper about wetlands and flooding.
+
 
 $if StatCheck(Research, 6)
     Thanks to your bookish tendencies, you should be able to knock this out by lunchtime.
@@ -1533,8 +1536,7 @@ $OnceChoice(DoYouHaveAPlanToReduceFloodRisk, "Do you have a plan to reduce flood
 {@spark}Well, sure. But there are other ways to stop flooding, too.
 {@spark}We can't stop growing just because we're scared of a little water.
 {@me}It wasn't just a <i>little</i> water....  
-{@spark}Aw, don't worry.
-{@spark}There are storm drains. Flood insurance. 
+{@spark}Aw, don't worry. There are storm drains. Flood insurance. 
 {@spark}We're the good guys here. Ask anyone!
 
 You try to ask another question, but he tells you he's getting another call and hangs up.
