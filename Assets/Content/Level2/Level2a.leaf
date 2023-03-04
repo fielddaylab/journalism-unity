@@ -19,8 +19,10 @@ $call StopRain()
 $call SetHeaderEnabled(true)
 It's an eerily quiet morning in Twin Lakes. 
 The internet is buzzing about the flood.
+{img Anim/2b/IntriguedEditor.png, Left}
+Your editor is pleased. 
 Your breaking news story has gone viral all across the Midwest!
-You're glad this little cherry-obsessed town is still standing. 
+{/img}
 
 $choice GatherFloodGear; Gather flood gear
 $choice GoOutsideAndHelpYourNeighbors; Go outside and help your neighbors
@@ -187,6 +189,8 @@ $choice AnswerPhone; Answer phone
 // Original Name: Answer phone
 :: AnswerPhone
 {bg $BG_BedroomDesk}
+The power is still out from the storm. 
+Good thing you have these cherry scented candles.
 {img Anim/2a/RingingPhone.png, Left}
 {@dionne}I've got your next assignment, El: a science story.
 {/img}
@@ -265,12 +269,14 @@ $choice GatherFloodGear; Gather flood gear
 // Original Name: Assignment: Science Story
 :: AssignmentScienceStory
 {layout Right}
+{img Anim/2b/IntriguedEditor.png, Left}
 {@dionne} You want to get in at the Smoke City Herald, right?
 {@me} Well... yeah, someday. 
 {@dionne} Trust me. They love science features like this.
 {@dionne} I worked there for years. I should know.
 {@me} Wait... seriously?? You worked at the Herald?  
 {@dionne} Stay focused, El. 
+{/img}
 {@dionne} I'd recommend starting at the DNR. They've got tons of data.  
 {@dionne} Or you could also head downtown and check on the recovery effort.
 {@me} Okay, yeah. But about the Herald--
@@ -480,7 +486,7 @@ The DNR person sounds a little distracted, but he's willing to talk!
 You want to ask more, but he's getting another call.
 Going in person might've gotten you more info... but at least this was quicker. 
 
-$call GiveSnippet(BasicFloodBackground)
+//$call GiveSnippet(BasicFloodBackground)
 $call GiveSnippet(BasicFloodPrevention)
 
 $choice PhoneContacts; Back to Phone Contacts
@@ -496,16 +502,16 @@ $if StatCheck(Social, 5)
     {@wynnedstorme} Well, Twin Lakes has a history of flooding. The city keeps the lake levels much higher than they used to.
     {@wynnedstorme} Plus, climate change is bringing more extreme weather.
     {@wynnedstorme} It's basically a perfect storm... no pun intended. 
-    $call GiveSnippet(DetailedFloodBackground)
+    // $call GiveSnippet(DetailedFloodBackground)
     $call GiveSnippet(RainfallStats)
-    $call GiveSnippet(CauseOfFlood)
+    // $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Research, 5)
     She's excited to talk to someone who's so well-informed on floods and climate change.
     {@wynnedstorme} Twin Lakes has a history of flooding. The city keeps the lake levels much higher than they used to.
     {@wynnedstorme} Plus, climate change is bringing more extreme weather.
     {@wynnedstorme} It's basically a perfect storm... no pun intended. 
-    $call GiveSnippet(DetailedFloodBackground)
-    $call GiveSnippet(RainfallStats)
+    // $call GiveSnippet(DetailedFloodBackground)
+    // $call GiveSnippet(RainfallStats)
     $call GiveSnippet(CauseOfFlood)
 $else
     {@wynnedstorme}Sorry, I need to stay focused on my work. 
@@ -657,16 +663,16 @@ Wynne tells you all about local increases in rainfall and rising lake volume.
 Apparently the lakes are being kept 5 feet higher than their natural level!
 It's a lot of data--good thing you're such a {stat-name}research{/stat-name} expert. 
 $call GiveSnippet(DetailedFloodBackground)
-$call GiveSnippet(RainfallStats)
-$call GiveSnippet(CauseOfFlood)
+// $call GiveSnippet(RainfallStats)
+// $call GiveSnippet(CauseOfFlood)
 $elseif StatCheck(Social, 5)
 Wynne tells you all about local increases in rainfall and rising lake volume.
 Apparently the lakes are being kept 5 feet higher than their natural level!
 All the data goes over your head at first... 
 But your {stat-name}social{/stat-name} skills make up for it.
 Wynne is happy to slow down and explain everything. 
-$call GiveSnippet(DetailedFloodBackground)
-$call GiveSnippet(RainfallStats)
+// $call GiveSnippet(DetailedFloodBackground)
+// $call GiveSnippet(RainfallStats)
 $call GiveSnippet(CauseOfFlood)
 $else
 She doesn't seem interested in talking much... but you can't blame her. 
@@ -873,6 +879,7 @@ $elseif StatCheck(Tech, 4)
 $else
     The joke flies right over your head. 
     {/img}
+    He looks at you. Unimpressed. 
     {@me}Uh.... good one. I think.
     {@me}Can I ask you some questions about the flood?
     {@dnrexpert}Well, I don't have time for an interview. But I can give you our official statement. 
@@ -1106,7 +1113,7 @@ $choice CanYouDescribeTheImpactOfFloodingOnTwinLakes; What is the long-term impa
 He tells you the cause of the flooding: 
 Extreme rainfall, and less places (like rain gardens and wetlands) for water to go.  
 
-{@dnrexpert}This flood has already caused millions of dollars in damages. 
+{@dnrexpert}The flood has caused millions of dollars in damages. 
 {@dnrexpert}We need better policies to prevent this kind of disaster in the future.
 
 $call GiveSnippet(BasicFloodBackground)
@@ -1116,8 +1123,9 @@ $choice DNRMap; Look elsewhere in the DNR
 
 // Original Name: "How is the state helping with flood recovery?"
 :: HowIsTheStateHelpingWithFloodRecovery
-{@governor} I'm glad you asked. I've authorized state agencies to send supplies and financial aid.
-{@governor} We need to make sure Twin Lakes gets the help it needs... because small towns are the backbone of our great state.
+{@governor} I've authorized state agencies to send supplies and financial aid.
+{@governor} We need to make sure Twin Lakes gets the help it needs... 
+{@governor} ... small towns are the backbone of our great state.
 Wow. Didn't realize this was a campaign speech.   
 $call GiveSnippet(Governor-Impact)
 

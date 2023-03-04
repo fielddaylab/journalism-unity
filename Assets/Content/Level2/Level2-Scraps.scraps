@@ -101,8 +101,8 @@ This is the worst flood Twin Lakes has ever had. It's already caused millions of
 :: BasicFloodPrevention
 @type Quote
 @quality Good
-@attr Useful
-We need better policies to prevent future disasters. 
+@attr Useful, Facts
+We need better policies to prevent future disasters. It's already caused millions of dollars in damages. 
 
 // Original Name: Wynne - Basic Flood Background
 :: WynneBasicFloodBackground
@@ -249,7 +249,7 @@ The city could change things with new policies: funding for storm drains, rain g
 @type Quote
 @quality Good
 @attr Facts
-According to weather reports from the time, flash flooding increased sharply after a community center was built atop Sugar Marsh.
+Flash flooding increased sharply after a community center was built atop Sugar Marsh.
 
 // Original Name: Librarian Quote
 :: LibrarianQuote
@@ -481,7 +481,7 @@ Local limnologists say paving over the Cherry Creek Marsh would harm rainwater a
 @type Fact
 @quality Good
 @attr Facts, Color
-Local volunteer Seth McPhee laments the loss of marshland west of Twin Lakes. "It's a golf course now, 28 holes, and not a speck of wildlife."
+Local volunteer Seth McPhee laments the loss of marshland. "It's a golf course now, 28 holes, and not a speck of wildlife."
 
 // Original Name: MarshPollution
 :: MarshPollution
@@ -515,7 +515,7 @@ Twin Lakes University's Department of Limnology has tracked an increase in flood
 :: WetlandsAndFloodingGraph
 @type Graph
 @quality Good
-@attr Facts
+@attr Facts, Useful
 @image Photo/FloodWetlandsGraph.png
 
 // Original Name: WetlandLossConfirmation
