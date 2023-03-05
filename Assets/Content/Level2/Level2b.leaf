@@ -387,7 +387,7 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {@me} I think there's a story here. 
 {@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
 {@dionne}Then we need to fast-track this story.
-{@dionne}I'll give you 2 hours. 
+{@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
 {/img}
 $call ActivateStory()
@@ -417,7 +417,7 @@ $call Ambience($Audio_RuralFrogs)
 $call Rain($Audio_CalmStreamRiverFlow)
 
 $if FirstVisit()
-    $call SetTimeRemaining(2)
+    $call SetTimeRemaining(2.5)
 $endif
 
 $if HasTime(0.5)
