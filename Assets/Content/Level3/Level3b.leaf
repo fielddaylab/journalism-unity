@@ -1215,10 +1215,7 @@ $choice WhatWouldYouSayToPeople; What would you say to people who think the city
 
 // What would you say to people
 :: WhatWouldYouSayToPeople
-{@liz} Um, to be clear. "People" is code for the Mayor, right?
-{@me} Um... let's just say the Mayor's not too happy with me right now.
-{@liz} Ha. You're not too bad, kid.
-{@liz} The Mayor is right that local shops and businesses matter.
+{@liz} You talking about the Mayor? He is right that local shops and businesses matter.
 {@liz} But our south side community is crucial to this town, too. It's all connected. 
 {@liz} If we all start moving out, this town is gonna collapse... 
 {img Anim/3b/CollapsedSouffle.png, Left}
