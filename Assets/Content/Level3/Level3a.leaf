@@ -34,7 +34,7 @@ $call SetLocation("CityHall")
 {@mayorbarrysmuckers} Some of you folks are gonna need to evacuate.
 {/img}
 {@mayorbarrysmuckers} But don't worry. We'll get through this together. We're #TwinLakesStrong! 
-{@mayorbarrysmuckers} My team has set up a flood shelter at the high school. 
+{@mayorbarrysmuckers} My team has set up a flood shelter at the local gym. 
 {img Anim/3a/Fred.png, Left}
 {@fredfinkler}  What if the dam bursts?
 {@mayorbarrysmuckers}  Aw, Finkler, quit panicking folks. The dam won't burst.
@@ -103,7 +103,7 @@ $elseif StatCheck (Social, 5)
       $HubChoice(InterviewMayorAboutEmergencyShelter, "Interview Mayor", 0.50, "")
 $else 
       {@mayorbarrysmuckers}  I can't play favorites, Missy. Make an appointment if you want to talk. 
-      Great. Because an interview 3 weeks from now is gonna be SO helpful.
+      Geez. An interview 3 weeks from now is gonna be so NOT helpful.
 
       $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
       $HubChoice(HeadStraightToShelter, "Head to the flood shelter", 0.25, "Shelter")
@@ -304,8 +304,7 @@ $choice FredFloodShelter; The flood shelter. Do you have any concerns?
 :: FredFloodShelter
 {@fredfinkler} Oh, absolutely I'm concerned. One shelter won't have space for everyone. 
 {@fredfinkler} The mayor keeps talking about how we'll all help each other. 
-{@fredfinkler} But I'm afraid I don't have that much faith in people.   
-{@fredfinkler} We need policies and safety nets to make sure nobody ends up in trouble.
+{@fredfinkler} I think we need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
 {img Anim/3a/AsterFlower.png, Left}
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower!
@@ -344,7 +343,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25
 
 //KeepPressing
 :: KeepPressing 
-{img Anim/3a/FredFinkler.png, Left}
+{img Anim/3a/Fred.png, Left}
 {@me} That's great, Fred. But about the flood shelter...
 {@me} Do you have any concerns?
 {@fredfinkler} Oh, absolutely I'm concerned. One shelter won't have space for everyone. 
@@ -395,7 +394,7 @@ $choice TellMeYourConcerns; Can you tell me your concerns about the evacuation?
 {@pattyforbes} I'm worried they'll turn the community center into a shelter.
 
 $choice WhatsTheProblem; What problems do you think that would cause? 
-$choice WhatIf; What if the shelter at the high school doesn't have enough space? 
+$choice WhatIf; What if the shelter at the gym doesn't have enough space? 
 
 // What would be the problem with that?
 :: WhatsTheProblem
@@ -419,6 +418,7 @@ $if StatCheck(Social, 5)
 {@pattyforbes} It's peaceful <i>here</i>. 
 {@pattyforbes} I'd like to keep it that way. 
 {@pattyforbes} Who knows what those flood evacuees would bring with them?? 
+(@me} Hm. I would guess some clothes and toothbrushes and granola bars.
 
 $call GiveSnippet(RudeRichLadyQuote)
 $else
@@ -431,7 +431,6 @@ $call AdjustStats(Social - 1)
 $endif
 
 
-$choice snarkyresponse; Hm. I would guess some clothes and toothbrushes and granola bars. 
 $choice WhatWouldYouSayToPeople; What would you say to people who need to leave their homes? 
 
 :: PetBuster
@@ -440,20 +439,12 @@ She eyes you up and down.
 {@pattyforbes} Buster's just been groomed.
 {@pattyforbes} His coat is sensitive to... oils. Sorry.
 {/img}
-You've never been more disappointed in your life.
-But, back to the task at hand.
+Buster looks up at you and growls.
+Geez. Back to the task at hand.
 
 $choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
 $choice WhatWouldYouSayToPeople; Anyway... what about the people who need to evacuate their homes?
 
-//Snarky Response
-:: snarkyresponse
-Her eyes narrow. It seems she doesn't appreciate the sarcasm. 
-{/img}
-{@pattyforbes} I guess you don't think my concerns are important enough.
-{@pattyforbes} You'd better find someone else to talk to.
-She hurries away, muttering angrily about big-city reporters. 
-$call AdjustStats(Trust - 1)
 
 $HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
@@ -518,7 +509,7 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {@me} Excuse me. You said earlier that you don't plan to evacuate.
 {@me} Can you tell me why? 
 {img Anim/3a/NoAccessibility.png, Left}
-{@barlow} That high school is an accessibility nightmare.
+{@barlow} That gym is an accessibility nightmare.
 {@barlow} My wife and I are both disabled. We'll probably be safer at home.
 {/img}
 $call GiveSnippet(AccessibilityNightmare)
@@ -1341,7 +1332,7 @@ $endif
 $if !Visited(CallDisabilityRightsExpertAtLocalCollege)
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at local college", 0.25, "")
 $endif 
-$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
+$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the gym", 0.25, "Shelter")
 $if !Visited(MeetWithLocalVet)
       $if VetContact == true
             $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "Downtown")
@@ -1438,7 +1429,7 @@ $choice GoToSeniorCitizenApartments; Find someone else to talk to.
 {clear-text}
 Time is ticking. What do you want to do next? 
 
-$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
+$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the gym", 0.25, "Shelter")
 $if VetContact == true
       $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "Downtown")
 $endif
@@ -1566,7 +1557,7 @@ $if StatCheck(Trust, 6)
       The woman on the line sounds excited to hear from you. 
       {@summer} Oh, you're El Benjamin, right? I've loved your work in the Gazette! 
       {@summer} I'd love to talk. What do you need to know? 
-      $choice DoYouKnowAnythingAboutTheShelter; Is it true that the flood shelter in the high school doesn't meet accessibility standards? 
+      $choice DoYouKnowAnythingAboutTheShelter; Is it true that the flood shelter in the gym doesn't meet accessibility standards? 
 $else 
       The woman on the other end of the line sounds a little suspicious. 
       {@summer} You're El Benjamin, right?
@@ -1616,7 +1607,7 @@ $elseif Visited(HeadStraightToShelter), Visited(MeetWithLocalVet), Visited(GoToS
       Looks like you have to cut this short. You have just enough time to compile your story!
       $choice StoryConstruction3a; Compile your story
 $endif
-$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the high school", 0.25, "Shelter")
+$HubChoice(HeadStraightToShelter, "Return to the flood shelter at the gym", 0.25, "Shelter")
 $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet about pet-friendly shelters", 0.25, "")
 $if ApartmentAddress
       $HubChoice(GoToSeniorCitizenApartments, "Go to Strudel Senior Apartments", 0.25, "SeniorApts")
