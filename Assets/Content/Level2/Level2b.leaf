@@ -197,7 +197,7 @@ $else
     $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $endif
 {/img}
-$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
+$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "CherryCreek")
 
 // Original Name: Gather supplies
 :: GatherSupplies
@@ -220,7 +220,7 @@ and a roll of duct tape.
 Oh, and bug spray, of course. 
 
 $call AdjustStats(Resourceful + 1, Research + 1)
-$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
+$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "CherryCreek")
 
 // Original Name: Meet some other reporters for coffee
 :: MeetSomeOtherReportersForCoffee
@@ -263,7 +263,7 @@ $endif
 
 $call AdjustStats(Endurance + 1)
 {/img}
-$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "Cherry Creek Marsh")
+$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "CherryCreek")
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
@@ -684,12 +684,12 @@ $elseif Visited(ReturnToTheDepartmentOfLimnology), Visited(GoToCityHall)
 $endif
 
 $HubChoice(ReturnToTheDepartmentOfLimnology, "Go to the Department of Limnology", 0.25, "Limnology")
-$HubChoice(GoToCityHall, "Go to City Hall and try to track down the mayor", 0.5, "City Hall")
+$HubChoice(GoToCityHall, "Go to City Hall and try to track down the mayor", 0.5, "CityHall")
 $if Visited(NoProblem.IBetterGoIveGotAStoryToWrite)
     $HubChoice(CallTheMayor, "Call the mayor's personal number", 0.25)
 $endif
 $if !Visited(CallTheSparkProject)
-    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting at the opera house", 0.25, "Opera House")
+    $HubChoice(SparkProjectMeeting, "Go to the Spark Project meeting at the opera house", 0.25, "OperaHouse")
 $endif
 $if !Visited(SparkProjectMeeting)
     $HubChoice(CallTheSparkProject, "Track down a phone number for the Spark Project", 0.25)
