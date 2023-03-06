@@ -1463,8 +1463,9 @@ $choice DecideWhatToDoNext; Thank her for her help
 {@limexpert}They never put new policies in place. 
 
 $call GiveSnippet(Limnology-RemovedWetlandProtections)
-$OnceChoice(WhatDoYouMeanTooRestrictve, "What do you mean, too restrictive?")
-$OnceChoice(AreYouConcernedAboutCherryCreekMarsh, "Are you concerned about the plan to pave over Cherry Creek Marsh?")
+$choice DecideWhatToDoNext; Thank her for the interview and do something else
+$HubChoice(WhatDoYouMeanTooRestrictve, "What do you mean, too restrictive?", 0.25)
+$HubChoice(AreYouConcernedAboutCherryCreekMarsh, "Are you concerned about the plan to pave over Cherry Creek Marsh?", 0.25)
 
 // Original Name: What do you mean, too restrictive? 
 :: WhatDoYouMeanTooRestrictve

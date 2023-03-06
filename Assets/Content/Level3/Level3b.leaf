@@ -299,8 +299,9 @@ $choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags
 
 // $call GiveSnippet(SandbagsOutsideBookstore)
 
-$choice WhatDoYouMean; Can you explain what the issues are? 
-$choice DoYouKnowOfAnyResources; Do you have any resources that could help me write this story?
+$HubChoice(WhatDoYouMean, "Can you explain what the issues are?", 0.25)
+$HubChoice(DoYouKnowOfAnyResources, "Do you have any resources that could help me write this story?", 0.25)
+$choice AfterBooksellerInterview; End interview and decide what to do next
 
 // What do you mean?
 :: WhatDoYouMean
@@ -310,7 +311,6 @@ $choice DoYouKnowOfAnyResources; Do you have any resources that could help me wr
 {img Anim/3b/BikeWithSandbags.png, Right}
 {@bookshop} I saw a guy biking twelve blocks with a bike trailer, just to haul sandbags from Main Street. 
 {/img}
-
 
 $call GiveSnippet(GreatBookstoreQuoteSandbagAccessIssues)
 
@@ -327,7 +327,9 @@ Unfortunately, the book they give you is heavily water damaged.
 {img Anim/3b/FloodlightsBook.png, Left}
 The pages are stuck together, but still, you tuck it in your bag for later. 
 {/img}
+$goto AfterBooksellerInterview
 
+:: AfterBooksellerInterview
 $CheckFinalConverge()
 
 $HubChoice(GoToSandbaggingStation, "Head to the nearest city-run sandbag filling station and take a look around", 0.25, "FillingStation")
@@ -429,8 +431,9 @@ $endif
 
 $call GiveSnippet(OnlyThreeSandbagLocations)
 
-$choice HowDidYouChooseTheLocations; How did you choose the locations? 
-$choice WhatWouldItTakeToSetUpMoreLocations; What would it take to set up more filling stations?
+$HubChoice(HowDidYouChooseTheLocations, "How did you choose the locations?", 0.25)
+$HubChoice(WhatWouldItTakeToSetUpMoreLocations, "What would it take to set up more filling stations?", 0.25)
+$choice WhatNeighborhood; End interview
 
 // What would it take to set up more
 :: WhatWouldItTakeToSetUpMoreLocations
@@ -701,8 +704,9 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
 
 $call GiveSnippet(HowToVolunteerAtFillingStation)
 
-$choice DoYouThinkThereAreEnoughSandbagStations; Do you think there are enough sandbag stations in town?
-$choice HaveYouBeenAffectedByTheFlood; Have you been affected by the flood?
+$HubChoice(DoYouThinkThereAreEnoughSandbagStations, "Do you think there are enough sandbag stations in town?", 0.25)
+$HubChoice(HaveYouBeenAffectedByTheFlood, "Have you been affected by the flood?", 0.25)
+$choice GoToSandbaggingStation; End interview and decide what to do next
 
 // Do you think there are enough sandbag stations?
 :: DoYouThinkThereAreEnoughSandbagStations
@@ -868,7 +872,7 @@ $endif
 
 $CheckFinalConverge()
 
-$HubChoice(KnockOnAFewDoors, "Knock on a few random doors", 0.25, "")
+$HubChoice(KnockOnAFewDoors, "Knock on a few random doors", -1, "")
 $HubChoice(TalkToWomanStackingSandbags, "Talk to woman stacking sandbags", 0.25, "")
 $HubChoice(TalkToMenCarryingCouchOutside, "Talk to men carrying a couch outside", 0.25, "")
 $HubChoice(AskToTakePhotos, "Take some photos", 0.25, "")
@@ -887,6 +891,7 @@ $choice ArriveAtRoyalHazelNeighborhood; Decide what to do next
 :: KnockOnAFewDoors
 You try knocking at three doors, but no one answers. 
 This is taking forever.
+$call DecreaseTime(0.25)
 You're starting to catch on that people around here aren't very excited to talk to you.
 You can't blame them... you've never even driven through here before. 
 If only you could earn their trust somehow. 

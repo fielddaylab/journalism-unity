@@ -156,8 +156,9 @@ $GameOver("Oops. Maaaaybe you should've thought this through.")
 {@mayorbarrysmuckers} I'm proud of them for their efforts! 
 $call GiveSnippet(MayorQuoteVagueAnswer)
 
-$choice ThatDidntAnswerMyQuestion; That didn't answer my question, Mr. Mayor. Will there be enough space?
-$choice WhoIsRunningTheShelter; Who is in charge of running the shelter?
+$HubChoice(ThatDidntAnswerMyQuestion, "That didn't answer my question, Mr. Mayor. Will there be enough space?", 0.25)
+$HubChoice(WhoIsRunningTheShelter, "Who is in charge of running the shelter?", 0.25)
+$choice AfterMayorInterview; End the interview and decide what to do next
 
 // That didn't answer my question, Mr. Mayor. Will there be enough space?
 :: ThatDidntAnswerMyQuestion
@@ -168,6 +169,7 @@ $call GiveSnippet(MayorInfoNotEnoughSpace)
 
 $choice WhyWasntTheCityMorePrepared; Why wasn't Twin Lakes better prepared for this? 
 $choice DontWantToLeaveTheirHomes; What would you say to people who don't want to leave their homes? 
+$choice AfterMayorInterview; End the interview and decide what to do next
 
 // Who is in charge of running the shelter?
 :: WhoIsRunningTheShelter
@@ -179,6 +181,7 @@ $call GiveSnippet(MayorInfoNearTolerableConditions)
 
 $choice DontWantToLeaveTheirHomes; What would you say to people who don't want to leave their homes?
 $choice WhyWasntTheCityMorePrepared; Why wasn't Twin Lakes better prepared for this? 
+$choice AfterMayorInterview; End the interview and decide what to do next
 
 // Why wasn't Twin Lakes better prepared for this? 
 :: WhyWasntTheCityMorePrepared
@@ -243,7 +246,9 @@ Um... yeah. That's kind of the point.
 {@mayorbarrysmuckers} Not a problem. Happy to help a novice reporter!
 
 $call GiveSnippet(MayorInterviewNoPlanToHelpTransportPeopleToShelter)
+$goto AfterMayorInterview
 
+:: AfterMayorInterview
 $choice StickAroundToInterviewTownspeople; Stick around to interview the townspeople
 $HubChoice(HeadStraightToShelter, "Head straight to the flood shelter", 0.25, "Shelter")
 
@@ -257,13 +262,23 @@ Plus the lady who was worried about evacuees camping out in her neighborhood....
 And the man who said he didn't want to leave his home. 
 {/img}
 
+$HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
+$HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
+$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
+
+:: InterviewOptions
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
 $endif
-$HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
-$HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
+
+$if !Visited(SnagInterviewWithMayor)
+      $HubChoice(SnagInterviewWithMayorFailed, "Try to snag an interview with the Mayor", 0, "")
+$endif
+$HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
+$HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
 $HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
+$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
 
 // Talk to Fred Finkler
 :: InterviewFredFinkler 
@@ -289,7 +304,6 @@ $choice IsYourHouseInAHighRiskZone; Is your house in a high risk zone, Fred?
 {/img}
 $call GiveSnippet(UselessFredQuoteAboutDeerAttacks)
 
-
 $choice SoSorry; I'm so sorry to hear that, Fred. I know how much those marigolds meant to you.  
 $choice YeahOkay; Yeah, okay. But if we could just talk about the flood shelter for a minute... 
 
@@ -298,7 +312,8 @@ $choice YeahOkay; Yeah, okay. But if we could just talk about the flood shelter 
 {@fredfinkler} Aw, Thank you, El.
          What was that you were asking about? I can't quite remember...
 
-$choice FredFloodShelter; The flood shelter. Do you have any concerns? 
+$HubChoice(FredFloodShelter, "The flood shelter. Do you have any concerns?", 0.25)
+$choice InterviewOptions; End the interview and decide what to do next
 
 //The flood shelter. Do you have any concerns about it?
 :: FredFloodShelter
@@ -310,12 +325,7 @@ $choice FredFloodShelter; The flood shelter. Do you have any concerns?
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower!
 {/img}
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
-$if !Visited(SnagInterviewWithMayor)
-      $HubChoice(SnagInterviewWithMayorFailed, "Try to snag an interview with the Mayor", 0, "")
-$endif
-$HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
-$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
+$goto InterviewOptions
 
 // Yeah, okay. But if we could just talk about something else for a minute... 
 :: YeahOkay 
@@ -333,13 +343,7 @@ $HubChoice(KeepPressing, "Keep pressing him about the flood shelter", 0.25, "")
 // Cut your losses
 :: CutYourLosses
 {@me} Thanks, Fred. I better go. Congrats on keeping those zinnias alive.
-
-$if !Visited(SnagInterviewWithMayor)
-      $HubChoice(SnagInterviewWithMayorFailed, "Try to snag an interview with the Mayor", 0, "")
-$endif
-$HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
-$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25, "Shelter")
+$goto InterviewOptions
 
 //KeepPressing
 :: KeepPressing 
@@ -355,13 +359,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to the emergency shelter", 0.25
 {/img}
 
 $call GiveSnippet(GreatFredQuoteAboutShelterAndSocialSafetyNets)
-
-$if !Visited(SnagInterviewWithMayor)
-      $HubChoice(SnagInterviewWithMayorFailed, "Try to snag an interview with the Mayor", 0, "")
-$endif
-$HubChoice(InterviewTheLady, "Ask the lady about her concerns", 0.25, "")
-$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
+$goto InterviewOptions
 
 //Failed Mayor Interview
 :: SnagInterviewWithMayorFailed
@@ -369,14 +367,7 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 You run for the podium, but Mayor Smuckers has already left.
 Looks like you spent too long chatting with Fred. 
 Oh well. At least you didn't have to deal with the mayor calling you "Missy" again.
-
-$if !HasTime(0.25)
-    Looks like you have to cut this short. You have just enough time to compile your story!
-    $choice StoryConstruction3a; Compile your story
-$endif
-$HubChoice(InterviewTheLady, "Talk to the lady who was concerned about her neighborhood", 0.25, "")
-$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
+$goto InterviewOptions
 
 // Ask the lady about her concerns
 :: InterviewTheLady
@@ -405,9 +396,11 @@ $choice WhatIf; What if the shelter at the gym doesn't have enough space?
 
 $call GiveSnippet(RichLadyQuoteSafeNeighborhood)
 
-$choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
-$choice WhatWouldYouSayToPeople; What about the people who need to evacuate their homes?
+$HubChoice(WalkingDog, "So... you think you'll be walking your dog a lot in the middle of a flood disaster?", 0.25)
+$HubChoice(WhatWouldYouSayToPeople, "What about the people who need to evacuate their homes?", 0.25)
 $choice PetBuster; Can I pet your dog?
+$choice InterviewOptions; End the interview and decide what to do next
+
 
 // Walking Dog
 :: WalkingDog
@@ -442,16 +435,9 @@ She eyes you up and down.
 Buster looks up at you and growls.
 Geez. Back to the task at hand.
 
-$choice WalkingDog; So... you think you'll be walking your dog a lot in the middle of a flood disaster? 
-$choice WhatWouldYouSayToPeople; Anyway... what about the people who need to evacuate their homes?
-
-
-$HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
-$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$if !Visited(SnagInterviewWithMayorFailed)
-      $HubChoice(SnagInterviewWithMayor, "Try to snag an interview with the Mayor", 0, "")
-$endif
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
+$HubChoice(WalkingDog, "So... you think you'll be walking your dog a lot in the middle of a flood disaster?", 0.25)
+$HubChoice(WhatWouldYouSayToPeople, "What about the people who need to evacuate their homes?", 0.25)
+$choice InterviewOptions; End the interview and decide what to do next
 
 // What if the city needs another shelter? 
 :: WhatIf 
@@ -474,13 +460,7 @@ When you start to ask another question, she makes an excuse and speed-walks away
 So much for #TwinLakesStrong... 
 ...unless the Mayor was talking about this lady's perfume.
 $call GiveSnippet(RichLadyCannedFoodDrive)
-
-$HubChoice(InterviewFredFinkler, "Talk to Fred Finkler", 0.50, "")
-$HubChoice(InterviewTheMan, "Interview the man about why he doesn't want to evacuate", 0.25, "")
-$if !Visited(SnagInterviewWithMayorFailed)
-      $HubChoice(SnagInterviewWithMayor, "Try to snag an interview with the Mayor", 0, "")
-$endif
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
+$goto InterviewOptions
 
 // What about the people who need to evacuate their homes?
 ::WhatWouldYouSayToPeople
@@ -495,13 +475,7 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {@pattyforbes} Stay safe out there, Dear! 
 {/img}
 $call GiveSnippet(ConflictingOpinions)
-
-$HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
-$HubChoice(InterviewTheMan, " Interview the man about why he doesn't want to evacuate", 0.25, "")
-$if !Visited(SnagInterviewWithMayorFailed)
-      $HubChoice(SnagInterviewWithMayor, "Try to snag an interview with the Mayor", 0, "")
-$endif
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
+$goto InterviewOptions
 
 // Interview the man about why he doesn't want to evacuate 
 :: InterviewTheMan
@@ -514,17 +488,19 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {/img}
 $call GiveSnippet(AccessibilityNightmare)
 
-$choice WhatIfTheDamBursts; But you're in a high risk zone, right? What if the dam bursts? 
-$choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about these issues? 
+$HubChoice(WhatIfTheDamBursts, "But you're in a high risk zone, right? What if the dam bursts?", 0.25)
+$HubChoice(HaveYouToldAnyoneYourConcerns, "Have you talked to anyone about these issues?", 0.25)
+$choice InterviewOptions; End the interview and decide what to do next
 
 // But you're in a high risk zone, right? What will you do if the dam bursts?
 :: WhatIfTheDamBursts
 {@barlow} Well, we're on the edge of the high risk zone.
-{@barlow} We just gotta keep our fingers crossed. Hopefully the dam will hold. 
+{@barlow} We just gotta keep our fingers crossed. Hopefully the dam will hold.
 $call GiveSnippet(PeopleStayingHome)
 
-$choice CouldYouStaySomewhereElse; Could you stay somewhere else? Somewhere safe? 
-$choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about the issues at the shelter? 
+$HubChoice(CouldYouStaySomewhereElse, "Could you stay somewhere else? Somewhere safe?", 0.25)
+$HubChoice(HaveYouToldAnyoneYourConcerns, "Have you talked to anyone about the issues at the shelter?", 0.25)
+$choice InterviewOptions; End the interview and decide what to do next
 
 // Have you talked to anyone about the accessibility problems?
 :: HaveYouToldAnyoneYourConcerns
@@ -535,14 +511,7 @@ $choice HaveYouToldAnyoneYourConcerns; Have you talked to anyone about the issue
 {@barlow} Nice chatting with you, kid. 
 {/img}
 $call GiveSnippet(CityPlanningIssue)
-
-
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
-$HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
-$HubChoice(InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
-$if !Visited(SnagInterviewWithMayorFailed)
-      $HubChoice(SnagInterviewWithMayor, "Try to snag an interview with the Mayor", 0, "")
-$endif
+$goto InterviewOptions
 
 // Could you stay somewhere else? Somewhere safe? 
 :: CouldYouStaySomewhereElse
@@ -551,11 +520,7 @@ $endif
 {@barlow} Nah. Thanks, though, kid. Just get the word out. 
 
 $call GiveSnippet(GetWordOutAboutAccessibility)
-
-$HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelter")
-$HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
-$HubChoice (InterviewTheLady, "Interview the lady who was concerned about her neighborhood", 0.25, "")
-$HubChoice(SnagInterviewWithMayor, "Try to snag an interview with the Mayor", 0, "")
+$goto InterviewOptions
 
 // Original Name: Head to the evacuation shelter.
 :: HeadStraightToShelter
@@ -1013,8 +978,9 @@ They scold a lizard wearing a leg cast and gently bop its nose.
 {/img}
 {@fox} Um. Agitated during disasters.
 $call GiveSnippet(WhyArentPetsAllowedQuote)
-$OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
-$OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
+$HubChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?", 0.25)
+$HubChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?", 0.25)
+$choice NextStepAfterVetMeeting; End interview
 
 // What would it take to set up a pet-friendly shelter?
 :: PetFriendlyShelter
@@ -1024,8 +990,9 @@ $OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to 
 $call GiveSnippet(PetFriendlyShelterRequirements)
 
 $choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
-$OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
-$OnceChoice(WhyNoPetArea, "Why doesn't the current shelter have those things?")
+$HubChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?", 0.25)
+$HubChoice(WhyNoPetArea, "Why doesn't the current shelter have those things?", 0.25)
+$choice NextStepAfterVetMeeting; End interview
 
 :: WhyNoPetArea
 {layout Right}
@@ -1044,8 +1011,8 @@ $else
 $endif
 
 {@fox} Did you have any other questions?
-$choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
-$OnceChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?")
+$HubChoice(HowCanTheCityHelpOut, "How can Twin Lakes help pet owners who need to evacuate?", 0.25)
+$HubChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?", 0.25)
 $choice NextStepAfterVetMeeting; Nope, that'll be all!
 
 
@@ -1060,7 +1027,7 @@ $choice NextStepAfterVetMeeting; Nope, that'll be all!
 $call GiveSnippet(HowCanCityHelpPetOwners)
 $set ApartmentAddress = true
 
-$choice NextStepAfterVetMeeting; End Interview 
+$choice NextStepAfterVetMeeting; End interview 
 
 // Where should pet-owners go if they need to evacuate? 
 :: WhereShouldPetOwnersGo
@@ -1072,8 +1039,9 @@ They shrug bashfully and a cockatiel wearing an eyepatch flaps for balance.
 {@fox} Or even driving outside of Twin Lakes to look for kennels and pet daycares.
 $call GiveSnippet(WhereShouldPetOwnersGo)
 
-$choice BoardingAnimalsIsExpensive; Doesn't boarding animals at a kennel cost a lot?
-$OnceChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?")
+$HubChoice(BoardingAnimalsIsExpensive, "Doesn't boarding animals at a kennel cost a lot?", 0.25)
+$HubChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?", 0.25)
+$choice NextStepAfterVetMeeting; End interview
 
 
 // Doesn't boarding animals at a kennel cost a lot?
@@ -1241,8 +1209,9 @@ $call GiveSnippet(ApartmentContext)
 $if Visited(WhereHaveYouBeenStaying), Visited(DoYouKnowWhenYoullBeAllowedBackIn)
       $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help?
 $endif
-$OnceChoice(WhereHaveYouBeenStaying, "Where have you been staying?")
-$OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?")
+$HubChoice(WhereHaveYouBeenStaying, "Where have you been staying?", 0.25)
+$HubChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?", 0.25)
+$choice GoToSeniorCitizenApartments; End interview and decide what to do next
 
 // Where have you been staying in the meantime?
 :: WhereHaveYouBeenStaying
@@ -1252,7 +1221,7 @@ $OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allow
 {@imojean} I just want to be home. 
 $call GiveSnippet(SadApartmentColorQuote)
 
-$choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? 
+$choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? // <- not hub choice because does not give snippet before next choice
 $OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?")
 
 // Do you know why it's taking so long for people to be let back inside?
@@ -1264,8 +1233,9 @@ $OnceChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allow
 {@imojean} Well, they said they're busy. I'd hate to be rude.
 $call GiveSnippet(ApartmentNotReturningCalls)
 
-$choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? 
-$OnceChoice(WhereHaveYouBeenStaying, "Where have you been living in the meantime?")
+$choice IsThereAnythingICanDoToHelp; Is there anything I can do to help? // <- not hub choice because does not give snippet before next choice
+$HubChoice(WhereHaveYouBeenStaying, "Where have you been living in the meantime?", 0.25)
+$choice GoToSeniorCitizenApartments; End interview and decide what to do next
 
 // Is there anything I can do to help?
 :: IsThereAnythingICanDoToHelp
@@ -1276,7 +1246,6 @@ $OnceChoice(WhereHaveYouBeenStaying, "Where have you been living in the meantime
 {/img}
 {img Anim/3a/ConcernedQuail.png, Left}
 The quail on her lap curls up and coos sadly. 
-
 
 $if TimeRemaining() > 0.25
       $choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks
@@ -1472,8 +1441,9 @@ $choice WhyArentPeopleAllowedBackIn; Can you tell me why people aren't allowed b
 {@apartmentmanager} And the electrical repair people JUST made it out today. 
 $call GiveSnippet(NotSafeInApartments)
 
-$choice WhatsTakingSoLong; Why do you think it's taking so long for repairs?
-$choice HaveYouDoneAnythingToHelpResidents; Have you done anything to help the residents? 
+$HubChoice(WhatsTakingSoLong, "Why do you think it's taking so long for repairs?", 0.25)
+$HubChoice(HaveYouDoneAnythingToHelpResidents, "Have you done anything to help the residents?", 0.25)
+$choice GoToSeniorCitizenApartments; End interview and decide what to do next
 
 // What's taking so long?
 :: WhatsTakingSoLong
@@ -1620,7 +1590,8 @@ $endif
 $call GiveSnippet(SchoolIsntAccessibleTownIsShrinking)
 // $call GiveSnippet(TwinLakesShrinking)
 
-$choice RequirementsForAccessibleShelter; Do you have recommendations for how to create an accessible shelter? 
+$HubChoice(RequirementsForAccessibleShelter, "Do you have recommendations for how to create an accessible shelter?", 0.25)
+$choice DoneWithPhoneCall; End the interview
 
 // Do you have recommendations
 :: RequirementsForAccessibleShelter
@@ -1632,8 +1603,8 @@ $choice RequirementsForAccessibleShelter; Do you have recommendations for how to
 {@summer} Hopefully your story will put the pressure on this group to make changes. 
 $call GiveSnippet(RequirementsForAccessibleShelter)
 
-
-$choice IsThereAnythingTheCityCanDoRightNow; Is there anything the city can do in the next three days?
+$HubChoice(IsThereAnythingTheCityCanDoRightNow, "Is there anything the city can do in the next three days?", 0.25)
+$choice DoneWithPhoneCall; End the interview
 
 // Is there anything the city can do to fix issues in the next three days?
 :: IsThereAnythingTheCityCanDoRightNow
