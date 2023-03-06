@@ -39,7 +39,7 @@ You have time to do one thing before meeting up with Khalisa!
 {/img}
 
 $choice HaveTeaWithYourUpstairsNeighbor; Have tea with your upstairs neighbor, Jeanie
-$choice GoForAJogAtCherryCreekMarsh; Go for a jog at Cherry Creek Marsh
+$choice GoForAJogAtCherryCreekMarsh; The rain is dying down. Go for a jog at Cherry Creek Marsh
 $choice ReplenishYourBagWithFoodAndSupplies; Replenish your bag with food and supplies 
 $choice GetOnlineAndFixTheGazetteWebsite; Fix the latest glitch on the Gazette's website 
 
@@ -253,7 +253,7 @@ $choice MayorEndsInterview; Which neighborhoods?
 {@mayorbarrysmuckers} I want to see people helping each other. Volunteering!
 {@mayorbarrysmuckers} I wish we had the resources of a big city. But the fact is, we're a small town. 
 {@mayorbarrysmuckers} We have to be scrappy and make do with what we've got.
-$call GiveSnippet(MayorTwinLakesStrongQuote)
+// $call GiveSnippet(MayorTwinLakesStrongQuote)
 $call GiveSnippe(MayorTwinLakesStrongNarrative)
 
 $choice MayorEndsInterview; What would it take to set up more filling stations?
@@ -297,7 +297,7 @@ $choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags
 {@bookshop} Though I coudn't help overhearing your phone call...
 {@bookshop} And there are definitely issues with sandbag access around here.
 
-$call GiveSnippet(SandbagsOutsideBookstore)
+// $call GiveSnippet(SandbagsOutsideBookstore)
 
 $choice WhatDoYouMean; Can you explain what the issues are? 
 $choice DoYouKnowOfAnyResources; Do you have any resources that could help me write this story?
@@ -314,7 +314,7 @@ $choice DoYouKnowOfAnyResources; Do you have any resources that could help me wr
 
 $call GiveSnippet(GreatBookstoreQuoteSandbagAccessIssues)
 
-$choice DoYouKnowOfAnyResources; Do you know of any resources that could help me write this story?
+$choice DoYouKnowOfAnyResources; Do you know of any resources about municipal flooding?
 
 // Do you know of any other resources
 :: DoYouKnowOfAnyResources
@@ -322,7 +322,6 @@ $choice DoYouKnowOfAnyResources; Do you know of any resources that could help me
 {@bookshop} Here's a great book to check out: <i>Floodlights</i>, by Dr. Nora Warner.  
 {@bookshop} It's all about flooding and equity issues!
 {@bookshop} Plus, a great exploration of neutrally-buoyant housing options. 
-{@me} I'm... not sure what that means. But it sounds great.
 
 Unfortunately, the book they give you is heavily water damaged.
 {img Anim/3b/FloodlightsBook.png, Left}
@@ -343,6 +342,7 @@ $call StopAmbience()
 $call StopRain()
 $if FirstVisit()
 
+{layout Left}
     Volunteers and people from the neighborhood hurry to fill sandbags.
     You recognize Misty, the DNR worker you met at Twin Lakes Dam. 
 $endif 
@@ -517,7 +517,7 @@ $choice WhyAreLowIncomeAreasMoreAtRisk; Why are those areas more at risk from fl
 {@misty} Plus, some people are elderly or disabled...
 {@misty} And sandbags aren't exactly easy to lug around. 
 
-$call GiveSnippet(BarriersToSandbagAccess)
+// $call GiveSnippet(BarriersToSandbagAccess)
 {/img}
 $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerned about? 
 
@@ -629,26 +629,6 @@ $choice AskHimToElaborate; Ask him what he means.
 {@rainn} A lot of folks by the river feel like nobody's listenin' to them. 
 $call GiveSnippet(RoughTwoWeeks)
 
-$choice WhyDoPeopleFeelIgnored; Why do you think people don't feel listened to? 
-
-// Why do you think people feel ignored?
-:: WhyDoPeopleFeelIgnored
-{@rainn} Well, my grandma's 92. She can't make it to all those Town Hall meetings!
-{@rainn} And she doesn't have money or influence or anything. 
-{@rainn} But at least she's got you folks at local paper to keep her informed. 
-
-$call GiveSnippet(GrandmaLeftOutOfTownMeetings)
-
-$choice DoYouPlanToStayInTwinLakes; Do you plan to stay in Twin Lakes after this?
-
-// Do you plan to stay in Twin Lakes?
-:: DoYouPlanToStayInTwinLakes
-{@rainn} Yeah, I reckon so. 
-{@me} Really? Even after how the city has handled all this? 
-{@rainn} Oh, ya know. It's water under the bridge, or over the dam, or whatever.
-{@rainn} This place is my home. Can't let one rotten cherry spoil the bunch.
-
-$call GiveSnippet(RottenCherryQuote)
 
 $choice GoToSandbaggingStation; Thank him for the interview. 
 
@@ -685,6 +665,7 @@ $choice WhyDoPeopleFeelIgnored; Can you tell me more about that?
 {@fillingstationvolunteer} My phone's almost dead. Gotta make sure my family can contact me. 
     $if StatCheck(Resourceful, 6)
     {@me} I can help with that!
+    Good thing you are so {stat-name} resourceful {/stat-name}.
     {@me} I brought my portable phone charger. You can use it while we talk!
     {@fillingstationvolunteer} Oh... thanks! 
     {@fillingstationvolunteer} Guess it's true what they say about reporters: Semper Paratus. Always ready. 
@@ -792,8 +773,10 @@ $HubChoice(Drive, "Drive--there's no time to waste", 0.25, "")
 $call Music($Audio_PaperPuddle)
 $call Ambience($Audio_UrbanSeagulls)
 $call StopRain()
+{img Anim/1a/Bike.png, Left}
 To reach the south side of town, you have to pedal through historic, higher-income neighborhoods. 
 The floodwater has gone down, and debris has been cleared away. 
+{/img}
 $call AdjustStats(Endurance + 1)
 $call GiveSnippet(DetailedDescriptionHighIncomeNeighborhood)
 {img Anim/3b/LemonadeStand.png, Left}
@@ -876,6 +859,7 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep driving toward the Royal Hazel neig
 $call Music($Audio_SolemnWaters)
 $call StopAmbience()
 $call StopRain()
+{layout clear-text}
 
 $if FirstVisit()
     Wow. Obviously the city didn't work very hard to clean up the debris here. 
@@ -1194,7 +1178,7 @@ $choice HowWereYouAbleToGetSandbagsForYourHome; How were you able to get so many
 $call Givesnippet(LizTripsBackAndForth)
 
 $choice HowCanPeopleHelpOutLiz; What kind of help would be most useful for this neighborhood? 
-$choice WhatWouldYouSayToPeople; What would you say to people who think the city should focus on protecting Main Street? 
+$choice WhatWouldYouSayToPeople; Do you think the city should focus on protecting Main Street? 
 
 // How did the first flood affect you
 :: HowDidTheFirstFloodAffectYouLiz
@@ -1251,14 +1235,15 @@ $choice FinalConvergeNode; Decide what to do next
     //  StopToBuyLemonade
     //  SeeIfTheOlderCoupleNeedsHelp
     //  ArriveAtRoyalHazelNeighborhood
-You're just about to plan your next move when your phone buzzes.
+You're just about to plan your next move...
+{anim rumble} ...when your phone buzzes.
 Oh no, you almost forgot... the phone interview with the Smoke City Herald!
 
 $choice FindAPrivatePlaceToTakeTheCall; Find a private place to take the call 
 
 :: FindAPrivatePlaceToTakeTheCall
 //Todo: add generic rainy town street background with coffee shop and hardware store 
-{bg $BG_OfficeExterior}
+// {bg $BG_OfficeExterior}
 $call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_StreetBustle)
 $call Rain($Audio_RainOutsideChill)
@@ -1289,7 +1274,7 @@ $choice IWantToMakeANameForMyself; I want to make a name for myself.
 {@gabby} You could handle that, right, El? 
 {@me} Oh... yeah. I think so.
 {/img}
-You try to listen to her next question, but your phone is buzzing again.
+{anim rumble} You try to listen to her next question, but your phone is buzzing again.
 
 $choice ReadTextFromDionne; Read text 
 
@@ -1427,8 +1412,9 @@ Whoa. Your rescuer is Nora, the Houseboat Lady!
 {img Anim/3b/Research.png, Right}
 {@nora} I was on my way to drop off a new stack of books at Bookish...
 {/img}
+{layout Left}
 {@nora} But Willa called and asked for my help.  
-{img Anim/3b/FloodlightsBook.png, Left}
+{img Anim/3b/FloodlightsBook.png, Right}
 That's when you notice the book propped up on the table: <i>Floodlights</i>, by Dr. Nora Warner.
 Signed copies, by the looks of it.
 {/img}
@@ -1515,7 +1501,7 @@ $choice HowDoYouThinkTwinLakesCanDoBetterNextTime; How can Twin Lakes can prepar
 {@drnorawarner} And I'll keep warning them, because the floods are only going to get worse.
 {@drnorawarner} Twin Lakes will be washed right off the map unless we make some changes.
 
-$call GiveSnippet(NoraFloodWarning)
+// $call GiveSnippet(NoraFloodWarning)
 
 $choice HowCanTwinLakesHelpLowerIncomeHouseholds; How can Twin Lakes help lower-income households bounce back from the flood?
 $choice RumorsAboutFloodMaps; I've heard rumors that the flood maps around here aren't accurate. Can you tell me about that?
