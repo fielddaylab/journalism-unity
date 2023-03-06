@@ -11,7 +11,6 @@ using BeauUtil.Debugger;
 using static Journalism.Player;
 using Journalism.UI;
 using BeauUtil.Tags;
-using UnityEngine.Networking.Types;
 using BeauPools;
 using Leaf;
 using Newtonsoft.Json;
@@ -413,7 +412,7 @@ namespace Journalism
             string text_content = m_LastKnownNodeContent;
             string current_node_id = m_LastKnownNodeId.ToString();
             string next_node_id = choice.TargetId.ToString();
-            string next_location = Assets.Location(choice.LocationId).Name;
+            string next_location = choice.LocationId.IsEmpty ? "N/A" : Assets.Location(choice.LocationId).Name;
 
             using (var e = m_Log.NewEvent("location_choice_click")) {
                 e.Param("text_content", text_content);
@@ -503,7 +502,8 @@ namespace Journalism
             string current_location = Assets.Location(Player.Location()).Name;
             List<string> locations_list = new List<string>(); // locations currently displayed on the map
             foreach(var id in m_LastKnownChoiceLocations) {
-                locations_list.Add(Assets.Location(id).Name);
+                string locStr = id.IsEmpty ? "N/A" : Assets.Location(id).Name;
+                locations_list.Add(locStr);
             }
 
             using (var e = m_Log.NewEvent("open_map_tab")) {
@@ -630,10 +630,9 @@ namespace Journalism
         // change location
         private void LogLocationUpdated(StringHash32 locId) {
             UpdateGameState();
-
             Debug.Log("[Analytics] event: change_location");
 
-            string new_location_id = Assets.Location(locId).Name;
+            string new_location_id = locId.IsEmpty ? "N/A" : Assets.Location(locId).Name;
 
             using (var e = m_Log.NewEvent("change_location")) {
                 e.Param("new_location_id", new_location_id);
@@ -1151,8 +1150,12 @@ namespace Journalism
         private List<StoryScrapQuality> GenerateStoryScrapQualityList() {
             List<StoryScrapQuality> qualities = new List<StoryScrapQuality>();
 
+            if (m_LastKnownPlayerData == null) {
+                return qualities;
+            }
+
             foreach (var scrapId in m_LastKnownPlayerData.AllocatedScraps) {
-                if (!scrapId.IsEmpty) {
+                if (scrapId != null && !scrapId.IsEmpty) {
                     StoryScrapData scrapData = Assets.Scrap(scrapId);
                     qualities.Add(scrapData.Quality);
                 }

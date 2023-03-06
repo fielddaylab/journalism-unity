@@ -172,6 +172,7 @@ namespace Journalism.UI
             m_StoryInput.blocksRaycasts = true;
 
             m_EditorNotesGroup.SetActive(false);
+            RefreshStats();
         }
 
         #region Handlers
