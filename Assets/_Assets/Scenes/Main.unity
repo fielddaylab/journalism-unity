@@ -596,6 +596,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &552109767 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6362356657543418724, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7466770506417136570}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40506b8bd22714048b4b57ef82bc1f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &659164384
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,6 +756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 359682021709405938, guid: a346a73cf816ee64b885be0cbf60153d,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 458729415693535385, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_Enabled
@@ -777,6 +794,11 @@ PrefabInstance:
     - target: {fileID: 647794718350446847, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713903217968298313, guid: a346a73cf816ee64b885be0cbf60153d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 736126689645766442, guid: a346a73cf816ee64b885be0cbf60153d,
@@ -1449,6 +1471,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -52.300003
       objectReference: {fileID: 0}
+    - target: {fileID: 3254378498967554763, guid: a346a73cf816ee64b885be0cbf60153d,
+        type: 3}
+      propertyPath: m_AudioSystem
+      value: 
+      objectReference: {fileID: 552109767}
     - target: {fileID: 3339293993004454774, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -11559,6 +11586,11 @@ PrefabInstance:
     - target: {fileID: 8662267555296584938, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053923164130730466, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+        type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

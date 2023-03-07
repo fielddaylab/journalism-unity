@@ -314,12 +314,21 @@ MonoBehaviour:
       Content: New Game
       Exposed: 0
     - Id: Title.PlayerCode
-      Content: Player Code:
+      Content: 'Player Code:'
       Exposed: 0
     - Id: Title.PlayerCodePrompt
       Content: 'Enter your
 
         Player Code'
+      Exposed: 0
+    - Id: Title.MusicVolume
+      Content: 'Music Volume:'
+      Exposed: 0
+    - Id: Title.Fullscreen
+      Content: 'Fullscreen (recommended):'
+      Exposed: 0
+    - Id: Title.PlayerCode2
+      Content: 'Player Code:'
       Exposed: 0
     - Id: Char.Me
       Content: You
@@ -597,7 +606,7 @@ MonoBehaviour:
     - Path: Title
       RecordStart: 56
     - Path: Char
-      RecordStart: 62
+      RecordStart: 65
     BasePath: Char
     Dirty: 0
   - Name: stats

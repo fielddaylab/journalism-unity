@@ -190,11 +190,20 @@ Options
 New Game
 
 :: PlayerCode
-Player Code
+Player Code:
 
 :: PlayerCodePrompt
 Enter your
 Player Code
+
+:: MusicVolume
+Music Volume:
+
+:: Fullscreen
+Fullscreen (recommended):
+
+:: PlayerCode2
+Player Code:
 
 # basePath Char
 

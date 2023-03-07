@@ -52,6 +52,7 @@ MonoBehaviour:
   m_MusicAudio: {fileID: 7019171256057623780}
   m_RainAudio: {fileID: 2471077114125281607}
   m_CrossFadeDuration: 2
+  m_DefaultMaxVolume: 0.55
 --- !u!81 &7844980253539271990
 AudioListener:
   m_ObjectHideFlags: 0

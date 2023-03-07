@@ -1,5 +1,6 @@
 ﻿using BeauRoutine;
 using BeauRoutine.Extensions;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace Journalism.UI
         [SerializeField] private Button m_NewBackButton;
         [SerializeField] private TMP_Text m_NewNameText;
         [SerializeField] private Button m_NewPlayButton;
+        [SerializeField] private Toggle m_NewToggleFullscreen = null;
+        [SerializeField] private Slider m_NewVolumeSlider = null;
 
         [Space(10)]
         [SerializeField] private CanvasGroup m_ContinuePage;
@@ -35,11 +38,16 @@ namespace Journalism.UI
         [SerializeField] private TMP_InputField m_ContinueNameText;
         [SerializeField] private Button m_ContinuePlayButton;
         [SerializeField] private TMP_InputField m_ContinueInputField;
+        [SerializeField] private Toggle m_ContinueToggleFullscreen = null;
+        [SerializeField] private Slider m_ContinueVolumeSlider = null;
 
         [Space(10)]
         [SerializeField] private CanvasGroup m_ErrorPanel;
         [SerializeField] private TMP_Text m_ErrorText;
         [NonSerialized] private Routine m_ErrorAnim;
+
+        [Space(10)]
+        [SerializeField] private AudioSystem m_AudioSystem;
 
         private bool m_LoadedFromPlaythrough;
 
@@ -80,6 +88,15 @@ namespace Journalism.UI
             m_NewPage.alpha = 0;
             m_ContinuePage.alpha = 0;
 
+            m_NewToggleFullscreen.onValueChanged.AddListener(HandleFullscreen);
+            m_ContinueToggleFullscreen.onValueChanged.AddListener(HandleFullscreen);
+
+            m_NewVolumeSlider.SetValueWithoutNotify(m_AudioSystem.GetMaxVolume());
+            m_ContinueVolumeSlider.SetValueWithoutNotify(m_AudioSystem.GetMaxVolume());
+
+            m_NewVolumeSlider.onValueChanged.AddListener(HandleVolumeAdjusted);
+            m_ContinueVolumeSlider.onValueChanged.AddListener(HandleVolumeAdjusted);
+
             // if player returns to title menu from game, start at continue screen
             if (m_LoadedFromPlaythrough) {
                 OnHubContinueButtonClicked();
@@ -94,6 +111,8 @@ namespace Journalism.UI
             Routine.Start(HubNewGameTransition());
 
             m_HubNewGameButton.interactable = false;
+            m_NewToggleFullscreen.isOn = Screen.fullScreen;
+
         }
 
         private IEnumerator HubNewGameTransition() {
@@ -113,6 +132,7 @@ namespace Journalism.UI
             Routine.Start(HubContinueGameTransition());
 
             m_HubResumeGameButton.interactable = false;
+            m_ContinueToggleFullscreen.isOn = Screen.fullScreen;
         }
 
         private IEnumerator HubContinueGameTransition() {
@@ -188,6 +208,14 @@ namespace Journalism.UI
 
         private void OnTitleErrorReceived(string errorMsg) {
             m_ErrorAnim.Replace(this, AnimateShowError(errorMsg)).TryManuallyUpdate(0);
+        }
+
+        private void HandleFullscreen(bool value) {
+            Screen.fullScreen = value;
+        }
+
+        private void HandleVolumeAdjusted(float value) {
+            m_AudioSystem.SetMaxVolume(value);
         }
 
         #endregion // Handlers

@@ -26,10 +26,27 @@ namespace Journalism {
         private Routine m_MusicFade;
         private Routine m_RainFade;
 
+        private float m_MaxVolume;
+        [SerializeField] private float m_DefaultMaxVolume;
+
         private void Awake() {
             if (m_DefaultBundle != null) {
                 LoadBundle(m_DefaultBundle);
             }
+
+            m_MaxVolume = m_DefaultMaxVolume;
+        }
+
+        public void SetMaxVolume(float value) {
+            m_MaxVolume = value;
+
+            m_MusicAudio.Volume = m_MaxVolume;
+            m_AmbienceAudio.Volume = m_MaxVolume;
+            m_RainAudio.Volume = m_MaxVolume;
+        }
+
+        public float GetMaxVolume() {
+            return m_MaxVolume;
         }
 
         #region Loading
@@ -92,15 +109,15 @@ namespace Journalism {
         }
 
         public void SetAmbience(string url, float volume) {
-            m_AmbienceFade.Replace(this, Transition(m_AmbienceAudio, url, volume, m_CrossFadeDuration));
+            m_AmbienceFade.Replace(this, Transition(m_AmbienceAudio, url, volume * m_MaxVolume, m_CrossFadeDuration));
         }
 
         public void SetMusic(string url, float volume) {
-            m_MusicFade.Replace(this, Transition(m_MusicAudio, url, volume, m_CrossFadeDuration));
+            m_MusicFade.Replace(this, Transition(m_MusicAudio, url, volume * m_MaxVolume, m_CrossFadeDuration));
         }
 
         public void SetRain(string url, float volume) {
-            m_RainFade.Replace(this, Transition(m_RainAudio, url, volume, m_CrossFadeDuration));
+            m_RainFade.Replace(this, Transition(m_RainAudio, url, volume * m_MaxVolume, m_CrossFadeDuration));
         }
 
         static private IEnumerator Transition(DownloadStreamingAudioSource source, string url, float volume, float duration) {

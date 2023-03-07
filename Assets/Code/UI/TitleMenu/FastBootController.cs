@@ -21,6 +21,8 @@ namespace Aqua {
 
         [Header("Ready")]
         public CanvasGroup ClickAnywhere;
+        public StreamingUGUITexture HeadlineTex;
+        public CanvasGroup HeadlineGroup;
         public TMP_Text PromptText;
 
         [Header("Run")]
@@ -35,6 +37,17 @@ namespace Aqua {
         private IEnumerator OnStart() {
             ClickAnywhere.gameObject.SetActive(true);
 
+            HeadlineGroup.alpha = 0;
+            PromptText.alpha = 0;
+
+            while (HeadlineTex.IsLoading()) {
+                yield return null;
+            }
+
+            yield return 0.5f;
+
+            yield return HeadlineGroup.FadeTo(1, 1f);
+
             m_ReadyPhase = ReadyPhase.AudioClick;
             Routine.Start(this, SwapToPrompt());
 
@@ -45,6 +58,8 @@ namespace Aqua {
             if (BootAudio != null) {
                 yield return BootAudio.WaitToComplete();
             }
+
+            yield return 0.5f;
 
             yield return Routine.Combine(
                 PromptText.FadeTo(0, 0.2f)
