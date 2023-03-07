@@ -502,11 +502,14 @@ $endif
 {@me} Do you have a minute to talk?
 {img Anim/1b/Bacteria.png, Right}
 {@limvolunteer} Sorry, I'm working. Gotta go sample the bacterial contamination in the epilimnion of Upper Lake. 
+As she starts walking quickly you run to catch up. 
 
 $if StatCheck(Research, 3)
 $choice BookwormAnswer; Interesting. Are you worried the flooding will contribute to toxic algae?
 $else
 $choice Non-BookwormAnswer; Um....epi-whatium?
+What a waste of time. How were you supposed to know what that was? 
+I guess you need to brush up on your {stat-name} research {/stat-name}
 $endif
 {/img}
 
@@ -559,10 +562,10 @@ $if StatCheck(Tech, 3)
 $endif
 
 $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
-    You can't help dreaming of the resources of the Smoke City Herald, where you'd have a pro photographer to help you.
+    You can't help dreaming of the pro photographer at the Smoke City Herald... 
     {img Anim/1b/RainGauge.png}
     The wind and rain make it tricky to get a good shot...
-    {img Anim/1b/tree.png}
+    {img Anim/1b/Tree.png}
     But then you notice a nearby tree. The perfect vantage point! 
     Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top.
     {/img}
