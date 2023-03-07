@@ -267,9 +267,10 @@ You push with all your strength and move Khalisa's car about half an inch.
 $endif
 
 $call AdjustStats(Endurance + 1, Trust + 1)
-$if TimeRemaining() <= 0
+$if TimeRemaining() <= 0.25
     {clear-text}
     {/img}
+    $call DecreaseTime(0.5)
     // fail state
     You head back into the office.
     As you enter you glance at the clock, and your stomach sinks.
