@@ -506,7 +506,8 @@ $OnceChoice(RudeSparkProjectResponse, "I've heard you're also destroying the tow
 {/img}
 $call GiveSnippet(ReplaceMarshWithLowIncomeApartments)
 
-$OnceChoice(WhatAboutTheFloodRisk, "Will paving over wetlands cause more flooding throughout the town?")
+$choice DecideWhatToDoNext; End interview and plan your next move
+$HubChoice(WhatAboutTheFloodRisk, "Will paving over wetlands cause more flooding throughout the town?", 0.25)
 
 //OriginalName: What about your plan for the Cherry Creek Marsh? 
 :: CherryCreekMarshPlan
@@ -1388,10 +1389,11 @@ $choice MarshMap; Thank him for his time
 {@limexpert}It's like when you pour water on grass or soil, it gets soaked up.
 {@limexpert}When you pour water on pavement, it pools up there...
 {@limexpert}Or else it runs downhill.
-{@limexpert}The city is the same way. 
+{@limexpert}The city is the same way.
 
-$OnceChoice(AskHerIfTheWetlandsAreProtected, "Ask her if the wetlands are protected.")
-$OnceChoice(WetlandStatistics, "Ask for statistics from her research")
+$choice DecideWhatToDoNext; Thank her for the interview and do something else
+$HubChoice(AskHerIfTheWetlandsAreProtected, "Ask her if the wetlands are protected.", 0.25)
+$HubChoice(WetlandStatistics, "Ask for statistics from her research", 0.25)
 
 // Original Name: Check Limnology Department Website.
 :: CheckLimnologyDepartmentWebsite

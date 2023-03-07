@@ -1201,7 +1201,8 @@ $choice WhatWouldYouSayToPeople; What would you say to people who think the city
 {@liz} So many folks have damaged homes and not enough money to fix it.
 $call GiveSnippet(LizHowCanPeopleHelp)
 
-$choice WhatWouldYouSayToPeople; What would you say to people who think the city should focus on protecting Main Street? 
+$choice ThankLiz; Thank her for her time and end interview
+$HubChoice(WhatWouldYouSayToPeople, "What would you say to people who think the city should focus on protecting Main Street?", 0.25)
 
 // What would you say to people
 :: WhatWouldYouSayToPeople
