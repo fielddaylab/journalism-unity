@@ -15,6 +15,7 @@ using Journalism.UI;
 namespace Aqua {
     public class FastBootController : MonoBehaviour {
         private enum ReadyPhase {
+            Loading,
             AudioClick,
             Ready
         }
@@ -35,6 +36,7 @@ namespace Aqua {
         }
 
         private IEnumerator OnStart() {
+            m_ReadyPhase = ReadyPhase.Loading;
             ClickAnywhere.gameObject.SetActive(true);
 
             HeadlineGroup.alpha = 0;
@@ -82,7 +84,7 @@ namespace Aqua {
 
         private IEnumerator OnMouseDown() {
             if (m_ReadyPhase != ReadyPhase.AudioClick) {
-                yield return null;
+                yield break; 
             }
 
             if (BootAudio != null) {
