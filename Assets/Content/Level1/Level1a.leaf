@@ -679,8 +679,7 @@ He tells you all his storm woes--his zinnias are flooded, his cat is getting cra
 {/img}
 {layout Left}
 He seems grateful to you for listening.
-You pick up your phone to text your friend Sammy back in NYC to complain...
-...but you already wasted enough time.
+This guy just seriously wasted your time...
 $call AdjustStats(Trust + 1)
 $choice BreakingNewsStory; Return to your desk
 
