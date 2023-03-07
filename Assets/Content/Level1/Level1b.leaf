@@ -478,7 +478,8 @@ $if StatCheck(Trust, 3)
     {@dnrvolunteer} Oh, I've heard of you!
     {@dnrvolunteer} So glad Twin Lakes snagged a reporter we can {stat-name}trust{/stat-name}. 
     He tells you how people can sign up to become volunteers. 
-    Plus, his deepest fears and a story about the time he stole a jar of paper clips from his office.
+    Plus, a long meandering story about a time he stole a jar of paper clips.
+    These folks know how to waste your time.
     $call GiveSnippet(VolunteerInfo)
 $elseif StatCheck(Social, 3)
     {@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!  
@@ -979,7 +980,7 @@ $call SFX(PhotoSnap)
 $call GiveSnippet(GreatFloodPhotosTruck)
 $else
 {layout LeftS}
-Oh no... you must've dropped your zoom lens! 
+Oh no... your zoom lens is smeared and you don't have time to clean it. 
 You reeeally wish you had a photographer with you. The job at the Smoke City Herald would be so cool...
 But for now, this'll have to do. 
 
