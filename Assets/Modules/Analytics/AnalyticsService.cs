@@ -220,7 +220,11 @@ namespace Journalism
             // complete level
                 .Register(GameEvents.CompleteLevel, LogCompleteLevel, this)
             // start endgame
-                .Register(GameEvents.StartEndgame, LogStartEndgame, this);
+                .Register(GameEvents.StartEndgame, LogStartEndgame, this)
+            // start new game
+                .Register(GameEvents.NewGameSuccess, LogNewGameSuccess, this)
+            // continue game
+                .Register(GameEvents.ContinueGameSuccess, LogContinueGameSuccess, this);
 
 
             // SceneHelper.OnSceneLoaded += LogSceneChanged;
@@ -909,6 +913,8 @@ namespace Journalism
                 e.Param("new_breakdown", JsonConvert.SerializeObject(new_breakdown));
                 e.Param("target_breakdown", JsonConvert.SerializeObject(target_breakdown));
                 e.Param("new_quality", JsonConvert.SerializeObject(new_quality));
+                e.Param("story_score", Player.StoryStatistics.TotalQuality);
+                e.Param("story_alignment", Player.StoryStatistics.Alignment);
             }
         }
 
@@ -1024,6 +1030,17 @@ namespace Journalism
             }
         }
 
+        private void LogNewGameSuccess() {
+            Debug.Log("[Analytics] event: new_game");
+
+            m_Log.NewEvent("new_game");
+        }
+
+        private void LogContinueGameSuccess() {
+            Debug.Log("[Analytics] event: continue_game");
+
+            m_Log.NewEvent("continue_game");
+        }
 
         /*
         private void OnCrash(Exception exception, string error) {
