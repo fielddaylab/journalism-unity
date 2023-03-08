@@ -288,7 +288,7 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {/img}
 {@me} The mayor said the dam will hold. Probably. 
 {@fredfinkler} I don't trust that guy.
-You have to admit, Fred's got a point. 
+You have to admit, Fred's been around awhile. 
 
 $choice IsYourHouseInAHighRiskZone; Is your house in a high risk zone, Fred?
 
@@ -299,7 +299,7 @@ $choice IsYourHouseInAHighRiskZone; Is your house in a high risk zone, Fred?
 {@fredfinkler} Did you know deer sightings are up 3% this year?
 {img Anim/3a/Deer.png, Left}
 {@fredfinkler} Some fawns just bit the heads clean off my marigolds! It was a bloodbath!
-{@fredfinkler} Well... not a bloodbath, I suppose. A sap bath?
+{@fredfinkler} Well... not a bloodbath, I suppose. A pollen bath?
 {/img}
 $call GiveSnippet(UselessFredQuoteAboutDeerAttacks)
 
@@ -440,9 +440,8 @@ $choice InterviewOptions; End the interview and decide what to do next
 
 // What if the city needs another shelter? 
 :: WhatIf 
-{@pattyforbes} I think we should have more shelters! Just... somewhere else. 
-{@me} But... if your neighborhood doesn't flood, it sounds like the perfect place.
-{@pattyforbes} Well, I suppose so. But think about it, Dear. 
+{@pattyforbes} We should have more shelters! Just... somewhere else. 
+{@me} But... if your neighborhood doesn't flood, it's the perfect place.
 {@pattyforbes} Would you really want a bunch of strangers staying in your neighborhood? 
 $call GiveSnippet(NIMBYLadyQuote)
 
