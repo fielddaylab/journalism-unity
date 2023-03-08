@@ -134,6 +134,7 @@ namespace Journalism {
                 Game.UI.PushInputMask(InputLayerFlags.OverStory);
             }
             else {
+                Game.Events.Dispatch(GameEvents.NewGameSuccess);
                 m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                     m_ScriptSystem.StartLevel();
                 });
@@ -155,6 +156,7 @@ namespace Journalism {
         }
 
         private void OnContinueGameSuccess(PlayerData data) {
+            Game.Events.Dispatch(GameEvents.ContinueGameSuccess);
             int levelIndex = Player.Data.LevelIndex;
             if (levelIndex < 0) {
                 Log.Warn("Previous player level data was not saved correctly. Should be a non-negative value. Starting at Level 1.");

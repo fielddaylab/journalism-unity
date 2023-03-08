@@ -33,9 +33,11 @@ namespace Journalism {
         static public readonly StringHash32 TitleErrorReceived = "title:error";
         static public readonly StringHash32 TryNewName = "title:new-name";
         static public readonly StringHash32 TryNewGame = "title:new-game";
+        static public readonly StringHash32 NewGameSuccess = "title:new-game-success";
         static public readonly StringHash32 NewNameGenerated = "title:new-name-generated";
         static public readonly StringHash32 TryContinueName = "title:continue-name";
         static public readonly StringHash32 TryContinueGame = "title:continue-game";
+        static public readonly StringHash32 ContinueGameSuccess = "title:continue-game-success";
         static public readonly StringHash32 ContinueNameRetrieved = "title:continue-name-retrieved";
 
 
@@ -45,20 +47,11 @@ namespace Journalism {
         static public readonly StringHash32 DisplaySnippetQualityDialog = "analytics:display-snippet-quality-dialog"; // StoryStats
         static public readonly StringHash32 DisplayFeedbackDialog = "analytics:display-feedback-dialog";
         static public readonly StringHash32 DisplayChoices = "analytics:display-choices";
-        // static public readonly StringHash32 HubChoiceClick = "analytics:hub-choice-click";
-        // static public readonly StringHash32 TimeChoiceClick = "analytics:time-choice-click";
-        // static public readonly StringHash32 LocationChoiceClick = "analytics:location-choice-click";
-        // static public readonly StringHash32 OnceChoiceClick = "analytics:once-choice-click";
-        // static public readonly StringHash32 ContinueChoiceClick = "analytics:continue-choice-click";
-        // static public readonly StringHash32 ActionChoiceClick = "analytics:action-choice-click";
-        // static public readonly StringHash32 FallbackChoiceClick = "analytics:fallback-choice-click";
         static public readonly StringHash32 OpenStatsTab = "analytics:open-stats-tab";
         static public readonly StringHash32 CloseStatsTab = "analytics:close-stats-tab";
         static public readonly StringHash32 OpenMapTab = "analytics:open-map-tab";
         static public readonly StringHash32 OpenChoiceMap = "analytics:open-choice-map";
         static public readonly StringHash32 CloseMapTab = "analytics:close-map-tab";
-        // static public readonly StringHash32 OpenImpactMap = "analytics:open-impact-map";
-        // static public readonly StringHash32 CloseImpactMap = "analytics:close-impact-map";
         static public readonly StringHash32 ChangeBackgroundImage = "analytics:change-background-image";
         static public readonly StringHash32 ShowPopupImage = "analytics:show-popup-image";
         static public readonly StringHash32 UnlockedNotebook = "analytics:unlocked-notebook";
@@ -72,9 +65,7 @@ namespace Journalism {
         static public readonly StringHash32 CloseTimer = "analytics:close-timer";
         static public readonly StringHash32 TimeElapsed = "analytics:time-elapsed";
         static public readonly StringHash32 TimeExpired = "analytics:time-expired";
-        // static public readonly StringHash32 SnippetReceived = "analytics:snippet-received";
         static public readonly StringHash32 StoryUpdated = "analytics:story-updated";
-        // static public readonly StringHash32 PublishStoryClick = "analytics:publish-story-click";
         static public readonly StringHash32 DisplayPublishedStory = "analytics:display-published-story";
         static public readonly StringHash32 ClosePublishedStory = "analytics:close-published-story";
         static public readonly StringHash32 CompleteLevel = "analytics:complete-level";
