@@ -45,7 +45,6 @@ $call SetLocation("CityHall")
 
 {clear-text}
 {@dionne} El, I need you to do some digging into that flood shelter. 
-{@dionne} Look for issues that people need to know about. 
 $call ActivateStory()
 // $if CityScore() > 2
 //     {img-inline Anim/CityScore_A.png}
@@ -288,7 +287,7 @@ $HubChoice(HeadStraightToShelter, "Head to the emergency shelter", 0.25, "Shelte
 {@fredfinkler} The dam’s gonna burst. I knew it all along.
 {/img}
 {@me} The mayor said the dam will hold. Probably. 
-{@fredfinkler} Ha. Then what's all this commotion about?
+{@fredfinkler} I don't trust that guy.
 You have to admit, Fred's got a point. 
 
 $choice IsYourHouseInAHighRiskZone; Is your house in a high risk zone, Fred?

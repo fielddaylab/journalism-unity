@@ -369,7 +369,7 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 You have to admit, Twin Lakes's bagel scene is sorely lacking.
 {/img} 
 But this doesn't seem like the best time to bring this up.
-{@me}Do you know where I can find the Spark Project?
+{@me}Where is the Spark Project located?
 {@birdie}They have a meeting this morning, in the old opera house.
 {img Anim/2b/SaveTheWetlands.png, Left}
 {@birdie}I wish I could go protest...
@@ -385,7 +385,7 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {img Anim/2b/IntriguedEditor.png, Left}
 {@dionne} What do you think, El? 
 {@me} I think there's a story here. 
-{@me} The vote on building over Cherry Creek Marsh happens tomorrow. 
+{@me} The vote on building over Cherry Creek Marsh is tomorrow. 
 {@dionne}Then we need to fast-track this story.
 {@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
