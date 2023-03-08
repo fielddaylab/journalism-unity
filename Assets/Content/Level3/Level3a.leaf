@@ -492,21 +492,26 @@ $choice InterviewOptions; End the interview and decide what to do next
 
 // But you're in a high risk zone, right? What will you do if the dam bursts?
 :: WhatIfTheDamBursts
+Barlow sits down and leans into his walker. He pauses for a moment.
+You look at the time on your phone, feeling impatient.
 {@barlow} Well, we're on the edge of the high risk zone.
 {@barlow} We just gotta keep our fingers crossed. Hopefully the dam will hold.
 $call GiveSnippet(PeopleStayingHome)
 
-$HubChoice(CouldYouStaySomewhereElse, "Could you stay somewhere else? Somewhere safe?", 0.25)
+$HubChoice(CouldYouStaySomewhereElse, "Could you stay somewhere else that's safe?", 0.25)
 $HubChoice(HaveYouToldAnyoneYourConcerns, "Have you talked to anyone about the issues at the shelter?", 0.25)
-$choice InterviewOptions; End the interview and decide what to do next
+$choice InterviewOptions; Say goodbye and decide what to do next
 
 // Have you talked to anyone about the accessibility problems?
 :: HaveYouToldAnyoneYourConcerns
+Barlow seems distracted looking out the window. You wonder if he remembers you are there. 
+Then he speaks up.
 {@barlow}The town meeting was over before I could say anything. 
 {@barlow} There's no time to change it now. 
 {img Anim/3a/ToiletPaper.png, Left}
 {@barlow} I'm headed to the store before everybody buys up all the toilet paper and bottled water.
 {@barlow} Nice chatting with you, kid. 
+You help the old guy to his car. 
 {/img}
 $call GiveSnippet(CityPlanningIssue)
 $goto InterviewOptions
@@ -586,8 +591,6 @@ $if StatCheck (Social, 5)
       As soon as you mention Fred Finkler, his face brightens.
       {@doug} You know Fred? Great fella, isn't he? 
       {@doug} He's always dropping off vases full of zinnias at my apartment building. 
-      {@doug} Really brightens up the place. Wish I was back there now... 
-      {@doug} And you love the smell, don'tcha Odie?
       He gives the dog a gentle pat.
       {@doug} Wish I was back there now...
       $if !HasTime(0.25)
@@ -668,7 +671,7 @@ $call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
 {@doug} Maybe some pressure from the local news will get things moving...
 He scrawls the address on the back of a receipt for dog food.
 {@article} Strudel Senior Apartments, 1502 Sugar Grove 
-$call GiveSnippet(KickedOutOfApartments)
+// $call GiveSnippet(KickedOutOfApartments)
 $set ApartmentAddress = true
 
 $choice FloodShelterChoices; Decide what to do next. 
@@ -978,7 +981,7 @@ They scold a lizard wearing a leg cast and gently bop its nose.
 $call GiveSnippet(WhyArentPetsAllowedQuote)
 $HubChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?", 0.25)
 $HubChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?", 0.25)
-$choice NextStepAfterVetMeeting; End interview
+$choice NextStepAfterVetMeeting; Say goodbye and wave to the animals.
 
 // What would it take to set up a pet-friendly shelter?
 :: PetFriendlyShelter
@@ -1594,7 +1597,8 @@ $choice DoneWithPhoneCall; End the interview
 // Do you have recommendations
 :: RequirementsForAccessibleShelter
 {img Anim/3a/Ramp.png, Left}
-{@summer} For starters, the building needs ramps, automated entrances, wide enough doorways, braille signs, drinking fountains that don't stick out into the hallway...
+{@summer} For starters, the building needs ramps, automated entrances, wide enough doorways...
+ {@summer} ...braille signs, drinking fountains that don't stick out into the hallway...
 {@me} What about the disabled kids that go to the gym there??
 {/img}
 {@summer} Exactly. It's awful.
