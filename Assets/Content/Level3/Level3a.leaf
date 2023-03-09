@@ -31,7 +31,7 @@ $call SetLocation("CityHall")
 {@mayorbarrysmuckers} Welp, we'd better get right down to it.
 {img Anim/3a/angryCloud.png, Left}
 {@mayorbarrysmuckers} Another storm is expected to hit in 3 days, and the town's not ready. 
-{@mayorbarrysmuckers} Some of you folks are gonna need to evacuate.
+{@mayorbarrysmuckers} Some of you folks need to evacuate.
 {/img}
 {@mayorbarrysmuckers} But don't worry. We'll get through this together. We're #TwinLakesStrong! 
 {@mayorbarrysmuckers} My team has set up a flood shelter at the local gym. 
@@ -316,9 +316,9 @@ $choice InterviewOptions; End the interview and decide what to do next
 
 //The flood shelter. Do you have any concerns about it?
 :: FredFloodShelter
-{@fredfinkler} Oh, absolutely I'm concerned. One shelter won't have space for everyone. 
+{@fredfinkler} Oh, absolutely. One shelter won't be enough space for everyone. 
 {@fredfinkler} The mayor keeps talking about how we'll all help each other. 
-{@fredfinkler} I think we need policies and safety nets to make sure nobody ends up in trouble.
+{@fredfinkler} But we need policies and safety nets to make sure nobody ends up in trouble.
 {@me} Wow. Thanks, Fred. That's very astute.
 {img Anim/3a/AsterFlower.png, Left}
 {@fredfinkler} Astute? Hmm... you must mean asters. My third favorite late summer flower!
@@ -364,7 +364,6 @@ $goto InterviewOptions
 :: SnagInterviewWithMayorFailed
 {clear-text}
 You run for the podium, but Mayor Smuckers has already left.
-Looks like you spent too long chatting with Fred. 
 Oh well. At least you didn't have to deal with the mayor calling you "Missy" again.
 $goto InterviewOptions
 
@@ -380,7 +379,7 @@ $choice TellMeYourConcerns; Can you tell me your concerns about the evacuation?
 :: TellMeYourConcerns
 
 {@pattyforbes} Well, I'd hate to sound rude, but...
-{@pattyforbes} I live in Amarena Grove. It's a quiet neighborhood. Never floods.
+{@pattyforbes} I live in Amarena Grove. It ever floods.
 {@pattyforbes} I'm worried they'll turn the community center into a shelter.
 
 $choice WhatsTheProblem; What problems do you think that would cause? 
@@ -389,16 +388,15 @@ $choice WhatIf; What if the shelter at the gym doesn't have enough space?
 // What would be the problem with that?
 :: WhatsTheProblem
 {@pattyforbes} Well, it's a safety issue. We don't have room for everyone.
-{@pattyforbes} I pay taxes to make sure my street is quiet and clean. 
 {img Anim/3a/DogOnLeash.png, Right}
 {@pattyforbes} And I deserve to feel safe walking my dog at night! 
 
 $call GiveSnippet(RichLadyQuoteSafeNeighborhood)
 
-$HubChoice(WalkingDog, "So... you think you'll be walking your dog a lot in the middle of a flood disaster?", 0.25)
+$HubChoice(WalkingDog, "Will you be walking your dog in the middle of the flood disaster?", 0.25)
 $HubChoice(WhatWouldYouSayToPeople, "What about the people who need to evacuate their homes?", 0.25)
 $choice PetBuster; Can I pet your dog?
-$choice InterviewOptions; End the interview and decide what to do next
+$choice InterviewOptions; Say goodbye and decide what to do next
 
 
 // Walking Dog
@@ -415,10 +413,10 @@ $if StatCheck(Social, 5)
 $call GiveSnippet(RudeRichLadyQuote)
 $else
 The woman scoffs.
-{@pattyforbes} What exactly is that supposed to mean??
-{@pattyforbes} Buster here needs his exercise.
+{@pattyforbes} What is that supposed to mean??
+{@pattyforbes} Buster needs his exercise.
 {/img}
-{@pattyforbes} So I think I'll be going now.
+{@pattyforbes} I think I'll be going now.
 $call AdjustStats(Social - 1)
 $endif
 
@@ -436,7 +434,7 @@ Geez. Back to the task at hand.
 
 $HubChoice(WalkingDog, "So... you think you'll be walking your dog a lot in the middle of a flood disaster?", 0.25)
 $HubChoice(WhatWouldYouSayToPeople, "What about the people who need to evacuate their homes?", 0.25)
-$choice InterviewOptions; End the interview and decide what to do next
+$choice InterviewOptions; Say goodbye and decide what to do next
 
 // What if the city needs another shelter? 
 :: WhatIf 
@@ -463,13 +461,12 @@ $goto InterviewOptions
 // What about the people who need to evacuate their homes?
 ::WhatWouldYouSayToPeople
 {@pattyforbes} Well, my heart goes out to them. But they chose to live in a flood zone. 
-{@pattyforbes} If they don't like it, they can move somewhere else.
 {@me} So... you're saying everyone who lives in a flood zone should leave?
 {@pattyforbes} What? Of course not, that's a third of Twin Lakes. 
 {@pattyforbes} Our whole town would collapse!
 {@me} Hmmm. Interesting. 
 {img Anim/3b/LoadofSandbags.png, Left}
-{@pattyforbes} Come to think of it, I better go. I'd like to get some sandbags, just in case.
+{@pattyforbes} I better go. I'd like to get some sandbags, just in case.
 {@pattyforbes} Stay safe out there, Dear! 
 {/img}
 $call GiveSnippet(ConflictingOpinions)
@@ -478,7 +475,7 @@ $goto InterviewOptions
 // Interview the man about why he doesn't want to evacuate 
 :: InterviewTheMan
 {clear-text}
-{@me} Excuse me. You said earlier that you don't plan to evacuate.
+{@me} Excuse me. I heard you say you don't plan to evacuate.
 {@me} Can you tell me why? 
 {img Anim/3a/NoAccessibility.png, Left}
 {@barlow} That gym is an accessibility nightmare.
@@ -488,14 +485,14 @@ $call GiveSnippet(AccessibilityNightmare)
 
 $HubChoice(WhatIfTheDamBursts, "But you're in a high risk zone, right? What if the dam bursts?", 0.25)
 $HubChoice(HaveYouToldAnyoneYourConcerns, "Have you talked to anyone about these issues?", 0.25)
-$choice InterviewOptions; End the interview and decide what to do next
+$choice InterviewOptions; Say goodbye and decide what to do next
 
 // But you're in a high risk zone, right? What will you do if the dam bursts?
 :: WhatIfTheDamBursts
 Barlow sits down and leans into his walker. He pauses for a moment.
 You look at the time on your phone, feeling impatient.
 {@barlow} Well, we're on the edge of the high risk zone.
-{@barlow} We just gotta keep our fingers crossed. Hopefully the dam will hold.
+{@barlow} Hopefully the dam will hold.
 $call GiveSnippet(PeopleStayingHome)
 
 $HubChoice(CouldYouStaySomewhereElse, "Could you stay somewhere else that's safe?", 0.25)
