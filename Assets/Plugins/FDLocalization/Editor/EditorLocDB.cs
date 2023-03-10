@@ -412,7 +412,7 @@ namespace FDLocalization.Editor {
                     int bestMatchLength = 0;
                     for (int i = 0, totalPathCount = file.Headers.Count; i < totalPathCount; i++) {
                         basePath = file.Headers[i];
-                        if (basePath.Path.Length > bestMatchLength & key.StartsWith(basePath.Path, StringComparison.InvariantCulture)) {
+                        if (basePath.Path.Length > bestMatchLength && key.StartsWith(basePath.Path, StringComparison.InvariantCulture)) {
                             bestMatchLength = basePath.Path.Length;
                             bestMatchIdx = i;
                         }
