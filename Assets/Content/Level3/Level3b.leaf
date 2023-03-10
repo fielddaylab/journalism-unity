@@ -13,10 +13,12 @@ $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call SetHeaderEnabled(true)
 {layout Right}
 {anim rumble}  Email Notification
+{img Anim/3b/CompterwithEmail.png, Left}
 {@email} El, we were impressed with your editor's letter of recommendation! 
 {@email} Let's talk about getting you a job with the Herald. 
 {@email} Phone interview, 2 P.M. today. 
 {@email} -Gabby White, Senior Editor, Smoke City Herald 
+{/img}
 {clear-text}
 {bg $BG_HouseExt}
 
@@ -29,10 +31,12 @@ It's been sprinkling on and off...
 {/img}
 Must be the second storm. Everyone in Twin Lakes is talking about it. 
 But the real downpour is expected to start tomorrow. 
+{img Anim/3b/Khalisa.png, Left}
 You wake up to a text from Khalisa. 
 
 {@khalisa} Hey El! Want to meet up at Bookish before work?
 {@me} Yes!! What time?
+{/img}
 {img Anim/3a/CoffeeToGo.png, Left}
 {@khalisa} One hour. I'll pick up coffee on the way.
 You have time to do one thing before meeting up with Khalisa!  
@@ -69,6 +73,7 @@ $call Rain($Audio_CalmStreamRiverFlow)
 {layout Right}
 {img Anim/3b/RunningShoes.png, Left}
 You grab your running shoes and hit the trails.
+{img Anim/3b/Birdie.png, Left}
 Birdie, the aptly-named birdwatcher, waves as you run past.
 {/img}
 {@birdie} Be careful out there, El! 
@@ -116,6 +121,7 @@ $call Music($Audio_StoryRain)
 $call StopAmbience()
 $call StopRain()
 {clear-text}
+
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Smoke City Herald yet. 
 Somehow, you can't bring yourself to tell her.
@@ -130,13 +136,15 @@ $call StopAmbience()
 $call StopRain()
 {clear-text}
 Khalisa isn't here yet.... but somebody else is.
+{img Anim/3b/Mayor.png, Left}
 {@mayorbarrysmuckers} Aw, cripes. Not you again!
 {@me} Um... did I do something wrong, Mr. Mayor? 
 {@mayorbarrysmuckers} Your latest article! It was full of gripes, complaints...
 {img Anim/3b/TwinLakesStrong.png, Left}
 {@mayorbarrysmuckers} What happened to #TwinLakesStrong?? 
-{@bookshop} *Ahem.*
 {/img}
+{img Anim/3b/BookStoreOwner.png, Left}
+{@bookshop} *Ahem.*
 {@bookshop} I liked the story. 
 You're trying to sneakily text Khalisa: <i>Mayor's ticked off, don't come in!</i>.
 ...when she texts you first.
@@ -201,12 +209,13 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 :: InterviewMayor
 {@me} Mr. Mayor, since we're both here...
 {@me} Can I ask you a few questions?
+{img Anim/3b/Mayor.png, Left}
 {@mayorbarrysmuckers} Ugh, sure. Why the heck not?
 {@mayorbarrysmuckers} I'm sure you'd just end up tracking me down anyway.
 {@me} What are you doing to make sure that everyone is prepared for the storm?
 {@mayorbarrysmuckers} A whole lot of things, as a matter of fact.
 {@mayorbarrysmuckers} You can see my full response on the city website. 
-{@mayorbarrysmuckers} See what I mean? If you were a real reporter, wouldn't you have already checked there?
+
 
 $call GiveSnippet(BadQuoteAndWebsiteReference)
 
@@ -273,7 +282,9 @@ $HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and
 
 // Interview bookseller
 :: InterviewBookseller
+{img Anim/3b/BookStoreOwner.png, Left}
 {@bookshop} Hey! You're El, right?
+{/img}
 {img Anim/3b/Opossum.png, Left}
 {@bookshop} I loved your piece about the local opossum family! 
 {@bookshop} I used to feed those little guys my tater tots when I was in high school. 
@@ -283,6 +294,7 @@ $choice DoYouFeelLikeYourShopIsReadyFortheFlood; Do you feel like your shop is r
 
 // Do you feel like your shop is ready for the flood?
 :: DoYouFeelLikeYourShopIsReadyFortheFlood
+{@me} Do you feel like your shop is ready for the flood?
 {@bookshop} Um... as you can see, not exactly.
 {@bookshop} We're still working on clean up from last time. 
 {@bookshop} By the way, all the books on the floor are half off. Tell your friends. 
@@ -300,8 +312,8 @@ $choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags
 // $call GiveSnippet(SandbagsOutsideBookstore)
 
 $HubChoice(WhatDoYouMean, "Can you explain what the issues are?", 0.25)
-$HubChoice(DoYouKnowOfAnyResources, "Do you have any resources that could help me write this story?", 0.25)
-$choice AfterBooksellerInterview; End interview and decide what to do next
+$HubChoice(DoYouKnowOfAnyResources, "Do you know what could help me write this story?", 0.25)
+$choice AfterBooksellerInterview; Thank them and decide what to do next
 
 // What do you mean?
 :: WhatDoYouMean
@@ -319,12 +331,13 @@ $choice DoYouKnowOfAnyResources; Do you know of any resources about municipal fl
 // Do you know of any other resources
 :: DoYouKnowOfAnyResources
 {@bookshop} Hmmm. Let's see...
+They walk around the mess of a book store, disappearing behind some shelves. 
+After several minutes they return.
 {@bookshop} Here's a great book to check out: <i>Floodlights</i>, by Dr. Nora Warner.  
 {@bookshop} It's all about flooding and equity issues!
 {@bookshop} Plus, a great exploration of neutrally-buoyant housing options. 
-
-Unfortunately, the book they give you is heavily water damaged.
 {img Anim/3b/FloodlightsBook.png, Left}
+Unfortunately, the book they give you is heavily water damaged.
 The pages are stuck together, but still, you tuck it in your bag for later. 
 {/img}
 $goto AfterBooksellerInterview
@@ -706,7 +719,7 @@ $call GiveSnippet(HowToVolunteerAtFillingStation)
 
 $HubChoice(DoYouThinkThereAreEnoughSandbagStations, "Do you think there are enough sandbag stations in town?", 0.25)
 $HubChoice(HaveYouBeenAffectedByTheFlood, "Have you been affected by the flood?", 0.25)
-$choice GoToSandbaggingStation; End interview and decide what to do next
+$choice GoToSandbaggingStation; Say goodbye and decide what to do next
 
 // Do you think there are enough sandbag stations?
 :: DoYouThinkThereAreEnoughSandbagStations

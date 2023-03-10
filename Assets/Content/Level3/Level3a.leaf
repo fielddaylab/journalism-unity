@@ -328,8 +328,10 @@ $goto InterviewOptions
 
 // Yeah, okay. But if we could just talk about something else for a minute... 
 :: YeahOkay 
+{img Anim/3a/Zinnia.png, Left}
 {@fredfinkler} Ah, yes! You probably want to hear all about my prize-winning zinnias!
 {@fredfinkler} <i>Thistle</i> be the best story you'll hear all day. 
+{/img}
 {@fredfinkler} I thought they were goners, but they <i>rose</i> to the occasion. 
 {@fredfinkler} I couldn't be-<i>leaf</i> my eyes!
 Welp.... that's just about all the gardening puns you can handle for this year. 
@@ -372,6 +374,7 @@ $goto InterviewOptions
 {clear-text}
 {@me} Excuse me. I'm a reporter with the Gazette. Can I ask a few questions?
 {@pattyforbes} Certainly, Dear! 
+{img Anim/3a/RichLady.png, Right}
 
 $choice TellMeYourConcerns; Can you tell me your concerns about the evacuation? 
 
@@ -382,6 +385,7 @@ $choice TellMeYourConcerns; Can you tell me your concerns about the evacuation?
 {@pattyforbes} Well, I'd hate to sound rude, but...
 {@pattyforbes} I live in Amarena Grove. It ever floods.
 {@pattyforbes} I'm worried they'll turn the community center into a shelter.
+{/img}
 
 $choice WhatsTheProblem; What problems do you think that would cause? 
 $choice WhatIf; What if the shelter at the gym doesn't have enough space? 
@@ -498,8 +502,10 @@ $choice InterviewOptions; Say goodbye and decide what to do next
 :: WhatIfTheDamBursts
 Barlow sits down and leans into his walker. He pauses for a moment.
 You look at the time on your phone, feeling impatient.
+{{img Anim3a/Dam.png, Left}
 {@barlow} Well, we're on the edge of the high risk zone.
 {@barlow} Hopefully the dam will hold.
+{/img}
 $call GiveSnippet(PeopleStayingHome)
 
 $HubChoice(CouldYouStaySomewhereElse, "Could you stay somewhere else that's safe?", 0.25)
@@ -508,9 +514,11 @@ $choice InterviewOptions; Say goodbye and decide what to do next
 
 // Have you talked to anyone about the accessibility problems?
 :: HaveYouToldAnyoneYourConcerns
+{img Anim3a/OldGuy.png, Left}
 Barlow seems distracted looking out the window. You wonder if he remembers you are there. 
 Then he speaks up.
 {@barlow}The town meeting was over before I could say anything. 
+{/img}
 {@barlow} There's no time to change it now. 
 {img Anim/3a/ToiletPaper.png, Left}
 {@barlow} I'm headed to the store before everybody buys up all the toilet paper and bottled water.
@@ -611,10 +619,12 @@ $else
 $endif
 
 :: PetOdie
+{img Anim/3a/ShelterDog.png, Left}
 {@doug} Hah, of course! Behind the ears is his favorite.
 You give Odie some scritches, to his great delight.
 The dog wags his tail so vigorously it wags his whole lower half with it.
 $call AdjustStats(Social + 1)
+{/img}
 
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
@@ -661,6 +671,7 @@ $choice FloodShelterChoices; Wish him well and find someone else to talk to.
 :: TellMeWhatHappened
 {clear-text}
 {@me} Can you tell me what happened? 
+{img Anim/3a/DogOwner.png, Left}
 {@doug} Got turned away. I guess the shelter doesn't allow pets.
 $call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
 
@@ -670,11 +681,14 @@ $call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
 {@me} Wait... the flood was two weeks ago!
 {@me} You're still not back home?
 {@doug} 'Fraid not. That building manager is slow as molasses. 
+{/img}
 {@me} Can I have the address of your apartment building?
 {@doug} Sure thing. 
+{img Anim/3a/Receipt.png.png, Left}
 {@doug} Maybe some pressure from the local news will get things moving...
 He scrawls the address on the back of a receipt for dog food.
 {@article} Strudel Senior Apartments, 1502 Sugar Grove 
+{/img}
 // $call GiveSnippet(KickedOutOfApartments)
 $set ApartmentAddress = true
 
@@ -683,17 +697,17 @@ $choice FloodShelterChoices; Decide what to do next.
 // Ask to interview the clipboard-wielding woman
 :: AskToInterviewTheShelterCoordinator
 {clear-text}
+{img Anim/3a/ClipBoard.png, Left}
 {@me} Excuse me. Do you have a few minutes to talk? 
 {@shelter} Finally! Are you here with our water delivery?
 {@me} Um, no, sorry. I’m a local reporter.
+{/img}
 {@shelter} Oh. Well, my condolences on living in this charming disaster of a town. 
 {@me} Well... it grows on you after a while. 
 {@me} Can I ask you a few questions? 
 {@shelter} Sorry, I'm too busy. Gotta bring in the latest food delivery.
 {img Anim/3a/HorseBuggy.png, Left}
-
 {@shelter} Probably cherry cornbread delivered in a horse and buggy, at this rate.
-
 $call GiveSnippet(ExasperatedShelterCoordinator)
 {/img}
 
@@ -981,6 +995,7 @@ $HubChoice(WhyDoesntShelterAllowPets, "Interview him", 0.25, "")
 They scold a lizard wearing a leg cast and gently bop its nose.
 {@fox} No biting Peppy's ear. We discussed this!
 {/img}
+{layout Right}
 {@fox} Um. Agitated during disasters.
 $call GiveSnippet(WhyArentPetsAllowedQuote)
 $HubChoice(PetFriendlyShelter, "What would it take to set up a pet-friendly shelter?", 0.25)
