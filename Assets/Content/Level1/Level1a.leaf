@@ -77,7 +77,7 @@ $call SetHeaderEnabled(true)
 {layout Right}
 You should be focusing on getting ready. 
 But you can't stop thinking about that email from your dream job: the Smoke City Herald. 
-{@email} "We don't hire reporters fresh out of school, Ms. Benjamin. 
+{@email} "We don't hire reporters fresh out of school, Ms. Benjamin."
 {img Anim/1a/Countdown.png}
 So... here you are, in a three-month contract with the Twin Lakes Gazette.
 Three months, and you'll be on to bigger and better things.
