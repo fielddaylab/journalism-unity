@@ -79,8 +79,8 @@ Birdie, the aptly-named birdwatcher, waves as you run past.
 {@birdie} Be careful out there, El! 
 {@birdie} The birds are riled up today. Something strange is brewing.
 {img Anim/3b/DarkCloud.png, Left}
-{@me} Don't worry, Birdie. The storm's not supposed to hit until tomorrow!
-Though, come to think of, those clouds look awfully dark... 
+{@me} The storm's not supposed to hit until tomorrow!
+But, those clouds look awfully dark... 
 {/img}
 
 $call AdjustStats(Endurance + 2)
@@ -122,6 +122,7 @@ $call StopAmbience()
 $call StopRain()
 {clear-text}
 
+{layout Right}
 Normally you'd be excited to see Khalisa...
 But she doesn't know about your interview with the Smoke City Herald yet. 
 Somehow, you can't bring yourself to tell her.
@@ -147,6 +148,7 @@ Khalisa isn't here yet.... but somebody else is.
 {@bookshop} *Ahem.*
 {@bookshop} I liked the story. 
 You're trying to sneakily text Khalisa: <i>Mayor's ticked off, don't come in!</i>.
+{/img}
 ...when she texts you first.
 {anim rumble} BUZZZZ
 {@khalisa}El, 911!! Gonna need to take a raincheck. 
@@ -177,7 +179,7 @@ Dionne picks up on the first ring.
 $call ActivateStory()
 {img Anim/1b/Sandbag.png, Left}
 {@dionne} We got a tip that some of the south side neighborhoods haven't been able to access sandbags in time. 
-{@dionne} If that's true, people need to know about it.
+{@dionne} People need to know about it.
 {/img}
 {@dionne} Start at one of the sandbag filling stations, and see where that takes you.  
 $choice AcceptStory; On it.  
@@ -278,7 +280,7 @@ Huh... you must've missed that day at Journalism School.
 $CheckFinalConverge()
 
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.5, "")
-$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station and take a look around", 0.25, "FillingStation")
+$HubChoice(GoToSandbaggingStation, "Head to the city-run sandbagging station", 0.25, "FillingStation")
 
 // Interview bookseller
 :: InterviewBookseller
@@ -305,13 +307,14 @@ $choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags
 
 // Have you been able to access sandbags over the past few days? 
 :: DidYouHaveEnoughAccessToSandbags
+{@me} Did you have enough access to sandbags?
 {@bookshop} Yep! A few of my staff members just headed down the street to grab some sandbags. 
 {@bookshop} Though I coudn't help overhearing your phone call...
 {@bookshop} And there are definitely issues with sandbag access around here.
 
 // $call GiveSnippet(SandbagsOutsideBookstore)
 
-$HubChoice(WhatDoYouMean, "Can you explain what the issues are?", 0.25)
+$HubChoice(WhatDoYouMean, "What are the issues?", 0.25)
 $HubChoice(DoYouKnowOfAnyResources, "Do you know what could help me write this story?", 0.25)
 $choice AfterBooksellerInterview; Thank them and decide what to do next
 
