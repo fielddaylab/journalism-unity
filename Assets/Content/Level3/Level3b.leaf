@@ -231,7 +231,7 @@ $choice IsItTrue; Is it true that some people haven't been able to sandbag their
 :: IsItTrue
 {@mayorbarrysmuckers} Well, I'm not sure if that's true--I've been a tad busy, as you can imagine.
 His phone buzzes. He pauses to answer a few emails.
-He doesn't notice that you are tapping your foot impatiently.
+You tap your foot impatiently.
 {@mayorbarrysmuckers} There are three sandbag filling stations throughout the city.
 {@mayorbarrysmuckers} Anyone who needs sandbags can go and get 'em!
 
@@ -318,12 +318,12 @@ You almost trip over a pile of wet towels.
 // $call GiveSnippet(SandbagsOutsideBookstore)
 
 $HubChoice(WhatDoYouMean, "What are the issues?", 0.25)
-$HubChoice(DoYouKnowOfAnyResources, "Do you know what could help me write this story?", 0.25)
+$HubChoice(DoYouKnowOfAnyResources, "Do you have any resources what could help me write this story?", 0.25)
 $choice AfterBooksellerInterview; Thank them and decide what to do next
 
 // What do you mean?
 :: WhatDoYouMean
-They pull out a map of town, pointing to differebnt areas.
+They shuffle around the store and then return with a map of town.
 {@bookshop} All the rich houses by the lake are doing fine.
 {@bookshop} I mean... nothing against rich folks. My customers come from all over. 
 {@bookshop} But they've got what they need. Others aren't so lucky.
@@ -547,10 +547,12 @@ $choice WhatNeighborhood; Can you tell me what neighborhood you're most concerne
 
 // Why are those areas more at risk?
 :: WhyAreLowIncomeAreasMoreAtRisk
+{img Anim/3b/SandbagsLady.png}
 {@misty} Well, if you have enough money, you can pay to repair damage and get on with their lives.
 {@misty} But if you're living paycheck to paycheck, you've got two choices: 
 {@misty} Pay thousands to fix the damage, fall behind on your bills, and maybe never catch up... 
 {@misty} Or ignore the damage and end up dealing with toxic mold and a ruined home. 
+{/img}
 
 $call GiveSnippet(WhyAreThoseAreasMoreAtRisk)
 
