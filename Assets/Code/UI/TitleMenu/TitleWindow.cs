@@ -51,6 +51,9 @@ namespace Journalism.UI
 
         private bool m_LoadedFromPlaythrough;
 
+        static private float START_Y = 200;
+        static float TRANSITION_Y = -413;
+
         #endregion //  Inspector
 
         #region Unity Callbacks
@@ -121,7 +124,7 @@ namespace Journalism.UI
             yield return Routine.Combine(
                 m_NewPage.FadeTo(1, 0.5f),
                 m_HubPage.FadeTo(0, 0.5f),
-                m_BG.AnchorPosTo(-273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_BG.AnchorPosTo(TRANSITION_Y, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_NewPageTransform.AnchorPosTo(-91, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
 
@@ -139,7 +142,7 @@ namespace Journalism.UI
             yield return Routine.Combine(
                 m_ContinuePage.FadeTo(1, 0.5f),
                 m_HubPage.FadeTo(0, 0.5f),
-                m_BG.AnchorPosTo(-273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_BG.AnchorPosTo(TRANSITION_Y, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_ContinuePageTransform.AnchorPosTo(-91, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
 
@@ -157,7 +160,7 @@ namespace Journalism.UI
             yield return Routine.Combine(
                 m_HubPage.FadeTo(1, 0.5f),
                 m_NewPage.FadeTo(0, 0.5f),
-                m_BG.AnchorPosTo(273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_BG.AnchorPosTo(START_Y, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_NewPageTransform.AnchorPosTo(564, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
         }
@@ -177,7 +180,7 @@ namespace Journalism.UI
             yield return Routine.Combine(
                 m_HubPage.FadeTo(1, 0.5f),
                 m_ContinuePage.FadeTo(0, 0.5f),
-                m_BG.AnchorPosTo(273, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
+                m_BG.AnchorPosTo(START_Y, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut),
                 m_ContinuePageTransform.AnchorPosTo(564, m_TransitionTime, Axis.Y).Ease(Curve.CubeOut)
                 );
         }

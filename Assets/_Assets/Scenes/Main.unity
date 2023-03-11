@@ -574,9 +574,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.030652774
+    x: 0.000000029802322
     y: 0
-    width: 0.9386945
+    width: 0.99999994
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1425,6 +1425,16 @@ PrefabInstance:
     - target: {fileID: 2687850185082950908, guid: a346a73cf816ee64b885be0cbf60153d,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687850185082950908, guid: a346a73cf816ee64b885be0cbf60153d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687850185082950908, guid: a346a73cf816ee64b885be0cbf60153d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2727647664023635263, guid: a346a73cf816ee64b885be0cbf60153d,
