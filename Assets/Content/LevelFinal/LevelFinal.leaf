@@ -16,16 +16,20 @@ $if CityScore() > 2
       $call Music($Audio_CherryTownRestoration)
       $call Ambience($Audio_BustlingCafeChatter)
       $call StopRain()
+      {img Anim/1b/Banner.png}
       Has it already been a year?
       It’s the annual Cherry Festival is back... 
+      {/img}
       // {img-inline Anim/CityScore_A.png}
       {img Anim/Final/CherryDuck.png, Left}
       The town got its cherry-themed ducks in a row. 
       There was another storm last month…
       {/img}
-      But the town is still standing, and everyone was able to find shelter.
+      But the town is still standing.
+      {img Anim/3b/VoteForSmuckers.png}
       The Mayor is running for reelection…
       But you have a feeling the other candidates, Sophia and Fred, are going to give him a run for his money.
+      {/img}
       You still have an open invitation to interview at the Smoke City Herald…
       You're going to stick around Twin Lakes for now. 
       This place has grown on you. 
@@ -39,9 +43,11 @@ $elseif CityScore() >= 0
       $call Ambience($Audio_BustlingCafeChatter)
       $call StopRain()
       About a year later...
+      {img Anim/1b/Banner.png}
       It’s the annual Cherry Festival…
       Not as impressive as it used to be.
       But at least all the tents are still standing.
+      {/img}
       Homes and business are still recovering. 
       // $if CityScore() == 2
       //       {img-inline Anim/CityScore_B.png}
@@ -50,8 +56,10 @@ $elseif CityScore() >= 0
       // $elseif CityScore() == 0
       //       {img-inline Anim/CityScore_D.png}
       // $endif
+      {img Anim/3b/TwinLakesStrong.png}
       #TwinLakesStrong has become a call to action. 
       Not just a #Hashtag
+      {/img}
       You still have an invitation to interview at the Smoke City Herald…
       But you’ve decided to stick around for now. 
       You’re working with Dionne to mentor reporters from the high school newspaper… 
@@ -60,7 +68,6 @@ $elseif CityScore() >= 0
       Twin Lakes still has a ways to go… 
       {/img}
       Maybe you'll stick around, at least for now.
-      Or maybe longer. 
 // bad
 $else
       {bg $BG_FinalField}
@@ -68,17 +75,23 @@ $else
       $call Ambience($Audio_RuralFrogs)
       $call StopRain()
       Its been almost a year.
+      {img Anim/1b/Banner.png}
       It’s the annual Cherry Festival again…
+      {/img}
       Or at least, it would be...
       ...if Twin Lakes still existed.
       Turns out making a difference is harder than you thought.
       // {img-inline Anim/CityScore_F.png}
+      {img Anim/3a/angryCloud.png}
       A huge storm hit last month, and the town wasn’t ready. 
+      {/img}
       The Cheese Shop, Sophia’s Bakery, and Bookish have all shut down.
       About a third of the town has moved away...
       ...including people who wanted to stay but couldn’t afford it.  
+      {img Anim/3b/SmokeCityHerald.png}
       Khalisa is working as a reporter at the Smoke City Herald….
       Which is where you would be, if you hadn’t gotten fired. 
+      {/img}
       This time your work wasn’t up to par, but you’re can try again. 
       {img Anim/Final/RecipeCard.png, Left}
       At least you have an unparalleled recipe for cherry-chocolate granola. 
