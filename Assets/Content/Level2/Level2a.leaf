@@ -655,8 +655,10 @@ $choice ScienceStoryMap; Gotta go!
 
 $if !Visited(PhoneCallWynneD.StormeDNR)
 {@wynnedstorme}Oh, hey, El! Nice to meet you in person! 
+{img Anim/3b/Stats.png, Right}
 {@wynnedstorme} Just looking over some data... probably not the juicy reporter stuff you're looking for. 
 {@me} Actually, data's exactly what I need! I'm on the science beat. 
+{/img}
 
 $if StatCheck(Research, 5)
 Wynne tells you all about local increases in rainfall and rising lake volume.

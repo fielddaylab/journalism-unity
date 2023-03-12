@@ -949,6 +949,7 @@ $call Music($Audio_PaperPuddle)
 $call Ambience($Audio_UrbanSeagulls)
 $call StopRain()
 {layout Right}
+{img Anim/3a/FoxSmulder.png, Left}
 The local vet meets you downtown on their lunch break. 
 You can tell they have their hands full.
 {img Anim/3a/VetsPets.png, Left}

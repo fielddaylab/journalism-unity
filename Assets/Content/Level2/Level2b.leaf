@@ -24,9 +24,11 @@ $OnceChoice (CheckSquawkerMessages, "Check Squawker")
 
 // Original Name: Check Squawker messages
 :: CheckSquawkerMessages
+{img Anim/3b/BirdieProfile.png, Right}
 {@birdie}Hi, my name is Birdie. I saw your article. 
 {@birdie}Decent story, but you hardly even mentioned the wetlands!
 {@birdie}Can we meet?
+{/img}
 
 According to her profile, she runs a conservation group called CRANE.
 
@@ -43,10 +45,13 @@ $OnceChoice(BlockHerAndTurnOnSomeWebflix, "Block her and let her bother someone 
 @tags Trust
 {@me}{auto}I'm interested. Can you tell me more?
 $if Visited(TakeASnackBreak)
+{img Anim/3b/BirdieProfile.png, Right}
 {@birdie}About time.
 $elseif Visited(ReadUpOnCRANE)
+{img Anim/3b/BirdieProfile.png, Right}
 {@birdie}About time.
 $else
+{img Anim/3b/BirdieProfile.png, Right}
 {@birdie}Thanks for the quick response!
 $call AdjustStats(Trust + 1)
 $endif
@@ -360,10 +365,14 @@ $OnceChoice(DoYouHaveSourcesForAllThisInformation, "Do you have sources to back 
 
 // Original Name: "Do you have sources for all this information?"
 :: DoYouHaveSourcesForAllThisInformation
+{img Anim/3b/Stats.png, Right}
 {@birdie}This data comes straight from the Limnology Department website.
 {@birdie}Of course, the Spark Project doesn't care about data. 
+{/img}
+{img Anim/3b/SparkProject.png, Right}
 {@me}What's the Spark Project?  
 {@birdie}A local business expansion group. They're awful.
+{/img}
 {img Anim/2b/Bagel.png, Left}
 {@birdie}They would literally pave over paradise to build a bagel shop.
 You have to admit, Twin Lakes's bagel scene is sorely lacking.
@@ -475,13 +484,18 @@ $endif
 
 //Original Name: Ask for an interview
 :: AskForAnInterview
+{img Anim/3b/SparkLady.png, Right}
 {@sparkleader}Sure. I love doing press!
 {@sparkleader}The name's Nancy Gilcrest.
+{/img}
 {@sparkleader}What are you writing about? 
+{img Anim/3b/Swings.png, Right}
 {@sparkleader}The flood recovery volunteers? Our new playground initiatve? 
+{/img}
+
 
 $OnceChoice(BusinessIsDestroyingTheWetlands, "I'm writing about how business is destroying the wetlands.")
-$OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in an interview about Cherry Creek Marsh I wanted to get your perspective.")
+$OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in at the Cherry Creek Marsh. Can I get your perspective.")
 $OnceChoice(PlaygroundInitiative, "I'd love to hear about the playground initiative. What's that about?")
 
 //Original Name: Playground initiative 
@@ -851,8 +865,10 @@ $if StatCheck(Endurance, 4)
     $HubChoice(InPersonMayorCherryCreekMarshInterview, "Did you know that there are plans to pave over Cherry Creek Marsh?", 0.25)
 $else
     Oh no. You weren't fast enough!
+    {img Anim/3b/Ketchup.png, Right}
     The mayor is gone. No sign of him except some violent-looking ketchup splatter on the pavement.
     Better luck next time. 
+    {/img}
 
     $if !HasTime(0.25)
         Looks like you have to cut this short. You have just enough time to compile your story!
