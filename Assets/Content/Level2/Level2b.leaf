@@ -548,9 +548,10 @@ Instantly, her smile fades.
 
 $call GiveSnippet (SugarMarshReplacedWithLibrary)
 
-$OnceChoice(ApologizeForInsultingHer, "I'm sorry, I didn't mean to imply anything. Can we start over?")
-$OnceChoice(WhatWouldYouSayToPeopleWhoThinkWetlandsAreMoreImportant, "Shouldn't the remaining wetlands be protected?")
-$OnceChoice(RudeSparkProjectResponse, "Really? \"Think of the children?\" That's the best you've got, lady?")
+$choice DecideWhatToDoNext; End interview
+$HubChoice(ApologizeForInsultingHer, "I'm sorry, I didn't mean to imply anything. Can we start over?", 0.25)
+$HubChoice(WhatWouldYouSayToPeopleWhoThinkWetlandsAreMoreImportant, "Shouldn't the remaining wetlands be protected?", 0.25)
+$HubChoice(RudeSparkProjectResponse, "Really? \"Think of the children?\" That's the best you've got, lady?", 0.25)
 
 //OriginalName: Really? "Think about the children?" That's the best you've got? 
 :: RudeSparkProjectResponse
@@ -598,9 +599,10 @@ She shrugs.
 
 $call GiveSnippet(NewDevelopmentPutsTwinLakesOnTheMap)
 
-$OnceChoice(WhatAboutTheFloodRisk, "Did you know that wetland destruction can cause flooding?")
-$OnceChoice(PlanForCherryCreekMarsh, "What is your business plan for Cherry Creek Marsh?")
-$OnceChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population growth is worth destroying our local wildlife?")
+$choice DecideWhatToDoNext; End interview
+$HubChoice(WhatAboutTheFloodRisk, "Did you know that wetland destruction can cause flooding?", 0.25)
+$HubChoice(PlanForCherryCreekMarsh, "What is your business plan for Cherry Creek Marsh?", 0.25)
+$HubChoice(WhatIfTwinLakesCantSupportThatKindofGrowth, "Do you think population growth is worth destroying our local wildlife?", 0.25)
 
 //Original Name: What about the flood risk?
 :: WhatAboutTheFloodRisk

@@ -1132,8 +1132,8 @@ Wow. Didn't realize this was a campaign speech.
 $call GiveSnippet(Governor-Impact)
 
 $choice ScienceStoryMap; End interview
-$HubChoice(AnythingYoudLikeToSay, "Do you have anything else to say to the people of Twin Lakes?", 0.5)
-$HubChoice(WhatAboutPrevention, "Do you have any plans to stop this from happening again?", 0.5)
+$HubChoice(AnythingYoudLikeToSay, "Do you have anything else to say to the people of Twin Lakes?", 0.25)
+$HubChoice(WhatAboutPrevention, "Do you have any plans to stop this from happening again?", 0.25)
 
 :: AnythingYoudLikeToSay
 {@governor} Of course! I would tell them to stay strong and keep the faith.

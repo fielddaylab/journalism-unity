@@ -536,8 +536,9 @@ $endif
 
 $call GiveSnippet(NeighborhoodsLeftOut)
 
-$choice WhatBarriersAreGettingInTheWay; What barriers are getting in the way? 
-$choice WhyAreLowIncomeAreasMoreAtRisk; Why are those areas more at risk from flooding? 
+$choice WhatNeighborhood; End interview
+$HubChoice(WhatBarriersAreGettingInTheWay, "What barriers are getting in the way?", 0.25)
+$HubChoice(WhyAreLowIncomeAreasMoreAtRisk, "Why are those areas more at risk from flooding?", 0.25)
 
 // What barriers are getting in people's way?
 :: WhatBarriersAreGettingInTheWay
