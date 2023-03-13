@@ -224,8 +224,9 @@ He finally respends.
 
 $call GiveSnippet(BadQuoteAndWebsiteReference)
 
-$choice InYourOwnWords; I'll make sure to check. But can you tell me in your own words? 
-$choice IsItTrue; Is it true that some people haven't been able to sandbag their properties? 
+$choice AfterMayorInterview; End interview
+$HubChoice(InYourOwnWords, "I'll make sure to check. But can you tell me in your own words?", 0.25)
+$HubChoice(IsItTrue, "Is it true that some people haven't been able to sandbag their properties?", 0.25)
 
 // Is it true
 :: IsItTrue
@@ -237,8 +238,9 @@ You tap your foot impatiently.
 
 $call GiveSnippet(MayorSandbagsQuote)
 
-$choice HowDidYouChooseLocationsMayor; How did you choose the locations for filling stations? 
-$choice WhatAboutPeopleWhoCant; What about people who can't travel that far, or can't carry them?
+$choice AfterMayorInterview; End interview
+$HubChoice(HowDidYouChooseLocationsMayor, "How did you choose the locations for filling stations?", 0.25)
+$HubChoice(WhatAboutPeopleWhoCant, "What about people who can't travel that far, or can't carry them?", 0.25)
 
 // In your own words
 :: InYourOwnWords
@@ -248,8 +250,9 @@ $choice WhatAboutPeopleWhoCant; What about people who can't travel that far, or 
 
 $call GiveSnippet(MayorSandbagsQuote)
 
-$choice HowDidYouChooseLocationsMayor; How did you choose the locations of filling stations? 
-$choice WhatAboutPeopleWhoCant; What about people who can't travel that far, or can't carry them?
+$choice AfterMayorInterview; End interview
+$HubChoice(HowDidYouChooseLocationsMayor, "How did you choose the locations of filling stations?", 0.25)
+$HubChoice(WhatAboutPeopleWhoCant, "What about people who can't travel that far, or can't carry them?", 0.25)
 
 // How did you choose the locations?
 :: HowDidYouChooseLocationsMayor
@@ -280,6 +283,9 @@ $choice MayorEndsInterview; What would it take to set up more filling stations?
 {@mayorbarrysmuckers} Nice chattin' wih you, as always.
 {@mayorbarrysmuckers} And remember... less negativity, more #TwinLakesStrong!! 
 
+$goto AfterMayorInterview
+
+:: AfterMayorInterview
 $CheckFinalConverge()
 
 $HubChoice(InterviewBookseller, "Interview the bookseller about the flood", 0.25, "")
@@ -305,7 +311,8 @@ $choice DoYouFeelLikeYourShopIsReadyFortheFlood; Do you feel like your shop is r
 
 $call GiveSnippet(BookstoreStillRecovering)
 
-$choice DidYouHaveEnoughAccessToSandbags; Did you have enough access to sandbags?
+$choice AfterBooksellerInterview; Thank them and decide what to do next
+$HubChoice(DidYouHaveEnoughAccessToSandbags, "Did you have enough access to sandbags?", 0.25)
 
 // Have you been able to access sandbags over the past few days? 
 :: DidYouHaveEnoughAccessToSandbags
@@ -317,9 +324,9 @@ You almost trip over a pile of wet towels.
 
 // $call GiveSnippet(SandbagsOutsideBookstore)
 
+$choice AfterBooksellerInterview; Thank them and decide what to do next
 $HubChoice(WhatDoYouMean, "What are the issues?", 0.25)
 $HubChoice(DoYouKnowOfAnyResources, "Do you have any resources what could help me write this story?", 0.25)
-$choice AfterBooksellerInterview; Thank them and decide what to do next
 
 // What do you mean?
 :: WhatDoYouMean
@@ -488,8 +495,9 @@ $choice DoYouAgreeWithHisChoices; Do you agree with his choices?
 
 $call GiveSnippet(SandbagStationQuoteLocations)
 
-$choice WhyUpperLakeside; Aren't the upper lakeside neighborhoods actually <i>less</i> likely to flood?
-$choice WhichNeighborhoodsAreBeingLeftOut; Which neighborhoods are being left out? 
+$choice WhatNeighborhood; End interview
+$HubChoice(WhyUpperLakeside, "Aren't the upper lakeside neighborhoods actually <i>less</i> likely to flood?", 0.25)
+$HubChoice(WhichNeighborhoodsAreBeingLeftOut, "Which neighborhoods are being left out?", 0.25)
 
 // Upper Lakeside
 :: WhyUpperLakeside
@@ -1088,7 +1096,7 @@ $elseif StatCheck(Social, 6)
     $choice InterviewEsme; Go inside and start interview 
 $else
     You keep wandering around, knocking on doors when your phone rings.
-    //deplete remaining time if possible!
+    $call DecreaseTime(4)
     {@dionne} El, haven't you been watching the clock? Time's up. 
     {@me} I'm sorry, Dionne. I can't find anyone in Royal Hazel who's willing to talk!
     {@dionne} Royal Hazel? El, you're a middle-class white girl from the city. Nobody in there knows you at all.

@@ -448,8 +448,9 @@ $choice InterviewOptions; Say goodbye and decide what to do next
 {@pattyforbes} Would you really want a bunch of strangers staying in your neighborhood? 
 $call GiveSnippet(NIMBYLadyQuote)
 
-$choice SoMuchForLookingOutForNeighbors; What about the Mayor's request for people to help their neighbors? 
-$choice WhatWouldYouSayToPeople; What about the people who need to evacuate their homes?
+$choice InterviewOptions; End interview
+$HubChoice(SoMuchForLookingOutForNeighbors, "What about the Mayor's request for people to help their neighbors?", 0.25)
+$HubChoice(WhatWouldYouSayToPeople, "What about the people who need to evacuate their homes?", 0.25)
 
 // Did you hear what the Mayor said about people helping their neighbors? 
 ::SoMuchForLookingOutForNeighbors
@@ -794,7 +795,9 @@ She sighs.
 {@shelter} We can't allow people to bring their pets.
 {@shelter} And there's not enough space or supplies.
 {@shelter} I don't know much about pet-friendly shelters, but I'm sure your local vet could probaby help with that.
-{@article} Contact: Fox Smolder, Local Vet 
+$if !Visited(MeetWithLocalVet)
+      {@article} New contact: Fox Smolder, Local Vet 
+$endif
 $set VetContact = true
 
 $call GiveSnippet(OneQuestionConcernsAboutShelter)
@@ -807,7 +810,9 @@ $choice EndShelterCoordinatorInterview; End Interview
 {@shelter} Nope, no pets here. Honestly, I'm not sure why, but I know it's safety related.
 {@shelter} I hate turning away pet owners, but there's nothing I can do.
 {@shelter} I'm sure your local vet would know more.
-{@article} Contact: Fox Smolder, Local Vet 
+$if !Visited(MeetWithLocalVet)
+      {@article} New contact: Fox Smolder, Local Vet 
+$endif
 $set VetContact = true
 
 // $call GiveSnippet(CoordinatorNotSureWhyPetsArentAllowed)
@@ -917,7 +922,9 @@ $choice PetQuestions; How can people keep their pets safe during the flood?
 {@shelter} I'm not sure. 
 {@shelter} I should probably get back to work. 
 {@shelter} You could try the local vet, Fox Smolder.
-{@article} New Contact: Fox Smolder, Local Vet 
+$if !Visited(MeetWithLocalVet)
+      {@article} New Contact: Fox Smolder, Local Vet 
+$endif
 $set VetContact = true
 
 $choice EndShelterCoordinatorInterview; End Interview 
@@ -1012,7 +1019,7 @@ $choice NextStepAfterVetMeeting; Say goodbye and wave to the animals.
 {@fox} Plus trained volunteers, crates, pet food, and other pet supplies. 
 $call GiveSnippet(PetFriendlyShelterRequirements)
 
-$choice HowCanTheCityHelpOut; How can Twin Lakes help pet owners who need to evacuate?
+$HubChoice(HowCanTheCityHelpOut, "How can Twin Lakes help pet owners who need to evacuate?", 0.25)
 $HubChoice(WhereShouldPetOwnersGo, "Where should pet-owners go if they need to evacuate?", 0.25)
 $HubChoice(WhyNoPetArea, "Why doesn't the current shelter have those things?", 0.25)
 $choice NextStepAfterVetMeeting; End interview
