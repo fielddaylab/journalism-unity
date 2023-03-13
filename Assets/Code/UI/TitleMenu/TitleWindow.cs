@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,6 +49,7 @@ namespace Journalism.UI
 
         [Space(10)]
         [SerializeField] private AudioSystem m_AudioSystem;
+        [SerializeField] private string m_OpeningAudioURL;
 
         private bool m_LoadedFromPlaythrough;
 
@@ -222,6 +224,10 @@ namespace Journalism.UI
         }
 
         #endregion // Handlers
+
+        public void StartAudio() {
+            Game.Audio.SetMusic(m_OpeningAudioURL, 1);
+        }
 
         #region Animation
 

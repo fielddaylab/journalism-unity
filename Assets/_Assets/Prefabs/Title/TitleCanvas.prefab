@@ -1262,6 +1262,7 @@ MonoBehaviour:
   HeadlineGroup: {fileID: 8427780808285247365}
   PromptText: {fileID: 4968433842941331297}
   BootAudio: {fileID: 0}
+  TitleWindow: {fileID: 3254378498967554763}
 --- !u!114 &3254378498967554763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1302,6 +1303,7 @@ MonoBehaviour:
   m_ErrorPanel: {fileID: 6681506911779325169}
   m_ErrorText: {fileID: 334393875402204086}
   m_AudioSystem: {fileID: 0}
+  m_OpeningAudioURL: 
 --- !u!1 &2468241475389419320
 GameObject:
   m_ObjectHideFlags: 0

@@ -162,6 +162,7 @@ namespace Journalism {
                 Log.Warn("Previous player level data was not saved correctly. Should be a non-negative value. Starting at Level 1.");
                 levelIndex = 0;
             }
+            Game.Audio.SetMusic(null, 1);
             m_ScriptSystem.LoadLevel(levelIndex).OnComplete(() => {
                 m_ScriptSystem.StartFromCheckpoint(data);
             });

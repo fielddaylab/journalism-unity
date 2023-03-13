@@ -11,6 +11,7 @@ using TMPro;
 using System.Collections.Generic;
 using EasyAssetStreaming;
 using Journalism.UI;
+using Journalism;
 
 namespace Aqua {
     public class FastBootController : MonoBehaviour {
@@ -28,6 +29,8 @@ namespace Aqua {
 
         [Header("Run")]
         public AudioSource BootAudio;
+        public TitleWindow TitleWindow;
+        
 
         [NonSerialized] private ReadyPhase m_ReadyPhase = 0;
 
@@ -45,6 +48,8 @@ namespace Aqua {
             while (HeadlineTex.IsLoading()) {
                 yield return null;
             }
+
+            TitleWindow.StartAudio();
 
             yield return 0.5f;
 

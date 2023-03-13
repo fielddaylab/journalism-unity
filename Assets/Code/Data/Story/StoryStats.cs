@@ -62,7 +62,6 @@ namespace Journalism {
             //add negative quality tag if the story had no picture. 
             if (!hasPicture){
                 stats.StoryHasPicture = false;
-                stats.QualitySubtract++;
                 stats.TotalQuality--;
             } else {
                 stats.StoryHasPicture = true;
