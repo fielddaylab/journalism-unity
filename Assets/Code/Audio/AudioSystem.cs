@@ -104,7 +104,7 @@ namespace Journalism {
             }
 
             AudioClip clip = evt.SampleRandomizer.Next();
-            AudioSource.PlayClipAtPoint(clip, default, evt.Volume.Generate());
+            AudioSource.PlayClipAtPoint(clip, default, m_MaxVolume);
             return clip.length;
         }
 

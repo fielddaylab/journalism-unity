@@ -1756,7 +1756,7 @@ $endif
 
 $Feedback("MayorQuoteVagueAnswer",                          "feedbackA", "Getting tired of Smuckers commending volunteers without doing anything to help...")
 $Feedback("MayorInfoNotEnoughSpace",                        "feedbackA", "Great idea! My door is open to any evacuee friends!")
-$Feedback("MayorInfoNearTolerableConditions",               "feedbackA", "\"Near tolerable,\" huh? With how many need shelter, that doesn't seem good enough...")
+$Feedback("MayorInfoNearTolerableConditions",               "feedbackA", "'Near tolerable,'' huh? With how many need shelter, that doesn't seem good enough...")
 $Feedback("MayorQuotePeopleTakeCareOfEachOther",            "feedbackA", "We do care for each other here! #TwinLakesStrong!")
 $Feedback("MayorAdvicePeopleShouldEvacuate",                "feedbackA", "Get out of those flood zones! Your life is worth more than some flood damage.")
 $Feedback("FiftyPercentChanceOfDamFailure",                 "feedbackA", "Dam failure at the odds of a coin flip?? That's some scary stuff...")
