@@ -116,7 +116,6 @@ $choice OffToWork; Off to work
 {layout Right}
 You haven't finished unpacking your boxes yet.
 Unfortunately, this makes it <i>slightly</i> tricky to find your rain gear. 
-{img Anim/1a/CollectGear.webm}
 Looks like you'll be repping NYC in a plastic trash bag and swim goggles.  
 $call AdjustStats(Tech + 1, Resourceful + 1)
 $choice OffToWork; Off to work
