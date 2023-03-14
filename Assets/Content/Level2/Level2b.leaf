@@ -929,8 +929,8 @@ $choice DecideWhatToDoNext; Leave City Hall and plan your next move
 
 //Original Name: Look around City Hall
 :: ExploreCityHall
-You head inside after the mayor.
-He's already gone, and the lobby is bustling with busy-looking people. 
+You make your way inside City Hall.
+The lobby is bustling with busy-looking people.
 
 $HubChoice(TalkToSomeone, "Look for someone to talk with", 0.25)
 $choice ReadTheBulletinBoard; Read the bulletin board 
@@ -1673,7 +1673,7 @@ $else
         {@dionne}   This story should help a lot of people... 
         {@dionne}   Though I gotta admit, some of this info is pretty low-quality.
     $elseif StoryAlignment() >= MEDIUM_THRESHOLD
-        {@dionne}   Nice work, Rookie. Your story construction is pretty solid!
+        {@dionne}   Nice work, Rookie. Your story construction is... not bad, but also not the greatest we've seen, either.
         {@dionne}   Your quality control could definitely use some work. 
         {@dionne}   Still. Not bad for your first natural disaster. 
     $else
