@@ -136,9 +136,7 @@ $if FirstVisit()
     {img Anim/1b/BenAndSudha.png, Right}
     Ben and Sudha are using coffee cups and recycle bins to catch rainwater dripping from the ceiling.
     {/img}
-    {img Anim/1b/SpinningTire.webm, Right}
     Out front, Khalisa is struggling to push her car out of the flooded street.
-    {/img}
 $endif
 
 $HubChoice(HeadOut, "Enough stalling. Time to go.", 0)
@@ -487,7 +485,7 @@ $if StatCheck(Trust, 3)
     $call GiveSnippet(VolunteerInfo)
 $elseif StatCheck(Social, 3)
     {@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!
-    where people can find sandbags.
+    He tells you where people can find sandbags.
     $call GiveSnippet(VolunteerInfo)
 $else
     You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you.
@@ -546,7 +544,7 @@ $endif
 $call Music($Audio_Flood)
 $call StopAmbience()
 $call Rain($Audio_HighFlowRiver)
-{img Anim/1b/Megaphone.webm, Right}
+{img Anim/1b/Megaphone.png, Right}
 {@nora} Houseboat, stay afloat! Houseboat, stay afloat!
 {@me} Excuse me... Ms. Houseboat Lady... do you have a minute to talk?
 {/img}
@@ -573,7 +571,7 @@ $if Stat(Tech) == 2 , StatCheck(Endurance, 3)
     {img Anim/1b/RainGauge.png}
     The wind and rain make it tricky to get a good shot...
     {/img}
-    {img Anim/1b/Tree-2.png}
+    {img Anim/1b/Tree.png}
     But then you notice a nearby tree. The perfect vantage point!
     Thanks to your {stat-name}endurance{/stat-name}-boosting breakfast, you make it easily to the top.
     {/img}
