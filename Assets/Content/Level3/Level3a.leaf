@@ -1111,6 +1111,7 @@ $endif
 //Go to the senior citizen apartment building
 :: GoToSeniorCitizenApartments
 {clear-text}
+{/img}
 $call SetLocation("SeniorApts")
 {bg $BG_SeniorCitizenApts}
 $call Music($Audio_SolemnWaters)
@@ -1236,12 +1237,12 @@ Poor lady. She reminds you of your neighbor Jeannie...
 Except with a quail curled up on her lap instead of a cat. 
 $call GiveSnippet(ApartmentContext)
 
+$choice GoToSeniorCitizenApartments; End interview and decide what to do next
 $if Visited(WhereHaveYouBeenStaying), Visited(DoYouKnowWhenYoullBeAllowedBackIn)
       $choice IsThereAnythingICanDoToHelp; Is there anything I can do to help?
 $endif
 $HubChoice(WhereHaveYouBeenStaying, "Where have you been staying?", 0.25)
 $HubChoice(DoYouKnowWhenYoullBeAllowedBackIn, "Do you know when you'll be allowed to move back in?", 0.25)
-$choice GoToSeniorCitizenApartments; End interview and decide what to do next
 
 // Where have you been staying in the meantime?
 :: WhereHaveYouBeenStaying
@@ -1276,7 +1277,9 @@ $choice GoToSeniorCitizenApartments; End interview and decide what to do next
 {/img}
 {img Anim/3a/ConcernedQuail.png, Left}
 The quail on her lap curls up and coos sadly. 
+{/img}
 
+$choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
 $if TimeRemaining() > 0.25
       $choice CheckYourBagForQuailSnacks; Check your bag for quail-appropriate snacks
       $HubChoice(SeeIfYouCanGetInside, "Try to convince the building manager to let you go inside for Queenie's food", 0.25, "")
@@ -1287,8 +1290,6 @@ $if TimeRemaining() > 0.25
 $else
       $choice StoryConstruction3a; Time to assemble the science story...
 $endif
-{/img}
-$choice GoToSeniorCitizenApartments; Thank the lady and get back to work. You're on a deadline here. 
 
 
 // Try to convince the building manager to let you go inside for Queenie's food 
