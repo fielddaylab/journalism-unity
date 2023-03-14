@@ -1371,12 +1371,15 @@ $else //if StoryHasPicture() == true
     $endif
 $endif
 
+#const GOOD_THRESHOLD = 0.5
+#const MEDIUM_THRESHOLD = 0.3
+
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment
-$if StoryAlignment() >= 0.4
+$if StoryAlignment() >= GOOD_THRESHOLD
     //good: +1 city score
     $call AdjustCityScore(+1)
-$elseif StoryAlignment() < 0.2
+$elseif StoryAlignment() < MEDIUM_THRESHOLD
     //bad: -1 city score
     $call AdjustCityScore(-1)
 $endif //medium: no change
@@ -1390,12 +1393,12 @@ $endif //1 or 2: no change
 
 
 $if StoryScore() == "good" //3+ net quality
-    $if StoryAlignment() >= 0.5
+    $if StoryAlignment() >= GOOD_THRESHOLD
         {@dionne}   Amazing work today, El!
         {@dionne}   You stuck to the assignment and gathered high-quality quotes and photos.
         {@dionne}   So many people read your story that it broke the server!
         {@dionne}   Now if only I had any clue how to get the website back online...
-    $elseif StoryAlignment() >= 0.3
+    $elseif StoryAlignment() >= MEDIUM_THRESHOLD
         {@dionne}   Nice work out there, El. This is some high-quality stuff!
         {@dionne}   You could've stuck a little more closely to my notes.
         {@dionne}   But still a solid story. We're already getting tons of engagement online!
@@ -1405,11 +1408,11 @@ $if StoryScore() == "good" //3+ net quality
         {@dionne}   Make sure to stick to the assignment to hook more readers... and hopefully help more people.
     $endif
 $elseif StoryScore() == "medium" //1 or 2 net quality
-    $if StoryAlignment() >= 0.5
+    $if StoryAlignment() >= GOOD_THRESHOLD
         {@dionne}   Great work, El! You stuck to the assignment and gathered some solid info.
         {@dionne}   Look at those numbers climbing. We're getting tons of engagement!
         {@dionne}   Glad you were here to get the word out.
-    $elseif StoryAlignment() >= 0.3
+    $elseif StoryAlignment() >= MEDIUM_THRESHOLD
         {@dionne}   Not bad, El! You got some solid quotes and photos.
         {@dionne}   You veered away from the story breakdown a little.
         {@dionne}   Still, your story should get plenty of engagement--and hopefully help a lot of people.
@@ -1419,11 +1422,11 @@ $elseif StoryScore() == "medium" //1 or 2 net quality
         {@dionne}   Still, you got the word out. Hopefully it'll be enough to keep people safe.
     $endif
 $else //<1 net quality
-    $if StoryAlignment() >= 0.5
+    $if StoryAlignment() >= GOOD_THRESHOLD
         {@dionne}   Great job sticking to the assignment, El!
         {@dionne}   Yikes... your quality control could use some work, though.
         {@dionne}   See if you can scrape together some more quality images and quotes.
-    $elseif StoryAlignment() >= 0.3
+    $elseif StoryAlignment() >= MEDIUM_THRESHOLD
         {@dionne}   Not bad, El! Pretty decent story construction.
         {@dionne}   These story segments are... a little out there.
         {@dionne}   Bigger papers have more help, but out here, you need to be a little scrappy.

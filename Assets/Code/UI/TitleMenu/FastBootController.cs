@@ -49,8 +49,6 @@ namespace Aqua {
                 yield return null;
             }
 
-            TitleWindow.StartAudio();
-
             yield return 0.5f;
 
             yield return HeadlineGroup.FadeTo(1, 1f);
@@ -97,6 +95,8 @@ namespace Aqua {
             }
 
             m_ReadyPhase = ReadyPhase.Ready;
+
+            TitleWindow.StartAudio();
 
             yield return Routine.Combine(
                 ClickAnywhere.FadeTo(0, 0.6f)

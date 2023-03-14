@@ -1697,12 +1697,15 @@ $else
     $endif
 $endif
 
+#const GOOD_THRESHOLD = 0.5
+#const MEDIUM_THRESHOLD = 0.3
+
 ///CITY SCORE ADJUSTMENT
 //Alignment-based city score adjustment
-$if StoryAlignment() >= 0.5
+$if StoryAlignment() >= GOOD_THRESHOLD
     //good: +1 city score
     $call AdjustCityScore(+1)
-$elseif StoryAlignment() < 0.3
+$elseif StoryAlignment() < MEDIUM_THRESHOLD
     //bad: -1 city score
     $call AdjustCityScore(-1)
 $endif //medium: no change
@@ -1716,11 +1719,11 @@ $endif //1 or 2: no change
 
 
 $if StoryScore() == "good"
-    $if StoryAlignment() >= 0.5
+    $if StoryAlignment() >= GOOD_THRESHOLD
       //   {@dionne}   Stellar work Rookie! I can tell you put your heart into this.
       //   {@dionne}   Solid story construction and lots of useful info.
       //   {@dionne}   Maybe you've got a Pulitzer Prize in your future.
-    $elseif StoryAlignment() >= 0.3
+    $elseif StoryAlignment() >= MEDIUM_THRESHOLD
       //   {@dionne}   Nice work, Rookie! Your quotes and photos are top notch.
       //   {@dionne}   Admittedly, we could've used a little more useful info... 
       //   {@dionne}   But this should still help a lot of people. 
@@ -1730,11 +1733,11 @@ $if StoryScore() == "good"
       //   {@dionne}   Make sure to check my notes next time. It's all in there.  
     $endif
 $elseif StoryScore() == "medium"
-    $if StoryAlignment() >= 0.5
+    $if StoryAlignment() >= GOOD_THRESHOLD
       //   {@dionne}   Nice work getting the right info out there!
       //   {@dionne}   These story segments could use some quality control, 
       //   {@dionne}   But still, a solid story. Twin Lakes is lucky to have you.
-    $elseif StoryAlignment() >= 0.3
+    $elseif StoryAlignment() >= MEDIUM_THRESHOLD
       //   {@dionne}   Hmm... not bad, Rookie! Good quotes, and decent story construction.
       //   {@dionne}   This should be enough to help a lot of people.  
       //   {@dionne}   Next time, make sure to check my notes. You veered off topic a little. 
@@ -1744,11 +1747,11 @@ $elseif StoryScore() == "medium"
       //   {@dionne}   Still. Not bad for your first natural disaster. 
     $endif
 $else
-    $if StoryAlignment() >= 0.5
+    $if StoryAlignment() >= GOOD_THRESHOLD
       //   {@dionne}   Nice work, Rookie. You got a lot of useful information out there! 
       //   {@dionne}   This story should help a lot of people... 
       //   {@dionne}   Though I gotta admit, some of this info is pretty low-quality.
-    $elseif StoryAlignment() >= 0.3
+    $elseif StoryAlignment() >= MEDIUM_THRESHOLD
       //   {@dionne}   Nice work, Rookie. Your story construction is pretty solid!
       //   {@dionne}   Your quality control could definitely use some work. 
       //   {@dionne}   Still. Not bad for your first natural disaster. 
