@@ -38,6 +38,9 @@ $choice GetReadyCheckpoint; Got it.
 
 :: GetReadyCheckpoint
 @checkpoint
+$call Music($Audio_CherryTownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {bg $BG_OfficeExterior}
 $goto GetReady
 

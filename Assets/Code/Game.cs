@@ -58,7 +58,7 @@ namespace Journalism {
         private void Start() {
             m_ScriptSystem.LoadLocalization(m_DefaultLoc);
 
-            Game.Events.Dispatch(GameEvents.LoadTitleScreen);
+            Game.Events?.Dispatch(GameEvents.LoadTitleScreen);
         }
 
         private void LateUpdate() {

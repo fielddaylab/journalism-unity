@@ -687,8 +687,8 @@ $choice HaveYouToldPeopleThatTheFloodMapSeemsWrong; Have you told anyone that th
 
 // Have you told people
 :: HaveYouToldPeopleThatTheFloodMapSeemsWrong
-{@rainn} Nah. Haven't had time.  
-{@rainn} Besides, they'd probably just keep ignorin' us. 
+{@rainn} Nah. Haven't had time.
+{@rainn} Besides, they'd probably just keep ignorin' us.
 
 $choice GoToSandbaggingStation; Thank him for the interview.
 
