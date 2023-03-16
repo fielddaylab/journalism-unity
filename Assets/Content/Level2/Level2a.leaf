@@ -315,7 +315,7 @@ $if FirstVisit()
 $endif
 
 
-$if HasTime(0.25)
+$if HasTime(0.5)
     Your science story is due in {timeLeft}.
     {map UI/MapPlaceholder.png}
 

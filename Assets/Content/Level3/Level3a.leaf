@@ -540,9 +540,13 @@ $call Music($Audio_Flood)
 $call StopAmbience()
 $call StopRain()
 
-$if !HasTime(0.25)
-    Looks like you have to cut this short. You have just enough time to compile your story!
-    $choice StoryConstruction3a; Compile your story
+$if !HasTime(0.5)
+      $if HasTime(0.25), !Visited(TakePhotosOfShelter)
+            $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
+      $else 
+            Looks like you have to cut this short. You have just enough time to compile your story!
+            $choice StoryConstruction3a; Compile your story
+      $endif
 $elseif Visited(TalkToManWithDog), Visited(AskToInterviewTheShelterCoordinator), Visited(TakePhotosOfShelter)
       Looks like you've already done everything you can here.
       $choice FloodShelterChoices; Decide what to do next.
@@ -574,8 +578,9 @@ $endif
 $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
+$else
+      $choice FloodShelterChoices; Decide what to do next
 $endif
-$choice FloodShelterChoices; Decide what to do next
 
 // Talk to the sad-looking man standing with his dog
 :: TalkToManWithDog
@@ -645,7 +650,7 @@ $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
 $else
-$HubChoice(TellMeWhatHappened, "Interview the man about his troubles.", 0.25, "")
+      $HubChoice(TellMeWhatHappened, "Interview the man about his troubles.", 0.25, "")
 $endif
 
 // Check your bag for something to offer him.
@@ -653,19 +658,18 @@ $endif
 You rifle around in your pack.
 
 $if StatCheck(Resourceful, 4)
-Hmm... Dogs like beef jerky, right?
-{{img Anim/3b/Dog.png}}
-You toss the mutt half a stick and he leaps to catch it midair.
-{@doug} Thanks, kid. Odie here was getting pretty hungry.
-{@doug} Thought we'd be all settled into the shelter by now. 
-{/img}
-$HubChoice(TellMeWhatHappened, "Interview him about his troubles.", 0.25, "")
-
+      Hmm... Dogs like beef jerky, right?
+      {{img Anim/3b/Dog.png}}
+      You toss the mutt half a stick and he leaps to catch it midair.
+      {@doug} Thanks, kid. Odie here was getting pretty hungry.
+      {@doug} Thought we'd be all settled into the shelter by now. 
+      {/img}
+      $HubChoice(TellMeWhatHappened, "Interview him about his troubles.", 0.25, "")
 $else
-Well, you've got, um...
-Two leftover quarters from laundry?
-You drop the coins in his palm halfheartedly.
-{@doug} Uh... thanks.
+      Well, you've got, um...
+      Two leftover quarters from laundry?
+      You drop the coins in his palm halfheartedly.
+      {@doug} Uh... thanks.
 $endif
 
 $choice FloodShelterChoices; Wish him well and find someone else to talk to.
@@ -695,7 +699,12 @@ He scrawls the address on the back of a receipt for dog food.
 // $call GiveSnippet(KickedOutOfApartments)
 $set ApartmentAddress = true
 
-$choice FloodShelterChoices; Decide what to do next. 
+$if !HasTime(0.25)
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice StoryConstruction3a; Compile your story
+$else
+      $choice FloodShelterChoices; Decide what to do next. 
+$endif
 
 // Ask to interview the clipboard-wielding woman
 :: AskToInterviewTheShelterCoordinator
@@ -718,8 +727,8 @@ $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
 $else
-$HubChoice(OfferToHelpCarryInFood, "Offer to help carry the food inside.", 0.25, "")
-$HubChoice(UseYourSocialSkills, "Use your social skills to put her at ease.", 0.25, "")
+      $HubChoice(OfferToHelpCarryInFood, "Offer to help carry the food inside.", 0.25, "")
+      $HubChoice(UseYourSocialSkills, "Use your social skills to put her at ease.", 0.25, "")
 $endif
 
 // Offer to help carry the food inside
@@ -937,16 +946,21 @@ $choice FloodShelterChoices; Decide what to do next.
 //Flood Shelter Choices
 :: FloodShelterChoices
 $call SetLocation("Shelter")
-$choice CallDisabilityRightsExpertAtLocalCollege; Call disability rights expert at local college 
-$HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
-$HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
-$HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
-$if VetContact == true
-      $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "Downtown")
+$if HasTime(0.25)
+      $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
+      $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
+      $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
+      $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
+      $if VetContact == true
+            $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "Downtown")
+      $endif
+      $if ApartmentAddress
+            $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building", 0.25, "SeniorApts")
+      $endif
+$else
+      Looks like you have to cut this short. You have just enough time to compile your story!
+      $choice StoryConstruction3a; Compile your story
 $endif
-$if ApartmentAddress
-      $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building", 0.25, "SeniorApts")
-$endif 
 
 // Head downtown to talk to the local vet, Fox Smolder
 :: MeetWithLocalVet
