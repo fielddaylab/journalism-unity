@@ -690,7 +690,7 @@ $choice HaveYouToldPeopleThatTheFloodMapSeemsWrong; Have you told anyone that th
 {@rainn} Nah. Haven't had time.  
 {@rainn} Besides, they'd probably just keep ignorin' us. 
 
-$choice WhyDoPeopleFeelIgnored; Can you tell me more about that? 
+$choice GoToSandbaggingStation; Thank him for the interview.
 
 // Talk to volunteer filling sandbags
 :: InterviewSandbagFillingVolunteer
