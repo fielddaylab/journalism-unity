@@ -72,7 +72,7 @@ $choice AcceptStory; Accept Story Assignment
 :: AcceptStory 
 @checkpoint
 {bg $BG_TownMeeting}
-$call SetTimeRemaining(4)
+$call SetTimeRemaining(2.75)
 
 $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople
 $HubChoice(SnagInterviewWithMayor, "Try to snag an interview with the Mayor", 0, "")
@@ -508,7 +508,7 @@ $choice InterviewOptions; Say goodbye and decide what to do next
 
 // Have you talked to anyone about the accessibility problems?
 :: HaveYouToldAnyoneYourConcerns
-{img Anim3a/OldGuy.png, Left}
+{img Anim/3a/OldGuy.png, Left}
 Barlow seems distracted looking out the window. You wonder if he remembers you are there. 
 Then he speaks up.
 {@barlow}The town meeting was over before I could say anything. 
