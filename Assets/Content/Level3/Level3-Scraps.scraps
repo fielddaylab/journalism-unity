@@ -236,7 +236,7 @@ For those looking to help, the shelter is accepting donations. Coordinators urge
 :: WhyArentPetsAllowedQuote
 @type Quote 
 @quality Good 
-@attr Facts
+@attr Facts, Useful
 "Pets in shelters are a safety issue for people with asthma or allergies. Plus, animals tend to get agitated during disasters."  
  
 :: PetFriendlyShelterRequirements
@@ -277,7 +277,7 @@ Local vet Fox Sculder said pet owners should stay with relatives, or look for ne
 
 :: DescriptionOfApartmentInterior
 @type Observation
-@quality Great 
+@quality Good 
 @attr Facts, Color
 Inside Strudel Apartments, the scene is grim: flickering lights, an out-of-order elevator, and moldy carpets.
 

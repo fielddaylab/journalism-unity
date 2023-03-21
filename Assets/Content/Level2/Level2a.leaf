@@ -1461,14 +1461,14 @@ She gives you the address for the Department of Limnology.
 {@cafeowner}Thanks again! Stop by any time. 
 
 $choice MainStreetFloodRecovery; Return to Main Street
-$choice ScienceStoryMap; Decide where to go next  
+$choice ScienceStoryMap; Head home to plan your next steps  
 
 // Original Name: Thanks
 :: Thanks
 {@cafeowner}No problem. Stop by any time!
 
 $choice MainStreetFloodRecovery; Head back out to Main Street 
-$choice ScienceStoryMap; Decide where to go next 
+$choice ScienceStoryMap; Head home to plan your next steps 
 
 // Original Name: "Can you give me the rainfall statistics?"
 :: CanYouGiveMeTheRainfallStatistics
