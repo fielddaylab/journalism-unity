@@ -182,7 +182,6 @@ $call AdjustStats(Research + 2)
 {/img}
 
 // shudder style
-{img Anim/2a/RingingPhone.png, Left}
 {anim rumble} RRRRING.
 $choice AnswerPhone; Answer phone
 

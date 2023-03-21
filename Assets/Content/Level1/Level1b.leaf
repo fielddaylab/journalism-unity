@@ -23,7 +23,7 @@ $call Rain($Audio_RainOutsideChill)
 // {@me} Yikes.
 This is the break you've been waiting for.
 {img Anim/3b/Opossum.png, Right}
-But it's better than reporting on local opossom families and unique varieties of cherry jam.
+It sure is better than reporting on local opossom families and unique varieties of cherry jam.
 $call ActivateStory()
 {@dionne} Okay, El.
 {/img}
@@ -410,11 +410,11 @@ $if FirstVisit()
 $endif
 
 $if HasTime(0.5)
-$HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, "Upper Lake Dam")
-$HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "Upper Lake Dam")
-$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "Upper Lake Dam")
-$HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "Upper Lake Dam")
-$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "Upper Lake Dam")
+$HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, "")
+$HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
+$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "")
+$HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
+$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
 $HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "Cherry Festival")
 {map UI/MapPlaceholder.png}
 $else
