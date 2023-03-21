@@ -26,7 +26,10 @@ namespace Journalism {
 
             Rect cameraRect = GetCameraRenderRegion((float) DesiredWidth / DesiredHeight);
             this.CacheComponent(ref m_Camera).rect = cameraRect;
-            RenderLetterboxing(cameraRect, LetterboxColor);
+        }
+
+        private void OnPostRender() {
+            RenderLetterboxing(m_Camera.rect, LetterboxColor);
         }
 
         static private Rect GetCameraRenderRegion(float aspect) {

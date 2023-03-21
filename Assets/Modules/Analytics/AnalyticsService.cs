@@ -129,10 +129,13 @@ namespace Journalism
             m_FeedbackInProgress = false;
             m_TextMapVisible = false;
 
+            m_LastKnownChoiceLocations = null;
+
             m_LastKnownSlotLayout = new List<StoryBuilderSlot>();
 
             // General Events
             Game.Events.Register(GameEvents.StoryEvalBegin, OnFeedbackBegin, this)
+                .Register<string>(GameEvents.ProfileStarting, SetUserCode, this)
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
                 .Register<TextChoice>(GameEvents.ChoiceCompleted, OnChoiceCompleted, this)
                 .Register<TextNodeParams>(GameEvents.OnPrepareLine, OnPrepareLine, this)
@@ -249,6 +252,7 @@ namespace Journalism
 
         private void SetUserCode(string userCode)
         {
+            Debug.Log("[Analytics] Setting user code: " + userCode);
             m_Log.Initialize(new OGDLogConsts() {
                 AppId = m_AppId,
                 AppVersion = m_AppVersion,
@@ -523,9 +527,11 @@ namespace Journalism
 
             string current_location = Assets.Location(Player.Location()).Name;
             List<string> locations_list = new List<string>(); // locations currently displayed on the map
-            foreach (var id in m_LastKnownChoiceLocations) {
-                string locStr = id.IsEmpty ? "N/A" : Assets.Location(id).Name;
-                locations_list.Add(locStr);
+            if (m_LastKnownChoiceLocations != null) {
+                foreach (StringHash32 id in m_LastKnownChoiceLocations) {
+                    string locStr = (id.IsEmpty || id == null) ? "N/A" : Assets.Location(id).Name;
+                    locations_list.Add(locStr);
+                }
             }
 
             using (var e = m_Log.NewEvent("open_choice_map")) {

@@ -96,7 +96,7 @@ namespace Aqua {
 
             m_ReadyPhase = ReadyPhase.Ready;
 
-            TitleWindow.StartAudio();
+            TitleWindow.Show();
 
             yield return Routine.Combine(
                 ClickAnywhere.FadeTo(0, 0.6f)

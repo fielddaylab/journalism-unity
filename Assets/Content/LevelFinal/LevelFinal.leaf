@@ -57,7 +57,7 @@ $elseif CityScore() >= 0
       //       {img-inline Anim/CityScore_D.png}
       // $endif
       {img Anim/3b/TwinLakesStrong.png}
-      #TwinLakesStrong has become a call to action. 
+      <noparse>#TwinLakesStrong has become a call to action. 
       Not just a #Hashtag
       {/img}
       You still have an invitation to interview at the Smoke City Herald…

@@ -99,6 +99,8 @@ namespace Journalism.UI
             m_NewVolumeSlider.onValueChanged.AddListener(HandleVolumeAdjusted);
             m_ContinueVolumeSlider.onValueChanged.AddListener(HandleVolumeAdjusted);
 
+            StartAudio();
+
             // if player returns to title menu from game, start at continue screen
             if (m_LoadedFromPlaythrough) {
                 OnHubContinueButtonClicked();
@@ -198,7 +200,7 @@ namespace Journalism.UI
         }
 
         private void OnContinueNameRetrieved(string inName) {
-            if (!inName.Equals(string.Empty)) {
+            if (string.IsNullOrEmpty(inName)) {
                 m_ContinueNameText.text = inName;
             }
 
@@ -224,6 +226,8 @@ namespace Journalism.UI
 
         public void StartAudio() {
             Game.Audio.SetMusic(m_OpeningAudioURL, 1);
+            Game.Audio.SetAmbience(null, 1);
+            Game.Audio.SetRain(null, 1);
         }
 
         #region Animation

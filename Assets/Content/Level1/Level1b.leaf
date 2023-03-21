@@ -21,6 +21,7 @@ $call Rain($Audio_RainOutsideChill)
 // {img-inline Anim/CityScore_D.png, Right}
 // {@dionne} Great, because when it comes to preparedness, Twin Lakes doesn’t exactly have a stellar track record.
 // {@me} Yikes.
+One natural disaster might not be quite enough to get you in at the Smoke City Herald...
 This is the break you've been waiting for.
 {img Anim/3b/Opossum.png, Right}
 It sure is better than reporting on local opossom families and unique varieties of cherry jam.
@@ -37,6 +38,9 @@ $choice GetReadyCheckpoint; Got it.
 
 :: GetReadyCheckpoint
 @checkpoint
+$call Music($Audio_CherryTownRestoration)
+$call Ambience($Audio_StreetBustle)
+$call Rain($Audio_RainOutsideChill)
 {bg $BG_OfficeExterior}
 $goto GetReady
 

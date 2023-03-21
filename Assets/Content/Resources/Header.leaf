@@ -54,6 +54,9 @@
 
 // CONSTS / RESOURCES
 
+// Map
+#const Map_Flood = "UI/MapPlaceholder.png"
+
 // Backgrounds
 #const BG_Bedroom = "BG/BedroomMorning.mp4"
 #const BG_BedroomDesk = "BG/Bedroom2.mp4"

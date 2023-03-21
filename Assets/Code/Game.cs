@@ -37,6 +37,8 @@ namespace Journalism {
 
         private readonly EventDispatcher<object> m_EventDispatcher = new EventDispatcher<object>();
 
+        private string m_ProfileName = null;
+
         protected override void Awake() {
             base.Awake();
 
@@ -58,7 +60,7 @@ namespace Journalism {
         private void Start() {
             m_ScriptSystem.LoadLocalization(m_DefaultLoc);
 
-            Game.Events.Dispatch(GameEvents.LoadTitleScreen);
+            Game.Events?.Dispatch(GameEvents.LoadTitleScreen);
         }
 
         private void LateUpdate() {
@@ -111,6 +113,7 @@ namespace Journalism {
 
         private void OnNewNameSuccess(string inName) {
             Game.Events.Dispatch(GameEvents.NewNameGenerated, inName);
+            m_ProfileName = inName;
         }
 
         private void OnNewNameFail(OGD.Core.Error error) {
@@ -134,6 +137,7 @@ namespace Journalism {
                 Game.UI.PushInputMask(InputLayerFlags.OverStory);
             }
             else {
+                Game.Events.Dispatch(GameEvents.ProfileStarting, m_ProfileName);
                 Game.Events.Dispatch(GameEvents.NewGameSuccess);
                 m_ScriptSystem.LoadLevel(0).OnComplete(() => {
                     m_ScriptSystem.StartLevel();
@@ -156,6 +160,8 @@ namespace Journalism {
         }
 
         private void OnContinueGameSuccess(PlayerData data) {
+            Game.Events.Dispatch(GameEvents.ProfileStarting, m_ProfileName);
+
             Game.Events.Dispatch(GameEvents.ContinueGameSuccess);
             int levelIndex = Player.Data.LevelIndex;
             if (levelIndex < 0) {
@@ -177,6 +183,7 @@ namespace Journalism {
             // TODO: Pause Input
             Game.UI.PushInputMask(InputLayerFlags.Menus);
 
+            m_ProfileName = userCode;
             m_SaveSystem.ReadServerSave(userCode)
                 .OnComplete(OnContinueGameSuccess)
                 .OnFail(OnContinueGameFail);

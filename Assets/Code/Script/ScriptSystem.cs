@@ -13,6 +13,7 @@ using UnityEngine.Scripting;
 using Journalism.UI;
 using EasyBugReporter;
 using FDLocalization;
+using UnityEngine.SceneManagement;
 
 namespace Journalism {
     public sealed class ScriptSystem : MonoBehaviour, IDumpSource {
@@ -283,7 +284,9 @@ namespace Journalism {
                 Routine.Start(LoadCheckpoint());
             } else {
                 // TODO: Title screen? What do we do?
-                yield return Game.UI.GameOver.Hide();
+                Game.UI.GameOver.InstantHide();
+                Game.Events?.Dispatch(GameEvents.PrepareTitleReturn);
+                Game.Events?.Dispatch(GameEvents.LoadTitleScreen);
             }
 
             Game.Events.Dispatch(GameEvents.GameOverClose);
