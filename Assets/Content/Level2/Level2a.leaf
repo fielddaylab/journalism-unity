@@ -650,7 +650,7 @@ $endif
 {@me} I'm a reporter at the Gazette.
 
 $HubChoice(InterviewGovernor, "Ask for an interview", 0.5)
-$choice ScienceStoryMap; Gotta go!
+$choice ScienceStoryMap; I gotta go home, nice to meet you!
 
 // Original Name: Look for your DNR Contact, Wynne D. Storme
 :: LookForYourDNRContactWynneD.Storme
