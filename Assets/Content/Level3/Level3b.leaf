@@ -1357,7 +1357,7 @@ $choice IgnoreDionnesText; Ignore the text and continue your interview
 $choice TellGabbyYoullCallBack; Tell Gabby you'll call back later--you need to find shelter 
 
 :: IgnoreDionnesText
-{img Anim/3b/HeavyRain.png} 
+{img Anim/3a/Dam.png} 
 The rain is coming down harder. 
 You can hear the rush of water at the dam. 
 {/img}
@@ -1396,7 +1396,7 @@ You hear a terrible crashing sound.
 $choice TheWaterRises; Hang up and run for higher ground 
 
 :: TellGabbyYoullCallBack
-{img Anim/3b/RainDrop.png}
+{img Anim/3a/Dam.png}
 You can hear the rush of water at the dam. 
 {/img}
 {@gabby} You'll... call back later? El, we're right in the middle of a job interview!
