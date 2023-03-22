@@ -835,8 +835,10 @@ $choice ArriveAtRoyalHazelNeighborhood; Keep biking--there's no story here
 The little girl glares at you.
 {@girlwithlemonade} It's for charity!
 $if Visited(MeetWithLocalVet)
+    {img Anim/3b/LemonadeForRelief.png, Right}
     She points at her sign.
     {@lemonadesign} Lemonade for flood relief! Help people keep their pets safe!
+    {/img}
     {@girlwithlemonade} My mom saw a story about it in the Gazette.
     {@girlwithlemonade} Some people can't afford to get a babysitter for their pets!
 $else
@@ -1355,7 +1357,7 @@ $choice IgnoreDionnesText; Ignore the text and continue your interview
 $choice TellGabbyYoullCallBack; Tell Gabby you'll call back later--you need to find shelter 
 
 :: IgnoreDionnesText
-{img Anim/3b/RainDrop.png} 
+{img Anim/3b/HeavyRain.png} 
 The rain is coming down harder. 
 You can hear the rush of water at the dam. 
 {/img}
@@ -1386,7 +1388,7 @@ You're about to answer Gabby's next question...
 {anim rumble} CRASH
 You hear a terrible crashing sound.
 {anim rumble} BUZZZZZZZZZZ
-{img Anim/3a/Dam.png}
+{img Anim/2a/Dam.png}
 {@dionne} El, the dam is compromised!
 {@dionne} Get out of there!!! 
 {/img}
@@ -1416,7 +1418,7 @@ Well... that interview didn't go as planned.
 You're about to text Dionne that you're on your way to safety...
 {anim rumble} When you hear a terrible crashing sound.
 You know what happened before the text comes. 
-{img Anim/3a/Dam.png}
+{img Anim/2a/Dam.png}
 {@dionne} El, 911. The dam is compromised!
 {@dionne} Get out of there!!!
 {/img}
@@ -1424,7 +1426,7 @@ You know what happened before the text comes.
 $choice TheWaterRises; Run for higher ground 
 
 :: TheWaterRises
-{img Anim/3b/RushingWater.png}
+{img Anim/3a/Dam.png}
 Water rushes through the street. 
 You run toward the nearest house--dark, doors shut, windows boarded up.
 You're not going to make it! 
