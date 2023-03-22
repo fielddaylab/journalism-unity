@@ -150,11 +150,15 @@ $GameOver("You put getting the dunk over getting the scoop... Better luck next t
 :: TomorrowMorning8A.M
 {clear-text}
 You wake up bright and early. Again.
-You have time to do one thing before heading to the marsh.
+You don't have all day to investigate this lead.
+$call SetTimeRemaining(1.75)
+$call ActivateStory()
+{timeLeft} seems like due diligence.
+Which means you have time to do one thing before heading to the marsh.
 
-$OnceChoice(GatherSupplies, "Gather tech supplies and hiking gear")
-$LocationChoice(MeetSomeOtherReportersForCoffee, "Meet Khalisa and Ben for breakfast and coffee", "Downtown")
-$LocationChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research local wetlands", "Library")
+$HubChoice(GatherSupplies, "Gather tech supplies and hiking gear", 0.5)
+$HubChoice(MeetSomeOtherReportersForCoffee, "Meet Khalisa and Ben for breakfast and coffee", 0.5, "MainSt")
+$HubChoice(DoSomeResearchOnLocalWetlands, "Bike to the library and research local wetlands", 0.5, "Library")
 
 // Original Name: Bike to the library and research local wetlands
 :: DoSomeResearchOnLocalWetlands
@@ -202,7 +206,7 @@ $else
     $call GiveSnippet(IncreasedFloodingSugarMarsh)
 $endif
 {/img}
-$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "CherryCreek")
+$HubChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", 0.25, "CherryCreek")
 
 // Original Name: Gather supplies
 :: GatherSupplies
@@ -225,50 +229,48 @@ and a roll of duct tape.
 Oh, and bug spray, of course. 
 
 $call AdjustStats(Resourceful + 1, Research + 1)
-$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "CherryCreek")
+$HubChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", 0.25, "CherryCreek")
 
 // Original Name: Meet some other reporters for coffee
 :: MeetSomeOtherReportersForCoffee
 @tags Social, Trust
 
-$call SetLocation("Downtown")
-
+$call SetLocation("MainSt")
 {bg $BG_FirstStDowntownCleanup}
 $call Music($Audio_StoryRain)
 $call StopAmbience()
 $call StopRain()
 
 $if Visited(AskAroundForItsOwner)
-When you arrive, Ben is eager to hear about the Great Chicken Rescue. 
-{@ben}I heard you saved the mayor's chicken from drowning!!
-{@ben}Is it true you swam to the bottom of the lake to rescue the eggs?
-{@me}Um... not even a little bit.
-Ben doesn't seem to hear you. Looks like this is how small-town legends get started. 
+    When you arrive, Ben is eager to hear about the Great Chicken Rescue. 
+    {@ben}I heard you saved the mayor's chicken from drowning!!
+    {@ben}Is it true you swam to the bottom of the lake to rescue the eggs?
+    {@me}Um... not even a little bit.
+    Ben doesn't seem to hear you. Looks like this is how small-town legends get started. 
 
-$call AdjustStats(Trust + 1)
+    $call AdjustStats(Trust + 1)
 $elseif Visited(MainStreetCafe)
-You meet Khalisa and Ben at the Goldfish Cafe. 
-The cafe owner is happy to see you again. 
-{@cafeowner}Thanks to your article, I've had lots of volunteers offering to help me. 
-{img Anim/2b/CoffeeQuiche.png, Left}
-{@cafeowner}Here's a quiche and some coffee for you and your friends, free of charge. 
-$call AdjustStats(Trust + 1)
+    You meet Khalisa and Ben at the Goldfish Cafe. 
+    The cafe owner is happy to see you again. 
+    {@cafeowner}Thanks to your article, I've had lots of volunteers offering to help me. 
+    {img Anim/2b/CoffeeQuiche.png, Left}
+    {@cafeowner}Here's a quiche and some coffee for you and your friends, free of charge. 
+    $call AdjustStats(Trust + 1)
 $else
-You meet Khalisa and Ben at the Goldfish Cafe.
-{@khalisa} Have you gotten any sleep?
-{@me} Just a little. 
-{@me} Yawn.
-The owner is happy to meet you. 
-{@cafeowner} You're El Benjamin, right? I read your story about the flood!
-{@cafeowner} I can tell you really care about this town. Have some coffee and quiche on me. 
-{img Anim/2b/CoffeeQuiche.png, Left}
-You wave to your friends as you head out. 
-
+    You meet Khalisa and Ben at the Goldfish Cafe.
+    {@khalisa} Have you gotten any sleep?
+    {@me} Just a little. 
+    {@me} Yawn.
+    The owner is happy to meet you. 
+    {@cafeowner} You're El Benjamin, right? I read your story about the flood!
+    {@cafeowner} I can tell you really care about this town. Have some coffee and quiche on me. 
+    {img Anim/2b/CoffeeQuiche.png, Left}
+    You wave to your friends as you head out. 
 $endif
 
 $call AdjustStats(Endurance + 1)
 {/img}
-$LocationChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", "CherryCreek")
+$HubChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", 0.25, "CherryCreek")
 
 // Original Name: Head to Cherry Creek Marsh.
 :: HeadToCherryCreekMarsh
@@ -285,7 +287,7 @@ Birdie, the aptly-named director of CRANE, is waiting at the trailhead.
 {img Anim/2b/Mosquito.png, Left}
 Plus a few volunteers, and about a thousand mosquitoes. 
 {/img}
-$OnceChoice(TalkToCRANEDirector, "Talk to Birdie")
+$HubChoice(TalkToCRANEDirector, "Talk to Birdie", 0.25)
 
 // Original Name: Talk to CRANE Director
 :: TalkToCRANEDirector
@@ -310,9 +312,9 @@ $call GiveSnippet (WetlandsRelatedToFlooding)
 Hmm... sounds like Birdie wasn't too sure about that statistic. 
 {/img}
 You'll need an expert to verify the numbers. 
-$OnceChoice(WhatDoYouMeanByWetlands, "Tell me about the \"wetlands?\"")
-$OnceChoice(WhatAboutTheLakes, "Aren't the lakes more important?")
-$OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands?")
+$HubChoice(WhatDoYouMeanByWetlands, "Tell me about the \"wetlands?\"", 0.25)
+$HubChoice(WhatAboutTheLakes, "Aren't the lakes more important?", 0.25)
+$HubChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all the other wetlands?", 0.25)
 
 // Original Name: "Can you tell me what you mean by "wetlands?""
 :: WhatDoYouMeanByWetlands
@@ -331,8 +333,8 @@ $OnceChoice(WhatHappenedToTheWetlandsInTwinLakes, "What happened to all of Twin 
 {@birdie}The lakes are important, too. 
 {@birdie}The whole watershed is connected. Every part has its role. 
 
-$OnceChoice(AreTherePoliciesToProtectWetlands, "Are there policies to protect wetlands?")
-$OnceChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought this up at Town Hall?")
+$HubChoice(AreTherePoliciesToProtectWetlands, "Are there policies to protect wetlands?", 0.25)
+$HubChoice(HaveYouBroughtThisUpAtTownHallMeetings, "Have you brought this up at Town Hall?", 0.25)
 
 // Original Name: "What happened to the wetlands in Twin Lakes?"
 :: WhatHappenedToTheWetlandsInTwinLakes
@@ -399,7 +401,6 @@ $OnceChoice(CallYourEditorAboutWetlandStory, "Thank her and call your editor wit
 {@dionne}I'll give you 2.5 hours. 
 {@dionne} And make sure to verify your data. 
 {/img}
-$call ActivateStory()
 {@dionne} This is a controversial topic so be careful.
 // $if CityScore() > 2
 //     {img-inline Anim/CityScore_A.png}
