@@ -214,12 +214,16 @@ $HubChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", 0.25, "CherryCr
 // Original Name: Gather supplies
 :: GatherSupplies
 @tags Resourceful
+...but you have no idea what you should take.
 You call Khalisa for advice. 
+She's a local, she'll know what to do. 
 {@me}Hey.... what are the marshes around here like?
-{@khalisa}Oh, they're beautiful! Lots of wildlife. 
+{@khalisa}You're such a city girl. 
+{@khalisa}Sure you are ready for all this wildlife?
 {@khalisa}Cranes, deer, turtles, tons of snakes. I even saw a coyote once!
 {img Anim/2b/Snake.png}
 {@khalisa}Cool, huh?
+{anim rumble} You shuddler. 
 {@me}.....yeah. Snakes. Cool.
 You stuff your bag with... 
 pepper spray,
