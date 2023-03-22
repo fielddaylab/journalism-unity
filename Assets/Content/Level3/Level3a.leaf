@@ -72,6 +72,7 @@ $choice AcceptStory; Accept Story Assignment
 :: AcceptStory 
 @checkpoint
 {bg $BG_TownMeeting}
+$call SetLocation("CityHall")
 $call SetTimeRemaining(2.75)
 
 $choice StickAroundToInterviewTownspeople; Stick around to interview townspeople

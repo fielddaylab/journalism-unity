@@ -301,6 +301,9 @@ MonoBehaviour:
     - Id: Map.RoyalHazel
       Content: Royal Hazel
       Exposed: 0
+    - Id: Map.MainSt
+      Content: Main Street
+      Exposed: 0
     - Id: Title.NewGame
       Content: New Game
       Exposed: 0
@@ -604,9 +607,9 @@ MonoBehaviour:
     - Path: Map
       RecordStart: 39
     - Path: Title
-      RecordStart: 56
+      RecordStart: 57
     - Path: Char
-      RecordStart: 65
+      RecordStart: 66
     BasePath: Char
     Dirty: 0
   - Name: stats

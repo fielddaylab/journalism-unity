@@ -169,6 +169,7 @@ $choice CallYourEditor; Call your editor
 //Text your editor back 
 ::CallYourEditor
 @checkpoint
+$call SetLocation("Bookstore")
 {bg $BG_Bookshop}
 $call Music($Audio_PaperPuddle)
 $call StopAmbience()

@@ -303,6 +303,7 @@ $choice ScienceStoryMap; Get started
 @checkpoint
 {/img}
 {clear-text}
+$call SetLocation("Apartment")
 {bg $BG_BedroomDesk}
 
 $if FirstVisit()
@@ -316,7 +317,7 @@ $endif
 
 $if HasTime(0.5)
     Your science story is due in {timeLeft}.
-    {map UI/MapPlaceholder.png}
+    {map $Choice_Map}
 
     $HubChoice(BikeDowntownToSurveyTheDamage, "Bike downtown to survey the damage", 0.5, "Downtown")
     $HubChoice(DNRMap, "Stop by the Department of Natural Resources", 0.5, "DNR")
@@ -571,7 +572,7 @@ $endif
 :: MainStreetFloodRecovery
 {/img}
 {clear-text}
-$call SetLocation("Downtown")
+$call SetLocation("MainSt")
 $if FirstVisit()
 {bg $BG_FirstStDowntownCleanup}
 $call Music($Audio_StoryRain)
@@ -587,10 +588,11 @@ How will people ever recover?
 $endif
 
 $if HasTime(0.5)
-    $choice ScienceStoryMap; Leave Main Street
+    $LocationChoice(ScienceStoryMap, "Return Home", "Apartment")
     $HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
     $HubChoice(MainStreetCafe, "Enter the cafe. The sign says ''PLEASE COME IN, WE'RE OPEN!!''", -1)
     $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
+    {map $Choice_Map}
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
 $endif
@@ -631,6 +633,7 @@ $endif
 // Original Name: Run into the mayor in hallway
 :: RunIntoTheGovernorInHallway
 @checkpoint
+$call SetLocation("DNR")
 {bg $BG_DNRSite}
 {layout Left}
 As you're leaving, you literally run into a lady who looks vaguely familiar.
@@ -1461,14 +1464,12 @@ She gives you the address for the Department of Limnology.
 {@cafeowner}Thanks again! Stop by any time. 
 
 $choice MainStreetFloodRecovery; Return to Main Street
-$choice ScienceStoryMap; Head home to plan your next steps  
 
 // Original Name: Thanks
 :: Thanks
 {@cafeowner}No problem. Stop by any time!
 
-$choice MainStreetFloodRecovery; Head back out to Main Street 
-$choice ScienceStoryMap; Head home to plan your next steps 
+$choice MainStreetFloodRecovery; Head back out to Main Street
 
 // Original Name: "Can you give me the rainfall statistics?"
 :: CanYouGiveMeTheRainfallStatistics
@@ -1479,8 +1480,8 @@ $choice ScienceStoryMap; Head home to plan your next steps
 $call GiveSnippet(DNRRainfallInfo)
 
 $choice DepartmentOfLimnology; End interview
-$HubChoice(WhatDoYouMeanLessPlacesForTheWaterToGo, "Why was this flood so much worse than in 1957?", 0.5)
-$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.5)
+$HubChoice(WhatDoYouMeanLessPlacesForTheWaterToGo, "Why was this flood so much worse than in 1957?", 0.25)
+$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.25)
 
 // Original Name: "What do you mean, less places for the water to go?"
 :: WhatDoYouMeanLessPlacesForTheWaterToGo
@@ -1491,8 +1492,8 @@ $HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happen
 $call GiveSnippet(DNRLessPlacesForWater)
 
 $choice DepartmentOfLimnology; End interview
-$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.5)
-$HubChoice(WhyAreTheLakesBeingKeptSoHigh, "Why are the lakes being kept so high?", 0.5)
+$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.25)
+$HubChoice(WhyAreTheLakesBeingKeptSoHigh, "Why are the lakes being kept so high?", 0.25)
 
 // Original Name: "How much financial damage has the flood caused?"
 :: HowMuchFinancialDamageHasTheFloodCaused
@@ -1501,7 +1502,8 @@ $HubChoice(WhyAreTheLakesBeingKeptSoHigh, "Why are the lakes being kept so high?
 
 $call GiveSnippet(DNRFinancialDamage)
 
-$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+$choice DepartmentOfLimnology; End interview
+$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.25)
 
 // Original Name: "How can we stop this from happening again?"
 :: HowCanWeStopThisFromHappeningAgain
@@ -1510,7 +1512,8 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 
 $call GiveSnippet(DNRPreventFromHappeningAgain)
 
-$choice WhatKindOfPolicies; What kind of policies?
+$choice DepartmentOfLimnology; End interview
+$HubChoice(WhatKindOfPolicies, "What kind of policies?", 0.25)
 
 // Original Name: "Tell me more about the high lake levels."
 :: TellMeMoreAboutTheHighLakeLevels

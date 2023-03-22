@@ -29,10 +29,16 @@ namespace Journalism
         [SerializeField] private MapLocation[] m_MapLocations = null;
 
         public void DefineLocation(string name, Vector2 coords) {
-            // TODO: check if id is already present
+            // check if id is already present
             // if so, update instead of append
+            for (int i = 0; i < m_MapLocations.Length; i++) {
+                if (m_MapLocations[i].Name == name) {
+                    m_MapLocations[i] = new MapLocation(name, name, coords);
+                    return;
+                }
+            }
 
-            // append to list of locations
+            // else append to list of locations
             int currLength = m_MapLocations.Length;
             System.Array.Resize(ref m_MapLocations, (currLength) + 1);
             m_MapLocations[currLength] = new MapLocation(name, name, coords);
