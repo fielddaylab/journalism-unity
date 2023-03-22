@@ -130,6 +130,8 @@ Your editor is intrigued.
 {@dionne}Strange... Cherry Creek Marsh hasn't come up much in Town Hall meetings.
 {@me}Then it must not be important, right?
 {@dionne}That's what you need to find out. 
+{@dionne} But you need to wrap this up by 10am. 
+{@dionne} Dont' forget to get in touch. 
 {/img}
 
 $choice AgreeToMeetWithHerInTheMorning; Message Birdie to arrange a meeting
@@ -151,6 +153,7 @@ $GameOver("You put getting the dunk over getting the scoop... Better luck next t
 {clear-text}
 You wake up bright and early. Again.
 You don't have all day to investigate this lead.
+Boss said you need to be done with this and get in touch before 10am. 
 $call SetTimeRemaining(1.75)
 $call ActivateStory()
 {timeLeft} seems like due diligence.
@@ -382,7 +385,7 @@ You have to admit, Twin Lakes's bagel scene is sorely lacking.
 But this doesn't seem like the best time to bring this up.
 {@me}Where is the Spark Project located?
 {@birdie}They have a meeting this morning, in the old opera house.
-{@article} Twin Lakes Historic Opera House, 381 E. Main St.
+{@article} Twin Lakes Historic Opera House, 381 E. Orchard St.
 {img Anim/2b/SaveTheWetlands.png, Left}
 {@birdie}I wish I could go protest...
 {@birdie}But there's so much work to do here.  

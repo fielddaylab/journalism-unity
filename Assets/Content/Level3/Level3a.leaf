@@ -660,7 +660,7 @@ You rifle around in your pack.
 
 $if StatCheck(Resourceful, 4)
       Hmm... Dogs like beef jerky, right?
-      {{img Anim/3b/Dog.png}}
+      {img Anim/3b/Dog.png}
       You toss the mutt half a stick and he leaps to catch it midair.
       {@doug} Thanks, kid. Odie here was getting pretty hungry.
       {@doug} Thought we'd be all settled into the shelter by now. 
