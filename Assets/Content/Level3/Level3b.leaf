@@ -350,7 +350,7 @@ They walk around the mess of a book store, disappearing behind some shelves.
 After several minutes they return.
 {@bookshop} Here's a great book to check out: <i>Floodlights</i>, by Dr. Nora Warner.  
 {@bookshop} It's all about flooding and equity issues!
-{@bookshop} Plus, a great exploration of neutrally-buoyant housing options. 
+{@bookshop} Plus, a great exploration of buoyant housing options. 
 {img Anim/3b/FloodlightsBook.png, Left}
 Unfortunately, the book they give you is heavily water damaged.
 The pages are stuck together, but still, you tuck it in your bag for later. 
@@ -1444,10 +1444,8 @@ $choice RunTowardTheVoice; Run toward the mysterious voice
 You almost make it...
 And then the flood knocks you off your feet.
 {anim rumble} {@me} AHHH! Help!!
-{img Anim/1b/FloodTruck.png}
 A flash of white and orange lands next to you. 
 {@mysteryrescuer} Grab on. I'll pull you in!
-{/img}
 $choice GrabFlotationDevice; Grab the flotation device 
 
 :: GrabFlotationDevice

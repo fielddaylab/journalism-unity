@@ -1032,7 +1032,7 @@ She tells you she's been worried about a catastrophic flood like this for years.
 {@limvolunteer}The levels are just too high. With climate change, it was only a matter of time.
 
 $call GiveSnippet(LakeLevels)
-$call GiveSnippet(FloodCause)
+// $call GiveSnippet(FloodCause)
 
 $choice ArriveAtFloodSite; Find someone else to talk to
 
