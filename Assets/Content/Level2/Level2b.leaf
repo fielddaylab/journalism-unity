@@ -421,6 +421,7 @@ $choice MarshMap; Got it. Thanks.
 :: MarshMap
 @checkpoint
 {bg $BG_CherryCreekMarsh}
+$call SetLocation("CherryCreek")
 $call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_RuralFrogs)
 $call Rain($Audio_CalmStreamRiverFlow)

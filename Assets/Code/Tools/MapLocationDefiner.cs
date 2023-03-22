@@ -21,8 +21,6 @@ namespace Journalism
 #if UNITY_EDITOR
             EditorUtility.SetDirty(m_mapLocationDef);
 #endif
-
-            // TODO: scale marker dimensions to match map (not just coords)
         }
 
         private void Awake() {

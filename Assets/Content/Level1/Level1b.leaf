@@ -41,6 +41,7 @@ $choice GetReadyCheckpoint; Got it.
 $call Music($Audio_CherryTownRestoration)
 $call Ambience($Audio_StreetBustle)
 $call Rain($Audio_RainOutsideChill)
+$call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 $goto GetReady
 
@@ -332,9 +333,9 @@ If you were more {stat-name}tech{/stat-name} or {stat-name}research{/stat-name} 
 But that's not helpful right now. Water is rising all around you!
 {/img}
 
-$LocationChoice(FindHigherGround, "Find higher ground and pull over ASAP", "Deli Lot")
-$LocationChoice(FloorIt, "Try to drive through", "Upper Lake Dam")
-{map UI/MapPlaceholder.png}
+$LocationChoice(FindHigherGround, "Find higher ground and pull over ASAP", "DeliLot")
+$LocationChoice(FloorIt, "Try to drive through", "UpperLakeDam")
+{map $Choice_Map}
 
 $endif
 
@@ -402,7 +403,7 @@ $choice Crackers; Grab a few saltine crackers. It's not worth making enemies for
 // Original Name: Arrive at flood site
 :: ArriveAtFloodSite
 {clear-text}
-$call SetLocation("Upper Lake Dam")
+$call SetLocation("UpperLakeDam")
 {/map}
 {bg $BG_UpperLakeDam}
 $call Music($Audio_Flood)
@@ -419,8 +420,8 @@ $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "
 $HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "")
 $HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
 $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
-$HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "Cherry Festival")
-{map UI/MapPlaceholder.png}
+$HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
+{map $Choice_Map}
 $else
 That leaves just enough time to compile your story!
 $choice CompileYourStory; Compile your story
@@ -614,7 +615,7 @@ $choice ArriveAtFloodSite; Back to the dam
 :: CherryFestivalMap
 {clear-text}
 {/map}
-$call SetLocation("Cherry Festival")
+$call SetLocation("CherryFestival")
 {bg $BG_CherryFestFlood}
 $call Music($Audio_Flood)
 $call StopAmbience()
@@ -626,11 +627,11 @@ Yikes... this is terrifying. You can barely stand up in all this rushing water.
 $endif
 
 $if HasTime(0.5)
-$HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25, "Cherry Festival")
-$HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5, "Cherry Festival")
-$HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5, "Cherry Festival")
+$HubChoice(GoInsideSpecialtyCheeseShop, "Go inside specialty cheese shop", 0.25, "CherryFestival")
+$HubChoice(TakePhotosOfTheStreet, "Snap some pictures of the dismal scene", 0.5, "CherryFestival")
+$HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5, "CherryFestival")
 
-$HubChoice(ArriveAtFloodSite, "Head back to the dam", 0.5, "Upper Lake Dam")
+$HubChoice(ArriveAtFloodSite, "Head back to the dam", 0.5, "UpperLakeDam")
 $else
 Time's up. Time to put your story together!
 $choice CompileYourStory; Compile your story

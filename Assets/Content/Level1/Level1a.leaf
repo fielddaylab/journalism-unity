@@ -71,6 +71,7 @@ $choice OnMyWay; {@me} "On my way."
 // Original Name: "On my way."
 :: OnMyWay
 @checkpoint
+$call SetLocation("Apartment")
 {bg $BG_Bedroom}
 {clear-text}
 $call SetHeaderEnabled(true)
@@ -432,6 +433,7 @@ $choice ArriveAtWork; Arrive at work.
 // Original Name: Breaking News Story
 :: BreakingNewsStory
 @checkpoint
+$call SetLocation("Newsroom")
 {bg $BG_OfficeExterior}
 {clear-text}
 {/img}

@@ -19,7 +19,7 @@ MonoBehaviour:
     NameId:
       m_Source: Map.Apartment
       m_HashValue: 153230505
-    NormalizedCoords: {x: -0.35550547, y: 0.176}
+    NormalizedCoords: {x: -0.3520548, y: 0.282}
   - Id:
       m_HashValue: 1779176013
     Name: Newsroom
@@ -28,15 +28,15 @@ MonoBehaviour:
       m_HashValue: 2340295445
     NormalizedCoords: {x: 0.22135246, y: -0.158}
   - Id:
-      m_HashValue: 2656043832
-    Name: Cherry Festival
+      m_HashValue: 3475059208
+    Name: CherryFestival
     NameId:
       m_Source: Map.CherryFestival
       m_HashValue: 1004817520
     NormalizedCoords: {x: 0.15511441, y: -0.0625}
   - Id:
-      m_HashValue: 2339622852
-    Name: Upper Lake Dam
+      m_HashValue: 3266647938
+    Name: UpperLakeDam
     NameId:
       m_Source: Map.UpperLakeDam
       m_HashValue: 34686522
@@ -49,8 +49,8 @@ MonoBehaviour:
       m_HashValue: 2786338461
     NormalizedCoords: {x: 0.32140824, y: -0.2875}
   - Id:
-      m_HashValue: 3599652654
-    Name: Deli Lot
+      m_HashValue: 1712965468
+    Name: DeliLot
     NameId:
       m_Source: Map.DeliLot
       m_HashValue: 3241171956
@@ -131,4 +131,11 @@ MonoBehaviour:
     NameId:
       m_Source: Map.RoyalHazel
       m_HashValue: 1540350786
+    NormalizedCoords: {x: 0.026830602, y: -0.35354167}
+  - Id:
+      m_HashValue: 1778172751
+    Name: MainSt
+    NameId:
+      m_Source: Map.MainSt
+      m_HashValue: 1641246151
     NormalizedCoords: {x: 0.026830602, y: -0.35354167}
