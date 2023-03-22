@@ -197,7 +197,7 @@ MonoBehaviour:
       Content: 'Editor Notes:'
       Exposed: 0
     - Id: Window.Time.StoryDeadline
-      Content: 'Time Until Story Deadline:'
+      Content: 'Time Until Deadline:'
       Exposed: 0
     - Id: Label.Color
       Content: Color

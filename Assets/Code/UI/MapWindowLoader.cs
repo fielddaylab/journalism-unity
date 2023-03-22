@@ -33,11 +33,11 @@ namespace Journalism.UI
                 yield return null;
             }
 
-            MapMarkerLoader.PopulateMapWithMarkers(m_streamingTex, m_streamingTex.gameObject);
+            MapMarkerLoader.PopulateMapWithMarkers(m_streamingTex, this.gameObject);
         }
 
         private void UnloadData() {
-            MapMarkerLoader.ClearMarkerContainer(m_streamingTex.gameObject);
+            MapMarkerLoader.ClearMarkerContainer(this.gameObject);
         }
     }
 
