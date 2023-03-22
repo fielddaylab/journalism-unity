@@ -114,7 +114,7 @@ $choice MeetKhalisaAtBookish; Meet Khalisa at Bookish
 
 // Meet Khalisa for coffee 
 :: MeetKhalisaAtBookish
-$call SetLocation("Bookstore")
+$call SetLocation("MainSt")
 {/img}
 {bg $BG_MainStreet}
 $call Music($Audio_StoryRain)
@@ -169,7 +169,7 @@ $choice CallYourEditor; Call your editor
 //Text your editor back 
 ::CallYourEditor
 @checkpoint
-$call SetLocation("Bookstore")
+$call SetLocation("MainSt")
 {bg $BG_Bookshop}
 $call Music($Audio_PaperPuddle)
 $call StopAmbience()

@@ -272,7 +272,7 @@ $if !HasTime(0.25)
     $choice StoryConstruction3a; Compile your story
 $endif
 
-$if !Visited(SnagInterviewWithMayor)
+$if !Visited(SnagInterviewWithMayor), !Visited(SnagInterviewWithMayorFailed)
       $HubChoice(SnagInterviewWithMayorFailed, "Try to snag an interview with the Mayor", 0, "")
 $endif
 $HubChoice(InterviewFredFinkler, "Talk to Good Ol' Fred Finkler", 0.50, "")
@@ -695,7 +695,7 @@ $call GiveSnippet(DogOwnerSaysShelterDoesntAllowPets)
 {img Anim/3a/Receipt.png, Left}
 {@doug} Maybe some pressure from the local news will get things moving...
 He scrawls the address on the back of a receipt for dog food.
-{@article} Strudel Senior Apartments, 1502 Sugar Grove 
+{@note} Strudel Senior Apartments, 1502 Sugar Grove 
 {/img}
 // $call GiveSnippet(KickedOutOfApartments)
 $set ApartmentAddress = true
@@ -728,6 +728,7 @@ $if !HasTime(0.25)
     Looks like you have to cut this short. You have just enough time to compile your story!
     $choice StoryConstruction3a; Compile your story
 $else
+      $choice EndShelterCoordinatorInterview; End Interview
       $HubChoice(OfferToHelpCarryInFood, "Offer to help carry the food inside.", 0.25, "")
       $HubChoice(UseYourSocialSkills, "Use your social skills to put her at ease.", 0.25, "")
 $endif
@@ -744,11 +745,13 @@ They weigh a ton, but you've had plenty of practice hoofing gear around lately.
 {@shelter} Thanks, kid. What do you want to know? 
 {/img}
 
-$HubChoice(ShelterCoordinatorInterview, "Interview Shelter Coordinator", 0.25, "")
 $if !HasTime(0.25)
-    Looks like you have to cut this short. You have just enough time to compile your story!
-    $choice StoryConstruction3a; Compile your story
+      Looks like you have to cut this short. You have just enough time to compile your story!
+      $choice StoryConstruction3a; Compile your story
+$else
+      $HubChoice(ShelterCoordinatorInterview, "Interview Shelter Coordinator", 0.25, "")
 $endif
+
 
 $else 
 Unfortunately, the boxes are even heavier than sandbags. 
@@ -778,7 +781,7 @@ $if StatCheck (Social, 5)
             Looks like you have to cut this short. You have just enough time to compile your story!
             $choice StoryConstruction3a; Compile your story
       $endif
-      $HubChoice(DoYouHaveAnyConcernsAboutTheShelterSimple, "Do you have any concerns about the shelter?", 0.25, "")
+      $OnceChoice(DoYouHaveAnyConcernsAboutTheShelterSimple, "Do you have any concerns about the shelter?")
 $else
       You try to empathize. 
       Unfortunately, you haven't been {stat-name}socializing{/stat-name} much lately.
@@ -852,7 +855,8 @@ $choice EndShelterCoordinatorInterview; End Interview
 
 $call GiveSnippet(ShelterCoordinatorConcerns)
 
-$choice WhatIssuesHaveYouNoticed; What issues have you noticed?
+$choice EndShelterCoordinatorInterview; End Interview 
+$HubChoice(WhatIssuesHaveYouNoticed, "What issues have you noticed?", 0.25)
 
 // Can you tell me about the issues you've noticed?
 :: WhatIssuesHaveYouNoticed
@@ -868,12 +872,9 @@ $choice WhatIssuesHaveYouNoticed; What issues have you noticed?
 {@me} Oh... long story. 
 
 $call GiveSnippet(ShelterCoordinatorDetailedConcerns)
-{
 
-$OnceChoice(HowCanTheCityMakeTheShelterMoreAccessible, "How can the city make the shelter more accessible?")
-$OnceChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?")
-$OnceChoice(WhyArentPetsAllowed, "Why aren't pets allowed in the shelter? ")
-$choice EndShelterCoordinatorInterview; End Interview 
+$goto ShelterCoordinatorQuestions
+
 
 // How can the city make the shelter more accessible?
 :: HowCanTheCityMakeTheShelterMoreAccessible
@@ -884,10 +885,11 @@ $choice EndShelterCoordinatorInterview; End Interview
 
 $call GiveSnippet(UsefulShelterAdviceAboutAccessibility)
 {/img}
-$choice DoYouHaveAnyResourcesAboutAccessibleShelters; Do you have any resources I could look at?
-$OnceChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?")
-$OnceChoice(WhyArentPetsAllowed, "Why aren't pets allowed in the shelter? ")
+
 $choice EndShelterCoordinatorInterview; End Interview 
+$OnceChoice(DoYouHaveAnyResourcesAboutAccessibleShelters, "Do you have any resources I could look at?")
+$HubChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?", 0.25)
+$HubChoice(WhyArentPetsAllowed, "Why aren't pets allowed in the shelter?", 0.25)
 
 // Do you have any resources I can look at?
 :: DoYouHaveAnyResourcesAboutAccessibleShelters
@@ -898,10 +900,9 @@ $call GiveSnippet(AccessibilityStandardsResource)
 {@shelter} This little town needs to keep up, or it's gonna get washed right off the map. 
 // $call GiveSnippet(ShelterCoordinatorColorQuote)
 {/img}
-$OnceChoice(HowCanTheCityMakeTheShelterMoreAccessible, "How can the city make the shelter more accessible?")
-$OnceChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?")
-$OnceChoice(WhyArentPetsAllowed, "Why aren't pets allowed in the shelter? ")
-$choice EndShelterCoordinatorInterview; End Interview 
+
+$goto ShelterCoordinatorQuestions
+
 
 // Is there anything that the people of Twin Lakes can do to help out?
 :: HowCanTheCommunityHelpOut
@@ -912,10 +913,8 @@ $choice EndShelterCoordinatorInterview; End Interview
 $call GiveSnippet(HowCanTheCommunityHelpShelter)
 {/img}
 
-$choice HowCanTheCityMakeTheShelterMoreAccessible; How can the city make the shelter more accessible? 
-$OnceChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?")
-$OnceChoice(WhyArentPetsAllowed, "Why aren't pets allowed in the shelter? ")
-$choice EndShelterCoordinatorInterview; End Interview 
+$goto ShelterCoordinatorQuestions
+
 
 // Why aren't pets allowed? 
 :: WhyArentPetsAllowed
@@ -938,6 +937,12 @@ $endif
 $set VetContact = true
 
 $choice EndShelterCoordinatorInterview; End Interview 
+
+:: ShelterCoordinatorQuestions
+$choice EndShelterCoordinatorInterview; End Interview
+$HubChoice(HowCanTheCityMakeTheShelterMoreAccessible, "How can the city make the shelter more accessible?", 0.25)
+$HubChoice(HowCanTheCommunityHelpOut, "Is there anything that the people of Twin Lakes can do to help out?", 0.25)
+$HubChoice(WhyArentPetsAllowed, "Why aren't pets allowed in the shelter?", 0.25)
 
 //EndShelterCoordinatorInterview
 :: EndShelterCoordinatorInterview
@@ -1222,11 +1227,12 @@ $endif
 $call GiveSnippet(ElectricianInterviewDetailedReason)
 {/img}
 
-$choice WhenWillPeopleBeAllowedBackInside; The management hasn't been keeping people informed. Do you know when residents will be allowed back inside?  
+$choice GoToSeniorCitizenApartments; End interview
+$HubChoice(WhenWillPeopleBeAllowedBackInside, "The management hasn't been keeping people informed. Do you know when residents will be allowed back inside?", 0.25)
 $if StatCheck(Social, 5)
-      $choice WhyHasItTakenSoLongToRepair; I know you're probably very busy. Is that why this place is still closed down?
+      $HubChoice(WhyHasItTakenSoLongToRepair, "I know you're probably very busy. Is that why this place is still closed down?", 0.25)
 $else 
-      $choice WhyHasItTakenSoLongRudeVersion; Why is it taking so long to get this place fixed up? It's been more than two weeks!
+      $HubChoice(WhyHasItTakenSoLongRudeVersion, "Why is it taking so long to get this place fixed up? It's been more than two weeks!", 0.25)
 $endif
 
 // When will people be allowed back inside?

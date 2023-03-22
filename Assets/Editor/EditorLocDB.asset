@@ -597,6 +597,9 @@ MonoBehaviour:
     - Id: Char.Willa
       Content: Willa
       Exposed: 0
+    - Id: Char.Note
+      Content: Note
+      Exposed: 0
     Headers:
     - Path: Header
       RecordStart: 11

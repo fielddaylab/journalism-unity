@@ -615,7 +615,7 @@ $choice ArriveAtFloodSite; Back to the dam
 :: CherryFestivalMap
 {clear-text}
 {/map}
-$call SetLocation("CherryFestival")
+$call SetLocation("MainSt")
 {bg $BG_CherryFestFlood}
 $call Music($Audio_Flood)
 $call StopAmbience()

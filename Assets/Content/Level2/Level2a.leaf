@@ -10,7 +10,7 @@
 :: Level2Story3TheScienceStory
 $call SetLocation("Apartment")
 $ActionChoice(The next morning...)
-{bg $BG_HouseExtNoRain}
+{bg $BG_BedroomDesk}
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
 $call StopAmbience()
 
@@ -489,8 +489,12 @@ Going in person might've gotten you more info... but at least this was quicker.
 //$call GiveSnippet(BasicFloodBackground)
 $call GiveSnippet(BasicFloodPrevention)
 
-$choice PhoneContacts; Back to Phone Contacts
-$choice ScienceStoryMap; Put away your phone and decide what to do next 
+$if HasTime(0.5)
+    $choice PhoneContacts; Phone Contacts
+    $choice ScienceStoryMap; Put away your phone and decide what to do next
+$else
+    $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
 
 // Original Name: Phone Call: Wynne D. Storme @ DNR
 :: PhoneCallWynneD.StormeDNR
@@ -521,17 +525,25 @@ $else
     This info isn't the most high quality, but at least it's something. 
 $endif
 
-$choice PhoneContacts; Phone Contacts
-$choice ScienceStoryMap; Put away your phone and decide what to do next 
+$if HasTime(0.5)
+    $choice PhoneContacts; Phone Contacts
+    $choice ScienceStoryMap; Put away your phone and decide what to do next
+$else
+    $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
 
 // Original Name: Phone Call: City Hall
 :: PhoneCallCityHall
 You call Town Hall, but it's impossible to get past the receptionist. 
-He gives you a clearly rehearsed quote. 
+He gives you a clearly rehearsed quote, then ends the call.
 $call GiveSnippet(BasicCityHallInfo)
 
-$choice PhoneContacts; Phone Contacts
-$choice ScienceStoryMap; Put away your phone
+$if HasTime(0.5)
+    $choice PhoneContacts; Phone Contacts
+    $choice ScienceStoryMap; Put away your phone and decide what to do next
+$else
+    $choice TimeToAssembleTheScienceStory; Time to assemble the science story...
+$endif
 
 // Original Name: Phone Call: Mayor's Personal Number
 :: PhoneCallMayorsPersonalNumber
@@ -732,10 +744,16 @@ A researcher with a nametag that says "S. McCloud."
 {@sarah}Hey! Careful out there, kid. 
 {@sarah}That's toxic blue-green algae.
 
-$choice QuickInterviewLimnologyExpert; Ask if she has time for an interview
-$if Visited(ThanksPlusUniversityContact)
-$choice TellHerYouMetHerSister; Tell her you met her sister this morning
+$if HasTime(0.25)
+    $HubChoice(QuickInterviewLimnologyExpert, "Ask if she has time for an interview", 0.25)
+    $if Visited(ThanksPlusUniversityContact)
+        $HubChoice(TellHerYouMetHerSister, "Tell her you met her sister this morning", 0.25)
+    $endif
+$else
+    $choice TimeToAssembleTheScienceStory; Time's up. You need to put your story together.  
 $endif
+
+
 
 // Original Name: Call your neighbor and see if it's hers
 :: CallYourNeighborAndSeeIfItsHers
@@ -781,11 +799,13 @@ $choice NoProblem.IBetterGoIveGotAStoryToWrite; No problem. I better go, I've go
 
 // Original Name: Main Street Gallery Owner
 :: MainStreetGalleryOwner
-The gallery owner is hanging soggy art prints on a clothesline, grumbling under his breath.
+$if FirstVisit()
+    The gallery owner is hanging soggy art prints on a clothesline, grumbling under his breath.
+$endif
 
-$choice AskToInterviewHim; Ask to interview him
-$choice AskIfHeNeedsHelp; Ask if he needs help
-$HubChoice(TellHimYoureABigFanOfHisWork, "Tell him you're a big fan of his work", 0.25)
+$OnceChoice(AskToInterviewHim, "Ask to interview him")
+$OnceChoice(AskIfHeNeedsHelp, "Ask if he needs help")
+$OnceChoice(TellHimYoureABigFanOfHisWork, "Tell him you're a big fan of his work")
 $choice MainStreetFloodRecovery; Leave the gallery
 
 // Original Name: Main Street Cafe
@@ -948,19 +968,23 @@ $if StatCheck(Social, 4)
 
     {@sarah}Sure, why not? I'd be happy to talk. 
 
-    $HubChoice(InterviewScientist, "Great, let's get started!", 0.25)
-    $choice DepartmentOfLimnology; Actually, I better go. 
+    $OnceChoice(InterviewScientist, "Great, let's get started!")
 $else
     {@sarah}Well... I guess I can chat for a minute. 
     {@sarah}Due to climate change, we expect to see more heavy rain like this. 
     {@sarah}This town needs to make some changes if it wants to survive.
 
     $call GiveSnippet(BasicFloodBackground)
-    $if !Visited(LookForSomeoneToInterview)
-        $choice LookForSomeoneToInterview; Look around for someone else to talk to
+    
+    $if HasTime(0.25)
+        $if !Visited(LookForSomeoneToInterview)
+            $choice LookForSomeoneToInterview; Look around for someone else to talk to
+        $endif
+        $choice ScienceStoryMap; Head out and decide what to do next
+    $else
+        $choice TimeToAssembleTheScienceStory; Time's up. You need to put your story together.  
     $endif
 
-    $choice ScienceStoryMap; Head out and decide what to do next 
 $endif
 
 // Original Name: Tell her you met her sister!
@@ -1006,9 +1030,7 @@ $choice ScienceStoryMap; Go somewhere else
 :: AskToInterviewHim
 {@galleryowner}Do I look like I'm in a chatty mood, kid?
 
-$choice AskIfHeNeedsHelp; Ask if he needs help
-$choice TellHimYoureABigFanOfHisWork; Tell him you're a big fan of his work
-$choice MainStreetFloodRecovery; Leave him alone. There must be someone else you can talk to.
+$goto MainStreetGalleryOwner
 
 // Original Name: Ask if he needs help
 :: AskIfHeNeedsHelp
@@ -1190,9 +1212,8 @@ $GameOver("Uh oh. Dionne isn't gonna be thrilled about this... looks like you'll
 
 // Original Name: Interview scientist
 :: InterviewScientist
-$choice WhatCausedTheFlood; Can you tell me what caused the flood? 
+$choice WhatCausedTheFlood; Can you tell me what caused the flood?
 $choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening again?
-$choice ScienceStoryMap; Actually... I'm running low on time. I better run. 
 
 // Original Name: In-Depth Interview: Limnology Expert
 :: In-DepthInterviewLimnologyExpert
@@ -1303,8 +1324,9 @@ $endif
 
 $call GiveSnippet(DNRCauseOfFlood)
 
-$choice CanYouGiveMeTheRainfallStatistics; Can you give me the rainfall statistics?
-$choice WhatDoYouMeanLessPlacesForTheWaterToGo; What do you mean, less places for the water to go?
+$choice DNRMap; End interview
+$HubChoice(CanYouGiveMeTheRainfallStatistics, "Can you give me the rainfall statistics?", 0.25)
+$HubChoice(WhatDoYouMeanLessPlacesForTheWaterToGo, "What do you mean, less places for the water to go?", 0.25)
 
 // Original Name: "Can you describe the long-term impact of flooding on Twin Lakes?" "
 :: CanYouDescribeTheImpactOfFloodingOnTwinLakes
@@ -1313,8 +1335,9 @@ $choice WhatDoYouMeanLessPlacesForTheWaterToGo; What do you mean, less places fo
 
 $call GiveSnippet(ImpactOfFlood)
 
-$choice HowMuchFinancialDamageHasTheFloodCaused; How much financial damage has the flood caused?
-$choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening again?
+$choice DNRMap; End interview
+$HubChoice(HowMuchFinancialDamageHasTheFloodCaused, "How much financial damage has the flood caused?", 0.25)
+$HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.25)
 
 // Original Name: "What caused the flood?"
 :: WhatCausedTheFlood
@@ -1324,8 +1347,15 @@ $choice HowCanWeStopThisFromHappeningAgain; How can we stop this from happening 
 
 $call GiveSnippet(WhatCausedTheFlood)
 
-$choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening next time?
-$choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake levels.
+$if TimeRemaining() < 0.25
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice TimeToAssembleTheScienceStory; Compile your story
+$else
+    $choice HowCanTheCityPreventThisFromHappeningNextTime; How can the city prevent this from happening next time?
+    $choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake levels.
+    $choice DepartmentOfLimnology; End interview
+$endif
+
 
 // Original Name: "How can the city prevent this from happening next time?"
 :: HowCanTheCityPreventThisFromHappeningNextTime
@@ -1336,8 +1366,13 @@ $choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake level
 
 $call GiveSnippet(LimnologyFloodPrevention)
 
-$choice WhatDoYouMeanEngineeredSolutions; What do you mean, engineered solutions?
-$choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake levels.
+$if TimeRemaining() < 0.25
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice TimeToAssembleTheScienceStory; Compile your story
+$else
+    $choice WhatDoYouMeanEngineeredSolutions; What do you mean, engineered solutions?
+    $choice TellMeMoreAboutTheHighLakeLevels; Tell me more about the high lake levels.
+$endif
 
 // Original Name: Ask what people can do to help
 :: AskWhatPeopleCanDoToHelp
@@ -1491,7 +1526,7 @@ $HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happen
 
 $call GiveSnippet(DNRLessPlacesForWater)
 
-$choice DepartmentOfLimnology; End interview
+$choice DNRMap; End interview
 $HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.25)
 $HubChoice(WhyAreTheLakesBeingKeptSoHigh, "Why are the lakes being kept so high?", 0.25)
 
@@ -1502,7 +1537,7 @@ $HubChoice(WhyAreTheLakesBeingKeptSoHigh, "Why are the lakes being kept so high?
 
 $call GiveSnippet(DNRFinancialDamage)
 
-$choice DepartmentOfLimnology; End interview
+$choice DNRMap; End interview
 $HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happening again?", 0.25)
 
 // Original Name: "How can we stop this from happening again?"
@@ -1512,7 +1547,7 @@ $HubChoice(HowCanWeStopThisFromHappeningAgain, "How can we stop this from happen
 
 $call GiveSnippet(DNRPreventFromHappeningAgain)
 
-$choice DepartmentOfLimnology; End interview
+$choice DNRMap; End interview
 $HubChoice(WhatKindOfPolicies, "What kind of policies?", 0.25)
 
 // Original Name: "Tell me more about the high lake levels."
@@ -1526,7 +1561,13 @@ $HubChoice(WhatKindOfPolicies, "What kind of policies?", 0.25)
 {/img}
 
 $call GiveSnippet(LimnologyLakeLevels)
-$choice DepartmentOfLimnology; Head back outside   
+$if TimeRemaining() < 0.25
+    Looks like you have to cut this short. You have just enough time to compile your story!
+    $choice TimeToAssembleTheScienceStory; Compile your story
+$else
+    $choice DepartmentOfLimnology; Head back outside   
+$endif
+
 
 // Original Name: What do you mean, engineered solutions?
 :: WhatDoYouMeanEngineeredSolutions

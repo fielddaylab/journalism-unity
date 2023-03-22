@@ -195,3 +195,15 @@ MonoBehaviour:
     Tail: 0
     RoundingScale: 1.5
     Texture: {fileID: 0}
+  - Id:
+      m_Source: note
+      m_HashValue: 2442791997
+    Background:
+      serializedVersion: 2
+      rgba: 4290241530
+    Outline:
+      serializedVersion: 2
+      rgba: 4278915113
+    Tail: 0
+    RoundingScale: 1.5
+    Texture: {fileID: 0}
