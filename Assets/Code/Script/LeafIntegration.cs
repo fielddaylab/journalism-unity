@@ -104,6 +104,7 @@ namespace Journalism {
             
             Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded");
             m_CurrentScript.TryGetNode(data.CheckpointId, out ScriptNode start);
+            // new event: resumed checkpoint (same event data as reached checkpoint; + origin: string (menu or ))
             Game.Events.Dispatch(GameEvents.LevelStarted);
             Run(start);
         }
@@ -172,7 +173,7 @@ namespace Journalism {
                 if (options.Count == 0) {
                     Log.Error("No options remaining at {0} (time remaining {1})", inThreadState.PeekNode().Id(), Player.TimeRemaining());
                 } else {
-                    inChoice.Choose(RNG.Instance.Next(0, options.Count));
+                    inChoice.Choose(options[RNG.Instance.Next(0, options.Count)].Index);
                 }
             } else {
                 yield return base.ShowOptions(inThreadState, inChoice);

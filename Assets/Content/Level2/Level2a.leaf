@@ -426,8 +426,10 @@ $if HasTime(0.25)
     $if !Visited(ReadTheBulletinBoardInTheHallway)
         $HubChoice(ReadTheBulletinBoardInTheHallway, "Read the bulletin board in the hallway", 0.25)
     $endif
-    $HubChoice(RunIntoTheGovernorInHallway, "Head toward the exit", 0.25)
-
+    $HubChoice(RunIntoTheGovernorInHallway, "Head toward the exit", 0)
+    $if Visited(RunIntoTheGovernorInHallway)
+        $choice ScienceStoryMap; Head toward the exit
+    $endif
 
     $if Visited(JenkinssComputer)
         $HubChoice(LookForYourDNRContactWynneD.Storme, "Look for your DNR Contact, Wynne D. Storme", 0.5)

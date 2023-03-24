@@ -746,7 +746,7 @@ $choice GoToSandbaggingStation; Say goodbye and decide what to do next
 {@fillingstationvolunteer} Nah. Not really.
 {@fillingstationvolunteer} But what can you do?
 
-$call GiveSnippet(PoorSandbagStationQuote)
+$call GiveSnippet(BadSandbagStationQuote)
 
 $choice AskHimToRephrase; Ask them to rephrase (and try to get a better quote)
 $choice HaveYouBeenAffectedByTheFlood; Ask how the flood has affected them 
