@@ -200,7 +200,7 @@ namespace Journalism.UI
         }
 
         private void OnContinueNameRetrieved(string inName) {
-            if (string.IsNullOrEmpty(inName)) {
+            if (!string.IsNullOrEmpty(inName)) {
                 m_ContinueNameText.text = inName;
             }
 
