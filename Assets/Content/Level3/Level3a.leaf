@@ -954,6 +954,19 @@ $choice FloodShelterChoices; Decide what to do next.
 $call SetLocation("Shelter")
 $if HasTime(0.25)
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
+      $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
+      $if VetContact == true
+            $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "Downtown")
+      $endif
+      $if ApartmentAddress
+            $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building", 0.25, "SeniorApts")
+      $endif
+      $if !HasChoices()
+            Looks like you have been pretty thorough. All that's left is to compile your story!
+            $choice StoryConstruction3a; Compile your story
+      $endif
+$elseif HasTime(0.5)
+      $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
       $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
       $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
       $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
@@ -962,6 +975,11 @@ $if HasTime(0.25)
       $endif
       $if ApartmentAddress
             $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building", 0.25, "SeniorApts")
+      $endif
+
+      $if !HasChoices()
+            Looks like you have been pretty thorough. All that's left is to compile your story!
+            $choice StoryConstruction3a; Compile your story
       $endif
 $else
       Looks like you have to cut this short. You have just enough time to compile your story!
