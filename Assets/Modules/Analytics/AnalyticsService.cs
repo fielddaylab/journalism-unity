@@ -884,8 +884,20 @@ namespace Journalism
 
             string node_id = m_LastKnownNodeId.ToString();
             string snippet_id = snippetId.ToString();
-            string snippet_type = snippetData.Type.ToString();
-            string snippet_quality = snippetData.Quality.ToString();
+            string snippet_type;
+            string snippet_quality;
+            /* TODO: somewhere a snippet is null despite having id
+            if (snippetData == null) {
+                snippet_type = "N/A";
+                snippet_quality = "N/A";
+            }
+            else {
+                snippet_type = snippetData.Type.ToString();
+                snippet_quality = snippetData.Quality.ToString();
+            }
+            */
+            snippet_type = snippetData.Type.ToString();
+            snippet_quality = snippetData.Quality.ToString();
 
             string attributeStr = GenerateAttributesString(snippetData);
 
