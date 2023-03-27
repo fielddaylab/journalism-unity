@@ -141,7 +141,7 @@ $choice OffToWork; Off to work
 {layout Right}
 {bg $BG_HouseExt}
 You scroll through posts on Squawker, Twin Lakes's preferred form of social media.
-{img Anim/1a/Duck.webm}
+{img Anim/Final/CherryDuck.png}
 {@localnurse} Barely made it to the hospital for work. Ducks are swimming through the parking lot!!
 {/img}
 {@article} Sponsored: 5 Ways to Stay Safe During Flooding. Number 3 Will Shock You! 
@@ -479,7 +479,7 @@ This guy is singlehandedly responsible for last week's Town Hall meeting going 4
 
 $call DecreaseTime(0.25)
 
-$choice BreakingNewsStory; {@me} Sorry, Fred, I'm pretty swamped here. Can't talk now.
+$choice BreakingNewsStory; (What a waste of time!) {@me} Sorry, Fred, I'm pretty swamped here. Can't talk now.
 $choice AnswerThePhoneContinue; {@me} Ahh, yes. Fred. What can I do for you?
 
 // Original Name: Office 1 - Weather
@@ -584,7 +584,7 @@ $if Visited(HelpHer)
     {layout Left}
     {img Anim/1b/TurnAroundSign.png, Right}
     He tells you some flood safety tips, and even includes an anecdote about a water rescue.  
-    $call GiveSnippet(PoliceSafetyQuote)
+   // $call GiveSnippet(PoliceSafetyQuote)
     {/img}
     $call GiveSnippet(PoliceStory)
 $else
