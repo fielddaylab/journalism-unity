@@ -32,6 +32,9 @@ namespace Journalism.Editor
                 {
                     bDesiredDevBuild = true;
                 }
+                else if (!branch.StartsWith("production") && !branch.StartsWith("staging") && !branch.StartsWith("hotfix")) {
+                    bDesiredDevBuild = true;
+                }
             }
 
             bool bApply = bDesiredDevBuild != EditorUserBuildSettings.development || UnityEditorInternal.InternalEditorUtility.inBatchMode;
@@ -45,9 +48,8 @@ namespace Journalism.Editor
                 {
                     BuildUtils.WriteDefines("DEVELOPMENT");
                 }
-                else
-                {
-                    BuildUtils.WriteDefines(null);
+                else {
+                    BuildUtils.WriteDefines("PRODUCTION");
                 }
             }
 
