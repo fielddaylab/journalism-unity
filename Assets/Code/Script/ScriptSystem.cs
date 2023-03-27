@@ -14,10 +14,14 @@ using Journalism.UI;
 using EasyBugReporter;
 using FDLocalization;
 using UnityEngine.SceneManagement;
+using Journalism.Analytics;
+using System.Collections.Generic;
 
 namespace Journalism {
     public sealed class ScriptSystem : MonoBehaviour, IDumpSource {
 
+        static private readonly StringUtils.ArgsList.Splitter s_ArgsSplitter = new StringUtils.ArgsList.Splitter();
+        
         #region Inspector
 
         [SerializeField] private TextDisplaySystem m_TextDisplay = null;
@@ -339,6 +343,26 @@ namespace Journalism {
         static private void EndTutorial() {
             Game.Events.Dispatch(GameEvents.TutorialEnd);
             Game.UI.PopInputMask();
+        }
+
+        [LeafMember("MarkImminentFailure"), Preserve]
+        static private void MarkImminentFailure(StringSlice failData) {
+            if (failData.IsEmpty) {
+                return;
+            }
+
+            TempList8<StringSlice> allTypes = default;
+            failData.Split(s_ArgsSplitter, System.StringSplitOptions.RemoveEmptyEntries, ref allTypes);
+
+            List<FailType> failTypes = new List<FailType>();
+
+            foreach(var typeStr in allTypes)
+            {
+                FailType failType = StringParser.ConvertTo<FailType>(typeStr);
+                failTypes.Add(failType);
+            }
+            
+            Game.Events.Dispatch(GameEvents.ImminentFailure, failTypes);
         }
 
         [LeafMember("HasChoices"), Preserve]

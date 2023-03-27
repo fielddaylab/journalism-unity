@@ -15,8 +15,19 @@ using BeauPools;
 using Leaf;
 using Newtonsoft.Json;
 
-namespace Journalism
+namespace Journalism.Analytics
 {
+    public enum FailType {
+        Time,
+        Choice,
+        Research,
+        Resourceful,
+        Endurance,
+        Tech,
+        Social,
+        Trust
+    }
+
     public partial class AnalyticsService : ServiceBehaviour, IDebuggable
     {
         #region Inspector
@@ -227,7 +238,9 @@ namespace Journalism
             // start new game
                 .Register(GameEvents.NewGameSuccess, LogNewGameSuccess, this)
             // continue game
-                .Register(GameEvents.ContinueGameSuccess, LogContinueGameSuccess, this);
+                .Register(GameEvents.ContinueGameSuccess, LogContinueGameSuccess, this)
+            // game over soon
+                .Register<List<FailType>>(GameEvents.ImminentFailure, LogImminentFailure, this);
 
 
             // SceneHelper.OnSceneLoaded += LogSceneChanged;
@@ -1060,6 +1073,14 @@ namespace Journalism
             Debug.Log("[Analytics] event: continue_game");
 
             m_Log.NewEvent("continue_game");
+        }
+
+        private void LogImminentFailure(List<FailType> failTypes) {
+            Debug.Log("[Analytics] event: level_fail");
+
+            using (var e = m_Log.NewEvent("level_fail")) {
+                e.Param("fail_types", JsonConvert.SerializeObject(failTypes));
+            }
         }
 
         /*

@@ -135,6 +135,7 @@ $HubChoice(HeadStraightToShelter, "Head straight to flood shelter", 0.25, "")
 //Remind the Mayor
 ::RemindTheMayor
 {clear-text}
+$call MarkImminentFailure(Choice)
 You've never sunk this low before.
 But hey, it's for a good cause. Sort of. 
 {@me} Hmm. Since you won't help me, I'll need to write about something else. 
@@ -1433,6 +1434,7 @@ $choice GoToSeniorCitizenApartments; Admit defeat. (And warn the quail-owner not
 
 // Sneak in the back
 :: SneakInTheBack
+$call MarkImminentFailure(Choice)
 //Possible pop-up, caution tape across back door 
 You sneak past the DO NOT ENTER sign and duck under the caution tape.
 You've just snagged the quail snacks from the lady's apartment when.... 

@@ -24,6 +24,7 @@ namespace Journalism {
         static public readonly StringHash32 TutorialBegin = "level:tutorial-begin";
         static public readonly StringHash32 TutorialEnd = "level:tutorial-end";
         static public readonly StringHash32 RollCredits = "level:roll-credits";
+        static public readonly StringHash32 ImminentFailure = "level:imminent-failure";
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments
         static public readonly StringHash32 ChoiceOptionsUpdating = "save:options-updating"; // StringHash32[] locIds
         static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated";

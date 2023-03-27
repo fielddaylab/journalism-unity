@@ -966,7 +966,8 @@ $choice TryToExplain; Insist that this story is for her own good
 $choice ArriveAtRoyalHazelNeighborhood; Look for someone else to talk to 
 
 // Try to make her understand 
-:: TryToExplain 
+:: TryToExplain
+$call MarkImminentFailure(Choice)
 {@me} I'm just trying to help!  
 {@me} How am I supposed to write this story if no one will talk to me? 
 Before you can say anything else...
@@ -1101,6 +1102,7 @@ $elseif StatCheck(Social, 6)
     Phew... THAT was a lucky break.
     $choice InterviewEsme; Go inside and start interview 
 $else
+    $call MarkImminentFailure(Research, Social)
     You keep wandering around, knocking on doors when your phone rings.
     $call DecreaseTime(4)
     {@dionne} El, haven't you been watching the clock? Time's up. 
