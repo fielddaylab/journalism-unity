@@ -28,6 +28,11 @@ namespace Journalism.Analytics
         Trust
     }
 
+    public enum ResumedCheckpointOrigin {
+        Menu,
+        LevelFail
+    }
+
     public partial class AnalyticsService : ServiceBehaviour, IDebuggable
     {
         #region Inspector
@@ -237,10 +242,10 @@ namespace Journalism.Analytics
                 .Register(GameEvents.StartEndgame, LogStartEndgame, this)
             // start new game
                 .Register(GameEvents.NewGameSuccess, LogNewGameSuccess, this)
-            // continue game
-                .Register(GameEvents.ContinueGameSuccess, LogContinueGameSuccess, this)
             // game over soon
-                .Register<List<FailType>>(GameEvents.ImminentFailure, LogImminentFailure, this);
+                .Register<List<FailType>>(GameEvents.ImminentFailure, LogImminentFailure, this)
+            // resumed checkpoint
+                .Register<ResumedCheckpointOrigin>(GameEvents.ResumedCheckpoint, LogResumedCheckpoint, this);
 
 
             // SceneHelper.OnSceneLoaded += LogSceneChanged;
@@ -1080,6 +1085,18 @@ namespace Journalism.Analytics
 
             using (var e = m_Log.NewEvent("level_fail")) {
                 e.Param("fail_types", JsonConvert.SerializeObject(failTypes));
+            }
+        }
+
+        // resumed checkpoint
+        private void LogResumedCheckpoint(ResumedCheckpointOrigin origin) {
+            Debug.Log("[Analytics] event: resumed_checkpoint from " + origin.ToString());
+
+            string node_id = m_LastKnownNodeId.ToString();
+
+            using (var e = m_Log.NewEvent("resumed_checkpoint")) {
+                e.Param("node_id", node_id);
+                e.Param("origin", origin.ToString());
             }
         }
 

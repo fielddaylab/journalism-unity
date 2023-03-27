@@ -11,6 +11,7 @@ namespace Journalism {
         static public readonly StringHash32 LevelLoading = "level:loading";
         static public readonly StringHash32 LevelStarted = "level:started";
         static public readonly StringHash32 LevelCheckpoint = "level:checkpoint";
+        static public readonly StringHash32 ResumedCheckpoint = "level:resumed-checkpoint";
         static public readonly StringHash32 GameOver = "level:game-over";
         static public readonly StringHash32 GameOverClose = "level:game-over-close";
         static public readonly StringHash32 EditorNotesOpen = "ui:editor-notes-open";
