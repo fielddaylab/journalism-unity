@@ -11,6 +11,7 @@ namespace Journalism {
         static public readonly StringHash32 LevelLoading = "level:loading";
         static public readonly StringHash32 LevelStarted = "level:started";
         static public readonly StringHash32 LevelCheckpoint = "level:checkpoint";
+        static public readonly StringHash32 ResumedCheckpoint = "level:resumed-checkpoint";
         static public readonly StringHash32 GameOver = "level:game-over";
         static public readonly StringHash32 GameOverClose = "level:game-over-close";
         static public readonly StringHash32 EditorNotesOpen = "ui:editor-notes-open";
@@ -24,6 +25,7 @@ namespace Journalism {
         static public readonly StringHash32 TutorialBegin = "level:tutorial-begin";
         static public readonly StringHash32 TutorialEnd = "level:tutorial-end";
         static public readonly StringHash32 RollCredits = "level:roll-credits";
+        static public readonly StringHash32 ImminentFailure = "level:imminent-failure";
         static public readonly StringHash32 StatsUpdated = "save:stats-updated"; // int[] adjustments
         static public readonly StringHash32 ChoiceOptionsUpdating = "save:options-updating"; // StringHash32[] locIds
         static public readonly StringHash32 ChoiceOptionsUpdated = "save:options-updated";

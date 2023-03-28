@@ -100,6 +100,7 @@ $choice GetReady; This feels too sketchy. I'll find another way.
 
 // Original Name: Swipe his charger
 :: SwipeHisCharger
+$call MarkImminentFailure(Choice)
 {layout Left}
 You tuck Ben's charger into your pocket and walk away, trying to whistle.
 Ben's phone was already at 92% power. It'll be fine.
@@ -225,6 +226,7 @@ $choice GetReadyPart2; Head back to your desk
 $call SetTimeRemaining(0)
 
 $if !StatCheck(Tech, 2)
+    $call MarkImminentFailure(Tech)
     You are heading downtown and the map website is asking for your login but you can't remember you password.
     $GameOver("You got lost in the storm. Make sure you brush up on {stat-name}tech{/stat-name} skills!")
 $endif
@@ -241,6 +243,7 @@ $endif
 
 // Original Name: Eject: Wasted too much time
 :: EjectWastedTooMuchTime
+$call MarkImminentFailure(Time)
 You're about to head out into the storm when Dionne stops by your desk.
 {@dionne} Can you put on a pot of coffee, El? We're almost out.
 
@@ -415,16 +418,17 @@ $if FirstVisit()
 $endif
 
 $if HasTime(0.5)
-$HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, "")
-$HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
-$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "")
-$HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
-$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.25, "")
-$HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
-{map $Choice_Map}
+
+    $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", -1, "")
+    $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
+    $HubChoice(InterviewTheDNRWorker, "Try to interview the DNR worker leading the effort", -1, "")
+    $HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
+    $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
+    $HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
+    {map $Choice_Map}
 $else
-That leaves just enough time to compile your story!
-$choice CompileYourStory; Compile your story
+    That leaves just enough time to compile your story!
+    $choice CompileYourStory; Compile your story
 $endif
 
 
@@ -488,10 +492,12 @@ $if StatCheck(Trust, 3)
     Plus, a long meandering story about a time he stole a jar of paper clips.
     These folks know how to waste your time.
     $call GiveSnippet(VolunteerInfo)
+    $call DecreaseTime(0.5)
 $elseif StatCheck(Social, 3)
     {@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!
     He tells you where people can find sandbags.
     $call GiveSnippet(VolunteerInfo)
+    $call DecreaseTime(0.5)
 $else
     You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you.
 
@@ -526,21 +532,20 @@ $endif
 :: InterviewTheDNRWorker
 {/map}
 $if StatCheck(Social, 3)
-{img Anim/3b/SandbagsLady.png, }
-{@dnrworker} You the new reporter, right? I've heard you've been making a lot of friends around here!
-{@dnrworker}Would you like an update on the situation?
-{/img}
+    {img Anim/3b/SandbagsLady.png, }
+    {@dnrworker} You the new reporter, right? I've heard you've been making a lot of friends around here!
+    {@dnrworker}Would you like an update on the situation?
+    {/img}
 
-$choice DamInterviewDNRWorker; Oh... yeah, that would be great!
+    $choice DamInterviewDNRWorker; Oh... yeah, that would be great!
 $endif
-
 $if !StatCheck(Social, 3)
-{@dnrworker}Sorry, kid. We're literally swamped here.
-{@dnrworker}Help or get out of the way.
-You bite your tongue. These small town folk annoy you.
+    {@dnrworker}Sorry, kid. We're literally swamped here.
+    {@dnrworker}Help or get out of the way.
+    You bite your tongue. These small town folk annoy you.
 
-$choice HelpMoveSomeSandbags; Help move some sandbags.
-$choice ArriveAtFloodSite; Talk to someone else.
+    $choice HelpMoveSomeSandbags; Help move some sandbags.
+    $choice ArriveAtFloodSite; Talk to someone else.
 $endif
 
 // Original Name: Talk to the houseboat lady
@@ -649,6 +654,7 @@ $choice UseDeliWifi; Go into the deli and ask for help
 
 // Original Name: Swim for it
 :: SwimForIt
+$call MarkImminentFailure(Choice)
 {img Anim/1b/Swimming.png}
 The rushing water only comes up to your knees.
 You're going to make it!!
@@ -721,6 +727,7 @@ $choice AskForAnInterview; Ask the retired fire chief for an interview
 While he eats, he tells you how volunteers can get signed up.
 // $call GiveSnippet(GreatVolunteeringQuote)
 $call GiveSnippet(VolunteerInfo)
+$call DecreaseTime(0.5)
 $choice ArriveAtFloodSite; Decide what to do next
 
 $if !StatCheck(Resourceful, 4)
@@ -739,6 +746,7 @@ He tells you how people can sign up to volunteer.
 You reeeeally wish you could quote him, but it's better than nothing.
 
 $call GiveSnippet(VolunteerInfoWithoutQuote)
+$call DecreaseTime(0.5)
 $choice ArriveAtFloodSite; Decide what to do next
 
 
@@ -791,6 +799,7 @@ $choice ArriveAtFloodSite; Find someone else to talk to
 
 // Original Name: Dam: Interview DNR Worker
 :: DamInterviewDNRWorker
+$call DecreaseTime(0.5)
 $choice WhenWillTheSituationBeUnderControl; When will the situation be under control?
 $choice HowCanPeopleProtectTheirHousesAndBusinesses; How can people protect their houses and businesses?
 $choice HowDidTheCityLetThisHappen; How did the city let this happen?
@@ -812,6 +821,7 @@ $if !StatCheck(Endurance, 3)
     {/img}
     {@dnrworker}Don't worry, El. I can barely lift those myself.
     She agrees to answer one question.
+    $call DecreaseTime(0.5)
 
     $choice WhenWillTheSituationBeUnderControl; When will the situation be under control?
     $choice HowCanPeopleProtectTheirHousesAndBusinesses; How can people protect their houses and businesses?
@@ -1251,12 +1261,13 @@ $if StatCheck(Endurance, 4)
     Most of your gear has been washed right out of your pockets...
     But you probably saved this poor guy's life.
     Plus, you've got a high-quality anecdote for your story... and free cheese for life!
-$call GiveSnippet(CheeseRescue)
-$call AdjustStats(Trust + 2)
-$call AdjustStats(Tech - 1)
-$call AdjustStats(Resourceful - 1)
-$choice ArriveAtFloodSite; Get rescued and head back to the dam
+    $call GiveSnippet(CheeseRescue)
+    $call AdjustStats(Trust + 2)
+    $call AdjustStats(Tech - 1)
+    $call AdjustStats(Resourceful - 1)
+    $choice ArriveAtFloodSite; Get rescued and head back to the dam
 $else
+    $call MarkImminentFailure(Endurance)
     Oh no!! The water is a lot deeper than you thought.
     You don't have the {stat-name}endurance{/stat-name} to keep swimming!
     {@me} Ah! Help!!

@@ -591,7 +591,7 @@ $else
     The officer coughs awkwardly.
     {@policespokesman} Um. Now I remember. You're Maureen's neighbor, aren't you?{auto}
     {@policespokesman} She said you almost ran over her chickens this morning.
-    {img Anim/1a/UpsetChicken.webm, Right}
+    {img Anim/1a/UpsetChicken.png, Right}
     {@me} I wouldn't say 'ran over,' exactly.
     {@policespokesman} I can give you some safety tips, but then I'd better go. 
     {@policespokesman} I don't know what it's like in New York, but around here, we help our neighbors.   
@@ -687,7 +687,7 @@ $choice BreakingNewsStory; Return to your desk
 :: Office1-Clock
 {bg $BG_OfficeExterior}
 {layout Left}
-$if !HasTime(0.5)
+$if !HasTime(0.25)
     $choice YouHaveJustEnoughTimeToCompileTheStoryNow; You have just enough time to compile the story now.
 $else
     $choice BreakingNewsStory; Return to your desk

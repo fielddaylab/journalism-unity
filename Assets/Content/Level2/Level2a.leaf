@@ -866,6 +866,7 @@ $endif
 $choice MainStreetFloodRecovery; Keep looking around
 
 :: TakeAPhotoAnyway
+$call MarkImminentFailure(Choice)
 As soon as the guy turns away, you snap a photo.
 $call SFX(PhotoSnap)
 It looks great! This was DEFINITELY worth it!
@@ -1201,7 +1202,7 @@ $choice WhatIfLocalOfficialsNeedMoreHelp; Will you send more aid if the town nee
 $choice RudeGovernorQuestion; Really? It seems like you're just here for a photo op. 
 
 :: RudeGovernorQuestion
-
+$call MarkImminentFailure(Choice)
 Her smile turns into a glare.  
 {@governor} What kind of newspaper is Dionne Richards running out here??
 {@me} You know Dionne?

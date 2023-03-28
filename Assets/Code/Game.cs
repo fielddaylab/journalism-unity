@@ -12,6 +12,7 @@ using BeauUtil.Extensions;
 using Journalism.UI;
 using EasyAssetStreaming;
 using FDLocalization;
+using Journalism.Analytics;
 
 namespace Journalism {
 
@@ -162,7 +163,8 @@ namespace Journalism {
         private void OnContinueGameSuccess(PlayerData data) {
             Game.Events.Dispatch(GameEvents.ProfileStarting, m_ProfileName);
 
-            Game.Events.Dispatch(GameEvents.ContinueGameSuccess);
+            Game.Events.Dispatch(GameEvents.ResumedCheckpoint, ResumedCheckpointOrigin.Menu);
+
             int levelIndex = Player.Data.LevelIndex;
             if (levelIndex < 0) {
                 Log.Warn("Previous player level data was not saved correctly. Should be a non-negative value. Starting at Level 1.");

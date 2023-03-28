@@ -379,16 +379,18 @@ $endif
 
 $if RoyalHazelLocation = true
     $HubChoice(HeadToRoyalHazelNeighborhood, "Head to Royal Hazel Neighborhood", 0.25, "RoyalHazel")
-$elseif Visited(InterviewDNRWorkerAtSandbagFillingStation), Visited(InterviewSandbagFillingVolunteer), Visited(AskPermissionToTakePhoto)
-    // Player has exhausted all options but failed to find Royal Hazel Location
-    Out of nowhere, you get a sinking feeling. Something's not right...
-    $choice FinalConvergeNode; What is it?
-$endif 
+$endif
 
 $HubChoice(InterviewDNRWorkerAtSandbagFillingStation, "Ask to interview Misty, the DNR worker", 0.25, "")
 $HubChoice(InterviewSandbagFillingVolunteer, "Talk to volunteer filling sandbags", 0.25, "")
 $HubChoice(AskToInterviewManFillingSandbags, "Talk to man loading sandbags into his pickup truck", 0.25, "")
 $HubChoice(AskPermissionToTakePhoto, "Ask permission to take a photo", 0.25, "")
+
+$if !HasChoices()
+    // Player has exhausted all options but failed to find Royal Hazel Location
+    Out of nowhere, you get a sinking feeling. Something's not right...
+    $choice FinalConvergeNode; What is it?
+$endif 
 
 
 // Interview DNR Worker
@@ -964,7 +966,8 @@ $choice TryToExplain; Insist that this story is for her own good
 $choice ArriveAtRoyalHazelNeighborhood; Look for someone else to talk to 
 
 // Try to make her understand 
-:: TryToExplain 
+:: TryToExplain
+$call MarkImminentFailure(Choice)
 {@me} I'm just trying to help!  
 {@me} How am I supposed to write this story if no one will talk to me? 
 Before you can say anything else...
@@ -1099,6 +1102,7 @@ $elseif StatCheck(Social, 6)
     Phew... THAT was a lucky break.
     $choice InterviewEsme; Go inside and start interview 
 $else
+    $call MarkImminentFailure(Research, Social)
     You keep wandering around, knocking on doors when your phone rings.
     $call DecreaseTime(4)
     {@dionne} El, haven't you been watching the clock? Time's up. 
@@ -1182,6 +1186,7 @@ The woman stacking up sandbags hurries over to say hello.
 {/img}
 {@liz} Of course. Any friend of yours is welcome here.
 
+$CheckFinalConverge()
 
 $HubChoice(InterviewLiz, "Interview Liz", 0.25, "")
 
@@ -1383,7 +1388,6 @@ You'll miss Twin Lakes too.
 $choice ContinuePhoneInterview; Continue phone interview 
 
 :: ContinuePhoneInterview 
-
 You're about to answer Gabby's next question...
 {anim rumble} CRASH
 You hear a terrible crashing sound.
@@ -1413,7 +1417,6 @@ You probably shouldn't have said that last part...
 $choice HangUpPhoneInterview; Hang up and look for shelter 
 
 :: HangUpPhoneInterview
-
 Well... that interview didn't go as planned.
 You're about to text Dionne that you're on your way to safety...
 {anim rumble} When you hear a terrible crashing sound.
@@ -1426,6 +1429,10 @@ You know what happened before the text comes.
 $choice TheWaterRises; Run for higher ground 
 
 :: TheWaterRises
+{bg $BG_CherryFestFlood}
+$call Music($Audio_Flood)
+$call StopAmbience()
+$call Rain($Audio_FloodWaterRushing)
 {img Anim/3a/Dam.png}
 Water rushes through the street. 
 You run toward the nearest house--dark, doors shut, windows boarded up.
@@ -1487,8 +1494,11 @@ That's when you notice the book propped up on the table: <i>Floodlights</i>, by 
 {@me} And... you're both named Nora.... 
 That's when you realize. Holy cherry-glazed donuts.
 
-
-$choice InterviewTheFloodingExpert; Interview the <i>flooding expert</i>, Dr. Nora Warner
+$if HasTime(0.5)
+    $HubChoice(InterviewTheFloodingExpert, "Interview the <i>flooding expert</i>, Dr. Nora Warner", 0.25)
+$else
+    $choice InterviewTheFloodingExpert; Interview the <i>flooding expert</i>, Dr. Nora Warner
+$endif
 
 // Interview the flooding expert
 :: InterviewTheFloodingExpert
@@ -1535,8 +1545,13 @@ $choice WhatMadeYouWantToStudyFlooding; What made you want to study floods?
 
 $call GiveSnippet(NoraBackground)
 
-$choice HowDidYouEndUpInAHouseboat; How did you end up living on a houseboat? 
-$choice WhyHasntAnyoneMentionedIt; Why hasn't anyone mentioned that the town flooded ten years ago? 
+$if HasTime(0.25)
+    $HubChoice(HowDidYouEndUpInAHouseboat, "How did you end up living on a houseboat?", 0.25)
+    $HubChoice(WhyHasntAnyoneMentionedIt, "Why hasn't anyone mentioned that the town flooded ten years ago?", 0.25)
+$else
+    $choice HowDidYouEndUpInAHouseboat; How did you end up living on a houseboat?
+    $choice WhyHasntAnyoneMentionedIt; Why hasn't anyone mentioned that the town flooded ten years ago?
+$endif
 
 // How did you end up on your houseboat? 
 :: HowDidYouEndUpInAHouseboat
@@ -1596,6 +1611,7 @@ $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know abo
 $call GiveSnippet(NoraFinancialHelp)
 
 $choice WhatDoYouThinkPeopleShouldKnow; What do you think people should know about floods and equity? 
+
 // What do you think people should know about floods and equity?
 :: WhatDoYouThinkPeopleShouldKnow
 {@drnorawarner} Well, people love to say we're all in this together.
