@@ -419,7 +419,7 @@ $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, ""
 $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
 $HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "")
 $HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
-$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
+$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.25, "")
 $HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
 {map $Choice_Map}
 $else
@@ -518,6 +518,7 @@ $else
 $choice Non-BookwormAnswer; Um....epi-whatium?
 What a waste of time. How were you supposed to know what that was?
 I guess you need to brush up on your {stat-name} research {/stat-name}
+This is frustrating. 
 $endif
 {/img}
 
@@ -718,7 +719,7 @@ $choice AskForAnInterview; Ask the retired fire chief for an interview
 {@me} Sorry it's a little soggy.
 {@dnrvolunteer} Hey, thanks, kid!
 While he eats, he tells you how volunteers can get signed up.
-$call GiveSnippet(GreatVolunteeringQuote)
+// $call GiveSnippet(GreatVolunteeringQuote)
 $call GiveSnippet(VolunteerInfo)
 $choice ArriveAtFloodSite; Decide what to do next
 
@@ -1089,9 +1090,10 @@ $choice ArriveAtFloodSite; Thank her for the interview
 {@dnrworker}The problem is, it's not safe to drive in this mess, so people can't get to them.
 {/img}
 {@dnrworker}Right now, the best thing people can do is clear out their basements, stay off the roads, and find higher ground.
+There are free sandbags but people need to make they can get there safely. 
 
 $call GiveSnippet(SandbagTroubles)
-$call GiveSnippet(SandbagLocation)
+// $call GiveSnippet(SandbagLocation)
 
 $choice ArriveAtFloodSite; Back to the dam
 
