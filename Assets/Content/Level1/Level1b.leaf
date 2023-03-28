@@ -418,16 +418,16 @@ $if FirstVisit()
 $endif
 
 $if HasTime(0.5)
-$HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", 0.5, "")
-$HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
-$HubChoice(InterviewTheDNRWorker, "Interview the DNR worker leading the effort", 0.5, "")
-$HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
-$HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
-$HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
-{map $Choice_Map}
+    $HubChoice(TalkToVolunteer1, "Talk to a volunteer taking a water break", -1, "")
+    $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
+    $HubChoice(InterviewTheDNRWorker, "Try to interview the DNR worker leading the effort", -1, "")
+    $HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
+    $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
+    $HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
+    {map $Choice_Map}
 $else
-That leaves just enough time to compile your story!
-$choice CompileYourStory; Compile your story
+    That leaves just enough time to compile your story!
+    $choice CompileYourStory; Compile your story
 $endif
 
 
@@ -491,10 +491,12 @@ $if StatCheck(Trust, 3)
     Plus, a long meandering story about a time he stole a jar of paper clips.
     These folks know how to waste your time.
     $call GiveSnippet(VolunteerInfo)
+    $call DecreaseTime(0.5)
 $elseif StatCheck(Social, 3)
     {@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!
     He tells you where people can find sandbags.
     $call GiveSnippet(VolunteerInfo)
+    $call DecreaseTime(0.5)
 $else
     You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you.
 
@@ -528,21 +530,20 @@ $endif
 :: InterviewTheDNRWorker
 {/map}
 $if StatCheck(Social, 3)
-{img Anim/3b/SandbagsLady.png, }
-{@dnrworker} You the new reporter, right? I've heard you've been making a lot of friends around here!
-{@dnrworker}Would you like an update on the situation?
-{/img}
+    {img Anim/3b/SandbagsLady.png, }
+    {@dnrworker} You the new reporter, right? I've heard you've been making a lot of friends around here!
+    {@dnrworker}Would you like an update on the situation?
+    {/img}
 
-$choice DamInterviewDNRWorker; Oh... yeah, that would be great!
+    $choice DamInterviewDNRWorker; Oh... yeah, that would be great!
 $endif
-
 $if !StatCheck(Social, 3)
-{@dnrworker}Sorry, kid. We're literally swamped here.
-{@dnrworker}Help or get out of the way.
-You bite your tongue. These small town folk annoy you.
+    {@dnrworker}Sorry, kid. We're literally swamped here.
+    {@dnrworker}Help or get out of the way.
+    You bite your tongue. These small town folk annoy you.
 
-$choice HelpMoveSomeSandbags; Help move some sandbags.
-$choice ArriveAtFloodSite; Talk to someone else.
+    $choice HelpMoveSomeSandbags; Help move some sandbags.
+    $choice ArriveAtFloodSite; Talk to someone else.
 $endif
 
 // Original Name: Talk to the houseboat lady
@@ -724,6 +725,7 @@ $choice AskForAnInterview; Ask the retired fire chief for an interview
 While he eats, he tells you how volunteers can get signed up.
 $call GiveSnippet(GreatVolunteeringQuote)
 $call GiveSnippet(VolunteerInfo)
+$call DecreaseTime(0.5)
 $choice ArriveAtFloodSite; Decide what to do next
 
 $if !StatCheck(Resourceful, 4)
@@ -742,6 +744,7 @@ He tells you how people can sign up to volunteer.
 You reeeeally wish you could quote him, but it's better than nothing.
 
 $call GiveSnippet(VolunteerInfoWithoutQuote)
+$call DecreaseTime(0.5)
 $choice ArriveAtFloodSite; Decide what to do next
 
 
@@ -794,6 +797,7 @@ $choice ArriveAtFloodSite; Find someone else to talk to
 
 // Original Name: Dam: Interview DNR Worker
 :: DamInterviewDNRWorker
+$call DecreaseTime(0.5)
 $choice WhenWillTheSituationBeUnderControl; When will the situation be under control?
 $choice HowCanPeopleProtectTheirHousesAndBusinesses; How can people protect their houses and businesses?
 $choice HowDidTheCityLetThisHappen; How did the city let this happen?
@@ -815,6 +819,7 @@ $if !StatCheck(Endurance, 3)
     {/img}
     {@dnrworker}Don't worry, El. I can barely lift those myself.
     She agrees to answer one question.
+    $call DecreaseTime(0.5)
 
     $choice WhenWillTheSituationBeUnderControl; When will the situation be under control?
     $choice HowCanPeopleProtectTheirHousesAndBusinesses; How can people protect their houses and businesses?

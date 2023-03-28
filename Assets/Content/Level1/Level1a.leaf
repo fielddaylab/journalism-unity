@@ -687,7 +687,7 @@ $choice BreakingNewsStory; Return to your desk
 :: Office1-Clock
 {bg $BG_OfficeExterior}
 {layout Left}
-$if !HasTime(0.5)
+$if !HasTime(0.25)
     $choice YouHaveJustEnoughTimeToCompileTheStoryNow; You have just enough time to compile the story now.
 $else
     $choice BreakingNewsStory; Return to your desk

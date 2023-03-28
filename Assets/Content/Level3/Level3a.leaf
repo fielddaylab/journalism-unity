@@ -617,7 +617,7 @@ $if StatCheck (Social, 5)
             $HubChoice(TellMeWhatHappened, "Interview the man about his troubles", 0.25, "")
       $endif
 $else
-      {img Anim/3a/DogOwner.png}}
+      {img Anim/3a/DogOwner.png}
       You try to strike up a conversation and mention some people you've met.
       The man clearly isn't in the mood.
       It seems like you don't quite have the 
