@@ -235,7 +235,7 @@ and a roll of duct tape.
 ...in case you get lost and need to build a shelter from twigs and prairie grass. 
 Oh, and bug spray, of course. 
 
-$call AdjustStats(Resourceful + 1, Research + 1)
+$call AdjustStats(Resourceful + 1, Tech + 1)
 $HubChoice(HeadToCherryCreekMarsh, "Head to Cherry Creek Marsh", 0.25, "CherryCreek")
 
 // Original Name: Meet some other reporters for coffee
