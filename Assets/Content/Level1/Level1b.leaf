@@ -423,7 +423,7 @@ $if HasTime(0.5)
     $HubChoice(TalkToVolunteer2, "Talk to a volunteer packing up their gear", 0.5, "")
     $HubChoice(InterviewTheDNRWorker, "Try to interview the DNR worker leading the effort", -1, "")
     $HubChoice(TalkToTheHouseboatLady, "Climb up onto the houseboat, \"Nora's Ark\"", 0.5, "")
-    $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.5, "")
+    $HubChoice(TakePhotosOfTheFloodSite, "Take some photos", 0.25, "")
     $HubChoice(CherryFestivalMap, "Walk down to the Cherry Festival on Main Street", 0.25, "CherryFestival")
     {map $Choice_Map}
 $else
@@ -492,12 +492,12 @@ $if StatCheck(Trust, 3)
     Plus, a long meandering story about a time he stole a jar of paper clips.
     These folks know how to waste your time.
     $call GiveSnippet(VolunteerInfo)
-    $call DecreaseTime(0.5)
+    $call DecreaseTime(0.25)
 $elseif StatCheck(Social, 3)
     {@dnrvolunteer} Oh, I've heard you're a real {stat-name}social{/stat-name} butterfly!
     He tells you where people can find sandbags.
     $call GiveSnippet(VolunteerInfo)
-    $call DecreaseTime(0.5)
+    $call DecreaseTime(0.25)
 $else
     You ask for an interview, but the volunteer doesn't seem to {stat-name}trust{/stat-name} you.
 
@@ -639,7 +639,10 @@ $HubChoice(FollowTheSirens, "Follow the sirens from around the corner", 0.5, "Ch
 
 $HubChoice(ArriveAtFloodSite, "Head back to the dam", 0.5, "UpperLakeDam")
 $else
-Time's up. Time to put your story together!
+You don't have enough time to check this place out.
+You had no idea how bad it is.
+You have to let people know right away. 
+Time to put your story together!
 $choice CompileYourStory; Compile your story
 $endif
 
@@ -821,6 +824,9 @@ $if !StatCheck(Endurance, 3)
     {/img}
     {@dnrworker}Don't worry, El. I can barely lift those myself.
     She agrees to answer one question.
+    Your editor gave you an assignment with specific notes. 
+    You know you should think about these before you decide. 
+    These town folks can be easy to offend so you pause before you choose. 
     $call DecreaseTime(0.5)
 
     $choice WhenWillTheSituationBeUnderControl; When will the situation be under control?
