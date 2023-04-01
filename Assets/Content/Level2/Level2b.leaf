@@ -505,7 +505,7 @@ $endif
 
 
 $OnceChoice(BusinessIsDestroyingTheWetlands, "I'm writing about how business is destroying the wetlands.")
-$OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up in at the Cherry Creek Marsh. Can I get your perspective.")
+$OnceChoice(YourNameCameUpInAnInterview, "The Spark Project came up at the Cherry Creek Marsh. Can I get your perspective.")
 $OnceChoice(PlaygroundInitiative, "I'd love to hear about the playground initiative. What's that about?")
 
 //Original Name: Playground initiative 
