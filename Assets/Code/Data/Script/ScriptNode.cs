@@ -6,14 +6,18 @@ using UnityEngine.Scripting;
 namespace Journalism {
     public sealed class ScriptNode : LeafNode {
 
+        private string m_FullName = null;
         private ScriptNodeFlags m_Flags;
         private StringHash32 m_CheckpointId;
         private StringHash32[] m_Tags;
 
-        public ScriptNode(StringHash32 inId, Script inScript)
-            : base(inId, inScript)
+        public ScriptNode(string inFullId, Script inScript)
+            : base(inFullId, inScript)
         {
+            m_FullName = inFullId;
         }
+
+        public string FullName() { return m_FullName; }
 
         public ScriptNodeFlags Flags() {
             return m_Flags;

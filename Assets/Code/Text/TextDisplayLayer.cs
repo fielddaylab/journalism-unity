@@ -226,6 +226,8 @@ namespace Journalism {
                 yield return ClearLines();
                 yield return 0.2f;
             }
+
+            Game.Events.Dispatch(GameEvents.OnNodeStart, new NodeNameParams(node.FullName()));
         }
 
         #endregion // Events
@@ -250,7 +252,7 @@ namespace Journalism {
                 var charLocName = Assets.Char(characterId).Name;
                 string charName = (charLocName.IsEmpty ? "" : FDLocalization.Loc.Get(charLocName));
 
-                Game.Events.Dispatch(GameEvents.OnPrepareLine, new TextNodeParams("[node name here]", inString.VisibleText, charName));
+                Game.Events.Dispatch(GameEvents.OnPrepareLine, new TextNodeParams(inString.VisibleText, charName));
             }
 
             m_ForceNext = inString.TryFindEvent(GameText.Events.ForceNext, out var _);

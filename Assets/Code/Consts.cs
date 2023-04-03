@@ -75,6 +75,7 @@ namespace Journalism {
         static public readonly StringHash32 StartEndgame = "analytics:start-endgame";
 
         static public readonly StringHash32 OnPrepareLine = "analytics:entering-node";
+        static public readonly StringHash32 OnNodeStart = "analytics:starting-node";
         static public readonly StringHash32 StatsRefreshed = "analytics:stats-refreshed";
         static public readonly StringHash32 StoryImpactDisplayed = "analytics:story-impact-displayed";
         static public readonly StringHash32 SlotsLaidOut = "analytics:slots-laid-out";

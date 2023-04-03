@@ -93,6 +93,7 @@ namespace Journalism {
             Assert.True(m_CurrentScript != null && !m_ScriptLoader, "Cannot start while script isn't fully loaded (current script {0})", m_CurrentScript);
             m_CurrentScript.TryGetNode(m_CurrentScript.StartNodeId(), out ScriptNode start);
             Game.Events.Dispatch(GameEvents.LevelStarted);
+            Game.Events.Dispatch(GameEvents.OnNodeStart, new NodeNameParams(start.FullName()));
             Run(start);
         }
 
@@ -106,6 +107,7 @@ namespace Journalism {
             m_CurrentScript.TryGetNode(data.CheckpointId, out ScriptNode start);
             // new event: resumed checkpoint (same event data as reached checkpoint; + origin: string (menu or ))
             Game.Events.Dispatch(GameEvents.LevelStarted);
+            Game.Events.Dispatch(GameEvents.OnNodeStart, new NodeNameParams(start.FullName()));
             Run(start);
         }
 

@@ -301,8 +301,8 @@ namespace Journalism {
             var loadLevel = Game.Scripting.LoadLevel(Player.Data);
             yield return Game.UI.GameOver.Hide();
             yield return loadLevel;
-            Game.Events.Dispatch(GameEvents.ResumedCheckpoint, ResumedCheckpointOrigin.LevelFail);
             Game.Scripting.StartFromCheckpoint(Player.Data);
+            Game.Events.Dispatch(GameEvents.ResumedCheckpoint, ResumedCheckpointOrigin.LevelFail);
         }
 
         [LeafMember("BeginFeedback"), Preserve]

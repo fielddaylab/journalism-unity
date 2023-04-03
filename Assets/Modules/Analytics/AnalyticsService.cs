@@ -117,7 +117,7 @@ namespace Journalism.Analytics
         private OGDLog m_Log;
 
         private bool m_FeedbackInProgress;
-        private StringHash32 m_LastKnownNodeId;
+        private string m_LastKnownNodeId;
         private string m_LastKnownSpeaker;
         private string m_LastKnownNodeContent;
         private PlayerData m_LastKnownPlayerData;
@@ -155,6 +155,7 @@ namespace Journalism.Analytics
                 .Register(GameEvents.StoryEvalEnd, OnFeedbackEnd, this)
                 .Register<TextChoice>(GameEvents.ChoiceCompleted, OnChoiceCompleted, this)
                 .Register<TextNodeParams>(GameEvents.OnPrepareLine, OnPrepareLine, this)
+                .Register<NodeNameParams>(GameEvents.OnNodeStart, OnNodeStart, this)
                 .Register<PlayerData>(GameEvents.StatsRefreshed, OnStatsRefreshed, this)
                 .Register<StringHash32[]>(GameEvents.ChoiceOptionsUpdating, OnChoiceOptionsUpdating)
                 .Register<List<StoryBuilderSlot>>(GameEvents.SlotsLaidOut, OnSlotsLaidOut)
@@ -1090,9 +1091,9 @@ namespace Journalism.Analytics
 
         // resumed checkpoint
         private void LogResumedCheckpoint(ResumedCheckpointOrigin origin) {
-            Debug.Log("[Analytics] event: resumed_checkpoint from " + origin.ToString());
+            Debug.Log("[Analytics] event: resumed_checkpoint at node id " + m_LastKnownNodeId + " from " + origin.ToString());
 
-            string node_id = m_LastKnownNodeId.ToString();
+            string node_id = m_LastKnownNodeId;
 
             using (var e = m_Log.NewEvent("resumed_checkpoint")) {
                 e.Param("node_id", node_id);
@@ -1167,9 +1168,12 @@ namespace Journalism.Analytics
         }
 
         private void OnPrepareLine(TextNodeParams args) {
-            m_LastKnownNodeId = args.NodeId;
             m_LastKnownNodeContent = args.Content;
             m_LastKnownSpeaker = args.Speaker;
+        }
+
+        private void OnNodeStart(NodeNameParams args) {
+            m_LastKnownNodeId = args.NodeId;
         }
 
         private void OnStatsRefreshed(PlayerData data) {

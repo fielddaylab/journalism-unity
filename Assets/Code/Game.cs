@@ -163,8 +163,6 @@ namespace Journalism {
         private void OnContinueGameSuccess(PlayerData data) {
             Game.Events.Dispatch(GameEvents.ProfileStarting, m_ProfileName);
 
-            Game.Events.Dispatch(GameEvents.ResumedCheckpoint, ResumedCheckpointOrigin.Menu);
-
             int levelIndex = Player.Data.LevelIndex;
             if (levelIndex < 0) {
                 Log.Warn("Previous player level data was not saved correctly. Should be a non-negative value. Starting at Level 1.");
@@ -173,6 +171,7 @@ namespace Journalism {
             Game.Audio.SetMusic(null, 1);
             m_ScriptSystem.LoadLevel(levelIndex).OnComplete(() => {
                 m_ScriptSystem.StartFromCheckpoint(data);
+                Game.Events.Dispatch(GameEvents.ResumedCheckpoint, ResumedCheckpointOrigin.Menu);
             });
         }
 
