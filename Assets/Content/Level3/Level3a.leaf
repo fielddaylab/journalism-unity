@@ -953,12 +953,30 @@ $choice FloodShelterChoices; Decide what to do next.
 //Flood Shelter Choices
 :: FloodShelterChoices
 $call SetLocation("Shelter")
-$if HasTime(0.25)
-      $if !HasChoices()
-            Looks like you have been pretty thorough. All that's left is to compile your story!
-            $choice StoryConstruction3a; Compile your story
+$if HasTime(0.5)
+      $if Visited(CallDisabilityRightsExpertAtLocalCollege), Visited(TalkToManWithDog), Visited(AskToInterviewTheShelterCoordinator), Visited(TakePhotosOfShelter)
+            $if VetContact == true
+                  $if Visited(MeetWithLocalVet)
+                        $if ApartmentAddress, Visited(GoToSeniorCitizenApartments)
+                              Looks like you have been pretty thorough. All that's left is to compile your story!
+                              $choice StoryConstruction3a; Compile your story
+                        $endif
+                  $endif
+            $elseif ApartmentAddress
+                  $if Visited(GoToSeniorCitizenApartments)
+                        $if VetContact == true, Visited(MeetWithLocalVet)
+                              Looks like you have been pretty thorough. All that's left is to compile your story!
+                              $choice StoryConstruction3a; Compile your story 
+                        $endif
+                  $endif
+            $else
+                  Looks like you have been pretty thorough. All that's left is to compile your story!
+                  $choice StoryConstruction3a; Compile your story 
+            $endif
       $endif
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
+      $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
+      $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
       $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
       $if VetContact == true
             $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "Downtown")
@@ -966,14 +984,28 @@ $if HasTime(0.25)
       $if ApartmentAddress
             $HubChoice(GoToSeniorCitizenApartments, "Go to the senior citizen apartment building", 0.25, "SeniorApts")
       $endif
-$elseif HasTime(0.5)
-      $if !HasChoices()
-            Looks like you have been pretty thorough. All that's left is to compile your story!
-            $choice StoryConstruction3a; Compile your story
+$elseif HasTime(0.25)
+      $if Visited(CallDisabilityRightsExpertAtLocalCollege), Visited(TakePhotosOfShelter)
+            $if VetContact == true
+                  $if Visited(MeetWithLocalVet)
+                        $if ApartmentAddress, Visited(GoToSeniorCitizenApartments)
+                              Looks like you have been pretty thorough. All that's left is to compile your story!
+                              $choice StoryConstruction3a; Compile your story
+                        $endif
+                  $endif
+            $elseif ApartmentAddress
+                  $if Visited(GoToSeniorCitizenApartments)
+                        $if VetContact == true, Visited(MeetWithLocalVet)
+                              Looks like you have been pretty thorough. All that's left is to compile your story!
+                              $choice StoryConstruction3a; Compile your story 
+                        $endif
+                  $endif
+            $else
+                  Looks like you have been pretty thorough. All that's left is to compile your story!
+                  $choice StoryConstruction3a; Compile your story 
+            $endif
       $endif
       $HubChoice(CallDisabilityRightsExpertAtLocalCollege, "Call disability rights expert at Twin Lakes College", 0.25)
-      $HubChoice(TalkToManWithDog, "Comfort the dog owner and ask for an interview", 0.50, "")
-      $HubChoice(AskToInterviewTheShelterCoordinator, "Ask to interview the woman with the clipboard", 0.50, "")
       $HubChoice(TakePhotosOfShelter, "Take some photos of the shelter", 0.25, "")
       $if VetContact == true
             $HubChoice(MeetWithLocalVet, "Head downtown to talk to the local vet, Fox Sculder", 0.25, "Downtown")
