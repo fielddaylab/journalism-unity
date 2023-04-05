@@ -8,14 +8,15 @@
 
 // Original Name: Level 2, Story 3: The Science Story
 :: Level2Story3TheScienceStory
+{/bg}
 $call SetLocation("Apartment")
+$call StopAmbience()
+$call StopRain()
 $ActionChoice(The next morning...)
 {bg $BG_BedroomDesk}
 $call Music($Audio_RainyDayInCherryTownWakingDay1)
-$call StopAmbience()
 
 {layout Right}
-$call StopRain()
 $call SetHeaderEnabled(true)
 It's an eerily quiet morning in Twin Lakes. 
 The internet is buzzing about the flood.
@@ -601,13 +602,12 @@ Your story is due in {timeLeft}.
 Oh no... this place looks awful.
 A few days ago, there was a bustling Cherry Festival here. 
 How will people ever recover? 
-$endif
 
-$if HasTime(0.5)
+$if HasTime(0.25)
     $LocationChoice(ScienceStoryMap, "Return Home", "Apartment")
     $HubChoice(MainStreetGalleryOwner, "Talk to the gallery owner airing out his artwork", -1)
     $HubChoice(MainStreetCafe, "Enter the cafe. The sign says ''PLEASE COME IN, WE'RE OPEN!!''", -1)
-    $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.5)
+    $HubChoice(TakePhotosOfTheDebris, "Snap some pictures of the debris", 0.25)
     {map $Choice_Map}
 $else
     $choice TimeToAssembleTheScienceStory; Time to assemble the science story...

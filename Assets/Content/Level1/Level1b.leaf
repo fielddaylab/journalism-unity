@@ -523,7 +523,7 @@ $choice BookwormAnswer; Interesting. Are you worried the flooding will contribut
 $else
 $choice Non-BookwormAnswer; Um....epi-whatium?
 What a waste of time. How were you supposed to know what that was?
-I guess you need to brush up on your {stat-name} research {/stat-name}
+I guess you need to brush up on your {stat-name}research{/stat-name}.
 This is frustrating. 
 $endif
 {/img}
