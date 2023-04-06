@@ -591,17 +591,18 @@ $endif
 {clear-text}
 $call SetLocation("MainSt")
 $if FirstVisit()
-{bg $BG_FirstStDowntownCleanup}
-$call Music($Audio_StoryRain)
-$call StopAmbience()
-$call StopRain()
+    {bg $BG_FirstStDowntownCleanup}
+    $call Music($Audio_StoryRain)
+    $call StopAmbience()
+    $call StopRain()
 
-{layout Left}
-Your story is due in {timeLeft}.
+    {layout Left}
+    Your story is due in {timeLeft}.
 
-Oh no... this place looks awful.
-A few days ago, there was a bustling Cherry Festival here. 
-How will people ever recover? 
+    Oh no... this place looks awful.
+    A few days ago, there was a bustling Cherry Festival here. 
+    How will people ever recover? 
+$endif
 
 $if HasTime(0.25)
     $LocationChoice(ScienceStoryMap, "Return Home", "Apartment")
