@@ -319,9 +319,7 @@ namespace Journalism {
                 }
 
                 if (fullOptions.Count == 1 && !hasTime) {
-                    var choices = inChoice.AvailableOptions().GetEnumerator();
-                    choices.MoveNext();
-                    var choice = choices.Current;
+                    var choice = fullOptions[0];
 
                     TagString choiceText = LookupLine(choice.LineCode);
                     StringHash32 characterId = GameText.FindCharacter(choiceText);

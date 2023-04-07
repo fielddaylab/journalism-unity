@@ -415,7 +415,7 @@ $if StatCheck(Social, 5)
 {@pattyforbes} It's peaceful <i>here</i>. 
 {@pattyforbes} I'd like to keep it that way. 
 {@pattyforbes} Who knows what those flood evacuees would bring with them?? 
-(@me} Hm. I would guess some clothes and toothbrushes and granola bars.
+{@me} Hm. I would guess some clothes and toothbrushes and granola bars.
 
 $call GiveSnippet(RudeRichLadyQuote)
 $else
