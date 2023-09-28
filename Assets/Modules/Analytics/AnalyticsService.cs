@@ -323,7 +323,7 @@ namespace Journalism.Analytics
             Debug.Log("[Analytics] event: display_breakdown_dialog");
 
             m_TargetBreakdown = Assets.CurrentLevel.Story;
-            m_CurrentBreakdown = StoryStats.FromPlayerData(Player.Data, Assets.CurrentLevel.Story);
+            m_CurrentBreakdown = StoryStats.FromPlayerData(Player.Data, m_TargetBreakdown);
 
             Dictionary<string, int> final_breakdown = new Dictionary<string, int> {
                 { "color_weight", m_CurrentBreakdown.ColorCount },
@@ -364,8 +364,8 @@ namespace Journalism.Analytics
             string text_content = m_LastKnownNodeContent;
             float story_score = m_CurrentBreakdown.TotalQuality;
             float story_alignment = m_CurrentBreakdown.Alignment;
-            // Debug.Log("[Analytics] SCORE: " + story_score);
-            // Debug.Log("[Analytics] ALIGNMENT: " + story_alignment);
+            // Debug.Log("[Analytics]      SCORE: " + story_score);
+            // Debug.Log("[Analytics]      ALIGNMENT: " + story_alignment);
 
 
             using (var e = m_Log.NewEvent("display_feedback_dialog")) {
@@ -805,7 +805,9 @@ namespace Journalism.Analytics
             Debug.Log("[Analytics] event: editor_notes_open");
 
             m_TargetBreakdown = Assets.CurrentLevel.Story;
-            m_CurrentBreakdown = Player.StoryStatistics;
+            m_CurrentBreakdown = StoryStats.FromPlayerData(Player.Data, m_TargetBreakdown);
+            // Debug.Log("[Analytics]      SCORE: " + story_score);
+            // Debug.Log("[Analytics]      ALIGNMENT: " + story_alignment);
 
             Dictionary<string, int> current_breakdown = new Dictionary<string, int>();
             current_breakdown.Add("color_weight", m_CurrentBreakdown.ColorCount);
@@ -940,7 +942,9 @@ namespace Journalism.Analytics
             Debug.Log("[Analytics] event: story_updated");
 
             m_TargetBreakdown = Assets.CurrentLevel.Story;
-            m_CurrentBreakdown = Player.StoryStatistics;
+            m_CurrentBreakdown = StoryStats.FromPlayerData(Player.Data, m_TargetBreakdown);
+            // Debug.Log("[Analytics]      SCORE: " + story_score);
+            // Debug.Log("[Analytics]      ALIGNMENT: " + story_alignment);
 
             Dictionary<string, int> new_breakdown = new Dictionary<string, int>();
             new_breakdown.Add("color_weight", m_CurrentBreakdown.ColorCount);
@@ -1031,7 +1035,9 @@ namespace Journalism.Analytics
             Debug.Log("[Analytics] event: start_level");
 
             m_TargetBreakdown = Assets.CurrentLevel.Story;
-            m_CurrentBreakdown = Player.StoryStatistics;
+            m_CurrentBreakdown = StoryStats.FromPlayerData(Player.Data, m_TargetBreakdown);
+            // Debug.Log("[Analytics]      SCORE: " + story_score);
+            // Debug.Log("[Analytics]      ALIGNMENT: " + story_alignment);
 
             int level_started = Assets.CurrentLevel.LevelIndex;
 
