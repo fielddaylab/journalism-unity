@@ -96,9 +96,12 @@ namespace Journalism {
             }
 
             if (stats.TotalQuality >= 3) {
+                // 3+ quality
                 stats.Score = StoryScore.Good;
             } else if (stats.TotalQuality >= 1) {
+                // 1 to 3 quality
                 stats.Score = StoryScore.Medium;
+                // 0 quality
             } else {
                 stats.Score = StoryScore.Bad;
             }
