@@ -387,7 +387,10 @@ namespace Journalism.UI
         #region Stats
 
         private void RefreshStats() {
+            // Debug.Log("[Analytics] REFRESH STATS TRIGGERED");
             m_CachedStats = StoryStats.FromPlayerData(Player.Data, Assets.CurrentLevel.Story);
+            // Debug.Log("[Analytics] New total quality: " + m_CachedStats.TotalQuality);
+
         }
 
         #endregion // Stats

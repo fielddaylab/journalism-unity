@@ -7,6 +7,8 @@ Unity implementation of Journalism Game
 
 level_begin(level_id)
 
+    Level 6 is for the credits
+
 begin_story(level_id, snippits_available[])
 
 level_complete(level_id, snippits_used[], alignment_score, quality_score)
