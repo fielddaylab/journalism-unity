@@ -928,7 +928,7 @@ namespace Journalism.Analytics
 
             string attributeStr = GenerateAttributesString(snippetData);
 
-            using (var e = m_Log.NewEvent("time_expired")) {
+            using (var e = m_Log.NewEvent("snippet_received")) {
                 e.Param("node_id", node_id);
                 e.Param("snippet_id", snippet_id);
                 e.Param("snippet_type", snippet_type);
