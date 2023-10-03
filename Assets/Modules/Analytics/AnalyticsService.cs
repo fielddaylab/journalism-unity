@@ -963,8 +963,8 @@ namespace Journalism.Analytics
                 e.Param("new_breakdown", JsonConvert.SerializeObject(new_breakdown));
                 e.Param("target_breakdown", JsonConvert.SerializeObject(target_breakdown));
                 e.Param("new_quality", JsonConvert.SerializeObject(new_quality));
-                e.Param("story_score", Player.StoryStatistics.TotalQuality);
-                e.Param("story_alignment", Player.StoryStatistics.Alignment);
+                e.Param("story_score", m_CurrentBreakdown.TotalQuality);
+                e.Param("story_alignment", m_CurrentBreakdown.Alignment);
             }
         }
 
