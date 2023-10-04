@@ -4,11 +4,12 @@ name: Unity3d Build
 # tags.  Creating new 'versions' via github is the most straightforward 
 # way of doing this.
 on:
+  workflow_dispatch:
   #create:
   #  tags:
   #    - '*'
-   push
-  #   branches: [ develop ] 
+  push:
+  #   branches: [ develop ]
 
 env:
   UNITY_LICENSE: ${{ secrets.FIELDDAY_UNITY_LICENSE_2019 }}
