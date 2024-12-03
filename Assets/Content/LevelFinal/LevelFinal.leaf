@@ -100,4 +100,5 @@ $endif
 
 {clear-text}
 {bg $BG_Credits}
+$call RequestSurvey(headlines_persona_questions) 
 $call RollCredits()
