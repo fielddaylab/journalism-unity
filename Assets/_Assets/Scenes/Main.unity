@@ -11592,6 +11592,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 323105464560375374, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+        type: 3}
+      propertyPath: SurveyText
+      value: 
+      objectReference: {fileID: 4900000, guid: ff9c18f0212c84a4984ed4139e8a445b, type: 3}
+    - target: {fileID: 323105464560375374, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+        type: 3}
+      propertyPath: SurveyPrefab
+      value: 
+      objectReference: {fileID: 2400622096144153359, guid: 4d4ebb2dc3005174385a43b4ec11b55a,
+        type: 3}
+    - target: {fileID: 323105464560375374, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+        type: 3}
+      propertyPath: m_SurveyData
+      value: 
+      objectReference: {fileID: 4900000, guid: ff9c18f0212c84a4984ed4139e8a445b, type: 3}
+    - target: {fileID: 323105464560375374, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+        type: 3}
+      propertyPath: m_SurveyPrefab
+      value: 
+      objectReference: {fileID: 2400622096144153359, guid: 81cf92935e5d17146b89dd315e67020b,
+        type: 3}
+    - target: {fileID: 323105464560375374, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
+        type: 3}
+      propertyPath: m_defaultSurvey
+      value: 
+      objectReference: {fileID: 2400622096144153359, guid: 81cf92935e5d17146b89dd315e67020b,
+        type: 3}
     - target: {fileID: 1374342849930155033, guid: 4b2cf30ee95166745a16fc5950a1dbe5,
         type: 3}
       propertyPath: m_UISystem

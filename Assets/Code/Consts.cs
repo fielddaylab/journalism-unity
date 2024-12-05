@@ -80,5 +80,7 @@ namespace Journalism {
         static public readonly StringHash32 StoryImpactDisplayed = "analytics:story-impact-displayed";
         static public readonly StringHash32 SlotsLaidOut = "analytics:slots-laid-out";
 
+        // static public readonly StringHash32 RequestSurvey = "analytics:request-survey";
+        // static public readonly StringHash32 SurveyFinished = "analytics:finish-survey";
     }
 }

@@ -1,0 +1,121 @@
+{
+    "package_config_id": "survey_test",
+    "surveys": [
+        {
+            "display_event_id": "example",
+            "header": "Survey Example",
+            "pages": [
+                {
+                    "items": [
+                        {
+                            "prompt": "Are you reading a survey question?",
+                            "responses": [
+                                "Yes", "No"
+                            ]
+                        },
+                        {
+                            "prompt": "Are you responding to the survey question?",
+                            "responses": [
+                                "Yes", "No"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "prompt": "How often do you think about Mars?",
+                            "responses": [
+                                "Every Day", "Every Hour", "eeeeeeeee", "Never"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "prompt": "When I said \"Mars\", which of these did you think of?",
+                            "responses": [
+                                "Rome", "Planet", "Candy", "Other"
+                            ]
+                        },
+                        {
+                            "prompt": "How does that make you feel?",
+                            "responses": [
+                                "Ashamed", "Giddy", "Curious", "Neutral", "Agitated"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "prompt": "Was this survey to your satisfaction?",
+                            "responses": [
+                                "Nope", "Uhhh", "Definitely Not"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_event_id": "headlines_persona_questions",
+            "header": "My Character, El, in Headlines and High Water",
+            "pages": [
+                {
+                    "subheader": "We have a couple quick questions for you about your character",
+                    "items": [
+                        {
+                            "prompt": "Which skill did you try to develop the most?",
+                            "responses": [ "Resourcefulness", "Endurance", "Tech", "Social", "Trust", "Research" ]
+                        },
+                        {
+                            "useVerticalLayout": true,
+                            "prompt": "Which of the following would your character, El, MOST agree with?",
+                            "responses": [
+                              "I care for my neighbors and community.",
+                              "I am always prepared and on-task.",
+                              "I get my information from official sources.",
+                              "I like to take lots of pictures.",
+                              "I always make time to interview local people about current events."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "subheader": "Half way, 2 more questions to go...",
+                    "items": [
+                        {
+                            "useVerticalLayout": true,
+                            "prompt": "How similar are you to El?",
+                            "responses": [
+                              "Very different",
+                              "A little different",
+                              "Not much different, but not the same",
+                              "A little similar",
+                              "Very similar"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "subheader": "Last Question!",
+                    "items": [
+                        {
+                            "useVerticalLayout": true,
+                            "prompt": "I have the skills needed to research real-life news.",
+                            "responses": [
+                              "Strongly disagree",
+                              "Slightly Disagree",
+                              "Neither agree nor disagree",
+                              "Slightly Agree",
+                              "Strongly agree"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

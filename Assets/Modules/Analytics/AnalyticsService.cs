@@ -2,17 +2,21 @@
 #define DEVELOPMENT
 #endif // UNITY_EDITOR || DEVELOPMENT_BUILD
 
-using BeauUtil;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FieldDay;
+
+using Leaf;
+using Leaf.Runtime;
+using BeauUtil;
+using BeauPools;
+using BeauRoutine;
+using BeauUtil.Tags;
 using BeauUtil.Debugger;
+using OGD;
 using static Journalism.Player;
 using Journalism.UI;
-using BeauUtil.Tags;
-using BeauPools;
-using Leaf;
 using Newtonsoft.Json;
 
 namespace Journalism.Analytics
@@ -116,6 +120,12 @@ namespace Journalism.Analytics
 
         private OGDLog m_Log;
 
+        // Survey Varibles
+        [SerializeField] private SurveyPanel SurveyPrefab;
+        [SerializeField] private TextAsset SurveyText;
+
+        static private OGDSurvey s_Survey;
+
         private bool m_FeedbackInProgress;
         private string m_LastKnownNodeId;
         private string m_LastKnownSpeaker;
@@ -161,7 +171,7 @@ namespace Journalism.Analytics
                 .Register<List<StoryBuilderSlot>>(GameEvents.SlotsLaidOut, OnSlotsLaidOut)
                 .Register(GameText.Events.Map, OnTextMap)
                 .Register(GameText.Events.ClearMap, OnTextMapClear);
-
+                // .Register(GameEvents.RequestSurvey, OnRequestSurvery, this);
 
             // Analytics Events
             // text click
@@ -261,6 +271,9 @@ namespace Journalism.Analytics
                 ClientLogVersion = 1
             });
             m_Log.UseFirebase(m_Firebase);
+
+            s_Survey = new OGDSurvey(SurveyPrefab, m_Log);
+            s_Survey.LoadSurveyPackageFromString(SurveyText.text);
 
             #if DEVELOPMENT
                 m_Debug = true;
@@ -1171,6 +1184,16 @@ namespace Journalism.Analytics
         #endregion // Log Events
 
         #region Other Events
+
+        // TODO: This should maybe use signals?
+        [LeafMember("RequestSurvey")]
+        static private IEnumerator RequestSurvey(string surveryId) {
+            Debug.Log("[Analytics > RequestSurvey] Requested survey: " + surveryId);
+
+            yield return s_Survey.DisplaySurveyAndWait(surveryId);
+
+            Debug.Log("[Analytics] Finished survey!");
+        }
 
         private void OnFeedbackBegin() {
             m_FeedbackInProgress = true;
