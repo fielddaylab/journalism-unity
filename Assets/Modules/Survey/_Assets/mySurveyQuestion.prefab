@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PromptText: {fileID: 1725583702550253329}
-  m_PrefixFormat: Q{0}:<indent=10%>
+  m_PrefixFormat: 
   m_ToggleGroup: {fileID: 5639040640455154469}
   m_ToggleLayout: {fileID: 5279503937656670200}
 --- !u!1 &5557766809651783194
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Q1:<indent=8%>This is not a question, correct?
+  m_text: 'Q1: This is not a question, correct?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e38c5ba7d23b62f4282674caa5419f99, type: 2}
   m_sharedMaterial: {fileID: 8874601541012333017, guid: e38c5ba7d23b62f4282674caa5419f99,
