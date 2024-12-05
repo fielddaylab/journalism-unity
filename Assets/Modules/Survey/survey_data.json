@@ -61,9 +61,10 @@
         },
         {
             "display_event_id": "headlines_persona_questions",
-            "header": "My Character, El, in Headlines & High Waters",
+            "header": "My Character, El, in Headlines and High Water",
             "pages": [
                 {
+                    "subheader": "We have a couple quick questions for you about your character",
                     "items": [
                         {
                             "prompt": "Which skill did you try to develop the most?",
@@ -71,9 +72,9 @@
                         },
                         {
                             "useVerticalLayout": true,
-                            "prompt": "Which of the following statements would your character, El, MOST agree with?",
+                            "prompt": "Which of the following would your character, El, MOST agree with?",
                             "responses": [
-                              "I care for my neighbors and my community.",
+                              "I care for my neighbors and community.",
                               "I am always prepared and on-task.",
                               "I get my information from official sources.",
                               "I like to take lots of pictures.",
@@ -83,8 +84,10 @@
                     ]
                 },
                 {
+                    "subheader": "Half way, 2 more questions to go...",
                     "items": [
                         {
+                            "useVerticalLayout": true,
                             "prompt": "How similar are you to El?",
                             "responses": [
                               "Very different",
@@ -93,8 +96,14 @@
                               "A little similar",
                               "Very similar"
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "subheader": "Last Question!",
+                    "items": [
                         {
+                            "useVerticalLayout": true,
                             "prompt": "I have the skills needed to research real-life news.",
                             "responses": [
                               "Strongly disagree",
