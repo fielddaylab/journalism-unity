@@ -26,7 +26,10 @@ public class VaultDropdownToggle : MonoBehaviour {
         int level_started = Assets.CurrentLevel.LevelIndex;
 
         if (level_started < cutoffLevel) return;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
         DisableVaultButton();
+#endif
     }
     
 }
